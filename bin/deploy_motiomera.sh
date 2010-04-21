@@ -1,47 +1,30 @@
 #!/bin/sh
 # Deploy motiomera.se
 homedir="/home/motiomera"
-svnrootdir="$homedir/project_svn"
-livedir="/usr/local"
+gitrootdir=$PWD
 owner="motiomera"
+GIT-TAG=$(git describe)
 
+echo "You are currently in $gitrootdir, is this the git root dir?"
+echo "Are your sure you want to deploy $GIT-TAG?
 echo "Choose environment to deploy"
 echo "1 - for motimera.se"
 echo "2 - for trunkomera.se"
+echo "3 - to exit"
 read DEPLOY_TO
 
 if [ "$DEPLOY_TO" = "1" ]; then
-  #only deploy a tag - check if tag dir exists
   depenv="motiomera"
-  svnrootdir="$homedir/aller-motiomera"  
-  echo "Enter which git-tag to deploy on motiomera.se"
-  echo "e.g v3.05"  
-  read TAG
-  #svnrootdir=$svnrootdir/tags/$TAG
+  livedir="/usr/local"  
 elif [ "$DEPLOY_TO" = "2" ]; then
   depenv="trunkomera"
-  homedir="/home/allersvn"
-  svnrootdir="$homedir/aller-motiomera"
   livedir="/var/www"  
-  echo "Enter the git-tag deploy to trunkomera"
-  echo "e.g v3.05"
-  read TAG
-  #svnrootdir=$svnrootdir/$TAG
 else
   cat /home/motiomera/project_svn/trunk/bin/bart
   echo "## Exiting deploy"
   exit 0
 fi
 
-
-if [ -d "$svnrootdir" ]; then
-  cd $svnrootdir
-else
-  cat /home/motiomera/project_svn/trunk/bin/bart 
-  echo "## $svnrootdir  does not exist"
-  echo "## Exiting deploy"
-  exit 0
-fi
 
 livedir="$livedir/$depenv"
 workdir="$homedir/$depenv"
@@ -59,7 +42,7 @@ mkdir $workbindir
 chown -R motiomera:motiomera $workbindir/
 
 echo "## copy all bin files to working bin dir - $workbindir/"
-su motiomera -c "cp -rf $svnrootdir/bin/. $workbindir"
+su motiomera -c "cp -rf $gitrootdir/bin/. $workbindir"
 
 
 echo "## Deploy $depenv - `date` ###################"
@@ -71,23 +54,20 @@ fi
 mkdir $tmpdeploydir
 chown -R motiomera:motiomera $tmpdeploydir/
 
-echo "## export all svn files to tmp dir - $tmpdeploydir/"
-su motiomera -c "cp -rf $svnrootdir/public_html/. $tmpdeploydir"
+echo "## copy all files to tmp dir - $tmpdeploydir/"
+su motiomera -c "cp -rf $gitrootdir/public_html/. $tmpdeploydir"
 
 
 echo "## copy serverspecific settings.php and remove settings-template.php  - $tmpdeploydir/"
-#cp -fp $workdir/site_properties/dbsettings.php $tmpdeploydir/php/dbsettings.php
 cp -fp $workdir/site_properties/settings.php $tmpdeploydir/php/settings.php
 rm $tmpdeploydir/php/settings-template.php
 
 
-echo "## add svn revision to css file  - $tmpdeploydir/ "
-SVNREVISION=$(svn info|grep Revision | cut -c 11-15)
-echo "$SVNREVISION"
+echo "## add git-tag $GIT-TAG to css file  - $tmpdeploydir/ "
 cd $tmpdeploydir/templates/
-sed -e "s/motiomera.css/motiomera.css?ver=$SVNREVISION/g" header.tpl >tmpfile
+sed -e "s/motiomera.css/motiomera.css?ver=$GIT-TAG/g" header.tpl >tmpfile
 mv tmpfile header.tpl
-sed -e "s/print.css/print.css?ver=$SVNREVISION/g" header.tpl >tmpfile
+sed -e "s/print.css/print.css?ver=$GIT-TAG/g" header.tpl >tmpfile
 mv tmpfile header.tpl
 
 
@@ -96,8 +76,6 @@ chown -R $owner:$owner $tmpdeploydir/
 
 echo "## set write permissions on compilation catalogs and others  - $tmpdeploydir/"
 chmod  -R  777  $tmpdeploydir/templates_c/
-chmod  -R  777  $tmpdeploydir/templates_c/
-chmod  -R  777  $tmpdeploydir/templates_c/
 chmod  -R  777  $tmpdeploydir/files/
 chmod  -R  777  $tmpdeploydir/admin/templates_c/
 chmod  -R  777  $tmpdeploydir/php/libs/smarty/cache 
@@ -105,7 +83,7 @@ chmod  -R  777  $tmpdeploydir/popup/templates_c/
 
 
 echo "## change script owner to $owner and copy bin and cron files to $workdir/bin "
-su $owner -c "svn export --force $svnrootdir/bin/ $workdir/bin/"
+su $owner -c "cp -rf $gitrootdir/bin/. $workdir/bin/"
 chmod 770 $workdir/bin/*
 
 echo "## tar deploy dir  "
@@ -118,11 +96,11 @@ tar xzf $tmpdeploydir/deploy.$depenv.tgz
 
 echo "## append svn revision to $livedir/htdocs/hustlerrev.php"
 hustlerrev="$livedir/htdocs/hustlerrev.php"
-cd $svnrootdir
+cd $gitrootdir
 
 echo "<br/><br/>" >> $hustlerrev
 date >> $hustlerrev
-svn info >>$hustlerrev
+$GIT-TAG >>$hustlerrev
 
 echo "## Touch all files in htdocs (to sort of empty xcache) - $livedir/htdocs/"
 find $livedir/htdocs/ -name "*" | xargs touch
