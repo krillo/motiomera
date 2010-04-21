@@ -81,7 +81,6 @@ chmod  -R  777  $tmpdeploydir/admin/templates_c/
 chmod  -R  777  $tmpdeploydir/php/libs/smarty/cache 
 chmod  -R  777  $tmpdeploydir/popup/templates_c/
 
-
 echo "## change script owner to $owner and copy bin and cron files to $workdir/bin "
 su $owner -c "cp -rf $gitrootdir/bin/. $workdir/bin/"
 chmod 770 $workdir/bin/*
