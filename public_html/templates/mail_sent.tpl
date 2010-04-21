@@ -1,0 +1,1 @@
+Ditt meddelande har skickats till {$medlem_sent->getANamn()}

@@ -1,0 +1,15 @@
+body {
+	background: #fff;
+	}
+	
+.noprint, #mmWrapTop, #mmBannerArea, #mmColumnLeft, .mmGrayLineBottom, #mmFooter, #mmWrapBottom{
+	display: none;
+	}
+	
+
+#mmWrapMiddle{
+	background: #fff;
+	}
+	
+
+	

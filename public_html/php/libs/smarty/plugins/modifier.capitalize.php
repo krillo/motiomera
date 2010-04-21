@@ -1,0 +1,8 @@
+<?php
+function smarty_modifier_capitalize($string, $uc_digits = false)
+{
+    return ucfirst($string);
+}
+
+
+?>

@@ -1,0 +1,18 @@
+<FilesMatch .tpl>
+Satisfy any
+Deny from all
+</FilesMatch>
+
+
+AddType application/x-httpd-php .js
+
+RewriteEngine On
+
+RewriteRule kommunjakten/(.*)/ pages/kommunjakten_laen.php?laen=$1 [L]
+RewriteRule kommunjakten/ pages/kommunjakten.php [L]
+RewriteRule kommunjakten$ /kommunjakten/ [R=301,L]
+RewriteRule kommun/(.*)/quiz/ pages/quiz.php?kommun=$1 [L]
+RewriteRule kommun/(.*)/quiz /kommun/$1/quiz/ [R=301,L]
+RewriteRule kommun/(.*)/ pages/kommun.php?knamn=$1 [L]
+RewriteRule kommun/(.*) /kommun/$1/ [R=301]
+RewriteRule foretag/ /pages/foretaglogin.php

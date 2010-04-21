@@ -1,0 +1,65 @@
+<?php
+
+include $_SERVER["DOCUMENT_ROOT"]  . "/php/init.php";
+
+
+if(!empty($_GET["fid"]) && !(isset($FORETAG) && $FORETAG->getId() == $_GET["fid"])){
+	Security::demand(ADMIN);
+	$foretag = Foretag::loadById($_GET["fid"]);
+	
+}else{
+	Security::demand(FORETAG);
+	$foretag = $FORETAG;
+}
+$smarty = new MMSmarty();
+$smarty->assign("pagetitle", "Redigera företag");
+
+$tabs = new TabBox("foretag", 590, null);
+$tabs->addTab("Lag", "lag");
+$tabs->addTab("Inställningar", "installningar");
+$tabs->addTab("Deltagare", "anstallda");
+$tabs->addTab("Tilläggsbeställning", "tillaggsbest");
+$tabs->addTab("Nycklar", "nycklar");
+$tabs->addTab("Reklamation", "reklamation");
+
+if((!empty($_GET["tab"])) && ($_GET["tab"] < 4)){
+	$tabs->setSelected($_GET["tab"]);
+}else{
+	$tabs->setSelected("Lag");
+}
+
+$smarty->assign("tabs", $tabs);
+$smarty->assign("foretaget", $foretag);
+$sel_kommun = $foretag->getKommunId();
+$smarty->assign("sel_kommun", $sel_kommun);
+
+$smarty->assign("id", $foretag->getId());
+$nycklar = $foretag->listNycklar(true);
+$smarty->assign("nycklar", $nycklar);
+
+//show this page a week after the contest is finished
+$registerUntilDate = date('Y-m-d', strtotime(date("Y-m-d", strtotime($foretag->getSlutDatum())) . " +1 days"));
+$sendResultDate = date('Y-m-d', strtotime(date("Y-m-d", strtotime($foretag->getSlutDatum())) . " +2 days"));
+$showPageUtilDate = date('Y-m-d', strtotime(date("Y-m-d", strtotime($foretag->getSlutDatum())) . " +7 days"));
+
+$datesArray = array(
+array($foretag->getStartdatum(), Misc::veckodag(date('N', strtotime($foretag->getStartdatum()))), 'Startdatum för er företagstävling'),
+array($foretag->getSlutDatum(), Misc::veckodag(date('N', strtotime($showPageUtilDate))), 'Slutdatum för er företagstävling'),
+array($registerUntilDate, Misc::veckodag(date('N', strtotime($registerUntilDate))), 'Sista dagen för registrering av steg'),
+array($sendResultDate, Misc::veckodag(date('N', strtotime($sendResultDate))), 'Tävlingsresultatet skickas per mail till alla deltagare'),
+array($showPageUtilDate, Misc::veckodag(date('N', strtotime($showPageUtilDate))), 'Administrationssidan är tillgänglig tom detta datum'),
+);
+$smarty->assign("datesArray", $datesArray);
+
+if(DEBUG){
+  echo "Adminsidan visas tom:  $showPageUtilDate";
+}
+
+if($showPageUtilDate > date('Y-m-d') OR isset($ADMIN)) {
+  $smarty->display('editforetag.tpl');  
+} else {
+  $smarty->display('nytavling.tpl');  
+}
+
+
+?>

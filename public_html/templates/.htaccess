@@ -1,0 +1,4 @@
+ErrorDocument 404 /filenotfound.html
+ErrorDocument 403 /filenotfound.html
+Order deny,allow
+Deny from all

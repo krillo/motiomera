@@ -1,0 +1,16 @@
+installera motiomera
+
+
+* HTML_AJAX
+    http://pear.php.net/package/HTML_AJAX/
+
+* PECL-modulen Uploadprogress, behöver installeras på servern som kör Motiomera för att uppladdningsfunktionaliteten för fotoalbumet skall fungera.
+    http://pecl.php.net/package/uploadprogress
+
+ * ImageMagick
+     http://www.imagemagick.org/script/index.php
+	 
+	 
+* All kod finns att hämta på https://allersforlag-svn.cvsdude.com/motiomera/
+
+

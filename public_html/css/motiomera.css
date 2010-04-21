@@ -1,0 +1,2933 @@
+a img
+{
+	border: 0;
+	vertical-align: middle;
+}
+a.highslide-full-expand
+{
+	background: url(/js/highslide/graphics/fullexpand.gif) no-repeat;
+	display: block;
+	width: 34px;
+	height: 34px;
+	margin: 0 10px 10px 0;
+}
+a: hover
+{
+	color: #333;
+	text-decoration: underline;
+}
+a
+{
+	color: #2c49b3;
+	text-decoration: none;
+}
+body
+{
+	background: #eaf4e2;
+	color: #333;
+	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
+	font-size: 11px;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+h1
+{
+	font-family: Trebuchet ms, Tahoma, Arial, Helvetica;
+	font-weight: bold;
+	font-size: 180%;
+	margin: 0 0 15px;
+}
+h2
+{
+	font-family: Trebuchet ms, Tahoma, Arial, Helvetica;
+	font-size: 18px;
+	font-weight: normal;
+	margin: 15px 0 5px;
+}
+h3
+{
+	font-family: Trebuchet ms, Tahoma, Arial, Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 14px;
+	margin: 3px 0 5px;
+}
+small
+{
+	font-size: 90%;
+}
+table td,table th
+{
+	text-align: left;
+	vertical-align: top;
+}
+table#alh_navtable td a.alh_navtable_link: hover
+{
+	text-decoration: underline;
+}
+table#alh_navtable td a.alh_navtable_link
+{
+	color: #333;
+	text-decoration: none;
+}
+table#alh_navtable td img
+{
+	border: 0;
+	height: 35px;
+	width: 35px;
+}
+table#alh_navtable td
+{
+	font-family: Verdana, Arial;
+	font-size: 9px;
+	margin: 1px;
+	padding: 1px;
+}
+table#alh_navtable
+{
+	border-spacing: 0;
+	margin-left: 0;
+	width: 100%;
+}
+#map-container #loader
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #fff url(/files/gmaps/loader.gif) no-repeat center center;
+	z-index: 17;
+}
+#map-container
+{
+	position: relative;
+	width: 601px;
+	height: 228px;
+	margin: 0 0 55px;
+}
+#map
+{
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+#mmBannerArea
+{
+	width: 780px;
+	height: 140px;
+}
+#mmBannerSmall .mmBannerSmallInside
+{
+	width: 760px;
+	margin-left: 14px;
+}
+#mmBannerSmall
+{
+	width: 778px;
+	height: 43px;
+	margin-left: 2px;
+	margin-top: 3px;
+}
+#mmBannerTop
+{
+	width: 765px;
+	height: 90px;
+	margin-left: 15px;
+}
+#mmBlueBoxMiddleWideText
+{
+	color: #FFF;
+	font-size: 1.5em;
+	font-weight: bold;
+	padding-top: 5px;
+	margin-left: 5px;
+}
+#mmBlueBoxMiddleWide
+{
+	background-image: url('/img/framework/mmBlueTopStart.gif');
+	width: 427px;
+	height: 29px;
+}
+#mmColumnLeft
+{
+	width: 140px;
+	height: auto;
+	float: left;
+	border: 0 solid #ddd;
+	margin-left: 5px;
+	padding: 0;
+}
+#mmColumnMiddle a: hover
+{
+	color: #444;
+	text-decoration: underline;
+}
+#mmColumnMiddle a
+{
+	color: #111;
+	text-decoration: none;
+}
+#mmColumnMiddleQuiz
+{
+	width: 340px;
+	float: left;
+	border-left: 1px solid #ddd;
+	min-height: 400px;
+	padding: 0 7px;
+}
+#mmColumnMiddleWide
+{
+	width: 600px;
+	float: left;
+	border-left: 1px solid #ddd;
+	border-right: 0 solid #ddd;
+	padding: 0 5px 5px 10px;
+}
+#mmColumnMiddle
+{
+	width: 430px;
+	float: left;
+	border-left: 1px solid #ddd;
+	padding: 0 5px;
+}
+#mmColumnRightKommun
+{
+	width: 193px;
+	float: right;
+	padding: 0;
+}
+#mmColumnRightMinSida
+{
+	width: 174px;
+	float: right;
+	padding-right: 0;
+}
+#mmColumnRightQuiz
+{
+	width: 240px;
+	float: right;
+	margin-left: 20px;
+	text-align: center;
+}
+#mmColumnRight
+{
+	width: 180px;
+	position: absolute;
+	left: 588px;
+	top: 262px;
+	padding-right: 7px;
+}
+#mmCommunityToolbar a,.mmWhite,.motiomera_kalender_selected: hover
+{
+	color: #fff;
+}
+#mmCommunityToolbar
+{
+	position: absolute;
+	color: #fff;
+	width: 120px;
+	margin: 20px 0 0 450px;
+}
+#mmDeleteFolderSelectDiv .mmDeleteFolderInput
+{
+	float: left;
+	width: 50px;
+	border: 1px solid #FFF;
+	height: 22px;
+	text-align: center;
+}
+#mmDeleteFolderSelectDiv .mmDeleteFolderName,.mmFolderNameDiv
+{
+	float: left;
+	width: 144px;
+	border: 1px solid #FFF;
+	height: 20px;
+	padding: 3px;
+}
+#mmDeleteFolderSelectDiv .mmDeleteFolderNbsp
+{
+	float: left;
+	width: 70px;
+	border: 1px solid #FFF;
+	height: 22px;
+}
+#mmDeleteFolderSelectDiv
+{
+	background-color: #ccc;
+	width: 276px;
+	height: 22px;
+}
+#mmFooterRight
+{
+	position: relative;
+	float: right;
+	padding-right: 20px;
+}
+#mmFooter
+{
+	margin-left: 10px;
+	line-height: 14px;
+	font-size: 10px;
+}
+#mmForetagsnyckelError
+{
+	position: relative;
+	left: 21px;
+}
+#mmForetagsnyckel
+{
+	margin-left: 21px;
+	display: none;
+}
+#mmFotoAlbumMainpage
+{
+	position: absolute;
+	left: 160px;
+	top: 270px;
+}
+#mmFotoalbumTopRightWide
+{
+	width: 520px;
+	height: 30px;
+	float: right;
+	position: relative;
+}
+#mmFotoalbumTopRight
+{
+	width: 300px;
+	text-align: right;
+	height: 30px;
+	float: right;
+	position: relative;
+}
+#mmFranBox
+{
+	float: left;
+	width: 60px;
+}
+#mmGrafikPositioner
+{
+	background: url(/img/framework/mmKlubbarGrafik.gif) no-repeat;
+	height: 236px;
+	width: 601px;
+	margin-top: 10px;
+	padding-bottom: 7px;
+	text-align: left;
+}
+#mmHeader
+{
+	width: 754px;
+	height: 97px;
+	background: url('/img/framework/mmHeader.gif') no-repeat;
+	margin: 0 0 10px 5px;
+}
+#mmInlineColumnMiddle
+{
+	width: 405px;
+	float: left;
+	overflow: hidden;
+}
+#mmInloggad a
+{
+	color: #fff;
+	font-size: 80%;
+}
+#mmInloggad
+{
+	position: absolute;
+	color: #fff;
+	font-size: 120%;
+	text-align: right;
+	width: 200px;
+	margin: 20px 0 0 540px;
+}
+.mmKommundialektFlash{
+	float: left; 
+	margin-right: 3px;
+}
+.mmKommundialektInfo{
+	padding-left: 30px; 
+	margin-bottom: 8px;
+}
+#mmKommunFakta,#lea_300x250
+{
+	margin-bottom: 20px;
+}
+#mmKvittoTable .mmRowHeading
+{
+	padding-top: 15px;
+}
+#mmLoggaIn .mmTextField
+{
+	border-top: 1px solid #5da326;
+	border-right: 1px solid #96db60;
+	border-bottom: 1px solid #96db60;
+	border-left: 1px solid #5da326;
+	padding: 2px;
+}
+#mmLoggaIn
+{
+	width: 290px;
+	height: 45px;
+	position: absolute;
+	border: 0 solid #000;
+	float: left;
+	text-align: right;
+	margin: 13px 0 0 455px;
+}
+#mmLogo
+{
+	width: 386px;
+	height: 76px;
+	position: absolute;
+	margin: -6px 0 0 5px;
+}
+#mmMaBraLogo a span
+{
+	position: relative;
+	top: 2px;
+}
+#mmMaBraLogo a,.motiomera_steg_table_gamla, .grey
+{
+	color: #888;
+}
+#mmMaBraLogo a: hover,#mmStegGrafikRapporteraSteg a: hover,#mmStegGrafikDetaljeradRapport a: hover,.motiomera_kalender_week_row td a: hover
+{
+	text-decoration: none;
+}
+#mmMaBraLogo
+{
+	width: 740px;
+	height: 35px;
+	position: absolute;
+	font-family: trebuchet ms, Tahoma, Trebuchet MS, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: italic;
+	color: #7e7e7e;
+	margin: 71px 0 0 10px;
+}
+#mmMailAmnesInput
+{
+	width: 300px;
+	height: 18px;
+}
+#mmMenuLeft .utLoggadMenuVal
+{
+	color: #666;
+}
+#mmMenuLeft a:active,#mmMenuLeft a:hover,#mmMenuLeft .mmMarkedMenu, #mmMenuLeft .utLoggadMenuVal a:hover, a:active
+{
+	color: #f02096;
+}
+.mmMarkedMenu
+{
+	color: #f02096 !important;
+}
+#mmMenuLeft a
+{
+	text-decoration: none;
+	color: #5aa41f;
+}
+#mmMenuLeft li
+{
+	border-bottom: 1px dotted #d9e6cf;
+	text-indent: 15px;
+	margin-left: 0;
+	vertical-align: middle;
+	padding: 0;
+}
+#mmMenuLeft ul
+{
+	width: 130px;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+#mmMenuLeft
+{
+	width: 135px;
+	font-family: trebuchet ms, Tahoma, Trebuchet MS, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 28px;
+}
+#mmMenuTop a,.mmLinkGreen a
+{
+	color: #5aa41f;
+	text-decoration: none;
+}
+#mmMenuTop a: hover
+{
+	color: #5c8040;
+	text-decoration: underline;
+}
+#mmMenuTop li
+{
+	margin-right: 5px;
+	display: inline;
+}
+#mmMenuTop ul
+{
+	list-style-type: none;
+	display: inline;
+}
+#mmMenuTop
+{
+	width: 748px;
+	height: 20px;
+	margin-top: 75px;
+	position: absolute;
+	text-align: right;
+	font-family: trebuchet ms, Tahoma, Trebuchet MS, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #ccc;
+}
+#mmProfilAdressbok
+{
+	width: 555px;
+	height: 30px;
+	float: right;
+	text-align: right;
+	position: relative;
+	margin-top: -10px;
+}
+#mmProfilBild
+{
+	width: 80px;
+	float: left;
+	margin-right: 10px;
+}
+#mmProfilInfo1
+{
+	width: 105px;
+	font-weight: bold;
+	float: left;
+}
+#mmProfilInfo3
+{
+	width: 125px;
+	font-weight: bold;
+	float: left;
+	margin-left: 40px;
+}
+#mmProfilInfo4
+{
+	width: 105px;
+	float: left;
+}
+#mmProfilInfoBottom
+{
+	position: relative;
+	float: left;
+	width: 450px;
+}
+#mmQuizKommunBild,.mmKommunKommunBild
+{
+	float: left;
+	margin-right: 8px;
+	margin-bottom: 10px;
+}
+#mmQuizKommunvapen
+{
+	height: 200px;
+}
+#mmRegSteg
+{
+	position: relative;
+	margin: -22px 0 0 245px;
+}
+
+#mmStegGrafikAvatar
+{
+	background: url(/img/icons/StegAvatar.gif) no-repeat #fff;
+	height: 29px;
+	width: 29px;
+	position: absolute;
+	top: 77px;
+	left: 25px;
+	margin: 0;
+}
+#mmStegGrafikDetaljeradRapport a
+{
+	color: #5aa41f;
+	display: block;
+	width: 111px;
+	height: 31px;
+	z-index: 10;
+}
+#mmStegGrafikDetaljeradRapport div,.mmDetaljeradRapportText
+{
+	margin: 2px 25px 0 0;
+}
+#mmStegGrafikDetaljeradRapport
+{
+	background: url(/img/minsida/mmDetaljeradRapport.gif) no-repeat;
+	position: absolute;
+	width: 111px;
+	height: 31px;
+	text-align: center;
+	cursor: pointer;
+	z-index: 10;
+	margin: 240px 0 0 490px;
+}
+#mmStegGrafikRapporteraSteg a
+{
+	color: #fff;
+	display: block;
+	padding: 12px 10px 10px 60px;
+}
+#mmStegGrafikValjRutt a
+{
+	color: #fff;
+	display: block;
+}
+
+#mmStegGrafikRapporteraSteg
+{
+	position: absolute;
+	width: 151px;
+	height: 56px;
+	text-align: left;
+	z-index: 10;
+	margin-top: 158px;
+	margin-left:-60px;
+}
+#mmStegGrafikRapporteraSteg.GM
+{
+	margin-top:216px;
+}
+#mmStegGrafikValjRutt
+{
+	position: absolute;
+	width: 151px;
+	height: 56px;
+	text-align: left;
+	z-index: 10;
+	margin-top: 171px;
+	margin-left: 160px;
+}
+#mmStegGrafikValjRutt.GM
+{
+	margin-top:229px;
+}
+#mmStegGrafikSenasteVeckan
+{
+	float: right;
+	margin-right: 5px;
+	margin-left: 4px;
+	width: 60px;
+}
+#mmStegGrafikSlutkommun
+{
+	width: 55px;
+	height: 70px;
+	position: absolute;
+	margin: 15px 0 0 542px;
+}
+#mmStegGrafikStartkommun
+{
+	width: 55px;
+	height: 70px;
+	position: absolute;
+	margin: 18px 0 0 15px;
+}
+#mmStegGrafikTextMal
+{
+	position: absolute;
+	text-align: center;
+	margin: 110px 0 0 537px;
+}
+#mmStegGrafikTextNu
+{
+	position: absolute;
+	text-align: center;
+	margin: 120px 0 0 15px;
+}
+#mmStegGrafikTotalt
+{
+	width: 90px;
+	height: 31px;
+	position: absolute;
+	text-align: right;
+	z-index: 10;
+	margin: 240px 0 0 392px;
+}
+#mmStegGrafik
+{
+	background: url(/img/minsida/mmStegGrafik0.gif) no-repeat;
+	height: 156px;
+	width: 601px;
+	padding-bottom: 70px;
+}
+#mmStegOverTextcontainer
+{
+	position: relative;
+	top: -30px;
+	margin-bottom: -20px;
+}
+#mmValjRuttKommunTh
+{
+	padding-right: 0;
+	padding-left: 5px;
+	margin: 0;
+}
+#mmWrapBottom
+{
+	width: 780px;
+	background: url('/img/framework/mmBgBottom.gif') no-repeat;
+	height: 18px;
+}
+#mmWrapMiddle
+{
+	width: 780px;
+	background: url('/img/framework/mmBgMiddle.gif') repeat-y;
+	height: auto;
+}
+#mmWrapTop
+{
+	width: 780px;
+	height: 10px;
+	background: url('/img/framework/mmBgTop.gif') bottom no-repeat;
+}
+#motiomera_andra_losenord_link
+{
+	padding-top: 3px;
+}
+#motiomera_banner_right
+{
+	position: absolute;
+	top: 3px;
+	left: 780px;
+	width: 300px;
+	height: 870px;
+}
+#motiomera_helpviewer p
+{
+	line-height: 11px;
+	margin: 5px;
+}
+#motiomera_kalender_rapport
+{
+	float: left;
+	margin-right: 20px;
+}
+#motiomera_kalender_steg
+{
+	position: absolute;
+}
+#motiomera_kommun_left
+{
+	width: 45%;
+	float: left;
+	padding: 5px;
+}
+#motiomera_kommun_right
+{
+	border: 1px solid #000;
+	width: 45%;
+	float: left;
+	margin-left: 10px;
+	padding: 10px;
+}
+#motiomera_minsida_left
+{
+	float: left;
+	padding: 5px;
+}
+#motiomera_minsida_right
+{
+	float: left;
+	margin-left: 10px;
+	padding: 10px;
+}
+#motiomera_popup_close
+{
+	background-image: url("../img/icons/CloseIcon.gif");
+	float: right;
+	font-size: 100%;
+	cursor: pointer;
+	position: relative;
+	width: 107px;
+	height: 35px;
+	top: -1px;
+	left: -5px;
+}
+#motiomera_popup_content h1
+{
+	margin-top: 0;
+}
+#motiomera_popup_content
+{
+	padding: 20px 30px 30px;
+}
+#motiomera_popup_helpicon
+{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+#motiomera_popup_overlay
+{
+	display: none;
+	background: #000;
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 18;
+}
+#motiomera_popup_shadow
+{
+	display: none;
+	background: #000;
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 1px solid #000;
+	z-index: 19;
+}
+#motiomera_popup
+{
+	border: 1px solid #444;
+	display: none;
+	background: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 20;
+}
+#motiomera_sok_medlem_loading
+{
+	position: relative;
+	margin-top: 3px;
+}
+#motiomera_sok_medlem_resultat ul
+{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#motiomera_sok_medlem_resultat
+{
+	margin-top: 10px;
+}
+#motiomera_steg_preview_header
+{
+	margin-top: 12px;
+	display: none;
+}
+#motiomera_steg_right
+{
+	position: relative;
+	left: 200px;
+	top: -20px;
+}
+#motiomera_steg_saved
+{
+	text-align: center;
+	padding-top: 88px;
+}
+#motiomera_valjrutt_rutt
+{
+	position: absolute;
+	left: 5px;
+	background-color: #FFF;
+	z-index: 500;
+}
+#motiomera_valjrutt_flytande_knappar
+{
+	position: absolute;
+	left: 400px;
+	top: 2100px;
+	z-index: 500;
+}
+#motiomera_valjrutt_flytande_knappar img
+{
+	cursor: pointer;
+}
+
+#motiomera_valjrutt_scrollbox
+{
+	height: 300px;
+	width: 240px;
+	overflow: auto;
+}
+#radio_div img
+{
+	margin-top: -4px;
+	float: left;
+}
+#routeContainer fieldset
+{
+	width: 337px;
+	margin: 10px 0 5px;
+}
+#routeContainer input
+{
+	width: 350px;
+}
+#routeContainer select
+{
+	position: relative;
+	top: 4px;
+	width: 300px;
+}
+#routeMap #map
+{
+	height: 300px;
+}
+#routeMap
+{
+	float: right;
+	width: 240px;
+	margin-right: -175px;
+	margin-top: 25px;
+}
+#vb_to,#vb_amne,#amne
+{
+	font-size: 9px;
+	line-height: 10px;
+	width: 200px;
+}
+.mailAmne
+{
+	width:300px;
+	height:18px;
+}
+.alh_navtable_site
+{
+	color: #999;
+}
+.AnslagTitle
+{
+	margin: 25px 0 0 65px !important;
+}
+.bolded
+{
+	font-weight: bold;
+}
+.BoxTitle
+{
+	position: absolute;
+	margin: 10px 0 0 15px;
+}
+
+
+.controlbar .close
+{
+	width: 36px;
+	background-position: -130px 0;
+}
+.controlbar .highslide-move
+{
+	width: 40px;
+	background-position: -90px 0;
+}
+.controlbar .next
+{
+	width: 40px;
+	background-position: -50px 0;
+}
+.controlbar a: hover
+{
+	background-image: url(/js/highslide/graphics/controlbar4-hover.gif);
+}
+.controlbar a
+{
+	display: block;
+	float: left;
+	height: 27px;
+}
+.controlbar
+{
+	background: url(/js/highslide/graphics/controlbar4.gif);
+	width: 167px;
+	height: 34px;
+}
+.eventResults
+{
+	float: left;
+	margin: 5px;
+}
+.fetchImgSize
+{
+	position: absolute;
+	z-index: -10;
+	visibility: hidden;
+}
+.h1
+{
+	font-family: Trebuchet ms, Tahoma, Arial, Helvetica;
+	font-size: 22px;
+	font-weight: bold;
+	line-height: 22px;
+	margin-bottom: 18px;
+}
+.highslide img
+{
+	border: 2px solid gray;
+}
+.highslide-caption
+{
+	display: none;
+	border: 2px solid #FFF;
+	border-top: none;
+	font-family: Verdana, Helvetica;
+	font-size: 10pt;
+	background-color: #FFF;
+	padding: 5px;
+}
+.highslide-display-block,.motiomera_kalender_week_row td a
+{
+	display: block;
+}
+.highslide-loading
+{
+	display: block;
+	color: #000;
+	font-size: 8pt;
+	font-family: sans-serif;
+	font-weight: bold;
+	text-decoration: none;
+	border: 1px solid #000;
+	background-color: #FFF;
+	background-image: url(/js/highslide/graphics/loader.white.gif);
+	background-repeat: no-repeat;
+	background-position: 3px 1px;
+	padding: 2px 2px 2px 22px;
+}
+.highslide-move
+{
+	cursor: move;
+}
+.highslide-wrapper
+{
+	background: #FFF;
+}
+.highslide: hover img,.highslide-image
+{
+	border: 2px solid #FFF;
+}
+.highslide
+{
+	cursor: url(/js/highslide/graphics/zoomin.cur), pointer;
+	outline: none;
+}
+.IE7 #routeContainer fieldset
+{
+	padding: 5px 0;
+}
+.IE7 .removeRoute
+{
+	position: relative;
+	top: 7px;
+}
+.js_close
+{
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.loading
+{
+	background: #fff url(/files/gmaps/loader.gif) no-repeat center center;
+}
+.mmAdressbokCellBlue1
+{
+	background: #d6eef6;
+	vertical-align: middle;
+	text-indent: 10px;
+}
+.mmAdressbokCellBlue2
+{
+	background: #b8e0ef;
+}
+.mmAdressbokCellWhite1
+{
+	background: #fff;
+	vertical-align: middle;
+	text-indent: 10px;
+}
+.mmAdressbokCellWhite2
+{
+	background: #fff;
+}
+.mmAdressbokTable .mmCell1 a
+{
+	position: relative;
+	top: -4px;
+}
+.mmAdressbokTable .mmCell1 img
+{
+	position: relative;
+	top: 0;
+}
+.mmAdressbokTable .mmCell2 img,.mmQuizKnapp div p img
+{
+	position: relative;
+	top: 4px;
+}
+.mmAdressbokTable .mmCell2 td a
+{
+	position: relative;
+	top: -5px;
+}
+.mmAdressbokTable
+{
+	border-top: none;
+	width: 100%;
+}
+.mmAlbumBoxBg,.mmQuizBoxBg
+{
+	width: 172px;
+	border: 1px solid #4aabcb;
+	border-top: none;
+}
+.mmAlbumBoxBgAlbumLank img
+{
+	vertical-align: middle;
+	margin-left: 3px;
+}
+.mmAlbumBoxBgAlbumLank,.mmQuizBoxQuizLank
+{
+	float: right;
+	margin-right: 10px;
+	text-align: right;
+}
+.mmAlbumBoxBgBilder table,.mmQuizBoxBgQuiz table
+{
+	width: 170px;
+}
+.mmAlbumBoxBgBilder,.mmQuizBoxBgQuiz
+{
+	height: 160px;
+	padding: 2px 0 0 2px;
+}
+.mmAlbumBoxTop
+{
+	background: url(../img/framework/mmAlbumTop.gif) bottom no-repeat;
+	width: 174px;
+	height: 34px;
+	margin-top: 2px;
+	padding: 0;
+}
+.mmAnslagstavlaBoxBg form
+{
+	padding: 0 20px;
+}
+.mmAnslagstavlaBoxBg textarea
+{
+	width: 100%;
+	height: 80px;
+}
+.mmAnslagstavlaBoxBg
+{
+	background: url(/img/framework/mmBlueBoxBg.gif) repeat-y;
+	width: 387px;
+	margin-left: 4px;
+	margin-top: 0;
+	padding-bottom: 6px;
+}
+.mmAnslagstavlaBoxBottom
+{
+	background: url(/img/framework/mmBlueBoxBottom.gif) no-repeat;
+	width: 387px;
+	height: 10px;
+	margin-left: 4px;
+	padding: 10px;
+}
+.mmAnslagstavlaBoxTop
+{
+	background: url(/img/framework/mmAnslagstavlaBoxTop.gif) bottom no-repeat;
+	width: 390px;
+	height: 61px;
+	margin: 0;
+	padding: 0;
+}
+.mmAnslagstavlaTabell
+{
+	width: 350px;
+	margin-left: 20px;
+}
+.mmAnslagstavlaTextarea,.mmMailMeddelandeText
+{
+	width: 300px;
+	height: 80px;
+}
+.mmAnslagstavla
+{
+	position: relative;
+	width: 400px;
+	left: -4px;
+}
+.mmArrow
+{
+	position: relative;
+	top: 6px;
+}
+.mmArticleNarrowStart
+{
+	width: 126px;
+	float: left;
+	padding: 1px;
+}
+.mmArticleWideStart
+{
+	width: 420px;
+	float: left;
+	padding: 1px;
+}
+.mmAvatarMini
+{
+	height: 20px;
+	width: 20px;
+}
+.mmAvatar
+{
+	width: 40px;
+	height: 40px;
+}
+.mmBackGroundColorCCCCNioNio
+{
+	background-color: #CC9;
+}
+.mmBgWhite
+{
+	background-color: #fff;
+}
+.mmBlueBoxBg
+{
+	background: url(../img/framework/mmBlueBoxBg.gif) repeat-y;
+	width: 387px;
+	margin: 0;
+	padding: 10px;
+}
+.mmBlueBoxBottom
+{
+	background: url(../img/framework/mmBlueBoxBottom.gif) no-repeat;
+	width: 387px;
+	height: 10px;
+	margin: 0;
+	padding: 10px;
+}
+.mmBlueBoxContainer
+{
+	width: 400px;
+	position: relative;
+	top: -15px;
+}
+.mmBlueBoxMiddleFaqCircle
+{
+	float: right;
+	padding-right: 7px;
+	padding-top: 5px;
+}
+.mmBlueBoxTop
+{
+	background: url(../img/framework/mmBlueBoxTop.gif) bottom no-repeat;
+	width: 387px;
+	height: 31px;
+	margin: 0;
+	padding: 0;
+}
+.mmBlueBoxWideBgMainPadding
+{
+	margin: 0;
+	padding: 10px 15px;
+}
+.mmBlueBoxWideBgMain
+{
+	background: url(../img/framework/mmBlueBoxWideBg.gif) repeat-y;
+	width: 601px;
+	margin: 0;
+}
+.mmBlueBoxWideBg
+{
+	background: url(../img/framework/mmBlueBoxWideBg.gif) repeat-y;
+	width: 601px;
+	margin: 0;
+	padding: 10px 15px;
+}
+.mmBlueBoxWideBottomMainPadding,.time_is_up
+{
+	padding: 10px;
+}
+.mmBlueBoxWideBottomMain
+{
+	background: url(../img/framework/mmBlueBoxWideBottom.gif) no-repeat;
+	width: 601px;
+	height: 10px;
+	margin: 0;
+}
+.mmBlueBoxWideBottom
+{
+	background: url(../img/framework/mmBlueBoxWideBottom.gif) no-repeat;
+	width: 601px;
+	height: 10px;
+	margin: 0;
+	padding: 10px;
+}
+.mmBlueBoxWideTop
+{
+	background: url(../img/framework/mmBlueBoxWideTop.gif) bottom no-repeat;
+	width: 601px;
+	height: 31px;
+	margin: 0;
+	padding: 0;
+}
+.mmBlue
+{
+	color: #1d6179;
+}
+
+.mmObs
+{
+	color: #2C49B3;
+	font-weight: bold;	
+}
+
+.mmObsText
+{
+	font-size: 13px;
+}
+
+.mmObsBiggerText
+{
+	font-size: 17px;
+}
+
+
+
+.mmBorderNone,.motiomera_form_table .mmLastRow td,.motiomera_form_table .mmLastRow th,#move_to_folder
+{
+	border: none;
+}
+.mmBoxLeft img
+{
+	float: right;
+	margin-left: 5px;
+}
+.mmBoxLeft
+{
+	width: 125px;
+	margin-top: 20px;
+}
+.mmBoxRight
+{
+	border: 0 solid #ccc;
+	width: 160px;
+	margin: 0 7px;
+}
+.mmBoxTitleTextRight2
+{
+	position: absolute;
+	text-align: right;
+	width: 440px;
+	margin: 10px 0 0 150px;
+}
+.mmBoxTitleTextRight
+{
+	position: absolute;
+	margin: 10px 0 0 500px;
+}
+.mmCenterText,.mmAlignCenter,.mmAlbumBoxBgBilder table td,.mmQuizBoxBgQuiz table td,table#alh_navtable td.alh_image
+{
+	text-align: center;
+}
+.mmClearBoth,.motiomera_clear
+{
+	clear: both;
+}
+.mmClearLeft
+{
+	clear: left;
+}
+.mmCurrentUser,.mmCurrentUser a
+{
+	color: red;
+	font-weight: bold;
+}
+.mmCursorDefault
+{
+	cursor: default;
+}
+.mmDisplayInline
+{
+	display: inline;
+}
+.mmDisplayNone,.mmTabBoxInfo,.mmTopplistaKommun,.mmHide,var.metadata,#map img.gmnoprint,#motiomera_steg_spara,#motiomera_andra_losenord_field,.mmFormError,.highslide-overlay,.highslide-display-none,.hidden_div,.mmFeedDetails
+{
+	display: none;
+}
+.mmFeedTableDatum
+{
+	border-bottom: 1px solid #ccc;
+	padding-top: 8px;
+	padding-bottom: 2px;
+}
+.mmFeedTableKolumnEtt
+{
+	width: 12px;
+	font-size: 9px;
+}
+.mmFeedTable
+{
+	width: 373px;
+}
+.mmFileUpload
+{
+	border: 1px solid #eee;
+	border-right-color: #ddd;
+	border-bottom-color: #ddd;
+	background: #fafafa;
+	padding: 5px;
+}
+.mmFloatLeft,#mmProfilInfo2
+{
+	float: left;
+}
+.mmFloatRight
+{
+	float: right;
+}
+.mmFolderCheckboxDiv
+{
+	float: left;
+	width: 50px;
+	border: 1px solid #FFF;
+	height: 26px;
+	text-align: center;
+}
+.mmFolderExists,#folder_exists
+{
+	display: none;
+	color: red;
+	font-weight: bold;
+}
+.mmFolderForeachLoop
+{
+	background-color: #9c9;
+	width: 276px;
+	height: 26px;
+}
+.mmFolderInputDiv
+{
+	float: left;
+	width: 70px;
+	border: 1px solid #FFF;
+	height: 26px;
+}
+.mmFontSizeAttaNollProcent
+{
+	font-size: 80%;
+}
+.mmFontSizeNioNollProcent
+{
+	font-size: 90%;
+}
+.mmFontWhite a: hover
+{
+	color: #FFF;
+	text-decoration: underline;
+}
+.mmFontWhite,.mmFontWhite a
+{
+	color: #FFF;
+}
+.mmGray{
+	color: #555;
+	font-weight: normal;
+}
+.mmGrafikPositionBottom
+{
+	position: relative;
+	top: 125px;
+}
+.mmGrafikPositionMedlem
+{
+	position: absolute;
+	width: 100px;
+	text-align: center;
+	margin-top: -8px;
+}
+.mmGrafikPositionText
+{
+	margin-bottom: -30px;
+	float: left;
+	font-weight: bold;
+}
+.mmGrafikPositionTop
+{
+	position: relative;
+	top: 30px;
+}
+.mmGrayLineBottom
+{
+	border-top: 1px solid #e7e7e7;
+	width: 740px;
+	height: 1px;
+	margin: 10px 0 5px 7px;
+}
+.mmGrayLineMiddle
+{
+	border-top: 1px solid #e7e7e7;
+	width: 425px;
+	height: 1px;
+	clear: both;
+	margin: 5px 0;
+}
+.mmGrayLineRight
+{
+	border-top: 1px solid #e7e7e7;
+	width: 165px;
+	height: 1px;
+	clear: both;
+	margin: 10px 0 5px 7px;
+}
+.mmGreen
+{
+	color: #5aa41f;
+}
+.mmGuldNivaInfo
+{
+	background-color: #FEFCC5;
+	width: 50px;
+	height: 20px;
+	float: left;
+	margin-top: -5px;
+	margin-right: 5px;
+}
+.mmh1 a
+{
+	font-size: 12px;
+}
+.mmh1
+{
+	margin-bottom: 18px;
+	font-family: Trebuchet ms, Tahoma, Arial, Helvetica;
+	font-size: 22px;
+	font-weight: bold;
+	line-height: 22px;
+}
+.mmh2
+{
+	font-family: Trebuchet MS, Helvetica, Arial, sans-serif;
+	font-size: 18px;
+	line-height: 20px;
+	font-weight: normal;
+}
+.mmh3Box
+{
+	font-family: Trebuchet MS, Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 14px;
+	position: absolute;
+	margin: 10px 0 0 13px;
+}
+.mmh3
+{
+	font-family: Trebuchet MS, Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 14px;
+}
+.mmHeightTvaNollPixlar
+{
+	height: 20px;
+}
+.mmIcon
+{
+	position: relative;
+	top: 3px;
+}
+.mmInstallningarTable
+{
+	border: 1px solid #60afcb;
+	border-top: none;
+}
+.mmKlubbarAvatarTop
+{
+	width: 50px;
+	height: 50px;
+	float: left;
+	margin-right: 5px;
+}
+.mmKommungrupperGrupper div
+{
+	border-top: 1px solid #ccc;
+	padding: 5px 10px 10px 35px;
+}
+.mmKommungrupperKommun span
+{
+	float: left;
+	padding-top: 5px;
+	display: block;
+	width: 10px;
+}
+.mmKommungrupperKommun
+{
+	background: #b2ed81;
+	border-top: 1px solid #ccefb0;
+	border-left: 1px solid #ccefb0;
+	border-bottom: 1px solid #8cd84f;
+	border-right: 1px solid #8cd84f;
+	padding: 5px;
+}
+.mmKommunJaktenBild
+{
+	margin: 10px 0 5px 15px;
+}
+.mmKommunVapenImg
+{
+	width: 100px;
+	float: right;
+}
+.mmKommunvapen
+{
+	height: 15px;
+	width: 15px;
+}
+.mmKontotypTable td
+{
+	text-align: right;
+	padding: 4px;
+}
+.mmKontotypTable th
+{
+	font-weight: normal;
+	width: 280px;
+	padding: 0;
+}
+.mmLinkGreen a: hover,.mmLinkGreen a: visited
+{
+	color: #5aa41f;
+	text-decoration: underline;
+}
+.mmList1, .mmList2
+{
+	border-bottom: 1px solid #ddd;
+	padding: 5px;
+	white-space: nowrap;
+}
+.mmList1
+{
+	background-color: #fff;
+}
+.mmList2
+{
+	background-color: #eee;
+}
+.mmLoading,.highslide-active-anchor img
+{
+	visibility: hidden;
+}
+.mmLoggaInTitle
+{
+	padding-top: 4px;
+	text-align: right;
+}
+.mmMailCellGray1
+{
+	background: #ccc;
+	vertical-align: middle;
+	font-weight: bold;
+}
+.mmMailCellGreen1
+{
+	background: #9cdf69;
+	font-weight: bold;
+	vertical-align: middle;
+}
+.mmMailCellGreen2
+{
+	background: #eaf4e2;
+	vertical-align: middle;
+}
+.mmMailOutboxTopTr,.mmBackGroundColorNioNioCCCC
+{
+	background-color: #9CC;
+}
+.mmMarginBottom
+{
+	margin-bottom: 10px;
+}
+.mmMarginLeft10
+{
+	margin-left: 10px;
+}
+.mmMarginLeft20
+{
+	margin-left: 20px;
+}
+.mmMarginLeft2
+{
+	margin-left: 2px;
+}
+.mmMarginLeft30
+{
+	margin-left: 30px;
+}
+.mmMarginLeft3
+{
+	margin-left: 3px;
+}
+.mmMarginLeft5
+{
+	margin-left: 5px;
+}
+.mmMarginLeftFyraNollPixlar
+{
+	margin-left: 40px;
+}
+.mmMarginRight10
+{
+	margin-right: 10px;
+}
+.mmMarginRight20
+{
+	margin-right: 20px;
+}
+.mmMarginRight15
+{
+	margin-right: 15px;
+}
+.mmMarginRight
+{
+	margin-right: 22px;
+}
+.mmMarginTop,#motiomera_helpviewer
+{
+	margin-top: 15px;
+}
+.mmMarginTop-6
+{
+	margin-top: -6px;
+}
+.mmMedaljAntalGold
+{
+	color: #B8B328;
+}
+.mmMedaljAntal
+{
+	position: relative;
+	top: -6px;
+	color: #888;
+}
+.mmMedaljerTd
+{
+	width: 60px;
+	padding-top: 4px;
+	height: 25px;
+}
+.mmMedlemmarTabell .mmAvatarMini
+{
+	position: relative;
+	top: 3px;
+	margin-right: 5px;
+}
+.mmMedlemmarTabell td
+{
+	width: 100px;
+	padding: 0 0 5px;
+}
+.mmMedlemmarTabell
+{
+	width: 350px;
+	margin-left: 10px;
+	margin-top: 0;
+}
+.mmMenuBG
+{
+	background: #eaf4e2;
+}
+.mmNoBr,.mmNoWrap
+{
+	white-space: nowrap;
+}
+.mmOrange
+{
+	color: #ff8000;
+}
+.mmPadding3
+{
+	padding: 2px 3px 1px 0;
+}
+.mmPaddingTop10
+{
+	padding-top: 10px;
+}
+.mmPaddingTop20
+{
+	padding-top: 20px;
+}
+.mmPaddingRight30
+{
+	padding-right: 30px;
+}
+.mmProfilH1 a{
+	color: #555;
+	font-size: 22px;
+}
+.mmPositionRelative,#mmStegGrafikStartkommunKontainer
+{
+	position: relative;
+}
+.mmProfilKommunJaktItemFirstKlarat
+{
+	position: relative;
+	left: 15px;
+	top: 20px;
+	height: 30px;
+}
+.mmProfilKommunJaktItemFirst
+{
+	width: 45px;
+	text-align: center;
+	float: left;
+	left: 10px;
+	cursor: pointer;
+	margin: 7px 7px 7px 0;
+}
+.mmProfilKommunJaktItemNR
+{
+	height: 60px;
+}
+.mmProfilKommunJaktItemVapen
+{
+	height: 45px;
+	width: 38px;
+	background-repeat: no-repeat;
+}
+.mmProfilKommunJaktItem
+{
+	width: 45px;
+	text-align: center;
+	float: left;
+	cursor: pointer;
+	margin: 7px;
+}
+.mmProfilNamnSpan
+{
+	font-weight: bold;
+	margin-right: 5px;
+}
+.mmQuizAlternativeText
+{
+	float: left;
+	width: 300px;
+}
+.mmQuizAnswer
+{
+	font-family: Trebuchet ms, Tahoma, Arial, Helvetica;
+	font-size: 16px;
+	font-weight: bold;
+	font-style: italic;
+	color: #4a9422;
+}
+.mmQuizAnswerFel
+{
+	font-family: Trebuchet ms, Tahoma, Arial, Helvetica;
+	font-size: 16px;
+	font-weight: bold;
+	font-style: italic;
+	color: #ab2525;
+}
+.mmQuizBoxTop
+{
+	background: url(/img/framework/mmQuizTop.gif) bottom no-repeat;
+	width: 174px;
+	height: 34px;
+	margin-top: 2px;
+	padding: 0;
+}
+.mmQuizKnapp div p
+{
+	text-align: right;
+	padding-right: 5px;
+	margin: 0;
+}
+.mmQuizKnapp div
+{
+	margin: 0;
+	padding: 38px 0 0 70px;
+}
+.mmQuizKnapp
+{
+	background: url('/img/icons/quizknapp.jpg');
+	width: 180px;
+	height: 98px;
+}
+.mmQuizKommunImg
+{
+	width: 240px;
+}
+.mmQuizNasta
+{
+	font-family: Trebuchet ms, Tahoma, Arial, Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+	cursor: pointer;
+}
+.mmQuizTitle
+{
+	font-family: Trebuchet ms, Tahoma, Arial, Helvetica;
+	font-size: 18px;
+	font-weight: bold;
+	font-style: italic;
+	color: #e1159f;
+}
+.mmRapporteraStegText
+{
+	margin: 13px 0 0 58px;
+}
+.mmReadMailButtonsDiv
+{
+	padding-bottom: 4px;
+}
+.mmReadMailMeddelande
+{
+	width: 100%;
+	height: 97px;
+}
+.mmReadMailMsg
+{
+	width: 100%;
+	height: 100px;
+}
+.mmRed
+{
+	color: #DD1D1D;
+}
+.mmRightMinSidaBox
+{
+	width: 162px;
+	border: 1px solid #4aabcb;
+	border-top: none;
+	padding: 5px;
+}
+.mmRightSideContestBar
+{
+	margin: -15px 0 0;
+}
+.mmRuttKommunGron
+{
+	color: #090;
+}
+.mmRuttKommunGul
+{
+	color: #a83;
+}
+.mmRuttKommunSvart
+{
+	color: #000;
+}
+.mmShadowWide
+{
+	background: url(/img/framework/mmShadowWide.gif) no-repeat;
+	height: 9px;
+	width: 602px;
+	padding-bottom: 7px;
+}
+.mmSilverNivaInfo
+{
+	background-color: #CCC;
+	width: 50px;
+	height: 20px;
+	float: left;
+	margin-top: -5px;
+	margin-right: 5px;
+}
+.mmStarText
+{
+	width: 14px;
+	height: 13px;
+	position: relative;
+	top: 1px;
+}
+.mmStatusIcon
+{
+	position: relative;
+	margin: -13px 0 0 5px;
+}
+#mmStatusLoading{
+	display: none;
+	position: relative;
+	top: 5px;
+}
+.mmStegrapporterTd
+{
+	padding-right: 20px;
+	margin: 0;
+}
+.mmStegrapportPapperskorg
+{
+	position: relative;
+	top: -3px;
+}
+.IE6 .mmStegrapportPapperskorg, .IE7 .mmStegrapportPapperskorg
+{
+	position: static;
+	top: 0;
+}
+.mmTabBoxContent
+{
+	background: url('/img/icons/tabboxbg.gif');
+	background-repeat: repeat-x;
+	padding: 6px 0 0;
+}
+.mmTabBoxLeft
+{
+	width: 5px;
+	background: url('/img/icons/AdressbokTabLeftSel.gif');
+}
+.mmTabBoxMid a: hover
+{
+	text-decoration: none;
+	color: #333;
+}
+.mmTabBoxMid a
+{
+	padding: 0 8px;
+}
+.mmTabBoxMid
+{
+	background: url('/img/icons/AdressbokTabMiddleSel.gif');
+	font-size: 140%;
+	padding-top: 4px;
+}
+.mmTabBoxRight
+{
+	width: 5px;
+	background: url('/img/icons/AdressbokTabRightSel.gif');
+}
+.mmTabBoxTab .mmTabBoxLeft
+{
+	background: url('/img/icons/AdressbokTabLeft.gif');
+	width: 5px;
+}
+.mmTabBoxTab .mmTabBoxMid
+{
+	background: url('/img/icons/AdressbokTabMiddle.gif');
+	padding-top: 4px;
+	font-size: 120%;
+}
+.mmTabBoxTab .mmTabBoxRight
+{
+	width: 5px;
+	background: url('/img/icons/AdressbokTabRight.gif');
+}
+.mmTabBoxTab table
+{
+	margin-top: 4px;
+	height: 23px;
+	border-bottom: 1px solid #89cfe8;
+}
+.mmTabBoxTabSelected table
+{
+	height: 27px;
+}
+.mmTabBoxTabSelected,.mmTabBoxTab
+{
+	float: left;
+	margin-right: 4px;
+}
+.mmTabWrapBox
+{
+	background: url('/img/icons/AdressbokTabBG.gif') repeat-x bottom;
+	height: 27px;
+}
+.mmTextAlignLeft,.mmTextAlignCenter
+{
+	text-align: left;
+}
+.mmTextalignRight,.mmTextAlignRight,.mmStegOverText,#mmStegOverText
+{
+	text-align: right;
+}
+.mmTextField
+{
+	font-family: Arial, Verdana, Trebuchet ms, Tahoma, Helvetica;
+	font-size: 11px;
+}
+.mmTilltradeTd
+{
+	padding-left: 20px;
+	margin: 0;
+}
+.mmTopplistaRuta
+{
+	float: left;
+	margin: 0 7px;
+}
+.mmTotaltAntalSteg
+{
+	padding-top: 21px;
+	float: right;
+}
+.mmValjRuttAvstandTh
+{
+	text-align: right;
+	padding-right: 10px;
+	margin: 0;
+}
+.mmValjRuttQuizResult
+{
+	padding-right: 30px;
+	margin: 0;
+}
+.mmVerticalAlignBottom
+{
+	vertical-align: bottom;
+}
+.mmVerticalAlignMiddle,#mmMaBraLogo img,#mmProfilAdressbok img
+{
+	vertical-align: middle;
+}
+.mmVerticalAlignTop
+{
+	vertical-align: top;
+}
+.mmHeight20
+{
+	height: 20px;
+}
+.mmHeight40
+{
+	height: 40px;
+}
+.mmWidth160
+{
+	width: 160px;
+}
+.mmWidth165
+{
+	width: 165px;
+}
+.mmWidth100
+{
+	width: 100px;
+	vertical-align: middle;
+}
+.mmWidth140
+{
+	width: 140px;
+	vertical-align: middle;
+}
+.mmWidth230
+{
+	width: 230px;
+	vertical-align: middle;
+}
+.mmWidth30a
+{
+	width: 30px;
+	text-align: center;
+	vertical-align: middle;
+}
+.mmWidth70
+{
+	width: 70px;
+	vertical-align: middle;
+}
+.mmWidth75Procent
+{
+	width: 75%;
+}
+.mmWidth90Procent
+{
+	width: 90%;
+}
+.mmWidthEttFemNollPixlar,.motiomera_installningar_table input,.motiomera_installningar_table select
+{
+	width: 150px;
+}
+.mmWidthEttFyraNollPixlar
+{
+	width: 140px;
+}
+.mmWidthEttSexNollPixlar
+{
+	width: 160px;
+}
+.mmWidthSexNollPixlar
+{
+	width: 160px;
+}
+.mmWidthEttTvaNollPixlar
+{
+	width: 120px;
+}
+.mmWidthFemNollPixlar,.motiomera_steg_table_cell1,.controlbar .previous
+{
+	width: 50px;
+}
+.mmWidthFyraEttNollPixlar
+{
+	width: 410px;
+}
+.mmWidthFyraFemPixlar
+{
+	width: 45px;
+}
+.mmWidthFyraNollPixlar
+{
+	width: 40px;
+}
+.mmWidthHundra,.mmWidthEttNollNollPixlar
+{
+	width: 100px;
+}
+.mmWidthHundraProcent,.mmKontotypTable,#reading_div table,#answering_div table,#fw_div table
+{
+	width: 100%;
+}
+.mmWidthNioNollPixlar
+{
+	width: 90px;
+}
+.mmWidthSjuNollPixlar
+{
+	width: 70px;
+}
+.mmWidthTreHundraPixlar
+{
+	width: 300px;
+}
+.mmWidthTreHundraTretioPixlar
+{
+	width: 330px;
+}
+.mmWidthTreNollPixlar
+{
+	width: 30px;
+}
+.mmWidthTvaHundraPixlar
+{
+	width: 200px;
+}
+.mmWidthTvaNollFemPixlar
+{
+	width: 205px;
+}
+.mmWidthTvaNollPixlar
+{
+	width: 20px;
+}
+.mmWidthTvaTreNollPixlar
+{
+	width: 230px;
+}
+.mmWidthTvaTvaNollPixlar
+{
+	width: 220px;
+}
+.mmWidthAttaNoll
+{
+	width: 80px;
+}
+.mm_topplista_markerad
+{
+	color: red;
+}
+.motiomera_form_table .mmRawText
+{
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+.motiomera_form_table td,.motiomera_form_table th
+{
+	border-bottom: 1px solid #eee;
+	padding: 3px 0;
+}
+.motiomera_form_table th
+{
+	padding-top: 8px;
+	width: 100px;
+}
+.motiomera_form_table
+{
+	width: 435px;
+}
+.motiomera_installningar_table textarea
+{
+	width: 304px;
+}
+.motiomera_installningar_table th
+{
+	padding-top: 7px;
+	font-size: 110%;
+	padding-right: 30px;
+}
+.motiomera_kalender .motiomera_kalender_month_row td
+{
+	height: 20px;
+	border-bottom: 1px solid #888;
+	text-align: center;
+}
+.motiomera_kalender td
+{
+	vertical-align: middle;
+	text-align: center;
+}
+.motiomera_kalender_disabled
+{
+	background: #eee;
+	color: #888;
+}
+.motiomera_kalender_flagged
+{
+	font-weight: bold;
+	text-decoration: underline;
+}
+.motiomera_kalender_nextMonth
+{
+	float: right;
+	padding-right: 5px;
+}
+.motiomera_kalender_notCurrent
+{
+	color: #aaa;
+}
+.motiomera_kalender_prevMonth
+{
+	float: left;
+	padding-left: 5px;
+}
+.motiomera_kalender_selected
+{
+	background: #1d6179;
+	color: #fff;
+	font-weight: bold;
+}
+.motiomera_kalender_today
+{
+	font-weight: bold;
+	color: #000;
+}
+.motiomera_kalender_weekday_row td,.motiomera_kalender_week_row td a
+{
+	padding: 2px 6px;
+}
+.motiomera_kalender
+{
+	font-family: Arial, sans-serif;
+	border: 1px solid #888;
+}
+.motiomera_kommun_thumbnail
+{
+	width: 80px;
+	height: 80px;
+	margin-left: 10px;
+}
+.motiomera_popup_before_close_show
+{
+	float: right;
+	font-size: 100%;
+	position: relative;
+	top: 15px;
+	left: -15px;
+	margin-right: 10px;
+}
+.motiomera_popup_before_close
+{
+	float: right;
+	font-size: 100%;
+	position: relative;
+	top: 15px;
+	left: -15px;
+	margin-right: 10px;
+	display: none;
+}
+.motiomera_start_medlemsprofil
+{
+	float: left;
+	margin-right: 3px;
+	padding-bottom: 20px;
+}
+.motiomera_steg_preview_table
+{
+	font-size: 80%;
+	width: 302px;
+}
+.motiomera_steg_preview_wrap
+{
+	width: 322px;
+	overflow: auto;
+	height: 91px;
+}
+.motiomera_steg_table_cell2
+{
+	width: 130px;
+}
+.motiomera_steg_table_cell3
+{
+	width: 55px;
+}
+.motiomera_visningsbild
+{
+	width: 80px;
+	height: 100px;
+	border: 1px solid #ccc;
+	padding: 1px;
+}
+.progressBar .background
+{
+	border: solid 1px #000;
+	width: 320px;
+	height: 20px;
+}
+.progressBar .bar
+{
+	position: relative;
+	background-color: blue;
+	width: 0;
+	height: 20px;
+}
+.progressBar
+{
+	position: relative;
+	width: 350px;
+	height: 40px;
+	font-size: 14px;
+	padding: 2px;
+}
+.quizradio
+{
+	width: 200px;
+	border-color: red;
+}
+.removeRoute
+{
+	font-size: 25px;
+	font-weight: bold;
+	color: red;
+	cursor: pointer;
+	text-align: center;
+	height: 32px;
+	width: 32px;
+	float: right;
+	display: block;
+}
+.remove
+{
+	color: #f22;
+}
+.ShadowBoxBottom
+{
+	background-color: #ff0;
+	background-image: url('/img/ShadowBottomRight.jpg');
+	background-repeat: repeat-y;
+	width: 255px;
+	height: 30px;
+	margin-top: -7px;
+}
+.ShadowBoxTop
+{
+	background-image: url('/img/ShadowTopRight.jpg');
+	background-repeat: repeat-y;
+	width: 260px;
+	height: 30px;
+	margin-bottom: -30px;
+}
+.ShadowBox
+{
+	background-image: url('/img/ShadowRight.jpg');
+	background-repeat: repeat-y;
+	width: 255px;
+	z-index: 1;
+	margin: 5px;
+}
+.warn_text
+{
+	color: #C00;
+}
+.mmClearBoth{
+	clear:both;
+}
+.mmFloatLeft {
+	float:left;
+}
+.eventResults
+{
+	float: left;
+	margin: 5px
+}
+.mmTopplistaRuta
+{
+	margin: 0 7px;
+}
+.mmWidthFyraEttNollPixlar
+{
+	width: 410px;
+}
+.mmRightSideContestBar
+{
+	margin: -15px 0 0;
+}
+.mmCurrentUser
+{
+	color: red;
+	font-weight: bold;
+}
+.mmCurrentUser a
+{
+	color: red;
+	font-weight: bold;
+}
+.mmNoWrap
+{
+	white-space: nowrap;
+}
+#quizId
+{
+	display: none;
+}
+.mmWhite
+{
+	color: #fff;
+}
+.autoWidth
+{
+	width: auto !important;
+}
+#mmRssFeeds
+{
+	position: absolute;
+	margin: -55px 0 0 0;
+	width: 400px;
+	height: 45px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+#mmRssFeeds.gmaps
+{
+	margin: 235px 0 0 0;
+}
+thead th, thead th a
+{
+	color: blue !important;
+	text-decoration: underline;
+}
+td.number
+{
+	white-space: nowrap;
+}
+.mmText
+{
+	position: relative;
+	width: 400px;
+	margin-bottom: 10px;
+}
+.hallOfFame
+{
+	position: relative;
+	left: 5px;
+	border: 0;
+	width: 182px;
+	margin: 0 7px;
+	background: url(/img/halloffame/mmHofBott.gif) bottom left no-repeat;
+	padding-bottom: 95px;
+}
+.hallOfFame .mmAlbumBoxTop
+{
+	height: 108px;
+	width: 182px;
+	background: url(/img/halloffame/mmHofTop.gif) no-repeat;
+}
+.hallOfFame .mmRightMinSidaBox
+{
+	background: url(/img/halloffame/mmHofBg.gif) repeat-y;
+	border: 0;
+	padding: 0 10px;	
+	width 182px !important;
+}
+.hallOfFame h3
+{
+	position: relative;
+	top: 105px;
+	left: -3px;
+	color: #000;
+}
+.IE7 .hallOfFame h3, .IE6 .hallOfFame h3
+{
+	top: 95px;
+}
+.hallOfFame strong
+{
+	position: relative;
+	top: 15px;
+	left: 2px;
+	display: block;
+	margin: 0 0 -7px;
+}
+
+.hallOfFame .toplista strong
+{
+	position: static;
+	margin: 0;
+}
+
+.mmPaminnelseNone
+{
+	color: red;
+	font-weight: bold;
+}
+
+#mtgt_unnamed_2
+{
+	z-index: 99999 !important;
+}
+/*------------------------------------*/
+/* Remove all inline CSS page by page.*/
+/*------------------------------------*/
+
+.hide
+{
+	display: none;
+}
+.marginRight5
+{
+	margin-right:5px;
+}
+.borderBottomBlack
+{
+	border-bottom: 1px solid #000;
+}
+.mmRod
+{
+	color: red !important;
+}
+.mmGron
+{
+	color: green !important;
+}
+.margin0
+{
+	margin: 0;
+}
+.guldNiva
+{
+	background-color:#FEFCC5;
+	width:50px;
+	height:20px;
+	float:left;
+	margin-top:-5px;
+	margin-right:5px;
+}
+.silverNiva
+{
+	background-color:#CCCCCC;
+	width:50px;
+	height:20px;
+	float:left;
+	margin-top:-5px;
+	margin-right:5px;
+}
+#mapdiv 
+{
+margin-left: -15px;
+}
+.paddingLeft15
+{
+	padding-left: 15px;
+}
+.marginLeft12
+{
+	margin-left: 12px;
+}
+.marginLeft8
+{
+	margin-left: 8px;
+}
+.marginRight20
+{
+	margin-right: 20px;
+}
+.kommunVapen
+{
+	padding-right: 0px;
+	white-space: nowrap;
+	padding-left: 5px;
+}
+.taBortKommun
+{
+	font-weight:bold;
+	font-size:14px;
+}
+.slutMal
+{
+	white-space:nowrap;
+	font-weight:bold;
+	text-align:right;
+	background-color:#ffffff;
+}
+.slutMalIngetValt
+{
+	padding-right: 0px;
+	white-space:nowrap;
+	padding-left:15px;
+	font-weight:bold;
+}
+.marginLeftNegative5
+{
+	margin-right:-5px;
+}
+
+#mmStegGrafikStartkommunKontainer #mmStegGrafikTotalt
+{
+	margin-top: 180px;
+}
+#mmStegGrafikStartkommunKontainer #mmStegGrafikDetaljeradRapport
+{
+	margin-top: 180px;
+}
+#mmUpdateStatus
+{
+	display: none;
+	position: absolute;
+	margin: -4px 0 0 0;
+}
+#mmMedlemStatusText
+{
+	padding: 0;
+	font-size: 50%;
+	position: relative;
+	top: -2px;
+	font-style: italic;
+	line-height: 15px;
+}
+.editable #mmMedlemStatusText
+{
+	padding: 2px 19px 1px 5px;
+	border: 1px solid #aaa;
+	font-size: 50%;
+	position: relative;
+	top: -4px;
+	background: #fff url(/img/icon-pen.png) no-repeat right -2px;
+	line-height: 20px;
+}
+.mailTextarea
+{
+	width: 300px;
+	height: 75px;
+}
+#filvaljare0
+{
+	position: absolute;
+	display: block;
+}
+.laggTillKommun
+{
+	font-weight:bold;
+	font-size:14px;
+	position:relative;
+	float:right;
+	margin-right:10px;
+}
+
+.laggTillKommunSmall
+{
+	font-weight:normal;
+	font-size:11px;
+	text-decoration: underline;
+	position:relative;
+	float:left;
+	margin-right:10px;
+}
+
+.ruttFloatLeft
+{
+	position: relative;
+	float: left;
+	padding-right: 10px;
+}
+.avKlaradRutt td, .avklaradRutt
+{
+	background-color:#FBD464;
+	width:30px;
+	height:10px;
+}
+.planeradRutt
+{
+	background-color:#FDECB9;
+	width:30px;
+	height:10px;
+}
+
+.pointer
+{
+	cursor: pointer;
+}
+.ingetValt
+{
+	padding-right: 0px;
+	white-space:nowrap;
+	padding-left:15px;
+	font-weight:bold;
+}
+.ettMal
+{
+	white-space:nowrap;
+	font-weight:bold;
+	text-align:right;
+	background-color:#ffffff;
+}
+.mmMarginTop13
+{
+	margin-top: 13px;
+}
+.mmMarginTop5
+{
+	margin-top: 5px;
+}
+.gruppTextarea
+{
+	width:300px;
+	height:80px;
+}
+.sqlSuccess
+{
+	color:#0C0;
+	font-weight: bold;
+}
+.sqlFail
+{
+	color:#C00;
+	font-weight: bold;
+}
+.center
+{
+	text-align: center;
+}
+.mmWidth320
+{
+	width: 320px;
+}
+.adressLoading
+{
+	position: relative;
+	top: 3px;
+}
+.nyttMeddelande
+{
+	width:250px;
+	height:80px;
+}
+.block
+{
+	display: block;
+}
+.amneInput
+{
+	width:300px;
+	height:18px;
+}
+#kontaktMeddelande
+{
+	width: 300px;
+	height: 100px;
+}
+.inbjuden
+{
+	text-align: center;
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+.mmRightMinSidaBox, .mmBlueBoxBg, .mmBlueBoxWideBgMainPadding, .BoxTitle a, .mmAnslagstavlaBoxBg
+{
+	overflow: hidden;
+	word-wrap: break-word;
+}
+.mmBlueBoxBg
+{
+	width: 370px !important;
+}
+.mmBlueBoxWideBgMainPadding td
+{
+	overflow: hidden;
+	float: left;
+	width: 160px;
+	margin: 0 10px;
+}
+.BoxTitle a
+{
+	width: 410px;
+	display: block;
+}
+.mmKontotypTable th
+{
+	width: auto;
+}
+.mmArticleNarrowStart .mmh2
+{
+	word-wrap: break-word;
+}
+
+.fastRutt td, .fastRutt
+{
+	background: #90bcf9;
+}
+.fastRutt td.mmBgWhite
+{
+	background: #fff;
+}
+
+.fastRuttPlanerad td, .fastRuttPlanerad
+{
+	background: #b0dcff;
+}
+
+#fastaRutterPokaler
+{
+	list-style-image: url(/img/icons/pokal_blau.gif);
+	list-style-position: inside;
+	padding: 5px 20px 0;
+}
+#bloggInlagg img
+{
+	display: block;
+	margin-bottom: 15px;
+}
+.gmapsImageThumb
+{
+	margin-left: -50px !important;
+}
+#mmStatusField
+{
+	margin: 0 0 0 5px;
+}
+.medlemListEmail
+{
+	display: block;
+	width: 190px;
+	overflow: hidden;
+}
+.IE6 #mmStegGrafikSenasteVeckan
+{
+        position: relative;
+        left: 10px;
+        margin-left: -3px;
+}
+.IE6 #mapdiv
+{
+	margin-left: -15px;
+}
+.IE6 .editable #mmMedlemStatusText
+{
+	background: #fff url(/img/icon-pen.png) repeat-y right 4px;
+}
+
+.noline{
+  border-bottom:none;
+}

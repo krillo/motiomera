@@ -1,0 +1,11 @@
+USE `motiomera`;
+
+CREATE TABLE `mm_tagg` (
+`id` INT( 40 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`objekt_table` VARCHAR( 255 ) NOT NULL ,
+`objekt_id` INT( 40 ) UNSIGNED NOT NULL ,
+`tag_table` VARCHAR( 255 ) NOT NULL ,
+`tag_id` INT( 40 ) NOT NULL ,
+`medlem_id` INT( 40 ) NOT NULL DEFAULT '0',
+`skapad` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

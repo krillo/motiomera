@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+
+OBS, glöm inte att se till att RefId finns i db, annars kommer det inte att fungera.
+<br/> 
+
+<form action="/api/order.php" method="post">
+<table>
+<tr><td>Items       </td><td><input  type="text" value="1" 				name="Items" />  </td></tr> 
+<tr><td>OrderId     </td><td><input  type="text" value="386486" 			name="OrderId" /></td></tr> 
+<tr><td>RefId       </td><td><input  type="text" value="krillo12355" 		name="RefId" /></td></tr> 
+<tr><td>Date        </td><td><input  type="text" value="2008-05-14 11:41:05" 	name="Date" /></td></tr> 
+<tr><td>PayerName   </td><td><input  type="text" value="Krillo Dillo" 		name="PayerName" /></td></tr> 
+<tr><td>PayerCompany</td><td><input  type="text" value="Boyhappy" 		name="PayerCompany" /></td></tr> 
+<tr><td>PayerAddress</td><td><input  type="text" value="Fakturagatan 1" 			name="PayerAddress" /></td></tr> 
+<tr><td>PayerCo     </td><td><input  type="text" value="Faktura co" 	name="PayerCo" /></td></tr> 
+<tr><td>PayerZipCode</td><td><input  type="text" value="22222" 			name="PayerZipCode" /></td></tr> 
+<tr><td>PayerCity   </td><td><input  type="text" value="Helsingborg" 		name="PayerCity" /></td></tr> 
+<tr><td>PayerEmail  </td><td><input  type="text" value="faktura@erendi.se" name="PayerEmail" /></td></tr> 
+<tr><td>PayerPhone  </td><td><input  type="text" value="111111" 		name="PayerPhone" /></td></tr> 
+<tr><td>PayerMobile </td><td><input  type="text" value="222222" 		name="PayerMobile" /></td></tr> 
+<tr><td>PayerCountry</td><td><input  type="text" value="Sverige" 			name="PayerCountry" /></td></tr> 
+<tr><td>Payment   </td><td><input  type="text" value="Faktura/inbetalningskort" name="Payment" /></td></tr> 
+<tr><td>ReciverName0 </td><td><input  type="text" value="Bruce Wayne" 		name="ReciverName0" /></td></tr> 
+<tr><td>ReciverCompany0 </td><td><input  type="text" value="Wayne corp" 		name="ReciverCompany0" /></td></tr> 
+<tr><td>ReciverAddress0 </td><td><input  type="text" value="Mottagargatan 6" 			name="ReciverAddress0" /></td></tr> 
+<tr><td>ReciverCo0  </td><td><input  type="text" value="Mot co" 	name="ReciverCo0" /></td></tr> 
+<tr><td>ReciverZipCode0 </td><td><input  type="text" value="33333" 			name="ReciverZipCode0" /></td></tr> 
+<tr><td>ReciverCity0 </td><td><input  type="text" value="Gotham City" 		name="ReciverCity0" /></td></tr> 
+<tr><td>ReciverEmail0 </td><td><input  type="text" value="batman@erendi.se" name="ReciverEmail0" /></td></tr> 
+<tr><td>ReciverPhone0 </td><td><input  type="text" value="333333" 		name="ReciverPhone0" /></td></tr> 
+<tr><td>ReciverMobile0  </td><td><input  type="text" value="4444444" 		name="ReciverMobile0" /></td></tr> 
+<tr><td>ReciverCountry0 </td><td><input  type="text" value="Sverige" 			name="ReciverCountry0" /></td></tr> 
+<tr><td>Price0      </td><td><input  type="text" value="795" 			name="Price0" /></td></tr> 
+<tr><td>Quantity0   </td><td><input  type="text" value="5" 			name="Quantity0" /></td></tr> 
+<tr><td>Item0       </td><td><input  type="text" value="MåBraJakten" 		name="Item0" /></td></tr> 
+<tr><td>MagazineId0 </td><td><input  type="text" value="231" 			name="MagazineId0" /></td></tr> 
+<tr><td>CampaignId0 </td><td><input  type="text" value="RE03" 			name="CampaignId0" /></td></tr> 
+<tr><td>OfferId0    </td><td><input  type="text" value="RE03" 			name="OfferId0" /></td></tr> 
+<tr><td>Sum         </td><td><input  type="text" value="795" 			name="Sum" /></td></tr> 
+</table>
+
+<input type="submit" value="Post" />
+</form>
+
+
+
+</body>
+</html>

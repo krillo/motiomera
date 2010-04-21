@@ -1,0 +1,9 @@
+use 'motiomera';
+
+CREATE TABLE `mm_level` (
+`id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`namn` VARCHAR( 255 ) NOT NULL
+) ENGINE = MYISAM;
+
+
+ALTER TABLE `mm_level` ADD `isDefault` TINYINT NOT NULL DEFAULT '0' ;

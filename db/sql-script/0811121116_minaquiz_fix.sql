@@ -1,0 +1,3 @@
+use `motiomera`;
+
+ALTER TABLE `mm_minaquiz` MODIFY `tillagd` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;

@@ -1,0 +1,171 @@
+<?php
+/**
+* Class and Function List:
+* Function list:
+* - __construct()
+* - showSidebar()
+* - noShowHeaderFooter()
+* - display()
+* - assign()
+* - assign_by_ref()
+* - display_bare()
+* Classes list:
+* - MMSmarty extends Smarty
+*/
+
+class MMSmarty extends Smarty
+{
+	var $showSidebar = false;
+	var $showHeaderFooter = true;
+	
+	private $contentCacheLifetime;
+	const HEADERTPL = "header.tpl";
+	const FOOTERTPL = "footer.tpl";
+	const SIDEBARTPL = "sidebar.tpl";
+	
+	public function __construct($cache = false, $cacheLiftime = 3600)
+	{
+		global $USER, $ADMIN, $FORETAG, $urlHandler, $security, $adressbok, $urlChecker, $db, $sajtDelarObj;
+		$this->template_dir = ROOT . '/templates';
+		$this->compile_dir = ROOT . '/templates_c';
+		$this->config_dir = ROOT . '/php/libs/smarty/configs';
+		$this->cache_dir = ROOT . '/php/libs/smarty/cache';
+
+		// Visar t.ex. trunkomera.se istället för MotioMera, om så är fallet.
+		
+		if ($_SERVER['HTTP_HOST'] != 'motiomera.se'):
+			$this->assign("pagename", ucfirst($_SERVER['HTTP_HOST']));
+		else:
+			$this->assign("pagename", "MotioMera");
+		endif;
+		
+		if (defined('DEBUG_SMARTY') && DEBUG_SMARTY) {
+			$this->assign('debugSmarty', true);
+		}
+
+		//$this->assign("pagename", "MotioMera");
+		$this->assign("microtime", Misc::get_milliseconds(true));
+		$this->assign("_GET", $_GET);
+		$this->assign("_POST", $_POST);
+		$this->assign("_SERVER", $_SERVER);
+		$this->assign("urlHandler", $urlHandler);
+		$this->assign("sajtDelarObj", $sajtDelarObj);
+		$this->assign("urlChecker", $urlChecker);
+		$this->assign("security", $security);
+		$this->assign("GOOGLEMAPS_APIKEY", GOOGLEMAPS_APIKEY);
+		$this->assign("DEBUG", DEBUG);
+		$this->contentCacheLifetime = $cacheLiftime;
+		$this->compile_check = true;
+		
+		if ($cache) {
+			$this->caching = 2;
+		} else {
+			$this->caching = false;
+		}
+		$this->assign("BROWSER", Medlem::getCurrentBrowserVersion(true));
+		$helpers = Help::listByPage($_SERVER['PHP_SELF']);
+		$this->assign("helpers", $helpers);
+		$this->assign('currentPage', Misc::getCurrentPage());
+		
+		if ($USER) {
+			$this->assign("USER", $USER);
+			$this->assign("adressbok", $adressbok);
+		}
+		
+		if ($ADMIN) {
+			$this->assign("ADMIN", $ADMIN);
+			$this->assign("inAdmin", true);
+		}
+		
+		if ($FORETAG) $this->assign("FORETAG", $FORETAG);
+		$this->register_function('stegToKm', array(
+			'Steg',
+			'stegToKm'
+		));
+	}
+	function showSidebar()
+	{
+		$this->showSidebar = true;
+	}
+	function noShowHeaderFooter()
+	{
+		$this->showHeaderFooter = false;
+	}
+	function display($resource_name, $cache_id = null, $compile_id = null)
+	{
+		global $db;
+		
+		if ($this->showHeaderFooter) {
+			$this->cache_lifetime = 0;
+			$this->fetch(self::HEADERTPL, null, null, true);
+		}
+		$this->cache_lifetime = $this->contentCacheLifetime;
+		
+		if ($this->showSidebar) {
+			include (ROOT . "/pages/sidebar.php");
+			echo '<div id="mmColumnMiddle">';
+			$this->fetch($resource_name, $cache_id, $compile_id, true);
+			echo '</div>';
+			$this->fetch(self::SIDEBARTPL, null, null, true);
+		} else {
+			
+			if ($this->showHeaderFooter) {
+				echo '<div id="mmColumnMiddleWide">';
+			}
+			$this->fetch($resource_name, $cache_id, $compile_id, true);
+			
+			if ($this->showHeaderFooter) {
+				echo '</div>';
+			}
+		}
+		
+		if ($this->showHeaderFooter) {
+			$this->assign("querycount", $db->getQuerycount());
+			$this->cache_lifetime = 0;
+			$this->fetch(self::FOOTERTPL, null, null, true);
+		}
+	}
+	/**
+	 * assigns values to template variables
+	 *
+	 * @param array|string $tpl_var the template variable name(s)
+	 * @param mixed $value the value to assign
+	 */
+	function assign($tpl_var, $value = null)
+	{
+		
+		if (is_array($tpl_var)) {
+			foreach($tpl_var as $key => $val) {
+				
+				if ($key != '') {
+					$this->_tpl_vars[$key] = $val;
+				}
+			}
+		} else {
+			
+			if ($tpl_var != '') {
+				$this->_tpl_vars[$tpl_var] = $value;
+			}
+		}
+		unset($value);
+	}
+	/**
+	 * assigns values to template variables by reference
+	 *
+	 * @param string $tpl_var the template variable name
+	 * @param mixed $value the referenced value to assign
+	 */
+	function assign_by_ref($tpl_var, &$value)
+	{
+		
+		if ($tpl_var != '') {
+			$this->_tpl_vars[$tpl_var] = & $value;
+		}
+		unset($value);
+	}
+	function display_bare($resource_name, $cache_id = null, $compile_id = null)
+	{
+		$this->fetch($resource_name, $cache_id, $compile_id, true);
+	}
+}
+?>

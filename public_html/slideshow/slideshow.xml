@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<slideshow>
+	<item>
+		<url>slideshow/img/0.jpg</url>
+		<link>/pages/blimedlem.php</link>
+	</item>
+	<item>
+		<url>slideshow/img/1.jpg</url>
+		<link>/pages/blimedlem.php</link>
+	</item>
+	<item>
+		<url>slideshow/img/2.jpg</url>
+		<link>/pages/blimedlem.php</link>
+	</item>
+	<item>
+		<url>slideshow/img/3.jpg</url>
+		<link>/pages/blimedlem.php</link>
+	</item>
+	<item>
+		<url>slideshow/img/4.jpg</url>
+		<link>/pages/blimedlem.php</link>
+	</item>	
+	<item>
+		<url>slideshow/img/5.jpg</url>
+		<link>/pages/blimedlem.php</link>
+	</item>
+	<item>
+		<url>slideshow/img/6.jpg</url>
+		<link>/pages/blimedlem.php</link>
+	</item>
+</slideshow>

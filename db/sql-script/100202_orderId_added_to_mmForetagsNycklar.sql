@@ -1,0 +1,1 @@
+ALTER TABLE `motiomera`.`mm_foretagsnycklar` ADD COLUMN `order_id` INTEGER UNSIGNED DEFAULT null AFTER `lag_id`;

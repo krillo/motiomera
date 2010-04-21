@@ -1,0 +1,7 @@
+Här lägger vi in info om kommunkopplingar på rutterna som behöver åtgärdas:
+[STAD][tab][STAD]
+
+KOPPLINGAR SOM SKA GÖRAS:
+
+KOPPLINGAR SOM SKA TAS BORT:
+Mariestad	Laxå
