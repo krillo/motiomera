@@ -14,23 +14,25 @@ if [ "$DEPLOY_TO" = "1" ]; then
   #only deploy a tag - check if tag dir exists
   depenv="motiomera"
   svnrootdir="$homedir/aller-motiomera"  
-  echo "Enter which release-tag to deploy"
+  echo "Enter which git-tag to deploy on motiomera.se"
+  echo "e.g v3.05"  
   read TAG
-  svnrootdir=$svnrootdir/tags/$TAG
+  #svnrootdir=$svnrootdir/tags/$TAG
 elif [ "$DEPLOY_TO" = "2" ]; then
   depenv="trunkomera"
   homedir="/home/allersvn"
   svnrootdir="$homedir/aller-motiomera"
   livedir="/var/www"  
-  echo "Enter the path to the branch or the revision to deploy to trunkomera"
-  echo "e.g branches/order  or  tags/release-2.99"
+  echo "Enter the git-tag deploy to trunkomera"
+  echo "e.g v3.05"
   read TAG
-  svnrootdir=$svnrootdir/$TAG
+  #svnrootdir=$svnrootdir/$TAG
 else
   cat /home/motiomera/project_svn/trunk/bin/bart
   echo "## Exiting deploy"
   exit 0
 fi
+
 
 if [ -d "$svnrootdir" ]; then
   cd $svnrootdir
