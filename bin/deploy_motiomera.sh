@@ -3,10 +3,10 @@
 homedir="/home/motiomera"
 gitrootdir=$PWD
 owner="motiomera"
-GIT-TAG=$(git describe)
+GITTAG=$(git describe)
 
 echo "You are currently in $gitrootdir, is this the git root dir?"
-echo "Are your sure you want to deploy $GIT-TAG?
+echo "Are your sure you want to deploy $GITTAG?
 echo "Choose environment to deploy"
 echo "1 - for motimera.se"
 echo "2 - for trunkomera.se"
@@ -20,7 +20,7 @@ elif [ "$DEPLOY_TO" = "2" ]; then
   depenv="trunkomera"
   livedir="/var/www"  
 else
-  cat /home/motiomera/project_svn/trunk/bin/bart
+  cat /home/motiomera/$depenv/bin/bart
   echo "## Exiting deploy"
   exit 0
 fi
@@ -63,11 +63,11 @@ cp -fp $workdir/site_properties/settings.php $tmpdeploydir/php/settings.php
 rm $tmpdeploydir/php/settings-template.php
 
 
-echo "## add git-tag $GIT-TAG to css file  - $tmpdeploydir/ "
+echo "## add GITTAG $GITTAG to css file  - $tmpdeploydir/ "
 cd $tmpdeploydir/templates/
-sed -e "s/motiomera.css/motiomera.css?ver=$GIT-TAG/g" header.tpl >tmpfile
+sed -e "s/motiomera.css/motiomera.css?ver=$GITTAG/g" header.tpl >tmpfile
 mv tmpfile header.tpl
-sed -e "s/print.css/print.css?ver=$GIT-TAG/g" header.tpl >tmpfile
+sed -e "s/print.css/print.css?ver=$GITTAG/g" header.tpl >tmpfile
 mv tmpfile header.tpl
 
 
@@ -99,7 +99,7 @@ cd $gitrootdir
 
 echo "<br/><br/>" >> $hustlerrev
 date >> $hustlerrev
-$GIT-TAG >>$hustlerrev
+$GITTAG >>$hustlerrev
 
 echo "## Touch all files in htdocs (to sort of empty xcache) - $livedir/htdocs/"
 find $livedir/htdocs/ -name "*" | xargs touch

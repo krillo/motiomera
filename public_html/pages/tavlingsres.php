@@ -79,7 +79,7 @@ if(isset($_GET["id"]) && $_GET["id"] == floor($_GET["id"]) && isset($_GET["tid"]
 	$foretag = Foretag::loadById($medlem->getForetag()->getId());
 //	$foretagId = $foretag->getId();
 //	$slutDatum = $foretag->getSlutdatum(); // this is the active companys enddate, all companies with this enddate or later should be shown
-	//$slutDatum = date("Y-m-d", strtotime($foretag->getSlutdatum() . "-1 day"));   //-1 so that it doesn't add steps added monday after ended competition 
+//  $slutDatum = date("Y-m-d", strtotime($foretag->getSlutdatum() . "-1 day"));   //-1 so that it doesn't add steps added monday after ended competition 
 //	$slutDatum_ts = strtotime($slutDatum);  
 }
 else

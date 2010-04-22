@@ -38,7 +38,8 @@
 		<b>Startdatum för företagstävling: {$foretagArray[0].start_datum|nice_date:"j F Y"}</b>
 		<br /><br />
 
-{include file="positionerlag.tpl"}
+{*include file="positionerlag.tpl"*}
+<div style="margin-top:20px;"> </div>
 <br />
 <div class="mmFloatLeft mmBlueBoxContainer mmWidthFyraEttNollPixlar">
   <div class="mmBlueBoxTop">
