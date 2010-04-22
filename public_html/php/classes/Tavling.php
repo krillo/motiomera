@@ -394,7 +394,7 @@ class Tavling extends Mobject
       AND d.id = a.medlem_id
       GROUP BY a.medlem_id
       ORDER BY steg DESC";
-    echo $sql;
+    //echo $sql;
     return $db->allValuesAsArray($sql);
   } 
   

@@ -148,5 +148,5 @@ else
   //false if no custom added
   
   
-$smarty->display('contest_results_template_krillo.tpl', $foretag_id);
+$smarty->display('contest_results_template_from_db.tpl', $foretag_id);
 ?>

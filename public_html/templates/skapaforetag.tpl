@@ -25,8 +25,8 @@
 		<tr>
 			<th  style="border-bottom:none;">Startdatum</th>					
 			<td  style="border-bottom:none;">
-				<input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2010-04-26" checked>
-				Den stora vårtävlingen 26 april &nbsp;&nbsp; 
+				<input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2010-04-26" disabled>
+				<span style="text-decoration: line-through;">Den stora vårtävlingen 26 april </span> 
 				<!-- span style="color: #f00; font-weight:bold;">
 				   Det är fortfarande möjligt att anmäla er till Vårtävlingen. Vi kan dock inte garantera att stegräknarna levereras till tävlingens startdatum. Det är även möjligt att välja annat startdatum nedan.
 				</span-->
@@ -40,7 +40,7 @@
 		<tr>
 			<td  style=""></td>		
 			<td class="mmRawText" style="">
-				<input name="startdatumRadio" id="mmForetagStartdatumRadio2" type="radio" value="egetdatum"  >
+				<input name="startdatumRadio" id="mmForetagStartdatumRadio2" type="radio" value="egetdatum"  checked>
 
 				{*}<span id="foretagStartdatum">{$startdatumStr}</span>{*}
 				<select name="startdatum" id="mmForetagStartdatum" onchange="checkforetagstartdatum()">
