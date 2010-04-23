@@ -350,6 +350,7 @@ class Tavling extends Mobject
   /**
    * Get all teams for one competition in descending order
    * If $foretagid is submitted the only that company is fetched
+   * It doesn't select lag with id -1
    * 
    * @author Krillo
    * @param string $tavlingsid
@@ -367,10 +368,11 @@ class Tavling extends Mobject
       WHERE a.tavlings_id = $tavlingsid ";
     $sql .= $addCompany;     
     $sql .= " AND a.lag_id = b.lag_id 
+      AND a.lag_id > 0 
       AND a.foretag_id = c.id
       GROUP BY lag_id 
       ORDER BY steg_medel DESC";
-    //echo $sql;
+    echo $sql;
     return $db->allValuesAsArray($sql);
   }   
   

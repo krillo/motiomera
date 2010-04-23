@@ -477,13 +477,18 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 	          $tavling->commit();
 	        }                
 	        if ($medlem->getForetag()){
+	          if($medlem->getLag()){   //members that are not in a lag, want also to be in the toplists  set lagId to -1  
+	            $lagId = $medlem->getLag()->getId(); 
+	          }else{
+	            $lagId = -1;
+	          }	          
 		        $steg = $medlem->getStegTotal($startDatum , $slutDatum);
 		        if($steg > 0){  //only save data for members who have more than 0 steg 
 			        try{          
 			          $save[] = array(
 			            'medlem_id' => $medlem->getId() ,
 			            'foretag_id' => $medlem->getForetag()->getId() ,
-			            'lag_id' => $medlem->getLag()->getId() ,
+			            'lag_id' => $lagId ,
 			            'foretagsnyckel' => $medlem->getForetagsnyckel() ,
 			            'tavlings_id' => $tavling->getId() ,
 			            'steg' => $steg, 
