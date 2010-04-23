@@ -369,7 +369,7 @@ class Tavling extends Mobject
     $sql .= " AND a.lag_id = b.lag_id 
       AND a.foretag_id = c.id
       GROUP BY lag_id 
-      ORDER BY steg DESC";
+      ORDER BY steg_medel DESC";
     //echo $sql;
     return $db->allValuesAsArray($sql);
   }   
