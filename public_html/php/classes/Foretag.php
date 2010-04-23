@@ -495,7 +495,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     global $db;
     Misc::logMotiomera(date("Y-m-d H:i:s") . " INFO - Commence email sending for ended tavling ******************");  
     //get last user from mm_tavling_save, if correct date then send emails  
-    $sql = 'SELECT tavlings_id, UNIX_TIMESTAMP(timestamp) AS timestamp, UNIX_TIMESTAMP(stop_datum) AS stop_datum FROM mm_tavling_save ORDER BY id DESC LIMIT 1';  
+    $sql = 'SELECT tavlings_id, UNIX_TIMESTAMP(stop_datum) AS stop_datum FROM mm_tavling_save ORDER BY id DESC LIMIT 1';  
     $lastUser = $db->row($sql);
     $tavlingsId = $lastUser['tavlings_id'];
     $stopDate = date("Ymd", $lastUser['stop_datum']);
