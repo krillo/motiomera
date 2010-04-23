@@ -93,11 +93,11 @@
 	</div>
 	<div class="mmRightMinSidaBox">
 		<div class="mmHeightTvaNollPixlar"><b>Snitt per deltagare och lag</b></div>	
-		<table width="155" cellpadding="0" cellspacing="0" border="0">
+		<table width="160" cellpadding="0" cellspacing="0" border="0">
 			<tr>
 				<td>&nbsp;</td>
 				<td><b>Medlem</b></td>
-				<td><b>Steg</b></td>
+				<td with="30"><b>Steg</b></td>
 			</tr>
 			{foreach name=outer item=lag from=$foretagLagArray}
 			<tr>
@@ -204,11 +204,11 @@
 					</div>
 					<div class="mmRightMinSidaBox">
 						<strong>Snitt per deltagare och lag</strong><br /><br />
-						<table width="155" cellpadding="0" cellspacing="0" border="0">
+						<table width="160" cellpadding="0" cellspacing="0" border="0">
 							<tr>
 							  <td>&nbsp;</td>
 							  <td><b>Lag</b></td>
-							  <td><b>Steg</b></td>
+							  <td width="30"><b>Steg</b></td>
 							</tr>
 							{foreach name=outer item=lag from=$lagArray}
 								<tr>
