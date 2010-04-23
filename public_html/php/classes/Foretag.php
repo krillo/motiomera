@@ -480,7 +480,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 	          if($medlem->getLag()){   //members that are not in a lag, want also to be in the toplists  set lagId to -1  
 	            $lagId = $medlem->getLag()->getId(); 
 	          }else{
-	            $lagId = -1;
+	            $lagId = 0;
 	          }	          
 		        $steg = $medlem->getStegTotal($startDatum , $slutDatum);
 		        if($steg > 0){  //only save data for members who have more than 0 steg 
