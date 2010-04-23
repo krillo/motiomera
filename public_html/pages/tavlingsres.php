@@ -15,7 +15,7 @@ if(isset($_GET["id"]) && $_GET["id"] == floor($_GET["id"]) && isset($_GET["tid"]
 	
   //get the data for the userid submitted 
 	$medlemArray = Tavling::getResultMember($tid, $mid);
-	//print_r($medlemArray); 
+	print_r($medlemArray); 
 	$foretag_namn = $medlemArray[0]['foretag_namn'];
 	$foretag_id = $medlemArray[0]['foretag_id'];
 	
