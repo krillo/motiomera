@@ -244,7 +244,7 @@ class Tavling extends Mobject
       AND d.id = $medlemid
       GROUP BY lag_id 
       ORDER BY steg DESC";
-    echo $sql;
+    //echo $sql;
     $memberArray = $db->allValuesAsArray($sql);    
     //add also the rank to the array
     $memberArray[0]['rank'] =  self::member_rank($tavlingsid, $medlemid);
