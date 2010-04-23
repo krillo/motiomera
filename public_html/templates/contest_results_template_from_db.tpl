@@ -53,11 +53,11 @@
         </div>
         <div class="mmRightMinSidaBox">
           <div class="mmHeightTvaNollPixlar"><b>Antal steg under tävlingen</b></div>
-          <table width="155" cellpadding="0" cellspacing="0" border="0">
+          <table width="160" cellpadding="0" cellspacing="0" border="0">
             <tr>
               <td>&nbsp;</td>
               <td><b>Medlem</b></td>
-              <td><b>Steg</b></td>
+              <td width="30"><b>Steg</b></td>
             </tr>
             {foreach key=key item=lagitem from=$lag name=inner}
               <tr>
@@ -97,7 +97,7 @@
 			<tr>
 				<td>&nbsp;</td>
 				<td><b>Medlem</b></td>
-				<td with="30"><b>Steg</b></td>
+				<td width="30"><b>Steg</b></td>
 			</tr>
 			{foreach name=outer item=lag from=$foretagLagArray}
 			<tr>
@@ -124,11 +124,11 @@
 	</div>
 	<div class="mmRightMinSidaBox">
 		<div class="mmHeightTvaNollPixlar"><b>Antal steg under tävlingen</b></div>
-		<table width="155" cellpadding="0" cellspacing="0" border="0">
+		<table width="160" cellpadding="0" cellspacing="0" border="0">
 			<tr>
 				<td>&nbsp;</td>
 				<td><b>Medlem</b></td>
-				<td><b>Steg</b></td>
+				<td width="30"><b>Steg</b></td>
 			</tr>
         {foreach name=outer item=memb from=$allCompMembArray}
 				<tr>
@@ -171,11 +171,11 @@
 					</div>
 					<div class="mmRightMinSidaBox">
 						<strong>Antal steg under tävlingen</strong><br /><br />
-						<table width="155" cellpadding="0" cellspacing="0" border="0">
+						<table width="160" cellpadding="0" cellspacing="0" border="0">
 							<tr>
 							  <td>&nbsp;</td>
 							  <td><b>Medlem</b></td>
-							  <td><b>Steg</b></td>
+							  <td width="30"><b>Steg</b></td>
 							</tr>
 							{foreach name=outer item=memb from=$allMembArray}
 								<tr>
@@ -239,11 +239,11 @@
 					</div>
 					<div class="mmRightMinSidaBox">
 						<strong>Dagligt snitt per företag och deltagare</strong><br /><br />
-						<table width="155" cellpadding="0" cellspacing="0" border="0">
+						<table width="160" cellpadding="0" cellspacing="0" border="0">
 							<tr>
 							  <td>&nbsp;</td>
 							  <td><b>Medlem</b></td>
-							  <td><b>Steg</b></td>
+							  <td width="30"><b>Steg</b></td>
 							</tr>
 							{foreach name=outer item=comp from=$allForetagArray}
 								<tr>

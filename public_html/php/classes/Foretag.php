@@ -350,135 +350,6 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     }
   }
 	
-  /**
-   * This function logs email sendings
-   * changed by krillo 20091030
-   *
-  public static function logEmailSend($whichEmail, $msg, $medlem, $foretag, $i){
-    @file_put_contents(EMAIL_SEND_LOG_FILE, date("Y-m-d H:i:s "). ' ' . $whichEmail .' | '. $msg . ' | '. $i . ' | ' .  $foretag . ' | id: ' . $medlem->getId() . ' | epost: ' . $medlem->getEpost() . ' | aNamn: '. $medlem->getAnamn(), FILE_APPEND);
-  }
-  */
-	
-	/**
-	 * This function logs email sendings
-	 * Added by krillo 20090217
-	 *
-	public static function logEmailSend($success, $whichEmail, $msg, $medlem )
-	{
-		if(!$success){
-			@file_put_contents(EMAIL_SEND_LOG_FILE, date("Y-m-d H:i:s "). ' | ' . $whichEmail . ' | '. $msg . ' | id: ' . $medlem->getId() . ' | epost: ' . $medlem->getEpost() . ' | aNamn: ' . $medlem->getAnamn(), FILE_APPEND);
-		} else {
-			@file_put_contents(EMAIL_SEND_LOG_FILE, " - SUCCESS! \n", FILE_APPEND);
-		}		
-	}	
-*/	
-
-  /**
-   * krillo 091026 changed the sql to only get the records that have a competition thats ending.
-   * This will work if the mail is sent on tuesdays
-   */  
-/*  
-  public static function foretagsTavlingEndSendEmail()
-  {
-    $emailName = "Tavling avslutad - tisdag";   
-    global $db;
-
-    $sql = 'SELECT a.id FROM mm_medlem a, mm_foretagsnycklar b, mm_foretag c
-    WHERE a.id = b.medlem_id
-    AND b.foretag_id = c.id
-    AND a.epostBekraftad = 1
-    AND UNIX_TIMESTAMP(c.startDatum) >= '. (time() - ((self::TAVLINGSPERIOD_DAGAR + 3) * 86400)) .
-    ' AND UNIX_TIMESTAMP(c.startDatum) < '. (time() - ((self::TAVLINGSPERIOD_DAGAR) * 86400));        
-      
-    $tavling = new Tavling('0000-00-00');
-
-    $save = array();
-    $subject = 'Så här gick det i MotioMera!';
-    $i = 1;
-    $users = $db->valuesAsArray($sql);
-    @file_put_contents(EMAIL_SEND_LOG_FILE, "\n**********  " . $emailName . " - ". count($users) . " adresser att skicka till *********** \n", FILE_APPEND);
-    foreach($users as $user) {    
-      $medlem = Medlem::loadById($user);      
-      if (isset($medlem)) {       
-        if($tavling->getStartDatum() == '0000-00-00') {
-          $tavling->setStartDatum($medlem->getForetag()->getStartDatum());  // give the Tavling object a correct startdate as soon as we've got one (we only do this once)
-          $tavling->commit();
-        }
-                
-        if ($medlem->getForetag() && $medlem->getLag()) {
-        try{          
-          //self::logEmailSend($emailName, "try", $medlem, $medlem->getForetag()->getNamn(), $i++);
-          $save[] = array(
-            'medlem_id' => $medlem->getId() ,
-            'foretag_id' => $medlem->getForetag()->getId() ,
-            'lag_id' => $medlem->getLag()->getId() ,
-            'foretagsnyckel' => $medlem->getForetagsnyckel() ,
-            'tavlings_id' => $tavling->getId() ,
-            'steg' => $medlem->getStegTotal($medlem->getForetag()->getStartDatum() , $medlem->getForetag()->getSlutDatum())
-          );
-          $message = 'Grattis ' . $medlem->getFNamn() . '!
-
-Du hör nu till en av dem som har klarat av en tävlingsomgång i stegtävlingen MotioMera! Sammanlagt gick du ' . $medlem->getStegTotal($medlem->getForetag()->getStartDatum() , $medlem->getForetag()->getSlutDatum()) . ' steg! Du kan se hela slutresultatet genom att gå in på denna sida: http://www.motiomera.se/pages/tavlingsresultat.php?id=' . $medlem->getId() . '
-
-Du vet väl att du kan fortsätta vara med i MotioMera som privatperson? Du registrerar dina steg precis som i företagstävlingen och du kan också skapa klubbar och bjuda in vänner. De steg som du gått under  företagstävlingen följer automatiskt med. Ditt kostnadsfria privatmedlemskap startar automatiskt och gäller under 3 månader. Du loggar in precis som vanligt på motiomera.se.
-
-Hoppas att du har tyckt att tjänsten har varit givande och rolig. Maila oss gärna på motiomera@aller.se och säg vad du tyckte. Ris och ros. Vi lottar ut en stegräknare de luxe bland er som tycker till.
-
-Tack för denna gång och hoppas vi ses snart igen på MotioMera! Hälsn /Tidningen MåBra och alla i MotioMera-teamet
-
------------------------------------------------------------
-Efter alla dessa promenader är du värd lite avkoppling! Vi föreslår därför en prenumeration på tidningen MåBra – som specialerbjudande får du just nu 3 nr och ett härligt velourset för 69 kr (+ porto 29 kr). Klicka här för att ta del av erbjudandet: 
-http://www.allersforlag.se/CampaignRedirect.aspx?id=2049&cc=311SGEG&refSite=MOTIOMERA&refBannerName=AVSLUTMAIL&refBannerSize=TEXTLANK&refBannerType=AVSLUTMAIL&refBannerPosition=TEXTLANK
------------------------------------------------------------
-
-MotioMera - Sveriges roligaste stegtävling
-
-www.motiomera.se
-
-Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@aller.se';
-
-          $logMessage = $i++ . ' | ' . $medlem->getForetag()->getNamn() . ' | id: ' . $medlem->getId() . ' | ' . $medlem->getAnamn();                   
-          Misc::sendEmail($medlem->getEpost() , $SETTINGS["email"], $subject, $message, $logMessage);
-          //@file_put_contents(EMAIL_SEND_LOG_FILE, " - SUCCESS! \n", FILE_APPEND); 
-          }catch(Exception $e){           
-            //@file_put_contents(EMAIL_SEND_LOG_FILE, ' - ' . $e->getMessage() . "\n", FILE_APPEND);
-          }           
-        }
-      }
-    }   
-    
-    // print_r($save);
-    $lag_save = array();
-    foreach($save as $m) {
-
-      // echo "<br /><br />";
-      // print_r($m);
-
-      $i = 0;
-      
-      if (!isset($lag_save[$m['lag_id']])) {
-        $lag_save[$m['lag_id']] = Lag::loadById($m['lag_id']);
-      }
-      $sql = "INSERT INTO " . Tavling::RELATION_TABLE . " SET ";
-      foreach($m as $field => $value) {
-        $i++;
-        
-        if ($i == 6) {
-          $sql.= $field . " = '" . $value . "'";
-        } else {
-          $sql.= $field . " = '" . $value . "', ";
-        }
-      }
-
-      // echo "<br />$sql";
-      $db->query($sql);
-    }
-    
-    if (count($lag_save) != 0) {
-      Tavling::saveLagList($lag_save);
-    }
-  }	
-*/
 
   
   /**
@@ -605,7 +476,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 	          $tavling->setSlutDatum($slutDatum);
 	          $tavling->commit();
 	        }                
-	        if ($medlem->getForetag() && $medlem->getLag()){
+	        if ($medlem->getForetag()){
 		        $steg = $medlem->getStegTotal($startDatum , $slutDatum);
 		        if($steg > 0){  //only save data for members who have more than 0 steg 
 			        try{          
@@ -627,7 +498,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 		          Misc::logMotiomera(date("Y-m-d H:i:s") . " WARN - ". $i++ ." | Member is omitted due to 0 steps |" . $medlem->getForetag()->getNamn() . ' | id: ' . $medlem->getId() . ' | ' . $medlem->getAnamn() . " | steg: $steg" . " | email: " . $medlem->getEpost()); 
 		        } 	                  
 	        }else{
-	          Misc::logMotiomera(date("Y-m-d H:i:s") . " WARN - ". $i++ ." | Member is omitted due to member not in foretag or lag, | id: ". $medlem->getId() . ' | ' . $medlem->getAnamn() . " | email: " . $medlem->getEpost());
+	          Misc::logMotiomera(date("Y-m-d H:i:s") . " WARN - ". $i++ ." | Member is omitted due to member not in foretag | id: ". $medlem->getId() . ' | ' . $medlem->getAnamn() . " | email: " . $medlem->getEpost());
 	        }
 	      }
 	    }       
