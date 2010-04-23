@@ -211,7 +211,35 @@ class Tavling extends Mobject
 		// echo $sql;
 		return $db->allValuesAsArray($sql);
 	}
+
 	
+	
+  /**
+   * This function gets all basic paramaters for a member for a specific contest
+   * This is added since not all members are in a lag, no post in mm_lag_save 
+   *  
+   * @author Krillo
+   * @param string $tavlingsid
+   * @param string $medlemid
+   */	
+  public static function getBasicMemberData($tavlingsid, $medlemid){
+    global $db;
+    $sql = "SELECT a.medlem_id, a.foretag_id, a.lag_id, a.steg, c.namn as foretag_namn, d.anamn as medlem_namn , a.start_datum, a.stop_datum
+      FROM " . self::RELATION_TABLE . " a, " . Foretag::TABLE ." c, mm_medlem d  
+      WHERE a.tavlings_id = $tavlingsid
+      AND a.medlem_id = $medlemid
+      AND a.foretag_id = c.id
+      AND d.id = $medlemid
+      GROUP BY lag_id 
+      ORDER BY steg DESC";
+    //echo $sql;
+    $memberArray = $db->allValuesAsArray($sql);    
+    //add also the rank to the array
+    $memberArray[0]['rank'] =  self::member_rank($tavlingsid, $medlemid);
+    return $memberArray;
+  } 
+
+
 
   /**
    * This function gets all the paramaters for a member for a specific contest
@@ -372,7 +400,7 @@ class Tavling extends Mobject
       AND a.foretag_id = c.id
       GROUP BY lag_id 
       ORDER BY steg_medel DESC";
-    echo $sql;
+    //echo $sql;
     return $db->allValuesAsArray($sql);
   }   
   

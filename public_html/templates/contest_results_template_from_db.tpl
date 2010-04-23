@@ -57,7 +57,7 @@
             <tr>
               <td>&nbsp;</td>
               <td><b>Medlem</b></td>
-              <td width="30"><b>Steg</b></td>
+              <td width="40"><b>Steg</b></td>
             </tr>
             {foreach key=key item=lagitem from=$lag name=inner}
               <tr>
@@ -97,7 +97,7 @@
 			<tr>
 				<td>&nbsp;</td>
 				<td><b>Medlem</b></td>
-				<td width="30"><b>Steg</b></td>
+				<td width="40"><b>Steg</b></td>
 			</tr>
 			{foreach name=outer item=lag from=$foretagLagArray}
 			<tr>
@@ -128,7 +128,7 @@
 			<tr>
 				<td>&nbsp;</td>
 				<td><b>Medlem</b></td>
-				<td width="30"><b>Steg</b></td>
+				<td width="40"><b>Steg</b></td>
 			</tr>
         {foreach name=outer item=memb from=$allCompMembArray}
 				<tr>
@@ -175,7 +175,7 @@
 							<tr>
 							  <td>&nbsp;</td>
 							  <td><b>Medlem</b></td>
-							  <td width="30"><b>Steg</b></td>
+							  <td width="40"><b>Steg</b></td>
 							</tr>
 							{foreach name=outer item=memb from=$allMembArray}
 								<tr>
@@ -208,7 +208,7 @@
 							<tr>
 							  <td>&nbsp;</td>
 							  <td><b>Lag</b></td>
-							  <td width="30"><b>Steg</b></td>
+							  <td width="40"><b>Steg</b></td>
 							</tr>
 							{foreach name=outer item=lag from=$lagArray}
 								<tr>
@@ -243,7 +243,7 @@
 							<tr>
 							  <td>&nbsp;</td>
 							  <td><b>Medlem</b></td>
-							  <td width="30"><b>Steg</b></td>
+							  <td width="40"><b>Steg</b></td>
 							</tr>
 							{foreach name=outer item=comp from=$allForetagArray}
 								<tr>
