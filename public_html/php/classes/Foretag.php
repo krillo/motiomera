@@ -511,7 +511,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 	    foreach($save as $m) {
 	      //print_r($m);
 	      $i = 0;      
-	      if (!isset($lag_save[$m['lag_id']])) {
+	      if (!isset($lag_save[$m['lag_id']]) && $lag_save[$m['lag_id']] > 0) {
 	        $lag_save[$m['lag_id']] = Lag::loadById($m['lag_id']);
 	      }
 	      $sql = "INSERT INTO " . Tavling::RELATION_TABLE . " SET ";
