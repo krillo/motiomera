@@ -507,24 +507,24 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 	        }
 	      }
 	    }       
-	    $lag_save = array();
+	    $lag_save = array();	    
 	    foreach($save as $m) {
 	      //print_r($m);
 	      $i = 0;      
-	      if (!isset($lag_save[$m['lag_id']]) AND ($lag_save[$m['lag_id']] > 0)) {
-	        $lag_save[$m['lag_id']] = Lag::loadById($m['lag_id']);
-	      }
-	      $sql = "INSERT INTO " . Tavling::RELATION_TABLE . " SET ";
-	      foreach($m as $field => $value) {
-	        $i++;        
-	        if ($i == 8) {
-	          $sql.= $field . " = '" . $value . "'";
-	        } else {
-	          $sql.= $field . " = '" . $value . "', ";
-	        }
-	      }
-	      //echo "<br />$sql";
-	      $db->query($sql);
+	      if (!isset($lag_save[$m['lag_id']]) AND ($m['lag_id'] > 0)){
+          $lag_save[$m['lag_id']] = Lag::loadById($m['lag_id']);
+        }    
+        $sql = "INSERT INTO " . Tavling::RELATION_TABLE . " SET ";
+        foreach($m as $field => $value) {
+          $i++;        
+          if ($i == 8) {
+            $sql.= $field . " = '" . $value . "'";
+          } else {
+            $sql.= $field . " = '" . $value . "', ";
+          }
+        }
+        //echo "<br />$sql";
+        $db->query($sql);	      
 	    }    
 	    if (count($lag_save) != 0) {
 	      Tavling::saveLagList($lag_save);
@@ -541,8 +541,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
   
   
 	
-	public static function loggaIn($namn, $losenord, $cookie = false)
-	{
+	public static function loggaIn($namn, $losenord, $cookie = false){
 		global $db;
 		$namn = Security::secure_postdata($namn);
 		$losenord = Security::secure_postdata($losenord);
