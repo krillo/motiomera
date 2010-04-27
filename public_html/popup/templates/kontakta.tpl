@@ -8,7 +8,7 @@ Du är välkommen att kontakta oss via e-post, brev eller fax – ange ditt medd
 Innan du kontaktar oss kan du titta i <a href="/pages/vanligafragor.php">Vanliga frågor</a> för att se om du hittar svaret på din fråga där.
 <p/>
 För personlig kundservice och teknisk support:<br/>
-Ring 042-44 430 31 vardagar 08.00-15.00
+Ring 042-444 30 25 vardagar 09.00-11.30, 13.00-15.00 
 <p/>
 Allers förlag<br/>
 MåBra Kundservice<br/>

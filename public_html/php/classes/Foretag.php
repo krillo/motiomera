@@ -411,10 +411,6 @@ Hoppas att du har tyckt att tjänsten har varit givande och rolig. Maila oss gä
 
 Tack för denna gång och hoppas vi ses snart igen på MotioMera! Hälsn /Tidningen MåBra och alla i MotioMera-teamet
 
------------------------------------------------------------
-Efter alla dessa promenader är du värd lite avkoppling! Vi föreslår därför en prenumeration på tidningen MåBra – som specialerbjudande får du just nu 3 nr och ett härligt velourset för 69 kr (+ porto 29 kr). Klicka här för att ta del av erbjudandet: 
-http://www.allersforlag.se/CampaignRedirect.aspx?id=2049&cc=311SGEG&refSite=MOTIOMERA&refBannerName=AVSLUTMAIL&refBannerSize=TEXTLANK&refBannerType=AVSLUTMAIL&refBannerPosition=TEXTLANK
------------------------------------------------------------
 
 MotioMera - Sveriges roligaste stegtävling
 
