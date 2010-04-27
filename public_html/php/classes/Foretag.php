@@ -1202,11 +1202,13 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     	echo date("Y-m-d H:i:s") . " ERROR - Couldn't create or save order PDF file: " . $localFile . "\n";
     	throw new ForetagException(" ERROR - Couldn't create or save order PDF file: " . $localFile, -10);    	
     }else{
-    	//set the passw again it is stored in temp just because otherwise we had not been able to print it in the letter
-      echo date("Y-m-d H:i:s") . " OK - Created file for " . $this->getCompanyName() . ",  " . $lokalFil . ", foretagId =  " . $this->getId() . ", orderids = " . implode(' ', $orderIdArray) . "\n";      
-      $this->setLosenord($losenord);
-      $this->setTempLosenord(NULL);
-      $this->commit();
+      echo date("Y-m-d H:i:s") . " OK - Created file for " . $this->getCompanyName() . ",  " . $lokalFil . ", foretagId =  " . $this->getId() . ", orderids = " . implode(' ', $orderIdArray) . "\n";
+    	//set the passw again, not tillaggsbestallning, it is stored in temp just because otherwise we had not been able to print it in the letter
+			if($typeForetag){  
+      	$this->setLosenord($losenord);
+      	$this->setTempLosenord(NULL);
+      	$this->commit();
+			}
       //update order status on all order lines            
       foreach ($orderIdArray as $orderId) { 
         $order = Order::loadById($orderId);                
