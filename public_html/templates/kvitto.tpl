@@ -1,5 +1,5 @@
 {if $orderList.pro_order}
-  <h1>Välkommen som MotioMeraPRO!</h1>
+  <h1>Välkommen till MotioMera!</h1>
 {elseif $orderList.typ == "foretag"}
   <h1>Välkommen till MotioMera!</h1>{/if}
 {*}<p>Ett kvitto har skickats till <b>{$order->getPayerEmail()}</b></p>{*}

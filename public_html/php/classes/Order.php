@@ -654,7 +654,7 @@ class Order extends Mobject
         $enamn = "";
         $stad = urlencode($foretag->getPayerCity());
         $epost = urlencode($foretag->getPayerEmail());
-        $postnummer = urlencode($foretag->payerZipCode());
+        $postnummer = urlencode($foretag->getPayerZipCode());
         $adress = urlencode($foretag->getPayerAddress());
         $foretagNamn = urlencode($foretag->getNamn());
         $customerId = urlencode($foretag->getKundnummer());			

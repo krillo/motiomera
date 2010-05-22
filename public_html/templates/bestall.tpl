@@ -1,10 +1,10 @@
 {if !empty($_GET.id)}
-<h1>Ditt {$level->getNamn()}-medlemskap har utgått</h1>
+<h1>Ditt medlemskap har utgått</h1>
 <p>
-Förläng ditt {$level->getNamn()}-medlemskap på MotioMera här!
+Förläng ditt medlemskap på MotioMera här!
 </p>
 {else}
-<h1>Skaffa eller förläng ett pro-medlemsskap</h1>
+<h1>Skaffa eller förläng ett medlemsskap</h1>
 {/if}
 <form action="{$urlHandler->getUrl(Order, URL_SEND)}" method="post" onsubmit="return motiomera_validateBestallForm(this);">
 	<input type="hidden" name="typ" value="medlem" />

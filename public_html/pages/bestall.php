@@ -1,7 +1,5 @@
 <?php
-
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
-
 $levelId = $_GET["id"];
 
 try {
@@ -13,35 +11,26 @@ try {
 	$levelNamn = false;
 }
 
-
-
 $smarty = new MMSmarty();
-if($levelNamn) {
-	$smarty->assign("pagetitle", "Förläng ditt {$levelNamn}-medlemsskap");
-}
-else {
-	$smarty->assign("pagetitle", "Skaffa ett pro-medlemsskap");
+if($levelNamn){
+	$smarty->assign("pagetitle", "Förläng ditt medlemsskap");
+}else{
+	$smarty->assign("pagetitle", "Skaffa ett medlemsskap");
 }
 
 $smarty->assign("level",$level);
-
 $campaignCodes = Order::getCampaignCodes("medlem");
-
 $cc_array = array();
 
 foreach($campaignCodes as $id=>$cc) {
 	if(isset($cc["popupid"])) {
 		$helper = Help::loadById($cc["popupid"]);
 	}
-	
 	$cc["popupwidth"] = $helper->getSizeX();
 	$cc["popupheight"] = $helper->getSizeY();
-	
 	$cc_array[$id] = $cc;
 }
 
 $smarty->assign("campaignCodes", $cc_array);
-
-
 $smarty->display('bestall.tpl');
 ?>

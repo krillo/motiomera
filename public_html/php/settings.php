@@ -10,8 +10,12 @@ $SETTINGS["new_company_order_mail"] = array("kristian.erendi@aller.se", "krillo@
 
 $SETTINGS["rapport_mail"] = "kristian.erendi@aller.se";
 $SETTINGS["url"] = "http://krillomera.se/";
-$SETTINGS["UPPSLAG_URL"] = "http://mabra.allers.dropit.se/Sites/Pren/Templates/Paymentgw____56389.aspx";
-$SETTINGS["KUNDNUMMER_URL"] = "http://mabra.allers.dropit.se/Templates/UserService____51336.aspx?key=jhf9h4opqmcjhu93dn&Get=CustomerFromOrder&Orderid=";
+#$SETTINGS["UPPSLAG_URL"] = "http://mabra.allers.dropit.se/Sites/Pren/Templates/Paymentgw____56389.aspx";
+#$SETTINGS["KUNDNUMMER_URL"] = "http://mabra.allers.dropit.se/Templates/UserService____51336.aspx?key=jhf9h4opqmcjhu93dn&Get=CustomerFromOrder&Orderid=";
+$SETTINGS["UPPSLAG_URL"] = "http://www.allersforlag.se/Sites/Pren/Templates/Paymentgw____56389.aspx";
+$SETTINGS["KUNDNUMMER_URL"] = "http://www.allersforlag.se/Templates/UserService____60489.aspx?key=h3zp0x4qgs4k&Get=CustomerFromOrder&Orderid=";
+
+
 
 //MySQL
 $dbdb =	'krillomera';
@@ -23,7 +27,7 @@ $dbpass = 'krillomera';
 define('TRUNCATE_OLDER_THAN', 4);
 
 //Debug
-define('DEBUG_OVERRIDE', false); // true - turns on debug
+define('DEBUG_OVERRIDE', true); // true - turns on debug
 define('DEBUG_MAIL', false); //Sätter på debug via mail
 define('DEBUG_SMARTY', false); //Sätter på debug i smarty
 define("DEBUG_IM", false); //sätter på debug i IM
