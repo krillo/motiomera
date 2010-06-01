@@ -330,7 +330,7 @@ class Tavling extends Mobject
     $sql .= $addCompany;          
     $sql .= " AND a.foretag_id = c.id
       GROUP BY a.foretag_id
-      ORDER BY steg DESC ";
+      ORDER BY foretag_steg_medel DESC ";
     $sql .= $addLimit;    
     //echo $sql;
     return $db->allValuesAsArray($sql);
