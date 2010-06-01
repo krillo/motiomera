@@ -21,7 +21,8 @@
 			<th>Startkommun att utgå ifrån</th>
 			<td>{mm_html_options name=kid options=$opt_kommuner}</td>
 		</tr>{*}
-        
+     
+     {*}   
 		<tr>
 			<th  style="border-bottom:none;">Startdatum</th>					
 			<td  style="border-bottom:none;">
@@ -33,12 +34,13 @@
 				<!-- span style="color: #f00; font-weight:bold;">
 				   Anmälan till Vårtävlingen är nu stängd. Det är dock möjligt att välja annat startdatum nedan, samt att anmäla er till höstens tävling. Välkomna!
 				</span -->
-				
 			</td>
+			{*}
 			
 		</tr>
 		<tr>
-			<td  style=""></td>		
+			<!--td  style=""></td-->
+			<th  style="border-bottom:none;">Startdatum</th>		
 			<td class="mmRawText" style="">
 				<input name="startdatumRadio" id="mmForetagStartdatumRadio2" type="radio" value="egetdatum"  checked>
 
@@ -51,13 +53,13 @@
 				</select>		
 			</td>		
 		</tr>
-		<!--  tr>
-			<td></td>					
+		<tr>
+			<td></td>
 			<td>
-				<input name="startdatumRadio" id="mmForetagStartdatumRadio3" type="radio" value="2009-09-28">
-				Den stora hösttävlingen 28 september
-			</td>		
-		</tr -->						
+				<input name="startdatumRadio" id="mmForetagStartdatumRadio3" type="radio" value="2010-09-27">
+				Den stora hösttävlingen 27 september
+			</td>
+		</tr>
 		<tr>
 			<th style="border-bottom:none;">Antal deltagare</th>
 			<td>
