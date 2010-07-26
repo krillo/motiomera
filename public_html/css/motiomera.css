@@ -2931,3 +2931,5 @@ margin-left: -15px;
 .noline{
   border-bottom:none;
 }
+
+.showlinkline{text-decoration:underline; color:blue;}

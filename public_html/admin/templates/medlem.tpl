@@ -43,12 +43,18 @@
 	</tr>
 	<tr>
 		<th>Lösenord</th>
-		<td><input type="submit" name="sendPassword" value="Skicka nytt lösenord" /></td>
+		<!-- td><input type="submit" name="sendPassword" value="Skicka nytt lösenord" /></td-->
+		<td>
+		  <input type="text" name="newpassword" value="" /><span class="mmRed">  {$passmsg}</span>
+		</td>
 	</tr>
 </table>
 <input type="submit" value="Spara" />
 </form>
 
+<br />
+<br />
+<br />
 <br />
 <form action="{$urlHandler->getUrl(Medlem, URL_ADMIN_DELETE, $medlem->getId())}" method="post">
 

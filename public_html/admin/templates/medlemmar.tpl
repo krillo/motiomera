@@ -62,13 +62,13 @@
 				{$medlem->getSkapadDateOnly()}
 			</td>
 			<td class="mmList2">
-				<a href="{$urlHandler->getUrl(Medlem, URL_VIEW, $medlem->getId())}">Visa profil</a>
+				<a style="text-decoration: underline; color: blue;" href="{$urlHandler->getUrl(Medlem, URL_VIEW, $medlem->getId())}">Visa profil</a>
 			</td>
 			<td class="mmList1 mmRed">
 			{if !$medlem->getEpostBekraftad()}Ej aktiverad{/if}
 			</td>
 			<td>
-				<a href="{$urlHandler->getUrl(Medlem, URL_ADMIN_EDIT, $medlem->getId())}">Redigera</a>
+				<a style="text-decoration: underline; color: blue;" href="{$urlHandler->getUrl(Medlem, URL_ADMIN_EDIT, $medlem->getId())}">Redigera</a>
 			</td>
 		</tr>
 		{/foreach}
