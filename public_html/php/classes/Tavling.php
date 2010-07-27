@@ -58,17 +58,10 @@ class Tavling extends Mobject
 		return new $class(true); //last arg need to be true
 	}
 
+
 	/**
-	 *@inline Public functions
-	 */
-	/**
-	 *@inline LISTERS
-	 */
-	/**
-	 * Function listAll
-	 *
+	 * Function listAll	
 	 * Lister For users
-	 *
 	 * Example:
 	 *      listAll  (   )
 	 */	
@@ -79,9 +72,7 @@ class Tavling extends Mobject
 	
 	/**
 	 * Function saveLagList
-	 *
 	 * Saves the lag data for future use
-	 *
 	 * Example:
 	 *      saveLagList  ( array of lag object  )
 	 */	
@@ -98,12 +89,6 @@ class Tavling extends Mobject
 		}
 	}
 	
-	/**
-	 *@inline private functions
-	 */
-	/**
-	 *@inline SEETERS & GETTERS
-	 */
 	/**
 	 * Sets the start date for competition
 	 * Example: setStartDatum  (2008-10-08)
@@ -149,13 +134,8 @@ class Tavling extends Mobject
 	}
 	
 	/**
-	 *@inline STATICS
-	 */
-	/**
 	 * Function getHallOfFameForetag
-	 *
 	 * Gets the companys that are in save tabel
-	 *
 	 * Example:
 	 *      getHallOfFameForetag  (  )
 	 */	
@@ -174,9 +154,7 @@ class Tavling extends Mobject
 	
 	/**
 	 * Function getHallOfFameLag
-	 *
 	 * Gets lag that are in save tabel
-	 *
 	 * Example:
 	 *      getHallOfFameLag  (  )
 	 */	
@@ -195,9 +173,7 @@ class Tavling extends Mobject
 	
 	/**
 	 * Function getHallOfFameMedlemmar
-	 *
 	 * Gets medlemmar that are in save tabel
-	 *
 	 * Example:
 	 *      getHallOfFameMedlemmar  (   )
 	 */	
@@ -429,11 +405,25 @@ class Tavling extends Mobject
   } 
   
   
-  
+
+/**
+ * This function gets all tavling ids for a member
+ *
+ * @param string $medlemid 
+ * @return array
+ * @author Aller Internet, Kristian Erendi
+ */
+  public static function getMemberCompetitions($medlemid){
+    global $db;
+    $sql = "SELECT medlem_id, tavlings_id, foretag_id, lag_id, start_datum, stop_datum 
+      FROM " . self::RELATION_TABLE . "
+      WHERE medlem_id = $medlemid";
+    //echo $sql;
+    $tavlingArray = $db->allValuesAsArray($sql);    
+    return $tavlingArray;
+  }  
  
 
   
 } // END Class Tavling
-
-
 ?>

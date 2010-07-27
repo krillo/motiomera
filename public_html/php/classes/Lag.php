@@ -301,7 +301,7 @@ class Lag extends Mobject
 	public function getStegTotal($devidebymedlem = false, $datum = null, $recount = false)
 	{
 		global $db,$lag_stegtotal_cache;
-		
+		$steg = 0;
 		if(!isset($lag_stegtotal_cache)) {
 			$lag_stegtotal_cache = array();
 		}

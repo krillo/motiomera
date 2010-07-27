@@ -18,10 +18,10 @@ $SETTINGS["KUNDNUMMER_URL"] = "http://www.allersforlag.se/Templates/UserService_
 
 
 //MySQL
-$dbdb =	'krillomera';
+$dbdb =	'motiomera';
 $dbhost = 'localhost';
-$dbuser = 'krillomera';
-$dbpass = 'krillomera';
+$dbuser = 'motiomera';
+$dbpass = 'motiomera';
 
 // Truncate feed items
 define('TRUNCATE_OLDER_THAN', 4);

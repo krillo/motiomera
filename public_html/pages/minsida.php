@@ -1,7 +1,5 @@
 <?php
-
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
-
 Security::demand(USER);
 
 $smarty = new MMSmarty;
@@ -12,17 +10,14 @@ $USER->cleanTempStrackor();
 
 
 // Klubbar:
-
 $grupper = Grupp::listByMedlem($USER);
 
 if(count($grupper) > 0)
 {
 	$smarty->assign("grupper", $grupper);
 }
-	
 
 // Topplistor
-
 $forraVeckan = date("Y-m-d H:i:s",strtotime("-7 days"));
 
 $topplista = new Topplista();
@@ -43,12 +38,7 @@ if(isset($usrForetag) && $usrForetag->aktivTavling()) {
 	}
 }
 
-	
-
-
-
 $stegList = $USER->listSteg();
-
 
 $smarty->assign("stegList", $stegList);
 unset($steglist);
@@ -217,7 +207,6 @@ $smarty->assign("kommunbild_start", $kommunbild_start);
 
 
 // Troféer 
-
 $guldmedaljer = Sammanstallning::listMedaljer($USER, Sammanstallning::M_GULD);
 $silvermedaljer = Sammanstallning::listMedaljer($USER, Sammanstallning::M_SILVER);
 
@@ -246,35 +235,29 @@ $smarty->assign("guldpokaler", $guldpokaler);
 
 
 // Mål
-
 /*$malManager = new MalManager($USER);
 $smarty->assign("malManager", $malManager);
 
 $currentMal = $malManager->getCurrentMal();
 $smarty->assign("currentMal", $currentMal);
 */
-// Fotoalbum
 
+
+// Fotoalbum
 $bildblock = FotoalbumBild::loadMedlemsBildblock($USER, $antal = 16);
 $smarty->assign("bildblock", $bildblock);
 
 // Mina Quiz
-
 $quizblock = MinaQuiz::loadMedlemsQuizblock($USER, $antal = 5, true); // True på slutet betyder att sidan är "Min sida" och inte "Profil".
 $smarty->assign("quizblock", $quizblock);
 $smarty->assign("hasQuiz", false);
 
 // Feed
-
-
 $feed = Feed::loadByMedlem($USER);
-
 $smarty->assign("feed", $feed->listRows(true));
-
 $smarty->assign("medlem", $USER);
 
 // Grafer:
-
 include_once ROOT.'/php/libs/php-ofc-library/open-flash-chart-object.php';
 
 ob_start();
@@ -314,12 +297,12 @@ if ($antalSteg >= $medaljLimitGuld) {
 }
 
 $smarty->assign('medaljLimitReached', $medaljLimitReached);
-
-
-
 $smarty->assign('selfProfile', true);
 
 
+//tavlingar
+$tavlingArray = Tavling::getMemberCompetitions($USER->getid());
+$smarty->assign('tavlingArray', $tavlingArray);
 
 $smarty->display('minsida.tpl');
 ?>

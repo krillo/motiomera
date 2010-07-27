@@ -662,11 +662,11 @@ table#alh_navtable
 	width: 601px;
 	padding-bottom: 70px;
 }
-#mmStegOverTextcontainer
-{
-	position: relative;
+#mmStegOverTextcontainer{
+  float:left;width:595px;height:20px;
+/*position: relative;
 	top: -30px;
-	margin-bottom: -20px;
+	margin-bottom: -20px;	*/
 }
 #mmValjRuttKommunTh
 {
@@ -2050,10 +2050,16 @@ table#alh_navtable
 {
 	text-align: left;
 }
-.mmTextalignRight,.mmTextAlignRight,.mmStegOverText,#mmStegOverText
-{
+.mmTextalignRight,.mmTextAlignRight{
 	text-align: right;
 }
+.mmStegOverText{
+	text-align:left;float:left;height:20px;width:595px;"
+}
+
+#mmFinishedComp{float:left;width:595px;margin-bottom:10px;}
+
+
 .mmTextField
 {
 	font-family: Arial, Verdana, Trebuchet ms, Tahoma, Helvetica;

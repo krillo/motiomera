@@ -4,16 +4,13 @@
 
 <div class="mmh1 mmMarginBottom mmProfilH1">
 	{$USER->getANamn()}
-
 	<span class="mmGray editable">
-
 		<span id="mmUpdateStatus">
 			<input type="text" name="status" id="mmStatusField" value=""  />
 			<input type="submit" name="save" value="Spara" id="save" />
 			<input type="button" onclick="mm_toggleUpdateStatus(false);" name="clear" value="Avbryt" id="clear" />
 			<img src="/img/icons/loadinganim.gif" alt="" id="mmStatusLoading" />
 		</span>
-
 
 		{if $selfProfile}
 		<a href="#" onclick="mm_toggleUpdateStatus(true); return false;">
@@ -29,7 +26,23 @@
 	</form>
 {/if}
 
-<br /><br />
+
+{if $tavlingArray}
+<div id="name" style="background: url(../img/framework/mmBlueBoxTop.gif) bottom no-repeat;width: 387px;height: 31px;margin: 0;padding: 0;">
+  <h3 class="mmWhite BoxTitle">Avklarade tävlingar</h3>
+</div>    
+<div class="mmBlueBoxBg">  
+  <div id="_mmFinishedComp" style="float:left;width:387px;">
+    {section name=record loop=$tavlingArray}
+        <a href="http://www.motiomera.se/pages/tavlingsres.php?id={$tavlingArray[record].medlem_id}&tid={$tavlingArray[record].tavlings_id}">
+          Resultatet för tävlingen {$tavlingArray[record].stop_datum|date_format:"%Y-%m-%d"}</a> <br/>
+    {/section}
+  </div>
+</div>
+<div class="mmBlueBoxBottom"></div>
+{/if}
+
+<div style="clear:both;"></div>
 
 {include file=steggrafik.tpl}
 

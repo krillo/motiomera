@@ -1,10 +1,10 @@
 {if !isset($isProfil) && isset($startKommun) && isset($slutmal)}
 <div id="mmStegOverTextcontainer">
 	{if isset($lagnamn) && isset($foretagnamn)}
-	<div class="mmStegOverText">Du tävlar just nu för lag <a href="{$urlHandler->getUrl("Lag", URL_VIEW, $lagid)}">{$lagnamn}</a> från {$foretagnamn}{if isset($tavlingstart)}. Tävlingen startar om {$tavlingstart} dagar{/if}</div>
+	<div class="mmStegOverText" style="float:left;height:20px;width:595px;">Du tävlar just nu för lag <a href="{$urlHandler->getUrl("Lag", URL_VIEW, $lagid)}">{$lagnamn}</a> från {$foretagnamn}{if isset($tavlingstart)}. Tävlingen startar om {$tavlingstart} dagar{/if}</div>
 	{/if}
 
-	<div id="mmStegOverText">
+	<div class="mmStegOverText">
 		Du började i
 		<a href="{$urlHandler->getUrl(Kommun, URL_VIEW, $startKommun->getUrlNamn())}">
 			<strong>
@@ -22,6 +22,7 @@
 		{/if}
 	</div>
 </div>
+<div style="clear:both;"></div>
 {/if}
 {if $sajtDelarObj->medlemHasAccess($medlem,"minSidaGmaps")}
 	<script type="text/javascript">
