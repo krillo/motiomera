@@ -2,9 +2,7 @@
 
 include $_SERVER["DOCUMENT_ROOT"]  . "/php/init.php";
 
-
 switch($_GET["table"]){
-	
 	case'fastautmaningar':
 		$abroad = '';
 		if(isset($_POST['abroad'])) {
@@ -399,10 +397,10 @@ switch($_GET["table"]){
 			$urlHandler->redirect("MergeOrder", "URL_ADMIN_MERGE", "missing_params");
 		}
 		break;				
-	case "medlem":	
+	case "medlem":
+	  $passmsg = '';
 		$medlem = Medlem::loadById($_POST["medlem_id"]);
 		if (!empty($_POST['sendPassword'])) {
-			
 			try{
 				Medlem::nyttLosen($medlem->getEpost());
 			}catch(MedlemException $e){
@@ -411,6 +409,11 @@ switch($_GET["table"]){
 				}
 			}
 			throw new UserException("Lösenord skickat", "Ett nytt lösenord har skapats och skickats");
+		}
+		$passwd = $_POST['newpassword'];
+		if(!empty($passwd)){
+      $medlem->newPassword($_POST['newpassword']);
+      $passmsg = rawurlencode('Ändrat till: ' .$_POST['newpassword']);
 		}
 		if(isset($_POST["aktivera"])){
 			$medlem->setEpostBekraftad(1);
@@ -422,7 +425,7 @@ switch($_GET["table"]){
 			$medlem->setEpost($_POST["epost"]);			
 			$medlem->commit();
 		}
-		$urlHandler->redirect("Medlem", URL_ADMIN_EDIT, $medlem->getId());
+		$urlHandler->redirect("Medlem", URL_ADMIN_EDIT, array($medlem->getId(), $passmsg));
 		break;
 		
 	case "level":

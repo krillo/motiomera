@@ -24,10 +24,10 @@ if($medlem_level == 0) {
 	$default_level = Level::getDefault();
 	$medlem_level = $default_level->getId();
 }
-
+$smarty->clear_cache('medlem.tpl');
+if(isset($_GET["passmsg"])){
+  $smarty->assign("passmsg",rawurldecode($_GET["passmsg"]));  
+}
 $smarty->assign("sel_level",$medlem_level);
-
-
 $smarty->display('medlem.tpl');
-
 ?>

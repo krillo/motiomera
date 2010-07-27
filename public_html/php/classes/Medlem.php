@@ -1899,7 +1899,7 @@ class Medlem extends Mobject
 		$pass = Security::generateCode(8);		
 		$msg  = "Hejsan, \n";
     $msg .= "Du bad nyss om ett nytt lösenord för MotioMera, kommer här: $pass Hoppas att du nu ska lyckas logga in på tjänsten igen. \n\n";
-    $msg .= "Om du har fler undringar kan du titta i Vanliga frågor på http://www.MotioMera.se för att se om du hittar svaret där. För personlig kundservice och teknisk support: Ring 042-44 430 25 vardagar 09.00-11.30, 13.00-15.00. \n\n";
+    $msg .= "Om du har fler undringar kan du titta i Vanliga frågor på http://www.MotioMera.se för att se om du hittar svaret där. För personlig kundservice och teknisk support: Ring 042-444 30 25 vardagar 09.00-11.30, 13.00-15.00. \n\n";
     $msg .= "Hoppas du får fortsatt glädje av tjänsten. \n";    
     $msg .= "Med vänliga hälsningar \n";
     $msg .= "Tidningen MåBra \n";
@@ -1909,6 +1909,27 @@ class Medlem extends Mobject
 		  $medlem->commit();
     }
 	}
+	
+	/**
+	 * This function sets a new password 
+	 * it requires logged in as admin&nbsp;
+	 *
+	 * @param string $pass 
+	 * @return void
+	 * @author Aller Internet, Kristian Erendi
+	 */
+	public function newPassword($pass){
+	  try {
+      Security::demand(ADMIN);
+      $this->setLosenP($pass);
+      $this->commit();
+	  } catch (Exception $e) {
+      $e->string = "kunde inte ställa om lösenordet";
+      throw $e;
+	  }
+	}
+	
+	
 	
 	public static function ledigtAnvandarnamn($aNamn)
 	{

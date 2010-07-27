@@ -77,7 +77,7 @@ class UrlHandler
 			URL_INVITE => "/pages/blimedlem.php?inv=*0",
 			URL_DELETE => "/actions/delete.php?table=medlem&id=*0",
 			URL_ADMIN_LIST => "/admin/pages/medlemmar.php",
-			URL_ADMIN_EDIT => "/admin/pages/medlem.php?id=*0",
+			URL_ADMIN_EDIT => "/admin/pages/medlem.php?id=*0&passmsg=*1",
 			URL_ADMIN_DELETE => "/admin/actions/delete.php?table=medlem&id=*0",
 			URL_ADMIN_SAVE => "/admin/actions/save.php?table=medlem&id=*0",
 			URL_NYTTLOSEN => "/actions/nyttlosen.php",
