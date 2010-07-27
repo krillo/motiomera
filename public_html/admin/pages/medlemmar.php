@@ -64,7 +64,5 @@ $smarty->assign("limit", $limit);
 $smarty->assign("sort", $sort);
 $smarty->assign("searchOpt", array("fNamn" => "Förnamn","eNamn"=> "Efternamn","aNamn"=> "Användarnamn","id"=> "Id","epost"=> "E-Mail"));
 $smarty->assign("searchSel", $sort);
-
 $smarty->display('medlemmar.tpl');
-
 ?>

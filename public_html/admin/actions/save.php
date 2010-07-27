@@ -398,8 +398,9 @@ switch($_GET["table"]){
 		}
 		break;				
 	case "medlem":
-	  $passmsg = '';
+	  $passmsg = 'apa';
 		$medlem = Medlem::loadById($_POST["medlem_id"]);
+		//probably not used any more - krillo 2010-07-29
 		if (!empty($_POST['sendPassword'])) {
 			try{
 				Medlem::nyttLosen($medlem->getEpost());
@@ -410,6 +411,7 @@ switch($_GET["table"]){
 			}
 			throw new UserException("Lösenord skickat", "Ett nytt lösenord har skapats och skickats");
 		}
+		//this is the new way for admin password changes - krillo 2010-07-29
 		$passwd = $_POST['newpassword'];
 		if(!empty($passwd)){
       $medlem->newPassword($_POST['newpassword']);
@@ -425,7 +427,7 @@ switch($_GET["table"]){
 			$medlem->setEpost($_POST["epost"]);			
 			$medlem->commit();
 		}
-		$urlHandler->redirect("Medlem", URL_ADMIN_EDIT, array($medlem->getId(), $passmsg));
+		$urlHandler->redirect("Medlem", URL_ADMIN_EDIT_PASS, array($medlem->getId(), $passmsg));
 		break;
 		
 	case "level":

@@ -25,6 +25,7 @@ define('URL_ADMIN_LIST', "url_admin_list");
 define('URL_ADMIN_ORDER_LIST', "url_admin_order_list");
 define('URL_ADMIN_SAVE', 'url_admin_save');
 define('URL_ADMIN_EDIT', 'url_admin_edit');
+define('URL_ADMIN_EDIT_PASS', 'url_admin_edit_pass');
 define('URL_ADMIN_DELETE', 'url_admin_delete');
 define('URL_ADMIN_CREATE', 'url_admin_create');
 define('URL_SET_DEFAULT', "url_set_default");
