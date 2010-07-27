@@ -8,8 +8,8 @@
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="description" content="Motiomera" />
 	<meta name="keywords" content="Motiomera" />
-	<link rel="stylesheet" href="/css/motiomera.css?ver=1601" type="text/css" media="screen" />
-	<link rel="stylesheet" href="/css/print.css?ver=1601" type="text/css" media="print" />
+	<link rel="stylesheet" href="/css/motiomera.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
         {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
 	{if !NO_INTERNET || GOOGLEMAPS_OVERRIDE_NO_INTERNET}
 	{if $urlChecker->getFileName() eq 'minsida.php' or 'fastautmaningar.php'}
