@@ -27,17 +27,17 @@ $dbpass = 'CONF_SQL_PASS';
 define('TRUNCATE_OLDER_THAN', 4);
 
 //Debug
-define('DEBUG_OVERRIDE', true); // true - turns on debug
-define('DEBUG_MAIL', false); //Sätter på debug via mail
-define('DEBUG_SMARTY', false); //Sätter på debug i smarty
-define("DEBUG_IM", false); //sätter på debug i IM
+define('DEBUG_OVERRIDE', CONF_DEBUG_OVERRIDE); // true - turns on debug
+define('DEBUG_MAIL', CONF_DEBUG_MAIL); //Sätter på debug via mail
+define('DEBUG_SMARTY', CONF_DEBUG_SMARTY); //Sätter på debug i smarty
+define("DEBUG_IM", CONF_DEBUG_IM); //sätter på debug i IM
 define("NO_INTERNET", true);
 define("GOOGLEMAPS_OVERRIDE_NO_INTERNET", false);
 
 //Memcache
 define('MEMCACHE', CONF_USE_MEMCACHE); //Sätter på memcache
 define('MEMCACHE_EXPIRE', (60*5)); //i sekunder innan man tömmer objectet ur DB. 0 = oändlig tid framöver ;) (60*60*24*30) är max man kan ange, dvs 30 dygn
-define('MEMCACHE_SERVER', 'localhost');
+define('MEMCACHE_SERVER', 'CONF_MEMCACHE_SERVER');
 
 //Directories
 define('AVATAR_PATH', ROOT . "/files/avatarer");
@@ -72,9 +72,9 @@ if (isset($google_map_api_keys[$_SERVER['HTTP_HOST']])) {
 }
 
 // FTP Data for Företagsfiler
-define('FTP_HOST', "sas.jlmdata.se");
-define('FTP_USER', "postpac");
-define('FTP_PASS', "PALM");
+define('FTP_HOST', 'CONF_FTP_HOST');
+define('FTP_USER', 'CONF_FTP_USER');
+define('FTP_PASS', 'CONF_FTP_PASS');
 define('FORETAGSFIL_REMOTE_PATH', "/allers/Motiomera_test");
 define('FORETAGSFIL_LOCAL_PATH', "/var/www/krillomera/postpac/order_files");
 

@@ -1,0 +1,30 @@
+2010-07-28 Jonas Björk
+== Deploy sker med capistrano ==
+Följande holders byts ut i php/settings.php vid deployment:
+
+: MYSQL
+: Relaterade till anslutningen till MySQL
+CONF_SQL_USER		Användarnamn på MySQL
+CONF_SQL_HOST		MySQL serverns namn (dns) eller IP
+CONF_SQL_PASS		Lösenordet för användaren
+CONF_SQL_DB		Namnet på databasen motiomera ligger i
+
+: MEMCACHE
+: Relaterade till användandet av Memcached
+CONF_USE_MEMCACHE	Skall vi anv�ända Memcached? (true/false)
+CONF_MEMCACHE_SERVER	Vilken Memcached server skall vi använda? (dns)namn eller IP
+
+: DEBUG
+: Debuginställningar
+CONF_DEBUG_OVERRIDE	Skall vi köra debugläge (true/false)
+CONF_DEBUG_MAIL		Skall debug skicka mail? (true/false)
+CONF_DEBUG_SMARTY	Skall vi debugga Smarty? (true/false)
+CONF_DEBUG_IM		Skall vi få debug till MSN? (true/false)
+
+: FTP
+: Inställningar för mottagande server (pdferna)
+CONF_FTP_HOST		Servernamn (dns) eller IP
+CONF_FTP_USER		Användarnamn på FTP-servern
+CONF_FTP_PASS		Lösenordet på FTP-servern
+
+
