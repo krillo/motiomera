@@ -18,10 +18,10 @@ $SETTINGS["KUNDNUMMER_URL"] = "http://www.allersforlag.se/Templates/UserService_
 
 
 //MySQL
-$dbdb =	'[SQL_DB]';
-$dbhost = '[SQL_HOST]';
-$dbuser = '[SQL_USER]';
-$dbpass = '[SQL_PASS]';
+$dbdb =	'CONF_SQL_DB';
+$dbhost = 'CONF_SQL_HOST';
+$dbuser = 'CONF_SQL_USER';
+$dbpass = 'CONF_SQL_PASS';
 
 // Truncate feed items
 define('TRUNCATE_OLDER_THAN', 4);
@@ -35,7 +35,7 @@ define("NO_INTERNET", true);
 define("GOOGLEMAPS_OVERRIDE_NO_INTERNET", false);
 
 //Memcache
-define('MEMCACHE', [USE_MEMCACHE]); //Sätter på memcache
+define('MEMCACHE', CONF_USE_MEMCACHE); //Sätter på memcache
 define('MEMCACHE_EXPIRE', (60*5)); //i sekunder innan man tömmer objectet ur DB. 0 = oändlig tid framöver ;) (60*60*24*30) är max man kan ange, dvs 30 dygn
 define('MEMCACHE_SERVER', 'localhost');
 
