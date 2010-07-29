@@ -286,11 +286,16 @@ class Misc
   
   /**
    * All purpose logging to motiomera.log
+   * or to another file if submitted
    *
    * @param string_type $msg
    */
-  public static function logMotiomera($msg){
-    @file_put_contents(LOG_DIR.'/motiomera.log', $msg . "\n" , FILE_APPEND);
+  public static function logMotiomera($msg, $logfilename=null){
+    if($logfilename == null){
+      @file_put_contents(LOG_DIR.'/motiomera.log', $msg . "\n" , FILE_APPEND);
+    }else{
+      @file_put_contents(LOG_DIR.'/'.$logfilename, $msg . "\n" , FILE_APPEND);
+    }    
   } 
   
     

@@ -82,47 +82,81 @@ class Sammanstallning
 			}
 		}
 	}
+
+
+
+/**
+ * This function iterates all members and counts the number of steps they have taken last week.
+ * This is intended to be run once a week 
+ * Optionally it is possible to submit year and week and run from motiomera.se/admin/pages/installningar.php, also called DEBUG in the menu
+ * Logging to /log/cron_motiomera.log
+ *
+ * The function is rewritten by krillo 2010-07-30 
+ *
+ * @return void
+ * @author Aller Internet, Kristian Erendi
+ */
+  public static function sammanstallMedaljer($year=null, $week=null){
+    if($year!=null && $week!=null){
+      $weekArray = JDate::getDateFromWeek($year, $week);
+    }else{
+      $weekArray = JDate::addWeek(-1);
+    }
+    Misc::logMotiomera(date("Y-m-d H:i:s") . " INFO - Start medalj batch, ". $weekArray['year'].", week ". $weekArray['week_number'], 'cron_motiomera.log');
+    $medalj = null;
+    $i = 0;
+    //$medlemmar = Medlem::listAll();
+    $medlemmar = Medlem::loadById(6568);
+    $medlemmar = array($medlemmar);
+    //print_r($weekArray);
+    foreach($medlemmar as $medlem) {
+      $steg = $medlem->getStegTotal($weekArray['monday']  , $weekArray['sunday'] );
+      if ($steg >= self::MEDALJ_GULD_NIVA){
+        $medalj = self::M_GULD;
+      }else{ 
+        if ($steg >= self::MEDALJ_SILVER_NIVA){
+          $medalj = self::M_SILVER;
+         }
+      }
+      //echo '$steg: ' . $steg . "\n" .'$medalj: ' . $medalj . "\n" . '$medalj: ' . $medalj . "\n" . 'veckastart: ' . $weekArray['monday'] . "\n" . 'veckastop: ' . $weekArray['sunday'] . "\n";
+      //echo 'ar: ' . $weekArray['year'] . "\n" . 'vecka: ' . $weekArray['week_number'] . "\n";
+      if($medalj!=null){
+        $i++;
+        self::nyMedalj($medlem, $medalj, $weekArray['year'], $weekArray['week_number'], $steg, $i);
+      }
+      $medalj = null;
+    }	
+  }
+
 	
-	public static function sammanstallMedaljer($vecka = null, $ar = null)
-	{
-		
-		if (!$vecka) {
-			$vecka = date("W", time() - (60 * 60 * 25 * 7));
-		}
-		
-		if (!$ar) {
-			$ar = date("Y");
-		}
-		$offset = date("N", strtotime(date($ar . "-01-01"))) - 1;
-		$veckaStart = strtotime($ar . "-01-01") + (60 * 60 * 24 * 7 * ($vecka - 1)) - (60 * 60 * 24 * $offset);
-		$veckaStop = $veckaStart + (60 * 60 * 24 * 6);
-		$medlemmar = Medlem::listAll();
-		foreach($medlemmar as $medlem) {
-			$steg = $medlem->getStegTotal(date("Y-m-d", $veckaStart) , date("Y-m-d", $veckaStop));
-			$guldmedalj = false;
-			$silvermedalj = false;
-			
-			if ($steg >= self::MEDALJ_GULD_NIVA) $guldmedalj = true;
-			else 
-			if ($steg >= self::MEDALJ_SILVER_NIVA) $silvermedalj = true;
-			
-			if ($guldmedalj || $silvermedalj) {
-				$medalj = ($guldmedalj) ? self::M_GULD : self::M_SILVER;
-				self::nyMedalj($medlem, $medalj, $ar, $vecka, $steg);
-			}
-		}
-	}
 	
-	private static function nyMedalj(Medlem $medlem, $medalj, $ar, $vecka, $steg)
-	{
-		global $db;
-		$sql = "SELECT count(*) FROM " . self::MEDALJ_TABLE . " WHERE medlem_id = " . $medlem->getId() . " AND ar = " . $ar . " AND vecka = " . $vecka;
-		
-		if ($db->value($sql) == "0") {
-			$sql = "INSERT INTO " . self::MEDALJ_TABLE . " VALUES (null, " . $medlem->getId() . ", '$medalj', $steg, $vecka, $ar);";
-			$db->nonquery($sql);
-		}
-	}
+  /**
+   * This function inserts a medallion in the db
+   * Checks if there allready is one for that week, in that case no insert is made
+   * Logging to /log/cron_motiomera.log
+   *
+   * @param Medlem $medlem 
+   * @param string $medalj 
+   * @param string $ar 
+   * @param string $vecka 
+   * @param string $steg 
+   * @param string $i 
+   * @return void
+   * @author Aller Internet, Kristian Erendi
+   */
+  private static function nyMedalj(Medlem $medlem, $medalj, $ar, $vecka, $steg, $i=0){
+    global $db;
+    $sql = "SELECT count(*) FROM " . self::MEDALJ_TABLE . " WHERE medlem_id = " . $medlem->getId() . " AND ar = " . $ar . " AND vecka = " . $vecka;
+
+    if ($db->value($sql) == "0") {
+      $sql = "INSERT INTO " . self::MEDALJ_TABLE . " VALUES (null, " . $medlem->getId() . ", '$medalj', $steg, $vecka, $ar);";
+      $db->nonquery($sql);
+      Misc::logMotiomera(date("Y-m-d H:i:s"). " OK - nbr $i New medalj for medlemId: ". $medlem->getId() .", $medalj, steg: $steg", 'cron_motiomera.log');
+    }else {
+      Misc::logMotiomera(date("Y-m-d H:i:s"). " ERROR - nbr $i Duplicate medalj for medlemId: ". $medlem->getId() .", $medalj, steg: $steg", 'cron_motiomera.log');
+    }
+  }
+	
 	
 	private static function nyPokal(Medlem $medlem, $pokal, $datum, $steg)
 	{
