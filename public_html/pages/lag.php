@@ -8,9 +8,9 @@ if(!isset($FORETAG))
 $smarty = new MMSmarty();
 
 if(isset($_GET["lid"])){
-
 	$lag = Lag::loadById($_GET["lid"]);
 	$lag2 = Lag::loadById($_GET["lid"]);
+	$foretag = Foretag::loadByLag($_GET["lid"]);
 
 	$smarty->assign("pagetitle", ucfirst($lag->getNamn())." &mdash; Lag");
 
@@ -35,6 +35,7 @@ if(isset($_GET["lid"])){
 		$topplista = new Topplista();
 		$topplista->addParameter(Topplista::PARAM_LAG, $lag);
 		$topplista->addParameter(Topplista::PARAM_START, $start);
+
 		
 		$topplistan = $topplista->getTopplista(10);
 		
@@ -62,14 +63,11 @@ if(isset($_GET["lid"])){
 	$smarty->assign("medlem",$USER);
 	
 	// Topplistor
-	
 	$forraVeckan = date("Y-m-d H:i:s", strtotime(date("Y-m-d"))-(60*60*24*7));
-	
-	$topplista = new Topplista();
-	$topplista->addParameter(Topplista::PARAM_START, $forraVeckan);
-	$topplista->addParameter(Topplista::PARAM_START, $lag->getStart());
-
-
+  $topplista = new Topplista();
+  $topplista->addParameter(Topplista::PARAM_START, $forraVeckan);
+  $topplista->addParameter(Topplista::PARAM_START, $lag->getStart());
+  $topplista->addParameter(Topplista::PARAM_STOP, $foretag->getSlutdatum());
 	$topplista->addParameter(Topplista::PARAM_LAG, $lag);
 	$smarty->assign("topplista", $topplista);
 

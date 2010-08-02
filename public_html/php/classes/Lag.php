@@ -1,90 +1,30 @@
 <?php
 /**
-* Class and Function List:
-* Function list:
-* - __construct()
-* - __getEmptyObject()
-* - loadById()
-* - loadByIds()
-* - listAll()
-* - listByForetag()
-* - loadByMedlem()
-* - getMaxLag()
-* - kanSkapaLag()
-* - deleteLagWithNoForetag()
-* - delete()
-* - addMedlem()
-* - removeMedlem()
-* - isMember()
-* - getStart()
-* - getSlut()
-* - getStegIndex()
-* - getStegSnittByDay()
-* - getStegTotal()
-* - getId()
-* - getNamn()
-* - getBildUrl()
-* - getBildFullUrl()
-* - getDefaultBildFullUrl()
-* - getBild()
-* - getSkapad()
-* - getForetagId()
-* - getForetag()
-* - getAnslagstavlaId()
-* - getAnslagstavla()
-* - listMedlemmar()
-* - listInvitable()
-* - getAntalMedlemmar()
-* - setNamn()
-* - setBildUrl()
-* - setBild()
-* - setForetagId()
-* - setForetag()
-* - setAnslagstavlaId()
-* - setAnslagstavla()
-* - setSkapad()
-* Classes list:
-* - Lag extends Mobject
-* - LagException extends Exception
-*/
+ * Felkoder
+ * -1 Medlem är redan medlem i ett lag
+ * -2 Felaktigt format på $datum
+ * -3 $medlem tillhör inte lagets företag
+ * -4 Max antal lag redan skapade
+ * -5 $namn är för kort
+ *
+ * Extends:
+ * Lag extends Mobject
+ * LagException extends Exception
+ */
 
-class Lag extends Mobject
-{
-	
+class Lag extends Mobject{
 	protected $id; // int
-
-	
 	protected $foretag_id; // int
-
-	
 	protected $foretag; // object foretag
-
-	
 	protected $namn; // string
-
-	
 	protected $bildUrl; // string
-
-	
 	protected $bild;
-	
 	protected $skapad; // string
-
-	
 	protected $medlemmar = array(); // Array: Medlem
-
-	
 	protected $antalMedlemmar; // int
-
-	
 	protected $stegTotal;
-	
 	protected $anslagstavla_id; // int
-
-	
 	protected $anslagstavla; // Anslagstavla
-
-	
 	protected $fields = array(
 		"foretag_id" => "int",
 		"anslagstavla_id" => "int",
@@ -99,25 +39,10 @@ class Lag extends Mobject
 	const BILD_DEFAULT = "Lag_2.jpg";
 	const MAX_LAG_NAMN_LENGTH = 40;
 
-	// Felkoder
-	// -1 Medlem är redan medlem i ett lag
-
-	// -2 Felaktigt format på $datum
-
-	// -3 $medlem tillhör inte lagets företag
-
-	// -4 Max antal lag redan skapade
-
-	// -5 $namn är för kort
-
 	
-	public function __construct(Foretag $foretag, $namn, $bild = null, $dummy_object = false)
-	{
-		
+	public function __construct(Foretag $foretag, $namn, $bild = null, $dummy_object = false){
 		if (!$dummy_object) {
-			
 			if ($namn == "") throw new LagException('$namn är för kort', -5);
-			
 			if (!self::kanSkapaLag($foretag)) throw new LagException("Max antal lag redan skapade", 4);
 			$this->setForetag($foretag);
 			$this->setNamn($namn);

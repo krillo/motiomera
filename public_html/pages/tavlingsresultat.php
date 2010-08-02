@@ -17,12 +17,8 @@ else
 }
 
 $smarty = new MMSmarty(true, -1); // Caches the contest content indefinitely
-
 $smarty->assign("medlem",$medlem);
 $smarty->assign("tavlingsresultatsidan",true);
-
-//krillo to be able to debug you must empty the smarty cache
-$smarty->clear_all_cache();
 
 if(!$smarty->is_cached('contest_results_template.tpl', $foretagId))
 {

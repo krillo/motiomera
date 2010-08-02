@@ -467,7 +467,7 @@ class Medlem extends Mobject
 			if($activeOnly) {
 
 				// check to make sure that the contest isn't over (+1 day to allow for mondays)
-				if($foretag->aktivTavling("+1")) {
+				if($foretag->aktivTavling(1)) {
 					return $nyckel;
 				}
 				else {

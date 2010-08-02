@@ -91,6 +91,7 @@ $smarty->assign("foretagCustomBild", $foretagCustomBild);
 $topplistaDeltagare = new Topplista();
 $topplistaDeltagare->addParameter(Topplista::PARAM_FORETAG, $foretag);
 $topplistaDeltagare->addParameter(Topplista::PARAM_START, $foretag->getStartdatum());
+$topplistaDeltagare->addParameter(Topplista::PARAM_STOP, $foretag->getSlutdatum());
 $smarty->assign("topplistaDeltagare", $topplistaDeltagare);
 
 

@@ -2,7 +2,6 @@
 /**
  * 
  */
-
 class Topplista
 {	
 	protected $params = array();	
@@ -211,11 +210,19 @@ class Topplista
 		$this->params[$param] = $varde;
 	}
 	
+/**
+ * undocumented function
+ *
+ * @param string $antal 
+ * @param string $inkludera_medlem 
+ * @return void
+ */
 	public function getTopplista($antal = null, $inkludera_medlem = null){		
 		if (!$this->topplista) {
 			global $db;
 			$medlem_inkluderad = false;
 			$sql = $this->makeSQL();
+			//echo 'sql: '. $sql . "<br/>";
 			$res = $db->query($sql);
 			$result = array();
 			$result_temp = array();

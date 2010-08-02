@@ -284,9 +284,8 @@ class Foretag extends Mobject
 			$foretag = self::loadById($id);
 		
 			if($activeOnly) {
-				
-				// check to make sure that the contest isn't over (+1 day to allow for mondays)
-				if($foretag->aktivTavling("+1")) {
+				// check to make sure that the contest isn't over (1 day to allow for mondays)
+				if($foretag->aktivTavling(1)) {
 					return $foretag;
 				}
 				else {
@@ -302,6 +301,29 @@ class Foretag extends Mobject
 		}
 	}
 	
+/**
+ * this function loads foretag by lag
+ * and then returns the id as well, when fail to find the foretag then null is returned
+ *
+ * @param Lag $lagid 
+ * @return int the foretag_id 
+ * @author Aller Internet, Kristian Erendi
+ */
+	public static function loadByLag($lagid){
+		global $db;
+		$sql = "SELECT foretag_id FROM mm_lag WHERE id = " . $lagid . " LIMIT 1";
+		$result = $db->row($sql);
+		$id = $result["foretag_id"];
+		if($id > 0) {
+			$foretag = self::loadById($id);
+			return $foretag;
+		}
+		else {
+			return null;
+		}
+	}
+
+
 
   /**
    * krillo 091026 changed the sql to only get the records that have a competition thats ending.
@@ -640,16 +662,31 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 	}
 	
 
-	
-	public function aktivTavling($mod = "+0") {
-		 // returns true for active contests including those that have yet to start
-				
-		if (strtotime($this->getSlutdatum() . " $mod days") > time()) {
-			return true;			
-		} else {
-			return false;
-		}
-	}
+/**
+ * This function returns true for active contests including those that have yet to start
+ * optionally submit days to add, e.g if yuo want to show a page even after the contest is over
+ *
+ * slutdatum is fetched from db and then added 24h since slutdatum is defined as i.e "Sun, 01 Aug 2010 00:00:00 GMT" but the contest stops at "23:59:59"
+ * 2h is also added as a precaution for summertime, execution time and safety
+ *
+ * @param int $offset 
+ * @return boolean
+ * @author Aller Internet, Kristian Erendi
+ */	
+	public function aktivTavling($offset=0) {
+    $secondsperday = 24 * 60 * 60;
+    $slutdatum = $this->getSlutdatumUnix() + $secondsperday + (2 * 60 * 60);  //add 2h as a precaution for summertime, execution time and safety
+    $compare = $slutdatum + ($offset * $secondsperday);
+    //echo "offset: ". $offset . "<br/>";
+    //echo "slutdatum: " . $slutdatum . "<br/>";
+    //echo "compare: ". $compare . "<br/>";
+    //echo "time: ". time() . "<br/>";
+    if($compare > time()){
+      return true;
+    } else {
+      return false;
+    }
+  }
 	
 
 	
@@ -1657,15 +1694,31 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 		return $this->startdatum;
 	}
 	
-	public function getStopdatum()
-	{
-		return date("Y-m-d", strtotime($this->startdatum) + (60 * 60 * 24 * (self::TAVLINGSPERIOD_DAGAR)));
+	
+/**
+ * returns the slutdatum in seconds (unix timestamp),  which is calculated from the startdate
+ *
+ * @return int
+ * @author Aller Internet, Kristian Erendi
+ */	
+	public function getSlutdatumUnix(){
+	  $slutdatumUnix = strtotime($this->startdatum) + (60 * 60 * 24 * (self::TAVLINGSPERIOD_DAGAR));
+		return $slutdatumUnix;
+	}
+
+
+  /**
+   * returns the slutdatum as a date (2010-08-01),  which is calculated from the startdate
+   *
+   * @return string 
+   * @author Aller Internet, Kristian Erendi
+   */
+	public function getSlutdatum(){
+	  $slutdatum = date("Y-m-d", $this->getSlutdatumUnix());
+		return $slutdatum;
 	}
 	
-	public function getSlutdatum()
-	{
-		return $this->getStopdatum();
-	}
+	
 	
 	/**
 	 * Function getCurrentTavlingId

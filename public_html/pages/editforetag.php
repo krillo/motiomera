@@ -51,10 +51,6 @@ array($showPageUtilDate, Misc::veckodag(date('N', strtotime($showPageUtilDate)))
 );
 $smarty->assign("datesArray", $datesArray);
 
-if(DEBUG){
-  echo "Adminsidan visas tom:  $showPageUtilDate";
-}
-
 if($showPageUtilDate > date('Y-m-d') OR isset($ADMIN)) {
   $smarty->display('editforetag.tpl');  
 } else {

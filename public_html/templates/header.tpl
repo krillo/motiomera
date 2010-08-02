@@ -191,9 +191,9 @@
 					{/if}
 					{if isset($USER)}
 					<li class="mmMenuBG"><a{if $urlChecker->getMarkedMenu() eq "MIN SIDA"} class="mmMarkedMenu"{/if} href="/pages/minsida.php">MIN SIDA</a><img src="/img/ftag/minsida_icon.gif" class="mmMarginLeft5" alt="" /></li>
-					{assign var=foretag value=$USER->getForetag(true)} 
+					{assign var=foretag value=$USER->getForetag(true)}
 					{if $USER->getForetagsnyckel(true)}
-						{if isset($foretag) && $foretag->aktivTavling("+1")}
+						{if isset($foretag) && $foretag->aktivTavling(1)}
 							{assign var=lag value=$USER->getLag()}
 							{if $lag!= null}
 							<li class="mmMenuBG"><a{if $urlChecker->getMarkedMenu() eq "MITT LAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Lag, URL_VIEW, $lag->getId())}">MITT LAG</a><img src="/img/ftag/mittlag_icon.gif" class="mmMarginLeft5" alt="" /></li>
