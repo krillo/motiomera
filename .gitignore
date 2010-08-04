@@ -1,0 +1,15 @@
+.cache/
+.project
+public_html/php/settings.php
+._*
+.DS_Store
+foretagsfiler/*
+log/*
+order_files/*
+public_html/admin/templates_c/*
+public_html/popup/templates_c/*
+public_html/files/foretagsbilder/*
+public_html/files/kommunbilder/*
+public_html/files/lagnamn/*
+public_html/templates_c/*
+public_html/php/libs/smarty/cache/*
