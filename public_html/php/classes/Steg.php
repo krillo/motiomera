@@ -1,78 +1,28 @@
 <?php
-
 /**
-* Class and Function List:
-* Function list:
-* - __construct()
-* - __getEmptyObject()
-* - listDatumByMedlem()
-* - loadById()
-* - listByMedlem()
-* - listByDatum()
-* - listAll()
-* - listTopMedlemmar()
-* - stegToKm()
-* - kmToSteg()
-* - getTotalSteg()
-* - lasSteg()
-* - delete()
-* - getTotalStegByDay()
-* - getStegTotal()
-* - getStegTotalGrupp()
-* - getStegTotalLag()
-* - setMedlem()
-* - setMedlemId()
-* - setAktivitet()
-* - setAktivitetId()
-* - setDatum()
-* - setLast()
-* - setAntal()
-* - setSteg()
-* - getAntal()
-* - getMedlem()
-* - getMedlemId()
-* - getAktivitet()
-* - getAktivitetId()
-* - getSteg()
-* - getDatum()
-* - getLast()
+* Håller reda på vilken aktivitet som utförts och hur många steg detta motsvarar
+*
+* Felkoder
+* -2 $medlem_id måste vara ett heltal
+* -3 $aktivitet_id måste vara ett heltal
+* -4 Felaktigt format på $datum
+* -5 $antal måste vara ett heltal
+* -6 Kan inte ta bort låst stegrapport
+*
 * Classes list:
 * - Steg extends Mobject
 * - StegException extends Exception
 */
-/*
-Håller reda på vilken aktivitet som utförts och hur många steg detta motsvarar
-*/
-
-class Steg extends Mobject
-{
-	
+class Steg extends Mobject{
 	protected $medlem_id; //int
-
-	
 	protected $medlem; //object: Medlem
-
-	
 	protected $aktivitet_id; //int
-
-	
 	protected $aktivitet; //object: Aktivitet
-
-	
 	protected $datum; //date
-
-	
 	protected $last;
-	
 	protected $tid; //time
-
-	
 	protected $antal; //int
-
-	
 	protected $steg; //int
-
-	
 	protected $fields = array(
 		"medlem_id" => "int",
 		"aktivitet_id" => "int",
@@ -88,19 +38,6 @@ class Steg extends Mobject
 	const VARNING_STEG_PER_RAPPORT = 30000;
 	const MAX_STEG_PER_DAG = 100000;
 	const MAX_STEG_PER_VECKA = 700000;
-
-	
-	// Felkoder
-	// -2 $medlem_id måste vara ett heltal
-
-	// -3 $aktivitet_id måste vara ett heltal
-
-	// -4 Felaktigt format på $datum
-
-	// -5 $antal måste vara ett heltal
-
-	// -6 Kan inte ta bort låst stegrapport
-
 	
 	public function __construct(Medlem $medlem, Aktivitet $aktivitet, $datum, $antal, $nykommun = false, $dummy_object = false)
 	{

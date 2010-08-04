@@ -1540,9 +1540,10 @@ class Medlem extends Mobject
 	
 	public function setPokalStart($datum)
 	{
-		Security::demand(USER, $this);
-		
-		if (!Misc::isDate($datum, "Y-m-d") && $datum != null) throw new MedlemException('$datum har ett felaktigt format', -20);
+		//Security::demand(USER, $this);
+		if (!Misc::isDate($datum, "Y-m-d") && $datum != null) {
+		  throw new MedlemException('$datum har ett felaktigt format', -20);
+	  }
 		$this->pokalStart = $datum;
 	}
 	

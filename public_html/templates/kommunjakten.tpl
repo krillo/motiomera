@@ -70,10 +70,10 @@
 			<td><strong>Pokaler</strong></td>
 			<td>
 				{foreach from=$guldpokaler item=pokal}
-				<img src="/img/icons/pokal_{$pokal.pokal}.gif" alt="" title="Guldpokal får du genom att gå minst {$stegGuldpokal|nice_tal} steg på en månad" />
+				<img src="/img/icons/pokal_{$pokal.pokal}.gif" alt="" title="Guldpokal får du genom att gå minst {$stegGuldpokal|nice_tal} steg på ett kavartal (91 dagar)" />
 				{/foreach}
 				{foreach from=$silverpokaler item=pokal}
-				<img src="/img/icons/pokal_{$pokal.pokal}.gif" alt="" title="Silverpokal får du genom att gå minst {$stegSilverpokal|nice_tal} steg på en månad" />
+				<img src="/img/icons/pokal_{$pokal.pokal}.gif" alt="" title="Silverpokal får du genom att gå minst {$stegSilverpokal|nice_tal} steg på ett kavartal (91 dagar)" />
 				{/foreach}
 			</td>
 		</tr>
@@ -93,7 +93,7 @@
 		{/if}
 	</table>
 	<br />
-	<strong>Kommuner</strong>
+	<div><strong>Kommuner</strong></div>
 	{foreach from=$kommunvapenList item=thisKommunvapen name="kommunvapenLoop"}
 	{assign var=kommun value=$thisKommunvapen->getKommun()}
 

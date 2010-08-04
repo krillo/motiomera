@@ -27,68 +27,118 @@ class Sammanstallning
 	const POKAL_SILVER_NIVA = 637000;
 	const KVARTAL = 91; // antal dagar i ett kvartal
 
-	
-	public static function sammanstallPokaler()
-	{
-		global $db;
-		$medlemmar = Medlem::listAll();
-		foreach($medlemmar as $medlem) {
-			
-			if (!$medlem->getPokalStart()) {
-				$sql = "SELECT datum FROM " . Steg::TABLE . " WHERE medlem_id = " . $medlem->getId() . " ORDER BY datum	 LIMIT 1";
-				$datum = $db->value($sql);
-				$start = strtotime($datum);
-				
-				if ($datum != "") {
-					$medlem->setPokalStart(date("Y-m-d", $start));
-					$medlem->commit();
-				}
-			} else {
-				$start = strtotime($medlem->getPokalStart());
-			}
-			
-			if ($start != 0) {
-				$dayNr = date("w", $start);
-				$i = 0;
-				while ($dayNr != 1) {
-					$i++;
-					$dayNr++;
-					
-					if ($dayNr == 7) $dayNr = 0;
-				}
-				$start = $start + (60 * 60 * 24 * $i);
-				$datum = $start;
-				$i = 0;
-				while (time() - $datum > (60 * 60 * 24 * self::KVARTAL)) {
-					$stop = $datum + (60 * 60 * 24 * self::KVARTAL);
-					$steg = $medlem->getStegTotal(date("Y-m-d", $datum) , date("Y-m-d", $stop));
-					$guldpokal = false;
-					$silverpokal = false;
-					
-					if ($steg >= self::POKAL_GULD_NIVA) {
-						$guldpokal = true;
-					} else 
-					if ($steg >= self::POKAL_SILVER_NIVA) {
-						$silverpokal = true;
-					}
-					
-					if ($guldpokal || $silverpokal) {
-						$pokal = ($guldpokal) ? self::P_GULD : self::P_SILVER;
-						self::nyPokal($medlem, $pokal, date("Y-m-d", $datum) , $steg);
-					}
-					$datum = $stop + (60 * 60 * 24);
-					$i++;
-				}
-			}
-		}
-	}
 
 
 
 /**
+ * this function iterates all users and calculates if a pokal is deserved.
+ * The start date is calculated like this: 
+ * 1. if it is missing - date of the first recorded steg is set
+ * 2. if it is less than stop date (start + self::KVARTAL) - nothing is done
+ * 3. if it is more than stop date (start + self::KVARTAL) - todays date is set as a new start date
+ *
+ * If a silver-pokal is deserved then the start date is still the same
+ * If a gold-pokal is deserved then todays date is set as the new atart date
+ * 
+ * This function should be run every morning as a batch
+ *
+ * @return void
+ * @author Aller Internet, Kristian Erendi
+ */
+  public static function sammanstallPokaler(){
+    global $db;
+    $today = date("Y-m-d");
+    $i = 0;
+    $nbr = 0;
+    $pokal = null;
+    $medlemmar = Medlem::listAll();    
+    //$medlemmar = Medlem::loadById(6568);
+    //$medlemmar = array($medlemmar);    
+    Misc::logMotiomera(date("Y-m-d H:i:s") . " INFO - Start pokal batch, ". sizeof($medlemmar). " members to run throuh", 'cron_motiomera.log');
+    foreach($medlemmar as $medlem) {
+      $nbr++;
+      echo $nbr . ' - medlem: ' . $medlem->getId() .' '. $medlem->getANamn() . "\n";
+      try{
+       if (!$medlem->getPokalStart()){
+         //no start date, create one
+         $sql = "SELECT datum FROM " . Steg::TABLE . " WHERE medlem_id = " . $medlem->getId() . " ORDER BY datum	 ASC LIMIT 1";
+         $datum = $db->value($sql);
+         echo "datum från db: ". $datum . "\n";
+         if ($datum != "") {
+           $pokalStartDate = $datum;
+         }
+       } else { 
+         //get existing start date
+         $pokalStartDate = $medlem->getPokalStart();
+       }
+       
+       //start and stop dates 
+       $pokalStopDateArray = JDate::addDays(self::KVARTAL + 1, $pokalStartDate);  //one extra day slack on date
+       if(time() > $pokalStopDateArray['date_unix']){
+         //pokal date expired, set todays date as a new startdate 
+         $pokalStartDate = $today;     
+         echo 'too old pokalStartDate: ' . $pokalStartDate . "\n";
+       } 
+       
+       $medlem->setPokalStart($pokalStartDate);    
+       //count steg between start date and today      
+       $steg = $medlem->getStegTotal($pokalStartDate , $today);
+       echo "$steg mellan $pokalStartDate och $today"."\n";
+       if ($steg >= self::POKAL_GULD_NIVA) {
+         $pokal = self::P_GULD;
+         $medlem->setPokalStart($today); //if gold then set start date to today
+         echo "guld "."\n";
+       }else{ 
+         if ($steg >= self::POKAL_SILVER_NIVA) {
+           $pokal = self::P_SILVER;
+           echo "silver "."\n";
+         }
+       }      
+       if($pokal!=null){
+         $i++;
+         self::nyPokal($medlem, $pokal, $today, $steg, $i);
+       }
+       $pokal = null;
+       $medlem->commit();  //store possibly a new start date
+     } catch (Exception $e) {
+        Misc::logMotiomera(date("Y-m-d H:i:s") . " ERROR - Pokal batch, ". $nbr . ' - medlem: ' . $medlem->getId() .' '. $medlem->getANamn() . " members to run throuh", 'cron_motiomera.log');
+        echo $e;
+     }
+     
+   }  
+  }
+
+
+/**
+ * This function inserts a pokal in the db
+ * Checks if there allready is one for that date, in that case no insert is made
+ * Logging to /log/cron_motiomera.log
+ *
+ * @param Medlem $medlem 
+ * @param string $pokal 
+ * @param string $datum 
+ * @param string $steg 
+ * @param string $i 
+ * @return void
+ * @author Aller Internet, Kristian Erendi
+ */
+  public static function nyPokal(Medlem $medlem, $pokal, $datum, $steg, $i=0){
+    global $db;
+    $sql = "SELECT count(*) FROM " . self::POKAL_TABLE . " WHERE medlem_id = " . $medlem->getId() . " AND datum = '$datum'";
+    if ($db->value($sql) == "0") {
+      $sql = "INSERT INTO " . self::POKAL_TABLE . " values (null, " . $medlem->getId() . ", '$pokal', $steg, '$datum')";
+      $db->nonquery($sql);
+      Misc::logMotiomera(date("Y-m-d H:i:s"). " OK - nbr $i New pokal for medlemId: ". $medlem->getId() .", $pokal, steg: $steg", 'cron_motiomera.log');
+    }else {
+      Misc::logMotiomera(date("Y-m-d H:i:s"). " ERROR - nbr $i Duplicate pokal for medlemId: ". $medlem->getId() .", $pokal, steg: $steg", 'cron_motiomera.log');
+    }
+  }
+
+
+/**
  * This function iterates all members and counts the number of steps they have taken last week.
- * This is intended to be run once a week 
- * Optionally it is possible to submit year and week and run from motiomera.se/admin/pages/installningar.php, also called DEBUG in the menu
+ * This is intended to be run as a batch once a week 
+ * Optionally it is possible to submit year and week and run from motiomera.se/admin/pages/installningar.php, also called DEBUG in the admin menu
  * Logging to /log/cron_motiomera.log
  *
  * The function is rewritten by krillo 2010-07-30 
@@ -100,14 +150,14 @@ class Sammanstallning
     if($year!=null && $week!=null){
       $weekArray = JDate::getDateFromWeek($year, $week);
     }else{
-      $weekArray = JDate::addWeek(-1);
+      $weekArray = JDate::addWeeks(-1);
     }
     Misc::logMotiomera(date("Y-m-d H:i:s") . " INFO - Start medalj batch, ". $weekArray['year'].", week ". $weekArray['week_number'], 'cron_motiomera.log');
     $medalj = null;
     $i = 0;
-    //$medlemmar = Medlem::listAll();
-    $medlemmar = Medlem::loadById(6568);
-    $medlemmar = array($medlemmar);
+    $medlemmar = Medlem::listAll();
+    //$medlemmar = Medlem::loadById(6568);
+    //$medlemmar = array($medlemmar);
     //print_r($weekArray);
     foreach($medlemmar as $medlem) {
       $steg = $medlem->getStegTotal($weekArray['monday']  , $weekArray['sunday'] );
@@ -158,16 +208,7 @@ class Sammanstallning
   }
 	
 	
-	private static function nyPokal(Medlem $medlem, $pokal, $datum, $steg)
-	{
-		global $db;
-		$sql = "SELECT count(*) FROM " . self::POKAL_TABLE . " WHERE medlem_id = " . $medlem->getId() . " AND datum = '$datum'";
-		
-		if ($db->value($sql) == "0") {
-			$sql = "INSERT INTO " . self::POKAL_TABLE . " values (null, " . $medlem->getId() . ", '$pokal', $steg, '$datum')";
-			$db->nonquery($sql);
-		}
-	}
+
 	
 	public static function listMedaljer(Medlem $medlem = null, $medalj = null, $vecka = null, $ar = null)
 	{

@@ -62,20 +62,48 @@ class JDate {
  * if no date is submitted then current time is used
  *
  * @param string $date
- * @return void
+ * @param int $i 
+ * @return array weekarray
  * @author Aller Internet, Kristian Erendi
  */  
-  public static function addWeek($i, $date = false) {
+  public static function addWeeks($i, $date=false) {
     if (!$date) {
       $udate = time();
     }
     if (is_int($date)) {
       $udate = $date;
+    } else{
+      $udate = strtotime($date);
     }
     if($i > 0 ){
       $i = '+'.$i;
     } 
     $date = date("Y-m-d", strtotime(date("Y-m-d", $udate) . " $i week"));
+    return self::getWeek($date);
+  } 
+
+/**
+ * this function adds or subtracts days to the submitted date
+ * if no date is submitted then current time is used
+ *
+ * @param string $date 
+ * @param int $i 
+ * @return array weekarray
+ * @author Aller Internet, Kristian Erendi
+ */    
+  public static function addDays($i, $date=false){
+    if (!$date) {
+      $udate = time();
+    }
+    if (is_int($date)) {
+      $udate = $date;
+    }else{
+      $udate = strtotime($date);
+    }
+    if($i > 0 ){
+      $i = '+'.$i;
+    } 
+    $date = date("Y-m-d", strtotime(date("Y-m-d", $udate) . " $i day"));
     return self::getWeek($date);
   } 
     

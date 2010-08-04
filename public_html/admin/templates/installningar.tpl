@@ -29,13 +29,23 @@
   År: <input type="text" name="year" value="" /><br/>
   från och med, startvecka: <input type="text" name="weekstart" value="" /><br/>
   till och med, slutvecka: <input type="text" name="weekstop" value="" /><br/>
-  <input type="submit" value="Skicka" />
+  <input type="submit" value="Skapa medaljer" />
 </form>
 <br/>
 <br/>
 <br/>
 
 
-
+<form action="/admin/actions/manuell_pokal.php?id={$ADMIN->getId()}" method="get">
+  <h3>Dela ut en pokal till en användare</h3>
+  <p>Normalt gås alla medlemmar igenom varje dag av cronscript för att se ifall någon har förtjänat en ny pokal, men här kan man göra det manuellt med dagens datum. Man kan bara ha en pokal per samma datum</p>
+  användar-id: <input type="text" name="memberid" value="" /><br/>
+  silver: <input type="radio" name="pokal" value="silver" /><br/>
+  guld: <input type="radio" name="pokal" value="guld" /><br/>    
+  <input type="submit" value="Skapa pokal" />
+</form>
+<br/>
+<br/>
+<br/>
 
 </div>
