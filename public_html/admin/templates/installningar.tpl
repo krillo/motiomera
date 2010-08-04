@@ -25,7 +25,7 @@
 
 <form action="/admin/actions/manuell_medalj.php?id={$ADMIN->getId()}" method="get">
   <h3>Batcha ut medaljer till alla melemmar mellan specade veckor</h3>
-  <p>Detta görs normalt av cronscript varje vecka, men om något har gått fel kan man göra detta retroaktivt</p>  
+  <p>Detta görs normalt av cronscript varje vecka, men om något har gått fel kan man göra detta retroaktivt. Kör denna bara en vecka åt gången och då ingen är inne på sajten för denna är så tung att den hänger sajten</p>  
   År: <input type="text" name="year" value="" /><br/>
   från och med, startvecka: <input type="text" name="weekstart" value="" /><br/>
   till och med, slutvecka: <input type="text" name="weekstop" value="" /><br/>

@@ -398,7 +398,7 @@ switch($_GET["table"]){
 		}
 		break;				
 	case "medlem":
-	  $passmsg = 'apa';
+	  $passmsg = '';
 		$medlem = Medlem::loadById($_POST["medlem_id"]);
 		//probably not used any more - krillo 2010-07-29
 		if (!empty($_POST['sendPassword'])) {
@@ -418,8 +418,14 @@ switch($_GET["table"]){
       $passmsg = rawurlencode('Ändrat till: ' .$_POST['newpassword']);
 		}
 		if(isset($_POST["aktivera"])){
-			$medlem->setEpostBekraftad(1);
-			$medlem->commit();
+      $medlem->setEpostBekraftad(1);
+      // Check for temp key, if we find one then clear it and set it in mm_foretagsnyckel  - krillo 2010-08-04 
+      $nyckel = $medlem->getForetagsnyckel_temp();
+      if($nyckel) {
+        $medlem->setForetagsnyckel_temp("");
+        $medlem->setForetagsnyckel($nyckel);
+      }
+      $medlem->commit();
 		}
 		else {
 			$medlem->setPaidUntil($_POST["paidUntil"]);

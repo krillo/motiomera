@@ -13,7 +13,7 @@
 	</tr>
 	<tr>
 		<th>Status</th>
-		<td class="mmRawText">{if $medlem->getEpostBekraftad() == 1}Aktiverad{else}<span class="mmRed">Ej aktiverad</span>&nbsp;<input type="submit" name="aktivera" value="Aktivera" />{/if}</td>
+		<td class="mmRawText">{if $medlem->getEpostBekraftad() == 1}Aktiverad{else}<span class="mmRed">Ej aktiverad</span>&nbsp;<input type="submit" name="aktivera" value="Aktivera" /> &nbsp; Nyckel:&nbsp;  {$medlem->getForetagsnyckel_temp()}{/if}</td>
 	</tr>
 	<tr>
 		<th>Konto skapat</th>

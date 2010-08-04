@@ -54,7 +54,7 @@ class Sammanstallning
     $medlemmar = Medlem::listAll();    
     //$medlemmar = Medlem::loadById(6568);
     //$medlemmar = array($medlemmar);    
-    Misc::logMotiomera(date("Y-m-d H:i:s") . " INFO - Start pokal batch, ". sizeof($medlemmar). " members to run throuh", 'cron_motiomera.log');
+    Misc::logMotiomera("Start pokal batch, ". sizeof($medlemmar). " members to run throuh", 'info');
     foreach($medlemmar as $medlem) {
       $nbr++;
       echo $nbr . ' - medlem: ' . $medlem->getId() .' '. $medlem->getANamn() . "\n";
@@ -77,21 +77,21 @@ class Sammanstallning
        if(time() > $pokalStopDateArray['date_unix']){
          //pokal date expired, set todays date as a new startdate 
          $pokalStartDate = $today;     
-         echo 'too old pokalStartDate: ' . $pokalStartDate . "\n";
+         //echo 'too old pokalStartDate: ' . $pokalStartDate . "\n";
        } 
        
        $medlem->setPokalStart($pokalStartDate);    
        //count steg between start date and today      
        $steg = $medlem->getStegTotal($pokalStartDate , $today);
-       echo "$steg mellan $pokalStartDate och $today"."\n";
+       //echo "$steg mellan $pokalStartDate och $today"."\n";
        if ($steg >= self::POKAL_GULD_NIVA) {
          $pokal = self::P_GULD;
          $medlem->setPokalStart($today); //if gold then set start date to today
-         echo "guld "."\n";
+         //echo "guld "."\n";
        }else{ 
          if ($steg >= self::POKAL_SILVER_NIVA) {
            $pokal = self::P_SILVER;
-           echo "silver "."\n";
+           //echo "silver "."\n";
          }
        }      
        if($pokal!=null){
@@ -100,9 +100,9 @@ class Sammanstallning
        }
        $pokal = null;
        $medlem->commit();  //store possibly a new start date
-     } catch (Exception $e) {
-        Misc::logMotiomera(date("Y-m-d H:i:s") . " ERROR - Pokal batch, ". $nbr . ' - medlem: ' . $medlem->getId() .' '. $medlem->getANamn() . " members to run throuh", 'cron_motiomera.log');
-        echo $e;
+     } catch (Exception $e){
+        Misc::logMotiomera("Pokal batch, ". $nbr ." members to run throuh, medlem: ". $medlem->getId() ." ". $medlem->getANamn(), 'ERROR');
+        Misc::logMotiomera($e);
      }
      
    }  
@@ -112,7 +112,7 @@ class Sammanstallning
 /**
  * This function inserts a pokal in the db
  * Checks if there allready is one for that date, in that case no insert is made
- * Logging to /log/cron_motiomera.log
+ * Logging to /log/motiomera.log
  *
  * @param Medlem $medlem 
  * @param string $pokal 
@@ -128,9 +128,9 @@ class Sammanstallning
     if ($db->value($sql) == "0") {
       $sql = "INSERT INTO " . self::POKAL_TABLE . " values (null, " . $medlem->getId() . ", '$pokal', $steg, '$datum')";
       $db->nonquery($sql);
-      Misc::logMotiomera(date("Y-m-d H:i:s"). " OK - nbr $i New pokal for medlemId: ". $medlem->getId() .", $pokal, steg: $steg", 'cron_motiomera.log');
+      Misc::logMotiomera("nbr $i New pokal for medlemId: ". $medlem->getId() .", $pokal, steg: $steg", 'OK');
     }else {
-      Misc::logMotiomera(date("Y-m-d H:i:s"). " ERROR - nbr $i Duplicate pokal for medlemId: ". $medlem->getId() .", $pokal, steg: $steg", 'cron_motiomera.log');
+      Misc::logMotiomera("nbr $i Duplicate pokal for medlemId: ". $medlem->getId() .", $pokal, steg: $steg", 'ERROR');
     }
   }
 
@@ -139,7 +139,7 @@ class Sammanstallning
  * This function iterates all members and counts the number of steps they have taken last week.
  * This is intended to be run as a batch once a week 
  * Optionally it is possible to submit year and week and run from motiomera.se/admin/pages/installningar.php, also called DEBUG in the admin menu
- * Logging to /log/cron_motiomera.log
+ * Logging to /log/motiomera.log
  *
  * The function is rewritten by krillo 2010-07-30 
  *
@@ -152,7 +152,7 @@ class Sammanstallning
     }else{
       $weekArray = JDate::addWeeks(-1);
     }
-    Misc::logMotiomera(date("Y-m-d H:i:s") . " INFO - Start medalj batch, ". $weekArray['year'].", week ". $weekArray['week_number'], 'cron_motiomera.log');
+    Misc::logMotiomera("Start medalj batch, ". $weekArray['year'].", week ". $weekArray['week_number'], 'INFO');
     $medalj = null;
     $i = 0;
     $medlemmar = Medlem::listAll();
@@ -183,7 +183,7 @@ class Sammanstallning
   /**
    * This function inserts a medallion in the db
    * Checks if there allready is one for that week, in that case no insert is made
-   * Logging to /log/cron_motiomera.log
+   * Logging to /log/motiomera.log
    *
    * @param Medlem $medlem 
    * @param string $medalj 
@@ -201,9 +201,9 @@ class Sammanstallning
     if ($db->value($sql) == "0") {
       $sql = "INSERT INTO " . self::MEDALJ_TABLE . " VALUES (null, " . $medlem->getId() . ", '$medalj', $steg, $vecka, $ar);";
       $db->nonquery($sql);
-      Misc::logMotiomera(date("Y-m-d H:i:s"). " OK - nbr $i New medalj for medlemId: ". $medlem->getId() .", $medalj, steg: $steg", 'cron_motiomera.log');
+      Misc::logMotiomera("nbr $i New medalj for medlemId: ". $medlem->getId() .", $medalj, steg: $steg", 'OK');
     }else {
-      Misc::logMotiomera(date("Y-m-d H:i:s"). " ERROR - nbr $i Duplicate medalj for medlemId: ". $medlem->getId() .", $medalj, steg: $steg", 'cron_motiomera.log');
+      Misc::logMotiomera("nbr $i Duplicate medalj for medlemId: ". $medlem->getId() .", $medalj, steg: $steg", 'ERROR');
     }
   }
 	
