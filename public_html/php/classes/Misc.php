@@ -240,38 +240,42 @@ class Misc
  * @param string $logMessage
  * @return boolean
  */
-	public static function sendEmail($to, $from, $subject, $message, $logMessage = ''){
-		global $SETTINGS;
-		$tomail = explode("Bcc:", $to);
-		$charset = 'UTF-8';
+	public static function sendEmail($to, $from, $subject, $message, $logMessage = '') {
+    global $SETTINGS;
+    $tomail = explode("Bcc:", $to);
+    $charset = 'UTF-8';
 
-		if (!self::isEmail($to)) {
-		  self::logEmailSend(false, $subject, $logMessage.' | To: is not a valid email adress - '. $to);
-			throw new MiscException($to.' är inte en giltig e-postadress '.$logMessage , -1);
-		}
-		if ($from != null && !self::isEmail($from)) {
-			self::logEmailSend(false, $subject, $logMessage.' | From: is not a valid email adress - '. $from);
-			throw new MiscException('$from är inte en giltig e-postadress '.$logMessage, -2);
-		}
+    if (!self::isEmail($to)) {
+      self::logEmailSend(false, $subject, $logMessage . ' | To: is not a valid email adress - ' . $to);
+      throw new MiscException($to . ' är inte en giltig e-postadress ' . $logMessage, -1);
+    }
+    if ($from != null && !self::isEmail($from)) {
+      self::logEmailSend(false, $subject, $logMessage . ' | From: is not a valid email adress - ' . $from);
+      throw new MiscException('$from är inte en giltig e-postadress ' . $logMessage, -2);
+    }
 
-		if ($from == null) $from = "Motiomera.se <" . $SETTINGS["email"] . ">";
-		$headers = 'MIME-Version: 1.0' . "\r\n";
-		$headers.= 'Content-type: text/plain; charset=utf-8' . "\r\n";
-		$headers.= 'Content-Transfer-Encoding: 8bit' . "\r\n";
-		$headers.= "From: $from \r\n";
-    $headers.= "Reply-To: ". $SETTINGS["reply_to"] . "\r\n";
-		$encoded_subject = "=?$charset?B?" . base64_encode($subject) . "?=\n";
-		$content = $message;
 
-		if (!mail($tomail[0], $encoded_subject, $message, $headers)) {
-			self::logEmailSend(false, $subject, $logMessage.' | The mail could not be sent to - '. $to);
-			throw new MiscException("Mailet kunde inte skickas ".$logMessage, -4);
-		}
-		self::logEmailSend(true, $subject, $logMessage.' | from: ' . $from . ' to: '. $to);
-		return true;
-	}
+    if ($from == null) {
+      $from = "noreply motiomera <" . $SETTINGS["email"] . ">";
+    }
+    $headers = 'MIME-Version: 1.0' . "\r\n";
+    $headers.= 'Content-type: text/plain; charset=UTF-8' . "\r\n";
+    $headers.= 'Content-Transfer-Encoding: 8bit' . "\r\n";
+    $headers.= "From: $from \r\n";
+    $headers.= "Reply-To: " . $SETTINGS["reply_to"] . "\r\n";
+    $headers.= 'Bcc: noreply motiomera <noreply@motiomera.se>' . "\r\n";
+    $encoded_subject = "=?$charset?B?" . base64_encode($subject) . "?=\n";
+    $content = $message;
 
-	/**
+    if (!mail($tomail[0], $encoded_subject, $message, $headers)) {
+      self::logEmailSend(false, $subject, $logMessage . ' | The mail could not be sent to - ' . $to);
+      throw new MiscException("Mailet kunde inte skickas " . $logMessage, -4);
+    }
+    self::logEmailSend(true, $subject, $logMessage . ' | from: ' . $from . ' to: ' . $to);
+    return true;
+  }
+
+  /**
 	 * Log email sending to logfile
 	 *
 	 * @param boolean $success

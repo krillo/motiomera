@@ -3,19 +3,16 @@
 * General settings 
 */
 $SETTINGS["email"] = "noreply@motiomera.se"; // Adress som ska stå som avsändare i mail till medlemmar
-$SETTINGS["reply_to"] = "per.olsson@aller.se"; // All bounces will land here
-$SETTINGS["kontakt"] = "kundservice@aller.se"; // Adressen dit formulärsmail skickas
+$SETTINGS["kontakt"] = "mabrasupport@aller.se"; // Adressen dit formulärsmail skickas
 $SETTINGS["debug_mail"] = array("kristian.erendi@aller.se"); //Adressen dit debug mail skickas till om den är aktiv ex: array("mail1","mail2");
-$SETTINGS["new_company_order_mail"] = array("kristian.erendi@aller.se", "krillo@gmail.com"); //Adressen dit debug mail skickas till om den är aktiv ex: array("mail1","mail2");
-
 $SETTINGS["rapport_mail"] = "kristian.erendi@aller.se";
-$SETTINGS["url"] = "http://krillomera.se/";
+$SETTINGS["reply_to"] = "noreply motiomera <noreply@motiomera.se>"; // All bounces will land here
+$SETTINGS["url"] = "http://motiomera.dev/";
 #$SETTINGS["UPPSLAG_URL"] = "http://mabra.allers.dropit.se/Sites/Pren/Templates/Paymentgw____56389.aspx";
 #$SETTINGS["KUNDNUMMER_URL"] = "http://mabra.allers.dropit.se/Templates/UserService____51336.aspx?key=jhf9h4opqmcjhu93dn&Get=CustomerFromOrder&Orderid=";
 $SETTINGS["UPPSLAG_URL"] = "http://www.allersforlag.se/Sites/Pren/Templates/Paymentgw____56389.aspx";
 $SETTINGS["KUNDNUMMER_URL"] = "http://www.allersforlag.se/Templates/UserService____60489.aspx?key=h3zp0x4qgs4k&Get=CustomerFromOrder&Orderid=";
-
-
+$SETTINGS["new_company_order_mail"] = array("kristian.erendi@aller.se", "krillo@gmail.com"); //Adressen dit debug mail skickas till om den är aktiv ex: array("mail1","mail2");
 
 //MySQL
 $dbdb =	'CONF_SQL_DB';

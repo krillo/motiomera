@@ -205,7 +205,7 @@ class Medlem extends Mobject
 		
 		if (count($usermails) == 0) {
 			global $SETTINGS;
-			$subject = 'Välkommen till Motiomera.se !';
+			$subject = 'Välkommen till Motiomera.se';
 			$msg = 'Vi här på Motiomera.se hoppas att du kommer att tycka om tjänsten. Klicka <a href="' . $SETTINGS["url"] . 'pages/valkommen.php' . '">här</a> för att komma till vår <a href="' . $SETTINGS["url"] . 'pages/valkommen.php' . '">välkomstsida</a>.';
 			$adminMedlem = Medlem::loadByUsername($SETTINGS["default_adminmail"]);
 			$internmail = new MotiomeraMail($subject, $msg, $adminMedlem->getId() , $this->getId() , date("Y-m-d H:i:s") , 0, 0);
@@ -1793,7 +1793,7 @@ class Medlem extends Mobject
 			// TODO: ny template för gammal användare
 			$body = $email->fetch('activationemail.tpl');
 		}
-		$subject = "Välkommen till Motiomera.se!";
+		$subject = "Välkommen till Motiomera.se";
 		Misc::sendEmail($this->getEpost() , $SETTINGS["email"], $subject, $body);
 	}
 	
