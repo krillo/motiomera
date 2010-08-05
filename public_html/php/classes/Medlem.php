@@ -1891,27 +1891,47 @@ class Medlem extends Mobject
 			return $browser;
 		}
 	}
-	
-	/**
-   * Sets and sends a new password to the user
-   */ 
-	public static function nyttLosen($epost){		
-		if (self::ledigEpost($epost)) throw new MedlemException("Inget konto är knuten till e-postadressen", -17);
-		$pass = Security::generateCode(8);		
-		$msg  = "Hejsan, \n";
-    $msg .= "Du bad nyss om ett nytt lösenord för MotioMera, kommer här: $pass Hoppas att du nu ska lyckas logga in på tjänsten igen. \n\n";
-    $msg .= "Om du har fler undringar kan du titta i Vanliga frågor på http://www.MotioMera.se för att se om du hittar svaret där. För personlig kundservice och teknisk support: Ring 042-444 30 25 vardagar 09.00-11.30, 13.00-15.00. \n\n";
-    $msg .= "Hoppas du får fortsatt glädje av tjänsten. \n";    
-    $msg .= "Med vänliga hälsningar \n";
-    $msg .= "Tidningen MåBra \n";
-    if(Misc::sendEmail($epost, null, "Ditt nya lösenord", $msg)){
-		  $medlem = Medlem::loadByEpost($epost);
-		  $medlem->setLosenP($pass);
-		  $medlem->commit();
+
+
+  /**
+   * Sets a new random password and sends it to the user
+   * 
+   * @param <type> $epost
+   */
+	public static function nyttLosen($epost) {
+    if (self::ledigEpost($epost)){
+      throw new MedlemException("Inget konto är knuten till e-postadressen", -17);
     }
-	}
-	
-	/**
+    $pass = Security::generateCode(8);
+    $medlem = Medlem::loadByEpost($epost);
+    $anamn = $medlem->getANamn();
+    
+    $msg = "Hejsan, $anamn \n\n";
+
+    $msg .= "Du bad nyss om ett nytt lösenord för MotioMera, kommer här: $pass Hoppas att du nu ska lyckas logga in på tjänsten igen. \n\n";
+    $msg .= "Om du har fler undringar kan du titta i Vanliga frågor på http://www.MotioMera.se för att se om du hittar svaret där. \n";
+    $msg .= "Hoppas du får fortsatt glädje av tjänsten. \n\n";
+
+    $msg .= "Med vänliga hälsningar \n";
+    $msg .= "Tidningen MåBra och alla i MotioMera-teamet \n\n";
+
+    $msg .= "MotioMera - Sveriges roligaste stegtävling \n";
+    $msg .= "www.motiomera.se \n\n";
+
+    $msg .= "MotioMera \n";
+    $msg .= "Aller media \n";
+    $msg .= "Kundservice \n";
+    $msg .= "251 85 Helsingborg \n";
+    $msg .= "Telefon: 042-444 30 25 \n";
+    $msg .= "Vardagar 09.00 - 11.30 samt 13.00-15.00 \n";
+
+    if (Misc::sendEmail($epost, null, "Ditt nya lösenord", $msg)) {
+      $medlem->setLosenP($pass);
+      $medlem->commit();
+    }
+  }
+
+  /**
 	 * This function sets a new password 
 	 * it requires logged in as admin&nbsp;
 	 *
