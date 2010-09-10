@@ -1,21 +1,5 @@
 <?php
-/**
-* Class and Function List:
-* Function list:
-* - __construct()
-* - __getEmptyObject()
-* - listAll()
-* - loadById()
-* - listMeddelanden()
-* - getId()
-* - setNamn()
-* - getNamn()
-* - setMall()
-* - getMall()
-* Classes list:
-* - Paminnelse_meddelanden extends Mobject
-* - Paminnelse_meddelandenException extends Exception
-*/
+
 /**
  * Reminders
  *
@@ -25,30 +9,18 @@
  * @package MotioMera Steg 2
  * @author Mikael Grön
  */
-
 class Paminnelse_meddelanden extends Mobject
 {
 	const QUERIES_TABLE = 'mm_paminnelse_sql';
 	const TEMPLATES_TABLE = 'mm_paminnelse_meddelanden';
 	const REMINDERS_TABLE = 'mm_paminnelse_aktiva';
-	
 	protected $id; // int
-
-	
 	protected $namn; // string
-
-	
 	protected $mall; // string
-
-	
 	protected $fields = array(
 		'id' => 'int', // int
-
 		'namn' => 'str', // string
-
 		'mall' => 'str', // string
-
-		
 	);
 	function __construct($data = array() , $dummy_object = false)
 	{

@@ -330,6 +330,7 @@ class Foretag extends Mobject
    * This will work if the mail is sent on a friday
    */
   public static function sendRemindAboutSteg(){
+    Misc::logMotiomera("Start foretag::sendRemindAboutSteg(),  Commence email sending for ended tavling. Please see email.log file", 'info');
     $emailName = "Tavling slutar - fredag";
     global $db;
     $sql = 'SELECT a.id FROM mm_medlem a, mm_foretagsnycklar b, mm_foretag c
@@ -370,6 +371,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
         }
       }
     }
+    Misc::logMotiomera("End foretag::sendRemindAboutSteg()", 'info');
   }
 	
 
@@ -386,7 +388,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
    */ 
   public static function foretagsTavlingEndSendEmail(){
     global $db;
-    Misc::logMotiomera(date("Y-m-d H:i:s") . " INFO - Commence email sending for ended tavling ******************");  
+    Misc::logMotiomera("Start foretag::foretagsTavlingEndSendEmail(), Commence email sending for ended tavling ", 'info');
     //get last user from mm_tavling_save, if correct date then send emails  
     $sql = 'SELECT tavlings_id, UNIX_TIMESTAMP(stop_datum) AS stop_datum FROM mm_tavling_save ORDER BY id DESC LIMIT 1';  
     $lastUser = $db->row($sql);
@@ -398,11 +400,12 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     if($daysBetween <= 4 && $daysBetween > 0){
       $sql = "SELECT medlem_id AS id FROM mm_tavling_save WHERE tavlings_id = $tavlingsId";  
       $users = $db->valuesAsArray($sql);
-      Misc::logMotiomera(date("Y-m-d H:i:s") . " INFO - ". count($users) ." to email. See motiomera/log/email.log file for further details");
+      Misc::logMotiomera( count($users) ." users to email. See email.log file for further details", 'info');
       self::sendEndEmail($users, $tavlingsId);
     }else{
-      Misc::logMotiomera(date("Y-m-d H:i:s") . " INFO - No tavling ended the last sunday");  
+      Misc::logMotiomera("No tavling ended the last sunday", 'info');
     }
+    Misc::logMotiomera("End foretag::foretagsTavlingEndSendEmail()", 'info');
   }  
 
 
@@ -465,8 +468,8 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
    * krillo 091026 changed the sql to only get the records that have a competition thats ending.
    * krillo 100420 changed to only save the competition to mm_tavling_save, mm_tavling, mm_lag_save
    */
-  public static function saveAndEndForetagsTavling()
-  {
+  public static function saveAndEndForetagsTavling(){
+    Misc::logMotiomera("Start foretag::saveAndEndForetagsTavling() ", 'info');
     global $db;
     $sql = 'SELECT a.id FROM mm_medlem a, mm_foretagsnycklar b, mm_foretag c
     WHERE a.id = b.medlem_id
@@ -481,9 +484,9 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $i = 1;
     $users = $db->valuesAsArray($sql);
     if(count($users) == 0){
-      Misc::logMotiomera(date("Y-m-d H:i:s") . " INFO - No tavling ended this last sunday");
+      Misc::logMotiomera("No tavling ended this last sunday", 'info');
     }else{  //commence saving
-     Misc::logMotiomera(date("Y-m-d H:i:s") . " INFO - End of tavling, saving data for ". count($users)." members *************");
+     Misc::logMotiomera("End of tavling, saving data for ". count($users)." members", 'info');
 	    foreach($users as $user) {    
 	      $medlem = Medlem::loadById($user);      
 	      if (isset($medlem)) {      
@@ -513,15 +516,15 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 			            'start_datum' => $startDatum, 
 			            'stop_datum' => $slutDatum           
 			          );		          
-			          Misc::logMotiomera(date("Y-m-d H:i:s") . " OK - ". $i++ ." tavling_id: " . $tavling->getId() ." | " . $medlem->getForetag()->getNamn() . ' | id: ' . $medlem->getId() . ' | ' . $medlem->getAnamn() . " | steg: $steg" . " | email: " . $medlem->getEpost());          
+			          Misc::logMotiomera(" ". $i++ ." tavling_id: " . $tavling->getId() ." | " . $medlem->getForetag()->getNamn() . ' | id: ' . $medlem->getId() . ' | ' . $medlem->getAnamn() . " | steg: $steg" . " | email: " . $medlem->getEpost(), 'ok');
 			        }catch(Exception $e){           
-			          Misc::logMotiomera(date("Y-m-d H:i:s") . " ERROR - ". $i++ ." | something went wrong"); 
+			          Misc::logMotiomera(" ". $i++ ." | something went wrong", 'error');
 			        }
 		        }else {
-		          Misc::logMotiomera(date("Y-m-d H:i:s") . " WARN - ". $i++ ." | Member is omitted due to 0 steps |" . $medlem->getForetag()->getNamn() . ' | id: ' . $medlem->getId() . ' | ' . $medlem->getAnamn() . " | steg: $steg" . " | email: " . $medlem->getEpost()); 
+		          Misc::logMotiomera(" ". $i++ ." | Member is omitted due to 0 steps |" . $medlem->getForetag()->getNamn() . ' | id: ' . $medlem->getId() . ' | ' . $medlem->getAnamn() . " | steg: $steg" . " | email: " . $medlem->getEpost(), 'warning');
 		        } 	                  
 	        }else{
-	          Misc::logMotiomera(date("Y-m-d H:i:s") . " WARN - ". $i++ ." | Member is omitted due to member not in foretag | id: ". $medlem->getId() . ' | ' . $medlem->getAnamn() . " | email: " . $medlem->getEpost());
+	          Misc::logMotiomera(" ". $i++ ." | Member is omitted due to member not in foretag | id: ". $medlem->getId() . ' | ' . $medlem->getAnamn() . " | email: " . $medlem->getEpost(), 'warning');
 	        }
 	      }
 	    }       
@@ -548,6 +551,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 	      Tavling::saveLagList($lag_save);
 	    }
     }
+    Misc::logMotiomera("End foretag::saveAndEndForetagsTavling() ", 'info');
   } 
   
   
@@ -1112,16 +1116,17 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
    * Moved and changed from Order krillo 100125
    */   
   public static function skapaFiler(){
-    echo date("Y-m-d H:i:s ") . " - Create files for orders in status 30, lift to status 40 \n";   	
+    Misc::logMotiomera("Start: Foretag::skapaFiler(),  Create files for orders in status 30, lift to status 40", 'info');
     $foretagIds = Foretag::getForetagIdsByOrder(0, 30, 0);
     foreach ($foretagIds as $foretagId => $orderIdArray) {
     	try{
       	$foretag = Foretag::loadById($foretagId);     	
         $foretag->createOrderPDF($orderIdArray);
     	}catch(Exception $e){
-    		echo date("Y-m-d H:i:s ") . " ERROR - problems loading foretag_id $foretagId \n";
+        Misc::logMotiomera("Problems loading foretag_id $foretagId", 'error');
     	}
     }
+    Misc::logMotiomera("End: Foretag::skapaFiler()", 'info');
   }
   
 
@@ -1232,10 +1237,10 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $lokalFil = FORETAGSFIL_LOCAL_PATH . "/" . $filnamn;    
     $pdf->Output($lokalFil);
     if(!file_exists($lokalFil)){
-    	echo date("Y-m-d H:i:s") . " ERROR - Couldn't create or save order PDF file: " . $localFile . "\n";
+      Misc::logMotiomera("Couldn't create or save order PDF file: " . $localFile, 'error');
     	throw new ForetagException(" ERROR - Couldn't create or save order PDF file: " . $localFile, -10);    	
     }else{
-      echo date("Y-m-d H:i:s") . " OK - Created file for " . $this->getCompanyName() . ",  " . $lokalFil . ", foretagId =  " . $this->getId() . ", orderids = " . implode(' ', $orderIdArray) . "\n";
+      Misc::logMotiomera("Created file for " . $this->getCompanyName() . ",  " . $lokalFil . ", foretagId =  " . $this->getId() . ", orderids = " . implode(' ', $orderIdArray), 'ok');
     	//set the passw again, not tillaggsbestallning, it is stored in temp just because otherwise we had not been able to print it in the letter
 			if($typeForetag){  
       	$this->setLosenord($losenord);
@@ -1248,7 +1253,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
         $order->setOrderStatus(Order::ORDERSTATUS_PSW_FILE);
         $order->setFilnamn($filnamn);              
         $order->commit();
-        echo "   " . date("Y-m-d H:i:s") . " OK - Updated status to " . Order::ORDERSTATUS_PSW_FILE . ", orderid = " .$orderId . "\n";              
+        Misc::logMotiomera("Updated status to " . Order::ORDERSTATUS_PSW_FILE . ", orderid = " .$orderId, 'ok');
       }
       return true;    	
     }
@@ -1372,19 +1377,21 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
   * Uploads order files in status 40 on the FTP
   * Lift the order rows to status 50 on success
   */ 
- public static function uploadOrderFilesFTP(){ 
+ public static function uploadOrderFilesFTP(){
+    Misc::logMotiomera("Start: Foretag::uploadOrderFilesFTP()", 'info');
     $filenames = Order::getFilesToUpload();             
     foreach ($filenames as $file) {     
       $localFile = FORETAGSFIL_LOCAL_PATH . "/" . $file;
       $serverFile = FORETAGSFIL_REMOTE_PATH . "/" . $file;      
       if(Foretag::uploadFilesFTP('order', $localFile, $serverFile, true)){
         if(Order::updateOrdersByFilename($file)==1){
-          echo date("Y-m-d H:i:s") . " File put successfully on ftp, status 50  " . $localFile . "\n";
-        }else{ 
-          echo date("Y-m-d H:i:s") . " File put successfully on ftp, FAIL TO UPDATE orderstatus, still 40 \n";
+          Misc::logMotiomera("File put successfully on ftp, status 50  " . $localFile, 'ok');
+        }else{
+          Misc::logMotiomera("File put successfully on ftp, FAIL TO UPDATE orderstatus, still 40", 'error');
         }
       }
     }
+    Misc::logMotiomera("End: Foretag::uploadOrderFilesFTP()", 'info');
   }     
   
   
@@ -1406,26 +1413,26 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $conn_id = ftp_connect(FTP_HOST);      
     if (!$conn_login = ftp_login($conn_id, FTP_USER, FTP_PASS)){
     	if($runAsCron){
-        echo date("Y-m-d H:i:s") . " ERROR - $type - Could not log onto the FTP ". FTP_HOST . "  - throwing exception\n";
+        Misc::logMotiomera("$type - Could not log onto the FTP ". FTP_HOST . "  - throwing exception", 'error');
     	}else{
-    		Misc::logMotiomera(date("Y-m-d H:i:s") . " ERROR - $type - Could not log onto the FTP ". FTP_HOST . "  - throwing exception");
+    		Misc::logMotiomera("Could not log onto the FTP ". FTP_HOST . "  - throwing exception", "error");
     	}
       throw new ForetagException("Could not log onto the FTP", -6);        
     }
     ftp_pasv($conn_id, true); 
     if (ftp_put($conn_id, $serverFile, $localFile, FTP_BINARY)) {
     	$sucess = true;
-    	if($runAsCron){    	
-    	  echo date("Y-m-d H:i:s") . " File put successfully on ftp " . $localFile . "\n";
+    	if($runAsCron){
+        Misc::logMotiomera("File put successfully on ftp " . $localFile, "ok");
     	}else{
-        Misc::logMotiomera(date("Y-m-d H:i:s") . " OK - File put successfully on ftp " . $localFile);
+        Misc::logMotiomera("File put successfully on ftp " . $localFile, "ok");
       }  
     } else {
       $sucess = false;    	
-    	if($runAsCron){        
-        echo date("Y-m-d H:i:s") . " Failed to upload file to ftp " . $localFile . "\n";
+    	if($runAsCron){
+        Misc::logMotiomera("Failed to upload file to ftp " . $localFile , "error");
     	}else{
-        Misc::logMotiomera(date("Y-m-d H:i:s") . " ERROR - Failed to upload file to ftp " . $localFile);
+        Misc::logMotiomera("Failed to upload file to ftp " . $localFile , "error"); 
       }          
     }
     ftp_close($conn_id);
@@ -1447,13 +1454,13 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
       $localFile = FORETAGSFIL_LOCAL_PATH . "/" . $fileName;      
       $serverFile = FORETAGSFIL_REMOTE_PATH . "/" . $fileName;      
       if(Foretag::uploadFilesFTP('reclamation', $localFile, $serverFile)){
-      	Misc::logMotiomera(date("Y-m-d H:i:s ") . " OK - reclamation order, $nbr pedomerters,  foretag_id: $foretag_id");
+      	Misc::logMotiomera("Reclamation order, $nbr pedomerters,  foretag_id: $foretag_id", 'ok');
         return true;
       }else{ 
       	return false;
       }                
   	}catch (Exception $e){
-  		Misc::logMotiomera(date("Y-m-d H:i:s ") . " ERROR - problem with reclamation order, $nbr pedomerters,  foretag_id: $foretag_id \n" . $e);
+  		Misc::logMotiomera("Problem with reclamation order, $nbr pedomerters,  foretag_id: $foretag_id " . $e, 'error');
   		return false;
   	}
   }  

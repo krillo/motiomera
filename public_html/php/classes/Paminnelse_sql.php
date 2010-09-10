@@ -1,34 +1,5 @@
 <?php
-/**
-* Class and Function List:
-* Function list:
-* - __construct()
-* - __getEmptyObject()
-* - listAll()
-* - listQueries()
-* - loadById()
-* - getIllegalWord()
-* - uppdateraAktiva()
-* - getAktivaIDn()
-* - getAktivaByPaminnelse()
-* - setId()
-* - getId()
-* - setNamn()
-* - getNamn()
-* - setDagarMellanUtskick()
-* - getDagarMellanUtskick()
-* - setQuery()
-* - getQuery()
-* - setTitel()
-* - getTitel()
-* - setInreMall()
-* - getInreMall()
-* - setMeddelandeId()
-* - getMeddelandeId()
-* Classes list:
-* - Paminnelse_sql extends Mobject
-* - Paminnelse_sqlException extends Exception
-*/
+
 /**
  * Reminders
  *
@@ -38,7 +9,6 @@
  * @package MotioMera Steg 2
  * @author Mikael Grön
  */
-
 class Paminnelse_sql extends Mobject
 {
 	const QUERIES_TABLE = 'mm_paminnelse_sql';
@@ -63,46 +33,23 @@ class Paminnelse_sql extends Mobject
 	);
 	
 	protected $id; // int
-
-	
 	protected $namn; // string
-
-	
 	protected $dagar_mellan_utskick; // int
-
-	
 	protected $query; // string
-
-	
 	protected $titel; // string
-
-	
 	protected $inre_mall; // string
-
-	
 	protected $meddelande_id; // int
-
-	
 	protected $fields = array(
 		'id' => 'int', // int
-
 		'namn' => 'str', // string
-
 		'dagar_mellan_utskick' => 'int', // int
-
 		'query' => 'str', // string
-
 		'titel' => 'str', // string
-
 		'inre_mall' => 'str', // string
-
 		'meddelande_id' => 'int', // int
-
-		
 	);
 	function __construct($data = array() , $dummy_object = false)
 	{
-		
 		if (!$dummy_object) {
 			
 			if (count($data)) {

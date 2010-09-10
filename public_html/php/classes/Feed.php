@@ -1,25 +1,8 @@
 <?php
-/**
- * Class and Function List:
- * Function list:
- * - __construct()
- * - trunicateFeedItems()
- * - sortFeeds()
- * - compareFeeds()
- * - loadByMedlem()
- * - makeText()
- * - listGroupedFeedItems()
- * - listSingleFeedItems()
- * - listRelevantFeedItems()
- * - listRows()
- * - getMedlem()
- * - listKontakter()
- * - listGrupper()
- * - setMedlem()
- * Classes list:
- * - Feed
- */
 
+/**
+ *
+ */
 class Feed
 {
 	protected $medlem;
@@ -34,12 +17,9 @@ class Feed
 		"lamnatgrupp"
 	);
 	
-	const MEDLEM_TABLE = "mm_medlem";
-	
+	const MEDLEM_TABLE = "mm_medlem";	
 	const RELATION_TABLE = "mm_feeditem";
-	
 	const STEG_TABLE = "mm_steg";
-	
 	const ANTAL_DATUM_I_FEED = 3;
 	
 	public function __construct(Medlem $medlem, $count)
@@ -50,17 +30,18 @@ class Feed
 
 	// STATIC FUNCTIONS ///////////////////////////////////////
 	
-	public static function trunicateFeedItems()
-	{
+	public static function truncateFeedItems(){
+    Misc::logMotiomera("Start Feed::truncateFeedItems() ", 'info');
 		$days = 7;
 		if(defined('TRUNCATE_OLDER_THAN')){
 			$days = TRUNCATE_OLDER_THAN;
 		}
 		
 		global $db;
-		$sql = "DELETE FROM " . self::RELATION_TABLE . " 
-		WHERE datum < '" . date("Y-m-d", strtotime("-". $days  ."days")) . "%'";  //string like "strtotime("-7 days"))" 
+		$sql = "DELETE FROM " . self::RELATION_TABLE . " WHERE datum < '" . date("Y-m-d", strtotime("-". $days  ."days")) . "%'";  //string like "strtotime("-7 days"))" 
 		$db->query($sql);
+    Misc::logMotiomera($sql, 'info');
+    Misc::logMotiomera("End Feed::truncateFeedItems() ", 'info');
 	}
 	
 	public static function sortFeeds($feeds)

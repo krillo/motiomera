@@ -107,10 +107,12 @@ class lastRSS
 
 	function Get($rss_url)
 	{
-
-		// If CACHE ENABLED
-		
 		if ($this->cache_dir != '') {
+
+      //krillo
+      echo "********* lastRSS::Get(rss_url)  cache IS enabled \n";
+
+
 			$cache_file = $this->cache_dir . '/rsscache_' . md5($rss_url);
 			$timedif = @(time() - filemtime($cache_file));
 			
@@ -127,7 +129,7 @@ class lastRSS
 				// cached file is too old, create new
 				$result = $this->Parse($rss_url);
 				$serialized = serialize($result);
-				
+
 				if ($f = @fopen($cache_file, 'w')) {
 					fwrite($f, $serialized, strlen($serialized));
 					fclose($f);
@@ -139,12 +141,15 @@ class lastRSS
 
 		// If CACHE DISABLED >> load and parse the file directly
 		else {
+      //krillo
+      echo "********* lastRSS::Get(rss_url)  cache NOT enabled \n";
 			$result = $this->Parse($rss_url);
-			
-			if ($result) $result['cached'] = 0;
-		}
+      //krillo
+      echo "********* lastRSS::Parse($rss_url) \n";
+      print_r($result);
 
-		// return result
+      if ($result) $result['cached'] = 0;
+		}
 		return $result;
 	}
 
@@ -232,11 +237,36 @@ class lastRSS
 
 		// Open and load RSS file
 		
-		if ($f = curl_init($rss_url)) {
-			curl_setopt($f, CURLOPT_RETURNTRANSFER, true);
+		//if ($f = curl_init($rss_url)) {
+			/*
+      curl_setopt($f, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($f, CURLOPT_HEADER, 0);
 			$rss_content = curl_exec($f);
 			curl_close($f);
+*/
+
+     if($ch = curl_init()){
+        //$ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $rss_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $rss_content = curl_exec($ch);
+        curl_close($ch);
+
+        /*
+     if($ch = curl_init()){
+          echo "curl init success";
+          curl_setopt($ch, CURLOPT_URL, "http://mabra.com/feed");
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+          $output = curl_exec($ch);
+          curl_close($ch);
+          echo $output;
+        */
+
+
+
+      //krillo
+      echo "********* lastRSS::Parse($rss_url) \n";
+      print_r($rss_content);
 
 			//////////////////////////////////////////////////////////////////////////////////
 			//fopen till curl 14/8 2008 av magnus
@@ -260,6 +290,13 @@ class lastRSS
 			// Parse document encoding
 
 			$result['encoding'] = $this->my_preg_match("'encoding=[\'\"](.*?)[\'\"]'si", $rss_content);
+
+
+
+      //krillo
+      //echo "result encoding \n";
+      //print_r($rss_content);
+
 
 			// if document codepage is specified, use it
 			
@@ -361,10 +398,14 @@ class lastRSS
 			}
 			$result['items_count'] = $i;
 			return $result;
-		} else
+		} else {
 
-		// Error in opening return False
-		{
+
+      //krillo
+      echo "********* lastRSS::Parse() Could not get a new Curl-session in lastRSS class \n";
+
+
+      Misc::logMotiomera("Could not get a new Curl-session in lastRSS class", 'error');
 			return False;
 		}
 	}

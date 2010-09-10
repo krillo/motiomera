@@ -12,6 +12,8 @@ if (!defined('ROOT')) {
 	define('ROOT', $_SERVER["DOCUMENT_ROOT"]);
 }
 
+//echo "ROOT = " . ROOT;
+
 require_once ROOT . '/php/constants.php';
 require_once ROOT . '/php/settings.php';
 require_once ROOT . '/php/settings_app.php';

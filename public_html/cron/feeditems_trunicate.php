@@ -3,7 +3,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
 
 
-Feed::trunicateFeedItems();
+Feed::truncateFeedItems();
 
 
 ?>

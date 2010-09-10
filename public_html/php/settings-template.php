@@ -5,14 +5,13 @@
 $SETTINGS["email"] = "noreply@motiomera.se"; // Adress som ska stå som avsändare i mail till medlemmar
 $SETTINGS["kontakt"] = "mabrasupport@aller.se"; // Adressen dit formulärsmail skickas
 $SETTINGS["debug_mail"] = array("kristian.erendi@aller.se"); //Adressen dit debug mail skickas till om den är aktiv ex: array("mail1","mail2");
-$SETTINGS["rapport_mail"] = "kristian.erendi@aller.se";
+$SETTINGS["rapport_mail"] = "CONF_REPORT_MAIL";
 $SETTINGS["reply_to"] = "noreply motiomera <noreply@motiomera.se>"; // All bounces will land here
-$SETTINGS["url"] = "http://motiomera.dev/";
-#$SETTINGS["UPPSLAG_URL"] = "http://mabra.allers.dropit.se/Sites/Pren/Templates/Paymentgw____56389.aspx";
-#$SETTINGS["KUNDNUMMER_URL"] = "http://mabra.allers.dropit.se/Templates/UserService____51336.aspx?key=jhf9h4opqmcjhu93dn&Get=CustomerFromOrder&Orderid=";
+$SETTINGS["url"] = "CONF_MOTIOMERA_URL";
 $SETTINGS["UPPSLAG_URL"] = "http://www.allersforlag.se/Sites/Pren/Templates/Paymentgw____56389.aspx";
 $SETTINGS["KUNDNUMMER_URL"] = "http://www.allersforlag.se/Templates/UserService____60489.aspx?key=h3zp0x4qgs4k&Get=CustomerFromOrder&Orderid=";
 $SETTINGS["new_company_order_mail"] = array("kristian.erendi@aller.se", "krillo@gmail.com"); //Adressen dit debug mail skickas till om den är aktiv ex: array("mail1","mail2");
+
 
 //MySQL
 $dbdb =	'CONF_SQL_DB';
@@ -28,8 +27,8 @@ define('DEBUG_OVERRIDE', CONF_DEBUG_OVERRIDE); // true - turns on debug
 define('DEBUG_MAIL', CONF_DEBUG_MAIL); //Sätter på debug via mail
 define('DEBUG_SMARTY', CONF_DEBUG_SMARTY); //Sätter på debug i smarty
 define("DEBUG_IM", CONF_DEBUG_IM); //sätter på debug i IM
-define("NO_INTERNET", true);
-define("GOOGLEMAPS_OVERRIDE_NO_INTERNET", false);
+define("NO_INTERNET", CONF_NO_INTERNET);
+define("GOOGLEMAPS_OVERRIDE_NO_INTERNET", CONF_GOOGLEMAPS_OVERRIDE_NO_INTERNET);
 
 //Memcache
 define('MEMCACHE', CONF_USE_MEMCACHE); //Sätter på memcache
@@ -53,7 +52,7 @@ define('PDF_TEMPLATE_DIR', ROOT . "/pdfomera/");
 
 // add new keys from http://code.google.com/apis/maps/signup.html
 $google_map_api_keys = array(
-    'krillomera.se' => 'ABQIAAAAKzMyNmzHpI2ys7Y4yLCUKxTy4MN0sW6gGuXvGNy8gkPzTfAzNBTX7HXHVNDeZ9bpiBeeIiqjxGc89A',
+  'krillomera.se' => 'ABQIAAAAKzMyNmzHpI2ys7Y4yLCUKxTy4MN0sW6gGuXvGNy8gkPzTfAzNBTX7HXHVNDeZ9bpiBeeIiqjxGc89A',
 	'testomera.se' => 'ABQIAAAANKJiM3KX0RgwW7CohhxtexTMcDzwyi0Hm9IHdH_sNWT7RCXriBRqeHrTLsDwDJNVmStXOp1zogUnyA',
 	'trunkomera.se' => 'ABQIAAAAuMDzylsCMpa8xNliwARAcRT_kyFNl-ka9r_oTqT-uZF8Air7lxStmrTx98iSJewQi9Wz9HZj-dLTtQ',
 	'localhost' => 'ABQIAAAAuMDzylsCMpa8xNliwARAcRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT83aaz0LC6xlEaulYzjESpV-HB4Q',
@@ -72,9 +71,8 @@ if (isset($google_map_api_keys[$_SERVER['HTTP_HOST']])) {
 define('FTP_HOST', 'CONF_FTP_HOST');
 define('FTP_USER', 'CONF_FTP_USER');
 define('FTP_PASS', 'CONF_FTP_PASS');
-define('FORETAGSFIL_REMOTE_PATH', "/allers/Motiomera_test");
-define('FORETAGSFIL_LOCAL_PATH', "/var/www/krillomera/postpac/order_files");
-
+define('FORETAGSFIL_REMOTE_PATH', "CONF_FTP_REMOTE_PATH");
+define('FORETAGSFIL_LOCAL_PATH', "CONF_FTP_LOCAL_PATH");
 
 
 //MSN settings

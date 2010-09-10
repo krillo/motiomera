@@ -1,51 +1,36 @@
 <?php
-/**
-* Class and Function List:
-* Function list:
-* - __construct()
-* - getRssAsArray()
-* - isRss()
-* - isAtom()
-* - getRssFlow()
-* - fetchFront()
-* - refreshCache()
-* Classes list:
-* - RSSHandler
-* - RSSHandlerException extends Exception
-*/
 
-class RSSHandler
-{
-	const RSS_URL = "http://www.allersforlag.se/Templates/rss20____51287.aspx";
+/**
+ * This class handles Rss
+ *
+ * Felkoder
+ * -1 Kan inte instansiera klass
+ * -2 RSS-filen kunde inte läsas
+ * -3 Cache-filen är inte skrivbar
+ */
+class RSSHandler{
+	//const RSS_URL = "http://www.allersforlag.se/Templates/rss20____51287.aspx";
+  const RSS_URL = "http://mabra.com/feed";
 	const CACHE_PATH = "/files/rsscache";
 	const CRON_PATH = "/cron";
 	const IMG_WIDTH = 126;
 	const IMG_HEIGHT = 95;
 	const MAX_ARTICLES = 3;
 
-	// Felkoder
-	// -1 Kan inte instansiera klass
-
-	// -2 RSS-filen kunde inte läsas
-
-	// -3 Cache-filen är inte skrivbar
 
 	
-	public function __construct()
-	{
+	public function __construct(){
 		throw new RSSHandlerException("Kan inte instansiera klass", -1);
 	}
+
+
 	/**
 	 * Function getLatestRowsInRss
-	 *
 	 * Gets the latest rows from rss
-	 *
 	 * Example:
 	 *      getLatestRowsInRss  ( http://motiomera.se/rss.xml )
-	 */
-	
-	public static function getRssAsArray($url, $amount = 2)
-	{
+	 */	
+	public static function getRssAsArray($url, $amount = 2){
 		$file = self::getRssFlow($url);
 		
 		if (!self::isRss($file)) {
@@ -83,18 +68,15 @@ class RSSHandler
 		}
 		return $xml;
 	}
+
+
 	/**
 	 * Function isRss
-	 *
 	 * Checks if xml=rss2.0
-	 *
 	 * Example:
 	 *      isRss( http://motiomera.se/rss.xml )
-	 */
-	
-	public function isRss($feedxml)
-	{
-		
+	 */	
+	public function isRss($feedxml){
 		if (!empty($feedxml)) {
 			try {
 				$feed = @new SimpleXMLElement($feedxml);
@@ -111,17 +93,16 @@ class RSSHandler
 			return false;
 		}
 	}
+
+
 	/**
 	 * Function isAtom
-	 *
 	 * Checks if xml=atom
-	 *
 	 * Example:
 	 *      isRss( http://motiomera.se/rss.xml )
 	 */
 	
-	public static function isAtom($feedxml)
-	{
+	public static function isAtom($feedxml){
 		$feed = @new SimpleXMLElement($feedxml);
 		
 		if ($feed->entry) {
@@ -130,17 +111,14 @@ class RSSHandler
 			return false;
 		}
 	}
+
 	/**
 	 * Function getRssFlow
-	 *
 	 * Gets an rss flow
-	 *
 	 * Example:
 	 *      getRssFlow  ( 'http:/motiomera.se/rss.xml' )
 	 */
-	
-	public static function getRssFlow($url)
-	{
+	public static function getRssFlow($url){
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -150,9 +128,9 @@ class RSSHandler
 		curl_close($ch);
 		return $content;
 	}
-	
-	public static function fetchFront()
-	{
+
+
+	public static function fetchFront(){
 		global $SETTINGS;
 		$rss_cache = array();
 		
@@ -172,30 +150,51 @@ class RSSHandler
 		return $rss_cache;
 	}
 	
-	public static function refreshCache()
-	{
+
+  public static function refreshCache(){
+    Misc::logMotiomera("Start RSSHandler::refreshCache() ", 'info');
 		$rss = new lastRSS;
 		$rss->cache_dir = '';
 		$rss->cache_time = 0;
 		$rss->CDATA = "content";
-		
+
+    /*
 		if (file_exists(ROOT . self::CACHE_PATH . "/rss.php")) {
 			include (ROOT . self::CACHE_PATH . "/rss.php");
 		}
-		
+     */
+    
+     //krillo
+    echo "************* refreshCache lastRSS: ";
+    print_r($rss);
+
 		if ($rs = $rss->get(self::RSS_URL)) {
+
+           //krillo
+          echo "************* refreshCache : inne i loopen   if (rs = rss->get(self::RSS_URL) \n";
+
+
+
 			$cache = "<?php \n\n // Skapad " . date("Y-m-d H:i:s") . "\n\n" . '$rss_cache = array();' . "\n";
 			$i = 0;
-			foreach($rs["items"] as $row) {
-				
-				if ($i < self::MAX_ARTICLES) {
-					$tmp = split("<br>", $row["description"]);
 
-					//$tmp3 = split("<BR>", $tmp[1]);
+
+           //krillo
+          echo "************* refreshCache : param rs \n";
+          print_r($rs);
+
+
+			foreach($rs["items"] as $row) {
+				if ($i < self::MAX_ARTICLES) {
+
+          //krillo
+          echo "****************** refreshCache item $i loopen ****************\n";
+          print_r($row);
+
+
+					$tmp = split("<br>", $row["description"]);
 					$tmp2 = split('"', $tmp[1]);
 					$img = $tmp2[1];
-
-					//$img = str_replace(" ","%20",$img);
 					$tmpsource = array(
 						" ",
 						"å",
@@ -223,11 +222,13 @@ class RSSHandler
 					$cache.= '$rss_cache[' . $i . ']["img"] = "' . addslashes($img) . '";' . "\n";
 					$cache.= '$rss_cache[' . $i . ']["link"] = "' . (isset($row["link"]) ? $row["link"] : 'default.html') . '";' . "\n";
 
-					//echo rawurlencode($img).'<br>';
+          //krillo
+					echo "rawurlencode(img): " . rawurlencode($img).'<br>';
 					
 					if (!isset($rss_cache) || $img != $rss_cache[$i]["img"]) { // hämta bild
 
-						//echo "hämta bild";
+            //krillo
+						echo "hämta bild";
 
 						
 						if ($f = curl_init($img)) {
@@ -253,15 +254,20 @@ class RSSHandler
 			$cache.= "?>";
 			
 			if (!$file = @fopen(ROOT . self::CACHE_PATH . "/rss.php", 'w')) {
+        Misc::logMotiomera("Cache-filen is not writable ", 'error');
 				throw new RSSHandlerException("Cache-filen är inte skrivbar", -3);
 			}
 			fwrite($file, $cache);
 			fclose($file);
-		}
+		} else {
+      Misc::logMotiomera("Could not get the RSS from " . self::RSS_URL , 'error');
+    }
+    Misc::logMotiomera("End RSSHandler::refreshCache() ", 'info');
 	}
+  
 }
 
-class RSSHandlerException extends Exception
-{
+class RSSHandlerException extends Exception{
 }
+
 ?>

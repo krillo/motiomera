@@ -340,7 +340,7 @@ class Order extends Mobject
    * Changes Krillo 090712
    */ 
 	public static function hamtaNyaKundnummer(){
-		echo date("Y-m-d H:i:s ") . "************ Get customer numbers from AS400, orders are lifted to status 30 ************ \n"; 
+    Misc::logMotiomera("Start: Order::hamtaNyaKundnummer(), Get customer numbers from AS400, orders are lifted to status 30", 'info');
 		global $db;
 		$sql = "SELECT id FROM " . self::TABLE . " WHERE typ = 'foretag' AND (kundnummer IS NULL OR kundnummer=1) AND orderId <> '' AND orderStatus = 20";
 		$ordrar = Order::listByIds($db->valuesAsArray($sql));		
@@ -352,11 +352,12 @@ class Order extends Mobject
 				$order->commit();
 				$order->getForetag()->setKundnummer($kundnummer);
 				$order->getForetag()->commit();
-				echo " OK - fetched customerId: " . $kundnummer . ", order_id: ". $order->getOrderId() .", foretag:  " . $order->getForetag()->getCompanyName() ."\n";
+        Misc::logMotiomera("fetched customerId: " . $kundnummer . ", order_id: ". $order->getOrderId() .", foretag:  " . $order->getForetag()->getCompanyName(), 'ok');
 			} else {
-				echo " ERROR - customerId is missing " . $kundnummer . ", order_id: ". $order->getOrderId() .", foretag: " . $order->getForetag()->getCompanyName() ."\n";
+        Misc::logMotiomera("customerId is missing " . $kundnummer . ", order_id: ". $order->getOrderId() .", foretag: " . $order->getForetag()->getCompanyName(), 'error');
 			}
 		}
+    Misc::logMotiomera("End: Order::hamtaNyaKundnummer()", 'info');
 	}
 
 
@@ -368,7 +369,7 @@ class Order extends Mobject
 	 * Added by krillo 100225
 	 */
 	public static function liftTillaggOrderStatus(){
-    echo date("Y-m-d H:i:s ") . "************ Copy customer numbers from parent orders to foretag_tillagg, status -> 30 ************\n"; 
+    Misc::logMotiomera("Start: Order::liftTillaggOrderStatus(), Copy customer numbers from parent orders to foretag_tillagg, status -> 30", 'info');
     global $db;
     $sql = "SELECT id, foretag_id FROM " . self::TABLE . " WHERE typ = 'foretag_tillagg' AND (kundnummer IS NULL OR kundnummer=1) AND orderId <> '' AND orderStatus = 20";
     $ordrar = Order::listByIds($db->valuesAsArray($sql));   
@@ -381,14 +382,15 @@ class Order extends Mobject
           $order->setKundnummer($kundnummer);
           $order->setOrderStatus(self::ORDERSTATUS_CUST_NO);
           $order->commit();
-          echo date("Y-m-d H:i:s ") . " OK - Tillaggsorder -> status 30, foretag: " . $order->getForetag()->getCompanyName(). ", order_id: ". $order->getOrderId() .",  CustomerId: " . $kundnummer . "\n";
+          Misc::logMotiomera("Tillaggsorder -> status 30, foretag: " . $order->getForetag()->getCompanyName(). ", order_id: ". $order->getOrderId() .",  CustomerId: " . $kundnummer, 'ok');
         }else{
-        	echo date("Y-m-d H:i:s ") . " NOTICE - Customer nbr missing for: " . $order->getForetag()->getCompanyName(). ", order_id: ". $order->getOrderId() ."\n";
+          Misc::logMotiomera("Customer nbr missing for: " . $order->getForetag()->getCompanyName(). ", order_id: ". $order->getOrderId(), 'WARNING');
         }
       }catch(Exception $e){
-      	echo date("Y-m-d H:i:s ") . " ERROR - problems with order_id: ". $order->getOrderId() ."\n";
+        Misc::logMotiomera("Problems with order_id: ". $order->getOrderId() , 'error');
       }
     }
+    Misc::logMotiomera("End: Order::liftTillaggOrderStatus()", 'info');
   }
 	
 		

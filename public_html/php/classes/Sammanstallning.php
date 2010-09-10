@@ -29,6 +29,10 @@ class Sammanstallning
 
 
 
+    public static function krillo(){
+      echo date('m:i') . " Sammanstallning::krillo - executing \n";
+    }
+
 
 /**
  * this function iterates all users and calculates if a pokal is deserved.
@@ -54,7 +58,7 @@ class Sammanstallning
     $medlemmar = Medlem::listAll();    
     //$medlemmar = Medlem::loadById(6568);
     //$medlemmar = array($medlemmar);    
-    Misc::logMotiomera("Start pokal batch, ". sizeof($medlemmar). " members to run throuh", 'info');
+    Misc::logMotiomera("Start: Sammanstallning::sammanstallPokaler(), ". sizeof($medlemmar). " members to run throuh", 'info');
     foreach($medlemmar as $medlem) {
       $nbr++;
       echo $nbr . ' - medlem: ' . $medlem->getId() .' '. $medlem->getANamn() . "\n";
@@ -104,8 +108,8 @@ class Sammanstallning
         Misc::logMotiomera("Pokal batch, ". $nbr ." members to run throuh, medlem: ". $medlem->getId() ." ". $medlem->getANamn(), 'ERROR');
         Misc::logMotiomera($e);
      }
-     
-   }  
+   }
+   Misc::logMotiomera("End: Sammanstallning::sammanstallPokaler() ", 'info');
   }
 
 
@@ -152,13 +156,14 @@ class Sammanstallning
     }else{
       $weekArray = JDate::addWeeks(-1);
     }
-    Misc::logMotiomera("Start medalj batch, ". $weekArray['year'].", week ". $weekArray['week_number'], 'INFO');
+    Misc::logMotiomera("Start: Sammanstallning::sammanstallMedaljer() , year: ". $weekArray['year'].", week: ". $weekArray['week_number'], 'INFO');
     $medalj = null;
     $i = 0;
     $medlemmar = Medlem::listAll();
     //$medlemmar = Medlem::loadById(6568);
     //$medlemmar = array($medlemmar);
     //print_r($weekArray);
+    Misc::logMotiomera(count($medlemmar) ." of members to itterate for new medals " , 'INFO');
     foreach($medlemmar as $medlem) {
       $steg = $medlem->getStegTotal($weekArray['monday']  , $weekArray['sunday'] );
       if ($steg >= self::MEDALJ_GULD_NIVA){
@@ -175,7 +180,8 @@ class Sammanstallning
         self::nyMedalj($medlem, $medalj, $weekArray['year'], $weekArray['week_number'], $steg, $i);
       }
       $medalj = null;
-    }	
+    }
+    Misc::logMotiomera("End: Sammanstallning::sammanstallMedaljer()" , 'INFO');
   }
 
 	

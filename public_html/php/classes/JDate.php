@@ -69,11 +69,12 @@ class JDate {
   public static function addWeeks($i, $date=false) {
     if (!$date) {
       $udate = time();
-    }
-    if (is_int($date)) {
-      $udate = $date;
-    } else{
-      $udate = strtotime($date);
+    }else{
+      if (is_int($date)) {
+        $udate = $date;
+      } else{
+        $udate = strtotime($date);
+      }
     }
     if($i > 0 ){
       $i = '+'.$i;
@@ -94,11 +95,12 @@ class JDate {
   public static function addDays($i, $date=false){
     if (!$date) {
       $udate = time();
-    }
-    if (is_int($date)) {
-      $udate = $date;
     }else{
-      $udate = strtotime($date);
+      if (is_int($date)) {
+        $udate = $date;
+      }else{
+        $udate = strtotime($date);
+      }
     }
     if($i > 0 ){
       $i = '+'.$i;
