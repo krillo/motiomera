@@ -46,7 +46,7 @@ define('KOMMUN_IMAGES_PATH', ROOT . "/files/kommunbilder");
 define('FOTOALBUM_PATH', ROOT . "/files/bilder");
 define('TAB_BOX_TABROOT', ROOT . "/tabroot");
 define('EMAIL_SEND_LOG_FILE', ROOT . "/../log/email.log");
-define('LOG_DIR', ROOT . "/../log");
+define('LOG_DIR', ROOT . "/../shared/log");
 define('PDF_TEMPLATE_DIR', ROOT . "/pdfomera/");
 
 
