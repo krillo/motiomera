@@ -7,7 +7,7 @@ $SETTINGS["kontakt"] = "mabrasupport@aller.se"; // Adressen dit formulärsmail s
 $SETTINGS["debug_mail"] = array("kristian.erendi@aller.se"); //Adressen dit debug mail skickas till om den är aktiv ex: array("mail1","mail2");
 $SETTINGS["rapport_mail"] = "CONF_REPORT_MAIL";
 $SETTINGS["reply_to"] = "noreply motiomera <noreply@motiomera.se>"; // All bounces will land here
-$SETTINGS["url"] = "CONF_MOTIOMERA_URL";
+$SETTINGS["url"] = "http//CONF_MOTIOMERA_URL";
 $SETTINGS["UPPSLAG_URL"] = "http://www.allersforlag.se/Sites/Pren/Templates/Paymentgw____56389.aspx";
 $SETTINGS["KUNDNUMMER_URL"] = "http://www.allersforlag.se/Templates/UserService____60489.aspx?key=h3zp0x4qgs4k&Get=CustomerFromOrder&Orderid=";
 $SETTINGS["new_company_order_mail"] = array("kristian.erendi@aller.se", "krillo@gmail.com"); //Adressen dit debug mail skickas till om den är aktiv ex: array("mail1","mail2");
