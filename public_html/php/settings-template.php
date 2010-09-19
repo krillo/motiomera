@@ -13,6 +13,10 @@ $SETTINGS["KUNDNUMMER_URL"] = "http://www.allersforlag.se/Templates/UserService_
 $SETTINGS["new_company_order_mail"] = array("kristian.erendi@aller.se", "krillo@gmail.com"); //Adressen dit debug mail skickas till om den är aktiv ex: array("mail1","mail2");
 
 
+//deploy and file owners
+define('CAPISTRANO_DEPLOY', CONF_CAPISTRANO_DEPLOY);     //set to true if the code is deployed via capistrano
+define('FILE_OWNER', 'CONF_FILE_OWNER');                 //which user to chown to, only applied when CAPISTRANO_DEPLOY = true
+
 //MySQL
 $dbdb =	'CONF_SQL_DB';
 $dbhost = 'CONF_SQL_HOST';

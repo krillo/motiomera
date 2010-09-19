@@ -303,6 +303,7 @@ class Misc
   /**
    * All purpose logging to motiomera.log
    * Use levels: CRITICAL, DEBUG, ERROR, INFO, NOTICE, WARNING
+   * This file is used both by webserver and crontab, make sure that the file has correct owner (from settings file)
    *
    * @param string_type $msg
    * @param string $level
@@ -311,8 +312,10 @@ class Misc
   	$logFile = LOG_DIR."/motiomera.".date("y-m").".log";
     if(!file_exists($logFile)){
       touch($logFile);
-      chmod($logFile, 777);
-      chown($logFile, 'deploy');
+      if(CAPISTRANO_DEPLOY == true){
+        chmod($logFile, 0777);
+        chown($logFile, FILE_OWNER);
+      }
     }
     $msg = date("Y-m-d H:i:s") . " [". strtoupper($level) ."] ".$msg ."\n";
   	$fd = fopen($logFile, "a");
