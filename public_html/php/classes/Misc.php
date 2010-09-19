@@ -309,8 +309,12 @@ class Misc
    */
   public static function logMotiomera($msg, $level = ''){
   	$logFile = LOG_DIR."/motiomera.".date("y-m").".log";
-    echo "logMotiomera file -> " . $logFile;
-  	$msg = date("Y-m-d H:i:s") . " [". strtoupper($level) ."] ".$msg ."\n";
+    if(!file_exists($logFile)){
+      touch($logFile);
+      chmod($logFile, '777');
+      chown($logFile, 'deploy');
+    }
+    $msg = date("Y-m-d H:i:s") . " [". strtoupper($level) ."] ".$msg ."\n";
   	$fd = fopen($logFile, "a");
   	fwrite($fd, $msg);
   	fclose($fd);
