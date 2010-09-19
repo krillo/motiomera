@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-  define('ROOT', "/var/www/motiomera/public_html");
+  define('ROOT', "/var/www/motiomera/current/public_html");
   chdir(ROOT);
   require_once(ROOT ."/php/init.php");
 
