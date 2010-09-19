@@ -311,7 +311,7 @@ class Misc
   	$logFile = LOG_DIR."/motiomera.".date("y-m").".log";
     if(!file_exists($logFile)){
       touch($logFile);
-      chmod($logFile, '777');
+      chmod($logFile, 777);
       chown($logFile, 'deploy');
     }
     $msg = date("Y-m-d H:i:s") . " [". strtoupper($level) ."] ".$msg ."\n";
