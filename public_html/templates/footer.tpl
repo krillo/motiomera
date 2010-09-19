@@ -48,7 +48,7 @@
   {/if}
 {/if}
 
-</div>
+<!-- /div -->
 {if $DEBUG == true}
 Querycount: {$querycount}
 {/if}

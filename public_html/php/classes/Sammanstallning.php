@@ -42,7 +42,7 @@ class Sammanstallning
  * 3. if it is more than stop date (start + self::KVARTAL) - todays date is set as a new start date
  *
  * If a silver-pokal is deserved then the start date is still the same
- * If a gold-pokal is deserved then todays date is set as the new atart date
+ * If a gold-pokal is deserved then todays date is set as the new start date
  * 
  * This function should be run every morning as a batch
  *
@@ -55,13 +55,13 @@ class Sammanstallning
     $i = 0;
     $nbr = 0;
     $pokal = null;
-    $medlemmar = Medlem::listAll();    
+    $medlemmar = Medlem::listAll();
     //$medlemmar = Medlem::loadById(6568);
-    //$medlemmar = array($medlemmar);    
+    //$medlemmar = array($medlemmar);
     Misc::logMotiomera("Start: Sammanstallning::sammanstallPokaler(), ". sizeof($medlemmar). " members to run throuh", 'info');
     foreach($medlemmar as $medlem) {
       $nbr++;
-      echo $nbr . ' - medlem: ' . $medlem->getId() .' '. $medlem->getANamn() . "\n";
+      //echo $nbr . ' - medlem: ' . $medlem->getId() .' '. $medlem->getANamn() . "\n";
       try{
        if (!$medlem->getPokalStart()){
          //no start date, create one
@@ -75,35 +75,28 @@ class Sammanstallning
          //get existing start date
          $pokalStartDate = $medlem->getPokalStart();
        }
-       
-       //start and stop dates 
+
        $pokalStopDateArray = JDate::addDays(self::KVARTAL + 1, $pokalStartDate);  //one extra day slack on date
        if(time() > $pokalStopDateArray['date_unix']){
-         //pokal date expired, set todays date as a new startdate 
-         $pokalStartDate = $today;     
-         //echo 'too old pokalStartDate: ' . $pokalStartDate . "\n";
-       } 
-       
-       $medlem->setPokalStart($pokalStartDate);    
-       //count steg between start date and today      
-       $steg = $medlem->getStegTotal($pokalStartDate , $today);
-       //echo "$steg mellan $pokalStartDate och $today"."\n";
-       if ($steg >= self::POKAL_GULD_NIVA) {
-         $pokal = self::P_GULD;
-         $medlem->setPokalStart($today); //if gold then set start date to today
-         //echo "guld "."\n";
-       }else{ 
-         if ($steg >= self::POKAL_SILVER_NIVA) {
-           $pokal = self::P_SILVER;
-           //echo "silver "."\n";
-         }
-       }      
-       if($pokal!=null){
+        //pokal date expired, use this date to check if pokal is deserved and reset pokal start date
+        $steg = $medlem->getStegTotal($pokalStartDate , $today);
+        if ($steg >= self::POKAL_GULD_NIVA) {
+          $pokal = self::P_GULD;
+        }else{
+          if ($steg >= self::POKAL_SILVER_NIVA) {
+            $pokal = self::P_SILVER;
+          }
+          // no pokal deserved
+        }
+        if($pokal!=null){
          $i++;
          self::nyPokal($medlem, $pokal, $today, $steg, $i);
-       }
-       $pokal = null;
-       $medlem->commit();  //store possibly a new start date
+        }
+        $pokal = null;
+        $medlem->setPokalStart($today);
+        $medlem->commit();
+
+       } 
      } catch (Exception $e){
         Misc::logMotiomera("Pokal batch, ". $nbr ." members to run throuh, medlem: ". $medlem->getId() ." ". $medlem->getANamn(), 'ERROR');
         Misc::logMotiomera($e);
