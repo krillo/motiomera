@@ -1996,7 +1996,7 @@ table#alh_navtable
 	width: 5px;
 	background: url('/img/icons/AdressbokTabLeftSel.gif');
 }
-.mmTabBoxMid a: hover
+.mmTabBoxMid a:hover
 {
 	text-decoration: none;
 	color: #333;

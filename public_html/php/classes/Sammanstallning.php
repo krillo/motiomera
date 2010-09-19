@@ -67,7 +67,6 @@ class Sammanstallning
          //no start date, create one
          $sql = "SELECT datum FROM " . Steg::TABLE . " WHERE medlem_id = " . $medlem->getId() . " ORDER BY datum	 ASC LIMIT 1";
          $datum = $db->value($sql);
-         echo "datum från db: ". $datum . "\n";
          if ($datum != "") {
            $pokalStartDate = $datum;
          }
