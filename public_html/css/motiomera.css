@@ -11,7 +11,7 @@ a.highslide-full-expand
 	height: 34px;
 	margin: 0 10px 10px 0;
 }
-a: hover
+a:hover
 {
 	color: #333;
 	text-decoration: underline;
@@ -62,7 +62,7 @@ table td,table th
 	text-align: left;
 	vertical-align: top;
 }
-table#alh_navtable td a.alh_navtable_link: hover
+table#alh_navtable td a.alh_navtable_link:hover
 {
 	text-decoration: underline;
 }
@@ -159,7 +159,7 @@ table#alh_navtable
 	margin-left: 5px;
 	padding: 0;
 }
-#mmColumnMiddle a: hover
+#mmColumnMiddle a:hover
 {
 	color: #444;
 	text-decoration: underline;
@@ -219,7 +219,7 @@ table#alh_navtable
 	top: 262px;
 	padding-right: 7px;
 }
-#mmCommunityToolbar a,.mmWhite,.motiomera_kalender_selected: hover
+#mmCommunityToolbar a, .mmWhite, .motiomera_kalender_selected:hover
 {
 	color: #fff;
 }
@@ -377,6 +377,11 @@ table#alh_navtable
 	text-align: right;
 	margin: 13px 0 0 455px;
 }
+/*
+#username, #password{
+  length:40px;
+}
+*/
 #mmLogo
 {
 	width: 386px;
@@ -393,7 +398,7 @@ table#alh_navtable
 {
 	color: #888;
 }
-#mmMaBraLogo a: hover,#mmStegGrafikRapporteraSteg a: hover,#mmStegGrafikDetaljeradRapport a: hover,.motiomera_kalender_week_row td a: hover
+#mmMaBraLogo a:hover,#mmStegGrafikRapporteraSteg a:hover,#mmStegGrafikDetaljeradRapport a:hover,.motiomera_kalender_week_row td a:hover
 {
 	text-decoration: none;
 }
@@ -402,7 +407,7 @@ table#alh_navtable
 	width: 740px;
 	height: 35px;
 	position: absolute;
-	font-family: trebuchet ms, Tahoma, Trebuchet MS, Arial, Helvetica, sans-serif;
+	font-family: "trebuchet ms", Tahoma, Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	font-style: italic;
 	color: #7e7e7e;
@@ -458,7 +463,7 @@ table#alh_navtable
 	color: #5aa41f;
 	text-decoration: none;
 }
-#mmMenuTop a: hover
+#mmMenuTop a:hover
 {
 	color: #5c8040;
 	text-decoration: underline;
@@ -936,7 +941,7 @@ table#alh_navtable
 	width: 40px;
 	background-position: -50px 0;
 }
-.controlbar a: hover
+.controlbar a:hover
 {
 	background-image: url(/js/highslide/graphics/controlbar4-hover.gif);
 }
@@ -1012,7 +1017,7 @@ table#alh_navtable
 {
 	background: #FFF;
 }
-.highslide: hover img,.highslide-image
+.highslide:hover img,.highslide-image
 {
 	border: 2px solid #FFF;
 }
@@ -1433,7 +1438,7 @@ table#alh_navtable
 {
 	font-size: 90%;
 }
-.mmFontWhite a: hover
+.mmFontWhite a:hover
 {
 	color: #FFF;
 	text-decoration: underline;
@@ -1607,7 +1612,7 @@ table#alh_navtable
 	width: 280px;
 	padding: 0;
 }
-.mmLinkGreen a: hover,.mmLinkGreen a: visited
+.mmLinkGreen a:hover,.mmLinkGreen a:visited
 {
 	color: #5aa41f;
 	text-decoration: underline;
@@ -1630,10 +1635,11 @@ table#alh_navtable
 {
 	visibility: hidden;
 }
-.mmLoggaInTitle
+.mmLoggaInTitle, .mmLoggaInCheckbox
 {
 	padding-top: 4px;
 	text-align: right;
+  white-space:nowrap;
 }
 .mmMailCellGray1
 {
@@ -2054,7 +2060,7 @@ table#alh_navtable
 	text-align: right;
 }
 .mmStegOverText{
-	text-align:left;float:left;height:20px;width:595px;"
+	text-align:left;float:left;height:20px;width:595px;
 }
 
 #mmFinishedComp{float:left;width:595px;margin-bottom:10px;}
@@ -2062,7 +2068,7 @@ table#alh_navtable
 
 .mmTextField
 {
-	font-family: Arial, Verdana, Trebuchet ms, Tahoma, Helvetica;
+	font-family: Arial, Verdana, "Trebuchet ms", Tahoma, Helvetica;
 	font-size: 11px;
 }
 .mmTilltradeTd
@@ -2555,7 +2561,7 @@ td.number
 	background: url(/img/halloffame/mmHofBg.gif) repeat-y;
 	border: 0;
 	padding: 0 10px;	
-	width 182px !important;
+	width: 182px !important;
 }
 .hallOfFame h3
 {
