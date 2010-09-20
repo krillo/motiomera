@@ -142,38 +142,45 @@ class Sammanstallning
  * @return void
  * @author Aller Internet, Kristian Erendi
  */
-  public static function sammanstallMedaljer($year=null, $week=null){
-    if($year!=null && $week!=null){
-      $weekArray = JDate::getDateFromWeek($year, $week);
-    }else{
-      $weekArray = JDate::addWeeks(-1);
-    }
-    Misc::logMotiomera("Start: Sammanstallning::sammanstallMedaljer() , year: ". $weekArray['year'].", week: ". $weekArray['week_number'], 'INFO');
-    $medalj = null;
+  public static function sammanstallMedaljer($year=null, $week=null) {
     $i = 0;
-    $medlemmar = Medlem::listAll();
-    //$medlemmar = Medlem::loadById(6568);
-    //$medlemmar = array($medlemmar);
-    //print_r($weekArray);
-    Misc::logMotiomera(count($medlemmar) ." of members to itterate for new medals " , 'INFO');
-    foreach($medlemmar as $medlem) {
-      $steg = $medlem->getStegTotal($weekArray['monday']  , $weekArray['sunday'] );
-      if ($steg >= self::MEDALJ_GULD_NIVA){
-        $medalj = self::M_GULD;
-      }else{ 
-        if ($steg >= self::MEDALJ_SILVER_NIVA){
-          $medalj = self::M_SILVER;
-         }
+    $nbr = 0;
+    $medalj = null;
+    try {
+      if ($year != null && $week != null) {
+        $weekArray = JDate::getDateFromWeek($year, $week);
+      } else {
+        $weekArray = JDate::addWeeks(-1);
       }
-      //echo '$steg: ' . $steg . "\n" .'$medalj: ' . $medalj . "\n" . '$medalj: ' . $medalj . "\n" . 'veckastart: ' . $weekArray['monday'] . "\n" . 'veckastop: ' . $weekArray['sunday'] . "\n";
-      //echo 'ar: ' . $weekArray['year'] . "\n" . 'vecka: ' . $weekArray['week_number'] . "\n";
-      if($medalj!=null){
-        $i++;
-        self::nyMedalj($medlem, $medalj, $weekArray['year'], $weekArray['week_number'], $steg, $i);
+      Misc::logMotiomera("Start: Sammanstallning::sammanstallMedaljer() , year: " . $weekArray['year'] . ", week: " . $weekArray['week_number'], 'INFO');
+      $medlemmar = Medlem::listAll();
+      //$medlemmar = Medlem::loadById(6568);
+      //$medlemmar = array($medlemmar);
+      //print_r($weekArray);
+      Misc::logMotiomera(count($medlemmar) . " of members to itterate for new medals ", 'INFO');
+      foreach ($medlemmar as $medlem) {
+        $nbr++;
+        $steg = $medlem->getStegTotal($weekArray['monday'], $weekArray['sunday']);
+        if ($steg >= self::MEDALJ_GULD_NIVA) {
+          $medalj = self::M_GULD;
+        } else {
+          if ($steg >= self::MEDALJ_SILVER_NIVA) {
+            $medalj = self::M_SILVER;
+          }
+        }
+        //echo '$steg: ' . $steg . "\n" .'$medalj: ' . $medalj . "\n" . '$medalj: ' . $medalj . "\n" . 'veckastart: ' . $weekArray['monday'] . "\n" . 'veckastop: ' . $weekArray['sunday'] . "\n";
+        //echo 'ar: ' . $weekArray['year'] . "\n" . 'vecka: ' . $weekArray['week_number'] . "\n";
+        if ($medalj != null) {
+          $i++;
+          self::nyMedalj($medlem, $medalj, $weekArray['year'], $weekArray['week_number'], $steg, $i);
+        }
+        $medalj = null;
       }
-      $medalj = null;
+    } catch (Exception $e) {
+      Misc::logMotiomera("Medalj batch, " . $nbr . " members to run throuh, medlem: " . $medlem->getId() . " " . $medlem->getANamn(), 'ERROR');
+      Misc::logMotiomera($e);
     }
-    Misc::logMotiomera("End: Sammanstallning::sammanstallMedaljer()" , 'INFO');
+    Misc::logMotiomera("End: Sammanstallning::sammanstallMedaljer()", 'INFO');
   }
 
 	
