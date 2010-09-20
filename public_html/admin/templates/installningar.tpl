@@ -48,4 +48,25 @@
 <br/>
 <br/>
 
+
+
+<h3>Hantera företagsfiler manuellt</h3>
+<p>Normalt hanteras detta varje natt av cronscript. Kör dem i tur och ordning och titta i logfilen att det har gått ok</p>
+<form action="/admin/actions/manuell_foretagsfiler.php?id={$ADMIN->getId()}" method="get">
+  <input type="hidden" name="action" value="kundnummer" />
+  <input type="submit" value="Hämta kundnummer från AS400" />
+</form>
+<form action="/admin/actions/manuell_foretagsfiler.php?id={$ADMIN->getId()}" method="get">
+  <input type="hidden" name="action" value="pdf" />
+  <input type="submit" value="Skapa pdf:er" />
+</form>
+<form action="/admin/actions/manuell_foretagsfiler.php?id={$ADMIN->getId()}" method="get">
+  <input type="hidden" name="action" value="ftp" />
+  <input type="submit" value="Lägg pdf:er på Postpacs ftp" />
+</form>
+<br/>
+<br/>
+<br/>
+
+
 </div>

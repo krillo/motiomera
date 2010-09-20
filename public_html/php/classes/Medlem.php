@@ -1967,7 +1967,21 @@ class Medlem extends Mobject
 		$sql = "SELECT count(*) FROM " . self::classToTable(get_class()) . " WHERE epost = '" . Security::secure_data($epost) . "' AND epostBekraftad = 1";
 		return ($db->value($sql) == "0") ? true : false;
 	}
-	
+
+  /**
+   * Get all member ids as an array
+   *
+   * @global <type> $db
+   * @return array  all member ids
+   */
+  public static function listAllIds(){
+		global $db;
+		$sql = "SELECT id FROM " . self::TABLE;
+		$ids = $db->valuesAsArray($sql);
+		return $ids;
+	}
+
+
 	public static function listAll()
 	{
 		$arr = parent::lister(get_class() , null, null, "aNamn");
