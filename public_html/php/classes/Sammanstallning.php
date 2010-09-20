@@ -157,7 +157,7 @@ class Sammanstallning
       //$medlemmar = Medlem::loadById(6568);
       //$medlemmar = array($medlemmar);
       //print_r($weekArray);
-      Misc::logMotiomera(count($medlemmar) . " of members to itterate for new medals ", 'INFO');
+      Misc::logMotiomera(sizeof($medlemmar) . " of members to itterate for new medals ", 'INFO');
       foreach ($medlemmar as $medlem) {
         $nbr++;
         $steg = $medlem->getStegTotal($weekArray['monday'], $weekArray['sunday']);
