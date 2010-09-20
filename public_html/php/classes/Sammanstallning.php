@@ -153,10 +153,10 @@ class Sammanstallning
         $weekArray = JDate::addWeeks(-1);
       }
       Misc::logMotiomera("Start: Sammanstallning::sammanstallMedaljer() , year: " . $weekArray['year'] . ", week: " . $weekArray['week_number'], 'INFO');
-      $medlemmar = Medlem::listAll();
-      //$medlemmar = Medlem::loadById(6568);
-      //$medlemmar = array($medlemmar);
-      //print_r($weekArray);
+      //$medlemmar = Medlem::listAll();
+      $medlemmar = Medlem::loadById(6568);
+      $medlemmar = array($medlemmar);
+      print_r($weekArray);
       Misc::logMotiomera(sizeof($medlemmar) . " of members to itterate for new medals ", 'INFO');
       foreach ($medlemmar as $medlem) {
         $nbr++;
