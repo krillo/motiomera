@@ -56,8 +56,12 @@
 		<tr>
 			<td></td>
 			<td>
-				<input name="startdatumRadio" id="mmForetagStartdatumRadio3" type="radio" value="2010-09-27">
-				Den stora hösttävlingen 27 september
+				<input name="startdatumRadio" id="mmForetagStartdatumRadio3" type="radio" value="2010-09-27" disabled>
+				<span style="text-decoration: line-through;">Den stora hösttävlingen 27 september</span>
+				<br/>
+				<span style="color: #f00; font-weight:bold;">
+				   Anmälan till hösttävlingen är nu stängd. Det är dock möjligt att välja annat startdatum. Välkomna!
+				</span>
 			</td>
 		</tr>
 		<tr>
