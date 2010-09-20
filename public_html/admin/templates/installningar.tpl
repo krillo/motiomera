@@ -25,12 +25,18 @@
 
 <form action="/admin/actions/manuell_medalj.php?id={$ADMIN->getId()}" method="get">
   <h3>Batcha ut medaljer till alla melemmar mellan specade veckor</h3>
-  <p>Detta görs normalt av cronscript varje vecka, men om något har gått fel kan man göra detta retroaktivt. Kör denna bara en vecka åt gången och då ingen är inne på sajten för denna är så tung att den hänger sajten</p>  
-  År: <input type="text" name="year" value="" /><br/>
-  från och med, startvecka: <input type="text" name="weekstart" value="" /><br/>
-  till och med, slutvecka: <input type="text" name="weekstop" value="" /><br/>
-  <input type="submit" value="Skapa medaljer" />
+
+
+  <p style="text-decoration: line-through;">Detta görs normalt av cronscript varje vecka, men om något har gått fel kan man göra detta retroaktivt. Kör denna bara en vecka åt gången och då ingen är inne på sajten för denna är så tung att den hänger sajten</p>
+  År: <input type="text" name="year" value="" disabled /><br/>
+  från och med, startvecka: <input type="text" name="weekstart" value="" disabled /><br/>
+  till och med, slutvecka: <input type="text" name="weekstop" value="" disabled /><br/>
+  <input type="submit" value="Skapa medaljer" disabled />
 </form>
+<p>Denna php timar ut så detta måste köras från command line på servern, en vecka i taget. Såhär: <br/>
+cd /var/www/motiomera/current/bin <br/>
+php medal_from_cmd.php 2010 24
+</p>
 <br/>
 <br/>
 <br/>
