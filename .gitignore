@@ -13,3 +13,10 @@ public_html/files/kommunbilder/*
 public_html/files/lagnamn/*
 public_html/templates_c/*
 public_html/php/libs/smarty/cache/*
+public_html/files/rsscache/0.jpg
+public_html/files/rsscache/1.jpg
+public_html/files/rsscache/2.jpg
+public_html/files/rsscache/3.jpg
+public_html/files/rsscache/motiofeed.txt
+public_html/files/rsscache/temp.jpg
+public_html/files/rsscache/temp_resized.jpg
