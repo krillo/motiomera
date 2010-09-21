@@ -227,15 +227,24 @@
 				</ul>
 			</div>
 			<div class="mmBoxLeft">
-				{*}<span class="mmh2 mmOrange">SENASTE NYTT!</span><br />
-				<img src="/img/icons/Mikrofon.gif" alt="Senaste nytt" />
-				Med MotioMera kan du nu l&auml;gga upp dina egna bilder
-				och dela med de andra medlemmarna. <br />
-				motioMERA - mer personligt!<br />
-				<div class="mmTextAlignRight">
-					<a href="default.html">L&auml;s mer h&auml;r</a><a href="default.html"><img src="/img/icons/ArrowCircleOrange.gif" alt="" /></a>
-				</div>
-				{*}
+      {if isset($USER)}
+        {* puff from rss feed *}
+        <div class="">
+          <span class="mmh2 mmOrange rss-sidebar">mabra.com</span>
+          {foreach from=$rss item=puff name=rss}
+            {if  $smarty.foreach.rss.iteration < 2 }
+              <div class="mmArticleNarrowStart rss-sidebar">
+                {$puff.imageurl}
+                <span class="mmh2 mmBlue">{$puff.title}</span><br />
+                {$puff.excerpt}
+                <div class="mmTextAlignRight">
+                  <a href="{$puff.link}" target="_blank">Läs mer <img src="/img/icons/ArrowsBlue.gif" class="mmVerticalAlignMiddle" style="padding-top:4px;" alt="Läs mer" /></a>
+                </div>
+              </div>
+            {/if}
+          {/foreach}
+        </div>
+      {/if}
 			</div>
 		</div>
 		{/if}

@@ -20,23 +20,19 @@
 
 	</div>
 </div>
-
 			<div class="mmGrayLineMiddle"></div>
 			<div id="mmBlueBoxMiddleWide"><div id="mmBlueBoxMiddleWideText">Senaste nytt från mabra.com:</div></div>
 			{foreach from=$rss item=puff name=rss}
-			
-			<div class="mmArticleNarrowStart{if $smarty.foreach.rss.iteration < 3} mmMarginRight{/if}">
-
-				<img src="/files/rsscache/{$smarty.foreach.rss.iteration-1}.jpg" alt="MotioMera" />
-				<span class="mmh2 mmBlue">{$puff.title}</span><br />
-				{$puff.description}
-
-				<div class="mmTextAlignRight"><a href="{$puff.link}">L&auml;s mer</a> <a href="default.html"><img src="img/icons/ArrowsBlue.gif" class="mmVerticalAlignMiddle" alt="Läs mer" /></a></div>
-
-			</div>
-				
-			
+        {if  $smarty.foreach.rss.iteration > 1 }
+          <div class="mmArticleNarrowStart{if $smarty.foreach.rss.iteration < 4} mmMarginRight{/if}">
+            {$puff.imageurl}
+            <span class="mmh2 mmBlue">{$puff.title}</span><br />
+            {$puff.excerpt}
+            <div class="mmTextAlignRight"><a href="{$puff.link}" target="_blank">L&auml;s mer <img src="img/icons/ArrowsBlue.gif" class="mmVerticalAlignMiddle" alt="Läs mer" /></a></div>
+          </div>
+        {/if}
 			{/foreach}
+
 							<div class="mmClearBoth"></div>
 							<div class="mmGrayLineMiddle"></div>
 								{$texteditor_nm->getTexten()}

@@ -31,7 +31,7 @@ class MMSmarty extends Smarty
 		$this->config_dir = ROOT . '/php/libs/smarty/configs';
 		$this->cache_dir = ROOT . '/php/libs/smarty/cache';
 
-		// Visar t.ex. trunkomera.se istället för MotioMera, om så är fallet.
+		// Visar t.ex. trunkomera.se istï¿½llet fï¿½r MotioMera, om sï¿½ ï¿½r fallet.
 		
 		if ($_SERVER['HTTP_HOST'] != 'motiomera.se'):
 			$this->assign("pagename", ucfirst($_SERVER['HTTP_HOST']));
@@ -56,6 +56,15 @@ class MMSmarty extends Smarty
 		$this->assign("DEBUG", DEBUG);
 		$this->contentCacheLifetime = $cacheLiftime;
 		$this->compile_check = true;
+
+    //the rss flow from mabra.com
+    $file = ROOT . "/files/rsscache/motiofeed.txt";
+    $fh = fopen($file, "r") or die("cant open file");
+    $smotiofeed = file_get_contents($file);
+    fclose($fh);
+    $rss = unserialize($smotiofeed);
+    $this->assign("rss", $rss);
+
 		
 		if ($cache) {
 			$this->caching = 2;

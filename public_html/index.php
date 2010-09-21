@@ -22,8 +22,15 @@ $smarty->assign("texteditor_nm", $texteditor);
 $namn = "Startsidan under menyn";
 $texteditor = TextEditor::loadByNamn($namn);
 $smarty->assign("texteditor_um", $texteditor);
-$rss = RSSHandler::fetchFront();
-$smarty->assign("rss", $rss);	
+
+//the rss flow from mabra.com
+$file = ROOT . "/files/rsscache/motiofeed.txt";
+$fh = fopen($file, "r") or die("cant open file");
+$smotiofeed = file_get_contents($file);
+fclose($fh);
+$rss = unserialize($smotiofeed);
+$smarty->assign("rss", $rss);
+
 // throw new Exception("testar");
 // echo Medlem::loadById(12431243);
 $smarty->display("index.tpl");
