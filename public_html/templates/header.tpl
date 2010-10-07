@@ -226,25 +226,23 @@
 
 				</ul>
 			</div>
-			<div class="mmBoxLeft">
       {if isset($USER)}
         {* puff from rss feed *}
-        <div class="">
-          <span class="mmh2 mmOrange rss-sidebar">mabra.com</span>
+        <div class="rss-sidebar">
           {foreach from=$rss item=puff name=rss}
             {if  $smarty.foreach.rss.iteration < 2 }
-              <div class="mmArticleNarrowStart rss-sidebar">
+                <span class="mmh2 mmOrange rss-sidebar">mabra.com</span>
+                <div style="float:left;" class="">
                 {$puff.imageurl}
+                </div>
                 <span class="mmh2 mmBlue">{$puff.title}</span><br />
                 {$puff.excerpt}
                 <div class="mmTextAlignRight">
                   <a href="{$puff.link}" target="_blank">Läs mer <img src="/img/icons/ArrowsBlue.gif" class="mmVerticalAlignMiddle" style="padding-top:4px;" alt="Läs mer" /></a>
                 </div>
-              </div>
             {/if}
           {/foreach}
         </div>
       {/if}
-			</div>
 		</div>
 		{/if}
