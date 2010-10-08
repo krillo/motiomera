@@ -27,3 +27,23 @@ pageTracker._trackPageview();
   <div><img src="//secure-dk.imrworldwide.com/cgi-bin/m?ci=aller-mabra-se&amp;cg=0&amp;cc=1" alt=""/></div>
 </noscript>
 <!-- END Nielsen Online SiteCensus V5.3 -->
+
+<!-- chartbeat tag -->
+<script type="text/javascript">
+var _sf_async_config={uid:2592,domain:"motiomera.se"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://s3.amazonaws.com/" : "http://") +
+      "static.chartbeat.com/js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+</script>
