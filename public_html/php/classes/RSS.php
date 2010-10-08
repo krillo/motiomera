@@ -10,7 +10,7 @@
  * @author Kristian Erendi 10-09-29
  */
 class RSS {
-  const RSS_URL = "http://mabra.com/feed";
+  const RSS_URL = "http://mabra.com/feed/";
   const CACHE_PATH = "/files/rsscache";
   const IMG_WIDTH = 126;
   const IMG_HEIGHT = 95;
