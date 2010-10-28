@@ -1,7 +1,7 @@
 <?php
 require $_SERVER["DOCUMENT_ROOT"] . "/php/init.php";
 // die('i save');
-switch($_GET["table"]){
+switch($_REQUEST["table"]){
 	case 'fastrutt':
 		if(isset($USER)&&!empty($_GET['rid'])){		
 			$USER->addStaticRouteToUser($_GET['rid']);			
@@ -9,6 +9,30 @@ switch($_GET["table"]){
 			$USER->removeStaticRouteForUser($_GET['mid']);		
 		}
 		break;
+  case "device":
+    try{
+      $status = Medlem::loggaIn(trim($_REQUEST["mem"]),trim($_REQUEST["in"]));
+      if(!isset($status) || !$status) {
+        throw new UserException("Felaktig inloggning", $felInloggString);
+      }
+      $USER = Medlem::getInloggad();
+      $USER->saveBrowserAndIp();
+
+      $a = Aktivitet::loadById($_REQUEST["steg0_aid"]);
+      new Steg($USER, $a, date($_REQUEST["steg0_datum"] . " H:i:s"), $_REQUEST["steg0_antal"]);
+      header("Location: /pages/device_result.php", true, '301');
+      exit;
+    }catch(MedlemException $e){
+      header("Location: /pages/device_result.php", true, '400');
+      exit;
+      //throw new UserException("Felaktig inloggning", $felInloggString);
+    }
+
+
+
+
+
+  break;
 	case "grupp":
 		if(!empty($_POST['publik'])){
 			$publik = $_POST['publik'];
