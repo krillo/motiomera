@@ -214,7 +214,7 @@ class Grupp extends Mobject
 
 För att bli medlem i MotioMera och gå med i klubben, klicka på länken nedan eller kopiera den och klistra in den i adressfältet i din webbläsare:
 
-" . substr($SETTINGS["url"], 0, -1) . $urlHandler->getUrl("Medlem", URL_INVITE, $this->encodeInvite($code));
+" . $SETTINGS["url"] . $urlHandler->getUrl("Medlem", URL_INVITE, $this->encodeInvite($code));
 
 		/*$body = $medlemLink . " har bjudin in dig till att gå med i sin klubb, " . $this->getNamn() . " som startades ". date("Y-m-d") .'.
 		
