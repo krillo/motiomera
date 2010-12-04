@@ -26,7 +26,7 @@
 		<tr>
 			<th  style="border-bottom:none;">Startdatum</th>					
 			<td  style="border-bottom:none;">
-				<input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2010-05-09" >
+				<input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2011-05-09" >
 				<span style="text-decoration: none;">Den stora vårtävlingen 9 maj </span>
 				<!-- span style="color: #f00; font-weight:bold;">
 				   Det är fortfarande möjligt att anmäla er till Vårtävlingen. Vi kan dock inte garantera att stegräknarna levereras till tävlingens startdatum. Det är även möjligt att välja annat startdatum nedan.
