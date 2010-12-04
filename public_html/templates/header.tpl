@@ -54,6 +54,7 @@
 
 			<div id="mmBannerSmall">
 				<div class="mmBannerSmallInside">
+        {*}
 				{if !NO_INTERNET}
 				<script type="text/javascript">
 				<!--
@@ -61,6 +62,7 @@
 				-->
 				</script>
 				{/if}
+        {*}
 				</div>
 			</div>
 		</div>

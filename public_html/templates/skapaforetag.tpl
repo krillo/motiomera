@@ -1,6 +1,6 @@
 <h1>{$pagetitle}</h1>
 
-<div id="infotext" style="position:absolute;left:530px;top:265px;border:2px solid;padding:6px;"> 
+<div id="infotext" style="position:absolute;left:530px;top:231px;border:2px solid;padding:6px;">
 <h3>TILLÄGGSBESTÄLLNING</h3>
 Är du redan kund och vill göra en<br/>tilläggsbeställning? Logga in på din<br/>administrationssida där du enkelt kan<br/>lägga till fler deltagare. <a href="/pages/foretaglogin.php">Klicka här</a>.
 </div>
@@ -22,12 +22,12 @@
 			<td>{mm_html_options name=kid options=$opt_kommuner}</td>
 		</tr>{*}
      
-     {*}   
+        
 		<tr>
 			<th  style="border-bottom:none;">Startdatum</th>					
 			<td  style="border-bottom:none;">
-				<input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2010-04-26" disabled>
-				<span style="text-decoration: line-through;">Den stora vårtävlingen 26 april </span> 
+				<input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2010-05-09" >
+				<span style="text-decoration: none;">Den stora vårtävlingen 9 maj </span>
 				<!-- span style="color: #f00; font-weight:bold;">
 				   Det är fortfarande möjligt att anmäla er till Vårtävlingen. Vi kan dock inte garantera att stegräknarna levereras till tävlingens startdatum. Det är även möjligt att välja annat startdatum nedan.
 				</span-->
@@ -35,12 +35,13 @@
 				   Anmälan till Vårtävlingen är nu stängd. Det är dock möjligt att välja annat startdatum nedan, samt att anmäla er till höstens tävling. Välkomna!
 				</span -->
 			</td>
-			{*}
+		
 			
 		</tr>
 		<tr>
 			<!--td  style=""></td-->
-			<th  style="border-bottom:none;">Startdatum</th>		
+			{*}<th  style="border-bottom:none;">Startdatum</th>{*}
+		  <th  style=""></th>
 			<td class="mmRawText" style="">
 				<input name="startdatumRadio" id="mmForetagStartdatumRadio2" type="radio" value="egetdatum"  checked>
 
@@ -53,6 +54,9 @@
 				</select>		
 			</td>		
 		</tr>
+
+
+    {*}
 		<tr>
 			<td></td>
 			<td>
@@ -64,6 +68,8 @@
 				</span>
 			</td>
 		</tr>
+    {*}
+
 		<tr>
 			<th style="border-bottom:none;">Antal deltagare</th>
 			<td>

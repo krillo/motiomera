@@ -116,7 +116,7 @@ table#alh_navtable
 #mmBannerArea
 {
 	width: 780px;
-	height: 140px;
+	height: 100px;
 }
 #mmBannerSmall .mmBannerSmallInside
 {
@@ -126,7 +126,7 @@ table#alh_navtable
 #mmBannerSmall
 {
 	width: 778px;
-	height: 43px;
+	height: 0px;
 	margin-left: 2px;
 	margin-top: 3px;
 }
