@@ -70,14 +70,24 @@
 		</tr>
     {*}
 
+    {*} exta camapign text{*}
+		<tr>
+      <td colspan="3" style="border-bottom:none;">
+        <span style="color:red;font-size:18px;">EXTRA! Beställ innan 11/3 och få 20% rabatt!</span>
+      </td>
+		</tr>
+
+
+
 		<tr>
 			<th style="border-bottom:none;">Antal deltagare</th>
 			<td>
 				<table border="0" cellpadding="0" cellspacing="0" class="mmKontotypTable">			
 					{foreach from=$campaignCodes item=details key=code name=codeLoop}
 					<tr style="border-bottom:none;">
-						<th{if $smarty.foreach.codeLoop.iteration eq count($campaignCodes)} class="mmBorderNone"{/if} style="border-bottom:none;">
-						    {*}<input type="radio" name="kontotyp" value="{$code}" /> {*}
+
+            {*}    removed for the 20% campaign - krillo
+						<th{if $smarty.foreach.codeLoop.iteration eq count($campaignCodes)} class="mmBorderNone"{/if} style="border-bottom:none;">						    
 						    <input type="hidden" name="$camparray[{$smarty.foreach.codeLoop.index}][kampanjkod]" value="{$code}" />						    
 			          <input type="text" name="$camparray[{$smarty.foreach.codeLoop.index}][antal]" size="4" maxlength="4" onblur="mm_krillo_foretag_uppdateraPriser(this.value, '{$code}');" />			          
 						    {$details.text} ({$details.pris}:-) 
@@ -85,6 +95,15 @@
 							    &nbsp;<a href="javascript:;" onclick="mm_rapportera_show_help({$details.popupid},{$details.popupwidth},{$details.popupheight},'topleft')">L&auml;s mer</a>
 						    {/if}
 						</th>
+            {*}
+
+						<th{if $smarty.foreach.codeLoop.iteration eq count($campaignCodes)} class="mmBorderNone"{/if} style="border-bottom:none;">
+                {*}<input type="radio" name="kontotyp" value="{$code}" / > {*}
+						    <input type="hidden" name="$camparray[{$smarty.foreach.codeLoop.index}][kampanjkod]" value="{$code}" />
+			          <input type="text" name="$camparray[{$smarty.foreach.codeLoop.index}][antal]" size="4" maxlength="4" onblur="mm_krillo_foretag_uppdateraPriser(this.value, '{$code}');" />
+						    {$details.text} <span style="color:red;">{$details.pris}kr</span> {$details.extra}
+						</th>
+
 						
 						{*}popupwidth,popupheight samt id hämtas från order.php classen{*}
 						<td{if $smarty.foreach.codeLoop.iteration eq count($campaignCodes)} class="mmBorderNone"{/if} style="border-bottom:none;">

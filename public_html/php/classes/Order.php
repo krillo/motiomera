@@ -129,14 +129,16 @@ class Order extends Mobject
     "RE03" => array(
       "typ" => "foretag",
       "text" => "5 veckors tävling <b>med</b> stegräknare",
-      "pris" => 289,
+      "extra" => "(ord. 289kr)",
+      "pris" => 231,
       "dagar" => 31,
       "popupid" => 22,
     ) ,
 	  "RE04" => array(
 			"typ" => "foretag",
 			"text" => "5 veckors tävling <b>utan</b> stegräknare",
-			"pris" => 159,
+      "extra" => "(ord. 159kr)",
+			"pris" => 127,
 			"dagar" => 31,
 			"popupid" => 21,
 		) ,
