@@ -165,8 +165,10 @@
 	</table>
 </form>    
 <br>
-<span  class="mmObs mmObsText">För beställning per telefon ring <!--  042-17 37 91 --> 
+<span  class="mmObs mmObsText">För beställning per telefon ring Marina<!--  042-17 37 91 -->
                                                                 <!-- 0705-17 35 95 --> 
                                                                 <!-- eller -->
-								042-444 30 25</span>
+								                                                <!--042-444 30 25 -->
+                                                                042-17 36 21
+                                                                </span>
 	
