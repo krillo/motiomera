@@ -36,6 +36,7 @@
 	<div id="motiomera_popup_content"></div>
 </div>
 
+{*}
 {if (!isset($ADMIN)) }
   {if !NO_INTERNET}
   <div id="motiomera_banner_right" class="mmFlash">
@@ -47,6 +48,7 @@
   {php} include($_SERVER["DOCUMENT_ROOT"]."/pages/footer_scripts.php"); {/php}
   {/if}
 {/if}
+{*}
 
 <!-- /div -->
 {if $DEBUG == true}

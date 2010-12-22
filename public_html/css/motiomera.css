@@ -116,7 +116,7 @@ table#alh_navtable
 #mmBannerArea
 {
 	width: 780px;
-	height: 100px;
+	height: 0px;
 }
 #mmBannerSmall .mmBannerSmallInside
 {
@@ -277,6 +277,16 @@ table#alh_navtable
 	left: 21px;
 }
 #mmForetagsnyckel
+{
+	margin-left: 21px;
+	display: none;
+}
+#mmKampanjkodError
+{
+	position: relative;
+	left: 21px;
+}
+#mmKampanjkod
 {
 	margin-left: 21px;
 	display: none;

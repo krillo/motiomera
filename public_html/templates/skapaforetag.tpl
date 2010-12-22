@@ -1,6 +1,6 @@
 <h1>{$pagetitle}</h1>
 
-<div id="infotext" style="position:absolute;left:530px;top:231px;border:2px solid;padding:6px;">
+<div id="infotext" style="position:absolute;left:530px;top:131px;border:2px solid;padding:6px;">
 <h3>TILLÄGGSBESTÄLLNING</h3>
 Är du redan kund och vill göra en<br/>tilläggsbeställning? Logga in på din<br/>administrationssida där du enkelt kan<br/>lägga till fler deltagare. <a href="/pages/foretaglogin.php">Klicka här</a>.
 </div>
@@ -165,10 +165,17 @@
 	</table>
 </form>    
 <br>
-<span  class="mmObs mmObsText">För beställning per telefon ring Marina<!--  042-17 37 91 -->
-                                                                <!-- 0705-17 35 95 --> 
-                                                                <!-- eller -->
-								                                                <!--042-444 30 25 -->
-                                                                042-17 36 21
-                                                                </span>
-	
+<div id="pers-service">
+  <div id="pers-img" style="float:left;">
+    <img src="/img/marina80x90.jpg" alt="Marina"/>
+  </div>
+  <div id="pers-text" style="float:left;padding-left:15px;width:200px;padding-top:10px">
+    <span  class="mmObs mmObsText">För beställning per telefon ring Marina
+      <!--  042-17 37 91 -->
+      <!-- 0705-17 35 95 -->
+      <!-- eller -->
+      <!--042-444 30 25 -->
+      042-17 36 21
+    </span>
+  </div>
+</div>

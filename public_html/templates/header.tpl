@@ -47,9 +47,11 @@
 		<div id="mmBannerArea" class="mmFlash">
 
 			<div id="mmBannerTop">
+        {*}
 				{if !NO_INTERNET}
 				  {php} include($_SERVER["DOCUMENT_ROOT"]."/pages/doubleclick_tile1.php"); {/php} 				  
 				{/if}
+        {*}
 			</div>
 
 			<div id="mmBannerSmall">
