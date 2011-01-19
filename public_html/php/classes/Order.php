@@ -411,11 +411,13 @@ class Order extends Mobject
 
   /**
    * This function checks if kampanjkod submitted from a user is valid (blimedlem.php)
+   * The $kod should be in lowercase UTF8
+   * see /ajax/actions/validate  for example
    * @param <type> $kod
    * @return <type>
    */
   public static function giltigKampanjkod($kod){
-		if(array_key_exists(strtolower($kod), self::$kampanjkoder)){
+		if(array_key_exists($kod, self::$kampanjkoder)){
       return true;
     }else{
       return self::KAMP_KOD_OGILTIG;

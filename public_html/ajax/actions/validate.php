@@ -26,7 +26,7 @@ switch($_POST["typ"]){
 
   // added by krillo 11-01-18
 	case "kampanjkod":
-    $varde = utf8_encode(urldecode($_POST["varde"]));
+    $varde = mb_convert_case(utf8_encode(urldecode($_POST["varde"])), MB_CASE_LOWER, "UTF-8");
 		$result = Order::giltigKampanjkod($varde);
 		if($result === true){
 			echo "1";
