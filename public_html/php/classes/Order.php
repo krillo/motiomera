@@ -124,8 +124,8 @@ class Order extends Mobject
 		"compAffCode" => "str",
 		"isValid" => "int",       
 	);
-	static 
-	protected $campaignCodes = array(
+  static $kampanjkoder = array("måbra" => "free", "krillo" => "free");  //the value can only be "free", the "RE03" part is not implemented yet, see actions/newuser.php
+	static protected $campaignCodes = array(
     "RE03" => array(
       "typ" => "foretag",
       "text" => "5 veckors tävling <b>med</b> stegräknare",
@@ -218,6 +218,7 @@ class Order extends Mobject
 	const ORDERSTATUS_FTP = 50;
 	const ORDERSTATUS_RENEWED = 55;
 	const MAX_LENGTH_AFFCODE = 20;
+  const KAMP_KOD_OGILTIG = -2;
 	
   /**
    * Constructor
@@ -406,6 +407,21 @@ class Order extends Mobject
 		}
 		return $result;
 	}
+
+
+  /**
+   * This function checks if kampanjkod submitted from a user is valid (blimedlem.php)
+   * @param <type> $kod
+   * @return <type>
+   */
+  public static function giltigKampanjkod($kod){
+		if(array_key_exists(strtolower($kod), self::$kampanjkoder)){
+      return true;
+    }else{
+      return self::KAMP_KOD_OGILTIG;
+		}
+	}
+
 
 	/**
 	 * List all orders. If $showValid is true then an extra "where" parameter isValid = 1 is added.

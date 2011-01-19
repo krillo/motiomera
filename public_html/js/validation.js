@@ -233,6 +233,8 @@ function mm_ajaxValidera(errorElement, typ, varde, onComplete){
 		ajax.makeRequest();
 }
 
+
+
 function mm_skapaFotoalbumValidera(form){
 
 	if(form.namn.value == ""){

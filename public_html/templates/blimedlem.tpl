@@ -88,11 +88,22 @@
 					</tr>
 
 
+          {*} Kampanjkod added by krillo 2011-01-11 {*}
+					<tr>
+						<th class="mmBorderNone">
+							<input type="radio" name="kontotyp" value="kampanjkod" onclick="getById('mmKampanjkod').style.display='inline';" /> <span style="font-weight:bold;"> Jag har en kampanjkod&nbsp;</span>
+							<input type="text" id="mmKampanjkod"  name="kampanjkod" size="25" onfocus="getById('mmKampanjkodError').style.display = 'none';" onblur="mm_ajaxValidera('mmKampanjkodError', 'kampanjkod', this.value);"  />
+              <span class="mmFormError mmRed" id="mmKampanjkodError"><br />Ogiltig kampanjkod</span>
+						</th>
+						<td class="mmBorderNone"></td>
+					</tr>
 					<!-- tr>
 						<th><input type="radio" selected="selected" name="kontotyp" value="trial" /> 3 månader MotioMera&nbsp;<a href="javascript:;" onclick="mm_rapportera_show_help(13,{$firstwidth},{$firstheight},'topleft')">L&auml;s mer</a></th>
 						<td><span class="mmGreen">0 kr</span></td>
 					</tr -->
-					
+
+
+
 					{foreach from=$campaignCodes item=details key=code name=codeLoop}
 					<tr>
 						<th><input type="radio" name="kontotyp" value="{$code}" /> {$details.text}

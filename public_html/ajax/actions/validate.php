@@ -23,7 +23,18 @@ switch($_POST["typ"]){
 		else if($result == Foretag::FN_UPPTAGEN)
 			echo "UPPTAGEN";
 		break;
-		
+
+  // added by krillo 11-01-18
+	case "kampanjkod":
+    $varde = utf8_encode(urldecode($_POST["varde"]));
+		$result = Order::giltigKampanjkod($varde);
+		if($result === true){
+			echo "1";
+    }else{
+			echo "OGILTIG";
+    }
+		break;
+
 	case "gruppnamn":
 		echo (Grupp::ledigtNamn($_POST["varde"])) ? "1" : "0";
 		break;
