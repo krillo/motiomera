@@ -40,7 +40,8 @@ if (!Medlem::upptagenEpost($_POST["epost"])) {
 
 //kampanjkod added by krillo 11-01-18
 if($_POST["kontotyp"] == "kampanjkod"){
-  $AS400Kampanjkod = Order::$kampanjkoder[$_POST["kampanjkod"]];
+  $key = mb_convert_case(urldecode($_POST["kampanjkod"]), MB_CASE_LOWER, "UTF-8");
+  $AS400Kampanjkod = Order::$kampanjkoder[$key];
 	if($AS400Kampanjkod == "free"){
     $m->addPaidUntil(92);  //set account valid for three months
     $m->setLevelId(1);     //set level to pro
