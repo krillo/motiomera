@@ -124,7 +124,7 @@ class Order extends Mobject
 		"compAffCode" => "str",
 		"isValid" => "int",       
 	);
-  static $kampanjkoder = array("måbra" => "free", "krillo" => "free");  //the value can only be "free", the "RE03" part is not implemented yet, see actions/newuser.php
+  static $kampanjkoder = array("måbra" => "free", "mabra" => "free","krillo" => "free");  //the value can only be "free", the "RE03" part is not implemented yet, see actions/newuser.php
 	static protected $campaignCodes = array(
     "RE03" => array(
       "typ" => "foretag",
