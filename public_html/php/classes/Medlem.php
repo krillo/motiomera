@@ -2118,10 +2118,10 @@ class Medlem extends Mobject
 
 			// if levelId is set (ie, the member used to be a pro), it gets reset to zero, and an exception is thrown (which leads to to the user being redirected to the buy page)
 			
-			if ($medlem->getPaidUntil() < date("Y-m-d") && $medlem->getLevelId() > 0) {
+			if ($medlem->getPaidUntil() < date("Y-m-d") ){  // && $medlem->getLevelId() > 0) {   //old stuff removed by krillo 2011-01-19,  always lock them out 
 				$level = $medlem->getLevelId();
-				$medlem->setLevelId(0);
-				$medlem->commit();
+				//$medlem->setLevelId(0);
+				//$medlem->commit();
 				throw new MedlemException('Medlemskap har gått ut', -19, $level);
 			}
 			return true;

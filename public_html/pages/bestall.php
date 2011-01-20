@@ -2,6 +2,13 @@
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
 $levelId = $_GET["id"];
 
+
+//$m = Medlem::loadById($_GET["id"]);
+
+//var_dump(get_defined_vars());
+//exit;
+
+
 try {
 	$level = Level::loadById($levelId);
 	$levelNamn = $level->getNamn();

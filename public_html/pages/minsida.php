@@ -2,6 +2,13 @@
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
 Security::demand(USER);
 
+
+//added by krillo 2011-01-19  keep expired user locket out
+if($USER->getPaidUntil() < date("Y-m-d")){
+  $urlHandler->redirect("Medlem", URL_BUY, $USER->getId());
+}
+
+
 $smarty = new MMSmarty;
 $smarty->assign("pagetitle", "Min sida");
 

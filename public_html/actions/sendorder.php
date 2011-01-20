@@ -1,6 +1,9 @@
 <?php
 	require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
 
+//var_dump(get_defined_vars());
+//exit;
+
 	//these variables apply for every option
 	$compAffCode = "";
 	$kanal = "";
@@ -10,6 +13,24 @@
 	if(isset($_POST["kanal"])){
 		$kanal = $_POST["kanal"];
 	}
+
+
+  //kampanjkod added by krillo 11-01-18
+if($_POST["kontotyp"] == "kampanjkod"){
+  $key = mb_convert_case(urldecode($_POST["kampanjkod"]), MB_CASE_LOWER, "UTF-8");
+  $AS400Kampanjkod = Order::$kampanjkoder[$key];
+	if($AS400Kampanjkod == "free"){
+    $USER->addPaidUntil(92);  //set account valid for three months
+    $USER->setLevelId(1);     //set level to pro
+    $USER->commit();
+    throw new UserException("Välkommen tillbaks till MotioMera!", "<p>Du är nu medlem i MotioMera igen. Hoppas du får en rolig tid hos oss!</p>Med vänlig hälsning<br/><b>MotioMera</b>-teamet <br/><br/><br/>" . '<a href="/pages/minsida.php">Till min sida</a>');
+  } else {
+    //not implemented yet
+    //if $AS400Kampanjkod == some campaign i.e. RE04 then proceed to "new Order()"  at the bottom of the page
+  }
+}
+
+
 
   switch (true){
     case (isset($_REQUEST["typ"]) && $_REQUEST["typ"] == "medlem"):
