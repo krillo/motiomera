@@ -16,7 +16,7 @@
 
 
   //kampanjkod added by krillo 11-01-18
-if($_POST["kontotyp"] == "kampanjkod"){
+if(isset($_REQUEST["kontotyp"]) && $_POST["kontotyp"] == "kampanjkod"){
   $key = mb_convert_case(urldecode($_POST["kampanjkod"]), MB_CASE_LOWER, "UTF-8");
   $AS400Kampanjkod = Order::$kampanjkoder[$key];
 	if($AS400Kampanjkod == "free"){
