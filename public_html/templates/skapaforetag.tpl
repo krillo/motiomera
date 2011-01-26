@@ -176,6 +176,7 @@
       <!-- eller -->
       <!--042-444 30 25 -->
       042-17 36 21
+      </br><a href="mailto:Marina.Kulevska@aller.se" style="text-decoration:underline;">Marina.Kulevska@aller.se</a>
     </span>
   </div>
 </div>
