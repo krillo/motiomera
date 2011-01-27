@@ -139,7 +139,8 @@
 				<option value="email">Email</option>
 				<option value="telefon">Telefon</option>
 				<option value="direktreklam">Direktreklam</option>
-				<option value="tidningsannons">Tidningsannons</option>
+        <option value="kontorspost">Kontorspost</option>
+ 				<option value="tidningsannons">Tidningsannons</option>
 				<option value="tidningskupong">Reklamblad i tidning</option>					
 				<option value="banner">Bannerannons på internet</option>
 				<option value="bannerinyhetsbrev">Bannerannons i nyhetsbrev</option>
