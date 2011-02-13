@@ -33,7 +33,7 @@ Mobilnummer: {$orderList.payerMobile}
 
 Leverans
 
-Företag: {$orderList.companyName}
+Företag: {$orderList.reciveCompanyName}
 Namn: {$orderList.reciverName}
 Ort: {$orderList.reciverZipCode}  {$orderList.reciverCity}  
 Adress: {$orderList.reciverAddress}
