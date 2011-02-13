@@ -1,0 +1,1 @@
+ALTER TABLE `motiomera`.`mm_foretag` ADD COLUMN `reciverCompanyName` VARCHAR(255) NULL DEFAULT NULL  AFTER `payment` ;

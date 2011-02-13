@@ -59,6 +59,7 @@ class Foretag extends Mobject
 	protected $payerPhone;
 	protected $payerMobile;	
 	protected $payerCountry;
+  protected $reciverCompanyName;
 	protected $reciverName;
 	protected $reciverAddress;
 	protected $reciverCo;
@@ -95,6 +96,7 @@ class Foretag extends Mobject
 		"payerPhone" => "str",
 		"payerMobile" => "str",
 		"payerCountry" => "str",
+    "reciverCompanyName" => "str", 
 		"reciverName" => "str",
 		"reciverAddress" => "str",
 		"reciverCo" => "str",
@@ -1034,6 +1036,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $orderList["payerPhone"] = $this->getPayerPhone();
     $orderList["payerMobile"] = $this->getPayerMobile();
     $orderList["payerCountry"] = $this->getPayerCountry();
+    $orderList["reciveCompanyName"] = $this->getReciverCompanyName();
     $orderList["reciverName"] = $this->getReciverName();
     $orderList["reciverAddress"] = $this->getReciverAddress();
     $orderList["reciverCo"] = $this->getReciverCo();
@@ -1143,7 +1146,8 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     global $SETTINGS;
     global $db;   
     $kundnummer = $this->getKundnummer();
-    $foretagsnamn = $this->getNamn();
+    //$foretagsnamn = $this->getNamn();
+    $foretagsnamn = $this->getReciverCompanyName();
     $losenord = $this->getTempLosenord();
     $namn = ($this->getReciverName());
     $adress = ($this->getReciverAddress());
@@ -1157,7 +1161,8 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $deltagare = 0;
     $stegraknare = 0;
     $typeForetag = false;
-    $typeTillagg = false;      
+    $typeTillagg = false;
+    $fileNamePrefix = '';
     //iterate all the order rows
     foreach ($orderIdArray as $orderId) {
       $order = Order::loadById($orderId);       
@@ -1219,6 +1224,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 		  $pdf->PageCoach($filter, $customerInfo);		  		
 		} elseif ($typeTillagg){
 			$pdf->PageAddition($filter_tillagg);
+      $fileNamePrefix = 'tillagg';
 		}
 		//PDF participant letters
     $sql = "select nyckel from mm_foretagsnycklar where order_id in (". implode(",", $orderIdArray) .")";  
@@ -1233,14 +1239,14 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     }    
     
     //close and write PDF document to disk
-    $filnamn = $this->setFilnamnAuto('', 'pdf');
+    $filnamn = $this->setFilnamnAuto($fileNamePrefix, 'pdf');
     $lokalFil = FORETAGSFIL_LOCAL_PATH . "/" . $filnamn;    
     $pdf->Output($lokalFil);
     if(!file_exists($lokalFil)){
       Misc::logMotiomera("Couldn't create or save order PDF file: " . $localFile, 'error');
     	throw new ForetagException(" ERROR - Couldn't create or save order PDF file: " . $localFile, -10);    	
     }else{
-      Misc::logMotiomera("Created file for " . $this->getCompanyName() . ",  " . $lokalFil . ", foretagId =  " . $this->getId() . ", orderids = " . implode(' ', $orderIdArray), 'ok');
+      Misc::logMotiomera("Created file for " . $this->getReciverCompanyName() . ",  " . $lokalFil . ", foretagId =  " . $this->getId() . ", orderids = " . implode(' ', $orderIdArray), 'ok');
     	//set the passw again, not tillaggsbestallning, it is stored in temp just because otherwise we had not been able to print it in the letter
 			if($typeForetag){  
       	$this->setLosenord($losenord);
@@ -1340,14 +1346,14 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
    * The function takes an optional parameter that is incorporated in the filenem
    * Moved from Order krillo 100125
    * 
-   * @param string $extraMsg
+   * @param string $prefix
    * @param string $fileExt
    * @return string the filename
    */
-  private function setFilnamnAuto($extraMsg = '', $fileExt = 'pdf')
+  private function setFilnamnAuto($prefix = '', $fileExt = 'pdf')
   {  
-  	if(!empty($extraMsg)){
-  		$extraMsg = '_'.$extraMsg;
+  	if(!empty($prefix)){
+  		$prefix = $prefix . '_';
   	} 	
     $letters = "a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 _";
     $letters = explode(" ", $letters);
@@ -1362,10 +1368,10 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
       
       if (in_array($b, $letters)) $nyttNamn.= $b;
     }
-    $filnamn = date("ymd"). "_" . $this->getId() . "_" . $nyttNamn . $extraMsg .".$fileExt";    
+    $filnamn = $prefix . date("ymd"). "_" . $this->getId() . "_" . $nyttNamn . ".$fileExt";
     $i = 0;
     while(file_exists(FORETAGSFIL_LOCAL_PATH . "/" . $filnamn)){
-      $filnamn = date("ymd"). "_" . $this->getId(). "_" . $i . "_" . $nyttNamn . $extraMsg . ".$fileExt";
+      $filnamn = $prefix . date("ymd"). "_" . $this->getId(). "_" . $i . "_" . $nyttNamn . ".$fileExt";
     	$i++;
     }   
     return $filnamn;
@@ -1476,7 +1482,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $pdf = new PDF();
     $a = array(
       'FULLNAME'  => $this->getPayerName(),
-      'COMPANY'   => $this->getCompanyName(),
+      'COMPANY'   => $this->getReciverCompanyName(),
       'ADDRESS'   => $this->getReciverAddress(),
       'ZIPCODE'   => $this->getReciverZipCode(),
       'CITY'      => $this->getReciverCity(),
@@ -1487,12 +1493,12 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     );
     $pdf->PagePreface($a);
     $filter = array(
-      '[CUSTOMER]'      => $this->getCompanyName(),
+      '[CUSTOMER]'      => $this->getReciverCompanyName(),
       '[CUSTOMERNO]'    => $this->getKundnummer(),
       '[STEPCOUNTERS]'  => $nbr,
     );
     $pdf->PageDoa($filter);
-    $fileName = $this->setFilnamnAuto('recl', 'pdf');
+    $fileName = $this->setFilnamnAuto('rekl', 'pdf');
     $localFile = FORETAGSFIL_LOCAL_PATH . "/" . $fileName;
 
     $pdf->Output($localFile);   
@@ -1897,7 +1903,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 	{
 		return $this->kundnummer;
 	}
-	
+
 	public function getCompanyName()
 	{
 		return htmlspecialchars_decode($this->companyName);
@@ -1947,7 +1953,12 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 	{
 		return $this->payerCountry;
 	}
-	
+
+
+	public function getReciverCompanyName()
+	{
+		return htmlspecialchars_decode($this->reciverCompanyName);
+	}
 	public function getReciverName()
 	{
 		return $this->reciverName;
@@ -2244,7 +2255,11 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 	{
 		$this->payerCountry = $payerCountry;
 	}
-		
+
+  public function setReciverCompanyName($name)
+	{
+		$this->reciverCompanyName = $name;
+	}
 	public function setReciverName($reciverName)
 	{
 		$this->reciverName = $reciverName;

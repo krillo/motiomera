@@ -62,6 +62,7 @@ switch (true)
 		$orderList["payerPhone"] = $foretag->getPayerPhone();
 		$orderList["payerMobile"] = $foretag->getPayerMobile();
 		$orderList["payerCountry"] = $foretag->getPayerCountry();
+    $orderList["reciverCompanyName"] = $foretag->getReciverCompanyName();
 		$orderList["reciverName"] = $foretag->getReciverName();
 		$orderList["reciverAddress"] = $foretag->getReciverAddress();
 		$orderList["reciverCo"] = $foretag->getReciverCo();

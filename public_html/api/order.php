@@ -82,7 +82,8 @@
 		$foretag->setPayerEmail($_POST["PayerEmail"]);
 		$foretag->setPayerPhone($_POST["PayerPhone"]); 
 		$foretag->setPayerMobile($_POST["PayerMobile"]); 
-		$foretag->setPayerCountry($_POST["PayerCountry"]); 
+		$foretag->setPayerCountry($_POST["PayerCountry"]);
+    $foretag->setReciverCompanyName($_POST["ReciverCompany0"]);
 		$foretag->setReciverName($_POST["ReciverName0"]); 	
 		$foretag->setReciverAddress($_POST["ReciverAddress0"]); 
 		$foretag->setReciverCo($_POST["ReciverCo0"]); 
@@ -136,7 +137,8 @@
 		$foretag->setPayerEmail($_POST["PayerEmail"]);
 		$foretag->setPayerPhone($_POST["PayerPhone"]); 
 		$foretag->setPayerMobile($_POST["PayerMobile"]); 
-		$foretag->setPayerCountry($_POST["PayerCountry"]); 
+		$foretag->setPayerCountry($_POST["PayerCountry"]);
+    $foretag->setReciverCompanyName($_POST["ReciverCompany0"]);
 		$foretag->setReciverName($_POST["ReciverName0"]); 	
 		$foretag->setReciverAddress($_POST["ReciverAddress0"]); 
 		$foretag->setReciverCo($_POST["ReciverCo0"]); 

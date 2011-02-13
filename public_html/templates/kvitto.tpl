@@ -106,7 +106,7 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
 		<td colspan="3" class="mmRowHeading"><h3>Leverans</h3></td>
 	</tr>
 	<tr>
-		<td><b>Företag:</b> {$orderList.companyName}</td>	
+		<td><b>Företag:</b> {$orderList.reciverCompanyName}</td>
 		<td colspan="2"><b>Ort:</b> {$orderList.reciverZipCode}  {$orderList.reciverCity}</td>
 	</tr>
 	<tr>

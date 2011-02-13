@@ -664,7 +664,7 @@ class Order extends Mobject
         $ReceiverEmail = urlencode($foretag->getReciverEmail());
         $ReceiverPhone = urlencode($foretag->getReciverPhone());
         $ReceiverMobile = urlencode($foretag->getReciverMobile());
-        $ReceiverCompany = "";
+        $ReceiverCompany = urlencode($foretag->getReciverCompanyName());
 			break;   					        	
         case ("foretag_again"):
    			$foretag = $this->getForetag();           
@@ -692,7 +692,7 @@ class Order extends Mobject
         $ReceiverEmail = urlencode($foretag->getReciverEmail());
         $ReceiverPhone = urlencode($foretag->getReciverPhone());
         $ReceiverMobile = urlencode($foretag->getReciverMobile());
-        $ReceiverCompany = "";			
+        $ReceiverCompany = urlencode($foretag->getReciverCompanyName());
 			break; 
     	default :   	
     	  $errMess = "Felaktig ordertyp Order::gorUppslag() - " . $this->getTyp();
