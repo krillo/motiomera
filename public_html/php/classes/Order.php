@@ -124,8 +124,8 @@ class Order extends Mobject
 		"compAffCode" => "str",
 		"isValid" => "int",       
 	);
-  static $kampanjkoder = array("måbra" => "free", "mabra" => "free","krillo" => "free");  //the value can only be "free", the "RE03" part is not implemented yet, see actions/newuser.php
-	static protected $campaignCodes = array(
+  static $kampanjkoder = array("måbra1" => "free", "mabra1" => "free","krillo" => "free", "mabra2" => "UE03", "måbra2" => "UE03");  //special campaign codes see actions/newuser.php
+  static $campaignCodes = array(
     "RE03" => array(
       "typ" => "foretag",
       "text" => "5 veckors tävling <b>med</b> stegräknare",
@@ -133,6 +133,7 @@ class Order extends Mobject
       "pris" => 231,
       "dagar" => 31,
       "popupid" => 22,
+      "public" => TRUE,
     ) ,
 	  "RE04" => array(
 			"typ" => "foretag",
@@ -141,6 +142,7 @@ class Order extends Mobject
 			"pris" => 127,
 			"dagar" => 31,
 			"popupid" => 21,
+      "public" => TRUE,
 		) ,
 		"RE05" => array(
 			"typ" => "medlem",
@@ -149,6 +151,7 @@ class Order extends Mobject
 			"dagar" => 91,
 			"popupid" => 30,
 			"levelid" => 1,
+      "public" => TRUE,
 		) ,
 		"RE06" => array(
 			"typ" => "medlem",
@@ -157,6 +160,7 @@ class Order extends Mobject
 			"dagar" => 91,
 			"popupid" => 14,
 			"levelid" => 1,
+      "public" => TRUE,
 		) ,
 		"RE07" => array(
 			"typ" => "medlem",
@@ -165,6 +169,7 @@ class Order extends Mobject
 			"dagar" => 91,
 			"popupid" => 15,
 			"levelid" => 1,
+      "public" => TRUE,
 		) ,
 		"RE08" => array(
 			"typ" => "medlem",
@@ -173,6 +178,7 @@ class Order extends Mobject
 			"dagar" => 91,
 			"popupid" => 16,
 			"levelid" => 1,
+      "public" => TRUE,
 		) ,
 		"RE09" => array(
 			"typ" => "medlem",
@@ -181,6 +187,7 @@ class Order extends Mobject
 			"dagar" => 365,
 			"popupid" => 17,
 			"levelid" => 1,
+      "public" => TRUE,
 		) ,
 		"RE10" => array(
 			"typ" => "medlem",
@@ -189,6 +196,7 @@ class Order extends Mobject
 			"dagar" => 365,
 			"popupid" => 18,
 			"levelid" => 1,
+      "public" => TRUE,
 		) ,
 		"RE11" => array(
 			"typ" => "medlem",
@@ -197,6 +205,7 @@ class Order extends Mobject
 			"dagar" => 365,
 			"popupid" => 19,
 			"levelid" => 1,
+      "public" => TRUE,
 		) ,
 		"RE12" => array(
 			"typ" => "medlem",
@@ -205,6 +214,16 @@ class Order extends Mobject
 			"dagar" => 365,
 			"popupid" => 20,
 			"levelid" => 1,
+      "public" => TRUE,
+		) ,
+    "UE03" => array(
+      "typ" => "medlem",
+      "text" => "4 veckor MotioMera <b>med</b> stegräknare",
+      "pris" => 99,
+      "dagar" => 35,
+      "popupid" => 22,
+			"levelid" => 1,
+      "public" => FALSE,
 		) ,
 	);
 	const TABLE = "mm_order";

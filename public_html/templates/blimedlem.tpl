@@ -105,15 +105,17 @@
 
 
 					{foreach from=$campaignCodes item=details key=code name=codeLoop}
-					<tr>
-						<th><input type="radio" name="kontotyp" value="{$code}" /> {$details.text}
-						{if isset($details.popupid)}
-							&nbsp;<a href="javascript:;" onclick="mm_rapportera_show_help({$details.popupid},{$details.popupwidth},{$details.popupheight},'topleft')">L&auml;s mer</a>
-						{/if}</th>
-						
-						{*}popupwidth,popupheight samt id hämtas från order.php classen{*}
-						<td>{$details.pris} kr</td>
-					</tr>
+            {if $details.public == "TRUE"} {* only show public campaigns *}
+              <tr>
+                <th><input type="radio" name="kontotyp" value="{$code}" /> {$details.text}
+                {if isset($details.popupid)}
+                  &nbsp;<a href="javascript:;" onclick="mm_rapportera_show_help({$details.popupid},{$details.popupwidth},{$details.popupheight},'topleft')">L&auml;s mer</a>
+                {/if}</th>
+
+                {*}popupwidth,popupheight samt id hämtas från order.php classen{*}
+                <td>{$details.pris} kr</td>
+              </tr>
+            {/if}
 					{/foreach}
 
 				</table>

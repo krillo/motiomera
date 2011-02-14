@@ -49,9 +49,12 @@ if($_POST["kontotyp"] == "kampanjkod"){
     $m->sendActivationEmail();
     $m->commit();
     throw new UserException("Välkommen till MotioMera!", "Grattis, du är nu medlem i MotioMera! Men innan du kan köra igång måste du aktivera ditt konto. <br />Det är enkelt, så här gör du:</p><p>Vi har nu skickat ett mail till adressen " . $m->getEpost() . ". När du klickar på länken som finns i mailet så aktiveras ditt Motiomera-konto. Proceduren är en säkerhetsåtgärd som vi använder för att ingen ska registrera ett konto i ditt namn. Om du inte ser meddelandet kan det av misstag ha blivit klassificerat som skräppost. Se efter om du hittar e-postmeddelandet i din skräppost-mapp.</p><p>Hoppas du får en rolig tid hos MotioMera!<br />Med vänlig hälsning</p><p><b>MotioMera</b>");
-  } else {
-    //not implemented yet
-    //if $AS400Kampanjkod == some campaign i.e. RE04 then proceed to "new Order()"  at the bottom of the page
+  } elseif(key_exists($AS400Kampanjkod, Order::$campaignCodes)){  //special campaign is verified proceed with order
+    $m->confirm($_POST["losenord"]);
+    $o = new Order("medlem", $m, $AS400Kampanjkod);
+    $o->setMedlem($m);
+    $o->gorUppslag();  //this function sends header and breaks execution
+    die();
   }
 }
 
