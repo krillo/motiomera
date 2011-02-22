@@ -7,8 +7,8 @@
 				<a href="#" onclick="motiomera_rapportera(); return false;">Uppmärksamma oss på denna sida</a>
 			</div>
 			<a href="#" onclick="motiomera_kontakt(); return false;">Kontakta oss</a>  |  <a href="http://www.integritetspolicy.se/#cookies" rel="external">Om Cookies</a>  |  <a href="http://www.integritetspolicy.se" rel="external">Integritetspolicy</a>  |
-			<a href="http://www.mabra.com/Pren____2633.aspx" rel="external">Om Allers f&ouml;rlag</a>  |  <a href="http://www.mabra.com/Default____33627.aspx" rel="external">Press</a>  |  <a href="/pages/sitemap.html">Sitemap</a><br />
-	&copy; Copyright Allers f&ouml;rlag 2008 - {$smarty.now|date_format:"%Y"}  | Ansvarig utgivare: Liselotte St&aring;lberg
+			<a href="http://aller.se/om-aller-media/" rel="external">Om Allers media</a>  |  <a href="/pages/sitemap.html">Sitemap</a><br />
+	&copy; Copyright Allers media 2008 - {$smarty.now|date_format:"%Y"}  | Ansvarig utgivare: Liselotte St&aring;lberg
 	
 		</div>
 		<div class="mmClearBoth"></div>
