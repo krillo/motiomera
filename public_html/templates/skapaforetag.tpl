@@ -73,7 +73,7 @@
     {*} exta camapign text{*}
 		<tr>
       <td colspan="3" style="border-bottom:none;">
-        <span style="color:red;font-size:18px;">EXTRA! Beställ innan 11/3 och få 20% rabatt!</span>
+        <span style="color:red;font-size:18px;">EXTRA! Beställ senast 11/3 och få 20% rabatt!</span>
       </td>
 		</tr>
 
