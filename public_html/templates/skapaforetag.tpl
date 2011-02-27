@@ -71,12 +71,13 @@
     {*}
 
     {*} exta camapign text{*}
+    {*}
 		<tr>
       <td colspan="3" style="border-bottom:none;">
         <span style="color:red;font-size:18px;">EXTRA! Beställ senast 11/3 och få 20% rabatt!</span>
       </td>
 		</tr>
-
+    {*}
 
 
 		<tr>
@@ -106,7 +107,7 @@
 
 						
 						{*}popupwidth,popupheight samt id hämtas från order.php classen{*}
-						<td{if $smarty.foreach.codeLoop.iteration eq count($campaignCodes)} class="mmBorderNone"{/if} style="border-bottom:none;">
+						<td{if $smarty.foreach.codeLoop.iteration eq count($campaignCodes)} class="mmBorderNone"{/if} style="border-bottom:none;padding-top:12px;">
 							<span id="mmForetagVisaPris{$code}">0</span>&nbsp;kr&nbsp;ex.&nbsp;moms
 							<div id="mmForetagKampanjPris{$code}" class="mmDisplayNone">{$details.pris}</div>
 							<div id="antal{$code}" class="mmDisplayNone">-1</div>
@@ -170,14 +171,21 @@
   <div id="pers-img" style="float:left;">
     <img src="/img/marina80x90.jpg" alt="Marina"/>
   </div>
-  <div id="pers-text" style="float:left;padding-left:15px;width:200px;padding-top:10px">
+  <div id="pers-text" style="float:left;padding-left:15px;width:330px;padding-top:5px">
     <span  class="mmObs mmObsText">För beställning per telefon ring Marina
       <!--  042-17 37 91 -->
       <!-- 0705-17 35 95 -->
       <!-- eller -->
       <!--042-444 30 25 -->
       042-17 36 21
-      </br><a href="mailto:Marina.Kulevska@aller.se" style="text-decoration:underline;">Marina.Kulevska@aller.se</a>
+      {*}</br><a href="mailto:Marina.Kulevska@aller.se" style="text-decoration:underline;">Marina.Kulevska@aller.se</a>{*}
+
+<br/>
+<br/>...eller ring eller maila vår kundservice:
+042-444 30 25 (vardagar 09.00-11.30, 13.00-15.00)
+<br/><a href="#" onclick="motiomera_kontakt(); return false;" style="text-decoration:underline;">Klicka här för att maila</a>
+
+
     </span>
   </div>
 </div>
