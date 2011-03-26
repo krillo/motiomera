@@ -25,7 +25,7 @@ $smarty->assign("texteditor_um", $texteditor);
 
 //the rss flow from mabra.com
 $file = ROOT . "/files/rsscache/motiofeed.txt";
-$fh = fopen($file, "r") or die("cant open file");
+$fh = fopen($file, "r");
 $smotiofeed = file_get_contents($file);
 fclose($fh);
 $rss = unserialize($smotiofeed);
