@@ -1,3 +1,23 @@
+<?php
+$mc = new Memcache;
+$mc->connect("127.0.0.1", 11211);
+$filename = md5("kalender.js".$_SERVER['PHPSESSID']);
+$ttl = 3600; // 3600 sec = 1 hour
+
+$content = $mc->get($filename);
+
+if ($content) {
+ header("Content-Type: text/javascript");
+        print $content;
+        exit;
+} else {
+
+ob_start();
+// Cache whole output, in the end of this file we store it in memcached - jb
+?>
+
+
+
 <?php $js_header = 1; include $_SERVER["DOCUMENT_ROOT"]  . "/php/init.php"; ?>
 // kalendrar
 var stegKalender = new motiomera_kalender("steg");
@@ -364,3 +384,11 @@ function motiomera_kalender(id){
 function motiomera_kalender_listManader(){
 		return new Array("Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec");
 }
+
+
+<?php
+$content = ob_get_contents();
+$mc->set($filename, $content, MEMCACHE_COMPRESSED, $ttl);
+ob_end_clean();
+}
+?>
