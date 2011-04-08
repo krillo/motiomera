@@ -104,7 +104,7 @@ class UrlChecker
 				'/js/fotoalbum.js',
 				'/php/libs/uploadprogressmeter/server.php?client=main,request,httpclient,dispatcher,json,util',
 				'/php/libs/uploadprogressmeter/server.php?stub=UploadProgressMeterStatus',
-				'/js/uploadprogressmeter/uploadprogressmeter.js',
+				'/js/uploadprogressmeter.js',
 			) ,
 		) ,
 		"QUIZ" => array(
