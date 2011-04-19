@@ -4,8 +4,8 @@ require(ROOT . '/php/libs/fpdf16/fpdf.php');
 date_default_timezone_set('Europe/Stockholm');
 define('LOGO_MOTIOMERA', PDF_TEMPLATE_DIR.'images/Logo_Motiomera_colour.jpg');
 define('LOGO_MABRA', PDF_TEMPLATE_DIR.'images/mabra_logo.jpg');
-define('LOGO_ALLERS', PDF_TEMPLATE_DIR.'images/allersforlag_logo.jpg');
-define('ALLER_ADDRESS', 'Allers förlag
+define('LOGO_ALLERS', PDF_TEMPLATE_DIR.'images/aller_media_logo.png');
+define('ALLER_ADDRESS', 'Aller media
 MåBra Kundservice
 251 85 Helsingborg');  
 
