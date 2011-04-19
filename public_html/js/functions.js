@@ -1,3 +1,20 @@
+<?php
+$mc = new Memcache;
+$mc->connect("127.0.0.1", 11211);
+$filename = md5("functions.js".$_SERVER['PHPSESSID']);
+$ttl = 3600; // 3600 sec = 1 hour
+
+$content = $mc->get($filename);
+
+if ($content) {
+ header("Content-Type: text/javascript");
+        print $content;
+        exit;
+} else {
+
+ob_start();
+// Cache whole output, in the end of this file we store it in memcached - jb
+?>
 <?php $js_header = 1; include $_SERVER["DOCUMENT_ROOT"]  . "/php/init.php"; ?>
 function isInt(val){
 	var int = val-0;
@@ -945,3 +962,10 @@ function mm_visningsbild_checkExtension() {
 mm_addOnLoad(targetBlank);
 
 window.onload = mm_onLoad;
+
+<?php
+$content = ob_get_contents();
+$mc->set($filename, $content, MEMCACHE_COMPRESSED, $ttl);
+ob_end_clean();
+}
+?>

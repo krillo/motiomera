@@ -1,5 +1,22 @@
-<?php $js_header = 1; require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php"); ?>
+<?php
+$mc = new Memcache;
+$mc->connect("127.0.0.1", 11211);
+$filename = md5("steg.js".$_SERVER['PHPSESSID']);
+$ttl = 3600; // 3600 sec = 1 hour
 
+$content = $mc->get($filename);
+
+if ($content) {
+ header("Content-Type: text/javascript");
+	print $content;
+	exit;
+} else {
+
+ob_start();
+// Cache whole output, in the end of this file we store it in memcached - jb
+?>
+
+<?php $js_header = 1; require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php"); ?>
 var gamlaSteg = new Array();
 
 function motiomera_steg_rapportera(){
@@ -471,3 +488,9 @@ function motiomera_steg_validera(){
 	}
 }
 
+<?php
+$content = ob_get_contents();
+$mc->set($filename, $content, MEMCACHE_COMPRESSED, $ttl);
+ob_end_clean();
+}
+?>
