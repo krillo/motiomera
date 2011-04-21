@@ -24,6 +24,4 @@ Instruktioner finns i asken, men väldigt kortfattat fungerar det så här:
 3. Börja gå.
 4. Registrera de steg stegräknaren visar varje dag på http://motiomera.se. Nollställ sedan stegräknaren genom att hålla knappen reset intryckt under några sekunder.
   
-Lycka till med ditt MotioMerande!
-Med vänliga hälsningar
-Tidningen MåBra
+Lycka till med ditt MotioMerande önskar Tidningen MåBra! 
