@@ -1,5 +1,4 @@
 <?php
-/*
 session_start();
 $mc = new Memcache;
 $mc->connect("127.0.0.1", 11211);
@@ -16,7 +15,6 @@ if ($content) {
 
 ob_start();
 // Cache whole output, in the end of this file we store it in memcached - jb
-*/
 ?>
 
 
@@ -390,10 +388,8 @@ function motiomera_kalender_listManader(){
 
 
 <?php
-/*
 $content = ob_get_contents();
 $mc->set($filename, $content, MEMCACHE_COMPRESSED, $ttl);
 ob_end_clean();
 }
-*/
 ?>
