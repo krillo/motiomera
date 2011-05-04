@@ -1,7 +1,7 @@
 <?php
 session_start();
 $mc = new Memcache;
-$mc->connect("127.0.0.1", 11211);
+$mc->connect(MEMCACHE_SERVER, 11211);
 $filename = md5("kalender.js".$_SERVER['PHPSESSID']);
 $ttl = 3600; // 3600 sec = 1 hour
 

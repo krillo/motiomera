@@ -172,19 +172,20 @@
     <img src="/img/marina80x90.jpg" alt="Marina"/>
   </div>
   <div id="pers-text" style="float:left;padding-left:15px;width:330px;padding-top:5px">
-    <span  class="mmObs mmObsText">För beställning per telefon ring Marina
+    <span  class="mmObs mmObsText">För beställning per telefon ring vår kundservice
       <!--  042-17 37 91 -->
       <!-- 0705-17 35 95 -->
       <!-- eller -->
-      <!--042-444 30 25 -->
-      042-17 36 21
+      <!-- 042-444 30 25 -->
+      <!-- 042-17 36 21 -->
       {*}</br><a href="mailto:Marina.Kulevska@aller.se" style="text-decoration:underline;">Marina.Kulevska@aller.se</a>{*}
-
+{*}
 <br/>
-<br/>...eller ring eller maila vår kundservice:
-042-444 30 25 (vardagar 09.00-11.30, 13.00-15.00)
+<br/>eller maila vår kundservice:{*}
+ 042-444 30 25 (vardagar 09.00-11.30, 13.00-15.00)
+{*}
 <br/><a href="#" onclick="motiomera_kontakt(); return false;" style="text-decoration:underline;">Klicka här för att maila</a>
-
+{*}
 
     </span>
   </div>
