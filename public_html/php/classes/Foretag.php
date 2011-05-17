@@ -118,6 +118,7 @@ class Foretag extends Mobject
 
 	//081002 - changed to 40
 	const TAVLINGSPERIOD_MEDLEMS_DAGAR = 40;
+	const FORETAGSMEDLEMS_EXTRA_DAYS = 90;
 	const TAVLINGSPERIOD_DAGAR = 34;    //5 weeks -1 day
  	const MAX_LENGTH_AFFCODE = 20;
 	
@@ -464,11 +465,14 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
    * The competitions and all the calculated data are saved in tables: mm_tavling_save, mm_tavling, mm_lag_save
    * A tavling_id is created for each competition.
    * Actions are logged to /motiomera/log/motiomera.log
+   *
+   * All members will have some extra days added, see the FORETAGSMEDLEMS_EXTRA_DAYS
    *  
    * @author krillo 
    * 
    * krillo 091026 changed the sql to only get the records that have a competition thats ending.
    * krillo 100420 changed to only save the competition to mm_tavling_save, mm_tavling, mm_lag_save
+   * krillo 110511 changed to add extra days after closed competition FORETAGSMEDLEMS_EXTRA_DAYS
    */
   public static function saveAndEndForetagsTavling(){
     Misc::logMotiomera("Start foretag::saveAndEndForetagsTavling() ", 'info');
@@ -506,7 +510,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 	            $lagId = 0;
 	          }	          
 		        $steg = $medlem->getStegTotal($startDatum , $slutDatum);
-		        if($steg > 0){  //only save data for members who have more than 0 steg 
+		        if($steg > 0){  //only save data for members who have more than 0 steg
 			        try{          
 			          $save[] = array(
 			            'medlem_id' => $medlem->getId() ,
@@ -519,6 +523,9 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 			            'stop_datum' => $slutDatum           
 			          );		          
 			          Misc::logMotiomera(" ". $i++ ." tavling_id: " . $tavling->getId() ." | " . $medlem->getForetag()->getNamn() . ' | id: ' . $medlem->getId() . ' | ' . $medlem->getAnamn() . " | steg: $steg" . " | email: " . $medlem->getEpost(), 'ok');
+                //add some extra days after finished competition
+                $medlem->addPaidUntil(self::FORETAGSMEDLEMS_EXTRA_DAYS);
+                $medlem->commit();
 			        }catch(Exception $e){           
 			          Misc::logMotiomera(" ". $i++ ." | something went wrong", 'error');
 			        }
