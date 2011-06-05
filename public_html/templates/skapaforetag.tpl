@@ -26,8 +26,8 @@
 		<tr>
 			<th  style="border-bottom:none;">Startdatum</th>					
 			<td  style="border-bottom:none;">
-				<input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2011-05-09" >
-				<span style="text-decoration: none;">Den stora vårtävlingen 9 maj </span>
+				<input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2011-09-26" checked>
+				<span style="text-decoration: none;">Den stora hösttävlingen 26 september </span>
 				<!-- span style="color: #f00; font-weight:bold;">
 				   Det är fortfarande möjligt att anmäla er till Vårtävlingen. Vi kan dock inte garantera att stegräknarna levereras till tävlingens startdatum. Det är även möjligt att välja annat startdatum nedan.
 				</span-->
@@ -43,7 +43,7 @@
 			{*}<th  style="border-bottom:none;">Startdatum</th>{*}
 		  <th  style=""></th>
 			<td class="mmRawText" style="">
-				<input name="startdatumRadio" id="mmForetagStartdatumRadio2" type="radio" value="egetdatum"  checked>
+				<input name="startdatumRadio" id="mmForetagStartdatumRadio2" type="radio" value="egetdatum"  >
 
 				{*}<span id="foretagStartdatum">{$startdatumStr}</span>{*}
 				<select name="startdatum" id="mmForetagStartdatum" onchange="checkforetagstartdatum()">
@@ -169,7 +169,7 @@
 <br>
 <div id="pers-service">
   <div id="pers-img" style="float:left;">
-    <img src="/img/marina80x90.jpg" alt="Marina"/>
+    <img src="/img/Emma_80x90.png" alt="Marina"/>
   </div>
   <div id="pers-text" style="float:left;padding-left:15px;width:330px;padding-top:5px">
     <span  class="mmObs mmObsText">För beställning per telefon ring vår kundservice

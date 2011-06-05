@@ -2,9 +2,9 @@
 include $_SERVER["DOCUMENT_ROOT"]  . '/php/init.php';
 
 define("COMPETITION_DAYS", 35);
-define("DELTAGARTOPPEN_MAX", 100);
+define("DELTAGARTOPPEN_MAX", 200);
 define("LAGTOPPEN_MAX", 25);
-define("FORETAGSTOPPEN_MAX", 50);
+define("FORETAGSTOPPEN_MAX", 400);
 
 
 
