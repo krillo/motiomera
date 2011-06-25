@@ -39,6 +39,7 @@
 		hs.captionEval = 'this.thumb.title';
 		{/literal}
 	</script>
+
 </head>	
 <body id="body" class="{$BROWSER} {$currentPage}">
 <div id="mmPage">

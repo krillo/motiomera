@@ -200,6 +200,15 @@ class UrlChecker
 				"/js/jquery.motiomera.js"
 			) ,
 		) ,
+		"INDEX" => array(
+			"index.php" => array(
+				"http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js",
+        "/js/slides.min.jquery.js",
+				"/js/jquery.tablesorter.js",
+				"/js/jquery.motiomera.js"
+			) ,
+		) ,
+
 	);
 	
 	private $extraUrls = array(
@@ -265,7 +274,6 @@ class UrlChecker
 				foreach($value as $page => $jspackage) {
 					
 					if ($page == $this->filename) {
-
 						//echo($this->filename);
 						//print_r($jspackage);
 
@@ -297,6 +305,7 @@ class UrlChecker
 		if ($marked == false) {
 			$this->setJsPackage($jspackage);
 			$this->setMarkedMenu("HEM");
+              //print_r($jspackage);
 		}
 	}
 

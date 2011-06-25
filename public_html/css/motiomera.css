@@ -2961,3 +2961,8 @@ margin-left: -15px;
 
 .rss-sidebar{padding:20px 0 0 6px;float:left;width:126px;}
 .rss-excerpt{color:#111;}
+
+
+.slides{width:430px;height:290px;}
+.slides_container {width:440px;height:290px;}
+.slides_container div {width:470px;height:170px;display:block;}

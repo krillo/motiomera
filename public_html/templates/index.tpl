@@ -1,5 +1,6 @@
 <div class="mmFlash">
 	<div id="mmSplash">
+  {*}
 	{if $browser eq IE6}
 	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"  codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="430" height="290" id="slideshow" align="middle">
 		<param name="allowFullScreen" value="false" />
@@ -17,6 +18,46 @@
 		<param name="scale" value="showall" />
 	</object>
 	{/if}
+  {*}
+
+
+  <a href="/pages/skapaforetag.php"><img src="img/varmed.png" alt="Höstens stora tävling 26sept - 30okt" /></a>
+	<div class="mmGrayLineMiddle"></div>
+
+<script>
+{literal}
+$(function(){
+  $("#slides").slides({
+  effect: 'fade',
+	play: 5000,
+  generatePagination: false
+  });
+});
+{/literal}
+</script>
+
+
+<div id="slides">
+  <div class="slides_container" >
+    <div>
+      <a href="pages/for_foretag.php"><img src="/slideshow/img/0.jpg" alt="" /></a>
+    </div>
+    <div>
+      <a href="pages/for_foretag.php"><img src="/slideshow/img/1.jpg" alt="" /></a>
+    </div>
+    <div>
+      <a href="pages/for_foretag.php"><img src="/slideshow/img/2.jpg" alt="" /></a>
+    </div>
+    <div>
+      <a href="pages/for_foretag.php"><img src="/slideshow/img/3.jpg" alt="" /></a>
+    </div>
+    <div>
+      <a href="pages/for_foretag.php"><img src="/slideshow/img/4.jpg" alt="" /></a>
+    </div>
+  </div>
+</div>
+
+
 
 	</div>
 </div>
