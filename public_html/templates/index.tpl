@@ -45,9 +45,9 @@ $(function(){
     <div>
       <a href="pages/for_foretag.php"><img src="/slideshow/img/1.jpg" alt="" /></a>
     </div>
-    <div>
+    <!--div>
       <a href="pages/for_foretag.php"><img src="/slideshow/img/2.jpg" alt="" /></a>
-    </div>
+    </div-->
     <div>
       <a href="pages/for_foretag.php"><img src="/slideshow/img/3.jpg" alt="" /></a>
     </div>
