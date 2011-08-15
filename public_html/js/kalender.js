@@ -1,7 +1,7 @@
 <?php
 session_start();
 $mc = new Memcache;
-$mc->connect(MEMCACHE_SERVER, 11211);
+$mc->connect("127.0.0.1", 11211);
 $filename = md5("kalender.js".$_SERVER['PHPSESSID']);
 $ttl = 3600; // 3600 sec = 1 hour
 
@@ -9,13 +9,18 @@ $content = $mc->get($filename);
 
 if ($content) {
  header("Content-Type: text/javascript");
-        print $content;
-        exit;
-} else {
+         print $content;
+	         exit;
+		 } else {
 
-ob_start();
-// Cache whole output, in the end of this file we store it in memcached - jb
+		 ob_start();
+		 // Cache whole output, in the end of this file we store it in memcached - jb
 ?>
+
+
+
+
+
 
 
 
