@@ -473,16 +473,22 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
    * krillo 091026 changed the sql to only get the records that have a competition thats ending.
    * krillo 100420 changed to only save the competition to mm_tavling_save, mm_tavling, mm_lag_save
    * krillo 110511 changed to add extra days after closed competition FORETAGSMEDLEMS_EXTRA_DAYS
+   * krillo 110817 changed to take a date parameter to be bale to run from admin. Please use only Tuesdays after finished competition
    */
-  public static function saveAndEndForetagsTavling(){
+  public static function saveAndEndForetagsTavling($date = null){
     Misc::logMotiomera("Start foretag::saveAndEndForetagsTavling() ", 'info');
     global $db;
+    if($date == null){
+      $date = date("Ymd");
+    }
+    $time = strtotime($date);
+
     $sql = 'SELECT a.id FROM mm_medlem a, mm_foretagsnycklar b, mm_foretag c
     WHERE a.id = b.medlem_id
     AND b.foretag_id = c.id
     AND a.epostBekraftad = 1
-    AND UNIX_TIMESTAMP(c.startDatum) >= '. (time() - ((self::TAVLINGSPERIOD_DAGAR + 3) * 86400)) .
-    ' AND UNIX_TIMESTAMP(c.startDatum) < '. (time() - ((self::TAVLINGSPERIOD_DAGAR) * 86400));        
+    AND UNIX_TIMESTAMP(c.startDatum) >= '. ($time - ((self::TAVLINGSPERIOD_DAGAR + 3) * 86400)) .
+    ' AND UNIX_TIMESTAMP(c.startDatum) < '. ($time - ((self::TAVLINGSPERIOD_DAGAR) * 86400));
     //echo $sql;
     
     $tavling = new Tavling('0000-00-00', '0000-00-00');

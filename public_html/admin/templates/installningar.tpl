@@ -75,4 +75,19 @@ php medal_from_cmd.php 2010 24
 <br/>
 
 
+
+<h3>Stäng en tävling manuellt</h3>
+<p>Normalt hanteras detta varje tisdag natt av cronscript (cron_foretagstavling_slut2.php). Detta är steg 2 i hanteringen av att avsluta en tävling.
+   Det är detta steg som tävlingsresultatet räknas ut och sparas i egen tabell i db, dvs utan detta steg finns det inget resultat av tävlingen.
+   För att stänga en tävling var vänlig och mata in tidagens datum efter tävlingsslut med formatet 20110817</p>
+<form action="/admin/actions/manuell_foretagstavling_slut2.php" method="get">
+  datum: <input type="text" name="date" value="{$smarty.now|date_format:"%Y%m%d"}" /><br/>
+  <input type="submit" value="Avsluta tävling" />
+</form>
+<br/>
+<br/>
+<br/>
+
+
+
 </div>
