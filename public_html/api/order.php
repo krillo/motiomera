@@ -35,7 +35,7 @@
 		$order->setCampaignId($_POST["CampaignId0"]);
 		$order->setOfferId($_POST["OfferId0"]); 
 		$order->setSum($_POST["Sum"]);		 
-		$order->setOrderStatus(Order::ORDERSTATUS_PAID); //Ordern har blivit betald i prenshopen - lyft orderstausen och sätt isValid
+		$order->setOrderStatus(Order::ORDERSTATUS_CUST_NO); //Ordern har blivit betald i prenshopen - lyft orderstausen och sätt isValid //2011-08-24 Krillo changed to status 30 to avoid the customer nbr lookup from prenshop not necessary any more
 		$order->setIsValid(1);			
 		$order->commit();
 		
@@ -61,7 +61,7 @@
 			$order->setCampaignId($_POST["CampaignId$i"]);
 			$order->setOfferId($_POST["OfferId$i"]); 
 			$order->setSum($_POST["Sum"]);		 
-			$order->setOrderStatus(Order::ORDERSTATUS_PAID); //Ordern har blivit betald i prenshopen - lyft orderstausen och sätt isValid
+			$order->setOrderStatus(Order::ORDERSTATUS_CUST_NO); //Ordern har blivit betald i prenshopen - lyft orderstausen och sätt isValid //2011-08-24 Krillo changed to status 30 to avoid the customer nbr lookup from prenshop not necessary any more
 			$order->setIsValid(1);	
 			$order->commit();						
       $foretag = $order->getForetag();
@@ -121,7 +121,7 @@
 			$order->setCampaignId($_POST["CampaignId$i"]);
 			$order->setOfferId($_POST["OfferId$i"]); 
 			$order->setSum($_POST["Sum"]);		 
-			$order->setOrderStatus(Order::ORDERSTATUS_PAID); //Ordern har blivit betald i prenshopen - lyft orderstausen och sätt isValid
+			$order->setOrderStatus(Order::ORDERSTATUS_CUST_NO); //Ordern har blivit betald i prenshopen - lyft orderstausen och sätt isValid //2011-08-24 Krillo changed to status 30 to avoid the customer nbr lookup from prenshop not necessary any more
 			$order->setIsValid(1);  			
 			$order->commit();						
       $foretag = $order->getForetag();     
