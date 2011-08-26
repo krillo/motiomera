@@ -5,7 +5,7 @@
 {*}<p>Ett kvitto har skickats till <b>{$order->getPayerEmail()}</b></p>{*}
 
 {if $orderList.typ == "foretag"}
-Hej och tack för din anmälan till MotioMera! Nedan ser du ditt kvitto. Er tävling startar {$orderList.startDatum} och ca 10 dagar innan start levereras de stegräknarpaket du beställt. Både ovanstående info och kvittot kommer att skickas till dig per e-post.
+Hej och tack för din anmälan till MotioMera! Nedan ser du ditt kvitto. Er tävling startar {$orderList.startDatum} och ca 10 dagar innan start levereras de stegräknarpaket du beställt. Paketen innehåller stegräknare (om ni beställt sådana) samt deltagarbrev med fullständiga inloggningsinstruktioner till användarna. Både ovanstående info och kvittot kommer att skickas till dig per e-post.
 
 <h2>Lagindelning och tilläggsbeställning</h2>
 Som tävlingsansvarig har du tillgång till din egen administrationssida, http://motiomera.se/pages/foretaglogin.php. På denna sida kan du göra din egen lagindelning samt göra tilläggsbeställningar. Se dina inloggningsuppgifter nedan.

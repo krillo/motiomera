@@ -1,7 +1,7 @@
 Hej och tack för din anmälan till MotioMera! 
 
 Nedan ser du ditt kvitto. Er tävling startar {$orderList.startDatum} och senast 10 dagar innan start levereras de stegräknarpaket du beställt. 
-Logga in på administrationssidorna för att administrera er tävling och göra tilläggsbeställningar.
+Logga in på administrationssidorna för att administrera er tävling och göra tilläggsbeställningar. Paketen innehåller stegräknare (om ni beställt sådana) samt deltagarbrev med fullständiga inloggningsinstruktioner till användarna.
 Användarnamn: {$orderList.foretagANamn}
 Lösenord: {$orderList.foretagLosen}
 http://motiomera.se/pages/foretaglogin.php?u={$orderList.foretagANamn}&p={$orderList.foretagLosen}
