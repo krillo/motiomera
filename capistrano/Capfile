@@ -1,0 +1,101 @@
+load 'deploy' if respond_to?(:namespace)
+
+Dir['vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
+
+set :application, "motiomera"
+# domain sets the server IP to deploy code to
+set :domain, "10.0.1.181"
+set :use_sudo, false
+set :repository, "git@github.com:allerinternet/motiomera.git"
+set :local_repository, "git@github.com:allerinternet/motiomera.git"
+set :scm, :git
+set :scm_passphrase, ""
+set :git, "/usr/bin/git"
+set :user, "deploy"
+set :scm_username, "deploy"
+set :branch, "master"
+set :scm_verbose, false
+set :deploy_via, :remote_cache
+set :keep_releases, 3
+set :deploy_to, "/export/#{application}"
+ssh_options[:forward_agent] = true
+
+role :web,	domain
+role :app,	domain
+role :db, 	domain, :primary => true
+
+namespace :deploy do
+	task :restart do
+	end
+end
+
+after "deploy" do
+
+	run "mv #{release_path}/public_html/php/settings-template.php #{release_path}/public_html/php/settings.php"
+
+        set :email_report, "mabrasupport@aller.se"
+        set :url_motiomera, "motiomera.se"
+        run "sed -i 's/CONF_REPORT_MAIL/#{email_report}/' #{release_path}/public_html/php/settings.php"
+        run "sed -i 's/CONF_MOTIOMERA_URL/#{url_motiomera}/' #{release_path}/public_html/php/settings.php"
+
+        set :capistrano_deploy, "true"
+        set :file_owner, "deploy"
+        run "sed -i 's/CONF_CAPISTRANO_DEPLOY/#{capistrano_deploy}/' #{release_path}/public_html/php/settings.php"
+        run "sed -i 's/FILE_OWNER/#{file_owner}/' #{release_path}/public_html/php/settings.php"
+
+	set :sql_db, "motiomera"
+	set :sql_host, "10.0.1.184"
+	set :sql_user, "motiomera"
+	set :sql_pass, "t5fugds"
+        run "sed -i 's/CONF_SQL_DB/#{sql_db}/' #{release_path}/public_html/php/settings.php"
+        run "sed -i 's/CONF_SQL_HOST/#{sql_host}/' #{release_path}/public_html/php/settings.php"
+	run "sed -i 's/CONF_SQL_USER/#{sql_user}/' #{release_path}/public_html/php/settings.php"
+	run "sed -i 's/CONF_SQL_PASS/#{sql_pass}/' #{release_path}/public_html/php/settings.php"
+
+	set :use_memcache, "true"
+	set :memcache_server, "10.0.1.188"
+	run "sed -i 's/CONF_USE_MEMCACHE/#{use_memcache}/' #{release_path}/public_html/php/settings.php"
+	run "sed -i 's/CONF_MEMCACHE_SERVER/#{memcache_server}/' #{release_path}/public_html/php/settings.php"
+
+        set :debug_override, "false"
+        set :debug_mail, "false"
+        set :debug_smarty, "false"
+        set :debug_im, "true"
+	set :no_internet, "false"
+	set :googlemaps_no_internet, "false"
+	run "sed -i 's/CONF_DEBUG_OVERRIDE/#{debug_override}/' #{release_path}/public_html/php/settings.php"
+	run "sed -i 's/CONF_DEBUG_MAIL/#{debug_mail}/' #{release_path}/public_html/php/settings.php"
+	run "sed -i 's/CONF_DEBUG_SMARTY/#{debug_smarty}/' #{release_path}/public_html/php/settings.php"
+	run "sed -i 's/CONF_DEBUG_IM/#{debug_im}/' #{release_path}/public_html/php/settings.php"
+	run "sed -i 's/CONF_NO_INTERNET/#{no_internet}/' #{release_path}/public_html/php/settings.php"
+	run "sed -i 's/CONF_GOOGLEMAPS_OVERRIDE_NO_INTERNET/#{googlemaps_no_internet}/' #{release_path}/public_html/php/settings.php"
+
+	set :ftp_host, 'ftp.postpac.se'
+	set :ftp_user, 'aller'
+	set :ftp_pass, 'A!!3r$47'
+        set :ftp_remote_path, '\/Motiomera'
+        set :ftp_local_path, '\/export\/motiomera\/shared\/files\/order_files'
+	run "sed -i 's/CONF_FTP_HOST/#{ftp_host}/' #{release_path}/public_html/php/settings.php"
+	run "sed -i 's/CONF_FTP_USER/#{ftp_user}/' #{release_path}/public_html/php/settings.php"
+	run "sed -i 's/CONF_FTP_PASS/#{ftp_pass}/' #{release_path}/public_html/php/settings.php"
+        run "sed -i 's/CONF_FTP_REMOTE_PATH/#{ftp_remote_path}/' #{release_path}/public_html/php/settings.php"
+        run "sed -i 's/CONF_FTP_LOCAL_PATH/{ftp_local_path}/' #{release_path}/public_html/php/settings.php"
+
+
+	run "rm -f #{release_path}/public_html/php/settings-template.php"
+	run "sed -i 's/motiomera.css/motiomera.css?ver=#{real_revision}/' #{release_path}/public_html/templates/header.tpl"
+	run "sed -i 's/print.css/print.css?ver=#{real_revision}/' #{release_path}/public_html/templates/header.tpl"
+
+	run "mv #{release_path}/public_html/files #{release_path}/public_html/files.old"
+	run "ln -s #{shared_path}/files #{release_path}/public_html/files"
+	run "ln -s #{shared_path}/log #{release_path}/public_html/log"
+
+
+	run "chmod 777 #{release_path}/public_html/templates_c"
+	run "chmod 777 #{release_path}/public_html/admin/templates_c"
+	run "chmod 777 #{release_path}/public_html/popup/templates_c"
+        run "mkdir #{release_path}/public_html/php/libs/smarty/cache"
+	run "chmod 777 #{release_path}/public_html/php/libs/smarty/cache"
+
+	# run "chown motiomera:motiomera #{release_path}"
+end
