@@ -397,10 +397,16 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $lastUser = $db->row($sql);
     $tavlingsId = $lastUser['tavlings_id'];
     $stopDate = date("Ymd", $lastUser['stop_datum']);
-    $today = date("Ymd");    
-    $daysBetween = $today - $stopDate;
+    $today = date("Ymd");
+    //$daysBetween = $today - $stopDate;  //not correct calculation..
+
+    $between = $time() - $lastUser['stop_datum'];
+    $secPerDay = 24*60*60;
+    $daysBetween = intval(floor($between/$secPerDay));
+
+    Misc::logMotiomera("Days between today: $today and the last saved competition end (stopdate: $stopDate) is $daysBetween ", 'info');
     //continue with the email sending if last tavling stop date is less than 4 days old ( this code can be run: mon, tue, wed and thursday) 
-    if($daysBetween <= 4 && $daysBetween > 0){
+    if($daysBetween <= 4 && $daysBetween >= 0){
       $sql = "SELECT medlem_id AS id FROM mm_tavling_save WHERE tavlings_id = $tavlingsId";  
       $users = $db->valuesAsArray($sql);
       Misc::logMotiomera( count($users) ." users to email. See email.log file for further details", 'info');
