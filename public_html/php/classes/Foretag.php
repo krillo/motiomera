@@ -400,7 +400,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $today = date("Ymd");
     //$daysBetween = $today - $stopDate;  //not correct calculation..
 
-    $between = $time() - $lastUser['stop_datum'];
+    $between = time() - $lastUser['stop_datum'];
     $secPerDay = 24*60*60;
     $daysBetween = intval(floor($between/$secPerDay));
 
