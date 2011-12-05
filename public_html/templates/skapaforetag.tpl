@@ -26,8 +26,8 @@
 		<tr>
 			<th  style="border-bottom:none;">Startdatum</th>					
 			<td  style="border-bottom:none;">
-				<input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2011-09-26" checked>
-				<span style="text-decoration: none;">Den stora hösttävlingen 26 september </span>
+				<input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2012-03-12" checked>
+				<span style="text-decoration: none;">Den stora vårtävlingen 12 mars </span>
 				<!-- span style="color: #f00; font-weight:bold;">
 				   Det är fortfarande möjligt att anmäla er till Vårtävlingen. Vi kan dock inte garantera att stegräknarna levereras till tävlingens startdatum. Det är även möjligt att välja annat startdatum nedan.
 				</span-->
