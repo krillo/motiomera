@@ -162,6 +162,7 @@ class Order extends Mobject
 			"levelid" => 1,
       "public" => TRUE,
 		) ,
+      /*
 		"RE07" => array(
 			"typ" => "medlem",
 			"text" => "3 månader MotioMera + 3 nr av Må Bra",
@@ -180,6 +181,7 @@ class Order extends Mobject
 			"levelid" => 1,
       "public" => TRUE,
 		) ,
+       */
 		"RE09" => array(
 			"typ" => "medlem",
 			"text" => "12 månader MotioMera",
@@ -198,6 +200,7 @@ class Order extends Mobject
 			"levelid" => 1,
       "public" => TRUE,
 		) ,
+      /*
 		"RE11" => array(
 			"typ" => "medlem",
 			"text" => "12 månader MotioMera + 3 nr av Må Bra",
@@ -207,6 +210,7 @@ class Order extends Mobject
 			"levelid" => 1,
       "public" => TRUE,
 		) ,
+
 		"RE12" => array(
 			"typ" => "medlem",
 			"text" => "12 månader + stegräknare + 3 nr av Må Bra",
@@ -216,6 +220,8 @@ class Order extends Mobject
 			"levelid" => 1,
       "public" => TRUE,
 		) ,
+       
+       */
     "UE03" => array(
       "typ" => "medlem",
       "text" => "4 veckor MotioMera <b>med</b> stegräknare",

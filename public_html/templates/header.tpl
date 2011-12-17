@@ -137,11 +137,12 @@
 					{/foreach}
 				{/if}
 					{*}<a href="javascript:;" onclick="rapportera_show_help(1,480,200,'topleft')"><img src="/img/icons/FaqCircleGreen.gif" alt="Hjälp" class="mmPositionRelative mmFloatRight" /></a>{*}
-					<a href="http://www.mabra.com/" title="Gå till Mabra.com">
+					{*}
+          <a href="http://www.mabra.com/" title="Gå till Mabra.com">
 						<span>En tj&auml;nst fr&aring;n tidningen</span>
 						<img src="/img/framework/MaBraLogo.gif" alt="M&aring; Bra" />
 					</a>
-					
+					{*}
 					
 
 				</div>

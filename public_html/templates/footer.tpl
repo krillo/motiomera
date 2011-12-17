@@ -7,8 +7,8 @@
 				<a href="#" onclick="motiomera_rapportera(); return false;">Uppmärksamma oss på denna sida</a>
 			</div>
 			<a href="#" onclick="motiomera_kontakt(); return false;">Kontakta oss</a>  |  <a href="http://www.integritetspolicy.se/#cookies" rel="external">Om Cookies</a>  |  <a href="http://www.integritetspolicy.se" rel="external">Integritetspolicy</a>  |
-			<a href="http://aller.se/om-aller-media/" rel="external">Om Aller media</a>  |  <a href="/pages/sitemap.html">Sitemap</a><br />
-	&copy; Copyright Aller media 2008 - {$smarty.now|date_format:"%Y"}  | Ansvarig utgivare: Liselotte St&aring;lberg
+			  <a href="/pages/sitemap.html">Sitemap</a><br />
+	&copy; Copyright Motiomera 2008 - {$smarty.now|date_format:"%Y"}
 	
 		</div>
 		<div class="mmClearBoth"></div>
