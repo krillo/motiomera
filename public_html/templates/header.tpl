@@ -148,7 +148,8 @@
 				</div>
 				{if !isset($USER) && !isset($ADMIN) && !isset($FORETAG)}
 				<div id="mmMenuTop">
-					<a href="/pages/blimedlem.php">BLI MEDLEM</a> | 
+          <a href="/pages/skapaforetag.php">FÖRETAGSMEDLEMSKAP</a> |
+          <a href="/pages/blimedlem.php">BLI PRIVATMEDLEM</a> |
 					<a href="/pages/glomtlosen.php">GL&Ouml;MT L&Ouml;SENORDET?</a>			
 				</div>
 				{/if}

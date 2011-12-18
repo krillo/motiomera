@@ -20,8 +20,17 @@
 	{/if}
   {*}
 
-
-  <a href="/pages/skapaforetag.php"><img src="img/varmed.png" alt="Höstens stora tävling 26sept - 30okt" /></a>
+  <div style="text-align:center;">
+    <a href="/pages/skapaforetag.php" style="text-decoration:none;"><h1 style="color:#B71416;font-size:220%;">Var med i vårens stora stegtävling!</h1>
+    <h2>
+      12 mars - 15 april<br/>
+      Anmäl er senast den 5 mars<br/>
+      Från 195 kr
+    </h2>
+    </a>
+    <a href="/pages/skapaforetag.php"><img src="img/bestall_knapp.jpg" alt="Beställ" /></a>
+  </div>
+  <!-- a href="/pages/skapaforetag.php"><img src="img/varmed.png" alt="Höstens stora tävling 26sept - 30okt" /></a -->
 	<div class="mmGrayLineMiddle"></div>
 
 <script>
