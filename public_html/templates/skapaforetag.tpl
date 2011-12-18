@@ -156,7 +156,7 @@
 		<tr>
 			<td></td>
 			<td>
-			<input type="checkbox" id="integritetspolicy" value="1" name="villkar" /> Ja, jag godkänner <a href="http://www.integritetspolicy.se/" target="_blank">Allers integritetspolicy</a> och är över 16 år</td>
+			<input type="checkbox" id="integritetspolicy" value="1" name="villkar" /> Ja, jag godkänner <a href="http://motiomera.se/pages/integritetspolicy.php/" target="_blank">Motiomeras integritetspolicy</a> och är över 16 år</td>
 		</tr>
 		<tr class="mmLastRow">
 			<td></td>
@@ -168,11 +168,12 @@
 </form>    
 <br>
 <div id="pers-service">
-  <div id="pers-img" style="float:left;">
+  <!-- div id="pers-img" style="float:left;">
     <img src="/img/Emma_80x90.png" alt="Marina"/>
-  </div>
+  </div -->
   <div id="pers-text" style="float:left;padding-left:15px;width:330px;padding-top:5px">
-    <span  class="mmObs mmObsText">För beställning per telefon ring vår kundservice
+    <span  class="mmObs mmObsText">För beställning per telefon ring Kristian på
+           0761-393855
       <!--  042-17 37 91 -->
       <!-- 0705-17 35 95 -->
       <!-- eller -->
@@ -181,9 +182,7 @@
       {*}</br><a href="mailto:Marina.Kulevska@aller.se" style="text-decoration:underline;">Marina.Kulevska@aller.se</a>{*}
 {*}
 <br/>
-<br/>eller maila vår kundservice:{*}
- 042-444 30 25 (vardagar 09.00-11.30, 13.00-15.00)
-{*}
+<br/>eller maila 
 <br/><a href="#" onclick="motiomera_kontakt(); return false;" style="text-decoration:underline;">Klicka här för att maila</a>
 {*}
 
