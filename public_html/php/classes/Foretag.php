@@ -118,7 +118,7 @@ class Foretag extends Mobject
 
 	//081002 - changed to 40
 	const TAVLINGSPERIOD_MEDLEMS_DAGAR = 40;
-	const FORETAGSMEDLEMS_EXTRA_DAYS = 90;
+	const FORETAGSMEDLEMS_EXTRA_DAYS = 7;  //one week free after competition is finished
 	const TAVLINGSPERIOD_DAGAR = 34;    //5 weeks -1 day
  	const MAX_LENGTH_AFFCODE = 20;
 	

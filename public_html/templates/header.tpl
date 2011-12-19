@@ -41,6 +41,20 @@
 		{/literal}
 	</script>
 
+
+{literal}
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28332028-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+{/literal}
 </head>	
 <body id="body" class="{$BROWSER} {$currentPage}">
 <div id="mmPage">
@@ -149,8 +163,8 @@
 				</div>
 				{if !isset($USER) && !isset($ADMIN) && !isset($FORETAG)}
 				<div id="mmMenuTop">
-          <a href="/pages/skapaforetag.php">FÖRETAGSMEDLEMSKAP</a> |
-          <a href="/pages/blimedlem.php">BLI PRIVATMEDLEM</a> |
+          <a href="/pages/skapaforetag.php" title="stegtävling">FÖRETAGSMEDLEMSKAP</a> |
+          <a href="/pages/blimedlem.php" title="stegräknare">BLI PRIVATMEDLEM</a> |
 					<a href="/pages/glomtlosen.php">GL&Ouml;MT L&Ouml;SENORDET?</a>			
 				</div>
 				{/if}
@@ -227,9 +241,9 @@
 					{*}<li><a{if $urlChecker->getMarkedMenu() eq "TÄVLINGAR"} class="mmMarkedMenu"{/if} href="/pages/tavlingar.php" class="utLoggadMenuVal">T&Auml;VLINGAR</a></li>{*}
 					<li><a{if $urlChecker->getMarkedMenu() eq "KOMMUNJAKTEN"} class="mmMarkedMenu"{/if} href="/pages/kommunjakten.php" class="utLoggadMenuVal">KOMMUNJAKTEN</a></li>
 					{if isset($FORETAG)}
-					<li><a{if $urlChecker->getMarkedMenu() eq "FÖR FÖRETAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretag, URL_EDIT, $FORETAG->getId())}" class="utLoggadMenuVal">F&Ouml;R F&Ouml;RETAG</a></li>
+					<li><a{if $urlChecker->getMarkedMenu() eq "FÖR FÖRETAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretag, URL_EDIT, $FORETAG->getId())}" class="utLoggadMenuVal" title="om stegtävling">F&Ouml;R F&Ouml;RETAG</a></li>
 					{else}
-					<li><a{if $urlChecker->getMarkedMenu() eq "FÖR FÖRETAG"} class="mmMarkedMenu"{/if} href="/pages/for_foretag.php" class="utLoggadMenuVal">F&Ouml;R F&Ouml;RETAG</a></li>
+					<li><a{if $urlChecker->getMarkedMenu() eq "FÖR FÖRETAG"} class="mmMarkedMenu"{/if} href="/pages/for_foretag.php" class="utLoggadMenuVal" title="om stegtävling">F&Ouml;R F&Ouml;RETAG</a></li>
 					{/if}
 
 				</ul>
