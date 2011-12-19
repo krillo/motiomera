@@ -4,7 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>{if isset($pagetitle)}{$pagetitle} &mdash; {/if}{$pagename}</title>
+	{*}<title>{if isset($pagetitle)}{$pagetitle} &mdash; {/if}{$pagename}</title>{*}
+  <title>Stegtävling för företag</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="description" content="Motiomera" />
 	<meta name="keywords" content="Motiomera" />
@@ -223,7 +224,7 @@
 					{/if}
 					<li><a{if $urlChecker->getMarkedMenu() eq "OM MOTIOMERA"} class="mmMarkedMenu"{/if} href="/pages/ommotiomera.php" class="utLoggadMenuVal">OM MOTIOMERA</a></li>
 					<li><a{if $urlChecker->getMarkedMenu() eq "VANLIGA FRÅGOR"} class="mmMarkedMenu"{/if} href="/pages/vanligafragor.php" class="utLoggadMenuVal">VANLIGA FR&Aring;GOR</a></li>
-					<li><a{if $urlChecker->getMarkedMenu() eq "TÄVLINGAR"} class="mmMarkedMenu"{/if} href="/pages/tavlingar.php" class="utLoggadMenuVal">T&Auml;VLINGAR</a></li>
+					{*}<li><a{if $urlChecker->getMarkedMenu() eq "TÄVLINGAR"} class="mmMarkedMenu"{/if} href="/pages/tavlingar.php" class="utLoggadMenuVal">T&Auml;VLINGAR</a></li>{*}
 					<li><a{if $urlChecker->getMarkedMenu() eq "KOMMUNJAKTEN"} class="mmMarkedMenu"{/if} href="/pages/kommunjakten.php" class="utLoggadMenuVal">KOMMUNJAKTEN</a></li>
 					{if isset($FORETAG)}
 					<li><a{if $urlChecker->getMarkedMenu() eq "FÖR FÖRETAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretag, URL_EDIT, $FORETAG->getId())}" class="utLoggadMenuVal">F&Ouml;R F&Ouml;RETAG</a></li>

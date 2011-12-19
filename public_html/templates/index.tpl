@@ -21,14 +21,15 @@
   {*}
 
   <div style="text-align:center;">
-    <a href="/pages/skapaforetag.php" style="text-decoration:none;"><h1 style="color:#B71416;font-size:220%;">Var med i vårens stora stegtävling!</h1>
-    <h2>
+    <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:220%;">Stegtävling för ert företag!</h1>
+    <h2>Var med i vårens stora tävling</h2>
+    <p style="text-align:left;padding-left:96px;font-size:14px;">
       12 mars - 15 april<br/>
       Anmäl er senast den 5 mars<br/>
       Från 195 kr
-    </h2>
+    </p>
     </a>
-    <a href="/pages/skapaforetag.php"><img src="img/bestall_knapp.jpg" alt="Beställ" /></a>
+    <a href="/pages/skapaforetag.php"><img src="img/bestall_knapp.jpg" alt="Stegtävling" /></a>
   </div>
   <!-- a href="/pages/skapaforetag.php"><img src="img/varmed.png" alt="Höstens stora tävling 26sept - 30okt" /></a -->
 	<div class="mmGrayLineMiddle"></div>
@@ -49,19 +50,19 @@ $(function(){
 <div id="slides">
   <div class="slides_container" >
     <div>
-      <a href="pages/for_foretag.php"><img src="/slideshow/img/0.jpg" alt="" /></a>
+      <a href="pages/for_foretag.php"><img src="/slideshow/img/0.jpg" title="om stegtävling" /></a>
     </div>
     <div>
-      <a href="pages/for_foretag.php"><img src="/slideshow/img/1.jpg" alt="" /></a>
+      <a href="pages/for_foretag.php"><img src="/slideshow/img/1.jpg" title="om stegtävling" /></a>
     </div>
     <!--div>
-      <a href="pages/for_foretag.php"><img src="/slideshow/img/2.jpg" alt="" /></a>
+      <a href="pages/for_foretag.php"><img src="/slideshow/img/2.jpg" title="om stegtävling" /></a>
     </div-->
     <div>
-      <a href="pages/for_foretag.php"><img src="/slideshow/img/3.jpg" alt="" /></a>
+      <a href="pages/for_foretag.php"><img src="/slideshow/img/3.jpg" title="om stegtävling" /></a>
     </div>
     <div>
-      <a href="pages/for_foretag.php"><img src="/slideshow/img/4.jpg" alt="" /></a>
+      <a href="pages/for_foretag.php"><img src="/slideshow/img/4.jpg" title="om stegtävling" /></a>
     </div>
   </div>
 </div>
