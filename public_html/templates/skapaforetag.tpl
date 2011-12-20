@@ -168,9 +168,9 @@
 </form>    
 <br>
 <div id="pers-service">
-  <!-- div id="pers-img" style="float:left;">
-    <img src="/img/Emma_80x90.png" alt="Marina"/>
-  </div -->
+  <div id="pers-img" style="float:left;">
+    <img src="/img/kristian_80x90.png" alt="Kristian"/>
+  </div>
   <div id="pers-text" style="float:left;padding-left:15px;width:330px;padding-top:5px">
     <span  class="mmObs mmObsText">För beställning per telefon ring Kristian på
            0761-393855
