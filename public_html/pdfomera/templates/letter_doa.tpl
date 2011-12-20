@@ -8,12 +8,10 @@ Tråkigt att höra att ni verkar ha fått ett eller flera måndagsexemplar av st
 
 Om ni inte redan gjort det, så vore det toppen om ni kan skicka de trasiga stegräknarna till nedanstående adress. Så kan vi skicka tillbaka dem till tillverkaren och påtala felet.
 
-<b>SVARSPOST</b> 
-<b>20528844</b> 
-<b>258 28 Helsingborg</b> 
+<b>Motiomera</b>
+<b>Finjagatan 6</b>
+<b>252 51 Helsingborg</b>
 
-(Inget porto behövs alltså, men märk gärna kuvertet <i>Stegräknare</i>)
-Vi önskar en fortsatt lyckad MotioMera-tävling! 
 
 Med vänliga hälsningar 
-Tidningen MåBra
+Motiomerateamet

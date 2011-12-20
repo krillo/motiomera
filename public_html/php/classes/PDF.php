@@ -154,8 +154,8 @@ class PDF extends FPDF{
 		$this->MultiCell(80,3, $info);
 		$this->SetXY(130,-65);
 		$this->MultiCell(80,3, $address);
-		$this->Image(LOGO_MABRA, 13, 255, 32, 8);
-		$this->Image(LOGO_ALLERS, 130,255,53,8);
+		//$this->Image(LOGO_MABRA, 13, 255, 32, 8);
+		//$this->Image(LOGO_ALLERS, 130,255,53,8);
 	}
 	
 	/**

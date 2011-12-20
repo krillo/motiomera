@@ -163,8 +163,8 @@
 				</div>
 				{if !isset($USER) && !isset($ADMIN) && !isset($FORETAG)}
 				<div id="mmMenuTop">
-          <a href="/pages/skapaforetag.php" title="stegtävling">FÖRETAGSMEDLEMSKAP</a> |
-          <a href="/pages/blimedlem.php" title="stegräknare">BLI PRIVATMEDLEM</a> |
+          <a href="/pages/skapaforetag.php" title="stegtävling">FÖR FÖRETAG</a> |
+          <a href="/pages/blimedlem.php" title="stegräknare">BLI MEDLEM</a> |
 					<a href="/pages/glomtlosen.php">GL&Ouml;MT L&Ouml;SENORDET?</a>			
 				</div>
 				{/if}

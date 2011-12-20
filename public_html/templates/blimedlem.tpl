@@ -124,7 +124,7 @@
 		<tr>
 			<td></td>
 			<td>
-			<input type="checkbox" id="integritetspolicy" value="1" /> Ja, jag godkänner <a href="http://www.integritetspolicy.se/" target="_blank">Motiomeras integritetspolicy</a> och är över 16 år</td>
+			<input type="checkbox" id="integritetspolicy" value="1" /> Ja, jag godkänner <a href="/pages/integritetspolicy.php" target="_blank">Motiomeras integritetspolicy</a> och är över 16 år</td>
 		</tr>
 		<tr class="mmLastRow">
 			<td></td>
