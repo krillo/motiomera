@@ -139,7 +139,7 @@ class Order extends Mobject
 			"typ" => "foretag",
 			"text" => "5 veckors tävling <b>utan</b> stegräknare",
       "extra" => " ex. moms.",
-			"pris" => 159,
+			"pris" => 169,
 			"dagar" => 31,
 			"popupid" => 21,
       "public" => TRUE,
@@ -147,7 +147,7 @@ class Order extends Mobject
 		"RE05" => array(
 			"typ" => "medlem",
 			"text" => "3 månader MotioMera",
-			"pris" => 49,
+			"pris" => 79,
 			"dagar" => 91,
 			"popupid" => 30,
 			"levelid" => 1,
@@ -156,7 +156,7 @@ class Order extends Mobject
 		"RE06" => array(
 			"typ" => "medlem",
 			"text" => "3 månader MotioMera + stegräknare",
-			"pris" => 159,
+			"pris" => 179,
 			"dagar" => 91,
 			"popupid" => 14,
 			"levelid" => 1,
@@ -185,7 +185,7 @@ class Order extends Mobject
 		"RE09" => array(
 			"typ" => "medlem",
 			"text" => "12 månader MotioMera",
-			"pris" => 169,
+			"pris" => 199,
 			"dagar" => 365,
 			"popupid" => 17,
 			"levelid" => 1,
@@ -194,7 +194,7 @@ class Order extends Mobject
 		"RE10" => array(
 			"typ" => "medlem",
 			"text" => "12 månader MotioMera + stegräknare",
-			"pris" => 279,
+			"pris" => 349,
 			"dagar" => 365,
 			"popupid" => 18,
 			"levelid" => 1,
