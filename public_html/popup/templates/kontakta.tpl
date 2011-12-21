@@ -4,17 +4,9 @@
 <input type="hidden" name="sida" id="sida" value="{$HTTP_REFERER}" />
 <input type="hidden" name="browser" id="user_browser" value="{$HTTP_USER_AGENT}" />
 <div>
-Du är välkommen att kontakta oss via e-post, brev eller fax – ange ditt meddelande nedan.
+Du är välkommen att kontakta oss via e-post – ange ditt meddelande nedan.
 Innan du kontaktar oss kan du titta i <a href="/pages/vanligafragor.php">Vanliga frågor</a> för att se om du hittar svaret på din fråga där.
-<p/>
-För personlig kundservice och teknisk support:<br/>
-Ring 042-444 30 25 vardagar 09.00-11.30, 13.00-15.00 
-<p/>
-Allers förlag<br/>
-MåBra Kundservice<br/>
-251 85 Helsingborg<br/>
-Fax: 042-17 37 40
-</div>
+
 <p/>
 <b>Meddelande:</b>
 <textarea name="beskrivning" id="beskrivning" cols="40" rows="8" class="mmWidth90Procent" ></textarea>
