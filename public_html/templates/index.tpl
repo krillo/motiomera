@@ -24,9 +24,9 @@
     <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:220%;">Stegtävling för ert företag!</h1>
     <h2>Var med i vårens stora tävling</h2>
     <p style="text-align:left;padding-left:96px;font-size:14px;">
-      12 mars - 15 april<br/>
-      Anmäl er senast den 5 mars<br/>
-      Från 195 kr
+      23 april - 27 maj<br/>
+      Anmäl er senast den 16 april<br/>
+      Från 169 kr
     </p>
     </a>
     <a href="/pages/skapaforetag.php"><img src="img/bestall_knapp.jpg" alt="Stegtävling" /></a>

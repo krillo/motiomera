@@ -26,8 +26,8 @@
 		<tr>
 			<th  style="border-bottom:none;">Startdatum</th>					
 			<td  style="border-bottom:none;">
-				<input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2012-03-12" checked>
-				<span style="text-decoration: none;">Den stora vårtävlingen 12 mars </span>
+				<input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2012-04-23" checked>
+				<span style="text-decoration: none;">Den stora vårtävlingen 23 april </span>
 				<!-- span style="color: #f00; font-weight:bold;">
 				   Det är fortfarande möjligt att anmäla er till Vårtävlingen. Vi kan dock inte garantera att stegräknarna levereras till tävlingens startdatum. Det är även möjligt att välja annat startdatum nedan.
 				</span-->
@@ -171,9 +171,8 @@
   <div id="pers-img" style="float:left;">
     <img src="/img/kristian_80x90.png" alt="Kristian"/>
   </div>
-  <div id="pers-text" style="float:left;padding-left:15px;width:330px;padding-top:5px">
-    <span  class="mmObs mmObsText">För beställning per telefon ring Kristian på
-           0761-393855
+  <div id="pers-text" style="float:left;padding-left:15px;width:390px;padding-top:5px">
+    <span  class="mmObs mmObsText">För beställning per telefon ring Kristian på 0761-393855
       <!--  042-17 37 91 -->
       <!-- 0705-17 35 95 -->
       <!-- eller -->
