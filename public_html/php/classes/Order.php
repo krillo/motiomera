@@ -225,7 +225,7 @@ class Order extends Mobject
     "UE03" => array(
       "typ" => "medlem",
       "text" => "4 veckor MotioMera <b>med</b> stegräknare",
-      "pris" => 99,
+      "pris" => 139,
       "dagar" => 35,
       "popupid" => 22,
 			"levelid" => 1,
