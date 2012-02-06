@@ -7,9 +7,8 @@
 	{*}<title>{if isset($pagetitle)}{$pagetitle} &mdash; {/if}{$pagename}</title>{*}
   <title>Stegtävling och friskvård för företag</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<meta name="description" content="Motiomera" />
-	<meta name="keywords" content="Motiomera" />
-  <meta name="keywords" content="stegtävling, företag, stegräknare, friskvård, stegkampanj, kommun" />
+	<meta name="description" content="Stegtävling för företag. Motiomera är Sveriges roligaste stegtävling för alla som vill röra på sig och ha kul. Häng bara på dig stegräknaren och börja gå." />
+  <meta name="keywords" content="motoimera stegtävling, stegtävling för företag, tävla med stegräknare, friskvård åt företag, avdragsgill friskvårdsaktivitet, motionera stegtävling, köp stegräknare, billig stegräknare, motionera mera, friskvård stegräknare" />
 	<link rel="stylesheet" href="/css/motiomera.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
         {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
