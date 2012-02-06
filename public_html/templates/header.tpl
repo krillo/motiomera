@@ -5,10 +5,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	{*}<title>{if isset($pagetitle)}{$pagetitle} &mdash; {/if}{$pagename}</title>{*}
-  <title>Stegtävling för företag</title>
+  <title>Stegtävling och friskvård för företag</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="description" content="Motiomera" />
 	<meta name="keywords" content="Motiomera" />
+  <meta name="keywords" content="stegtävling, företag, stegräknare, friskvård, stegkampanj, kommun" />
 	<link rel="stylesheet" href="/css/motiomera.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
         {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
