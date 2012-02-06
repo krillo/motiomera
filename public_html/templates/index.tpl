@@ -29,7 +29,7 @@
       Från 169 kr
     </p>
     </a>
-    <a href="/pages/skapaforetag.php"><img src="img/bestall_knapp.jpg" alt="Stegtävling" /></a>
+    <a href="/pages/skapaforetag.php"><img src="img/bestall_knapp.jpg" alt="Stegtävling" title="Stegtävling"/></a>
   </div>
   <!-- a href="/pages/skapaforetag.php"><img src="img/varmed.png" alt="Höstens stora tävling 26sept - 30okt" /></a -->
 	<div class="mmGrayLineMiddle"></div>

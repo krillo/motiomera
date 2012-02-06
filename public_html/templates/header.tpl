@@ -87,7 +87,7 @@
 		
 		<div id="mmHeader">
 			<div id="mmLogo">
-				<a href="/"><img src="/img/framework/mmLogo.gif" alt="Motiomera" /></a>
+				<a href="/"><img src="/img/framework/mmLogo.gif" alt="Motiomera stegtävling för företag" title="Motiomera stegtävling för företag"/></a>
 			</div>
 			<div class="noprint">
 				{if isset($USER) or isset($ADMIN) or isset($FORETAG)}
