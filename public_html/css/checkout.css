@@ -1,0 +1,27 @@
+/* 
+    Document   : style.css
+    Created on : 2012-feb-11, 13:10:57
+    Author     : krillo
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+  display: block;
+}
+.clear{clear:both;}
+
+#checkout-ul li{margin-top: 15px;}
+.invalid{border-color: red;}
+
+#nbr{clear:both;}
+#nbr-with{float:left;}
+#nbr-with-text{float:left;}
+#nbr-with-sum{float:left;}
+#nbr-without{float:left;}
+#nbr-without-text{float:left;}
+#nbr-without-sum{float:left;}
+#nbr-sum-total{}
+
+#delivery{}
+.hidden{display: none;}

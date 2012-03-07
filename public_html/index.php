@@ -1,7 +1,6 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
 $smarty = new MMSmarty;
-
 $medlemsprofiler = Medlem::getMedlemmarFrontpage(3);
 shuffle($medlemsprofiler);
 $smarty->assign("title", "Välkommen till Motiomera");
