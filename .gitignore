@@ -22,3 +22,7 @@ public_html/files/rsscache/temp.jpg
 public_html/files/rsscache/temp_resized.jpg
 public_html/files/customvisningsbilder/*
 public_html/files/*
+public_html/bilder/*
+public_html/files.old/*
+public_html/test.php
+shared/*
