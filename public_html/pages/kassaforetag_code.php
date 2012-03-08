@@ -1,5 +1,6 @@
 <?php 
   $campaignCodes = Order::$campaignCodes;
+  $moms = Order::$moms;
   Order::getMondays(15);
 
 ?>
@@ -81,11 +82,22 @@
         //sum with and without stepcounter, add freight and moms
         function sum(){
           countWith = $('#nbr-with').val();
-          sumWith =  countWith * 289;
+          sumWith =  countWith * <?php echo $campaignCodes['RE03']['pris']; ?>;
           $('#nbr-with-sum span').html(sumWith);
   
+          if(sumWith == 0){
+           //FRAKT00 is 0 kr
+            $('#freight span').html(<?php echo $campaignCodes['FRAKT00']['pris']; ?>);
+            $('#freight-text').html('<?php echo $campaignCodes['FRAKT00']['extra']; ?>');
+            $('#m_freight').val('FRAKT00');
+         } else {             
+            $('#freight span').html(<?php echo $campaignCodes['FRAKT01']['pris']; ?>);
+            $('#freight-text').html('<?php echo $campaignCodes['FRAKT01']['extra']; ?>');
+            $('#m_freight').val('FRAKT01');
+          } 
+  
           countWithout = $('#nbr-without').val();
-          sumWithout =  countWithout * 169;
+          sumWithout =  countWithout * <?php echo $campaignCodes['RE04']['pris']; ?>;
           $('#nbr-without-sum span').html(sumWithout);
         
           sumTotal = sumWith + sumWithout;  
@@ -96,14 +108,15 @@
           $('#nbr-sum-total-freight span').html(sumTotalFreight);    
         
           
-          sumTotalFreightMoms = sumTotalFreight * 1.25;  
+          sumTotalFreightMoms = sumTotalFreight * <?php echo $moms['percent']; ?>;
+          sumTotalFreightMoms = Math.ceil(sumTotalFreightMoms);
           $('#nbr-sum-total-freight-moms span').html(sumTotalFreightMoms);
 
 
           
           //  
           $('#m_exmoms').val(sumTotal);
-          $('#m_freight').val(freight);
+          
           $('#m_total').val(sumTotalFreight);        
           $('#m_incmoms').val(sumTotalFreightMoms);
         }
@@ -209,7 +222,7 @@
       <input type="hidden" name="m_exmoms"  id="m_exmoms" value=""> 
       <input type="hidden" name="m_freight" id="m_freight"  value="">         
       <input type="hidden" name="m_total"   id="m_total" value="">        
-      <input type="hidden" name="m_incmoms" id="m_incmoms" value="">      
+      <input type="hidden" name="m_incmoms" id="m_incmoms" value="">            
 
       <ul id="checkout-ul">
         <li><label>Startdatum</label>
@@ -265,7 +278,8 @@
         <div class="clear"></div>
         <li>
           <label>Frakt</label>
-          <div id="freight"><span>50</span> kr ex moms</div>
+            
+          <div id="freight"><span></span><span id="freight-text"></span></div>
         </li>        
         <li>
           <div id="nbr-sum-total-freight"><span>0</span> kr ex moms</div>

@@ -125,7 +125,26 @@ class Order extends Mobject {
       "isValid" => "int",
   );
   static $kampanjkoder = array("måbra1" => "free", "mabra1" => "free", "krillo" => "free", "mabra2" => "UE03", "måbra2" => "UE03");  //special campaign codes see actions/newuser.php
+  static $moms = array('name' => 'Moms', 'percent' => 1.25, 'text' => '25%');
   static $campaignCodes = array(
+      "FRAKT00" => array(
+          "typ" => "frakt",
+          "text" => "Frakt",
+          "extra" => " kr - fraktfritt, instruktioner mailas till dig.",
+          "pris" => 0,
+          "dagar" => 0,
+          "popupid" => 22,
+          "public" => TRUE,
+      ),     
+      "FRAKT01" => array(
+          "typ" => "frakt",
+          "text" => "Frakt",
+          "extra" => " kr ex. moms.",
+          "pris" => 50,
+          "dagar" => 0,
+          "popupid" => 22,
+          "public" => TRUE,
+      ),     
       "RE03" => array(
           "typ" => "foretag",
           "text" => "5 veckors tävling <b>med</b> stegräknare",
@@ -162,26 +181,6 @@ class Order extends Mobject {
           "levelid" => 1,
           "public" => TRUE,
       ),
-      /*
-        "RE07" => array(
-        "typ" => "medlem",
-        "text" => "3 månader MotioMera + 3 nr av Må Bra",
-        "pris" => 69,
-        "dagar" => 91,
-        "popupid" => 15,
-        "levelid" => 1,
-        "public" => TRUE,
-        ) ,
-        "RE08" => array(
-        "typ" => "medlem",
-        "text" => "3 månader MotioMera + stegräknare + 3 nr av Må Bra",
-        "pris" => 219,
-        "dagar" => 91,
-        "popupid" => 16,
-        "levelid" => 1,
-        "public" => TRUE,
-        ) ,
-       */
       "RE09" => array(
           "typ" => "medlem",
           "text" => "12 månader MotioMera",
@@ -200,28 +199,6 @@ class Order extends Mobject {
           "levelid" => 1,
           "public" => TRUE,
       ),
-      /*
-        "RE11" => array(
-        "typ" => "medlem",
-        "text" => "12 månader MotioMera + 3 nr av Må Bra",
-        "pris" => 229,
-        "dagar" => 365,
-        "popupid" => 19,
-        "levelid" => 1,
-        "public" => TRUE,
-        ) ,
-
-        "RE12" => array(
-        "typ" => "medlem",
-        "text" => "12 månader + stegräknare + 3 nr av Må Bra",
-        "pris" => 339,
-        "dagar" => 365,
-        "popupid" => 20,
-        "levelid" => 1,
-        "public" => TRUE,
-        ) ,
-
-       */
       "UE03" => array(
           "typ" => "medlem",
           "text" => "4 veckor MotioMera <b>med</b> stegräknare",
@@ -290,33 +267,6 @@ class Order extends Mobject {
     }
   }
 
-  /* 			
-    if ($typ == "medlem") {
-    $this->setMedlem($objekt);
-    $this->setOfferId($offerId);
-    $this->setSkapadDatum(date("Y-m-d H:i:s"));
-    $this->setBrowser();
-    $this->setIpNr();
-    $this->setKanal($kanal);
-    $this->setCompAffCode($compAffCode);
-    $this->commit();
-    $this->gorUppslag($offerId);
-    } else
-    if ($typ == "foretag" || $typ == "foretag_tillagg") {
-    $this->setForetag($objekt);
-    $this->setAntal($antal);
-    $this->setCampaignId($offerId);
-    $this->setOfferId($offerId);
-    }
-    $this->setSkapadDatum(date("Y-m-d H:i:s"));
-    $this->setBrowser();
-    $this->setIpNr();
-    $this->setKanal($kanal);
-    $this->setCompAffCode($compAffCode);
-    $this->commit();
-    }
-   */
-
   /**
    * Construct an empty Order object
    * "isValid" is set default to 1 until correct order flow is implemented  Krillo 090428 
@@ -356,6 +306,37 @@ class Order extends Mobject {
 
   // STATIC FUNCTIONS ///////////////////////////////////////
 
+  
+  /**
+   * Return true if all input prices match to calculations
+   * 
+   * @param type $RE03
+   * @param type $RE04
+   * @param type $exmoms_in
+   * @param type $freight_in
+   * @param type $total_in
+   * @param type $incmoms_in
+   * @return boolean 
+   */
+  public static function priceCheck($RE03, $RE04, $exmoms_in, $FREIGHT, $total_in, $incmoms_in){ 
+    $RE03_price = (int)self::$campaignCodes['RE03']['pris'];
+    $RE04_price = (int)self::$campaignCodes['RE04']['pris'];
+    $FREIGHT_price = (int)self::$campaignCodes[$FREIGHT]['pris'];
+    $exmoms = ($RE03 * $RE03_price) + ($RE04 * $RE04_price);
+    $total = $exmoms + $FREIGHT_price;
+    $incmoms = $total * self::$moms['percent'];
+    $incmoms = (int)ceil($incmoms);
+    //echo'<br> exmoms '. $exmoms_in . $exmoms . '<br>';
+    //echo 'total '.  $total . $total_in . '<br>';
+    //echo 'incmoms '.  $incmoms . $incmoms_in. '<br>';
+    if($exmoms == $exmoms_in && $total == $total_in && $incmoms == $incmoms_in){
+      return true;
+    } else {
+      return false;
+    }   
+  }
+  
+  
   /**
    * Finds rows in mm_order that has no kundnummer. The kundnummer is generated in AS400 a day after an order is layed.
    * If successful, the order status is set to 30. Kundnummmer is also set in the Foretag object (mm_foretag).
