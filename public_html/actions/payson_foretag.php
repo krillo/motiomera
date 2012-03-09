@@ -185,6 +185,101 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
     
     echo $message;
 
+    
+    
+    
+?>    
+    Välj hur du vill betala:
+    <div style="border:solid 1px grey; float:left;">  
+VISA / MasterCard <br/>
+Internetbank Föreningssparbanken / Swedbank <br/>
+Internetbank Handelsbanken <br/>
+Internetbank SEB <br/>
+Internetbank Nordea
+<input type="button" value="Betala" id="payson">
+    </div>
+    <div style="border:solid 1px grey; float:left;">  
+Faktura <br/>
+<input type="button" value="Betala" id="faktura">
+    </div>    
+    
+    
+    
+    
+    
+    
+<?php
+
+
+require_once '../php/libs/payson/paysonapi.php';
+$credentials = new PaysonCredentials("11654", "a86549bf-cb16-41e8-a86d-f1c79522becd");
+$api = new PaysonApi($credentials);
+/*
+ * To initiate a direct payment the steps are as follows
+ *  1. Set up the details for the payment
+ *  2. Initiate payment with Payson
+ *  3. Verify that it suceeded
+ *  4. Forward the user to Payson to complete the payment
+ */
+
+/*
+ * Step 1: Set up details
+ */
+
+// URLs to which Payson sends the user depending on the success of the payment
+$returnUrl = "http://payson.dev/return.php";
+$cancelUrl = "http://payson.dev/cancel.php";
+// URL to which Payson issues the IPN
+$ipnUrl = "http://payson.dev/ipn.php";
+
+// Details about the receiver
+$receiver = new Receiver(
+    "kristian@motiomera.se", // The email of the account to receive the money
+    1); // The amount you want to charge the user, here in SEK (the default currency)
+$receivers = array($receiver);
+
+// Details about the user that is the sender of the money
+$sender = new Sender("krillos@erendi.se", "kristian", "erendi");
+
+//print("\nPay:\n");
+
+$payData = new PayData($returnUrl, $cancelUrl, $ipnUrl, $message, $sender, $receivers);
+
+// Set guarantee options
+$payData->setGuaranteeOffered(GuaranteeOffered::NO);
+/*
+ * Step 2 initiate payment
+ */
+$payResponse = $api->pay($payData);
+
+/*
+ * Step 3: verify that it suceeded
+ */
+//print_r($payResponse);
+
+
+if ($payResponse->getResponseEnvelope()->wasSuccessful())
+{
+  
+  //echo "after wasSuccessful <br>";
+    /*
+     * Step 4: forward user
+     */
+    header("Location: " . $api->getForwardPayUrl($payResponse));
+}
+
+?>    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ <?php   
   } else{
     echo 'priset stämmer inte...';
   }

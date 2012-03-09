@@ -6,16 +6,29 @@ Förläng ditt medlemskap på MotioMera här!
 {else}
 <h1>Skaffa eller förläng ett medlemsskap</h1>
 {/if}
+<form action="/actions/save.php?table=foretagsnyckel" method="post" onsubmit="">  
+	<input type="hidden" name="typ" value="medlem" />
+	<table border="0" cellpadding="0" cellspacing="0" class="motiomera_form_table">
+  <tr>    
+     <th>Företagsnyckel</th>
+     <td>
+      <input type="text" name="foretagsnyckel" class="mmTextField" onfocus="getById('mmForetagsnyckelError').style.display='none';" onblur="if(this.value != '') mm_ajaxValidera('mmForetagsnyckelError', 'foretagsnyckel', this.value);" /> <span class="mmRed hide" id="mmForetagsnyckelError">Ogiltig företagsnyckel</span>
+      <input type="submit" value="Ok">    
+     </td>     
+  </tr>
+  </table>
+</form>  
+  
 <form action="{$urlHandler->getUrl(Order, URL_SEND)}" method="post" onsubmit="return motiomera_validateBestallForm(this);">
 	<input type="hidden" name="typ" value="medlem" />
 	<table border="0" cellpadding="0" cellspacing="0" class="motiomera_form_table">
-	
+
 	<tr>
 		<th>Erbjudande</th>
 		<td>
 			<table border="0" cellpadding="0" cellspacing="0" class="mmKontotypTable">
-
-
+       
+        
           {*} Kampanjkod added by krillo 2011-01-19 {*}
 					<tr>
 						<th class="mmBorderNone">

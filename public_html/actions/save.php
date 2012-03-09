@@ -2,6 +2,21 @@
 require $_SERVER["DOCUMENT_ROOT"] . "/php/init.php";
 // die('i save');
 switch($_REQUEST["table"]){
+  case "foretagsnyckel":
+		if($USER->getForetagsnyckel(true) == "" && !empty($_POST["foretagsnyckel"])){			
+      echo 'krillo';
+			$USER->setForetagsnyckel($_POST["foretagsnyckel"]);
+			$USER->commit();
+      /*
+			if ($USER->getLag() == null)
+				$urlHandler->redirect("Foretag", URL_VIEW, $USER->getForetag(true)->getId());
+			else
+				$urlHandler->redirect("Lag", URL_VIEW, $USER->getLag()->getId());
+      }
+       * 
+       */  
+    }
+    break;
 	case 'fastrutt':
 		if(isset($USER)&&!empty($_GET['rid'])){		
 			$USER->addStaticRouteToUser($_GET['rid']);			
