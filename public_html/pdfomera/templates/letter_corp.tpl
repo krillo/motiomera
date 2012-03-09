@@ -11,5 +11,4 @@ Användarnamn: <b>[USERNAME]</b>
 Lösenord: <b>[PASSWORD]</b>
 
 Lycka till med er MotioMera-tävling!
-Med vänliga hälsningar
-Tidningen MåBra
+Önskar Motiomera-gänget

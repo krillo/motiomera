@@ -14,4 +14,4 @@ Om ni inte redan gjort det, så vore det toppen om ni kan skicka de trasiga steg
 
 
 Med vänliga hälsningar 
-Motiomerateamet
+Motiomera-gänget

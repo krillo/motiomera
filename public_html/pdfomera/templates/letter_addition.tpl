@@ -12,6 +12,5 @@ Tävlingen pågår i 5 veckor. Ert startdatum är: [STARTDATE]
 
 
 Lycka till med er MotioMera-tävling! 
-Med vänliga hälsningar 
-Tidningen MåBra
+Önskar Motiomera-gänget
 
