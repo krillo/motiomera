@@ -1913,17 +1913,8 @@ class Medlem extends Mobject
     $msg .= "Hoppas du får fortsatt glädje av tjänsten. \n\n";
 
     $msg .= "Med vänliga hälsningar \n";
-    $msg .= "Tidningen MåBra och alla i MotioMera-teamet \n\n";
+    $msg .= "MotioMera-gänget \n\n";
 
-    $msg .= "MotioMera - Sveriges roligaste stegtävling \n";
-    $msg .= "www.motiomera.se \n\n";
-
-    $msg .= "MotioMera \n";
-    $msg .= "Aller media \n";
-    $msg .= "Kundservice \n";
-    $msg .= "251 85 Helsingborg \n";
-    $msg .= "Telefon: 042-444 30 25 \n";
-    $msg .= "Vardagar 09.00 - 11.30 samt 13.00-15.00 \n";
 
     if (Misc::sendEmail($epost, null, "Ditt nya lösenord", $msg)) {
       $medlem->setLosenP($pass);

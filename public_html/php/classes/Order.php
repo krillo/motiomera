@@ -124,8 +124,23 @@ class Order extends Mobject {
       "compAffCode" => "str",
       "isValid" => "int",
   );
-  static $kampanjkoder = array("måbra1" => "free", "mabra1" => "free", "krillo" => "free", "mabra2" => "UE03", "måbra2" => "UE03");  //special campaign codes see actions/newuser.php
+  //static $kampanjkoder = array("måbra1" => "free", "mabra1" => "free", "krillo" => "free", "mabra2" => "UE03", "måbra2" => "UE03");  //special campaign codes see actions/newuser.php
+  static $kampanjkoder = array("krillo" => "free");  //special campaign codes see actions/newuser.php  
   static $moms = array('name' => 'Moms', 'percent' => 1.25, 'text' => '25%');
+  static $discountcodes = array(
+      'mm10' => array( 
+          'percent' => .90, 
+          'text' => '10% rabatt'
+          ),
+      'kap15' => array( 
+          'percent' => .85, 
+          'text' => '15% rabatt'
+          ),
+      'mop20' => array( 
+          'percent' => .80, 
+          'text' => '20% rabatt'
+          ),
+      );  
   static $campaignCodes = array(
       "FRAKT00" => array(
           "typ" => "frakt",
@@ -135,7 +150,7 @@ class Order extends Mobject {
           "dagar" => 0,
           "popupid" => 22,
           "public" => TRUE,
-      ),     
+      ),
       "FRAKT01" => array(
           "typ" => "frakt",
           "text" => "Frakt",
@@ -144,7 +159,7 @@ class Order extends Mobject {
           "dagar" => 0,
           "popupid" => 22,
           "public" => TRUE,
-      ),     
+      ),
       "RE03" => array(
           "typ" => "foretag",
           "text" => "5 veckors tävling <b>med</b> stegräknare",
@@ -306,7 +321,6 @@ class Order extends Mobject {
 
   // STATIC FUNCTIONS ///////////////////////////////////////
 
-  
   /**
    * Return true if all input prices match to calculations
    * 
@@ -318,25 +332,54 @@ class Order extends Mobject {
    * @param type $incmoms_in
    * @return boolean 
    */
-  public static function priceCheck($RE03, $RE04, $exmoms_in, $FREIGHT, $total_in, $incmoms_in){ 
-    $RE03_price = (int)self::$campaignCodes['RE03']['pris'];
-    $RE04_price = (int)self::$campaignCodes['RE04']['pris'];
-    $FREIGHT_price = (int)self::$campaignCodes[$FREIGHT]['pris'];
+  public static function priceCheck($RE03, $RE04, $exmoms_in, $FREIGHT, $total_in, $incmoms_in) {
+    $RE03_price = (int) self::$campaignCodes['RE03']['pris'];
+    $RE04_price = (int) self::$campaignCodes['RE04']['pris'];
+    $FREIGHT_price = (int) self::$campaignCodes[$FREIGHT]['pris'];
     $exmoms = ($RE03 * $RE03_price) + ($RE04 * $RE04_price);
     $total = $exmoms + $FREIGHT_price;
     $incmoms = $total * self::$moms['percent'];
-    $incmoms = (int)ceil($incmoms);
+    $incmoms = (int) ceil($incmoms);
     //echo'<br> exmoms '. $exmoms_in . $exmoms . '<br>';
     //echo 'total '.  $total . $total_in . '<br>';
     //echo 'incmoms '.  $incmoms . $incmoms_in. '<br>';
-    if($exmoms == $exmoms_in && $total == $total_in && $incmoms == $incmoms_in){
+    if ($exmoms == $exmoms_in && $total == $total_in && $incmoms == $incmoms_in) {
       return true;
     } else {
       return false;
-    }   
+    }
   }
+
   
-  
+  /**
+   * setup a payson connection, return the PayResponse object.
+   * 
+   * To initiate a direct payment the steps are as follows
+   *  1. Set up the details for the payment
+   *  2. Initiate payment with Payson
+   *  3. Verify that it suceeded
+   *  4. Forward the user to Payson to complete the payment
+   */
+  public static function setupPaysonConnection($payerEmail, $payerFname, $payerLname, $sumtopay, $paysonMsg) {
+    global $SETTINGS;
+    require_once '../php/libs/payson/paysonapi.php';
+    $credentials = new PaysonCredentials("11654", "a86549bf-cb16-41e8-a86d-f1c79522becd");
+    $api = new PaysonApi($credentials);
+    
+    // Step 1: Set up details
+    $receiver = new Receiver($SETTINGS["paysonReceiverEmail"], $sumtopay); // The receiver and amount you want to charge the user, here in SEK (the default currency)
+    $receivers = array($receiver);
+
+    // Details about the user that is the sender of the money
+    $sender = new Sender($payerEmail, $payerFname, $payerLname);
+    $payData = new PayData($SETTINGS["paysonReturnUrl"], $SETTINGS["paysonCancelUrl"], $SETTINGS["paysonIpnUrl"], $paysonMsg, $sender, $receivers);
+    $payData->setGuaranteeOffered(GuaranteeOffered::NO);
+
+    // Step 2 initiate payment
+    $payResponse = $api->pay($payData);
+    return $payResponse;
+  }
+
   /**
    * Finds rows in mm_order that has no kundnummer. The kundnummer is generated in AS400 a day after an order is layed.
    * If successful, the order status is set to 30. Kundnummmer is also set in the Foretag object (mm_foretag).
@@ -842,6 +885,15 @@ class Order extends Mobject {
     }
   }
 
+  public static function genRefId() {
+    $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    $result = "";
+    for ($i = 0; $i < 28; $i++) {
+      $result.= $letters[mt_rand(0, strlen($letters) - 1)];
+    }
+    return $result;
+  }
+          
   public function generateRefId() {
     $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     $result = "";
@@ -1237,8 +1289,11 @@ class Order extends Mobject {
     $this->browser = Medlem::getRawCurrentBrowserVersion();
   }
 
-  public function setIpNr() {
-    $this->ip = Medlem::getCurrentIpNr();
+  public function setIpNr($ip = '') {
+    if($ip ==''){
+      $ip = Medlem::getCurrentIpNr();  //does not work, krillo 2012-03-10 
+    }
+    $this->ip = $ip;
   }
 
   public function setKanal($kanal) {
@@ -1295,7 +1350,10 @@ class Order extends Mobject {
     $this->orderId = $orderId;
   }
 
-  public function setDate($date) {
+  public function setDate($date = 'now') {
+    if($date == 'now'){
+      $date = date('Y-m-d H:i:s');
+    }
     $this->date = $date;
   }
 

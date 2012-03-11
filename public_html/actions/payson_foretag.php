@@ -12,12 +12,13 @@ $order = new stdClass;
 !empty($_REQUEST['m_total']) ? $order->total = $_REQUEST['m_total'] : $order->total = 0;
 !empty($_REQUEST['m_incmoms']) ? $order->incmoms = $_REQUEST['m_incmoms'] : $order->incmoms = 0;
 !empty($_REQUEST['startdatumRadio']) ? $order->startdatumRadio = $_REQUEST['startdatumRadio'] : $order->startdatumRadio = 0;
-!empty($_REQUEST['campcode']) ? $order->campcode = $_REQUEST['campcode'] : $order->campcode = 0;
+!empty($_REQUEST['discount']) ? $order->discount = $_REQUEST['discount'] : $order->discount = 0;
 !empty($_REQUEST['RE03']) ? $order->RE03 = $_REQUEST['RE03'] : $order->RE03 = 0;
 !empty($_REQUEST['RE04']) ? $order->RE04 = $_REQUEST['RE04'] : $order->RE04 = 0;
 !empty($_REQUEST['company']) ? $order->company = $_REQUEST['company'] : $order->company = 0;
 !empty($_REQUEST['co']) ? $order->co = $_REQUEST['co'] : $order->co = '';
-!empty($_REQUEST['name']) ? $order->name = $_REQUEST['name'] : $order->name = '';
+!empty($_REQUEST['firstname']) ? $order->fname = $_REQUEST['firstname'] : $order->fname = '';
+!empty($_REQUEST['lastname']) ? $order->lname = $_REQUEST['lastname'] : $order->lname = '';
 !empty($_REQUEST['refcode']) ? $order->refcode = $_REQUEST['refcode'] : $order->refcode = 0;
 !empty($_REQUEST['email']) ? $order->email = $_REQUEST['email'] : $order->email = 0;
 !empty($_REQUEST['phone']) ? $order->phone = $_REQUEST['phone'] : $order->phone = 0;
@@ -39,6 +40,7 @@ $order = new stdClass;
 !empty($_REQUEST['del-city']) ? $order->delCity = $_REQUEST['del-city'] : $order->delCity = 0;
 !empty($_REQUEST['del-country']) ? $order->delcountry = $_REQUEST['del-country'] : $order->delcountry = 0;
 !empty($_REQUEST['channel']) ? $order->channel = $_REQUEST['channel'] : $order->channel = 0;
+!empty($_REQUEST['paytype']) ? $order->paytype = $_REQUEST['paytype'] : $order->paytype = '';
 
 $order->RE03 = (int) $order->RE03;
 $order->RE04 = (int) $order->RE04;
@@ -55,25 +57,22 @@ if (!empty($_REQUEST["startdatumRadio"])) {
   }
 }
 
-
 if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
   $url = $SETTINGS["url"] . '/pages/kassaforetag.php?nbr=0';
   header('Location: ' . $url);
   exit;
 } else {
+
+  //http://motiomera.se/pages/kvitto.php?RefId=GIDAZJLVYX36QC20NRE4FXTFQKY6&OrderId=1531126
   //do a price check to avoid javascript hacking
   $noFraud = Order::priceCheck($order->RE03, $order->RE04, $order->exmoms, $order->freight, $order->total, $order->incmoms);
-  if ($noFraud) {  //javascriopt prices match to local calculation
-    //print_r($order);
-    $kampanjkod = "";
-    $antal = "";
-
-    $kommun = Kommun::loadById(150);  //Ale - legacy
+  if ($noFraud) {  //javascript prices match to local calculation
+    //everthing looks fine sofar, create the company 
+    $kommun = Kommun::loadById(150);  //Use Ale - legacy
     $isValid = 0;
-
     $foretag = new Foretag($order->company, $kommun, $foretagLosen, $order->startdatum, $order->channel, $order->campcode, $isValid);  //last param is "Order::isValid" and is set to 0 - i.e. not a valid order yet
     $foretag->setTempLosenord(Foretag::skapaLosen());  //a new is created in api/order if a purchase is made
-    $foretag->setPayerName($order->name);
+    $foretag->setPayerName($order->fname . ' ' . $order->lname);
     $foretag->setPayerAddress($order->street1 . ' ;; ' . $order->street2 . ' ;; ' . $order->street3);
     $foretag->setPayerCo($order->co);
     $foretag->setPayerZipCode($order->zip);
@@ -94,65 +93,116 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
     $foretag->setReciverCountry($order->delcountry);
     $foretag->commit();
 
+    $token = null;
+    if ($order->paytype == 'Direkt') { //do a payson connection
+      $nbrpers = $order->RE03 + $order->RE04;
+      $paysonMsg = "Motiomera, $nbrpers deltagare, $order->RE03 stegräknare";
+      $payResponse = Order::setupPaysonConnection($order->email, $order->fname, $order->lname, $order->incmoms, $paysonMsg);
+      if ($payResponse->getResponseEnvelope()->wasSuccessful()) {  // Step 3: verify that it suceeded
+        //print_r($payResponse);
+        $token = $payResponse->getToken();
+        echo $token;
+        //header("Location: " . $api->getForwardPayUrl($payResponse)); //do the redirection to payson
+      } else {
+        throw new UserException("Problem med Payson", "Det är något problem med betaltjänsten Payson. Prova igen senare eller välj faktura.");
+      }
+    }
+
+    $paymenttype = '';
+    if (empty($token)) {
+      $refId = Order::genRefId();
+      $paymenttype = 'faktura';
+    } else {
+      $refId = $token;      
+      $paymenttype = 'payson';
+    }
+    $ip=$_SERVER['REMOTE_ADDR'];
     $typ = "foretag";
-    $refId = "first_iteration";
+    $foretagLosen = Foretag::skapaLosen();  //a new is created in api/order if a purchase is made
     $orderRE03 = null;
     $orderRE04 = null;
     $orderFR = null;
     $orderId = '';
     if ($order->RE03 > 0) {
-      if ($refId == "first_iteration") {    //first order row
+      /*
+        if ($refId == "first_iteration") {    //first order row
         $orderRE03 = new Order($typ, $foretag, 'RE03', $order->RE03, $order->channel, $order->campcode, 0);
         $refId = $orderRE03->getRefId();    //use the same refId for all order rows
-      } else {         //all other order rows
-        $orderRE03 = Order::__constructOrderWithSameRefId($typ, $foretag, 'RE03', $order->RE03, $order->channel, $order->campcode, 0, false, $refId);
-      }
+        } else {         //all other order rows
+       * 
+       */      
+      $orderRE03 = Order::__constructOrderWithSameRefId($typ, $foretag, 'RE03', $order->RE03, $order->channel, $order->campcode, 0, false, $refId);
       $orderRE03->setForetag($foretag);
       $orderRE03->setCompanyName($order->company);
       $priceRE03 = ((int) Order::$campaignCodes['RE03']['pris'] * $order->RE03);
-      $priceRE03_moms = $price * Order::$moms['percent'];
+      $priceRE03_moms = $priceRE03 * Order::$moms['percent'];
       $orderRE03->setPrice($priceRE03);
       $orderRE03->setSum($priceRE03_moms);
       $orderRE03->setQuantity($order->RE03);
       $orderRE03->setAntal($order->RE03);
+      $orderRE03->setItem(Order::$campaignCodes['RE03']['text']);
+      $orderRE03->setSum($order->incmoms);
+      $orderRE03->setPayment($paymenttype);
+      $orderRE03->setDate();
+      $orderRE03->setIpNr($ip);
       $orderRE03->commit();
       $orderId = $orderRE03->getId();
-
     }
     if ($order->RE04 > 0) {
-      if ($refId == "first_iteration") {    //first order row
+      /*
+        if ($refId == "first_iteration") {    //first order row
         $orderRE04 = new Order($typ, $foretag, 'RE04', $order->RE04, $order->channel, $order->campcode, 0);
         $refId = $orderRE04->getRefId();    //use the same refId for all order rows
-      } else {         //all other order rows
-        $orderRE04 = Order::__constructOrderWithSameRefId($typ, $foretag, 'RE04', $order->RE04, $order->channel, $order->campcode, 0, false, $refId);
-      }
+        } else {         //all other order rows
+       * 
+       */
+      $orderRE04 = Order::__constructOrderWithSameRefId($typ, $foretag, 'RE04', $order->RE04, $order->channel, $order->campcode, 0, false, $refId);
       $orderRE04->setForetag($foretag);
       $orderRE04->setCompanyName($order->company);
       $priceRE04 = ((int) Order::$campaignCodes['RE04']['pris'] * $order->RE04);
-      $priceRE04_moms = $price * Order::$moms['percent'];
+      $priceRE04_moms = $priceRE04 * Order::$moms['percent'];
       $orderRE04->setPrice($priceRE04);
       $orderRE04->setSum($priceRE04_moms);
       $orderRE04->setQuantity($order->RE04);
       $orderRE04->setAntal($order->RE04);
+      $orderRE04->setItem(Order::$campaignCodes['RE04']['text']);
+      $orderRE04->setSum($order->incmoms);
+      $orderRE04->setPayment($paymenttype);
+      $orderRE04->setDate();
+      $orderRE04->setIpNr($ip);      
       $orderRE04->commit();
       if ($orderId == '') {
         $orderId = $orderRE04->getId();
       }
-
     }
     if ($order->freight != 'FRAKT00') {
       $orderFR = Order::__constructOrderWithSameRefId($typ, $foretag, $order->freight, 1, $order->channel, $order->campcode, 0, false, $refId);
       $orderFR->setForetag($foretag);
       $orderFR->setCompanyName($order->company);
       $priceFR = (int) Order::$campaignCodes[$order->freight]['pris'];
-      $priceFR_moms = $price * Order::$moms['percent'];
+      $priceFR_moms = $priceFR * Order::$moms['percent'];
       $orderFR->setPrice($priceFR);
       $orderFR->setSum($priceFR_moms);
       $orderFR->setQuantity(1);
       $orderFR->setAntal(1);
+      $orderFR->setItem(Order::$campaignCodes[$order->freight]['text']);
+      $orderFR->setSum($order->incmoms);
+      $orderFR->setPayment($paymenttype);
+      $orderFR->setDate();
+      $orderFR->setIpNr($ip);      
       $orderFR->commit();
     }
 
+
+    //do the redirect to payson or faktura kvittosida
+    if (empty($token)) { 
+      //header("Location: " . $api->getForwardPayUrl($payResponse)); //do the redirection to payson
+    } else {
+      $kvittoPage = $SETTINGS["paysonReturnUrl"] . '?RefId=' . $refId;
+      //echo $kvittoPage; 
+      //header("Location: " . $kvittoPage); //do the redirection to payson
+    }
+/*
 
     $message = "<br>......................................................<br>";
     $message .= "ORDERNUMMER: $orderId <br>";
@@ -182,105 +232,12 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
     $momssats = Order::$moms['text'];
     $message .= "Summa inkl $momssats moms: $order->incmoms Kr<br>";
     $message .= "<br><br>Pris att betala: $order->incmoms Kr<br>";
-    
-    echo $message;
 
-    
-    
-    
-?>    
-    Välj hur du vill betala:
-    <div style="border:solid 1px grey; float:left;">  
-VISA / MasterCard <br/>
-Internetbank Föreningssparbanken / Swedbank <br/>
-Internetbank Handelsbanken <br/>
-Internetbank SEB <br/>
-Internetbank Nordea
-<input type="button" value="Betala" id="payson">
-    </div>
-    <div style="border:solid 1px grey; float:left;">  
-Faktura <br/>
-<input type="button" value="Betala" id="faktura">
-    </div>    
-    
-    
-    
-    
-    
-    
-<?php
-
-
-require_once '../php/libs/payson/paysonapi.php';
-$credentials = new PaysonCredentials("11654", "a86549bf-cb16-41e8-a86d-f1c79522becd");
-$api = new PaysonApi($credentials);
-/*
- * To initiate a direct payment the steps are as follows
- *  1. Set up the details for the payment
- *  2. Initiate payment with Payson
- *  3. Verify that it suceeded
- *  4. Forward the user to Payson to complete the payment
+    //echo $message;
+ * 
+ * 
  */
-
-/*
- * Step 1: Set up details
- */
-
-// URLs to which Payson sends the user depending on the success of the payment
-$returnUrl = "http://payson.dev/return.php";
-$cancelUrl = "http://payson.dev/cancel.php";
-// URL to which Payson issues the IPN
-$ipnUrl = "http://payson.dev/ipn.php";
-
-// Details about the receiver
-$receiver = new Receiver(
-    "kristian@motiomera.se", // The email of the account to receive the money
-    1); // The amount you want to charge the user, here in SEK (the default currency)
-$receivers = array($receiver);
-
-// Details about the user that is the sender of the money
-$sender = new Sender("krillos@erendi.se", "kristian", "erendi");
-
-//print("\nPay:\n");
-
-$payData = new PayData($returnUrl, $cancelUrl, $ipnUrl, $message, $sender, $receivers);
-
-// Set guarantee options
-$payData->setGuaranteeOffered(GuaranteeOffered::NO);
-/*
- * Step 2 initiate payment
- */
-$payResponse = $api->pay($payData);
-
-/*
- * Step 3: verify that it suceeded
- */
-//print_r($payResponse);
-
-
-if ($payResponse->getResponseEnvelope()->wasSuccessful())
-{
-  
-  //echo "after wasSuccessful <br>";
-    /*
-     * Step 4: forward user
-     */
-    header("Location: " . $api->getForwardPayUrl($payResponse));
-}
-
-?>    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
- <?php   
-  } else{
+  } else {
     echo 'priset stämmer inte...';
   }
 }
