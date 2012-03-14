@@ -308,8 +308,8 @@ class Misc
    * @param string_type $msg
    * @param string $level
    */
-  public static function logMotiomera($msg, $level = ''){
-  	$logFile = LOG_DIR."/motiomera.".date("y-m").".log";
+  public static function logMotiomera($msg, $level = '', $filename = 'motiomera'){
+  	$logFile = LOG_DIR."/". $filename . ".".date("y-m").".log";
     if(!file_exists($logFile)){
       touch($logFile);
       if(CAPISTRANO_DEPLOY == true){

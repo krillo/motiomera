@@ -69,6 +69,7 @@ class Order extends Mobject {
   protected $offerId;
   protected $isValid; //if the foretag isValid	
   protected $sum;
+  protected $sumMoms;
   protected $expired;
   protected $kanal; //var har de hort talas om motiomera 
   protected $compAffCode; //affiliate kod för företagsanmälningar 
@@ -119,6 +120,7 @@ class Order extends Mobject {
       "campaignId" => "str",
       "offerId" => "str",
       "sum" => "int",
+      "sumMoms" => "int",
       "expired" => "int",
       "kanal" => "str",
       "compAffCode" => "str",
@@ -128,19 +130,19 @@ class Order extends Mobject {
   static $kampanjkoder = array("krillo" => "free");  //special campaign codes see actions/newuser.php  
   static $moms = array('name' => 'Moms', 'percent' => 1.25, 'text' => '25%');
   static $discountcodes = array(
-      'mm10' => array( 
-          'percent' => .90, 
+      'mm10' => array(
+          'percent' => .90,
           'text' => '10% rabatt'
-          ),
-      'kap15' => array( 
-          'percent' => .85, 
+      ),
+      'kap15' => array(
+          'percent' => .85,
           'text' => '15% rabatt'
-          ),
-      'mop20' => array( 
-          'percent' => .80, 
+      ),
+      'mop20' => array(
+          'percent' => .80,
           'text' => '20% rabatt'
-          ),
-      );  
+      ),
+  );
   static $campaignCodes = array(
       "FRAKT00" => array(
           "typ" => "frakt",
@@ -332,9 +334,13 @@ class Order extends Mobject {
    * @param type $incmoms_in
    * @return boolean 
    */
-  public static function priceCheck($RE03, $RE04, $exmoms_in, $FREIGHT, $total_in, $incmoms_in) {
+  public static function priceCheck($RE03, $RE04, $exmoms_in, $FREIGHT, $total_in, $incmoms_in, $discountcode) {
     $RE03_price = (int) self::$campaignCodes['RE03']['pris'];
     $RE04_price = (int) self::$campaignCodes['RE04']['pris'];
+
+    //fix this later
+    //$discount = self::$discountcode[$discountcode]['percent'];
+
     $FREIGHT_price = (int) self::$campaignCodes[$FREIGHT]['pris'];
     $exmoms = ($RE03 * $RE03_price) + ($RE04 * $RE04_price);
     $total = $exmoms + $FREIGHT_price;
@@ -350,9 +356,9 @@ class Order extends Mobject {
     }
   }
 
-  
   /**
    * setup a payson connection, return the PayResponse object.
+   * Only step 1 and 2 are done here
    * 
    * To initiate a direct payment the steps are as follows
    *  1. Set up the details for the payment
@@ -365,7 +371,7 @@ class Order extends Mobject {
     require_once '../php/libs/payson/paysonapi.php';
     $credentials = new PaysonCredentials("11654", "a86549bf-cb16-41e8-a86d-f1c79522becd");
     $api = new PaysonApi($credentials);
-    
+
     // Step 1: Set up details
     $receiver = new Receiver($SETTINGS["paysonReceiverEmail"], $sumtopay); // The receiver and amount you want to charge the user, here in SEK (the default currency)
     $receivers = array($receiver);
@@ -377,8 +383,15 @@ class Order extends Mobject {
 
     // Step 2 initiate payment
     $payResponse = $api->pay($payData);
-    return $payResponse;
+
+    $data['payResponse'] = $payResponse;
+    $data['api'] = $api;
+    return $data;
   }
+
+
+
+
 
   /**
    * Finds rows in mm_order that has no kundnummer. The kundnummer is generated in AS400 a day after an order is layed.
@@ -540,7 +553,7 @@ class Order extends Mobject {
    */
   public static function listOrderDataByRefId($refId) {
     global $db;
-    $sql = "SELECT id, item, price, quantity  FROM " . self::classToTable(get_class()) . " WHERE refId = '" . $refId . "'";
+    $sql = "SELECT id, item, price, antal, payment  FROM " . self::classToTable(get_class()) . " WHERE refId = '" . $refId . "'";
     $res = $db->query($sql);
     $items = array();
     while ($data = mysql_fetch_assoc($res)) {
@@ -893,7 +906,7 @@ class Order extends Mobject {
     }
     return $result;
   }
-          
+
   public function generateRefId() {
     $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     $result = "";
@@ -1156,12 +1169,20 @@ class Order extends Mobject {
     return $this->sum;
   }
 
+  public function getSumMoms() {
+    return $this->sumMoms;
+  }
+
   public function getExpired() {
     return ($this->expired == "1") ? true : false;
   }
 
   public function getOrderStatus() {
     return $this->orderStatus;
+  }
+
+  public function getIp() {
+    return $this->ip;
   }
 
   /**
@@ -1290,7 +1311,7 @@ class Order extends Mobject {
   }
 
   public function setIpNr($ip = '') {
-    if($ip ==''){
+    if ($ip == '') {
       $ip = Medlem::getCurrentIpNr();  //does not work, krillo 2012-03-10 
     }
     $this->ip = $ip;
@@ -1351,7 +1372,7 @@ class Order extends Mobject {
   }
 
   public function setDate($date = 'now') {
-    if($date == 'now'){
+    if ($date == 'now') {
       $date = date('Y-m-d H:i:s');
     }
     $this->date = $date;
@@ -1495,14 +1516,14 @@ class Order extends Mobject {
     $this->sum = $sum;
   }
 
+  public function setSumMoms($arg) {
+    $this->sumMoms = $arg;
+  }
+
   public function setExpired($expired) {
     $this->expired = ($expired) ? "1" : "0";
   }
 
-}
-
-class OrderException extends Exception {
-  
 }
 
 ?>

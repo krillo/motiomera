@@ -60,7 +60,7 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
 	</tr>
 	<tr>
 		<td><b>Köpet genomfört:</b> {$orderList.date|date_format:"%Y-%m-%d %H:%m"}</td>
-		<td colspan="2"><b>Betalsätt:</b> {$orderList.payment}</td>		
+    <td colspan="2"><b>Betalsätt:</b><span style="text-transform: capitalize;"> {$orderList.payment}</span></td>		
 	</tr>	
 	<tr>
 		<td><b>Orderid:</b> {$orderList.orderId}</td>
@@ -72,8 +72,8 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
 	{section name=orderItem loop=$orderItemList}
 	{strip}
 		<tr>
-			<td colspan="2" width="300px">{$orderItemList[orderItem].quantity} st. {$orderItemList[orderItem].item}</td>
-			<td>&nbsp; &nbsp; {$orderItemList[orderItem].price}  kr inkl. moms</td>		
+			<td colspan="2" width="300px">{$orderItemList[orderItem].antal} st. {$orderItemList[orderItem].item}</td>
+			<td>&nbsp; &nbsp; {$orderItemList[orderItem].price}  kr exkl. moms</td>		
 		</tr>	
 	{/strip}
 	{/section}

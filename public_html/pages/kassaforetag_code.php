@@ -204,22 +204,7 @@ Order::getMondays(15);
   }
 </script>    
 
-<div id="pers-service">
-  <div id="pers-img" style="float:left;">
-    <img src="/img/kristian_80x90.png" alt="Kristian"/>
-  </div>
-  <div id="pers-text" style="float:left;padding-left:15px;width:450px;padding-top:5px">
-    <span  class="mmObs mmObsText">För mer information eller om du vill ha en powerpoint-presentation. Kontakta Kristian på:<br/>
-      0761-393855<br/>
-      <a href="mailto:kristian@motiomera.se" >kristian@motiomera.se</a>
-    </span>
-  </div>
-</div>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+
 
 <!--form action="/actions/sendorder.php" method="get" --> <!--onsubmit="return motiomera_validateSkapaForetagForm(this)" -->
 <form action="/actions/payson_foretag.php" method="get" id="checkout">
