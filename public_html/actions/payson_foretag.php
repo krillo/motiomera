@@ -148,6 +148,7 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
       $orderRE03->setPayment($paymenttype);
       $orderRE03->setDate();
       $orderRE03->setIpNr($ip);
+      $orderRE03->setOrderRefCode($order->refcode);
       $orderRE03->commit();
       $orderId = $orderRE03->getId();
     }
@@ -165,6 +166,7 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
       $orderRE04->setPayment($paymenttype);
       $orderRE04->setDate();
       $orderRE04->setIpNr($ip);
+      $orderRE04->setOrderRefCode($order->refcode);
       $orderRE04->commit();
       if ($orderId == '') {
         $orderId = $orderRE04->getId();
@@ -184,8 +186,9 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
       $orderFR->setPayment($paymenttype);
       $orderFR->setDate();
       $orderFR->setIpNr($ip);
+      $orderFR->setOrderRefCode($order->refcode);
       $orderFR->commit();
-    }    
+    }
     $foretag->setOrderId($orderId);  //update the company with orderid in the db
     $foretag->commit();
 

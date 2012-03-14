@@ -33,7 +33,7 @@ class Order extends Mobject {
   protected $foretag_id;
   protected $betald;
   protected $foretagLosen;
-  protected $antal;
+  protected $antal;  //antalet av beställd produkt, dvs frakt får här en 1
   protected $filnamn;
   protected $ip;
   protected $browser;
@@ -61,17 +61,18 @@ class Order extends Mobject {
   protected $reciverPhone;
   protected $reciverMobile;
   protected $reciverCountry;
-  protected $price;
-  protected $quantity;
-  protected $item;
+  protected $price;       //enhetspriset
+  protected $quantity;    //antalet stegräknare
+  protected $item;        //textuella namnet för produkten 
   protected $magazineId;
   protected $campaignId;
   protected $offerId;
   protected $isValid; //if the foretag isValid	
-  protected $sum;
-  protected $sumMoms;
+  protected $sum;     //totala summan av alla ordrar med samma refid
+  protected $sumMoms; //totala summan + moms av alla ordrar med samma refid
   protected $expired;
-  protected $kanal; //var har de hort talas om motiomera 
+  protected $kanal; //var har de hört talas om motiomera 
+  protected $orderRefCode;  
   protected $compAffCode; //affiliate kod för företagsanmälningar 
   protected $fields = array(
       "id" => "int",
@@ -123,6 +124,7 @@ class Order extends Mobject {
       "sumMoms" => "int",
       "expired" => "int",
       "kanal" => "str",
+      "orderRefCode" => "str",      
       "compAffCode" => "str",
       "isValid" => "int",
   );
@@ -164,7 +166,7 @@ class Order extends Mobject {
       ),
       "RE03" => array(
           "typ" => "foretag",
-          "text" => "5 veckors tävling <b>med</b> stegräknare",
+          "text" => "Med stegräknare",
           "extra" => " ex. moms.",
           "pris" => 289,
           "dagar" => 31,
@@ -173,7 +175,7 @@ class Order extends Mobject {
       ),
       "RE04" => array(
           "typ" => "foretag",
-          "text" => "5 veckors tävling <b>utan</b> stegräknare",
+          "text" => "Utan stegräknare",
           "extra" => " ex. moms.",
           "pris" => 169,
           "dagar" => 31,
@@ -389,10 +391,6 @@ class Order extends Mobject {
     return $data;
   }
 
-
-
-
-
   /**
    * Finds rows in mm_order that has no kundnummer. The kundnummer is generated in AS400 a day after an order is layed.
    * If successful, the order status is set to 30. Kundnummmer is also set in the Foretag object (mm_foretag).
@@ -553,7 +551,7 @@ class Order extends Mobject {
    */
   public static function listOrderDataByRefId($refId) {
     global $db;
-    $sql = "SELECT id, item, price, antal, payment  FROM " . self::classToTable(get_class()) . " WHERE refId = '" . $refId . "'";
+    $sql = "SELECT id, item, price, antal, payment, orderRefCode  FROM " . self::classToTable(get_class()) . " WHERE refId = '" . $refId . "'";
     $res = $db->query($sql);
     $items = array();
     while ($data = mysql_fetch_assoc($res)) {
@@ -1039,6 +1037,10 @@ class Order extends Mobject {
     }
   }
 
+  public function getOrderRefCode() {
+    return $this->orderRefCode;
+  }
+
   /*
     public function getPayerName()
     {
@@ -1268,6 +1270,11 @@ class Order extends Mobject {
     $this->orderStatus = $orderStatus;
   }
 
+  public function setOrderRefCode($arg) {
+    $this->orderRefCode = $arg;
+  }
+  
+  
   public function setKundnummer($kundnummer) {
     $this->kundnummer = $kundnummer;
   }

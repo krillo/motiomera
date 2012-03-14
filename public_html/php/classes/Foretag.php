@@ -1081,6 +1081,8 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
       Misc::logMotiomera("Couldn't create or save order faktura file: " . $lokalFil, 'ERROR');
       throw new OrderException(" ERROR - Couldn't create or save order faktura file: " . $lokalFil, -10);
     } else {
+      $orderItems = Order::listOrderDataByRefId($refId);      
+      $orderRefCode = $orderItems[0]['orderRefCode'];
       $msg = "FAKTURA \n\n";
       $msg .= "Fakturaadress: \n";
       $msg .= $this->getCompanyName() . "\n";
@@ -1090,17 +1092,18 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
       $msg .= $this->getPayerCity() . "\n";
       $msg .= $this->getPayerCountry() . "\n\n";
       $msg .= "Er referens: \n";
-      $msg .= $this->getPayerName() . "\n\n";
+      $msg .= $this->getPayerName() . "\n";
+      $msg .= $this->getPayerEmail() . "\n\n";
       $msg .= "Vår referens: \n";
       $msg .= "Kristian Erendi \n\n";
       $msg .= "Leveransvillkor: \n";
-      $msg .= "sss \n\n";
+      $msg .= $orderRefCode . "\n\n";
       $msg .= "Fakturadatum: \n";
       $msg .= date('Y-m-d') . " \n\n";
       $msg .= "Artikel: \n";
-      $orderItems = Order::listOrderDataByRefId($refId);
+
       foreach ($orderItems as $orderItem) {
-        $msg .= $orderItem['item'] . " " . $orderItem['quantity'] . " " . $orderItem['price'] . "\n";
+        $msg .= $orderItem['item'] . "    " . $orderItem['antal'] . "    " . $orderItem['price'] . "\n";
       }
       $fd = fopen($lokalFil, "a");
       fwrite($fd, $msg);

@@ -200,7 +200,7 @@ Order::getMondays(15);
     
     
   function updateStartRadio(){
-    jQuery("#mmForetagStartdatumRadio2").attr('checked', true); 
+    jQuery("#startdatumRadio2").attr('checked', true); 
   }
 </script>    
 
@@ -214,61 +214,93 @@ Order::getMondays(15);
   <input type="hidden" name="m_total"   id="m_total" value="">        
   <input type="hidden" name="m_incmoms" id="m_incmoms" value="">            
 
+  <style>
+    #checkout-ul label{margin-bottom: 10px;display:block;margin-top: 40px;font-size:18px;}
+    #checkout-ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
+    #checkout-ul input{height:18px;font-size: 14px;}
+    #checkout-ul a{text-decoration: underline;}
+    #calc{border-bottom: solid black 1px;}
+
+    #nbr-with-text, #nbr-without-text{width:120px;margin-bottom: 15px;}
+    #nbr-with-text span, #nbr-without-text span{color:#427F10;}
+
+    #nbr-with, #nbr-without{width:40px;height:20px;font-size: 18px;}
+
+    #nbr-with-sum, #nbr-without-sum {margin-left: 30px;}
+    .nbr{font-size: 18px;font-weight: bold;}
+    #freight-label{display:block;width:190px;float:left;}
+    #freight{float:left;}
+    #nbr-sum-total-freight{margin-left: 190px;float:left;}
+    #nbr-sum-total-freight-moms{margin-left: 65px;float:left;color:#427F10;}
+
+    #startdatumRadio-label{font-size: 13px;display: inline;}
+    #startdatumRadio1, #startdatumRadio2{width:40px;} 
+    #startdatum{width:175px;height:22px;font-size: 12px;}
+    #payer li{margin-bottom: 2px; margin-top: 0;display:block;float:left;}
+    #payer li div{width:130px;font-size: 14px;float:left}
+    #payer li input{width:180px;float:left;}
+    #payer #payer-label{margin-bottom: 10px;display:block;margin-top: 40px;font-size:18px;}
+
+  </style>
+
   <ul id="checkout-ul">
-    <li><label>Startdatum</label>
+    <li id="calc">
+      <label >Antal deltagare för 5 veckors stegtävling</label>
       <div class="clear"></div>
-      <input name="startdatumRadio" id="mmForetagStartdatumRadio1" type="radio" value="2012-04-23" checked><label for="mmForetagStartdatumRadio1">Den stora vårtävlingen 23 april</label><br/>
-      <input name="startdatumRadio" id="mmForetagStartdatumRadio2" type="radio" value="egetdatum"  >
-      <select name="startdatum" id="mmForetagStartdatum" onchange="updateStartRadio();">
+      <div id="nbr-with-text"><?php echo $campaignCodes['RE03'][text]; ?><span > <?php echo $campaignCodes['RE03'][pris]; ?> kr / person</span></div>
+      <input type="text" name="RE03" id="nbr-with"/>
+      <div id="nbr-with-sum"><span class="nbr">0</span> kr ex moms</div>
+      <div class="clear"></div>
+      <div id="nbr-without-text"><?php echo $campaignCodes['RE04'][text]; ?><span > <?php echo $campaignCodes['RE04'][pris]; ?> kr / person</span></div>
+      <input type="text" name="RE04" id="nbr-without" />       
+      <div id="nbr-without-sum"><span class="nbr">0</span> kr ex moms</div>
+      <div class="clear"></div>
+      <div id="freight-label">Frakt</div><div id="freight"><span class="nbr">0</span><span id="freight-text"> kr ex moms</div>
+      <div class="clear"></div>
+    </li>
+    <li>
+      <div id="nbr-sum-total-freight"><span class="nbr">0</span> kr ex moms</div>
+      <div id="nbr-sum-total-freight-moms"><span class="nbr"> 0</span> kr inkl. moms </div>
+    </li>
+    <div class="clear"></div>
+
+    <li><label>Välj ert startdatum (valfri måndag)</label>      
+      <input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2012-04-23" checked><label for="startdatumRadio1" id="startdatumRadio-label" style="font-size: 13px;display: inline;">Den stora vårtävlingen 23 april</label><br/>
+      <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum"  >
+      <select name="startdatum" id="startdatum" onchange="updateStartRadio();">
         <?php echo Order::getMondays(20); ?>
       </select>		
     </li>
 
-    <li>
-        <label><a href="" id="discount-toggle">Har du en rabattkod?</a></label><input type="text" name="discount" id="discount" class="hidden"/>         
-    </li>
-    <li>
-      <label><a href="" id="refcode-toggle">Referenskod på kvittot?</a></label><input type="text" name="refcode" id="refcode" class="hidden"/>         
-    </li>        
-    <li>
-      <label id="nbr">Antal deltagare</label>
-      <div class="clear"></div>
-      <input type="text" name="RE03" id="nbr-with"/>
-      <div id="nbr-with-text"><?php echo $campaignCodes['RE03'][text]; ?><span style="color:red;"> <?php echo $campaignCodes['RE03'][pris]; ?>kr</span><?php echo $campaignCodes['RE03']['extra']; ?></div>
-      <div id="nbr-with-sum"><span>0</span> kr ex moms</div>
-      <div class="clear"></div>
-      <input type="text" name="RE04" id="nbr-without" /> 
-      <div id="nbr-with-text"><?php echo $campaignCodes['RE04'][text]; ?><span style="color:red;"> <?php echo $campaignCodes['RE04'][pris]; ?>kr</span><?php echo $campaignCodes['RE04']['extra']; ?></div>
-      <div id="nbr-without-sum"><span>0</span> kr ex moms</div>
-    </li>
     <div class="clear"></div>
-    <li>
-      <label>Frakt</label>
+    <div id="payer">
+      <li><div id="payer-label">Faktureringsadress</div></li><div class="clear"></div>
+      <li><div>Företagets namn</div><input type="text" name="company" id="company" class=""/></li><div class="clear"></div>
+      <li><div><a href="" id="co-toggle">c/o ?</a></div><input type="text" name="co" id="co" class="hidden"/></li><div class="clear"></div>          
+      <li><div>Förnamn</div><input type="text" name="firstname" id="firstname" class=""/></li><div class="clear"></div>
+      <li><div>Efternamn</div><input type="text" name="lastname" id="lastname" class=""/></li><div class="clear"></div>
+      <li><div>E-post</div><input type="text" name="email" id="email" class=""/></li><div class="clear"></div>
+      <li><div>Mobil/telefon</div><input type="text" name="phone" id="phone"/></li><div class="clear"></div>
+      <li><div>Postadress</div><input type="text" name="street1" id="street1"/></li><div class="clear"></div>
+      <li><div><a href="" id="address-toggle">Fler rader?</a></div></li> 
+      <div id="extra-address"class="hidden">
+        <li><div></div><input type="text" name="street2" id="street2"/></li><div class="clear"></div>
+        <li><div>&nbsp;</div><input type="text" name="street3" id="street3"/></li>
+      </div>
+      <div class="clear"></div>
+      <li><div>Postnummer</div><input type="text" name="zip" id="zip"/></li><div class="clear"></div>
+      <li><div>Ort</div><input type="text" name="city" id="city"/></li><div class="clear"></div>
+      <li><div><a href="" id="country-toggle">Inte Sverige?</a></div><input type="text" name="country" id="country" class="hidden" value="Sverige"/></li><div class="clear"></div>   
 
-      <div id="freight"><span></span><span id="freight-text"></span></div>
-    </li>        
-    <li>
-      <div id="nbr-sum-total-freight"><span>0</span> kr ex moms</div>
-    </li>
-    <li>
-      <div id="nbr-sum-total-freight-moms"><span>0</span> kr inkl. moms</div>
-    </li>
-
-
-    Faktureringsadress
-    <li><label>Företagets namn</label><input type="text" name="company" id="company" class=""/></li>
-    <li><label><a href="" id="co-toggle">c/o ?</a></label><input type="text" name="co" id="co" class="hidden"/></li>          
-    <li><label>Förnamn</label><input type="text" name="firstname" id="firstname" class=""/><label>Efternamn</label><input type="text" name="lastname" id="lastname" class=""/></li>
-    <li><label>E-post</label><input type="text" name="email" id="email" class=""/></li>
-    <li><label>Mobil/telefon</label><input type="text" name="phone" id="phone"/></li>        
-    <li><label>Postadress</label><input type="text" name="street1" id="street1"/></li><a href="" id="address-toggle"> Fler rader</a> 
-    <div id="extra-address"class="hidden">
-      <li><label>Postadress 2</label><input type="text" name="street2" id="street2"/></li>
-      <li><label>Postadress 3</label><input type="text" name="street3" id="street3"/></li>
+      <li>
+        <label><a href="" id="discount-toggle">Har du en rabattkod?</a></label><input type="text" name="discount" id="discount" class="hidden"/>         
+      </li>
+      <li>
+        <label><a href="" id="refcode-toggle">Referenskod på kvittot?</a></label><input type="text" name="refcode" id="refcode" class="hidden"/>         
+      </li>      
     </div>
-    <li><label>Postnummer</label><input type="text" name="zip" id="zip"/></li>
-    <li><label>Ort</label><input type="text" name="city" id="city"/></li>
-    <li><label><a href="" id="country-toggle">Inte Sverige?</a></label><input type="text" name="country" id="country" class="hidden" value="Sverige"/></li>       
+
+
     <a href="" id="delivery-toggle"> Ange en leveransadress</a> 
     <div id="delivery" class="hidden">
       Leveransadress
