@@ -117,6 +117,8 @@ if (!empty($order) && !empty($orderItemList)) {
       $orderList["item"] = $order->getItem();
       $orderList["payment"] = $order->getPayment();
       $orderList["sum"] = $order->getSum();
+      $orderList["sumMoms"] = $order->getSumMoms();
+      $orderList["orderRefCode"] = $order->getOrderRefcode();
       $orderList["typ"] = $order->getTyp();
       $orderList["id"] = $order->getId();
       $orderList["orderId"] = $foretag->getOrderId();

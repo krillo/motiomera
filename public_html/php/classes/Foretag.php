@@ -1074,6 +1074,8 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
    * Create a faktura file, put it on the ftp area
    */
   public function createFakturaFile($refId) {
+    //$fileNamePrefix = 'fak';
+    $fileNamePrefix = '';
     $filnamn = $this->setFilnamnAuto($fileNamePrefix, 'txt', 'faktura');
     $lokalFil = FORETAGSFAKTURA_LOCAL_PATH . "/" . $filnamn;
 
@@ -1081,7 +1083,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
       Misc::logMotiomera("Couldn't create or save order faktura file: " . $lokalFil, 'ERROR');
       throw new OrderException(" ERROR - Couldn't create or save order faktura file: " . $lokalFil, -10);
     } else {
-      $orderItems = Order::listOrderDataByRefId($refId);      
+      $orderItems = Order::listOrderDataByRefId($refId);
       $orderRefCode = $orderItems[0]['orderRefCode'];
       $msg = "FAKTURA \n\n";
       $msg .= "Fakturaadress: \n";
@@ -1101,34 +1103,30 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
       $msg .= "Fakturadatum: \n";
       $msg .= date('Y-m-d') . " \n\n";
       $msg .= "Artikel: \n";
-
       foreach ($orderItems as $orderItem) {
         $msg .= $orderItem['item'] . "    " . $orderItem['antal'] . "    " . $orderItem['price'] . "\n";
+        $orderIdArray[] = $orderItem['id'];  
       }
+      $msg .= "\nSumma ink moms: \n";
+      $msg .= $orderItem['sumMoms'] . "\n\n";
+
+
       $fd = fopen($lokalFil, "a");
-      fwrite($fd, $msg);
-      fclose($fd);
-
-
-      Misc::logMotiomera("Created faktura-file for " . $this->getReciverCompanyName() . ",  " . $lokalFil . ", foretagId =  " . $this->getId() . ", orderids = " . implode(' ', $orderIdArray), 'OK');
-      //set the passw again, not tillaggsbestallning, it is stored in temp just because otherwise we had not been able to print it in the letter
-      /*
-        if ($typeForetag) {
-        $this->setLosenord($losenord);
-        $this->setTempLosenord(NULL);
-        $this->commit();
+      if ($fd != false) {
+        fwrite($fd, $msg);
+        fclose($fd);
+        Misc::logMotiomera("Created faktura-file for " . $this->getReciverCompanyName() . ",  " . $lokalFil . ", foretagId =  " . $this->getId() . ", orderids = " . implode(' ', $orderIdArray), 'OK');
+        //update the orderrows with faktura filename        
+        foreach ($orderItems as $orderItem) {
+          $order = Order::loadById($orderItem[id]);
+          $order->setFilnamnFaktura($filnamn);
+          $order->commit();
         }
-        //update order status on all order lines
-        foreach ($orderIdArray as $orderId) {
-        $order = Order::loadById($orderId);
-        $order->setOrderStatus(Order::ORDERSTATUS_PSW_FILE);
-        $order->setFilnamn($filnamn);
-        $order->commit();
-        Misc::logMotiomera("Updated status to " . Order::ORDERSTATUS_PSW_FILE . ", orderid = " . $orderId, 'OK');
-        }
-       * 
-       */
-      return true;
+        return true;
+      } else {
+        Misc::logMotiomera("Unable to create faktura-file for " . $this->getReciverCompanyName() . ",  " . $lokalFil . ", foretagId =  " . $this->getId() . ", orderids = " . implode(' ', $orderIdArray), 'ERROR');
+        return false;
+      }
     }
   }
 

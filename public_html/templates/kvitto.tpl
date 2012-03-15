@@ -64,8 +64,18 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
 	</tr>	
 	<tr>
 		<td><b>Orderid:</b> {$orderList.orderId}</td>
-		<td colspan="2"><b>Totalsumma:</b> {$orderList.sum} kr inkl. moms</td>
+		<td colspan="2"><b>Totalsumma:</b> {$orderList.sumMoms} kr inkl. moms</td>
 	</tr>	
+	<tr>
+		<td colspan="3" class="mmRowHeading"><h3>Info</h3></td>
+	</tr>
+	<tr>
+		<td><b>Startdatum:</b> {$orderList.startDatum}</td>
+	</tr>
+	<tr>
+		<td><b>Er referenskod:</b> {$orderList.orderRefCode}</td>
+	</tr>
+  
 	<tr>
 		<td colspan="3" class="mmRowHeading"><h3>Artiklar</h3></td>
 	</tr>

@@ -35,6 +35,7 @@ class Order extends Mobject {
   protected $foretagLosen;
   protected $antal;  //antalet av beställd produkt, dvs frakt får här en 1
   protected $filnamn;
+  protected $filnamnFaktura;
   protected $ip;
   protected $browser;
   // Orderdata
@@ -83,6 +84,7 @@ class Order extends Mobject {
       "typ" => "str",
       "skapadDatum" => "str",
       "filnamn" => "str",
+      "filnamnFaktura" => "str",
       "medlem_id" => "int",
       "foretag_id" => "int",
       "betald" => "int",
@@ -551,7 +553,7 @@ class Order extends Mobject {
    */
   public static function listOrderDataByRefId($refId) {
     global $db;
-    $sql = "SELECT id, item, price, antal, payment, orderRefCode  FROM " . self::classToTable(get_class()) . " WHERE refId = '" . $refId . "'";
+    $sql = "SELECT id, item, price, antal, payment, orderRefCode, sumMoms  FROM " . self::classToTable(get_class()) . " WHERE refId = '" . $refId . "'";
     $res = $db->query($sql);
     $items = array();
     while ($data = mysql_fetch_assoc($res)) {
@@ -969,7 +971,12 @@ class Order extends Mobject {
   public function getFilnamn() {
     return $this->filnamn;
   }
+  public function getFilnamnFaktura() {
+    return $this->filnamnFaktura;
+  }
 
+  
+  
   public function getForetagId() {
     return $this->foretag_id;
   }
@@ -1368,6 +1375,9 @@ class Order extends Mobject {
 
   public function setFilnamn($filname) {
     $this->filnamn = $filname;
+  }
+  public function setFilnamnFaktura($arg) {
+    $this->filnamnFaktura = $arg;
   }
 
   public function setItems($items) {

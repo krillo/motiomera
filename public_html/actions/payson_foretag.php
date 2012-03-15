@@ -42,6 +42,22 @@ $order = new stdClass;
 !empty($_REQUEST['channel']) ? $order->channel = $_REQUEST['channel'] : $order->channel = '';
 !empty($_REQUEST['paytype']) ? $order->paytype = $_REQUEST['paytype'] : $order->paytype = '';
 
+
+//copy buyer data to delivery data
+if ($order->delStreet1 == '' && $order->delCity == '') { //consider deliverydata empty
+  $order->delCompany = $order->company;
+  $order->delName = $order->fname . ' ' . $order->lname;
+  $order->delStreet1 = $order->street1;
+  $order->delStreet2 = $order->street2;
+  $order->delStreet3 = $order->street3;
+  $order->delco = $order->co;
+  $order->delZip = $order->zip;
+  $order->delCity = $order->city;
+  $order->delEmail = $order->email;
+  $order->delPhone = $order->phone;
+  $order->delcountry = $order->country;
+}
+
 $order->RE03 = (int) $order->RE03;
 $order->RE04 = (int) $order->RE04;
 $order->exmoms = (int) $order->exmoms;
