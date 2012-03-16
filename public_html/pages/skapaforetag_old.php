@@ -51,7 +51,7 @@ if(!empty($_GET['caff'])){
 	$compAffCode = $_GET['caff'];
 }
 $smarty->assign('compAffCode', $compAffCode);
-$smarty->display('kassaforetag.tpl');
+$smarty->display('skapaforetag_old.tpl');
 
 
 

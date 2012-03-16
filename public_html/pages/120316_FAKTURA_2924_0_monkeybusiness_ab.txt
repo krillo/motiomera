@@ -1,0 +1,29 @@
+FAKTURA 
+
+Fakturaadress: 
+Monkeybusiness AB
+c/o Ankarklew
+Ostgatan 6 g2 g3
+747474
+Burg
+Sverige
+
+Er referens: 
+Kapten Kaka
+simon@erendi.se
+
+Vår referens: 
+Kristian Erendi 
+
+Leveransvillkor: 
+dddd
+
+Fakturadatum: 
+2012-03-16 
+
+Artikel: 
+Utan stegräknare    1    169
+
+Summa ink moms: 
+212
+

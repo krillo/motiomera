@@ -41,6 +41,7 @@ $order = new stdClass;
 !empty($_REQUEST['del-country']) ? $order->delcountry = $_REQUEST['del-country'] : $order->delcountry = '';
 !empty($_REQUEST['channel']) ? $order->channel = $_REQUEST['channel'] : $order->channel = '';
 !empty($_REQUEST['paytype']) ? $order->paytype = $_REQUEST['paytype'] : $order->paytype = '';
+!empty($_REQUEST['campcode']) ? $order->campcode = $_REQUEST['campcode'] : $order->campcode = '';
 
 
 //copy buyer data to delivery data
@@ -89,6 +90,8 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
     $foretag = new Foretag($order->company, $kommun, $foretagLosen, $order->startdatum, $order->channel, $order->campcode, $isValid);  //last param is "Order::isValid" and is set to 0 - i.e. not a valid order yet
     $foretag->setTempLosenord($foretagLosen);  //a new is created in api/order if a purchase is made. Store this!
     $foretag->setPayerName($order->fname . ' ' . $order->lname);
+    $foretag->setPayerFName($order->fname);
+    $foretag->setPayerLName($order->lname);
     $order->street = $order->street1;
     !empty($order->street2) ? $order->street = $order->street . ' ' . $order->street2 : null;
     !empty($order->street3) ? $order->street = $order->street . ' ' . $order->street3 : null;
@@ -118,10 +121,15 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
     $foretag->commit();
 
     $token = null;
-    if ($order->paytype == 'Direkt') { //do a payson connection
+    if ($order->paytype == 'Direktbetalning') { //do a payson connection
       $nbrpers = $order->RE03 + $order->RE04;
       $paysonMsg = "Motiomera, $nbrpers deltagare, $order->RE03 stegräknare";
-      $data = Order::setupPaysonConnection($order->email, $order->fname, $order->lname, $order->incmoms, $paysonMsg);
+      if($order->email == 'krillo@gmail.com'){
+        $sumToPay = 1;   //for testing only pay 1 kr, don't forget to return the money in payson to krillo@gmail.com
+      } else {
+        $sumToPay = $order->incmoms;
+      }      
+      $data = Order::setupPaysonConnection($order->email, $order->fname, $order->lname,$sumToPay , $paysonMsg);
       $payResponse = $data['payResponse'];
       $api = $data['api'];
       if ($payResponse->getResponseEnvelope()->wasSuccessful()) {  // Step 3: verify that it suceeded
@@ -130,7 +138,7 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
         echo $token;
         //header("Location: " . $api->getForwardPayUrl($payResponse)); //do the redirection to payson
       } else {
-        throw new UserException("Problem med Payson.com", "Det är något problem med betaltjänsten Payson.com. Prova igen senare eller välj faktura.");
+        throw new UserException("Problem med Payson.se", "Det är något problem med betaltjänsten Payson.com. Prova igen senare eller välj faktura.");
       }
     }
 
@@ -138,7 +146,6 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
     if (empty($token)) {
       $refId = Order::genRefId();
       $paymenttype = 'faktura';
-      echo "faktura";
     } else {
       $refId = $token;
       $paymenttype = 'payson';
@@ -221,41 +228,6 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
       //echo $kvittoPage;
       header("Location: " . $kvittoPage); //do the redirection to kvittosidan
     }
-    /*
-
-      $message = "<br>......................................................<br>";
-      $message .= "ORDERNUMMER: $orderId <br>";
-      $message .= "$order->company <br>";
-      $message .= "$order->name <br>";
-      $message .= "$order->email <br>";
-      $order->refcode != '' ? $message .= "Referenskod: $order->refcode <br>" : null;
-      $message .= "<br>";
-
-      if (isset($orderRE03)) {
-      $text = Order::$campaignCodes['RE03']['text'];
-      $price = Order::$campaignCodes['RE03']['pris'];
-      $message .= "$order->RE03 x $text a $price Kr&nbsp; =  &nbsp;$priceRE03 Kr<br>";
-      }
-      if (isset($orderRE04)) {
-      $text = Order::$campaignCodes['RE04']['text'];
-      $price = Order::$campaignCodes['RE04']['pris'];
-      $message .= "$order->RE04 x $text a $price Kr&nbsp;  =  &nbsp;$priceRE04 Kr<br>";
-      }
-      if (isset($orderFR)) {
-      $text = Order::$campaignCodes[$order->freight]['text'];
-      $price = Order::$campaignCodes[$order->freight]['pris'];
-      $message .= "1 x $text a $price Kr&nbsp;  =  &nbsp;$priceFR Kr<br>";
-      }
-      $message .= ".....................................................<br>";
-      $message .= "Summa: $order->total Kr<br>";
-      $momssats = Order::$moms['text'];
-      $message .= "Summa inkl $momssats moms: $order->incmoms Kr<br>";
-      $message .= "<br><br>Pris att betala: $order->incmoms Kr<br>";
-
-      //echo $message;
-     * 
-     * 
-     */
   } else {
     echo 'priset stämmer inte...';
   }

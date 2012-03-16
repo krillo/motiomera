@@ -128,8 +128,8 @@ Order::getMondays(15);
         
         
         
-    //catch keyup where the ammount is submitted 
-    $('#company').keyup(function(event) {
+    //catch keyup where the companyname is submitted 
+    $('#company').keyup(function() {
       $('#fields-hidden').toggleClass("visible");
       $('#fields-hidden').show("slow");
     });
@@ -210,6 +210,15 @@ Order::getMondays(15);
     jQuery("#startdatumRadio2").attr('checked', true); 
   }
 </script>    
+
+
+
+<div id="infotext" style="position:absolute;left:530px;top:131px;border:2px solid;padding:6px;">
+<h3>TILLÄGGSBESTÄLLNING</h3>
+Är du redan kund och vill göra en<br/>tilläggsbeställning? Logga in på din<br/>administrationssida där du enkelt kan<br/>lägga till fler deltagare. <a href="/pages/foretaglogin.php">Klicka här</a>.
+</div>
+
+
 
 
 
@@ -340,24 +349,42 @@ Order::getMondays(15);
         </select>	
       </li-->
 
-      <div id="pay">
-        
+  <style>
+    #pay {font-size: 14px;margin-top: 45px;}
+    #pay div{float:left;}
+    #pay input{font-size: 15px;width:200px;height:25px;}
+    #pay ul{  list-style: none outside none;margin-left: 2px;padding-left: 15px;}    
+    #or{font-size: 15px; margin:0 30px 0 30px;}
+  </style>
 
-        <h2>Välj hur du vill betala:</h2>
-        <div style="border:solid 1px grey; float:left;">  
-          VISA / MasterCard <br/>
-          Internetbank Föreningssparbanken / Swedbank <br/>
-          Internetbank Handelsbanken <br/>
-          Internetbank SEB <br/>
-          Internetbank Nordea
-          <input type="submit" value="Direkt" name="paytype" id="payson">
-        </div>
-        <div style="border:solid 1px grey; float:left;">  
-          Faktura <br/>
-          <input type="submit" value="Faktura" name="paytype" id="faktura">
-        </div>           
-        <li>Genom att fortsätta köpet godkänner jag <a href="/pages/integritetspolicy.php" target="_blank">Motiomeras integritetspolicy</a> och är över 16 år</li>
-      </div>
+
+  <div id="pay">
+    <div >
+      <input type="submit" value="Direktbetalning" name="paytype" id="payson">
+
+    </div>
+    <div id="or">eller</div>
+    <div >      
+      <input type="submit" value="Faktura" name="paytype" id="faktura">
+    </div>  
+    <div class="clear"></div>
+    <div id="payalt">
+      <ul>
+        <li>VISA / MasterCard </li>
+        </li>Internetbank:</li> 
+        <ul>
+          <li>Föreningssparbanken</li> 
+          <li>Swedbank</li>
+          <li>Handelsbanken </li>
+          <li>SEB </li>
+          <li>Nordea </li>
+        </ul>
+      </ul>
+    </div>  
+  </div>
+      
+      
+      
     </div>
 
 
@@ -366,3 +393,21 @@ Order::getMondays(15);
   </ul>
 </form>    
 <div class="clear"></div>
+
+
+    
+<br>
+<br/>
+<br/>
+<br/>
+<div id="pers-service">
+  <div id="pers-img" style="float:left;">
+    <img src="/img/kristian_80x90.png" alt="Kristian"/>
+  </div>
+  <div id="pers-text" style="float:left;padding-left:15px;width:450px;padding-top:5px">
+    <span  class="mmObs mmObsText">För mer information eller om du vill ha en powerpoint-presentation. Kontakta Kristian på:<br/>
+      0761-393855<br/>
+      <a href="mailto:kristian@motiomera.se" >kristian@motiomera.se</a>
+    </span>
+  </div>
+</div>

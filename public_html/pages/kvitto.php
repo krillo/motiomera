@@ -2,8 +2,8 @@
 
 include $_SERVER["DOCUMENT_ROOT"] . "/php/init.php";
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+//error_reporting(E_ALL);
+//ini_set('display_errors', '1');
 
 $refId = '';
 try {
@@ -48,7 +48,7 @@ if (!empty($order) && !empty($orderItemList)) {
         Misc::logMotiomera($msg, 'INFO', 'order');
         foreach ($orderItems as $orderItem) {
           $order = Order::loadById($orderItem['id']);
-          $order->setOrderStatus(Order::ORDERSTATUS_CUST_NO); //The Order has been payed at payson - to status 30 (status does not aply any more)
+          $order->setOrderStatus(Order::ORDERSTATUS_CUST_NO); //The Order has been payed at payson (or faktura) - to status 30 (status 20 does not aply any more)
           $order->setIsValid(1);
           $order->commit();
           $foretag = $order->getForetag();
@@ -59,27 +59,31 @@ if (!empty($order) && !empty($orderItemList)) {
         $foretag->genereraLag(); //generate lag, only when typ = foretag  
         $foretag->commit();
         $foretag->sendEmailReciept($order->getTyp(), $refId);
-        if($paytype == 'faktura'){
+        if ($paytype == 'faktura') {
           $foretag->createFakturaFile($refId);
-          
         }
         break;
       case ("foretag_tillagg"):
         $orderItems = Order::listOrderDataByRefId($refId);
         $foretag = $order->getForetag();
-        $msg .= "\nTyp: Foretag - tillaggsorder \nId: " . $foretag->getId() . "\nNamn: " . $foretag->getNamn() . "\nEpost: " . $foretag->getPayerEmail();
+        $msg .= "\nkrillo Typ: Foretag - tillaggsorder \nId: " . $foretag->getId() . "\nNamn: " . $foretag->getNamn() . "\nEpost: " . $foretag->getPayerEmail();
         $msg .= "\nTelefon: " . $foretag->getPayerPhone() . "\nip: " . $order->getIp() . "\n: " . print_r($orderItems, true);
         Misc::logMotiomera($msg, 'INFO', 'order');
         foreach ($orderItems as $orderItem) {
           $order = Order::loadById($orderItem['id']);
-          $order->setOrderStatus(Order::ORDERSTATUS_CUST_NO); //The Order has been payed at payson - to status 30 (status does not aply any more)
+          $order->setOrderStatus(Order::ORDERSTATUS_CUST_NO); //The Order has been payed at payson (or faktura) - to status 30 (status 20 does not aply any more)
           $order->setIsValid(1);
           $order->commit();
           $foretag = $order->getForetag();
           $foretag->generateNycklar($order->getQuantity(), true, $order->getId());
+          $paytype = $order->getPayment();
+          $orderId = $order->getId();
         }
         $foretag->commit();
         $foretag->sendEmailReciept($order->getTyp(), $refId);
+        if ($paytype == 'faktura') {
+          $foretag->createFakturaFile($refId);
+        }
         break;
       case ("foretag_again"):
         $order->getForetag()->startNewContestSameAsLast();
@@ -110,7 +114,7 @@ if (!empty($order) && !empty($orderItemList)) {
       $orderList = array();
       $orderList["refId"] = $order->getRefId();
       $orderList["items"] = $order->getItems();
-      $orderList["orderId"] = $order->getOrderId();
+      $orderList["orderId"] = $orderId;
       $orderList["date"] = $order->getDate();
       $orderList["price"] = $order->getPrice();
       $orderList["quantity"] = $order->getQuantity();
@@ -121,12 +125,11 @@ if (!empty($order) && !empty($orderItemList)) {
       $orderList["orderRefCode"] = $order->getOrderRefcode();
       $orderList["typ"] = $order->getTyp();
       $orderList["id"] = $order->getId();
-      $orderList["orderId"] = $foretag->getOrderId();
     }
-
     switch (true) {
       case ($orderTyp == "foretag"):
         $orderList["foretagLosen"] = $foretag->getTempLosenord();
+        $orderList["orderId"] = $foretag->getOrderId();
       //continue
       case ($orderTyp == "foretag_again" || $orderTyp == "foretag_tillagg"):
         $orderList["companyName"] = $foretag->getCompanyName();

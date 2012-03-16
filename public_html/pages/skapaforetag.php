@@ -53,7 +53,4 @@ if(!empty($_GET['caff'])){
 $smarty->assign('compAffCode', $compAffCode);
 $smarty->display('skapaforetag.tpl');
 
-
-
-
 ?>

@@ -52,6 +52,8 @@ class Foretag extends Mobject {
   protected $kundnummer;    //kundnummer från AS400, hämtas via cron
   protected $companyName;
   protected $payerName;
+  protected $payerFName;
+  protected $payerLName;
   protected $payerAddress;
   protected $payerCo;
   protected $payerZipCode;
@@ -89,6 +91,8 @@ class Foretag extends Mobject {
       "kundnummer" => "int",
       "companyName" => "str",
       "payerName" => "str",
+      "payerFName" => "str",
+      "payerLName" => "str",
       "payerAddress" => "str",
       "payerCo" => "str",
       "payerZipCode" => "str",
@@ -1075,9 +1079,10 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
    */
   public function createFakturaFile($refId) {
     //$fileNamePrefix = 'fak';
-    $fileNamePrefix = '';
-    $filnamn = $this->setFilnamnAuto($fileNamePrefix, 'txt', 'faktura');
-    $lokalFil = FORETAGSFAKTURA_LOCAL_PATH . "/" . $filnamn;
+    $prefix = '';
+    $middlefix = 'FAK';
+    $filnamn = $this->setFilnamnAuto($prefix, 'txt', 'faktura', $middlefix);
+    $lokalFil =  FORETAGSFAKTURA_LOCAL_PATH . "/" . $filnamn;
 
     if (file_exists($lokalFil)) {
       Misc::logMotiomera("Couldn't create or save order faktura file: " . $lokalFil, 'ERROR');
@@ -1105,7 +1110,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
       $msg .= "Artikel: \n";
       foreach ($orderItems as $orderItem) {
         $msg .= $orderItem['item'] . "    " . $orderItem['antal'] . "    " . $orderItem['price'] . "\n";
-        $orderIdArray[] = $orderItem['id'];  
+        $orderIdArray[] = $orderItem['id'];
       }
       $msg .= "\nSumma ink moms: \n";
       $msg .= $orderItem['sumMoms'] . "\n\n";
@@ -1118,7 +1123,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
         Misc::logMotiomera("Created faktura-file for " . $this->getReciverCompanyName() . ",  " . $lokalFil . ", foretagId =  " . $this->getId() . ", orderids = " . implode(' ', $orderIdArray), 'OK');
         //update the orderrows with faktura filename        
         foreach ($orderItems as $orderItem) {
-          $order = Order::loadById($orderItem[id]);
+          $order = Order::loadById($orderItem['id']);
           $order->setFilnamnFaktura($filnamn);
           $order->commit();
         }
@@ -1367,7 +1372,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
    * @param string $type  default 'order'
    * @return string the filename
    */
-  public function setFilnamnAuto($prefix = '', $fileExt = 'pdf', $type = 'order') {
+  public function setFilnamnAuto($prefix = '', $fileExt = 'pdf', $type = 'order', $middlefix = '') {
     if (!empty($prefix)) {
       $prefix = $prefix . '_';
     }
@@ -1384,15 +1389,19 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
       if (in_array($b, $letters))
         $nyttNamn.= $b;
     }
-    $filnamn = $prefix . date("ymd") . "_" . $this->getId() . "_" . $nyttNamn . ".$fileExt";
-    $i = 0;
-    if ($type == 'order') {
-      $filepath = FORETAGSFIL_LOCAL_PATH . "/" . $filnamn;
-    } else {
-      $filepath = FORETAGSFAKTURA_LOCAL_PATH . "/" . $filnamn;
+    if($middlefix != ''){
+      $middlefix = $middlefix . "_";
     }
-    while (file_exists($filepath)) {
-      $filnamn = $prefix . date("ymd") . "_" . $this->getId() . "_" . $i . "_" . $nyttNamn . ".$fileExt";
+      
+    if ($type == 'order') {
+      $path = FORETAGSFIL_LOCAL_PATH . "/";
+    } else {
+      $path = FORETAGSFAKTURA_LOCAL_PATH . "/";
+    }    
+    $filnamn = $prefix . date("ymd") . "_" . $middlefix  . $this->getId() . "_" . $nyttNamn . ".$fileExt";
+    $i = 0;
+    while (file_exists($path . $filnamn)) {
+      $filnamn = $prefix . date("ymd") . "_" . $middlefix . $this->getId() . "_" . $i . "_" . $nyttNamn . ".$fileExt";
       $i++;
     }
     return $filnamn;
@@ -1878,6 +1887,14 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     return $this->payerName;
   }
 
+  public function getPayerFName() {
+    return $this->payerFName;
+  }
+
+  public function getPayerLName() {
+    return $this->payerLName;
+  }
+
   public function getPayerAddress() {
     return $this->payerAddress;
   }
@@ -2153,6 +2170,14 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
 
   public function setPayerName($payerName) {
     $this->payerName = $payerName;
+  }
+
+  public function setPayerFName($payerName) {
+    $this->payerFName = $payerName;
+  }
+
+  public function setPayerLName($payerName) {
+    $this->payerLName = $payerName;
   }
 
   public function setPayerAddress($payerAddress) {
