@@ -166,6 +166,15 @@ class Order extends Mobject {
           "popupid" => 22,
           "public" => TRUE,
       ),
+      "FRAKT02" => array(
+          "typ" => "frakt",
+          "text" => "Frakt",
+          "extra" => " kr ex. moms.",
+          "pris" => 20,
+          "dagar" => 0,
+          "popupid" => 22,
+          "public" => TRUE,
+      ),
       "RE03" => array(
           "typ" => "foretag",
           "text" => "Med stegräknare",
@@ -184,7 +193,7 @@ class Order extends Mobject {
           "popupid" => 21,
           "public" => TRUE,
       ),
-      "RE05" => array(
+      "PRIV3" => array(
           "typ" => "medlem",
           "text" => "3 månader MotioMera",
           "pris" => 79,
@@ -193,6 +202,26 @@ class Order extends Mobject {
           "levelid" => 1,
           "public" => TRUE,
       ),
+      "PRIV12" => array(
+          "typ" => "medlem",
+          "text" => "12 månader MotioMera",
+          "pris" => 199,
+          "dagar" => 91,
+          "popupid" => 30,
+          "levelid" => 1,
+          "public" => TRUE,
+      ),
+      "STEG01" => array(
+          "typ" => "steg",
+          "text" => "med stegräknare ",
+          "extra" => "Silva ex step, vit",          
+          "pris" => 100,
+          "dagar" => 0,
+          "popupid" => 30,
+          "levelid" => 1,
+          "public" => TRUE,
+      ),
+
       "RE06" => array(
           "typ" => "medlem",
           "text" => "3 månader MotioMera + stegräknare",
