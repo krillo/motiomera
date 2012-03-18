@@ -202,7 +202,8 @@ class UrlChecker
 		) ,
 		"INDEX" => array(
 			"index.php" => array(
-				"http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js",
+        "/js/jquery-1.7.1.min.js",          
+				//"http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js",
         "/js/slides.min.jquery.js",
 				"/js/jquery.tablesorter.js",
 				"/js/jquery.motiomera.js"

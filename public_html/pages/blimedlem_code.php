@@ -3,7 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 $campaignCodes = Order::$campaignCodes;
-$moms = Order::$moms;
+$kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
 ?>
 
 
@@ -15,7 +15,7 @@ $moms = Order::$moms;
       errorClass: "invalid",
       validClass: "valid",
       rules: {
-        company: {
+        anamn: {
           required: true
         },
         firstname: {
@@ -24,7 +24,7 @@ $moms = Order::$moms;
         lastname: {
           required: true
         },
-        email: {
+        mailone: {
           required: true,
           email: true
         },
@@ -42,7 +42,7 @@ $moms = Order::$moms;
         }
       },  
       messages: {
-        company: {
+        anamn: {
           required: ''
         },
         firstname: {
@@ -63,7 +63,7 @@ $moms = Order::$moms;
         phone: {
           required: ''
         },
-        email: {
+        mailone: {
           required: '', 
           email: ''
         }         
@@ -83,11 +83,6 @@ $moms = Order::$moms;
     $('#long-check').change(function() {
       sum(); 
     });
-
-
-
-
-
  
     function sum(){
       radio  = $('input:radio[name=radio-priv]:checked').val();
@@ -115,7 +110,7 @@ $moms = Order::$moms;
         if(typeof longCheck == 'undefined'){
           longCheck = 0;
         } 
-        //alert('radio: ' + radio + ' shortCheck: ' + shortCheck+ ' longCheck: ' + longCheck);  
+        //alert('radio: ' + radio + ' shortCheck: ' + shortCheck+ ' longCheck: ' + longCheck);
         if(shortCheck != 0 || longCheck != 0){
           sumFreight = parseInt(<?php echo $campaignCodes['FRAKT02'][pris]; ?>);
           $('#m_frakt02').val(1);
@@ -144,6 +139,13 @@ $moms = Order::$moms;
     }
 
 
+    //catch keyup where the alias is submitted 
+    $('#anamn').keyup(function() {
+      $('#fields-hidden').toggleClass("visible");
+      $('#fields-hidden').show("slow");
+    });
+
+
     $('#private-toggle').click(function(event) {
       event.preventDefault(); 
       if($('#member-private').hasClass("visible")){
@@ -155,69 +157,7 @@ $moms = Order::$moms;
       }       
     });   
 
-
-    //sum with and without stepcounter, add freight and moms
-    function sum_x(){
-      countWith = $('#nbr-with').val();
-      sumWith =  countWith * <?php echo $campaignCodes['RE03']['pris']; ?>;
-      $('#nbr-with-sum span').html(sumWith);
-  
-      if(sumWith == 0){
-        //FRAKT00 is 0 kr
-        $('#freight span').html(<?php echo $campaignCodes['FRAKT00']['pris']; ?>);
-        $('#freight-text').html('<?php echo $campaignCodes['FRAKT00']['extra']; ?>');
-        $('#m_freight').val('FRAKT00');
-      } else {             
-        $('#freight span').html(<?php echo $campaignCodes['FRAKT01']['pris']; ?>);
-        $('#freight-text').html('<?php echo $campaignCodes['FRAKT01']['extra']; ?>');
-        $('#m_freight').val('FRAKT01');
-      } 
-  
-      countWithout = $('#nbr-without').val();
-      sumWithout =  countWithout * <?php echo $campaignCodes['RE04']['pris']; ?>;
-      $('#nbr-without-sum span').html(sumWithout);
         
-      sumTotal = sumWith + sumWithout;  
-      $('#nbr-sum-total span').html(sumTotal);
-          
-      freight = $('#freight span').html();
-      sumTotalFreight = parseInt(freight) + parseInt(sumTotal);
-      $('#nbr-sum-total-freight span').html(sumTotalFreight);    
-        
-          
-      sumTotalFreightMoms = sumTotalFreight * <?php echo $moms['percent']; ?>;
-      sumTotalFreightMoms = Math.ceil(sumTotalFreightMoms);
-      $('#nbr-sum-total-freight-moms span').html(sumTotalFreightMoms);
-
-
-          
-      //  
-      $('#m_exmoms').val(sumTotal);
-          
-      $('#m_total').val(sumTotalFreight);        
-      $('#m_incmoms').val(sumTotalFreightMoms);
-    }
-        
-        
-        
-    //catch keyup where the companyname is submitted 
-    $('#company').keyup(function() {
-      $('#fields-hidden').toggleClass("visible");
-      $('#fields-hidden').show("slow");
-    });
-        
-        
-    $('#delivery-toggle').click(function(event) {
-      event.preventDefault();
-      if($('#delivery').hasClass("visible")){
-        $('#delivery').toggleClass("visible");
-        $('#delivery').hide("slow");
-      }else {
-        $('#delivery').toggleClass("visible");
-        $('#delivery').show("slow");
-      }
-    });
-
     $('#address-toggle').click(function(event) {
       event.preventDefault(); 
       if($('#extra-address').hasClass("visible")){
@@ -241,16 +181,6 @@ $moms = Order::$moms;
       }       
     });        
 
-    $('#refcode-toggle').click(function(event) {
-      event.preventDefault(); 
-      if($('#refcode').hasClass("visible")){
-        $('#refcode').toggleClass("visible");
-        $('#refcode').hide("slow");
-      }else {
-        $('#refcode').toggleClass("visible");
-        $('#refcode').show("slow");
-      }       
-    });   
 
     $('#co-toggle').click(function(event) {
       event.preventDefault(); 
@@ -263,7 +193,16 @@ $moms = Order::$moms;
       }       
     });   
  
-
+    $('#country-toggle').click(function(event) {
+      event.preventDefault(); 
+      if($('#country').hasClass("visible")){
+        $('#country').toggleClass("visible");
+        $('#country').hide("slow");
+      }else {
+        $('#country').toggleClass("visible");
+        $('#country').show("slow");
+      }       
+    });   
  
  
   });
@@ -314,45 +253,21 @@ $moms = Order::$moms;
 
 
     <style>
-  
-          #checkout-ul h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
-          #checkout-ul .h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
-          #checkout-ul li{margin-top: 5px;}
-      
-          #checkout-ul label{width:130px;font-size: 14px;float:left}
-          #checkout-ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
-          #checkout-ul input{height:18px;font-size: 14px;}
-          #checkout-ul a{text-decoration: underline;}
-          #calc{border-bottom: solid black 1px;}
-      
-          #nbr-with-text, #nbr-without-text{width:120px;margin-bottom: 15px;}
-          #nbr-with-text span, #nbr-without-text span{color:#427F10;}
-      
-          #nbr-with, #nbr-without{width:40px;height:20px;font-size: 18px;}
-      
-          #nbr-with-sum, #nbr-without-sum {margin-left: 30px;}
-          .nbr{font-size: 18px;font-weight: bold;}
-          #freight-label{display:block;width:197px;float:left;}
-          #freight{float:left;}
-          #nbr-sum-total-freight{margin-left: 197px;float:left;}
-          #nbr-sum-total-freight-moms{margin-left: 65px;float:left;color:#427F10;}
-      
-          #checkout-ul #startdatumRadio-label{font-size: 13px;display: inline;width:300px;}
-          #startdatumRadio1, #startdatumRadio2{width:40px;float:left;} 
-          #startdatum{width:175px;height:22px;font-size: 12px;}
-          #early-info{margin-left: 20px; margin-top: 10px;}
-          
-          #payer li{margin-bottom: 2px; margin-top: 0;display:block;float:left;}
-          #payer li div{width:130px;font-size: 14px;float:left}
-          #payer li input{width:180px;float:left;}
-          #payer #payer-label{margin-bottom: 10px;display:block;margin-top: 40px;font-size:18px;}
-          #checkout-ul #refcode-row{margin-top: 20px;}
-   
+
+      #checkout-ul h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
+      #checkout-ul .h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
+      #checkout-ul li{margin-top: 5px;}
+
+      #checkout-ul label{width:130px;font-size: 14px;float:left}
+      #checkout-ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
+      #checkout-ul input{height:18px;font-size: 14px;}
+      #checkout-ul a{text-decoration: underline;}
+
     </style>
 
 
     <style>
-      #calc {margin-top: 100px;margin-bottom: 10px;font-size: 14px;border-bottom: 1px solid black;float:left;}
+      #calc {margin-top: 50px;margin-bottom: 10px;font-size: 14px;border-bottom: 1px solid black;float:left;}
       #calc input{width:18px;height:18px;font-size: 14px;float:left;}
       #calc div{font-size: 14px;float:left;}
       .step-check{margin-left: 20px;}
@@ -362,6 +277,13 @@ $moms = Order::$moms;
       .nbr{font-size: 22px; font-weight: bold;}
       #sum-freight{margin-left:98px;}
       #sum-total{margin-left:379px; float:left;margin-bottom:40px;}
+
+      #pay {font-size: 14px;margin-top: 45px;}
+      #integrity{margin-bottom: 20px;width: 350px;}
+      
+      #pay div{float:left;}
+      #pay input{font-size: 15px;width:200px;height:25px;}
+      #pay ul{margin-left: 2px;padding-left: 15px;}          
     </style>  
     <div id="calc">
 
@@ -384,16 +306,43 @@ $moms = Order::$moms;
       <div class="clear"></div>
     </div>
     <div id="sum-total"><span class="nbr">0</span> kr</div>
+    <div class="clear"></div>
 
 
 
     <ul id="checkout-ul">
-      <div id="fields-hidden" class="">
+      <li><label for="alias">Välj alias</label>
+        <input type="text" name="anamn" id="anamn" class="" onfocus="getById('mmANamnError').style.display = 'none';" onblur="mm_ajaxValidera('mmANamnError', 'anamn', this.value);"/>
+        <span id="mmANamnError" class="mmRed mmFormError">Upptaget</span>
+      </li>
+      <div class="clear"></div>
+      <div id="fields-hidden" class="hidden">
+        <li>
+          <label for="sex">Kön</label>
+          <select name="sex">
+            <option value="kvinna">Kvinna</option>
+            <option value="man">Man</option>
+          </select>
+        </li>
+        <li>
+          <label for="kid">Startkommun</label>          
+          <select name="kid" id="kid">
+            <?php
+            foreach ($kommuner as $key => $value) {
+              echo '<option label="' . $value . '" value="' . $key . '">' . $value . '</option>';
+            }
+            ?>
+          </select>
+        </li>
 
         <li><label for="firstname">Förnamn</label><input type="text" name="firstname" id="firstname" class=""/></li><div class="clear"></div>
         <li><label for="lastname">Efternamn</label><input type="text" name="lastname" id="lastname" class=""/></li><div class="clear"></div>
         <li><label><a href="" id="co-toggle">c/o ?</a></label><input type="text" name="co" id="co" class="hidden"/></li><div class="clear"></div>         
-        <li><label for="email">E-post</label><input type="text" name="email" id="email" class=""/></li><div class="clear"></div>
+        <li><label for="email">E-post</label>
+          <input type="text" name="mailone" id="mailone" class="" onfocus="getById('mmEpostError').style.display = 'none';" onblur="mm_ajaxValidera('mmEpostError', 'epost', this.value);"/>
+          <span id="mmEpostError" class="mmRed mmFormError">Upptagen</span><br />
+        </li>
+        <div class="clear"></div>
         <li><label for="phone">Mobil/telefon</label><input type="text" name="phone" id="phone"/></li><div class="clear"></div>
         <li><label for="street1">Postadress</label><input type="text" name="street1" id="street1"/></li><div class="clear"></div>
         <li><label><a href="" id="address-toggle">Fler rader ?</a></label> 
@@ -407,44 +356,31 @@ $moms = Order::$moms;
         <li><label for="city">Ort</label><input type="text" name="city" id="city"/></li><div class="clear"></div>
         <li><label><a href="" id="country-toggle">Inte Sverige ?</a></label><input type="text" name="country" id="country" class="hidden" value="Sverige"/></li><div class="clear"></div>           
         <!--li><label><a href="" id="discount-toggle">Har du en rabattkod?</a></label><input type="text" name="discount" id="discount" class="hidden"/></li-->
-      </div>
+        <div id="margin"></div>
+
+
+        <li>
+          <div id="pay">
+            <div id="integrity">Genom att fortsätta betalningen godkänner jag <a href="/pages/integritetspolicy.php" target="_blank">Motiomeras integritetspolicy</a> och är över 18 år</div>
+            <div class="clear"></div>
+            <div ><input type="submit" value="Betala" name="paytype" id="payson"></div>
+            <div class="clear"></div>
+            <div id="payalt">
+              <ul>
+                <li>VISA</li>
+                <li>MasterCard </li>
+                <li>Internetbank: Föreningssparbanken / Swedbank</li>
+                <li>Internetbank: Handelsbanken </li>
+                <li>Internetbank: SEB </li>
+                <li>Internetbank: Nordea </li>
+              </ul>
+            </div>  
+          </div>    
+        </li>
+      </div> 
     </ul>
 
 
-    
-  <style>
-    #pay {font-size: 14px;margin-top: 45px;}
-    #pay div{float:left;}
-    #pay input{font-size: 15px;width:200px;height:25px;}
-    #pay ul{  list-style: none outside none;margin-left: 2px;padding-left: 15px;}    
-    #or{font-size: 15px; margin:0 30px 0 30px;}
-  </style>
-
-
-  <div id="pay">
-    <div >
-      <input type="submit" value="Direktbetalning" name="paytype" id="payson">
-
-    </div>
-    <div id="or">eller</div>
-    <div >      
-      <input type="submit" value="Faktura" name="paytype" id="faktura">
-    </div>  
-    <div class="clear"></div>
-    <div id="payalt">
-      <ul>
-        <li>VISA / MasterCard </li>
-        </li>Internetbank:</li> 
-        <ul>
-          <li>Föreningssparbanken</li> 
-          <li>Swedbank</li>
-          <li>Handelsbanken </li>
-          <li>SEB </li>
-          <li>Nordea </li>
-        </ul>
-      </ul>
-    </div>  
-  </div>    
 
 
 </div> <!-- end member-private -->  

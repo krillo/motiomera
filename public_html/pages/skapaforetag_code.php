@@ -214,8 +214,8 @@ Order::getMondays(15);
 
 
 <div id="infotext" style="position:absolute;left:530px;top:131px;border:2px solid;padding:6px;">
-<h3>TILLÄGGSBESTÄLLNING</h3>
-Är du redan kund och vill göra en<br/>tilläggsbeställning? Logga in på din<br/>administrationssida där du enkelt kan<br/>lägga till fler deltagare. <a href="/pages/foretaglogin.php">Klicka här</a>.
+  <h3>TILLÄGGSBESTÄLLNING</h3>
+  Är du redan kund och vill göra en<br/>tilläggsbeställning? Logga in på din<br/>administrationssida där du enkelt kan<br/>lägga till fler deltagare. <a href="/pages/foretaglogin.php">Klicka här</a>.
 </div>
 
 
@@ -258,7 +258,7 @@ Order::getMondays(15);
     #startdatumRadio1, #startdatumRadio2{width:40px;float:left;} 
     #startdatum{width:175px;height:22px;font-size: 12px;}
     #early-info{margin-left: 20px; margin-top: 10px;}
-    
+
     #payer li{margin-bottom: 2px; margin-top: 0;display:block;float:left;}
     #payer li div{width:130px;font-size: 14px;float:left}
     #payer li input{width:180px;float:left;}
@@ -349,42 +349,43 @@ Order::getMondays(15);
         </select>	
       </li-->
 
-  <style>
-    #pay {font-size: 14px;margin-top: 45px;}
-    #pay div{float:left;}
-    #pay input{font-size: 15px;width:200px;height:25px;}
-    #pay ul{  list-style: none outside none;margin-left: 2px;padding-left: 15px;}    
-    #or{font-size: 15px; margin:0 30px 0 30px;}
-  </style>
+      <style>
+        #pay {font-size: 14px;margin-top: 45px;}
+        #integrity{margin-bottom: 20px;width: 350px;}
+        #pay div{float:left;}
+        #pay input{font-size: 15px;width:200px;height:25px;}
+        #pay ul{margin-left: 2px;padding-left: 15px;}    
+        #or{font-size: 15px; margin:0 30px 0 30px;}
+      </style>
 
 
-  <div id="pay">
-    <div >
-      <input type="submit" value="Direktbetalning" name="paytype" id="payson">
+      <div id="pay">
+        <div id="integrity">Genom att fortsätta betalningen godkänner jag <a href="/pages/integritetspolicy.php" target="_blank">Motiomeras integritetspolicy</a> och är över 18 år</div>
+        <div class="clear"></div>
 
-    </div>
-    <div id="or">eller</div>
-    <div >      
-      <input type="submit" value="Faktura" name="paytype" id="faktura">
-    </div>  
-    <div class="clear"></div>
-    <div id="payalt">
-      <ul>
-        <li>VISA / MasterCard </li>
-        </li>Internetbank:</li> 
-        <ul>
-          <li>Föreningssparbanken</li> 
-          <li>Swedbank</li>
-          <li>Handelsbanken </li>
-          <li>SEB </li>
-          <li>Nordea </li>
-        </ul>
-      </ul>
-    </div>  
-  </div>
-      
-      
-      
+        <div >
+          <input type="submit" value="Direktbetalning" name="paytype" id="payson">
+
+        </div>
+        <div id="or">eller</div>
+        <div >      
+          <input type="submit" value="Faktura" name="paytype" id="faktura">
+        </div>  
+        <div class="clear"></div>
+        <div id="payalt">
+          <ul>
+            <li>VISA</li>
+            <li>MasterCard </li>
+            <li>Internetbank: Föreningssparbanken / Swedbank</li>
+            <li>Internetbank: Handelsbanken </li>
+            <li>Internetbank: SEB </li>
+            <li>Internetbank: Nordea </li>
+          </ul>
+        </div>  
+      </div>
+
+
+
     </div>
 
 
@@ -395,7 +396,7 @@ Order::getMondays(15);
 <div class="clear"></div>
 
 
-    
+
 <br>
 <br/>
 <br/>
