@@ -757,9 +757,11 @@ class Medlem extends Mobject {
   public function getCity() {
     return $this->city;
   }
+
   public function getCountry() {
     return $this->country;
   }
+
   public function getEmail() {
     return $this->email;
   }
@@ -1189,30 +1191,34 @@ class Medlem extends Mobject {
     $this->eNamn = $eNamn;
   }
 
-  
   public function setAddress($arg) {
     $this->address = $arg;
   }
+
   public function setCo($arg) {
     $this->co = $arg;
   }
+
   public function setZip($arg) {
     $this->zip = $arg;
   }
+
   public function setCity($arg) {
     $this->city = $arg;
   }
+
   public function setEmail($arg) {
     $this->email = $arg;
   }
+
   public function setPhone($arg) {
     $this->phone = $arg;
   }
+
   public function setCountry($arg) {
     $this->country = $arg;
   }
 
-  
   public function setANamn($anamn) {
 
     if ($this->aNamn) {
@@ -1942,11 +1948,18 @@ class Medlem extends Mobject {
     return parent::listByIds(get_class(), $ids, true);
   }
 
-  /*
-    Försöker logga in med epost och lösenord.
-    Om det lyckas så sparas data om vem som är inloggad, och ett Medlems-objekt returneras
+ 
+  /**
+   * Försöker logga in med epost och lösenord.
+   * Om det lyckas så sparas data om vem som är inloggad, och ett Medlems-objekt returneras
+   *
+   * @global  $db
+   * @param type $epost
+   * @param type $losenord
+   * @param type $cookie
+   * @return boolean
+   * @throws MedlemException 
    */
-
   public static function loggaIn($epost, $losenord, $cookie = false) {
     global $db;
     $epost = Security::secure_postdata($epost);

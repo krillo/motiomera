@@ -1,4 +1,5 @@
 <?php
+
 require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
 
 error_reporting(E_ALL);
@@ -34,8 +35,14 @@ $kommun = Kommun::loadById($order->kid);
 $kontotyp = ''; //legacy or not used right now
 $maffcode = ''; //legacy or not used right now
 $medlem = new Medlem($order->email, $order->anamn, $kommun, $order->sex, $order->fname, $order->lname, $kontotyp, $maffcode);
+$medlem->setEpostBekraftad(1); //medlem valid
+$medlem->setLevelId(1);
 $medlem->confirm($order->pass);
+$medlem->setForetagsnyckel_temp($order->nyckel);
+$medlem->setForetagsnyckel($order->nyckel);
 $medlem->commit();
+$medlem->loggaIn($order->email, $order->pass, true);
+
 
 header("Location: " . '/pages/minsida.php');
 ?>
