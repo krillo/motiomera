@@ -3,18 +3,18 @@
 * General settings 
 */
 $SETTINGS["email"] = "noreply@motiomera.se"; // Adress som ska stå som avsändare i mail till medlemmar
-$SETTINGS["kontakt"] = "mabrasupport@aller.se"; // Adressen dit formulärsmail skickas
-$SETTINGS["debug_mail"] = array("kristian.erendi@aller.se"); //Adressen dit debug mail skickas till om den är aktiv ex: array("mail1","mail2");
-$SETTINGS["rapport_mail"] = "CONF_REPORT_MAIL";
+$SETTINGS["kontakt"] = "support@motiomera.se"; // Adressen dit formulärsmail skickas
+$SETTINGS["debug_mail"] = array("kristian@motiomera.se"); //Adressen dit debug mail skickas till om den är aktiv ex: array("mail1","mail2");
+$SETTINGS["rapport_mail"] = "support@motiomera.se";
 $SETTINGS["reply_to"] = "noreply motiomera <noreply@motiomera.se>"; // All bounces will land here
 $SETTINGS["url"] = "http://CONF_MOTIOMERA_URL";
-$SETTINGS["UPPSLAG_URL"] = "http://www.allersforlag.se/Sites/Pren/Templates/Paymentgw____56389.aspx";
-$SETTINGS["KUNDNUMMER_URL"] = "http://www.allersforlag.se/Templates/UserService____60489.aspx?key=h3zp0x4qgs4k&Get=CustomerFromOrder&Orderid=";
-$SETTINGS["new_company_order_mail"] = array("kristian.erendi@aller.se", "krillo@gmail.com"); //Adressen dit debug mail skickas till om den är aktiv ex: array("mail1","mail2");
+$SETTINGS["UPPSLAG_URL"] = $SETTINGS["url"] . "/pages/404.php?arg=UPPSLAG_URL";
+$SETTINGS["KUNDNUMMER_URL"] = $SETTINGS["url"] . "/pages/404.php?arg=KUNDNUMMER_URL";
+$SETTINGS["new_company_order_mail"] = array("kristian@motiomera.se");  //är nog inte aktiv 
 $SETTINGS["paysonReturnUrl"] = $SETTINGS["url"] . "/pages/kvitto.php";
 $SETTINGS["paysonCancelUrl"] = $SETTINGS["url"] . "/pages/paysonavbryt.php"; 
 $SETTINGS["paysonIpnUrl"] = $SETTINGS["url"] . "/pages/paysonipn.php";
-$SETTINGS["paysonReceiverEmail"] = "kassa@motiomera.se";
+$SETTINGS["paysonReceiverEmail"] = "kristian@motiomera.se";
 
 //deploy and file owners
 define('CAPISTRANO_DEPLOY', CONF_CAPISTRANO_DEPLOY);     //set to true if the code is deployed via capistrano
@@ -59,11 +59,7 @@ define('PDF_TEMPLATE_DIR', ROOT . "/pdfomera/");
 
 // add new keys from http://code.google.com/apis/maps/signup.html
 $google_map_api_keys = array(
-  'krillomera.se' => 'ABQIAAAAKzMyNmzHpI2ys7Y4yLCUKxTy4MN0sW6gGuXvGNy8gkPzTfAzNBTX7HXHVNDeZ9bpiBeeIiqjxGc89A',
-	'testomera.se' => 'ABQIAAAANKJiM3KX0RgwW7CohhxtexTMcDzwyi0Hm9IHdH_sNWT7RCXriBRqeHrTLsDwDJNVmStXOp1zogUnyA',
-	'trunkomera.se' => 'ABQIAAAAuMDzylsCMpa8xNliwARAcRT_kyFNl-ka9r_oTqT-uZF8Air7lxStmrTx98iSJewQi9Wz9HZj-dLTtQ',
-	'localhost' => 'ABQIAAAAuMDzylsCMpa8xNliwARAcRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT83aaz0LC6xlEaulYzjESpV-HB4Q',
-	'motiomera.local' => 'ABQIAAAANKJiM3KX0RgwW7CohhxtexS1LzYKLbLQjIR8BUgnzcVXnHMhFBRhxYys6eSBfGDz1G7wWynCXYGP5w',
+	'motiomera.dev' => 'ABQIAAAANKJiM3KX0RgwW7CohhxtexS1LzYKLbLQjIR8BUgnzcVXnHMhFBRhxYys6eSBfGDz1G7wWynCXYGP5w',
 	'motiomera.se' => 'ABQIAAAAoKGJwdpOav2ETgqnbjarahQO7RuXVt7MF_rSjXZeZTDFiOd82xQjxvpURu3QurFzD-6V3p4mcOMujg',
 	'www.motiomera.se' => 'ABQIAAAAoKGJwdpOav2ETgqnbjarahSYvq-FPqK4lLNaOXGWuDfDL82xGRTsfWTH7cJboy2WmrVTUP0RY_wNvQ',
 );
@@ -100,6 +96,6 @@ define('OK', 1);
 define('DEBUG_IM_MAIL', 'debug@thefarm.se');
 define('DEBUG_IM_PASS', 'bonde123');
 $SETTINGS['im_recip'] = array(
-	'kristian.erendi@aller.se',
+	'krillo@gmail.com',
 );
 ?>
