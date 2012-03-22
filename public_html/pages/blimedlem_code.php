@@ -28,6 +28,9 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
           required: true,
           email: true
         },
+        email2: {
+          equalTo: "#mailone"
+        },        
         street1: {
           required: true
         },
@@ -39,7 +42,14 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
         },
         phone: {
           required: true
-        }
+        },
+         pass: {
+           required: true
+           //min: 4
+         },
+        pass2: {
+          equalTo: "#pass"
+        }       
       },  
       messages: {
         anamn: {
@@ -66,7 +76,17 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
         mailone: {
           required: '', 
           email: ''
-        }         
+        },
+        email2: {
+          equalTo: ''
+        },        
+        pass: {
+          required: ''
+          //min: 'minst 4 tecken'
+        },        
+        pass2: {
+          equalTo: ''
+        }           
       }
     });
 
@@ -114,9 +134,11 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
         if(shortCheck != 0 || longCheck != 0){
           sumFreight = parseInt(<?php echo $campaignCodes['FRAKT02'][pris]; ?>);
           $('#m_frakt02').val(1);
+          $('#m_steg01').val(1);          
         } else{
           sumFreight = 0;
           $('#m_frakt02').val(0);
+          $('#m_steg01').val(0);
         }
           
         sumShort = parseInt(shortRadio) + parseInt(shortCheck);
@@ -242,14 +264,13 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
 
 
 <div id="member-private" class="hide">
-  <form action="/actions/payson_privat.php" method="get" id="checkout">
-    <input type="hidden" name="type" value="foretag">  
-    <input type="hidden" name="m_freight" id="m_freight"  value="">         
-    <input type="hidden" name="m_total"   id="m_total" value="">        
-    <input type="hidden" name="m_frakt02"   id="m_frakt02" value="">        
+  <form action="/actions/payson_privat.php" method="post" id="checkout">
+    <input type="hidden" name="type" value="medlem">         
+    <input type="hidden" name="m_total"   id="m_total" value="">                    
     <input type="hidden" name="m_priv3"   id="m_priv3" value="">        
-    <input type="hidden" name="m_priv12"   id="m_priv12" value="">        
-
+    <input type="hidden" name="m_priv12"  id="m_priv12" value="">        
+    <input type="hidden" name="m_steg01"  id="m_steg01" value="">        
+    <input type="hidden" name="m_frakt02" id="m_frakt02" value="">
 
 
     <style>
@@ -335,14 +356,17 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
           </select>
         </li>
 
-        <li><label for="firstname">Förnamn</label><input type="text" name="firstname" id="firstname" class=""/></li><div class="clear"></div>
-        <li><label for="lastname">Efternamn</label><input type="text" name="lastname" id="lastname" class=""/></li><div class="clear"></div>
-        <li><label><a href="" id="co-toggle">c/o ?</a></label><input type="text" name="co" id="co" class="hidden"/></li><div class="clear"></div>         
         <li><label for="email">E-post</label>
           <input type="text" name="mailone" id="mailone" class="" onfocus="getById('mmEpostError').style.display = 'none';" onblur="mm_ajaxValidera('mmEpostError', 'epost', this.value);"/>
-          <span id="mmEpostError" class="mmRed mmFormError">Upptagen</span><br />
+          <span id="mmEpostError" class="mmRed mmFormError">Upptagen, <a href="/pages/glomtlosen.php?email="  class="mmRed" >glömt lösenord?</a></span><br />
         </li>
         <div class="clear"></div>
+        <li><label for="email2">E-post igen</label><input type="text" name="email2" id="email2" class=""/></li><div class="clear"></div>
+        <li><label for="pass">Lösenord</label><input type="password" name="pass" id="pass" class=""/></li><div class="clear"></div>
+        <li><label for="pass2">Lösenord igen</label><input type="password" name="pass2" id="pass2" class=""/></li><div class="clear"></div>        
+        <li><label for="firstname">Förnamn</label><input type="text" name="firstname" id="firstname" class=""/></li><div class="clear"></div>
+        <li><label for="lastname">Efternamn</label><input type="text" name="lastname" id="lastname" class=""/></li><div class="clear"></div>
+        <li><label><a href="" id="co-toggle">c/o ?</a></label><input type="text" name="co" id="co" class="hidden"/></li><div class="clear"></div>                 
         <li><label for="phone">Mobil/telefon</label><input type="text" name="phone" id="phone"/></li><div class="clear"></div>
         <li><label for="street1">Postadress</label><input type="text" name="street1" id="street1"/></li><div class="clear"></div>
         <li><label><a href="" id="address-toggle">Fler rader ?</a></label> 

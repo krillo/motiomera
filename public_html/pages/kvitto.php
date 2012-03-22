@@ -29,16 +29,29 @@ if (!empty($order) && !empty($orderItemList)) {
   if ($order->getOrderStatus() < Order::ORDERSTATUS_CUST_NO) {  //check one of the rows that the order isn't allready handled 
     switch ($order->getTyp()) {
       case ("medlem"):
-        $order = Order::loadByRefId($refId);
-        $order->setOrderStatus(Order::ORDERSTATUS_CUST_NO); //The Order has been payed at payson - to status 30 (status does not aply any more)
-        $order->setIsValid(1);
-        $order->commit();
+        $orderItems = Order::listOrderDataByRefId($refId);
         $medlem = Medlem::loadById($order->getMedlemId());
-        $msg .= "\nTyp: Medlem \nId: " . $order->getMedlemId() . "\nNamn: " . $medlem->getFNamn() . ' ' . $medlem->getENamn() . "\nEpost: " . $medlem->getEpost();
-        //$msg .= "\nTelefon: " . $medlem->getPayerPhone() . 
-        $msg .= "\nip: " . $order->getIp() . "\n" . print_r($orderItems, true);
-        $order->getMedlem()->handleOrder($order);
+        $msg .= "\n\tTyp: Medlem \n\tId: " . $order->getMedlemId() . "\n\tNamn: " . $medlem->getFNamn() . ' ' . $medlem->getENamn() . "\n\tEpost: " . $medlem->getEpost();
+        $msg .= "\n\tTelefon: " . $medlem->getPhone() . "\n\tip: " . $order->getIp() . "\n\t" . print_r($orderItems, true);
+        Misc::logMotiomera($msg, 'INFO', 'order');
+        $stepcounter = false;
+        foreach ($orderItems as $orderItem) {
+          $order = Order::loadById($orderItem['id']);
+          $order->setOrderStatus(Order::ORDERSTATUS_CUST_NO); //The Order has been payed at payson (or faktura) - to status 30 (status 20 does not apply any more)
+          $order->setIsValid(1);
+          $order->commit();
+          if (strpos($order->getCampaignId(), 'STEG')) {
+            $stepcounter = true;
+          }
+        }
+        $medlem->setEpostBekraftad(1); //medlem valid
+        $medlem->setLevelId(1);
+        $medlem->handleOrder($order);
+        $medlem->commit();
         $order->sendEmailReciept();
+        if ($stepcounter) {
+          $foretag->createMemberFile($refId);
+        }
         break;
       case ("foretag"):
         $orderItems = Order::listOrderDataByRefId($refId);
@@ -108,25 +121,28 @@ if (!empty($order) && !empty($orderItemList)) {
     /* -----------------------------------------
      * continue with the page printout data
      * ----------------------------------------- */
+    $orderList = array();
+    $orderList["refId"] = $order->getRefId();
+    $orderList["items"] = $order->getItems();
+    $orderList["orderId"] = $orderId;
+    $orderList["date"] = $order->getDate();
+    $orderList["price"] = $order->getPrice();
+    $orderList["quantity"] = $order->getQuantity();
+    $orderList["item"] = $order->getItem();
+    $orderList["payment"] = $order->getPayment();
+    $orderList["sum"] = $order->getSum();
+    $orderList["sumMoms"] = $order->getSumMoms();
+    $orderList["orderRefCode"] = $order->getOrderRefcode();
+    $orderList["typ"] = $order->getTyp();
+    $orderList["id"] = $order->getId();
+
     $orderTyp = $order->getTyp();
     if ($orderTyp != "medlem") {
       $foretag = $order->getForetag();
-      $orderList = array();
-      $orderList["refId"] = $order->getRefId();
-      $orderList["items"] = $order->getItems();
-      $orderList["orderId"] = $orderId;
-      $orderList["date"] = $order->getDate();
-      $orderList["price"] = $order->getPrice();
-      $orderList["quantity"] = $order->getQuantity();
-      $orderList["item"] = $order->getItem();
-      $orderList["payment"] = $order->getPayment();
-      $orderList["sum"] = $order->getSum();
-      $orderList["sumMoms"] = $order->getSumMoms();
-      $orderList["orderRefCode"] = $order->getOrderRefcode();
-      $orderList["typ"] = $order->getTyp();
-      $orderList["id"] = $order->getId();
     }
     switch (true) {
+      case ($orderTyp == "medlem"):
+        break;
       case ($orderTyp == "foretag"):
         $orderList["foretagLosen"] = $foretag->getTempLosenord();
         $orderList["orderId"] = $foretag->getOrderId();
@@ -157,9 +173,10 @@ if (!empty($order) && !empty($orderItemList)) {
         $orderList["reciverMobile"] = $foretag->getReciverMobile();
         $orderList["reciverCountry"] = $foretag->getReciverCountry();
         break;
-      default :   //pro order   krillo 090604: typ.mm_order is not set when it is an pro order... (old Farm code)
-        $pro_order = $order->getMedlem()->getSenastInloggad() == "0000-00-00 00:00:00" ? false : true;
-        $orderList["pro_order"] = $pro_order;
+      default :
+        // pro order   krillo 090604: typ.mm_order is not set when it is an pro order... (old Farm code)
+        // $pro_order = $order->getMedlem()->getSenastInloggad() == "0000-00-00 00:00:00" ? false : true;
+        // $orderList["pro_order"] = $pro_order;
         break;
     }
 

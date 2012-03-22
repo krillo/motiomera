@@ -1082,7 +1082,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $prefix = '';
     $middlefix = 'FAK';
     $filnamn = $this->setFilnamnAuto($prefix, 'txt', 'faktura', $middlefix);
-    $lokalFil =  FORETAGSFAKTURA_LOCAL_PATH . "/" . $filnamn;
+    $lokalFil = FORETAGSFAKTURA_LOCAL_PATH . "/" . $filnamn;
 
     if (file_exists($lokalFil)) {
       Misc::logMotiomera("Couldn't create or save order faktura file: " . $lokalFil, 'ERROR');
@@ -1130,6 +1130,62 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
         return true;
       } else {
         Misc::logMotiomera("Unable to create faktura-file for " . $this->getReciverCompanyName() . ",  " . $lokalFil . ", foretagId =  " . $this->getId() . ", orderids = " . implode(' ', $orderIdArray), 'ERROR');
+        return false;
+      }
+    }
+  }
+
+  /**
+   * Create a member file, put it on the ftp area
+   */
+  public function createMemberFile($refId) {
+    //$fileNamePrefix = 'fak';
+    $prefix = '';
+    $middlefix = 'MEM';
+    $filnamn = $this->setFilnamnAuto($prefix, 'txt', 'member', $middlefix);
+    $lokalFil = MEDLEMSFIL_LOCAL_PATH . "/" . $filnamn;
+
+    if (file_exists($lokalFil)) {
+      Misc::logMotiomera("Couldn't create or save order member file: " . $lokalFil, 'ERROR');
+      throw new OrderException(" ERROR - Couldn't create or save order member file: " . $lokalFil, -10);
+    } else {
+      $orderItems = Order::listOrderDataByRefId($refId);
+      $orderRefCode = $orderItems[0]['orderRefCode'];
+      $medlemId = $orderItems[0]['medlem_id'];
+      $medlem = Medlem::loadById($medlemId);
+      $msg = "SKICKA STEGRÄKNARE TILL MEDLEM \n\n";
+      $msg .= "Adress: \n";
+      $name = $medlem->getFNamn() . ' ' . $medlem->getENamn();
+      $msg .= $name . "\n";
+      $msg .= $medlem->getCo() . "\n";
+      $msg .= $medlem->getAddress() . "\n";
+      $msg .= $medlem->getZip() . "\n";
+      $msg .= $medlem->getCity() . "\n";
+      $msg .= $medlem->getCountry() . "\n\n";
+      $msg .= "Köpdatum: \n";
+      $msg .= date('Y-m-d') . " \n\n";
+      $msg .= "Artikel: \n";
+      foreach ($orderItems as $orderItem) {
+        $msg .= $orderItem['item'] . "    " . $orderItem['antal'] . "    " . $orderItem['price'] . "\n";
+        $orderIdArray[] = $orderItem['id'];
+      }
+      $msg .= "\nSumma: \n";
+      $msg .= $orderItem['sum'] . "\n\n";
+
+      $fd = fopen($lokalFil, "a");
+      if ($fd != false) {
+        fwrite($fd, $msg);
+        fclose($fd);
+        Misc::logMotiomera("Created member-file for " . $name . ",  " . $lokalFil . ", medlemId =  " . $medlemId . ", orderids = " . implode(' ', $orderIdArray), 'OK');
+        //update the orderrows with faktura filename        
+        foreach ($orderItems as $orderItem) {
+          $order = Order::loadById($orderItem['id']);
+          $order->setFilnamnFaktura($filnamn);
+          $order->commit();
+        }
+        return true;
+      } else {
+        Misc::logMotiomera("Unable to create member-file for " . $name . ",  " . $lokalFil . ", medlemId =  " . $medlemId . ", orderids = " . implode(' ', $orderIdArray), 'ERROR');
         return false;
       }
     }
@@ -1389,16 +1445,26 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
       if (in_array($b, $letters))
         $nyttNamn.= $b;
     }
-    if($middlefix != ''){
+    if ($middlefix != '') {
       $middlefix = $middlefix . "_";
     }
-      
-    if ($type == 'order') {
-      $path = FORETAGSFIL_LOCAL_PATH . "/";
-    } else {
-      $path = FORETAGSFAKTURA_LOCAL_PATH . "/";
-    }    
-    $filnamn = $prefix . date("ymd") . "_" . $middlefix  . $this->getId() . "_" . $nyttNamn . ".$fileExt";
+
+    switch ($type) {
+      case 'order':
+        $path = FORETAGSFIL_LOCAL_PATH . "/";
+        break;
+      case 'faktura':
+        $path = FORETAGSFAKTURA_LOCAL_PATH . "/";
+        break;
+      case 'member':
+        $path = MEDLEMSFIL_LOCAL_PATH . "/";
+        break;
+      default:
+        $path = FORETAGSFIL_LOCAL_PATH . "/";        
+        break;
+    }
+
+    $filnamn = $prefix . date("ymd") . "_" . $middlefix . $this->getId() . "_" . $nyttNamn . ".$fileExt";
     $i = 0;
     while (file_exists($path . $filnamn)) {
       $filnamn = $prefix . date("ymd") . "_" . $middlefix . $this->getId() . "_" . $i . "_" . $nyttNamn . ".$fileExt";

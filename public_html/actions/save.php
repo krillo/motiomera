@@ -4,7 +4,7 @@ require $_SERVER["DOCUMENT_ROOT"] . "/php/init.php";
 switch($_REQUEST["table"]){
   case "foretagsnyckel":
 		if($USER->getForetagsnyckel(true) == "" && !empty($_POST["foretagsnyckel"])){			
-      echo 'krillo';
+      //echo 'krillo';
 			$USER->setForetagsnyckel($_POST["foretagsnyckel"]);
 			$USER->commit();
       /*

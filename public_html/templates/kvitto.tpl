@@ -1,4 +1,4 @@
-{if $orderList.pro_order}
+{if $orderList.typ == "medlem"}
   <h1>Välkommen till MotioMera!</h1>
 {elseif $orderList.typ == "foretag"}
   <h1>Välkommen till MotioMera!</h1>{/if}
@@ -16,11 +16,15 @@ Hej och tack för att ni valt att förnya er tävling här på MotioMera! Nedan 
 {elseif $orderList.typ == "foretag_tillagg"}
 Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävling startar {$orderList.startDatum} och vi skickar era stegräknarpaket snarast. Både nedanstående info och kvittot kommer att skickas till dig per e-post.
 
-{else}
+{elseif $orderList.typ == "medlem"}
+  {*}
   {if $orderList.pro_order}
     Hoppas du får en fortsatt rolig tid hos Motiomera!
-  {else}
-   <p>Grattis, du är nu medlem i MotioMera! Men innan du kan köra igång måste du aktivera ditt konto. <br />Det är enkelt, så här gör du:</p><p>Vi har nu skickat ett mail till den epostadress du uppgav vid beställningen. När du klickar på länken som finns i mailet så aktiveras ditt MotioMera-konto. Proceduren är en säkerhetsåtgärd som vi använder för att ingen ska registrera ett konto i ditt namn.</p><p>Hoppas du får en rolig tid hos Motiomera!{/if}<br />Med vänlig hälsning</p><p><b>MåBra</b><br />- specialtidningen för kropp &amp; själ</p>
+  {else *}
+   <p>Du är nu medlem i MotioMera. <br/>Logga in med din e-postadress och ditt lösenord högst upp på sidan och börja promenera!</p><br/><p>Med vänlig hälsning - MotioMeragänget</p> 
+     {*}
+     Men innan du kan köra igång måste du aktivera ditt konto. <br />Det är enkelt, så här gör du:</p><p>Vi har nu skickat ett mail till den epostadress du uppgav vid beställningen. När du klickar på länken som finns i mailet så aktiveras ditt MotioMera-konto. Proceduren är en säkerhetsåtgärd som vi använder för att ingen ska registrera ett konto i ditt namn.</p><p>Hoppas du får en rolig tid hos Motiomera!{/if}<br />Med vänlig hälsning</p><p><b>Motiomera</b></p>
+     {*}
 {/if}
 
 <table border="0" cellpadding="0" cellspacing="0" id="mmKvittoTable">

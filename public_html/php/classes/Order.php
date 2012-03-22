@@ -390,6 +390,35 @@ class Order extends Mobject {
   }
 
   /**
+   * Return true if all input prices match to calculations
+   * 
+   * @param type $PRIV3
+   * @param type $PRIV12
+   * @param type $STEG01
+   * @param type $FRAKT02
+   * @param type $total_in
+   * @param type $discountcode
+   * @return boolean 
+   */
+  public static function priceCheckPrivate($PRIV3, $PRIV12, $STEG01, $FRAKT02, $total_in,  $discountcode) {
+    $PRIV3_price = (int) self::$campaignCodes['PRIV3']['pris'];
+    $PRIV12_price = (int) self::$campaignCodes['PRIV12']['pris'];
+    $STEG01_price = (int) self::$campaignCodes['STEG01']['pris'];
+    $FRAKT02_price = (int) self::$campaignCodes['FRAKT02']['pris'];
+    $total = ($PRIV3_price * $PRIV3) + ($PRIV12_price * $PRIV12) + ($STEG01 * $STEG01_price) + ($FRAKT02_price * $FRAKT02);
+    if ($total == $total_in) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  
+  
+  
+  
+  
+  /**
    * setup a payson connection, return the PayResponse object.
    * Only step 1 and 2 are done here
    * 
@@ -582,7 +611,7 @@ class Order extends Mobject {
    */
   public static function listOrderDataByRefId($refId) {
     global $db;
-    $sql = "SELECT id, item, price, antal, payment, orderRefCode, sumMoms  FROM " . self::classToTable(get_class()) . " WHERE refId = '" . $refId . "'";
+    $sql = "SELECT id, item, price, antal, payment, orderRefCode, sumMoms, medlem_id  FROM " . self::classToTable(get_class()) . " WHERE refId = '" . $refId . "'";
     $res = $db->query($sql);
     $items = array();
     while ($data = mysql_fetch_assoc($res)) {
@@ -912,6 +941,7 @@ class Order extends Mobject {
   public function sendEmailReciept() {
     $email = new MMSmarty();
     $email->assign("order", $this);
+    $email->assign("medlem", Medlem::loadById($this->getMedlemId()));
     $subject = "Kvitto";
 
     switch ($this->getTyp()) {

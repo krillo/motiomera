@@ -274,12 +274,11 @@ table#alh_navtable
 #mmForetagsnyckelError
 {
 	position: relative;
-	left: 21px;
+	left: 0px;
 }
 #mmForetagsnyckel
 {
-	margin-left: 21px;
-	display: none;
+	margin-left: 0;
 }
 #mmKampanjkodError
 {

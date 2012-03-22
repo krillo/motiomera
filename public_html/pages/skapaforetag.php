@@ -25,7 +25,7 @@ foreach($campaignCodes as $id=>$cc) {
 //find and list 10 mondays at least 14 days ahead  
 $datumalternativ=array();
 $datumstralt=array();
-$addDays = 14 + (8 - date("w"));  //the fist monday at least 14 days ahead
+$addDays = 7 + (8 - date("w"));  //the fist monday at least 14 days ahead
 $firstMonday = date("Y-m-d", strtotime(date("Y-m-d") . "+$addDays days"));
 $monday = $firstMonday;  
 for($i=0; $i<15; ++$i) {

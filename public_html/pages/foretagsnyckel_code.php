@@ -4,6 +4,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 $campaignCodes = Order::$campaignCodes;
 $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
+
+!empty($_REQUEST['mmForetagsnyckel']) ? $nyckel = $_REQUEST['mmForetagsnyckel'] : $nyckel = '';
 ?>
 
 
@@ -28,6 +30,9 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
           required: true,
           email: true
         },
+        email2: {
+          equalTo: "#mailone"
+        },
         street1: {
           required: true
         },
@@ -39,6 +44,10 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
         },
         phone: {
           required: true
+        },
+        pass: "required",
+        pass2: {
+          equalTo: "#pass"
         }
       },  
       messages: {
@@ -66,14 +75,28 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
         mailone: {
           required: '', 
           email: ''
-        }         
+        },
+        email2: {
+          equalTo: ''
+        },        
+        pass: {
+          required: ''
+        },        
+        pass2: {
+          equalTo: ''
+        }        
       }
     });
 
 
+    if('' != '<?php echo $nyckel; ?>'){
+      $('#fields-hidden').toggleClass("visible");
+      $('#fields-hidden').show("slow");
+    }
+
 
     //catch keyup where the alias is submitted 
-    $('#anamn').keyup(function() {
+    $('#mmForetagsnyckel').keyup(function() {
       $('#fields-hidden').toggleClass("visible");
       $('#fields-hidden').show("slow");
     });
@@ -150,34 +173,50 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
   #checkout-ul li{margin-top: 5px;}
 
   #checkout-ul label{width:130px;font-size: 14px;float:left}
-  #checkout-ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
+  #checkout-ul{list-style: none;margin-left: 0; margin-top: 35px;padding-left: 0;font-size: 13px;}
   #checkout-ul input{height:18px;font-size: 14px;}
   #checkout-ul a{text-decoration: underline;}
 
 
-  #pay {font-size: 14px;margin-top: 45px;}
+  #pay {font-size: 14px;margin-top: 35px;}
   #integrity{margin-bottom: 20px;width: 350px;}
 
   #pay div{float:left;}
-  #pay input{font-size: 15px;width:200px;height:25px;}
-  #pay ul{margin-left: 2px;padding-left: 15px;}          
+  #pay input{font-size: 15px;width:200px;height:25px; margin-left:130px;}
+  #pay ul{margin-left: 2px;padding-left: 15px;}    
+  .margin{margin-top:30px;}
 </style>  
 
 
 
 
 <div id="member-private" class="">
-  <form action="/actions/payson_privat.php" method="get" id="checkout">
-    <input type="hidden" name="type" value="foretag">  
+  <form action="/actions/medlem_foretagsnyckel.php" method="post" id="checkout">
+    <input type="hidden" name="type" value="foretagsnyckel">  
 
 
     <ul id="checkout-ul">
-      <li><label for="alias">Din företagsnyckel</label>
-        <input type="text" name="anamn" id="anamn" class="" onfocus="getById('mmANamnError').style.display = 'none';" onblur="mm_ajaxValidera('mmANamnError', 'anamn', this.value);"/>
-        <span id="mmANamnError" class="mmRed mmFormError">Upptaget</span>
+      <li><label for="foretagsnyckel">Din företagsnyckel</label>
+        <input id="mmForetagsnyckel" type="text" name="mmForetagsnyckel" value="<?php echo $nyckel; ?>" onfocus="getById('mmFNyckelError').style.display = 'none';" onblur="mm_ajaxValidera('mmForetagsnyckelError', 'foretagsnyckel', this.value);"  />
+        <span class="mmFormError mmRed" id="mmForetagsnyckelError">Ogiltig företagsnyckel</span>        
       </li>
-      <div class="clear"></div>
+      <div class="clear margin"></div>
       <div id="fields-hidden" class="hidden">
+        <li><label for="alias">Välj alias</label>
+          <input type="text" name="anamn" id="anamn" class="" onfocus="getById('mmANamnError').style.display = 'none';" onblur="mm_ajaxValidera('mmANamnError', 'anamn', this.value);"/>
+          <span id="mmANamnError" class="mmRed mmFormError">Upptaget</span>
+        </li>      
+        <li><label for="mailone">E-post</label>
+          <input type="text" name="mailone" id="mailone" class="" onfocus="getById('mmEpostError').style.display = 'none';" onblur="mm_ajaxValidera('mmEpostError', 'epost', this.value);"/>
+          <span id="mmEpostError" class="mmRed mmFormError">Upptagen</span><br />
+        </li>
+        <li><label for="email2">E-post igen</label><input type="text" name="email2" id="email2" class=""/></li><div class="clear"></div>
+        <li><label for="pass">Lösenord</label><input type="password" name="pass" id="pass" class=""/></li><div class="clear"></div>
+        <li><label for="pass2">Lösenord igen</label><input type="password" name="pass2" id="pass2" class=""/></li><div class="clear"></div>
+
+        <li><label for="firstname">Förnamn</label><input type="text" name="firstname" id="firstname" class=""/></li><div class="clear"></div>
+        <li><label for="lastname">Efternamn</label><input type="text" name="lastname" id="lastname" class=""/></li><div class="clear"></div>      
+
         <li>
           <label for="sex">Kön</label>
           <select name="sex">
@@ -196,30 +235,10 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
           </select>
         </li>
 
-        <li><label for="firstname">Förnamn</label><input type="text" name="firstname" id="firstname" class=""/></li><div class="clear"></div>
-        <li><label for="lastname">Efternamn</label><input type="text" name="lastname" id="lastname" class=""/></li><div class="clear"></div>
-        <li><label><a href="" id="co-toggle">c/o ?</a></label><input type="text" name="co" id="co" class="hidden"/></li><div class="clear"></div>         
-        <li><label for="email">E-post</label>
-          <input type="text" name="mailone" id="mailone" class="" onfocus="getById('mmEpostError').style.display = 'none';" onblur="mm_ajaxValidera('mmEpostError', 'epost', this.value);"/>
-          <span id="mmEpostError" class="mmRed mmFormError">Upptagen</span><br />
-        </li>
-        <div class="clear"></div>
-        <li><label for="phone">Mobil/telefon</label><input type="text" name="phone" id="phone"/></li><div class="clear"></div>
-        <li><label for="street1">Postadress</label><input type="text" name="street1" id="street1"/></li><div class="clear"></div>
-        <li><label><a href="" id="address-toggle">Fler rader ?</a></label> 
-          <div id="extra-address"class="hidden">
-            <input type="text" name="street2" id="street2"/><div class="clear"></div>
-            <label>&nbsp;</label><input type="text" name="street3" id="street3"/>
-          </div>
-        </li>
-        <div class="clear"></div>
-        <li><label for="zip">Postnummer</label><input type="text" name="zip" id="zip"/></li><div class="clear"></div>
-        <li><label for="city">Ort</label><input type="text" name="city" id="city"/></li><div class="clear"></div>
-        <li><label><a href="" id="country-toggle">Inte Sverige ?</a></label><input type="text" name="country" id="country" class="hidden" value="Sverige"/></li><div class="clear"></div>           
-        <!--li><label><a href="" id="discount-toggle">Har du en rabattkod?</a></label><input type="text" name="discount" id="discount" class="hidden"/></li-->
-        <div id="margin"></div>
-        <li><input type="submit" value="Ok" name="ok" id="payson"></li>
-
+        <div class="margin"></div>
+        <div id="pay">
+          <input type="submit" value="Ok" name="ok" id="payson">
+        </div>
       </div> 
     </ul>
 

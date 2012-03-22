@@ -1,19 +1,23 @@
 Kvitto
-
+------
 Köpet genomfört: {$order->getDate()|date_format:"%Y-%m-%d %H:%m"}
-Orderid: {$order->getOrderId()}
+Orderid: {$order->getId()}
 Betalsätt: {$order->getPayment()}
 Totalsumma: {$order->getSum()} inkl. moms
 
+
 Betalare
+--------
+Namn: {$medlem->getFNamn()} {$medlem->getENamn()}
+c/o: {$medlem->getCo()}
+Adress: {$medlem->getAddress()}
+Adress: {$medlem->getZip()}
+Ort: {$medlem->getCity()}
+Land: {$medlem->getCountry()}
 
-Namn: {$order->getPayerName()}
-Ort: {$order->getPayerCity()}
-Adress: {$order->getPayerAddress()}
-Land: {$order->getPayerCountry()}
-c/o: {$order->getPayerCo()}
-E-postadress: {$order->getPayerEmail()}
-Telefonnummer: {$order->getPayerPhone()}
-Mobilnummer: {$order->getPayerMobile()}
+E-postadress: {$medlem->getEpost()}
+Telefonnummer: {$medlem->getPhone()}
 
-Tack för din beställning!
+
+Tack för din beställning - Motiomeragänget
+
