@@ -44,6 +44,8 @@ define('URL_BLOCK_MEMBER', 'url_block_member');
 define('URL_NEW_CONTEST', 'url_new');
 define('URL_RANDOMIZE_TEAMS', 'url_random');
 define('URL_RESET_STEG','url_reset_steg');
+define('URL_ADMIN_MERGE','url_admin_merge');
+define('URL_RECLAMATION','url_reclamation');
 
 
 ?>
