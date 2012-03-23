@@ -127,9 +127,9 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
        if ($order->email == 'krillo@gmail.com' OR (strpos($order->email, '@erendi.se') > 0)) {
         $sumToPay = 1;   //for testing only pay 1 kr and allways kristian@erendi.se, don't forget to return the money in payson
         $order->email = 'kristian@erendi.se';
+        $paysonMsg = $order->incmoms .' '. $paysonMsg;
       } else {
         $sumToPay = $order->total;
-        $paysonMsg = $order->incmoms .' '. $paysonMsg;
       }           
       $data = Order::setupPaysonConnection($order->email, $order->fname, $order->lname,$sumToPay , $paysonMsg);
       $payResponse = $data['payResponse'];
