@@ -48,8 +48,15 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
     $token = null;
     if ($order->paytype == 'Direktbetalning') { //do a payson connection
       $nbrpers = $order->RE03 + $order->RE04;
-      $paysonMsg = "Motiomera tillägg , $nbrpers deltagare, $order->RE03 stegräknare";
-      $data = Order::setupPaysonConnection($order->email, $order->fname, $order->lname, $order->incmoms, $paysonMsg);
+      $paysonMsg = "Motiomera tillägg , $nbrpers deltagare, $order->RE03 stegräknare";      
+      if ($order->email == 'krillo@gmail.com' OR (strpos($order->email, '@erendi.se') > 0)) {
+        $sumToPay = 1;   //for testing only pay 1 kr and allways kristian@erendi.se, don't forget to return the money in payson
+        $order->email = 'kristian@erendi.se';
+        $paysonMsg = $order->incmoms .' '. $paysonMsg;
+      } else {
+        $sumToPay = $order->total;
+      }      
+      $data = Order::setupPaysonConnection($order->email, $order->fname, $order->lname, $sumToPay, $paysonMsg);
       $payResponse = $data['payResponse'];
       $api = $data['api'];
       if ($payResponse->getResponseEnvelope()->wasSuccessful()) {  // Step 3: verify that it suceeded
