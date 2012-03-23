@@ -15,8 +15,8 @@ $SETTINGS["paysonReturnUrl"] = $SETTINGS["url"] . "/pages/kvitto.php";
 $SETTINGS["paysonCancelUrl"] = $SETTINGS["url"] . "/pages/paysonavbryt.php"; 
 $SETTINGS["paysonIpnUrl"] = $SETTINGS["url"] . "/pages/paysonipn.php";
 $SETTINGS["paysonReceiverEmail"] = "kassa@motiomera.se";
-$SETTINGS["paysonAgentId"] = CONF_PAYSON_AGENTID;
-$SETTINGS["paysonMD5"] = CONF_PAYSON_MD5;
+$SETTINGS["paysonAgentId"] = "CONF_PAYSON_AGENTID";
+$SETTINGS["paysonMD5"] = "CONF_PAYSON_MD5";
 
 //deploy and file owners
 define('CAPISTRANO_DEPLOY', CONF_CAPISTRANO_DEPLOY);     //set to true if the code is deployed via capistrano
@@ -52,7 +52,7 @@ define('LAGNAMN_PATH', ROOT . "/files/lagnamn");
 define('VISNINGSBILD_PATH', ROOT . "/files/visningsbilder");
 define('CUSTOM_VISNINGSBILD_PATH', ROOT . "/files/customvisningsbilder");
 define('KOMMUN_IMAGES_PATH', ROOT . "/files/kommunbilder");
-define('FOTOALBUM_PATH', ROOT . "/../bilder");
+define('FOTOALBUM_PATH', ROOT . "/../../../bilder");
 define('TAB_BOX_TABROOT', ROOT . "/tabroot");
 define('EMAIL_SEND_LOG_FILE', ROOT . "/../log/email.log");
 define('LOG_DIR', ROOT . "/../log");
