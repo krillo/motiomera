@@ -52,7 +52,7 @@ define('LAGNAMN_PATH', ROOT . "/files/lagnamn");
 define('VISNINGSBILD_PATH', ROOT . "/files/visningsbilder");
 define('CUSTOM_VISNINGSBILD_PATH', ROOT . "/files/customvisningsbilder");
 define('KOMMUN_IMAGES_PATH', ROOT . "/files/kommunbilder");
-define('FOTOALBUM_PATH', ROOT . "/../../../bilder");
+define('FOTOALBUM_PATH', ROOT . "/../../../shared/bilder");
 define('TAB_BOX_TABROOT', ROOT . "/tabroot");
 define('EMAIL_SEND_LOG_FILE', ROOT . "/../log/email.log");
 define('LOG_DIR', ROOT . "/../log");
