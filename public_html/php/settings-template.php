@@ -14,7 +14,9 @@ $SETTINGS["new_company_order_mail"] = array("kristian@motiomera.se");  //är nog
 $SETTINGS["paysonReturnUrl"] = $SETTINGS["url"] . "/pages/kvitto.php";
 $SETTINGS["paysonCancelUrl"] = $SETTINGS["url"] . "/pages/paysonavbryt.php"; 
 $SETTINGS["paysonIpnUrl"] = $SETTINGS["url"] . "/pages/paysonipn.php";
-$SETTINGS["paysonReceiverEmail"] = "kristian@motiomera.se";
+$SETTINGS["paysonReceiverEmail"] = "kassa@motiomera.se";
+$SETTINGS["paysonAgentId"] = CONF_PAYSON_AGENTID;
+$SETTINGS["paysonMD5"] = CONF_PAYSON_MD5;
 
 //deploy and file owners
 define('CAPISTRANO_DEPLOY', CONF_CAPISTRANO_DEPLOY);     //set to true if the code is deployed via capistrano

@@ -431,7 +431,7 @@ class Order extends Mobject {
   public static function setupPaysonConnection($payerEmail, $payerFname, $payerLname, $sumtopay, $paysonMsg) {
     global $SETTINGS;
     require_once '../php/libs/payson/paysonapi.php';
-    $credentials = new PaysonCredentials("11654", "a86549bf-cb16-41e8-a86d-f1c79522becd");
+    $credentials = new PaysonCredentials($SETTINGS["paysonAgentId"], $SETTINGS["paysonMD5"]);
     $api = new PaysonApi($credentials);
 
     // Step 1: Set up details
