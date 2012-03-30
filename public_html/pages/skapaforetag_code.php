@@ -86,6 +86,8 @@ Order::getMondays(15);
 
     //sum with and without stepcounter, add freight and moms
     function sum(){
+      var sumWith, sumWithout, sumTotal, countWith, countWithout, freight, sumTotalFreight, sumTotalFreightMoms;
+      
       countWith = $('#nbr-with').val();
       sumWith =  countWith * <?php echo $campaignCodes['RE03']['pris']; ?>;
       $('#nbr-with-sum span').html(sumWith);
@@ -108,7 +110,6 @@ Order::getMondays(15);
       sumTotal = sumWith + sumWithout;  
       $('#nbr-sum-total span').html(sumTotal);
           
-      freight = '';    
       freight = $('#freight span').html();
       sumTotalFreight = parseInt(freight) + parseInt(sumTotal);
       $('#nbr-sum-total-freight span').html(sumTotalFreight);    
