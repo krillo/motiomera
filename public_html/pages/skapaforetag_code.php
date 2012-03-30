@@ -108,6 +108,7 @@ Order::getMondays(15);
       sumTotal = sumWith + sumWithout;  
       $('#nbr-sum-total span').html(sumTotal);
           
+      freight = '';    
       freight = $('#freight span').html();
       sumTotalFreight = parseInt(freight) + parseInt(sumTotal);
       $('#nbr-sum-total-freight span').html(sumTotalFreight);    

@@ -435,6 +435,14 @@ class Medlem extends Mobject {
     }
   }
 
+  /**
+   * Return the tha users foretagsnyckel.
+   * If $activeOnly is true then return the key only if the competition is still ongoing else null
+   * 
+   * @global  $db
+   * @param type $activeOnly
+   * @return null 
+   */
   public function getForetagsnyckel($activeOnly = false) {
     global $db;
     $sql = "SELECT foretag_id, nyckel FROM " . Foretag::KEY_TABLE . " WHERE medlem_id = " . $this->getId() . " ORDER BY datum DESC LIMIT 1";
@@ -442,13 +450,9 @@ class Medlem extends Mobject {
 
     $nyckel = $result["nyckel"];
     $id = $result["foretag_id"];
-
     if ($id) {
-
       $foretag = Foretag::loadById($id);
-
       if ($activeOnly) {
-
         // check to make sure that the contest isn't over (+1 day to allow for mondays)
         if ($foretag->aktivTavling(1)) {
           return $nyckel;

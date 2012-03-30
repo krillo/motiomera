@@ -38,6 +38,7 @@ $sajtDelarObj = new SajtDelar();
 $USER = Medlem::getInloggad();
 if(!$USER) unset($USER);
 
+
 $IM = new sendMsg;
 
 $ADMIN = Admin::getInloggad();

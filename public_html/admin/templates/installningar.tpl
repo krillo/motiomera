@@ -89,5 +89,11 @@ php medal_from_cmd.php 2010 24
 <br/>
 
 
+<h3>Parametrarna i settingsfilen</h3>
+<pre>
+{$settings}
+</pre>
+
+
 
 </div>

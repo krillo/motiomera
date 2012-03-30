@@ -29,14 +29,14 @@ $order->incmoms = round($order->incmoms, 2);
 
 $foretag = Foretag::loadById($order->fid);
 $order->email = $foretag->getPayerEmail();
-$order->fname = $foretag->getPayerFName(); 
+$order->fname = $foretag->getPayerFName();
 $order->lname = $foretag->getPayerLName();
 $order->company = $foretag->getNamn();
 
 
 
 if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
-  $url = $SETTINGS["url"] . '/pages/editforetag.php?fid='. $order->fid .'&tab='. $order->fid;
+  $url = $SETTINGS["url"] . '/pages/editforetag.php?fid=' . $order->fid . '&tab=' . $order->fid;
   header('Location: ' . $url);
   exit;
 } else {
@@ -44,18 +44,19 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
   //do a price check to avoid javascript hacking
   $noFraud = Order::priceCheck($order->RE03, $order->RE04, $order->exmoms, $order->freight, $order->total, $order->incmoms, $order->discount);
   if ($noFraud) {  //javascript prices match to local calculation
-
     $token = null;
     if ($order->paytype == 'Direktbetalning') { //do a payson connection
       $nbrpers = $order->RE03 + $order->RE04;
-      $paysonMsg = "Motiomera tillägg , $nbrpers deltagare, $order->RE03 stegräknare";      
+      $paysonMsg = "Motiomera tillägg , $nbrpers deltagare, $order->RE03 stegräknare";
       if ($order->email == 'krillo@gmail.com' OR (strpos($order->email, '@erendi.se') > 0)) {
         $sumToPay = 1;   //for testing only pay 1 kr and allways kristian@erendi.se, don't forget to return the money in payson
         $order->email = 'kristian@erendi.se';
-        $paysonMsg = $order->incmoms .' '. $paysonMsg;
+        $order->fname = 'kristian';
+        $order->ename = 'erendi';
+        $paysonMsg = $order->incmoms . ' ' . $paysonMsg;
       } else {
         $sumToPay = $order->total;
-      }      
+      }
       $data = Order::setupPaysonConnection($order->email, $order->fname, $order->lname, $sumToPay, $paysonMsg);
       $payResponse = $data['payResponse'];
       $api = $data['api'];
@@ -65,7 +66,7 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
         echo $token;
         //header("Location: " . $api->getForwardPayUrl($payResponse)); //do the redirection to payson
       } else {
-        throw new UserException("Problem med Payson.se", "Det är något problem med betaltjänsten Payson.com. Prova igen senare eller välj faktura.");
+        throw new UserException("Problem med Payson.se", "Det är något problem med betaltjänsten Payson.se. Prova igen senare eller välj faktura.");
       }
     }
 
@@ -138,7 +139,7 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
       $orderFR->setOrderRefCode($order->refcode);
       $orderFR->commit();
     }
-    
+
     //do the redirect to payson or faktura
     if (!empty($token)) {
       //Payson Step 3: verify that it suceeded
