@@ -281,7 +281,7 @@ Order::getMondays(15);
       <input type="text" name="RE04" id="nbr-without" />       
       <div id="nbr-without-sum"><span class="nbr">0</span> kr ex moms</div>
       <div class="clear"></div>
-      <div id="freight-label">Frakt</div><div id="freight"><span class="nbr">0</span><span id="freight-text"> kr ex moms</div>
+      <div id="freight-label">Frakt</div><div id="freight"><span class="nbr">0</span><span id="freight-text"> kr ex moms</span></div>
       <div class="clear"></div>
     </li>
     <li>
