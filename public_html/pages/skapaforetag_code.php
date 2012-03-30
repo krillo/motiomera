@@ -131,7 +131,7 @@ Order::getMondays(15);
         
         
     //catch keyup where the companyname is submitted 
-    $('#company').keyup(function() {
+    $('#company').keypress(function() {
       $('#fields-hidden').toggleClass("visible");
       $('#fields-hidden').show("slow");
     });
