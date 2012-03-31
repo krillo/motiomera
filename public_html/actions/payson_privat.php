@@ -101,8 +101,9 @@ switch ($order->type) {
     }
     $noFraud = Order::priceCheckPrivate($order->PRIV3, $order->PRIV12, $order->STEG01, $order->FRAKT02, $order->total, $order->discount);
     if ($noFraud) {  //javascript prices match to local calculation
+      
       $medlem = Medlem::getInloggad();
-      $ordertyp = "medlem_förlängd";
+      $ordertyp = "medlem_extend";
     } else{
       throw new UserException("Priset stämmer inte", ' <a href="/pages/bestall.php?email=' . $order->email . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '" >Prova igen</a>');
     }
@@ -154,6 +155,8 @@ $orderPRIV12 = null;
 $orderFRAKT02 = null;
 $orderId = '';
 if ($order->PRIV3 > 0) {
+  echo "inne priv3";
+  
   $orderPRIV3 = Order::__constructOrderWithSameRefId($ordertyp, $medlem, 'PRIV3', 1, $order->channel, $order->campcode, 0, false, $token);
   $orderPRIV3->setCompanyName($order->fname . ' ' . $order->lname);
   $orderPRIV3->setPrice(Order::$campaignCodes['PRIV3']['pris']);
@@ -205,7 +208,7 @@ if ($order->STEG01 > 0) {
     $orderId = $orderSTEG01->getId();
   }
 }
-if ($order->freight != 'FRAKT00') {
+if ($order->FRAKT02 != 0) {
   $orderFRAKT02 = Order::__constructOrderWithSameRefId($ordertyp, $medlem, 'FRAKT02', 1, $order->channel, $order->campcode, 0, false, $token);
   $orderFRAKT02->setCompanyName($order->fname . ' ' . $order->lname);
   $orderFRAKT02->setPrice(Order::$campaignCodes['FRAKT02']['pris']);

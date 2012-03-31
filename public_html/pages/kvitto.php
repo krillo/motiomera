@@ -45,8 +45,8 @@ if (!empty($order) && !empty($orderItemList)) {
           }
         }
         $medlem->setEpostBekraftad(1); //medlem valid
-        $medlem->setLevelId(1);
         $medlem->handleOrder($order);
+        $medlem->setLevelId(1);        
         $medlem->commit();
         $order->sendEmailReciept();
         if ($stepcounter) {

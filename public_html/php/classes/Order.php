@@ -287,7 +287,7 @@ class Order extends Mobject {
       $this->setOrderStatus(self::ORDERSTATUS_BEGIN);
 
       switch (true) {
-        case $typ == "medlem":
+        case $typ == "medlem" OR $typ == "medlem_extend":
           $this->setMedlem($objekt);
           $this->setOfferId($offerId);
           $this->setSkapadDatum(date("Y-m-d H:i:s"));
@@ -296,7 +296,7 @@ class Order extends Mobject {
           $this->setKanal($kanal);
           $this->setCompAffCode($compAffCode);
           $this->commit();
-          $this->gorUppslag($offerId);
+          //$this->gorUppslag($offerId);
           break;
         case $typ == "foretag" || $typ == "foretag_tillagg":
           $this->setForetag($objekt);
@@ -1371,6 +1371,7 @@ class Order extends Mobject {
 
     if (!in_array($typ, array(
                 "medlem",
+                "medlem_extend",
                 "foretag",
                 "foretag_again",
                 "foretag_tillagg",

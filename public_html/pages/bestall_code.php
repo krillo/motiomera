@@ -1,9 +1,19 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
-//error_reporting(E_ALL);
-//ini_set('display_errors', '1');
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 $campaignCodes = Order::$campaignCodes;
+$email = '';
+$fname = '';
+$lname = '';
+!empty($_REQUEST['mmForetagsnyckel']) ? $nyckel = $_REQUEST['mmForetagsnyckel'] : $nyckel = '';
 $user = Medlem::getInloggad();
+if(!empty($user)){
+  $email = $user->getEpost();
+  $fname = $user->getFNamn();
+  $lname = $user->getENamn();
+}
+
 ?>
 
 
@@ -57,16 +67,16 @@ $user = Medlem::getInloggad();
     function sum(){
       radio  = $('input:radio[name=radio-priv]:checked').val();
       if(typeof radio != 'undefined'){  //one of the radios are checked
-        shortRadio = <?php echo $campaignCodes['PRIV3'][pris]; ?>;
-        longRadio = <?php echo $campaignCodes['PRIV12'][pris]; ?>;
+        shortRadio = <?php echo $campaignCodes['PRIV3']['pris']; ?>;
+        longRadio = <?php echo $campaignCodes['PRIV12']['pris']; ?>;
         
-        if(radio == <?php echo $campaignCodes['PRIV3'][pris]; ?>){          
+        if(radio == <?php echo $campaignCodes['PRIV3']['pris']; ?>){          
           $('input:#long-check').attr('checked', false);
           longRadio = 0;
           $('#m_priv3').val(1);   
           $('#m_priv12').val(0);   
         }
-        if(radio == <?php echo $campaignCodes['PRIV12'][pris]; ?>){            
+        if(radio == <?php echo $campaignCodes['PRIV12']['pris']; ?>){            
           $('input:#short-check').attr('checked', false);
           shortRadio = 0;
           $('#m_priv12').val(1);
@@ -82,7 +92,7 @@ $user = Medlem::getInloggad();
         } 
         //alert('radio: ' + radio + ' shortCheck: ' + shortCheck+ ' longCheck: ' + longCheck);
         if(shortCheck != 0 || longCheck != 0){
-          sumFreight = parseInt(<?php echo $campaignCodes['FRAKT02'][pris]; ?>);
+          sumFreight = parseInt(<?php echo $campaignCodes['FRAKT02']['pris']; ?>);
           $('#m_frakt02').val(1);
           $('#m_steg01').val(1);          
         } else{
@@ -195,20 +205,20 @@ $user = Medlem::getInloggad();
 
     <div id="calc">
       <div id="short">
-        <input type="radio" id="short-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV3'][pris]; ?>" /><div id="short-text"><?php echo $campaignCodes['PRIV3'][text]; ?><span > <?php echo $campaignCodes['PRIV3'][pris]; ?> kr</span></div>
+        <input type="radio" id="short-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV3']['pris']; ?>" /><div id="short-text"><?php echo $campaignCodes['PRIV3']['text']; ?><span > <?php echo $campaignCodes['PRIV3']['pris']; ?> kr</span></div>
         <div class="clear"></div>
-        <div id="" class="step-check"><input type="checkbox" id="short-check" name="short-check-step" value="<?php echo $campaignCodes['STEG01'][pris]; ?>" /><div id="short-text"><?php echo $campaignCodes['STEG01'][text]; ?><span> +<?php echo $campaignCodes['STEG01'][pris]; ?> kr</span></div></div>    
+        <div id="" class="step-check"><input type="checkbox" id="short-check" name="short-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /><div id="short-text"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></div>    
       </div>
       <div id="sum-short"><span class="nbr">0</span> kr</div>
       <div class="clear"></div>
       <div id="long">
-        <input type="radio" id="long-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV12'][pris]; ?>" /><div id="long-text"><?php echo $campaignCodes['PRIV12'][text]; ?><span > <?php echo $campaignCodes['PRIV12'][pris]; ?> kr</span></div>
+        <input type="radio" id="long-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV12']['pris']; ?>" /><div id="long-text"><?php echo $campaignCodes['PRIV12']['text']; ?><span > <?php echo $campaignCodes['PRIV12']['pris']; ?> kr</span></div>
         <div class="clear"></div>
-        <div id=""class="step-check"><input type="checkbox" id="long-check" name="long-check-step" value="<?php echo $campaignCodes['STEG01'][pris]; ?>" /><div id="long-text"><?php echo $campaignCodes['STEG01'][text]; ?><span> +<?php echo $campaignCodes['STEG01'][pris]; ?> kr</span></div></div>    
+        <div id=""class="step-check"><input type="checkbox" id="long-check" name="long-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /><div id="long-text"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></div>    
       </div>
       <div id="sum-long"><span class="nbr">0</span> kr</div>
       <div class="clear"></div>
-      <div id="freight">Frakt (<?php echo $campaignCodes['FRAKT02'][pris]; ?> kr)</div><div id="sum-freight"><span class="nbr">0</span> kr</div>
+      <div id="freight">Frakt (<?php echo $campaignCodes['FRAKT02']['pris']; ?> kr)</div><div id="sum-freight"><span class="nbr">0</span> kr</div>
       <div class="clear"></div>
     </div>
     <div id="sum-total"><span class="nbr">0</span> kr</div>
@@ -216,12 +226,9 @@ $user = Medlem::getInloggad();
 
 
     <ul id="checkout-ul">
-      <li><label for="mailone">E-post</label>
-        <input type="text" name="mailone" id="mailone" class="" value="<?php echo $user->getEpost(); ?>" />
-      </li>        
-      <li><label for="firstname">Förnamn</label><input type="text" name="firstname" id="firstname" class="" value="<?php echo $user->getFNamn(); ?>"/></li><div class="clear"></div>
-      <li><label for="lastname">Efternamn</label><input type="text" name="lastname" id="lastname" class="" value="<?php echo $user->getENamn(); ?>"/></li><div class="clear"></div>
-      <div id="margin"></div>
+      <li><label for="mailone">E-post</label><input type="text" name="mailone" id="mailone" class="" value="<?php echo $email; ?>" /></li>        
+      <li><label for="firstname">Förnamn</label><input type="text" name="firstname" id="firstname" class="" value="<?php echo $fname; ?>"/></li>
+      <li><label for="lastname">Efternamn</label><input type="text" name="lastname" id="lastname" class="" value="<?php echo $lname; ?>"/></li>
 
 
       <li>
