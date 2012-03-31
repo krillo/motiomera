@@ -74,7 +74,7 @@ class RSS {
         break;
       }
     }
-    print_r($motiofeed);
+    //print_r($motiofeed);
  
     //save array as file
     $smotiofeed = serialize($motiofeed);
