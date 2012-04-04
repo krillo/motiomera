@@ -5,7 +5,14 @@ if(Security::authorized(ADMIN)) {
 <span class="mmRed hide" id="mmForetagsnyckelError"></span>
 <p>
 <strong>Lägg till nycklar till <?=$foretag->getNamn()?>:</strong><br />
-<form method="get" action="/actions/save.php">
+
+<form>
+  <input type="hidden" name="table" value="newkeys" />
+</form>
+
+
+<form method="get" action="/actions/save.php" name="keyform" id="keyform">
+ 
 <input type="hidden" name="table" value="newkeys" />
 <input type="hidden" name="foretagsid" value="<?=$foretag->getId();?>" />
 <input type="hidden" name="orderid" value="1" />
@@ -24,7 +31,9 @@ echo ($i>1?"lar":"el");
 <? } ?>
 </select>
 &nbsp;<input type="submit" value="Lägg till nya nycklar" />
-</form><br /><br />
+</form>
+
+<br /><br />
 
 </p><hr size="1" /><br />
 <? } ?>

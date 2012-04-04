@@ -205,7 +205,7 @@ $moms = Order::$moms;
       </ul>
     </div>  
   </div>
-
+  </form>
 
   <a href="javascript:;" onclick="mm_rapportera_show_help(29,<?= $keyhelp->getSizeX() ?>,<?= $keyhelp->getSizeY() ?>,'topleft')" title="Hj&auml;lp"><img src="/img/icons/FaqCircleRed.gif" alt="Hjälp" class="mmFloatRight" /></a>
 
