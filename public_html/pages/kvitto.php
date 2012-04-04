@@ -57,6 +57,7 @@ if (!empty($order) && !empty($orderItemList)) {
         $medlem->setEpostBekraftad(1); //medlem valid
         $medlem->addPaidUntil($dagar);
         $medlem->setLevelId($level);
+        
         $medlem->commit();
         
         $order->sendEmailReciept();
@@ -67,8 +68,8 @@ if (!empty($order) && !empty($orderItemList)) {
         if($order->getTyp() == 'medlem_extend') {
           header('location:/pages/minsida.php');  //already logged in
         }
-        
-        //$medlem->loggaIn($order->email, $order->pass, true);
+        $medlem->loggInCurrentUser();  
+        header('location:/pages/minsida.php');        
         break;
       case ("foretag"):
         $orderItems = Order::listOrderDataByRefId($refId);

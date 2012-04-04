@@ -2070,6 +2070,24 @@ class Medlem extends Mobject {
   }
 
   /**
+   * Just log in the current user
+   *  
+   */
+  public function loggInCurrentUser() {
+    $sessionId = self::generateSessionId();
+    $this->setSenastInloggad();
+    $this->setSessionId($sessionId);
+    $this->commit();
+    $_SESSION["mm_mid"] = $this->id;
+    $_SESSION["mm_sid"] = $sessionId;
+
+    if ($cookie) {
+      setcookie("mm_mid", $id, time() + 60 * 60 * 24 * 30, "/");
+      setcookie("mm_sid", $sessionId, time() + 60 * 60 * 24 * 30, "/");
+    }
+  }
+
+  /**
    * 	Returnerar medlemsobjektet för den inloggade medlemmen, eller false om besökaren inte är inloggad
    */
   public static function getInloggad() {
