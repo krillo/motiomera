@@ -206,7 +206,7 @@ class Order extends Mobject {
           "typ" => "medlem",
           "text" => "12 månader MotioMera",
           "pris" => 199,
-          "dagar" => 91,
+          "dagar" => 365,
           "popupid" => 30,
           "levelid" => 1,
           "public" => TRUE,
@@ -220,43 +220,6 @@ class Order extends Mobject {
           "popupid" => 30,
           "levelid" => 1,
           "public" => TRUE,
-      ),
-
-      "RE06" => array(
-          "typ" => "medlem",
-          "text" => "3 månader MotioMera + stegräknare",
-          "pris" => 179,
-          "dagar" => 91,
-          "popupid" => 14,
-          "levelid" => 1,
-          "public" => TRUE,
-      ),
-      "RE09" => array(
-          "typ" => "medlem",
-          "text" => "12 månader MotioMera",
-          "pris" => 199,
-          "dagar" => 365,
-          "popupid" => 17,
-          "levelid" => 1,
-          "public" => TRUE,
-      ),
-      "RE10" => array(
-          "typ" => "medlem",
-          "text" => "12 månader MotioMera + stegräknare",
-          "pris" => 349,
-          "dagar" => 365,
-          "popupid" => 18,
-          "levelid" => 1,
-          "public" => TRUE,
-      ),
-      "UE03" => array(
-          "typ" => "medlem",
-          "text" => "4 veckor MotioMera <b>med</b> stegräknare",
-          "pris" => 139,
-          "dagar" => 35,
-          "popupid" => 22,
-          "levelid" => 1,
-          "public" => FALSE,
       ),
   );
 
@@ -611,7 +574,7 @@ class Order extends Mobject {
    */
   public static function listOrderDataByRefId($refId) {
     global $db;
-    $sql = "SELECT id, item, price, antal, payment, orderRefCode, sumMoms, medlem_id  FROM " . self::classToTable(get_class()) . " WHERE refId = '" . $refId . "'";
+    $sql = "SELECT id, item, price, antal, payment, orderRefCode, sumMoms, medlem_id, skapadDatum  FROM " . self::classToTable(get_class()) . " WHERE refId = '" . $refId . "'";
     $res = $db->query($sql);
     $items = array();
     while ($data = mysql_fetch_assoc($res)) {
@@ -945,13 +908,14 @@ class Order extends Mobject {
     $subject = "Kvitto";
 
     switch ($this->getTyp()) {
+      case ("medlem_extend"):
       case ("medlem"):
         $body = $email->fetch('epostkvitto.tpl');
         $epost = $this->getMedlem()->getEpost();
         Misc::sendEmail($epost, null, $subject, $body);
         break;
       default :
-        Order::logEmailSend(false, $subject, 'Felaktigt ordertyp inget epostkvitto skickat:  ' . $epost);
+        Misc::logEmailSend(false, $subject, 'Felaktigt ordertyp inget epostkvitto skickat:  ' . $epost);
         throw new OrderException("Felaktigt ordertyp inget epostkvitto skickat: " . $order, -9);
         break;
     }

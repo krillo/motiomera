@@ -3,7 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
 //error_reporting(E_ALL);
 //ini_set('display_errors', '1');
 $campaignCodes = Order::$campaignCodes;
-$kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
+$kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn()); 
 ?>
 
 

@@ -229,6 +229,70 @@ class Misc
 	}
 
 
+  
+  /**
+   * This function creates a filname with safe letters  
+   * The format is yymmdd_id_name.txt like 090616_1910_KaptenAB.txt
+   * Test if filename allready exists on disk then create a new name
+   * The function takes an optional parameter that is incorporated in the filenem
+   * 
+   * Change: 2012-03-13 Krillo
+   * This is also used to create faktura files - called from Order
+   * Added $type as input param
+   * 
+   * @param string $prefix
+   * @param string $fileExt
+   * @param string $type  default 'order'
+   * @return string the filename
+   */
+  public static function setFilnamnAuto($prefix = '', $fileExt = 'pdf', $type = 'order', $middlefix = '', $name = '', $orderid = '0') {
+    if (!empty($prefix)) {
+      $prefix = $prefix . '_';
+    }
+    $letters = "a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 _";
+    $letters = explode(" ", $letters);
+    $namn = strtolower($name);
+    $namn = str_replace("å", "a", $namn);
+    $namn = str_replace("ä", "a", $namn);
+    $namn = str_replace("ö", "o", $namn);
+    $namn = str_replace(" ", "_", $namn);
+    $nyttNamn = "";
+    for ($i = 0; $i < strlen($namn); $i++) {
+      $b = substr($namn, $i, 1);
+      if (in_array($b, $letters))
+        $nyttNamn.= $b;
+    }
+    if ($middlefix != '') {
+      $middlefix = $middlefix . "_";
+    }
+
+    switch ($type) {
+      case 'order':
+        $path = FORETAGSFIL_LOCAL_PATH . "/";
+        break;
+      case 'faktura':
+        $path = FORETAGSFAKTURA_LOCAL_PATH . "/";
+        break;
+      case 'member':
+        $path = MEDLEMSFIL_LOCAL_PATH . "/";
+        break;
+      default:
+        $path = FORETAGSFIL_LOCAL_PATH . "/";        
+        break;
+    }
+
+    $filnamn = $prefix . date("ymd") . "_" . $middlefix . $orderid . "_" . $nyttNamn . ".$fileExt";
+    $i = 0;
+    while (file_exists($path . $filnamn)) {
+      $filnamn = $prefix . date("ymd") . "_" . $middlefix . $orderid . "_" . $i . "_" . $nyttNamn . ".$fileExt";
+      $i++;
+    }
+    return $filnamn;
+  }  
+  
+  
+  
+  
 /**
  * Sends all the emails. Loggs all to file email.log
  * Optional messages can sent to the logfile via last param logmessage

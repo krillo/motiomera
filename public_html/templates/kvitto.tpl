@@ -16,7 +16,7 @@ Hej och tack för att ni valt att förnya er tävling här på MotioMera! Nedan 
 {elseif $orderList.typ == "foretag_tillagg"}
 Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävling startar {$orderList.startDatum} och vi skickar era stegräknarpaket snarast. Både nedanstående info och kvittot kommer att skickas till dig per e-post.
 
-{elseif $orderList.typ == "medlem"}
+{elseif $orderList.typ == "medlem" || $orderList.typ == "medlem_extend"}
   {*}
   {if $orderList.pro_order}
     Hoppas du får en fortsatt rolig tid hos Motiomera!

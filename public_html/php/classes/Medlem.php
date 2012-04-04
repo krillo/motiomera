@@ -259,6 +259,63 @@ class Medlem extends Mobject {
     //		Misc::sendMail($this->getEpost(), null, "Tack för din beställning!", $message);
   }
 
+  /**
+   * Create a member file, put it on the ftp area
+   */
+  public static function createMemberFile($refId) {
+    $orderItems = Order::listOrderDataByRefId($refId);
+    $orderRefCode = $orderItems[0]['orderRefCode'];
+    $medlemId = $orderItems[0]['medlem_id'];
+    $orderId = $orderItems[0]['id'];
+    $date = $orderItems[0]['skapadDatum'];
+    $medlem = Medlem::loadById($medlemId);
+    $name = $medlem->getFNamn() . ' ' . $medlem->getENamn();
+    $prefix = '';
+    $middlefix = 'MEM';
+    $filnamn = Misc::setFilnamnAuto($prefix, 'txt', 'member', $middlefix, $name, $orderId);
+    $lokalFil = MEDLEMSFIL_LOCAL_PATH . "/" . $filnamn;
+
+    if (file_exists($lokalFil)) {
+      Misc::logMotiomera("Couldn't create or save order member file: " . $lokalFil, 'ERROR');
+      throw new OrderException(" ERROR - Couldn't create or save order member file: " . $lokalFil, -10);
+    } else {
+      $msg = "SKICKA STEGRÄKNARE TILL MEDLEM \n\n";
+      $msg .= "Adress: \n";
+      $msg .= $name . "\n";
+      $msg .= $medlem->getCo() . "\n";
+      $msg .= $medlem->getAddress() . "\n";
+      $msg .= $medlem->getZip() . "\n";
+      $msg .= $medlem->getCity() . "\n";
+      $msg .= $medlem->getCountry() . "\n\n";
+      $msg .= "Köpdatum: \n";
+      $msg .= $date . " \n\n";
+      $msg .= "Artikel: \n";
+      foreach ($orderItems as $orderItem) {
+        $msg .= $orderItem['item'] . "    " . $orderItem['antal'] . "    " . $orderItem['price'] . "\n";
+        $orderIdArray[] = $orderItem['id'];
+      }
+      $msg .= "\nSumma: \n";
+      $msg .= $orderItems[0]['sumMoms'] . "\n\n";
+
+      $fd = fopen($lokalFil, "a");
+      if ($fd != false) {
+        fwrite($fd, $msg);
+        fclose($fd);
+        Misc::logMotiomera("Created member-file for " . $name . ",  " . $lokalFil . ", medlemId =  " . $medlemId . ", orderids = " . implode(' ', $orderIdArray), 'OK');
+        //update the orderrows with faktura filename        
+        foreach ($orderItems as $orderItem) {
+          $order = Order::loadById($orderItem['id']);
+          $order->setFilnamnFaktura($filnamn);
+          $order->commit();
+        }
+        return true;
+      } else {
+        Misc::logMotiomera("Unable to create member-file for " . $name . ",  " . $lokalFil . ", medlemId =  " . $medlemId . ", orderids = " . implode(' ', $orderIdArray), 'ERROR');
+        return false;
+      }
+    }
+  }
+
   public function addStaticRouteToUser($fastrutt_id) {
     $this->removeToCurrentPos($this->getId());
     //Stracka::deleteUserStrackor($this);
@@ -1952,7 +2009,6 @@ class Medlem extends Mobject {
     return parent::listByIds(get_class(), $ids, true);
   }
 
- 
   /**
    * Försöker logga in med epost och lösenord.
    * Om det lyckas så sparas data om vem som är inloggad, och ett Medlems-objekt returneras

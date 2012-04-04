@@ -1135,61 +1135,6 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     }
   }
 
-  /**
-   * Create a member file, put it on the ftp area
-   */
-  public function createMemberFile($refId) {
-    //$fileNamePrefix = 'fak';
-    $prefix = '';
-    $middlefix = 'MEM';
-    $filnamn = $this->setFilnamnAuto($prefix, 'txt', 'member', $middlefix);
-    $lokalFil = MEDLEMSFIL_LOCAL_PATH . "/" . $filnamn;
-
-    if (file_exists($lokalFil)) {
-      Misc::logMotiomera("Couldn't create or save order member file: " . $lokalFil, 'ERROR');
-      throw new OrderException(" ERROR - Couldn't create or save order member file: " . $lokalFil, -10);
-    } else {
-      $orderItems = Order::listOrderDataByRefId($refId);
-      $orderRefCode = $orderItems[0]['orderRefCode'];
-      $medlemId = $orderItems[0]['medlem_id'];
-      $medlem = Medlem::loadById($medlemId);
-      $msg = "SKICKA STEGRÄKNARE TILL MEDLEM \n\n";
-      $msg .= "Adress: \n";
-      $name = $medlem->getFNamn() . ' ' . $medlem->getENamn();
-      $msg .= $name . "\n";
-      $msg .= $medlem->getCo() . "\n";
-      $msg .= $medlem->getAddress() . "\n";
-      $msg .= $medlem->getZip() . "\n";
-      $msg .= $medlem->getCity() . "\n";
-      $msg .= $medlem->getCountry() . "\n\n";
-      $msg .= "Köpdatum: \n";
-      $msg .= date('Y-m-d') . " \n\n";
-      $msg .= "Artikel: \n";
-      foreach ($orderItems as $orderItem) {
-        $msg .= $orderItem['item'] . "    " . $orderItem['antal'] . "    " . $orderItem['price'] . "\n";
-        $orderIdArray[] = $orderItem['id'];
-      }
-      $msg .= "\nSumma: \n";
-      $msg .= $orderItem['sum'] . "\n\n";
-
-      $fd = fopen($lokalFil, "a");
-      if ($fd != false) {
-        fwrite($fd, $msg);
-        fclose($fd);
-        Misc::logMotiomera("Created member-file for " . $name . ",  " . $lokalFil . ", medlemId =  " . $medlemId . ", orderids = " . implode(' ', $orderIdArray), 'OK');
-        //update the orderrows with faktura filename        
-        foreach ($orderItems as $orderItem) {
-          $order = Order::loadById($orderItem['id']);
-          $order->setFilnamnFaktura($filnamn);
-          $order->commit();
-        }
-        return true;
-      } else {
-        Misc::logMotiomera("Unable to create member-file for " . $name . ",  " . $lokalFil . ", medlemId =  " . $medlemId . ", orderids = " . implode(' ', $orderIdArray), 'ERROR');
-        return false;
-      }
-    }
-  }
 
   /**
    * Gets all orders in status 30 for this company and creates a textfile for each company 

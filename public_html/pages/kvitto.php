@@ -25,33 +25,50 @@ $msg = "\n\tToken/RefId: " . $refId;
 $orderItemList = Order::listOrderDataByRefId($refId); //can be more than one order row
 $order = Order::loadByRefId($refId); //find out what order type, load the first order row
 
+
 if (!empty($order) && !empty($orderItemList)) {
   if ($order->getOrderStatus() < Order::ORDERSTATUS_CUST_NO) {  //check one of the rows that the order isn't allready handled 
     switch ($order->getTyp()) {
+      case ("medlem_extend"):  
       case ("medlem"):
         $orderItems = Order::listOrderDataByRefId($refId);
         $medlem = Medlem::loadById($order->getMedlemId());
-        $msg .= "\n\tTyp: Medlem \n\tId: " . $order->getMedlemId() . "\n\tNamn: " . $medlem->getFNamn() . ' ' . $medlem->getENamn() . "\n\tEpost: " . $medlem->getEpost();
+        $msg .= "\n\tTyp: " . $order->getTyp() . " \n\tId: " . $order->getMedlemId() . "\n\tNamn: " . $medlem->getFNamn() . ' ' . $medlem->getENamn() . "\n\tEpost: " . $medlem->getEpost();
         $msg .= "\n\tTelefon: " . $medlem->getPhone() . "\n\tip: " . $order->getIp() . "\n\t" . print_r($orderItems, true);
         Misc::logMotiomera($msg, 'INFO', 'order');
         $stepcounter = false;
+        $dagar = 0;
+        $level = 0;
         foreach ($orderItems as $orderItem) {
           $order = Order::loadById($orderItem['id']);
+          $campaign = Order::$campaignCodes[$order->getCampaignId()];
           $order->setOrderStatus(Order::ORDERSTATUS_CUST_NO); //The Order has been payed at payson (or faktura) - to status 30 (status 20 does not apply any more)
+          $order->setExpired(true);
           $order->setIsValid(1);
           $order->commit();
-          if (strpos($order->getCampaignId(), 'STEG')) {
+          if (strpos($order->getCampaignId(), 'STEG') !== false) {
             $stepcounter = true;
           }
-        }
+          if (strpos($order->getCampaignId(), 'PRIV') !== false) {
+            $dagar = $campaign["dagar"];
+            $level = $campaign["levelid"];
+          }
+        }        
         $medlem->setEpostBekraftad(1); //medlem valid
-        $medlem->handleOrder($order);
-        $medlem->setLevelId(1);        
+        $medlem->addPaidUntil($dagar);
+        $medlem->setLevelId($level);
         $medlem->commit();
+        
         $order->sendEmailReciept();
         if ($stepcounter) {
-          $foretag->createMemberFile($refId);
+          Medlem::createMemberFile($refId);
         }
+        // login the user and skip this page
+        if($order->getTyp() == 'medlem_extend') {
+          header('location:/pages/minsida.php');  //already logged in
+        }
+        
+        //$medlem->loggaIn($order->email, $order->pass, true);
         break;
       case ("foretag"):
         $orderItems = Order::listOrderDataByRefId($refId);
@@ -137,11 +154,13 @@ if (!empty($order) && !empty($orderItemList)) {
     $orderList["id"] = $order->getId();
 
     $orderTyp = $order->getTyp();
-    if ($orderTyp != "medlem") {
+    if (($orderTyp != "medlem") && ($orderTyp != "medlem_extend")) {
       $foretag = $order->getForetag();
     }
     switch (true) {
       case ($orderTyp == "medlem"):
+        break;
+      case ($orderTyp == "medlem_extend"):
         break;
       case ($orderTyp == "foretag"):
         $orderList["foretagLosen"] = $foretag->getTempLosenord();
