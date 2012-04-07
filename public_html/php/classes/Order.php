@@ -574,7 +574,7 @@ class Order extends Mobject {
    */
   public static function listOrderDataByRefId($refId) {
     global $db;
-    $sql = "SELECT id, item, price, antal, payment, orderRefCode, sumMoms, medlem_id, skapadDatum  FROM " . self::classToTable(get_class()) . " WHERE refId = '" . $refId . "'";
+    $sql = "SELECT id, item, price, antal, payment, orderRefCode, sum, sumMoms, medlem_id, skapadDatum  FROM " . self::classToTable(get_class()) . " WHERE refId = '" . $refId . "'";
     $res = $db->query($sql);
     $items = array();
     while ($data = mysql_fetch_assoc($res)) {

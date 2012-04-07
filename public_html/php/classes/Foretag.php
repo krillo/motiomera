@@ -1091,30 +1091,23 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
       $orderItems = Order::listOrderDataByRefId($refId);
       $orderRefCode = $orderItems[0]['orderRefCode'];
       $msg = "FAKTURA \n\n";
-      $msg .= "Fakturaadress: \n";
       $msg .= $this->getCompanyName() . "\n";
+      $msg .= $this->getPayerName() . "  (". $this->getPayerEmail() . " " . $this->getPayerPhone() . ")\n\n";      
+
       $msg .= $this->getPayerCo() . "\n";
       $msg .= $this->getPayerAddress() . "\n";
-      $msg .= $this->getPayerZipCode() . "\n";
-      $msg .= $this->getPayerCity() . "\n";
+      $msg .= $this->getPayerZipCode() . "  " . $this->getPayerCity() . "\n";
       $msg .= $this->getPayerCountry() . "\n\n";
-      $msg .= "Er referens: \n";
-      $msg .= $this->getPayerName() . "\n";
-      $msg .= $this->getPayerEmail() . "\n\n";
-      $msg .= "Vår referens: \n";
-      $msg .= "Kristian Erendi \n\n";
-      $msg .= "Leveransvillkor: \n";
-      $msg .= $orderRefCode . "\n\n";
-      $msg .= "Fakturadatum: \n";
-      $msg .= date('Y-m-d') . " \n\n";
-      $msg .= "Artikel: \n";
+
+      $msg .= "Kostnadsställe/ref/kod: " . $orderRefCode . "\n\n";
+      $msg .= "Fakturadatum: " . $orderItems[0]['skapadDatum'] . " \n\n";
+      $msg .= "Artiklar: \n";
       foreach ($orderItems as $orderItem) {
         $msg .= $orderItem['item'] . "    " . $orderItem['antal'] . "    " . $orderItem['price'] . "\n";
         $orderIdArray[] = $orderItem['id'];
       }
-      $msg .= "\nSumma ink moms: \n";
-      $msg .= $orderItem['sumMoms'] . "\n\n";
-
+      $msg .= "\nSumma: " .$orderItem['sum'] . " Kr \n";
+      $msg .= "Summa: " .$orderItem['sumMoms'] . " Kr ink moms\n\n\n";
 
       $fd = fopen($lokalFil, "a");
       if ($fd != false) {
