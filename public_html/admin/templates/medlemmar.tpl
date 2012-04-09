@@ -25,6 +25,12 @@
 				<a href="{$urlHandler->getUrl(Medlem, URL_ADMIN_LIST)}?sort=id&amp;way={$way}">ID</a>
 			</th>
 			<th>
+				<a href="{$urlHandler->getUrl(Medlem, URL_ADMIN_LIST)}?sort=aNamn&amp;way={$way}">Förnamn</a>
+			</th>
+			<th>
+				<a href="{$urlHandler->getUrl(Medlem, URL_ADMIN_LIST)}?sort=aNamn&amp;way={$way}">Efternamn</a>
+			</th>
+			<th>
 				<a href="{$urlHandler->getUrl(Medlem, URL_ADMIN_LIST)}?sort=aNamn&amp;way={$way}">Användarnamn</a>
 			</th>
 			<th>
@@ -49,6 +55,12 @@
 		<tr>
 			<td class="mmList2">
 				{$medlem->getId()}
+			</td>
+			<td class="mmList1">
+				{$medlem->getFNamn()}
+			</td>
+			<td class="mmList2">
+				{$medlem->getENamn()}
 			</td>
 			<td class="mmList1">
 				{$medlem->getANamn()}
