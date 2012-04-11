@@ -13,13 +13,14 @@ $fid = $foretag->getId();
 Kontrollera först att placeringen av stegräknaren varit korrekt. Idealiska placeringen är i byxlinning eller livrem vid höftbenet. För bästa funktion ska stegräknaren fästas helt upprätt, dvs den ska inte luta.
 </p>
 <p>
-Om problemet ändå inte avhjälps så ersätter vi den defekta stegräknaren med en ny. Beställ en ny nedan och skicka tillbaka den defekta stegräknaren (kostnadsfritt) till oss på denna adress. Märk kuvertet "stegräknare":
+Om problemet ändå inte avhjälps så ersätter vi den defekta stegräknaren med en ny. Beställ en ny nedan och skicka tillbaka den defekta stegräknaren till oss på denna adress. Märk kuvertet "stegräknare":
 </p>
 
 <p>
-SVARSPOST<br/>
-20528844<br/>
-258 28 Helsingborg<br/> 
+Motiomera AB<br/>
+c/o Kristian Erendi<br/>
+Finjagatan 6<br/>
+252 51 Helsingborg<br/> 
 </p> 
 <br/>
     
