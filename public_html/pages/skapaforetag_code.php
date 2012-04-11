@@ -322,7 +322,7 @@ Order::getMondays(15);
       <li><label for="zip">Postnummer</label><input type="text" name="zip" id="zip"/></li><div class="clear"></div>
       <li><label for="city">Ort</label><input type="text" name="city" id="city"/></li><div class="clear"></div>
       <li><label><a href="" id="country-toggle">Inte Sverige ?</a></label><input type="text" name="country" id="country" class="hidden" value="Sverige"/></li><div class="clear"></div>       
-      <li id="refcode-row"><label ><a href="" id="refcode-toggle">Referenskod på kvittot?</a></label><input type="text" name="refcode" id="refcode" class="hidden"/></li>      
+      <li id="refcode-row"><label ><a href="" id="refcode-toggle">Kostnadsställe/Refkod/Id mm?</a></label><input type="text" name="refcode" id="refcode" class="hidden"/></li>      
       <!--li><label><a href="" id="discount-toggle">Har du en rabattkod?</a></label><input type="text" name="discount" id="discount" class="hidden"/></li-->
 
       <div class="clear"></div>

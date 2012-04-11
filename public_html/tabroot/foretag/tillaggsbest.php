@@ -169,7 +169,7 @@ $moms = Order::$moms;
   </ul>  
 
   <div class="clear"></div>  
-  <div id="refcode-div"><label><a href="" id="refcode-toggle">Referenskod på kvittot?</a></label><input type="text" name="refcode" id="refcode" class="hidden"/></div>
+  <div id="refcode-div"><label><a href="" id="refcode-toggle">Kostnadsställe/Refkod/Id mm?</a></label><input type="text" name="refcode" id="refcode" class="hidden"/></div>
   <div class="clear"></div>
 
 
