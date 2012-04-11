@@ -150,15 +150,15 @@ $moms = Order::$moms;
   <ul id="checkout-ul">
     <li id="calc">
       <div class="clear"></div>
-      <div id="nbr-with-text"><?php echo $campaignCodes['RE03'][text]; ?><span > <?php echo $campaignCodes['RE03'][pris]; ?> kr / person</span></div>
+      <div id="nbr-with-text"><?php echo $campaignCodes['RE03']['text']; ?><span > <?php echo $campaignCodes['RE03']['pris']; ?> kr / person</span></div>
       <input type="text" name="RE03" id="nbr-with"/>
       <div id="nbr-with-sum"><span class="nbr">0</span> kr ex moms</div>
       <div class="clear"></div>
-      <div id="nbr-without-text"><?php echo $campaignCodes['RE04'][text]; ?><span > <?php echo $campaignCodes['RE04'][pris]; ?> kr / person</span></div>
+      <div id="nbr-without-text"><?php echo $campaignCodes['RE04']['text']; ?><span > <?php echo $campaignCodes['RE04']['pris']; ?> kr / person</span></div>
       <input type="text" name="RE04" id="nbr-without" />       
       <div id="nbr-without-sum"><span class="nbr">0</span> kr ex moms</div>
       <div class="clear"></div>
-      <div id="freight-label">Frakt</div><div id="freight"><span class="nbr">0</span><span id="freight-text"> kr ex moms</div>
+      <div id="freight-label">Frakt</div><div id="freight"><span class="nbr">0</span><span id="freight-text"> kr ex moms</span></div>
       <div class="clear"></div>
     </li>
     <li>

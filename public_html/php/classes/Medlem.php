@@ -279,14 +279,15 @@ class Medlem extends Mobject {
       Misc::logMotiomera("Couldn't create or save order member file: " . $lokalFil, 'ERROR');
       throw new OrderException(" ERROR - Couldn't create or save order member file: " . $lokalFil, -10);
     } else {
-      $msg = "SKICKA STEGRÄKNARE TILL MEDLEM \n\n";
-      $msg .= "Adress: \n";
+      $msg = "Skicka stegräknare till medlem  - OBS BETALT!\n";
+      $msg = "                                  -----------\n\n";
       $msg .= $name . "\n";
-      $msg .= $medlem->getCo() . "\n";
+      $medlem->getCo() == ''?$co = $medlem->getCo() . "\n" :$co = '';
+      $msg .= $co;
       $msg .= $medlem->getAddress() . "\n";
-      $msg .= $medlem->getZip() . "\n";
-      $msg .= $medlem->getCity() . "\n";
+      $msg .= $medlem->getZip() . ' ' . $medlem->getCity() . "\n";
       $msg .= $medlem->getCountry() . "\n\n";
+      $msg .= "--------------------------------- \n";
       $msg .= "Köpdatum: \n";
       $msg .= $date . " \n\n";
       $msg .= "Artikel: \n";
