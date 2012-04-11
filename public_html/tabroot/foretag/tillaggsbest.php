@@ -38,6 +38,7 @@ $moms = Order::$moms;
 
     //sum with and without stepcounter, add freight and moms
     function sum(){
+      var sumWith, sumWithout, sumTotal, countWith, countWithout, freight, sumTotalFreight, sumTotalFreightMoms;
       countWith = $('#nbr-with').val();
       sumWith =  countWith * <?php echo $campaignCodes['RE03']['pris']; ?>;
       $('#nbr-with-sum span').html(sumWith);
