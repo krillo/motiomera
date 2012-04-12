@@ -1431,6 +1431,26 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     }
     Misc::logMotiomera("End: Foretag::uploadOrderFilesFTP()", 'info');
   }
+  /**
+   * Uploads order fktura files in status 50 on the FTP
+   * Lift the order rows to status 60 on success
+   */
+  public static function uploadOrderFakturaFilesFTP() {
+    Misc::logMotiomera("Start: Foretag::uploadOrderFakturaFilesFTP()", 'info');
+    $filenames = Order::getFakturaFilesToUpload();
+    foreach ($filenames as $file) {
+      $localFile = FORETAGSFAKTURA_LOCAL_PATH . "/" . $file;
+      $serverFile = FORETAGSFIL_REMOTE_PATH . "/" . $file;
+      if (Foretag::uploadFilesFTP('order', $localFile, $serverFile, true)) {
+        if (Order::updateOrdersByFilenameGeneric($file, 'filnamnfaktura', 50, 60) == 1) {
+          Misc::logMotiomera("Faktura file put successfully on ftp, status 60  " . $localFile, 'ok');
+        } else {
+          Misc::logMotiomera("Faktura file put successfully on ftp, FAIL TO UPDATE orderstatus, still 50", 'error');
+        }
+      }
+    }
+    Misc::logMotiomera("End: Foretag::uploadOrderFilesFTP()", 'info');
+  }
 
   /**
    * Puts files on the FTP 

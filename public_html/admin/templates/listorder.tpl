@@ -60,6 +60,9 @@
 			<th>
 				<a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Pris</a>
 			</th>
+			<th>
+				<a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Pris moms</a>
+			</th>
 			<th style="padding-right: 5px;">	
 				<a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Betalning</a>
 			</th>
@@ -103,6 +106,7 @@
 			<td class="mmList1">{$thisOrder->getAntal()}</td>
 			<td class="mmList2">{$thisOrder->getQuantity()}</td>			
 			<td class="mmList1">{$thisOrder->getPrice()}</td>						
+			<td class="mmList1">{$thisOrder->getSumMoms()}</td>						
 			<td class="mmList2">{$thisOrder->getPayment()}</td>			
       <td class="mmList1">{$thisOrder->getPayerName()}</td> 
       <td class="mmList2">{$thisOrder->getPayerEmail()}</td>     		      									

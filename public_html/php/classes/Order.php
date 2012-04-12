@@ -232,6 +232,7 @@ class Order extends Mobject {
   const ORDERSTATUS_CUST_NO = 30;
   const ORDERSTATUS_PSW_FILE = 40;
   const ORDERSTATUS_FTP = 50;
+  const ORDERSTATUS_FAKTURA_FTP = 60;
   const ORDERSTATUS_RENEWED = 55;
   const MAX_LENGTH_AFFCODE = 20;
   const KAMP_KOD_OGILTIG = -2;
@@ -1280,6 +1281,23 @@ class Order extends Mobject {
   }
 
   /**
+   * This function returns all filenames that are in status 40. 
+   * The filenmanes are distinct, i.e. the same filenamne can correspond to more than one order-row
+   * @return array of filenames
+   * krillo 100127
+   */
+  public static function getFakturaFilesToUpload() {
+    try {
+      global $db;
+      $sql = "SELECT distinct(filnamnFaktura) FROM " . self::TABLE . " WHERE  orderstatus = 50";
+      $filenames = $db->valuesAsArray($sql);
+      return $filenames;
+    } catch (Exception $e) {
+      return "0";
+    }
+  }
+
+  /**
    * This function updates all orderlines to 50 where status is 40 and filnamn corresponds to the submitted
    * Returns 1 for success 0 for fail. It also echos error messages (caught into cron logfile)
    * @param string $file
@@ -1289,6 +1307,24 @@ class Order extends Mobject {
     try {
       global $db;
       $sql = "UPDATE " . self::TABLE . " SET orderStatus = " . self::ORDERSTATUS_FTP . " WHERE  orderstatus = 40 AND filnamn = '$file'";
+      $result = $db->query($sql);
+      return $result;
+    } catch (Exception $e) {
+      return "0";
+    }
+  }
+  /**
+   * 
+   * This function is a generic update order by filename.
+   * It updates all orderlines to $newStatus where status is $currentStatus and where $fileName corresponds to $fileFieldName in the db
+   * Returns 1 for success 0 for fail. It also echos error messages (caught into cron logfile)
+   * @param string $file
+   * krillo 120412
+   */
+  public static function updateOrdersByFilenameGeneric($fileName, $fileFieldName, $currentStatus, $newStatus) {
+    try {
+      global $db;
+      $sql = "UPDATE " . self::TABLE . " SET orderStatus = $newStatus WHERE  orderstatus = $currentStatus AND $fileFieldName = '$fileName'";
       $result = $db->query($sql);
       return $result;
     } catch (Exception $e) {

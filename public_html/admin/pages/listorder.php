@@ -77,6 +77,8 @@ if($foretagid != "0"){
 	$listOrder = Order::listOrderIdsByForetagId($foretagid);
 } else {
 	$listOrder = Order::listOrderKrillo($offset, $limit, $field, $search, $way, $showValid, $showForetag);
+  //print_r($listOrder);
+  //die();
 }
 $smarty->assign("search", $search);
 $smarty->assign("offset", $offset);
