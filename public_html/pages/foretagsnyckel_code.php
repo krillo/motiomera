@@ -18,7 +18,9 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
       validClass: "valid",
       rules: {
         anamn: {
-          required: true
+          required: true,
+          maxlength: <?php echo Medlem::MAX_LENGTH_ANAMN; ?>, 
+          minlength: <?php echo Medlem::MIN_LENGTH_ANAMN; ?>
         },
         firstname: {
           required: true
@@ -52,7 +54,9 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
       },  
       messages: {
         anamn: {
-          required: ''
+          required: '',
+          maxlength: 'För långt',
+          minlength: 'För kort'
         },
         firstname: {
           required: ''

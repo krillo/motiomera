@@ -1281,10 +1281,10 @@ class Order extends Mobject {
   }
 
   /**
-   * This function returns all filenames that are in status 40. 
+   * This function returns all faktura-filenames that are in status 50. 
    * The filenmanes are distinct, i.e. the same filenamne can correspond to more than one order-row
    * @return array of filenames
-   * krillo 100127
+   * krillo 120412
    */
   public static function getFakturaFilesToUpload() {
     try {
