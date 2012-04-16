@@ -644,7 +644,7 @@ class Order extends Mobject {
    */
   public static function getMondays($count = 15) {
     $output = '';
-    $addDays = 14 + (8 - date("w"));  //the fist monday at least 14 days ahead
+    $addDays = 7 + (8 - date("w"));  //the fist monday at least 7 days ahead
     $firstMonday = date("Y-m-d", strtotime(date("Y-m-d") . "+$addDays days"));
     $monday = $firstMonday;
     for ($i = 0; $i < $count; ++$i) {
