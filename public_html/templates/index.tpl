@@ -25,9 +25,10 @@
         <div style="text-align:left;float:left;padding-left:50px;">
           <h2 style="text-align:left;float:left;">Fem veckors tävling, start varje måndag!</h2>
           <p style="text-align:left;font-size:14px;">
-            Vi fortsätter med 10% rabatt!<br/><br/>
-            <span style="text-decoration:line-through">169 kr</span>&nbsp; 152kr per person<br/>
-            <span style="text-decoration:line-through">289 kr</span>&nbsp; 260kr per person med stegräknare
+            
+            <!-- Vi fortsätter med 10% rabatt!<br/><br/-->
+            <!--span style="text-decoration:line-through">169 kr &nbsp;</span> 152kr -->169kr per person<br/>
+            <!--span style="text-decoration:line-through">289 kr &nbsp;</span> 260kr -->289kr per person med stegräknare
           </p>
         </div>  
       </a>
