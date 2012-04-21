@@ -5,135 +5,143 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-$order = new stdClass;
-!empty($_REQUEST['type']) ? $order->type = $_REQUEST['type'] : $order->type = 'foretag';
-!empty($_REQUEST['m_exmoms']) ? $order->exmoms = $_REQUEST['m_exmoms'] : $order->exmoms = 0;
-!empty($_REQUEST['m_freight']) ? $order->freight = $_REQUEST['m_freight'] : $order->freight = 0;
-!empty($_REQUEST['m_total']) ? $order->total = $_REQUEST['m_total'] : $order->total = 0;
-!empty($_REQUEST['m_incmoms']) ? $order->incmoms = $_REQUEST['m_incmoms'] : $order->incmoms = 0;
-!empty($_REQUEST['startdatumRadio']) ? $order->startdatumRadio = $_REQUEST['startdatumRadio'] : $order->startdatumRadio = 0;
-!empty($_REQUEST['discount']) ? $order->discount = $_REQUEST['discount'] : $order->discount = '';
-!empty($_REQUEST['RE03']) ? $order->RE03 = $_REQUEST['RE03'] : $order->RE03 = 0;
-!empty($_REQUEST['RE04']) ? $order->RE04 = $_REQUEST['RE04'] : $order->RE04 = 0;
-!empty($_REQUEST['company']) ? $order->company = $_REQUEST['company'] : $order->company = '';
-!empty($_REQUEST['co']) ? $order->co = $_REQUEST['co'] : $order->co = '';
-!empty($_REQUEST['firstname']) ? $order->fname = $_REQUEST['firstname'] : $order->fname = '';
-!empty($_REQUEST['lastname']) ? $order->lname = $_REQUEST['lastname'] : $order->lname = '';
-!empty($_REQUEST['refcode']) ? $order->refcode = $_REQUEST['refcode'] : $order->refcode = '';
-!empty($_REQUEST['email']) ? $order->email = $_REQUEST['email'] : $order->email = '';
-!empty($_REQUEST['phone']) ? $order->phone = $_REQUEST['phone'] : $order->phone = '';
-!empty($_REQUEST['street1']) ? $order->street1 = $_REQUEST['street1'] : $order->street1 = '';
-!empty($_REQUEST['street2']) ? $order->street2 = $_REQUEST['street2'] : $order->street2 = '';
-!empty($_REQUEST['street3']) ? $order->street3 = $_REQUEST['street3'] : $order->street3 = '';
-!empty($_REQUEST['zip']) ? $order->zip = $_REQUEST['zip'] : $order->zip = '';
-!empty($_REQUEST['city']) ? $order->city = $_REQUEST['city'] : $order->city = '';
-!empty($_REQUEST['country']) ? $order->country = $_REQUEST['country'] : $order->country = '';
-!empty($_REQUEST['del-company']) ? $order->delCompany = $_REQUEST['del-company'] : $order->delCompany = '';
-!empty($_REQUEST['del-co']) ? $order->delco = $_REQUEST['del-co'] : $order->delco = '';
-!empty($_REQUEST['del-name']) ? $order->delName = $_REQUEST['del-name'] : $order->delName = '';
-!empty($_REQUEST['del-email']) ? $order->delEmail = $_REQUEST['del-email'] : $order->delEmail = '';
-!empty($_REQUEST['del-phone']) ? $order->delPhone = $_REQUEST['del-phone'] : $order->delPhone = '';
-!empty($_REQUEST['del-street1']) ? $order->delStreet1 = $_REQUEST['del-street1'] : $order->delStreet1 = '';
-!empty($_REQUEST['del-street2']) ? $order->delStreet2 = $_REQUEST['del-street2'] : $order->delStreet2 = '';
-!empty($_REQUEST['del-street3']) ? $order->delStreet3 = $_REQUEST['del-street3'] : $order->delStreet3 = '';
-!empty($_REQUEST['del-zip']) ? $order->delZip = $_REQUEST['del-zip'] : $order->delZip = '';
-!empty($_REQUEST['del-city']) ? $order->delCity = $_REQUEST['del-city'] : $order->delCity = '';
-!empty($_REQUEST['del-country']) ? $order->delcountry = $_REQUEST['del-country'] : $order->delcountry = '';
-!empty($_REQUEST['channel']) ? $order->channel = $_REQUEST['channel'] : $order->channel = '';
-!empty($_REQUEST['paytype']) ? $order->paytype = $_REQUEST['paytype'] : $order->paytype = '';
-!empty($_REQUEST['campcode']) ? $order->campcode = $_REQUEST['campcode'] : $order->campcode = '';
+
+// NOTICE the parameters with prefix "del-" is the actual company
+// and without "del-" is all payer (faktura) data
 
 
-//copy buyer data to delivery data
-if ($order->delStreet1 == '' && $order->delCity == '') { //consider deliverydata empty
-  $order->delCompany = $order->company;
-  $order->delName = $order->fname . ' ' . $order->lname;
-  $order->delStreet1 = $order->street1;
-  $order->delStreet2 = $order->street2;
-  $order->delStreet3 = $order->street3;
-  $order->delco = $order->co;
-  $order->delZip = $order->zip;
-  $order->delCity = $order->city;
-  $order->delEmail = $order->email;
-  $order->delPhone = $order->phone;
-  $order->delcountry = $order->country;
+$req = new stdClass;
+!empty($_REQUEST['type']) ? $req->type = $_REQUEST['type'] : $req->type = 'foretag';
+!empty($_REQUEST['m_exmoms']) ? $req->exmoms = $_REQUEST['m_exmoms'] : $req->exmoms = 0;
+!empty($_REQUEST['m_freight']) ? $req->freight = $_REQUEST['m_freight'] : $req->freight = 0;
+!empty($_REQUEST['m_total']) ? $req->total = $_REQUEST['m_total'] : $req->total = 0;
+!empty($_REQUEST['m_incmoms']) ? $req->incmoms = $_REQUEST['m_incmoms'] : $req->incmoms = 0;
+!empty($_REQUEST['startdatumRadio']) ? $req->startdatumRadio = $_REQUEST['startdatumRadio'] : $req->startdatumRadio = 0;
+!empty($_REQUEST['discount']) ? $req->discount = $_REQUEST['discount'] : $req->discount = '';
+!empty($_REQUEST['RE03']) ? $req->RE03 = $_REQUEST['RE03'] : $req->RE03 = 0;
+!empty($_REQUEST['RE04']) ? $req->RE04 = $_REQUEST['RE04'] : $req->RE04 = 0;
+!empty($_REQUEST['company']) ? $req->company = $_REQUEST['company'] : $req->company = '';
+!empty($_REQUEST['co']) ? $req->co = $_REQUEST['co'] : $req->co = '';
+!empty($_REQUEST['firstname']) ? $req->fname = $_REQUEST['firstname'] : $req->fname = '';
+!empty($_REQUEST['lastname']) ? $req->lname = $_REQUEST['lastname'] : $req->lname = '';
+!empty($_REQUEST['refcode']) ? $req->refcode = $_REQUEST['refcode'] : $req->refcode = '';
+!empty($_REQUEST['email']) ? $req->email = $_REQUEST['email'] : $req->email = '';
+!empty($_REQUEST['phone']) ? $req->phone = $_REQUEST['phone'] : $req->phone = '';
+!empty($_REQUEST['street1']) ? $req->street1 = $_REQUEST['street1'] : $req->street1 = '';
+!empty($_REQUEST['street2']) ? $req->street2 = $_REQUEST['street2'] : $req->street2 = '';
+!empty($_REQUEST['street3']) ? $req->street3 = $_REQUEST['street3'] : $req->street3 = '';
+!empty($_REQUEST['zip']) ? $req->zip = $_REQUEST['zip'] : $req->zip = '';
+!empty($_REQUEST['city']) ? $req->city = $_REQUEST['city'] : $req->city = '';
+!empty($_REQUEST['country']) ? $req->country = $_REQUEST['country'] : $req->country = '';
+!empty($_REQUEST['del-company']) ? $req->delCompany = $_REQUEST['del-company'] : $req->delCompany = '';
+!empty($_REQUEST['del-co']) ? $req->delco = $_REQUEST['del-co'] : $req->delco = '';
+!empty($_REQUEST['del-firstname']) ? $req->delFname = $_REQUEST['del-firstname'] : $req->delFname = '';
+!empty($_REQUEST['del-lastname']) ? $req->delLname = $_REQUEST['del-lastname'] : $req->delLname = '';
+!empty($_REQUEST['del-email']) ? $req->delEmail = $_REQUEST['del-email'] : $req->delEmail = '';
+!empty($_REQUEST['del-phone']) ? $req->delPhone = $_REQUEST['del-phone'] : $req->delPhone = '';
+!empty($_REQUEST['del-street1']) ? $req->delStreet1 = $_REQUEST['del-street1'] : $req->delStreet1 = '';
+!empty($_REQUEST['del-street2']) ? $req->delStreet2 = $_REQUEST['del-street2'] : $req->delStreet2 = '';
+!empty($_REQUEST['del-street3']) ? $req->delStreet3 = $_REQUEST['del-street3'] : $req->delStreet3 = '';
+!empty($_REQUEST['del-zip']) ? $req->delZip = $_REQUEST['del-zip'] : $req->delZip = '';
+!empty($_REQUEST['del-city']) ? $req->delCity = $_REQUEST['del-city'] : $req->delCity = '';
+!empty($_REQUEST['del-country']) ? $req->delcountry = $_REQUEST['del-country'] : $req->delcountry = '';
+!empty($_REQUEST['channel']) ? $req->channel = $_REQUEST['channel'] : $req->channel = '';
+!empty($_REQUEST['paytype']) ? $req->paytype = $_REQUEST['paytype'] : $req->paytype = '';
+!empty($_REQUEST['campcode']) ? $req->campcode = $_REQUEST['campcode'] : $req->campcode = '';
+
+
+//copy delivery data to buyer date
+if ($req->street1 == '' && $req->city == '') { //consider buyerdata empty
+  $req->company = $req->delCompany;
+  $req->fname = $req->delFname;
+  $req->lname = $req->delLname;
+  $req->Street1 = $req->delstreet1;
+  $req->Street2 = $req->delstreet2;
+  $req->Street3 = $req->delstreet3;
+  $req->co = $req->delco;
+  $req->Zip = $req->delzip;
+  $req->City = $req->delcity;
+  $req->Email = $req->delemail;
+  $req->Phone = $req->delphone;
+  $req->country = $req->delcountry;
 }
 
-$order->RE03 = (int) $order->RE03;
-$order->RE04 = (int) $order->RE04;
-$order->exmoms = (int) $order->exmoms;
-$order->total = (int) $order->total;
-$order->incmoms = round($order->incmoms, 2);
+$req->RE03 = (int) $req->RE03;
+$req->RE04 = (int) $req->RE04;
+$req->exmoms = (int) $req->exmoms;
+$req->total = (int) $req->total;
+$req->incmoms = round($req->incmoms, 2);
 
-$order->startdatum = '';
+$req->startdatum = '';
 if (!empty($_REQUEST["startdatumRadio"])) {
   if ($_REQUEST["startdatumRadio"] != 'egetdatum') {
-    $order->startdatum = $_REQUEST["startdatumRadio"];
+    $req->startdatum = $_REQUEST["startdatumRadio"];
   } else {
-    $order->startdatum = $_REQUEST["startdatum"];
+    $req->startdatum = $_REQUEST["startdatum"];
   }
 }
 
-if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
-  $url = $SETTINGS["url"] . '/pages/kassaforetag.php?nbr=0';
+if (($req->RE03 == 0 && $req->RE04 == 0)) { //return to checkout
+  $url = $SETTINGS["url"] . '/pages/skapaforetag.php?nbr=0';
   header('Location: ' . $url);
   exit;
 } else {
 
   //do a price check to avoid javascript hacking
-  $noFraud = Order::priceCheck($order->RE03, $order->RE04, $order->exmoms, $order->freight, $order->total, $order->incmoms, $order->discount);
+  $noFraud = Order::priceCheck($req->RE03, $req->RE04, $req->exmoms, $req->freight, $req->total, $req->incmoms, $req->discount);
   if ($noFraud) {  //javascript prices match to local calculation
     //everthing looks fine sofar, create the company 
     $kommun = Kommun::loadById(150);  //Use Ale - legacy
     $foretagLosen = Foretag::skapaLosen();  //a new is created in api/order if a purchase is made
     $isValid = 0;
-    $foretag = new Foretag($order->company, $kommun, $foretagLosen, $order->startdatum, $order->channel, $order->campcode, $isValid);  //last param is "Order::isValid" and is set to 0 - i.e. not a valid order yet
+    $foretag = new Foretag($req->delCompany, $kommun, $foretagLosen, $req->startdatum, $req->channel, $req->campcode, $isValid);  //last param is "Order::isValid" and is set to 0 - i.e. not a valid order yet
     $foretag->setTempLosenord($foretagLosen);  //a new is created in api/order if a purchase is made. Store this!
-    $foretag->setPayerName($order->fname . ' ' . $order->lname);
-    $foretag->setPayerFName($order->fname);
-    $foretag->setPayerLName($order->lname);
-    $order->street = $order->street1;
-    !empty($order->street2) ? $order->street = $order->street . ' ' . $order->street2 : null;
-    !empty($order->street3) ? $order->street = $order->street . ' ' . $order->street3 : null;
-    $foretag->setPayerAddress($order->street);
-    $foretag->setPayerCo($order->co);
-    $foretag->setPayerZipCode($order->zip);
-    $foretag->setPayerCity($order->city);
-    $foretag->setPayerEmail($order->email);
-    $foretag->setPayerPhone($order->phone);
-    $foretag->setPayerMobile($order->phone);
-    $foretag->setPayerCountry($order->country);
-    $foretag->setReciverCompanyName($order->delCompany);
-    $foretag->setReciverName($order->delName);
-    $order->delStreet = $order->delStreet1;
-    !empty($order->delStreet2) ? $order->delStreet = $order->delStreet . ' ' . $order->delStreet2 : null;
-    !empty($order->delStreet3) ? $order->delStreet = $order->delStreet . ' ' . $order->delStreet3 : null;
-    $foretag->setReciverAddress($order->delStreet);
-    $foretag->setReciverCo($order->delco);
-    $foretag->setReciverZipCode($order->delZip);
-    $foretag->setReciverCity($order->delCity);
-    $foretag->setReciverEmail($order->delEmail);
-    $foretag->setReciverPhone($order->delPhone);
-    $foretag->setReciverMobile($order->delPhone);
-    $foretag->setReciverCountry($order->delcountry);
-    $foretag->setCompanyName($order->company);
+    $foretag->setPayerCompanyName($req->company);
+    $foretag->setPayerName($req->fname . ' ' . $req->lname);
+    $foretag->setPayerFName($req->fname);
+    $foretag->setPayerLName($req->lname);
+    $req->street = $req->street1;
+    !empty($req->street2) ? $req->street = $req->street . ' ;; ' . $req->street2 : null;
+    !empty($req->street3) ? $req->street = $req->street . ' ;; ' . $req->street3 : null;
+    $foretag->setPayerAddress($req->street);
+    $foretag->setPayerCo($req->co);
+    $foretag->setPayerZipCode($req->zip);
+    $foretag->setPayerCity($req->city);
+    $foretag->setPayerEmail($req->email);
+    $foretag->setPayerPhone($req->phone);
+    $foretag->setPayerMobile($req->phone);
+    $foretag->setPayerCountry($req->country);
+    $foretag->setReciverCompanyName($req->delCompany);
+    $foretag->setReciverName($req->delFname . " " . $req->delLname);
+    $req->delStreet = $req->delStreet1;
+    !empty($req->delStreet2) ? $req->delStreet = $req->delStreet . ' ;; ' . $req->delStreet2 : null;
+    !empty($req->delStreet3) ? $req->delStreet = $req->delStreet . ' ;; ' . $req->delStreet3 : null;
+    $foretag->setReciverAddress($req->delStreet);
+    $foretag->setReciverCo($req->delco);
+    $foretag->setReciverZipCode($req->delZip);
+    $foretag->setReciverCity($req->delCity);
+    $foretag->setReciverEmail($req->delEmail);
+    $foretag->setReciverPhone($req->delPhone);
+    $foretag->setReciverMobile($req->delPhone);
+    $foretag->setReciverCountry($req->delcountry);
+    $foretag->setCompanyName($req->company);
     $foretag->setCreatedDate();
     $foretag->commit();
 
     $token = null;
-    if ($order->paytype == 'Direktbetalning') { //do a payson connection
-      $nbrpers = $order->RE03 + $order->RE04;
-      $paysonMsg = "Motiomera, $nbrpers deltagare, $order->RE03 stegräknare";
-      if ($order->email == 'krillo@gmail.com' OR (strpos($order->email, '@erendi.se') > 0)) {
+    if ($req->paytype == 'Direktbetalning') { //do a payson connection
+      $nbrpers = $req->RE03 + $req->RE04;
+      $paysonMsg = "Motiomera, $nbrpers deltagare, $req->RE03 stegräknare";
+      if ($req->email == 'krillo@gmail.com' OR (strpos($req->email, '@erendi.se') > 0)) {
         $sumToPay = 1;   //for testing only pay 1 kr and allways kristian@erendi.se, don't forget to return the money in payson
-        $order->email = 'kristian@erendi.se';
-        $order->fname = 'kristian';
-        $order->ename = 'erendi';
-        $paysonMsg = $order->incmoms . ' ' . $paysonMsg;
+        $req->email = 'kristian@erendi.se';
+        $req->fname = 'kristian';
+        $req->ename = 'erendi';
+        $paysonMsg = $req->incmoms . ' ' . $paysonMsg;
       } else {
-        $sumToPay = $order->total;
+        $sumToPay = $req->total;
       }
-      $data = Order::setupPaysonConnection($order->email, $order->fname, $order->lname, $sumToPay, $paysonMsg);
+      $data = Order::setupPaysonConnection($req->email, $req->fname, $req->lname, $sumToPay, $paysonMsg);
       $payResponse = $data['payResponse'];
       $api = $data['api'];
       if ($payResponse->getResponseEnvelope()->wasSuccessful()) {  // Step 3: verify that it suceeded
@@ -161,59 +169,59 @@ if (($order->RE03 == 0 && $order->RE04 == 0)) { //return to checkout
     $orderRE04 = null;
     $orderFR = null;
     $orderId = '';
-    if ($order->RE03 > 0) {
-      $orderRE03 = Order::__constructOrderWithSameRefId($ordertyp, $foretag, 'RE03', $order->RE03, $order->channel, $order->campcode, 0, false, $refId);
+    if ($req->RE03 > 0) {
+      $orderRE03 = Order::__constructOrderWithSameRefId($ordertyp, $foretag, 'RE03', $req->RE03, $req->channel, $req->campcode, 0, false, $refId);
       $orderRE03->setForetag($foretag);
-      $orderRE03->setCompanyName($order->company);
-      $priceRE03 = ((int) Order::$campaignCodes['RE03']['pris'] * $order->RE03);
+      $orderRE03->setCompanyName($req->delCompany);
+      $priceRE03 = ((int) Order::$campaignCodes['RE03']['pris'] * $req->RE03);
       $orderRE03->setPrice($priceRE03);
-      $orderRE03->setQuantity($order->RE03);
-      $orderRE03->setAntal($order->RE03);
+      $orderRE03->setQuantity($req->RE03);
+      $orderRE03->setAntal($req->RE03);
       $orderRE03->setItem(Order::$campaignCodes['RE03']['text']);
-      $orderRE03->setSum($order->total);
-      $orderRE03->setSumMoms($order->incmoms);
+      $orderRE03->setSum($req->total);
+      $orderRE03->setSumMoms($req->incmoms);
       $orderRE03->setPayment($paymenttype);
       $orderRE03->setDate();
       $orderRE03->setIpNr($ip);
-      $orderRE03->setOrderRefCode($order->refcode);
+      $orderRE03->setOrderRefCode($req->refcode);
       $orderRE03->commit();
       $orderId = $orderRE03->getId();
     }
-    if ($order->RE04 > 0) {
-      $orderRE04 = Order::__constructOrderWithSameRefId($ordertyp, $foretag, 'RE04', $order->RE04, $order->channel, $order->campcode, 0, false, $refId);
+    if ($req->RE04 > 0) {
+      $orderRE04 = Order::__constructOrderWithSameRefId($ordertyp, $foretag, 'RE04', $req->RE04, $req->channel, $req->campcode, 0, false, $refId);
       $orderRE04->setForetag($foretag);
-      $orderRE04->setCompanyName($order->company);
-      $priceRE04 = ((int) Order::$campaignCodes['RE04']['pris'] * $order->RE04);
+      $orderRE04->setCompanyName($req->delCompany);
+      $priceRE04 = ((int) Order::$campaignCodes['RE04']['pris'] * $req->RE04);
       $orderRE04->setPrice($priceRE04);
-      $orderRE04->setQuantity($order->RE04);
-      $orderRE04->setAntal($order->RE04);
+      $orderRE04->setQuantity($req->RE04);
+      $orderRE04->setAntal($req->RE04);
       $orderRE04->setItem(Order::$campaignCodes['RE04']['text']);
-      $orderRE04->setSum($order->total);
-      $orderRE04->setSumMoms($order->incmoms);
+      $orderRE04->setSum($req->total);
+      $orderRE04->setSumMoms($req->incmoms);
       $orderRE04->setPayment($paymenttype);
       $orderRE04->setDate();
       $orderRE04->setIpNr($ip);
-      $orderRE04->setOrderRefCode($order->refcode);
+      $orderRE04->setOrderRefCode($req->refcode);
       $orderRE04->commit();
       if ($orderId == '') {
         $orderId = $orderRE04->getId();
       }
     }
-    if ($order->freight != 'FRAKT00') {
-      $orderFR = Order::__constructOrderWithSameRefId($ordertyp, $foretag, $order->freight, 1, $order->channel, $order->campcode, 0, false, $refId);
+    if ($req->freight != 'FRAKT00') {
+      $orderFR = Order::__constructOrderWithSameRefId($ordertyp, $foretag, $req->freight, 1, $req->channel, $req->campcode, 0, false, $refId);
       $orderFR->setForetag($foretag);
-      $orderFR->setCompanyName($order->company);
-      $priceFR = (int) Order::$campaignCodes[$order->freight]['pris'];
+      $orderFR->setCompanyName($req->delCompany);
+      $priceFR = (int) Order::$campaignCodes[$req->freight]['pris'];
       $orderFR->setPrice($priceFR);
       $orderFR->setQuantity(0);  //used to get nbr of step counters
       $orderFR->setAntal(1);
-      $orderFR->setItem(Order::$campaignCodes[$order->freight]['text']);
-      $orderFR->setSum($order->total);
-      $orderFR->setSumMoms($order->incmoms);
+      $orderFR->setItem(Order::$campaignCodes[$req->freight]['text']);
+      $orderFR->setSum($req->total);
+      $orderFR->setSumMoms($req->incmoms);
       $orderFR->setPayment($paymenttype);
       $orderFR->setDate();
       $orderFR->setIpNr($ip);
-      $orderFR->setOrderRefCode($order->refcode);
+      $orderFR->setOrderRefCode($req->refcode);
       $orderFR->commit();
     }
     $foretag->setOrderId($orderId);  //update the company with orderid in the db

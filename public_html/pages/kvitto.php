@@ -168,11 +168,12 @@ if (!empty($order) && !empty($orderItemList)) {
         $orderList["orderId"] = $foretag->getOrderId();
       //continue
       case ($orderTyp == "foretag_again" || $orderTyp == "foretag_tillagg"):
-        $orderList["companyName"] = $foretag->getCompanyName();
+        $orderList["companyName"] = $foretag->getNamn();
         $orderList["foretagANamn"] = $foretag->getANamn();
         $orderList["foretagsId"] = $foretag->getId();
         $orderList["startDatum"] = $foretag->getStartdatum();
         $orderList["pro_order"] = false;
+        $orderList["payerCompanyName"] = $foretag->getPayerCompanyName();
         $orderList["payerName"] = $foretag->getPayerName();
         $orderList["payerAddress"] = $foretag->getPayerAddress();
         $orderList["payerCo"] = $foretag->getPayerCo();

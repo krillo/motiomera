@@ -80,6 +80,7 @@ if($foretagid != "0"){
   //print_r($listOrder);
   //die();
 }
+
 $smarty->assign("search", $search);
 $smarty->assign("offset", $offset);
 $smarty->assign("way", $way);

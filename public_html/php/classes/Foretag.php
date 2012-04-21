@@ -51,6 +51,7 @@ class Foretag extends Mobject {
    */
   protected $kundnummer;    //kundnummer från AS400, hämtas via cron
   protected $companyName;
+  protected $payerCompanyName;
   protected $payerName;
   protected $payerFName;
   protected $payerLName;
@@ -90,6 +91,7 @@ class Foretag extends Mobject {
       "isValid" => "int",
       "kundnummer" => "int",
       "companyName" => "str",
+      "payerCompanyName" => "str",
       "payerName" => "str",
       "payerFName" => "str",
       "payerLName" => "str",
@@ -989,10 +991,11 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $orderItemList = Order::listOrderDataByRefId($refId); //can be more than one order row
     $orderList = array();
     $orderList["foretagLosen"] = $this->getTempLosenord();
-    $orderList["companyName"] = $this->getCompanyName();
+    $orderList["companyName"] = $this->getNamn();
     $orderList["foretagANamn"] = $this->getANamn();
     $orderList["startDatum"] = $this->getStartdatum();
     $orderList["pro_order"] = false;
+    $orderList["payerCompanyName"] = $this->getPayerCompanyName();    
     $orderList["payerName"] = $this->getPayerName();
     $orderList["payerAddress"] = $this->getPayerAddress();
     $orderList["payerCo"] = $this->getPayerCo();
@@ -1091,17 +1094,18 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
       $orderItems = Order::listOrderDataByRefId($refId);
       $orderRefCode = $orderItems[0]['orderRefCode'];
       $msg = "FAKTURA \n\n";
-      $msg .= $this->getCompanyName() . "\n";
+      $msg .= $this->getPayerCompanyName() . "\n";
       $msg .= $this->getPayerName() . "  (". $this->getPayerEmail() . " " . $this->getPayerPhone() . ")\n\n";      
 
       $msg .= $this->getPayerCo() . "\n";
       $msg .= $this->getPayerAddress() . "\n";
       $msg .= $this->getPayerZipCode() . "  " . $this->getPayerCity() . "\n";
       $msg .= $this->getPayerCountry() . "\n\n";
-
-      $msg .= "Kostnadsställe/ref/kod: " . $orderRefCode . "\n\n";
+      
       $msg .= "Fakturadatum: " . $orderItems[0]['skapadDatum'] . " \n\n";
+      
       $msg .= "Artiklar: \n";
+      $msg .= "Kostnadsställe/ref/kod: " . $orderRefCode . "\n";
       foreach ($orderItems as $orderItem) {
         $msg .= $orderItem['item'] . "    " . $orderItem['antal'] . "    " . $orderItem['price'] . "\n";
         $orderIdArray[] = $orderItem['id'];
@@ -1906,6 +1910,9 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
   public function getCompanyName() {
     return htmlspecialchars_decode($this->companyName);
   }
+  public function getPayerCompanyName() {
+      return htmlspecialchars_decode($this->payerCompanyName);
+  }
 
   public function getPayerName() {
     return $this->payerName;
@@ -2191,7 +2198,9 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
   public function setCompanyName($name) {
     $this->companyName = $name;
   }
-
+  public function setPayerCompanyName($name) {
+    $this->payerCompanyName = $name;
+  }
   public function setPayerName($payerName) {
     $this->payerName = $payerName;
   }

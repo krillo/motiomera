@@ -73,7 +73,7 @@ class Order extends Mobject {
   protected $sumMoms; //totala summan + moms av alla ordrar med samma refid
   protected $expired;
   protected $kanal; //var har de hört talas om motiomera 
-  protected $orderRefCode;  
+  protected $orderRefCode;
   protected $compAffCode; //affiliate kod för företagsanmälningar 
   protected $fields = array(
       "id" => "int",
@@ -126,7 +126,7 @@ class Order extends Mobject {
       "sumMoms" => "int",
       "expired" => "int",
       "kanal" => "str",
-      "orderRefCode" => "str",      
+      "orderRefCode" => "str",
       "compAffCode" => "str",
       "isValid" => "int",
   );
@@ -216,7 +216,7 @@ class Order extends Mobject {
       "STEG01" => array(
           "typ" => "steg",
           "text" => "med stegräknare ",
-          "extra" => "Silva ex step, vit",          
+          "extra" => "Silva ex step, vit",
           "pris" => 100,
           "dagar" => 0,
           "popupid" => 30,
@@ -366,7 +366,7 @@ class Order extends Mobject {
    * @param type $discountcode
    * @return boolean 
    */
-  public static function priceCheckPrivate($PRIV3, $PRIV12, $STEG01, $FRAKT02, $total_in,  $discountcode) {
+  public static function priceCheckPrivate($PRIV3, $PRIV12, $STEG01, $FRAKT02, $total_in, $discountcode) {
     $PRIV3_price = (int) self::$campaignCodes['PRIV3']['pris'];
     $PRIV12_price = (int) self::$campaignCodes['PRIV12']['pris'];
     $STEG01_price = (int) self::$campaignCodes['STEG01']['pris'];
@@ -379,11 +379,6 @@ class Order extends Mobject {
     }
   }
 
-  
-  
-  
-  
-  
   /**
    * setup a payson connection, return the PayResponse object.
    * Only step 1 and 2 are done here
@@ -436,9 +431,9 @@ class Order extends Mobject {
         $order->commit();
         $order->getForetag()->setKundnummer($kundnummer);
         $order->getForetag()->commit();
-        Misc::logMotiomera("fetched customerId: " . $kundnummer . ", order_id: " . $order->getOrderId() . ", foretag:  " . $order->getForetag()->getCompanyName(), 'ok');
+        Misc::logMotiomera("fetched customerId: " . $kundnummer . ", order_id: " . $order->getOrderId() . ", foretag:  " . $order->getForetag()->getNamn(), 'ok');
       } else {
-        Misc::logMotiomera("customerId is missing " . $kundnummer . ", order_id: " . $order->getOrderId() . ", foretag: " . $order->getForetag()->getCompanyName(), 'error');
+        Misc::logMotiomera("customerId is missing " . $kundnummer . ", order_id: " . $order->getOrderId() . ", foretag: " . $order->getForetag()->getNamn(), 'error');
       }
     }
     Misc::logMotiomera("End: Order::hamtaNyaKundnummer()", 'info');
@@ -465,9 +460,9 @@ class Order extends Mobject {
           $order->setKundnummer($kundnummer);
           $order->setOrderStatus(self::ORDERSTATUS_CUST_NO);
           $order->commit();
-          Misc::logMotiomera("Tillaggsorder -> status 30, foretag: " . $order->getForetag()->getCompanyName() . ", order_id: " . $order->getOrderId() . ",  CustomerId: " . $kundnummer, 'ok');
+          Misc::logMotiomera("Tillaggsorder -> status 30, foretag: " . $order->getForetag()->getNamn() . ", order_id: " . $order->getOrderId() . ",  CustomerId: " . $kundnummer, 'ok');
         } else {
-          Misc::logMotiomera("Customer nbr missing for: " . $order->getForetag()->getCompanyName() . ", order_id: " . $order->getOrderId(), 'WARNING');
+          Misc::logMotiomera("Customer nbr missing for: " . $order->getForetag()->getNamn() . ", order_id: " . $order->getOrderId(), 'WARNING');
         }
       } catch (Exception $e) {
         Misc::logMotiomera("Problems with order_id: " . $order->getOrderId(), 'error');
@@ -997,12 +992,11 @@ class Order extends Mobject {
   public function getFilnamn() {
     return $this->filnamn;
   }
+
   public function getFilnamnFaktura() {
     return $this->filnamnFaktura;
   }
 
-  
-  
   public function getForetagId() {
     return $this->foretag_id;
   }
@@ -1032,6 +1026,10 @@ class Order extends Mobject {
 
   public function getCompanyName() {
     return htmlspecialchars_decode($this->companyName);
+  }
+
+  public function getOrderRefCode() {
+    return $this->orderRefCode;
   }
 
   /**
@@ -1070,10 +1068,72 @@ class Order extends Mobject {
     }
   }
 
-  public function getOrderRefCode() {
-    return $this->orderRefCode;
+  public function getPayerPhone() {
+    try {
+      if ($this->getTyp() == 'medlem') {
+        return $this->getMedlem()->getPhone();
+      } else { //foretag aso
+        return $this->getForetag()->getPayerPhone();
+      }
+    } catch (Exception $e) {
+      return 'ERROR';
+    }
+  }  
+  
+  /**
+   * Get the value from Foretag or medlem
+   * @return type 
+   */
+  public function getReciverEmail() {
+    try {
+      if ($this->getTyp() == 'medlem') {
+        return $this->getMedlem()->getEpost();
+      } else { //foretag aso
+        return $this->getForetag()->getReciverEmail();
+      }
+    } catch (Exception $e) {
+      return 'ERROR';
+    }
   }
 
+  public function getReciverName() {
+    try {
+      if ($this->getTyp() == 'medlem') {
+        return $this->getMedlem()->getFNamn() . ' ' . $this->getMedlem()->getENamn();
+      } else { //foretag aso
+        return $this->getForetag()->getReciverName();
+      }
+    } catch (Exception $e) {
+      return 'ERROR';
+    }
+  }
+
+  public function getReciverPhone() {
+    try {
+      if ($this->getTyp() == 'medlem') {
+        return $this->getMedlem()->getPhone();
+      } else { //foretag 
+        return $this->getForetag()->getReciverPhone();
+      }
+    } catch (Exception $e) {
+      return 'ERROR';
+    }
+  }
+
+  public function getStartdatum() {
+    try {
+      if ($this->getTyp() == 'medlem') {
+        return '';
+      } else { //foretag 
+        return $this->getForetag()->getStartdatum();
+      }
+    } catch (Exception $e) {
+      return 'ERROR';
+    }
+  }
+  
+  
+  
   /*
     public function getPayerName()
     {
@@ -1131,6 +1191,7 @@ class Order extends Mobject {
     return $this->reciverName;
     }
 
+
     public function getReciverAddress()
     {
     return $this->reciverAddress;
@@ -1149,11 +1210,6 @@ class Order extends Mobject {
     public function getReciverCity()
     {
     return $this->reciverCity;
-    }
-
-    public function getReciverEmail()
-    {
-    return $this->reciverEmail;
     }
 
     public function getReciverPhone()
@@ -1315,6 +1371,7 @@ class Order extends Mobject {
       return "0";
     }
   }
+
   /**
    * 
    * This function is a generic update order by filename.
@@ -1341,8 +1398,7 @@ class Order extends Mobject {
   public function setOrderRefCode($arg) {
     $this->orderRefCode = $arg;
   }
-  
-  
+
   public function setKundnummer($kundnummer) {
     $this->kundnummer = $kundnummer;
   }
@@ -1438,6 +1494,7 @@ class Order extends Mobject {
   public function setFilnamn($filname) {
     $this->filnamn = $filname;
   }
+
   public function setFilnamnFaktura($arg) {
     $this->filnamnFaktura = $arg;
   }

@@ -66,12 +66,17 @@
 			<th style="padding-right: 5px;">	
 				<a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Betalning</a>
 			</th>
-
+			<th style="padding-right: 5px;">	
+				<a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Startdatum</a>
+			</th>
       <th style="padding-right: 5px;">  
         <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Namn</a>
       </th>
       <th style="padding-right: 5px;">  
         <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Epost</a>
+      </th>
+      <th style="padding-right: 5px;">  
+        <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Telefon</a>
       </th>
 
 			<th style="padding-right: 5px;">
@@ -83,13 +88,20 @@
       <th>
         <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Filnamn</a>
       </th> 			
-      <th style="padding-right: 5px;">        
-				<a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">AS400OrderId</a>
-			</th>
-			<th style="padding-right: 5px;">	
-				<a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">AS400Kundnummer</a>
-			</th>
-
+      <th>
+        <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Faktura filnamn</a>
+      </th> 	
+      <th style="padding-right: 5px;">  
+        <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Faktura namn</a>
+      </th>
+      <th style="padding-right: 5px;">  
+        <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Faktura epost</a>
+      </th>
+      <th style="padding-right: 5px;">  
+        <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Faktura telefon</a>
+      </th>
+      
+      
 		</tr>
 	</thead>
 	<tbody>
@@ -106,15 +118,19 @@
 			<td class="mmList1">{$thisOrder->getAntal()}</td>
 			<td class="mmList2">{$thisOrder->getQuantity()}</td>			
 			<td class="mmList1">{$thisOrder->getPrice()}</td>						
-			<td class="mmList1">{$thisOrder->getSumMoms()}</td>						
-			<td class="mmList2">{$thisOrder->getPayment()}</td>			
-      <td class="mmList1">{$thisOrder->getPayerName()}</td> 
-      <td class="mmList2">{$thisOrder->getPayerEmail()}</td>     		      									
-			<td class="mmList1">{$thisOrder->getCampaignId()}</td>
-			<td class="mmList2">{$thisOrder->getItem()}</td>	
-      <td class="mmList1">{$thisOrder->getFilnamn()}</td>  								
-			<td class="mmList2">{$thisOrder->getOrderId()}</td>
-			<td class="mmList1">{$thisOrder->getKundnummer()}</td>						
+			<td class="mmList2">{$thisOrder->getSumMoms()}</td>						
+			<td class="mmList1">{$thisOrder->getPayment()}</td>	
+			<td class="mmList2">{$thisOrder->getStartdatum()}</td>	
+      <td class="mmList1">{$thisOrder->getReciverName()}</td> 
+      <td class="mmList2">{$thisOrder->getReciverEmail()}</td>     		      									
+      <td class="mmList1">{$thisOrder->getReciverPhone()}</td>     		      									
+			<td class="mmList2">{$thisOrder->getCampaignId()}</td>
+			<td class="mmList1">{$thisOrder->getItem()}</td>	
+      <td class="mmList2"><a style="text-decoration: underline; color: blue;" href="/admin/pages/showfile.php?file={$thisOrder->getFilnamn()}"  target="_blank">{$thisOrder->getFilnamn()}</a></td>  								
+			<td class="mmList1"><a style="text-decoration: underline; color: blue;" href="/admin/pages/showfile.php?file={$thisOrder->getFilnamnFaktura()}"  target="_blank">{$thisOrder->getFilnamnFaktura()}</a></td>
+      <td class="mmList2">{$thisOrder->getPayerName()}</td> 
+      <td class="mmList1">{$thisOrder->getPayerEmail()}</td>   				
+      <td class="mmList2">{$thisOrder->getPayerPhone()}</td>   				
 		</tr>	
 		{/foreach}
 	</tbody>

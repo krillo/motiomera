@@ -91,32 +91,9 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
 		</tr>	
 	{/strip}
 	{/section}
-	<tr>
-		<td colspan="3" class="mmRowHeading"><h3>Betalare</h3></td>
-	</tr>
-	<tr>
-		<td><b>Företag:</b> {$orderList.companyName}</td>
-		<td colspan="2"><b>Ort:</b> {$orderList.payerZipCode}  {$orderList.payerCity}</td>
-	</tr>
-	<tr>
-		<td><b>Namn:</b> {$orderList.payerName}</td>	
-		<td colspan="2"><b>Land:</b> {$orderList.payerCountry}</td>
-	</tr>
-	<tr>
-		<td><b>Adress:</b> {$orderList.payerAddress}</td>
-		<td colspan="2"><b>E-postadress:</b> {$orderList.payerEmail}</td>
-	</tr>
-	<tr>
-		<td><b>c/o:</b> {$orderList.payerCo}</td>	
-		<td colspan="2"><b>Telefon:</b> {$orderList.payerPhone}</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td colspan="2"><b>Mobil:</b> {$orderList.payerMobile} </td>
-	</tr>
-	
-	
-	<tr>
+  
+  
+ 	<tr>
 		<td colspan="3" class="mmRowHeading"><h3>Leverans</h3></td>
 	</tr>
 	<tr>
@@ -138,7 +115,34 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
 	<tr>
 		<td></td>		
 		<td colspan="2"><b>Mobil:</b> {$orderList.reciverMobile} </td>		
+	</tr> 
+  
+	<tr>
+		<td colspan="3" class="mmRowHeading"><h3>Betalare</h3></td>
 	</tr>
+	<tr>
+		<td><b>Företag:</b> {$orderList.payerCompanyName}</td>
+		<td colspan="2"><b>Ort:</b> {$orderList.payerZipCode}  {$orderList.payerCity}</td>
+	</tr>
+	<tr>
+		<td><b>Namn:</b> {$orderList.payerName}</td>	
+		<td colspan="2"><b>Land:</b> {$orderList.payerCountry}</td>
+	</tr>
+	<tr>
+		<td><b>Adress:</b> {$orderList.payerAddress}</td>
+		<td colspan="2"><b>E-postadress:</b> {$orderList.payerEmail}</td>
+	</tr>
+	<tr>
+		<td><b>c/o:</b> {$orderList.payerCo}</td>	
+		<td colspan="2"><b>Telefon:</b> {$orderList.payerPhone}</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td colspan="2"><b>Mobil:</b> {$orderList.payerMobile} </td>
+	</tr>
+	
+	
+
 
 
 	{/if}

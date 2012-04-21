@@ -12,55 +12,55 @@ Order::getMondays(15);
       errorClass: "invalid",
       validClass: "valid",
       rules: {
-        company: {
+        "del-company": {
           required: true
         },
-        firstname: {
+        "del-firstname": {
           required: true
         },
-        lastname: {
+        "del-lastname": {
           required: true
         },
-        email: {
+        "del-email": {
           required: true,
           email: true
         },
-        street1: {
+        "del-street1": {
           required: true
         },
-        zip: {
+        "del-zip": {
           required: true
         },
-        city: {
+        "del-city": {
           required: true
         },
-        phone: {
+        "del-phone": {
           required: true
         }
       },  
       messages: {
-        company: {
+        "del-company": {
           required: ''
         },
-        firstname: {
+        "del-firstname": {
           required: ''
         },
-        lastname: {
+        "del-lastname": {
           required: ''
         },
-        street1: {
+        "del-street1": {
           required: ''
         },
-        zip: {
+        "del-zip": {
           required: ''
         },
-        city: {
+        "del-city": {
           required: ''
         },
-        phone: {
+        "del-phone": {
           required: ''
         },
-        email: {
+        "del-email": {
           required: '', 
           email: ''
         }         
@@ -120,10 +120,7 @@ Order::getMondays(15);
       $('#nbr-sum-total-freight-moms span').html(sumTotalFreightMoms);
 
 
-          
-      //  
-      $('#m_exmoms').val(sumTotal);
-          
+      $('#m_exmoms').val(sumTotal);          
       $('#m_total').val(sumTotalFreight);        
       $('#m_incmoms').val(sumTotalFreightMoms);
     }
@@ -131,20 +128,31 @@ Order::getMondays(15);
         
         
     //catch keyup where the companyname is submitted 
-    $('#company').keypress(function() {
-      $('#fields-hidden').toggleClass("visible");
-      $('#fields-hidden').show("slow");
+    $('#del-company').keypress(function() {
+      $('#delivery').toggleClass("visible");
+      $('#delivery').show("slow");
+      $('#pay').toggleClass("visible");
+      $('#pay').show("slow");
+      $('#delivery-toggle').addClass("h3");      
+      //$('#delivery-toggle').toggleClass("visible");
+      $('#delivery-toggle').removeClass("hidden");            
+      $('#delivery-toggle').show("slow");
     });
         
         
     $('#delivery-toggle').click(function(event) {
       event.preventDefault();
-      if($('#delivery').hasClass("visible")){
-        $('#delivery').toggleClass("visible");
-        $('#delivery').hide("slow");
+      if($('#fields-hidden').hasClass("visible")){        
+        $('#fields-hidden').toggleClass("visible");
+        $('#fields-hidden').hide("slow");
+
       }else {
-        $('#delivery').toggleClass("visible");
-        $('#delivery').show("slow");
+        $('#fields-hidden').toggleClass("visible");
+        $('#fields-hidden').show("slow");       
+        $('#firstname').val($('#del-firstname').val());
+        $('#lastname').val($('#del-lastname').val());
+        $('#email').val($('#del-email').val());
+        $('#phone').val($('#del-phone').val());
       }
     });
 
@@ -184,12 +192,12 @@ Order::getMondays(15);
 
     $('#co-toggle').click(function(event) {
       event.preventDefault(); 
-      if($('#co').hasClass("visible")){
-        $('#co').toggleClass("visible");
-        $('#co').hide("slow");
+      if($('#del-co').hasClass("visible")){
+        $('#del-co').toggleClass("visible");
+        $('#del-co').hide("slow");
       }else {
-        $('#co').toggleClass("visible");
-        $('#co').show("slow");
+        $('#del-co').toggleClass("visible");
+        $('#del-co').show("slow");
       }       
     });   
  
@@ -303,43 +311,39 @@ Order::getMondays(15);
 
     <div class="clear"></div>
 
-    <li><h2 id="payer-labelx">Faktureringsadress</h2></li><div class="clear"></div>
-    <li><label for="company">Företagets namn</label><input type="text" name="company" id="company" class=""/></li><div class="clear"></div>
-    <div id="fields-hidden" class="hidden">
-      <li><label><a href="" id="co-toggle">c/o ?</a></label><input type="text" name="co" id="co" class="hidden"/></li><div class="clear"></div>          
-      <li><label for="firstname">Förnamn</label><input type="text" name="firstname" id="firstname" class=""/></li><div class="clear"></div>
-      <li><label for="lastname">Efternamn</label><input type="text" name="lastname" id="lastname" class=""/></li><div class="clear"></div>
-      <li><label for="email">E-post</label><input type="text" name="email" id="email" class=""/></li><div class="clear"></div>
-      <li><label for="phone">Mobil/telefon</label><input type="text" name="phone" id="phone"/></li><div class="clear"></div>
-      <li><label for="street1">Postadress</label><input type="text" name="street1" id="street1"/></li><div class="clear"></div>
-      <li><label><a href="" id="address-toggle">Fler rader ?</a></label> 
-        <div id="extra-address"class="hidden">
-          <input type="text" name="street2" id="street2"/><div class="clear"></div>
-          <label>&nbsp;</label><input type="text" name="street3" id="street3"/>
-        </div>
-      </li>
-      <div class="clear"></div>
+    <li><h2 id="payer-labelx">Adress</h2></li><div class="clear"></div>
+    <li><label for="del-company">Företagets namn</label><input type="text" name="del-company" id="del-company" class=""/></li><div class="clear"></div>
+
+    <div id="delivery" class="hidden">
+      <li><label>c/o</label><input type="text" name="del-co" id="del-co" class=""/></li><div class="clear"></div>
+      <li><label>Adress</label><input type="text" name="del-street1" id="del-street1"/></li><div class="clear"></div>
+      <li><label>&nbsp;</label><input type="text" name="del-street2" id="del-street2"/></li><div class="clear"></div>
+      <li><label>Postnummer</label><input type="text" name="del-zip" id="del-zip"/></li>
+      <li><label>Ort</label><input type="text" name="del-city" id="del-city"/></li>
+      <li><label>Land</label><input type="text" name="del-country" id="del-country" class="" value="Sverige"/></li>
+      <li><label for="del-firstname">Förnamn</label><input type="text" name="del-firstname" id="del-firstname" class=""/></li><div class="clear"></div>
+      <li><label for="del-lastname">Efternamn</label><input type="text" name="del-lastname" id="del-lastname" class=""/></li><div class="clear"></div>        
+      <li><label>E-post</label><input type="text" name="del-email" id="del-email" class=""/></li><div class="clear"></div>
+      <li><label>Telefon</label><input type="text" name="del-phone" id="del-phone"/></li>
+      <li><label>Kostnställe/refkod</label><input type="text" name="refcode" id="refcode" class=""/></li>  
+    </div>    
+
+    <div class="clear"></div>
+    <h2><a href="" id="delivery-toggle" class="hidden">Annan faktura-adress?</a></h2> 
+    <div id="fields-hidden" class="hidden">      
+      <li><label for="company">Företagets namn</label><input type="text" name="company" id="company" class=""/></li><div class="clear"></div>
+      <li><label>c/o</label><input type="text" name="co" id="co" /></li><div class="clear"></div>          
+      <li><label for="street1">Adress</label><input type="text" name="street1" id="street1"/></li><div class="clear"></div>
+      <li><label for="street2">&nbsp;</label><input type="text" name="street2" id="del-street2"/></li>
       <li><label for="zip">Postnummer</label><input type="text" name="zip" id="zip"/></li><div class="clear"></div>
       <li><label for="city">Ort</label><input type="text" name="city" id="city"/></li><div class="clear"></div>
-      <li><label><a href="" id="country-toggle">Inte Sverige ?</a></label><input type="text" name="country" id="country" class="hidden" value="Sverige"/></li><div class="clear"></div>       
-      <li id="refcode-row"><label ><a href="" id="refcode-toggle">Kostnadsställe/Refkod/Id mm?</a></label><input type="text" name="refcode" id="refcode" class="hidden"/></li>      
-      <!--li><label><a href="" id="discount-toggle">Har du en rabattkod?</a></label><input type="text" name="discount" id="discount" class="hidden"/></li-->
+      <li><label for="country">Land</label><input type="text" name="country" id="country" class="" value="Sverige"/></li><div class="clear"></div>       
+      <li><label for="firstname">Kontakt förnamn</label><input type="text" name="firstname" id="firstname" class=""/></li><div class="clear"></div>
+      <li><label for="lastname">Kontakt efternamn</label><input type="text" name="lastname" id="lastname" class=""/></li><div class="clear"></div>
+      <li><label for="email">E-post</label><input type="text" name="email" id="email" class=""/></li><div class="clear"></div>
+      <li><label for="phone">Mobil/telefon</label><input type="text" name="phone" id="phone"/></li><div class="clear"></div>
 
-      <div class="clear"></div>
-      <a href="" id="delivery-toggle" class="h2">Annan leveransadress ?</a> 
-      <div id="delivery" class="hidden">
-        <li><label>Företagets namn</label><input type="text" name="del-company" id="del-company" class=""/></li>
-        <li><label>c/o</label><input type="text" name="del-co" id="del-co" class=""/></li>
-        <li><label>Kontaktperson</label><input type="text" name="del-name" id="del-name" class=""/></li>
-        <li><label>E-post</label><input type="text" name="del-email" id="del-email" class=""/></li>
-        <li><label>Telefon</label><input type="text" name="del-phone" id="del-phone"/></li>        
-        <li><label>Postadress</label><input type="text" name="del-street1" id="del-street1"/></li>
-        <li><label>Postadress 2</label><input type="text" name="del-street2" id="del-street2"/></li>
-        <li><label>Postadress 3</label><input type="text" name="del-street2" id="del-street3"/></li>
-        <li><label>Postnummer</label><input type="text" name="del-zip" id="del-zip"/></li>
-        <li><label>Ort</label><input type="text" name="del-city" id="del-city"/></li>
-        <li><label>Land</label><input type="text" name="del-country" id="del-country" class="" value="Sverige"/></li>
-      </div>
+<!--li><label><a href="" id="discount-toggle">Har du en rabattkod?</a></label><input type="text" name="discount" id="discount" class="hidden"/></li-->
 
       <!--li>
         Var hörde du talas om Motiomera
@@ -350,45 +354,47 @@ Order::getMondays(15);
           <option value="direktreklam">Direktreklam</option>
         </select>	
       </li-->
-
-      <style>
-        #pay {font-size: 14px;margin-top: 45px;}
-        #integrity{margin-bottom: 20px;width: 350px;}
-        #pay div{float:left;}
-        #pay input{font-size: 15px;width:200px;height:25px;}
-        #pay ul{margin-left: 2px;padding-left: 15px;}    
-        #or{font-size: 15px; margin:0 30px 0 30px;}
-      </style>
-
-
-      <div id="pay">
-        <div id="integrity">Genom att fortsätta betalningen godkänner jag <a href="/pages/integritetspolicy.php" target="_blank">Motiomeras integritetspolicy</a> och är över 18 år</div>
-        <div class="clear"></div>
-
-        <div >
-          <input type="submit" value="Direktbetalning" name="paytype" id="payson">
-
-        </div>
-        <div id="or">eller</div>
-        <div >      
-          <input type="submit" value="Faktura" name="paytype" id="faktura">
-        </div>  
-        <div class="clear"></div>
-        <div id="payalt">
-          <ul>
-            <li>VISA</li>
-            <li>MasterCard </li>
-            <li>Internetbank: Föreningssparbanken / Swedbank</li>
-            <li>Internetbank: Handelsbanken </li>
-            <li>Internetbank: SEB </li>
-            <li>Internetbank: Nordea </li>
-          </ul>
-        </div>  
-      </div>
-
-
-
     </div>
+
+
+    <style>
+      #pay {font-size: 14px;margin-top: 45px;}
+      #integrity{margin-bottom: 20px;width: 350px;}
+      #pay div{float:left;}
+      #pay input{font-size: 15px;width:200px;height:25px;}
+      #pay ul{margin-left: 2px;padding-left: 15px;}    
+      #or{font-size: 15px; margin:0 30px 0 30px;}
+    </style>
+
+
+    <div id="pay" class="hidden">
+      <div id="integrity">Genom att fortsätta betalningen godkänner jag <a href="/pages/integritetspolicy.php" target="_blank">Motiomeras integritetspolicy</a> och är över 18 år</div>
+      <div class="clear"></div>
+
+      <div >
+        <input type="submit" value="Direktbetalning" name="paytype" id="payson">
+
+      </div>
+      <div id="or">eller</div>
+      <div >      
+        <input type="submit" value="Faktura" name="paytype" id="faktura">
+      </div>  
+      <div class="clear"></div>
+      <div id="payalt">
+        <ul>
+          <li>VISA</li>
+          <li>MasterCard </li>
+          <li>Internetbank: Föreningssparbanken / Swedbank</li>
+          <li>Internetbank: Handelsbanken </li>
+          <li>Internetbank: SEB </li>
+          <li>Internetbank: Nordea </li>
+        </ul>
+      </div>  
+    </div>
+
+
+
+
 
 
 
