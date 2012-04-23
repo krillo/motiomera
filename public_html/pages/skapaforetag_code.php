@@ -229,7 +229,7 @@ Order::getMondays(15);
 </div>
 
 
-<!--div style="color:red;font-size: 22px;"> OBS 10% rabatt just nu! </div-->
+<div style="color:red;font-size: 22px;"> OBS 15% rabatt just nu! </div>
 
 
 <!--form action="/actions/sendorder.php" method="get" --> <!--onsubmit="return motiomera_validateSkapaForetagForm(this)" -->
@@ -281,11 +281,11 @@ Order::getMondays(15);
     <li id="calc">
       <h2 >Antal deltagare för 5 veckors stegtävling</h2>
       <div class="clear"></div>
-      <div id="nbr-with-text"><?php echo $campaignCodes['RE03'][text]; ?><br/><!--span style="color:black;text-decoration: line-through;">289 </span--><span><?php echo $campaignCodes['RE03'][pris]; ?> kr/person</span></div>
+      <div id="nbr-with-text"><?php echo $campaignCodes['RE03'][text]; ?><br/><span style="color:black;text-decoration: line-through;">289 </span><span><?php echo $campaignCodes['RE03'][pris]; ?> kr/person</span></div>
       <input type="text" name="RE03" id="nbr-with"/>
       <div id="nbr-with-sum"><span class="nbr">0</span> kr ex moms</div>
       <div class="clear"></div>
-      <div id="nbr-without-text"><?php echo $campaignCodes['RE04'][text]; ?><br/><!--span style="color:black;text-decoration: line-through;">169 </span--><span><?php echo $campaignCodes['RE04'][pris]; ?> kr/person</span></div>
+      <div id="nbr-without-text"><?php echo $campaignCodes['RE04'][text]; ?><br/><span style="color:black;text-decoration: line-through;">169 </span><span><?php echo $campaignCodes['RE04'][pris]; ?> kr/person</span></div>
       <input type="text" name="RE04" id="nbr-without" />       
       <div id="nbr-without-sum"><span class="nbr">0</span> kr ex moms</div>
       <div class="clear"></div>
@@ -299,8 +299,8 @@ Order::getMondays(15);
     <div class="clear"></div>
 
     <li><h2>Välj ert startdatum (valfri måndag)</h2>      
-      <!--input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2012-04-23" checked><label for="startdatumRadio1" id="startdatumRadio-label" style="font-size: 13px;display: inline;">Den stora vårtävlingen 23 april</label>
-      <div class="clear"></div-->
+      <input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2012-05-07" checked><label for="startdatumRadio1" id="startdatumRadio-label" style="font-size: 13px;display: inline;">Den 7 maj</label>
+      <div class="clear"></div>
       <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum" checked >
       <select name="startdatum" id="startdatum" onchange="updateStartRadio();">
         <?php echo Order::getMondays(20); ?>
