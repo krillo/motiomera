@@ -239,7 +239,7 @@
 					{/if}
 					<li><a{if $urlChecker->getMarkedMenu() eq "OM MOTIOMERA"} class="mmMarkedMenu"{/if} href="/pages/ommotiomera.php" class="utLoggadMenuVal">OM MOTIOMERA</a></li>
 					<li><a{if $urlChecker->getMarkedMenu() eq "VANLIGA FRÅGOR"} class="mmMarkedMenu"{/if} href="/pages/vanligafragor.php" class="utLoggadMenuVal">VANLIGA FR&Aring;GOR</a></li>
-					{*}<li><a{if $urlChecker->getMarkedMenu() eq "TÄVLINGAR"} class="mmMarkedMenu"{/if} href="/pages/tavlingar.php" class="utLoggadMenuVal">T&Auml;VLINGAR</a></li>{*}
+					<li><a{if $urlChecker->getMarkedMenu() eq "TÄVLINGAR"} class="mmMarkedMenu"{/if} href="/pages/tavlingar.php" class="utLoggadMenuVal">T&Auml;VLINGAR</a></li>
 					<li><a{if $urlChecker->getMarkedMenu() eq "KOMMUNJAKTEN"} class="mmMarkedMenu"{/if} href="/pages/kommunjakten.php" class="utLoggadMenuVal">KOMMUNJAKTEN</a></li>
 					{if isset($FORETAG)}
 					<li><a{if $urlChecker->getMarkedMenu() eq "FÖR FÖRETAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretag, URL_EDIT, $FORETAG->getId())}" class="utLoggadMenuVal" title="om stegtävling">F&Ouml;R F&Ouml;RETAG</a></li>
