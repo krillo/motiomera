@@ -1027,6 +1027,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $orderList["magazineId"] = $order->getMagazineId();
     $orderList["payment"] = $order->getPayment();
     $orderList["sum"] = $order->getSum();
+    $orderList["sumMoms"] = $order->getSumMoms();
     $orderList["typ"] = $order->getTyp();
     $orderList["id"] = $order->getId();
     $email->assign("orderList", $orderList);
