@@ -1169,10 +1169,13 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $kundnummer = $this->getKundnummer();
     //$foretagsnamn = $this->getNamn();
     $foretagsnamn = $this->getReciverCompanyName();
+    $co = ($this->getReciverCo());
+    if($co != ''){
+      $foretagsnamn = $foretagsnamn . "\nc/o " . $co;
+    }    
     $losenord = $this->getTempLosenord();
     $namn = ($this->getReciverName());
     $adress = ($this->getReciverAddress());
-    $co = ($this->getReciverCo());
     $zip = ($this->getReciverZipCode());
     $city = ($this->getReciverCity());
     $country = ($this->getReciverCountry());
@@ -1184,9 +1187,15 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $typeForetag = false;
     $typeTillagg = false;
     $fileNamePrefix = '';
+    $articlesNSum = '';
+    $sumMoms = '';
+    $ordId = '';
     //iterate all the order rows
     foreach ($orderIdArray as $orderId) {
       $order = Order::loadById($orderId);
+      $articlesNSum .= "\n" . $order->getAntal() . ' ' . $order->getItem() . ' ' . $order->getPrice() ." ex moms";
+      $sumMoms = $order->getSumMoms();
+      $ordId = $orderId;
       switch ($order->getCampaignId()) {
         case 'RE03':
           $deltagare += $order->getAntal();
@@ -1203,19 +1212,41 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
         $typeTillagg = true;
       }
     }
-
+    $filnamn = $this->setFilnamnAuto($fileNamePrefix, 'pdf');
+    
+    $payerCompanyName = $this->getPayerCompanyName();
+    $payerCo = $this->getPayerCo();
+    if($payerCo != ''){
+      $payerCompanyName = $payerCompanyName . "\nc/o " . $payerCo;
+    }      
+    
     //PDF preface
     $pdf = new PDF();
     $a = array(
         'FULLNAME' => $namn,
-        'COMPANY' => $foretagsnamn,
+        'COMPANY' => $foretagsnamn,        
         'ADDRESS' => $adress,
         'ZIPCODE' => $zip,
         'CITY' => $city,
         'COUNTRY' => $country,
+        'EMAIL' => $this->getReciverEmail(),
+        'PHONE' => $this->getReciverPhone(),
         'STARTDATE' => $startdatum,
         'CONTESTERS' => $deltagare,
         'COUNT' => $stegraknare,
+        'FILENAME' => $filnamn,
+        'ORDERID' => $ordId,
+        
+        'fak-name' => $this->getPayerName(),
+        'fak-companyname' => $payerCompanyName,        
+        'fak-adress' => $this->getPayerAddress(),
+        'fak-zip' => $this->getPayerZipCode(),
+        'fak-city' => $this->getPayerCity(),
+        'fak-country' => $this->getPayerCountry(),
+        'fak-email' => $this->getPayerEmail(),
+        'fak-phone' => $this->getPayerPhone(),
+        
+        'articlesNSum' => $articlesNSum . "\n" . 'Totalsumma: ' . $sumMoms . ' ink moms' ,
     );
     $pdf->PagePreface($a);
 
@@ -1228,6 +1259,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $customerInfo = array(
         'COMPANY' => $foretagsnamn,
         'CUSTOMERNO' => $kundnummer,
+        'ORDERID'  => $ordId,
         'CONTENDERS' => $deltagare,
         'PEDOMETERS' => $stegraknare,
     );
@@ -1236,6 +1268,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $filter_tillagg = array(
         '[CUSTOMER]' => $foretagsnamn,
         '[CUSTOMERNO]' => $kundnummer,
+        '[ORDERID]'  => $ordId,        
         '[STEPCOUNTERS]' => $stegraknare,
         '[ADDITIONALCOUNTER]' => $deltagare,
         '[STARTDATE]' => $startdatum,
@@ -1260,7 +1293,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     }
 
     //close and write PDF document to disk
-    $filnamn = $this->setFilnamnAuto($fileNamePrefix, 'pdf');
+    
     $lokalFil = FORETAGSFIL_LOCAL_PATH . "/" . $filnamn;
     $pdf->Output($lokalFil);
     if (!file_exists($lokalFil)) {
@@ -1388,6 +1421,9 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
       if (in_array($b, $letters))
         $nyttNamn.= $b;
     }
+    if ($prefix != '') {
+      $prefix = $prefix . "_";
+    }    
     if ($middlefix != '') {
       $middlefix = $middlefix . "_";
     }
@@ -1407,10 +1443,10 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
         break;
     }
 
-    $filnamn = $prefix . date("ymd") . "_" . $middlefix . $this->getId() . "_" . $nyttNamn . ".$fileExt";
+    $filnamn = date("ymd") . "_" . $this->getId() . "_" . $prefix . $middlefix . $nyttNamn . ".$fileExt";
     $i = 0;
     while (file_exists($path . $filnamn)) {
-      $filnamn = $prefix . date("ymd") . "_" . $middlefix . $this->getId() . "_" . $i . "_" . $nyttNamn . ".$fileExt";
+      $filnamn = date("ymd") . "_" . $this->getId() . "_" . $prefix . $middlefix . $i . "_" . $nyttNamn . ".$fileExt";
       $i++;
     }
     return $filnamn;
@@ -1549,6 +1585,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $filter = array(
         '[CUSTOMER]' => $this->getReciverCompanyName(),
         '[CUSTOMERNO]' => $this->getKundnummer(),
+
         '[STEPCOUNTERS]' => $nbr,
     );
     $pdf->PageDoa($filter);

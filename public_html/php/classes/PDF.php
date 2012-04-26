@@ -212,7 +212,7 @@ class PDF extends FPDF {
    * @author Jonas Björk
    */
   function HeaderPrintContest() {
-    $this->SetXY(115, 30);
+    $this->SetXY(115, 35);
     $this->SetFont('Arial', 'B', 20);
     $this->SetFillColor(255, 255, 0);
     $this->Cell(80, 10, utf8_decode("Till tävlingsansvarig"), 0, 0, 'C', TRUE);
@@ -257,7 +257,7 @@ class PDF extends FPDF {
    */
   function PageCoach($filter, $customerInfo) {
     $headerInfo = $customerInfo['COMPANY'] . "\n" .
-            'Kundnummer: ' . $customerInfo['CUSTOMERNO'] . "\n" .
+            'Order id: ' . $customerInfo['ORDERID'] . "\n" .
             'Deltagare: ' . $customerInfo['CONTENDERS'] . ', Stegräknare: ' . $customerInfo['PEDOMETERS'];
     $this->_newpage();
     $this->PageHeader();
@@ -379,9 +379,16 @@ class PDF extends FPDF {
             $content['ADDRESS'] . "\r\n" .
             $content['ZIPCODE'] . " " .
             $content['CITY'] . "\r\n" .
-            $content['COUNTRY']
+            $content['COUNTRY'] . "\r\n\n" .
+            $content['EMAIL'] . "\r\n" .
+            $content['PHONE']
     );
     $this->_newpage();
+
+    $this->SetFont('Arial', '', 12);
+    $this->SetXY(70, 10);
+    $this->MultiCell(100, 6, $content['FILENAME'] . "\r\nOrder id: " . $content['ORDERID']);
+
     $this->SetFont('Arial', 'B', 16);
     $this->SetXY(20, 30);
     $this->MultiCell(600, 8, $address);
@@ -397,6 +404,24 @@ class PDF extends FPDF {
     $this->SetFont('Arial', 'B', 12);
     $this->SetXY(120, 50);
     $this->Cell(10, 30, utf8_decode('Startdatum: ' . $content['STARTDATE']));
+
+
+    $payerAddress = utf8_decode(
+            'Fakturaadress' . "\r\n" .
+            $content['fak-companyname'] . "\r\n" .
+            'ATT: ' . $content['fak-name'] . "\r\n" .
+            $content['fak-adress'] . "\r\n" .
+            $content['fak-zip'] . " " .
+            $content['fak-city'] . "\r\n" .
+            $content['fak-country'] . "\r\n" .
+            $content['fak-email'] . "\r\n" .
+            $content['fak-phone'] . "\r\n" .
+            $content['articlesNSum']
+    );
+
+    $this->SetFont('Arial', '', 12);
+    $this->SetXY(20, 120);
+    $this->MultiCell(600, 6, $payerAddress);
   }
 
 // PagePreFace()
