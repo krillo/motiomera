@@ -364,6 +364,7 @@ Order::getMondays(15);
       #pay input{font-size: 15px;width:200px;height:25px;}
       #pay ul{margin-left: 2px;padding-left: 15px;}    
       #or{font-size: 15px; margin:0 30px 0 30px;}
+      #payalt{color:#494949;font-size:11px;margin:5px 0 0 10PX;}
     </style>
 
 
@@ -372,8 +373,7 @@ Order::getMondays(15);
       <div class="clear"></div>
 
       <div >
-        <input type="submit" value="Direktbetalning" name="paytype" id="payson">
-
+        <input type="submit" value="Betalning - Payson" name="paytype" id="payson">
       </div>
       <div id="or">eller</div>
       <div >      
@@ -381,6 +381,7 @@ Order::getMondays(15);
       </div>  
       <div class="clear"></div>
       <div id="payalt">
+        På Payson kan du betala med:
         <ul>
           <li>VISA</li>
           <li>MasterCard </li>

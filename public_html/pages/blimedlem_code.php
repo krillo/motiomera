@@ -308,7 +308,8 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
       
       #pay div{float:left;}
       #pay input{font-size: 15px;width:200px;height:25px;}
-      #pay ul{margin-left: 2px;padding-left: 15px;}          
+      #pay ul{margin-left: 2px;padding-left: 15px;}
+      #payalt{color:#494949;font-size:11px;margin:5px 0 0 10PX;}
     </style>  
     <div id="calc">
 
@@ -391,9 +392,10 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
           <div id="pay">
             <div id="integrity">Genom att fortsätta betalningen godkänner jag <a href="/pages/integritetspolicy.php" target="_blank">Motiomeras integritetspolicy</a> och är över 18 år</div>
             <div class="clear"></div>
-            <div ><input type="submit" value="Betala" name="paytype" id="payson"></div>
+            <div ><input type="submit" value="Betala - Payson" name="paytype" id="payson"></div>
             <div class="clear"></div>
             <div id="payalt">
+              På Payson kan du betala med:
               <ul>
                 <li>VISA</li>
                 <li>MasterCard </li>

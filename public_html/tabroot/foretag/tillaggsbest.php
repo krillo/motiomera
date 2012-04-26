@@ -176,15 +176,16 @@ $moms = Order::$moms;
   <style>
     #pay {font-size: 14px;}
     #pay div{float:left;}
-    #pay input{font-size: 15px;width:200px;}
-    #pay ul{  list-style: none outside none;margin-left: 2px;padding-left: 15px;}    
+    #pay input{font-size: 15px;width:200px;}  
     #or{font-size: 15px; margin:0 30px 0 30px;}
+    #payalt{color:#494949;font-size:11px;margin:5px 0 0 10PX;}
+    #payalt ul{padding-left: 15px;}
   </style>
 
 
   <div id="pay">
     <div >
-      <input type="submit" value="Direktbetalning" name="paytype" id="payson">
+      <input type="submit" value="Betala - Payson" name="paytype" id="payson">
 
     </div>
     <div id="or">eller</div>
@@ -193,22 +194,20 @@ $moms = Order::$moms;
     </div>  
     <div class="clear"></div>
     <div id="payalt">
+      På Payson kan du betala med:
       <ul>
-        <li>VISA / MasterCard </li>
-        </li>Internetbank:</li> 
-        <ul>
-          <li>Föreningssparbanken</li> 
-          <li>Swedbank</li>
-          <li>Handelsbanken </li>
-          <li>SEB </li>
-          <li>Nordea </li>
-        </ul>
+        <li>VISA</li>
+        <li>MasterCard </li>
+        <li>Internetbank: Föreningssparbanken / Swedbank</li>
+        <li>Internetbank: Handelsbanken </li>
+        <li>Internetbank: SEB </li>
+        <li>Internetbank: Nordea </li>
       </ul>
     </div>  
   </div>
-  </form>
+</form>
 
-  <a href="javascript:;" onclick="mm_rapportera_show_help(29,<?= $keyhelp->getSizeX() ?>,<?= $keyhelp->getSizeY() ?>,'topleft')" title="Hj&auml;lp"><img src="/img/icons/FaqCircleRed.gif" alt="Hjälp" class="mmFloatRight" /></a>
+<a href="javascript:;" onclick="mm_rapportera_show_help(29,<?= $keyhelp->getSizeX() ?>,<?= $keyhelp->getSizeY() ?>,'topleft')" title="Hj&auml;lp"><img src="/img/icons/FaqCircleRed.gif" alt="Hjälp" class="mmFloatRight" /></a>
 
 
 

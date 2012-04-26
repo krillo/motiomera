@@ -1022,7 +1022,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     $orderList["orderId"] = $order->getOrderId();
     $orderList["date"] = $order->getDate();
     $orderList["price"] = $order->getPrice();
-    $orderList["quantity"] = $order->getQuantity();
+    $orderList["quantity"] = $order->getAntal();
     $orderList["item"] = $order->getItem();
     $orderList["magazineId"] = $order->getMagazineId();
     $orderList["payment"] = $order->getPayment();
@@ -1046,11 +1046,11 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
         $body = $email->fetch('epostkvittoforetag_again.tpl');
         break;
       default :
-        Order::logEmailSend(false, $subject, 'Felaktigt ordertyp inget epostkvitto skickat:  | ' . $orderList["foretagANamn"] . ' | ' . $orderList["payerEmail"]);
+        Order::logEmailSend(false, $subject, 'Felaktigt ordertyp inget epostkvitto skickat:  | ' . $orderList["reciveCompanyName"] . ' | ' . $orderList["reciverEmail"]);
         throw new OrderException("Felaktigt ordertyp inget epostkvitto skickat: " . $order, -9);
         break;
     }
-    Misc::sendEmail($orderList["payerEmail"], null, $subject, $body);
+    Misc::sendEmail($orderList["reciverEmail"], null, $subject, $body);
   }
 
   /**
