@@ -326,7 +326,7 @@ class Misc
     $headers.= 'Content-type: text/plain; charset=UTF-8' . "\r\n";
     $headers.= 'Content-Transfer-Encoding: 8bit' . "\r\n";
     $headers.= "From: $from \r\n";
-    $headers.= "Reply-To: " . $SETTINGS["reply_to"] . "\r\n";
+    $headers.= "Reply-To: " . $from . "\r\n";
     $headers.= 'Bcc: noreply motiomera <noreply@motiomera.se>' . "\r\n";
     $encoded_subject = "=?$charset?B?" . base64_encode($subject) . "?=\n";
     $content = $message;
