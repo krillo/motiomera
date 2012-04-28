@@ -1167,7 +1167,6 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
     global $SETTINGS;
     global $db;
     $kundnummer = $this->getKundnummer();
-    //$foretagsnamn = $this->getNamn();
     $foretagsnamn = $this->getReciverCompanyName();
     $co = ($this->getReciverCo());
     if($co != ''){
@@ -1569,10 +1568,16 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
    * @return string $fileName  
    */
   private function createReclamationPDF($nbr) {
+    $fileName = $this->setFilnamnAuto('REKL', 'pdf');
+    $foretagsnamn = $this->getReciverCompanyName();
+    $co = ($this->getReciverCo());
+    if($co != ''){
+      $foretagsnamn = $foretagsnamn . "\nc/o " . $co;
+    }       
     $pdf = new PDF();
     $a = array(
         'FULLNAME' => $this->getPayerName(),
-        'COMPANY' => $this->getReciverCompanyName(),
+        'COMPANY' => $foretagsnamn,
         'ADDRESS' => $this->getReciverAddress(),
         'ZIPCODE' => $this->getReciverZipCode(),
         'CITY' => $this->getReciverCity(),
@@ -1580,6 +1585,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
         'STARTDATE' => $this->getStartdatum(),
         'CONTESTERS' => 0,
         'COUNT' => $nbr,
+        'FILENAME' => $fileName,        
     );
     $pdf->PagePreface($a);
     $filter = array(
@@ -1589,7 +1595,6 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
         '[STEPCOUNTERS]' => $nbr,
     );
     $pdf->PageDoa($filter);
-    $fileName = $this->setFilnamnAuto('rekl', 'pdf');
     $localFile = FORETAGSFIL_LOCAL_PATH . "/" . $fileName;
 
     $pdf->Output($localFile);

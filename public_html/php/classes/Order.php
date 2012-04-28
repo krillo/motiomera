@@ -179,9 +179,9 @@ class Order extends Mobject {
           "typ" => "foretag",
           "text" => "Med stegräknare",
           "extra" => " ex. moms.",
-          //"pris" => 289, //original
+          "pris" => 289, //original
           //"pris" => 260, //10%                    
-          "pris" => 246, //15%                    
+          //"pris" => 246, //15%                    
           "dagar" => 31,
           "popupid" => 22,
           "public" => TRUE,
@@ -190,13 +190,13 @@ class Order extends Mobject {
           "typ" => "foretag",
           "text" => "Utan stegräknare",
           "extra" => " ex. moms.",
-          //"pris" => 169, //original
+          "pris" => 169, //original
           //"pris" => 152, //10%          
-          "pris" => 144, //15%          
+          //"pris" => 144, //15%          
           "dagar" => 31,
           "popupid" => 21,
           "public" => TRUE,
-      ),
+      ),    
       "PRIV3" => array(
           "typ" => "medlem",
           "text" => "3 månader MotioMera",
@@ -219,6 +219,16 @@ class Order extends Mobject {
           "typ" => "steg",
           "text" => "med stegräknare ",
           "extra" => "Silva ex step, vit",
+          "pris" => 100,
+          "dagar" => 0,
+          "popupid" => 30,
+          "levelid" => 1,
+          "public" => TRUE,
+      ),
+      "STEG02" => array(  //additional stepcountyers for companys
+          "typ" => "steg",
+          "text" => "bara en extra stegräknare ",
+          "extra" => "",
           "pris" => 100,
           "dagar" => 0,
           "popupid" => 30,

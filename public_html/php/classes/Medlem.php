@@ -2149,6 +2149,20 @@ class Medlem extends Mobject {
     return $db->nonquery($sql);
   }
 
+  
+  /**
+   * Return the count of current active users
+   * krillo 2012-04-30
+   * NOT TESTED!!!!  
+   */
+  public static function getCurrentUserCount(){
+    global $db;
+    $today = date('Y-m-d');
+    $sql = "select count(id) from mm_medlem where paidUntil > '$today' and epostBekraftad = 1";
+    return $db->nonquery($sql);    
+  }
+  
+  
   /** used by actions/verifymember.php */
   public static function verifyValidUsername($uname) {
     $sql = 'SELECT id FROM ' . self::TABLE . ' WHERE aNamn = "' . mysql_real_escape_string($uname) . '" LIMIT 1';

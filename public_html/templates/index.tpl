@@ -21,13 +21,13 @@
     {*}
 
     <div style="text-align:center;">
-      <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:220%;">Starta er stegtävling den 7 maj</h1>
+      <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:220%;">Stegtävling för ert företag</h1>
         <div style="text-align:left;float:left;padding-left:50px;">
           <h2 style="text-align:left;float:left;">Fem veckors tävling och vi sköter allt!</h2><div class="clear"></div>
           <p style="text-align:left;font-size:14px;">
-            Just nu 15% rabatt!<br/><br/>
-            <span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144kr per person<br/>
-            <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 245kr per person med stegräknare
+            <!-- Just nu 15% rabatt!<br/><br/-->
+            <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span--> 144kr per person<br/>
+            <!--span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span--> 245kr per person med stegräknare
           </p>
         </div>        
       </a>
