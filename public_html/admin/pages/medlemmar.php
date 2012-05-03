@@ -55,7 +55,6 @@ if(!empty($_GET['search'])){
 }
 
 $medlemmar = Medlem::listMedlemmar($offset,$limit,$sort,$search,$way);
-
 $smarty->assign("medlemmar", $medlemmar);
 $smarty->assign("search", $search);
 $smarty->assign("offset", $offset);

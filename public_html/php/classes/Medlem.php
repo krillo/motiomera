@@ -282,7 +282,7 @@ class Medlem extends Mobject {
       $msg = "Skicka stegräknare till medlem  - OBS BETALT!\n";
       $msg = "                                  -----------\n\n";
       $msg .= $name . "\n";
-      $medlem->getCo() == ''?$co = $medlem->getCo() . "\n" :$co = '';
+      $medlem->getCo() == '' ? $co = $medlem->getCo() . "\n" : $co = '';
       $msg .= $co;
       $msg .= $medlem->getAddress() . "\n";
       $msg .= $medlem->getZip() . ' ' . $medlem->getCity() . "\n";
@@ -497,11 +497,13 @@ class Medlem extends Mobject {
    * Return the tha users foretagsnyckel.
    * If $activeOnly is true then return the key only if the competition is still ongoing else null
    * 
+   * 2012-04-03 Added parameter $info. if true then return both foretagsnyckel and foretagsid as an array  
+   * 
    * @global  $db
    * @param type $activeOnly
    * @return null 
    */
-  public function getForetagsnyckel($activeOnly = false) {
+  public function getForetagsnyckel($activeOnly = false, $info = false) {
     global $db;
     $sql = "SELECT foretag_id, nyckel FROM " . Foretag::KEY_TABLE . " WHERE medlem_id = " . $this->getId() . " ORDER BY datum DESC LIMIT 1";
     $result = $db->row($sql);
@@ -513,12 +515,51 @@ class Medlem extends Mobject {
       if ($activeOnly) {
         // check to make sure that the contest isn't over (+1 day to allow for mondays)
         if ($foretag->aktivTavling(1)) {
-          return $nyckel;
+          if ($info) {  //return array
+            return $result;
+          } else {
+            return $nyckel;
+          }
         } else {
           return null;
         }
       } else {
-        return $nyckel;
+        if ($info) {  //return array
+          return $result;
+        } else {
+          return $nyckel;
+        }
+      }
+    } else {
+      return null;
+    }
+  }
+
+  /**
+   * If $activeOnly is true then return id only if the competition is active
+   * 
+   * @global $db $db
+   * @param type $activeOnly
+   * @return null 
+   */
+  public function getForetagsId($activeOnly = false) {
+    global $db;
+    $sql = "SELECT foretag_id, nyckel FROM " . Foretag::KEY_TABLE . " WHERE medlem_id = " . $this->getId() . " ORDER BY datum DESC LIMIT 1";
+    $result = $db->row($sql);
+
+    $nyckel = $result["nyckel"];
+    $id = $result["foretag_id"];
+    if ($id) {
+      $foretag = Foretag::loadById($id);
+      if ($activeOnly) {
+        // check to make sure that the contest isn't over (+1 day to allow for mondays)
+        if ($foretag->aktivTavling(1)) {
+          return $id;
+        } else {
+          return null;
+        }
+      } else {
+        return $id;
       }
     } else {
       return null;
@@ -1215,6 +1256,17 @@ class Medlem extends Mobject {
     return $this->foretag;
   }
 
+  public function getForetagsNamn($activeOnly = false) {
+    if (!$this->foretag) {
+      $this->foretag = Foretag::loadByMedlem($this, $activeOnly);      
+    }
+    if(isset($this->foretag)){
+      return $this->foretag->getNamn();
+    } else {
+      return null;
+    }    
+  }
+  
   public function getLag() {
 
     if (!$this->lag) {
@@ -2149,20 +2201,18 @@ class Medlem extends Mobject {
     return $db->nonquery($sql);
   }
 
-  
   /**
    * Return the count of current active users
    * krillo 2012-04-30
    * NOT TESTED!!!!  
    */
-  public static function getCurrentUserCount(){
+  public static function getCurrentUserCount() {
     global $db;
     $today = date('Y-m-d');
     $sql = "select count(id) from mm_medlem where paidUntil > '$today' and epostBekraftad = 1";
-    return $db->nonquery($sql);    
+    return $db->nonquery($sql);
   }
-  
-  
+
   /** used by actions/verifymember.php */
   public static function verifyValidUsername($uname) {
     $sql = 'SELECT id FROM ' . self::TABLE . ' WHERE aNamn = "' . mysql_real_escape_string($uname) . '" LIMIT 1';

@@ -48,6 +48,9 @@
 			<th>
 				Redigera
 			</th>
+			<th>
+				Företag
+			</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -79,8 +82,11 @@
 			<td class="mmList1 mmRed">
 			{if !$medlem->getEpostBekraftad()}Ej aktiverad{/if}
 			</td>
-			<td>
+			<td class="mmList2">
 				<a style="text-decoration: underline; color: blue;" href="{$urlHandler->getUrl(Medlem, URL_ADMIN_EDIT, $medlem->getId())}">Redigera</a>
+			</td>
+			<td class="mmList1">
+        <a href="/admin/pages/listorder.php?search=&field=id&limit=40&offset=0&showValid=true&foretagid={$medlem->getForetagsId()}" style="text-decoration: underline; color: blue;">{$medlem->getForetagsNamn()}</a>
 			</td>
 		</tr>
 		{/foreach}
