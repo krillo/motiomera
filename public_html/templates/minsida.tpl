@@ -24,7 +24,7 @@
 {if $selfProfile}
 	</form>
 {/if}
-<div style="float:left;width:200px;">
+<div style="float:left;width:200px;height: 30px;">
 <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FMotioMera%2F63606043494&amp;send=false&amp;layout=standard&amp;width=200&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:35px;" allowTransparency="true"></iframe>  
 </div>
 
