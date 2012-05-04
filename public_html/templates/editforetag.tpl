@@ -1,5 +1,5 @@
 {if (isset($ADMIN)) }
-<h1 style="color:red;">Inloggad som Administrator - {$ADMIN->getANamn()}</h1>
+<h1 class="mmAdminColor">Inloggad som Administrator - {$ADMIN->getANamn()}</h1>
 <h2>Administrationssida för {if isset($foretaget)}{$foretaget->getNamn()}{else}Nytt företag{/if}</h2>
 {else}
 <h1>Administrationssida för {if isset($foretaget)}{$foretaget->getNamn()}{else}Nytt företag{/if}</h1>
@@ -25,6 +25,10 @@ Vill du anmäla fler deltagare till tävlingen gör du det under fliken <b>Till�
   {/section} 
 </table> 
 
+<br/>
+{if (isset($ADMIN)) }
+<div class="mmAdminColor"><h3>Se alla <a href="/admin/pages/listorder.php?search=&field=id&offset=0&showValid=true&foretagid={$foretaget->getId()}" class="mmAdminColor" style="text-decoration:underline; ">ordrar</a></h3></div>
+{/if}
 
-<br/><br/>
+<br/>
 {$tabs->printTabBox()}

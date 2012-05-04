@@ -22,7 +22,7 @@ $tabs->addTab("Tilläggsbeställning", "tillaggsbest");
 $tabs->addTab("Nycklar", "nycklar");
 $tabs->addTab("Reklamation", "reklamation");
 
-if((!empty($_GET["tab"])) && ($_GET["tab"] < 4)){
+if((!empty($_GET["tab"])) && ($_GET["tab"] < 6)){
 	$tabs->setSelected($_GET["tab"]);
 }else{
 	$tabs->setSelected("Lag");

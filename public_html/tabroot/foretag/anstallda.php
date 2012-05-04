@@ -33,7 +33,12 @@ if(count($medlemmar) > 0){ ?>
 		<td class="mmCell1">
 			<img src="<?= $medlem->getAvatar()->getUrl(); ?>" class="mmAvatarMini" alt="<?= $medlem->getAnamn() ?>_avatar" />
 			<a href="<?= $urlHandler->getUrl("Medlem", URL_VIEW, $medlem->getId()) ?>" title="<?php echo $medlem->getFNamn() ." ". $medlem->getENamn() ?>"><?php echo $medlem->getFNamn() ." ". $medlem->getENamn() ?></a>
-		</td>
+    </td>
+    <?php if(isset($ADMIN)){
+      echo '<td class="mmCellAdmin">';  
+      echo '<a href="/admin/pages/medlem.php?id='.$medlem->getId().'" class="mmAdminColor">edit</a>';
+      echo '</td>';
+    } ?>		    
 		<td class="mmCell1">
 			<?
 				$lag=$medlem->getLag();

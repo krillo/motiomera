@@ -196,7 +196,7 @@ class Order extends Mobject {
           "dagar" => 31,
           "popupid" => 21,
           "public" => TRUE,
-      ),    
+      ),
       "PRIV3" => array(
           "typ" => "medlem",
           "text" => "3 månader MotioMera",
@@ -225,7 +225,7 @@ class Order extends Mobject {
           "levelid" => 1,
           "public" => TRUE,
       ),
-      "STEG02" => array(  //additional stepcountyers for companys
+      "STEG02" => array(//additional stepcountyers for companys
           "typ" => "steg",
           "text" => "bara en extra stegräknare ",
           "extra" => "",
@@ -1090,8 +1090,8 @@ class Order extends Mobject {
     } catch (Exception $e) {
       return 'ERROR';
     }
-  }  
-  
+  }
+
   /**
    * Get the value from Foretag or medlem
    * @return type 
@@ -1143,9 +1143,57 @@ class Order extends Mobject {
       return 'ERROR';
     }
   }
-  
-  
-  
+
+  /**
+   * Return slutdatum
+   * @author Kristian Erendi, Reptilo 2012-05-05  
+   */
+  public function getSlutdatum() {
+    try {
+      if ($this->getTyp() == 'medlem') {
+        return '';
+      } else { //foretag 
+        return $this->getForetag()->getSlutdatum();
+      }
+    } catch (Exception $e) {
+      return 'ERROR';
+    }
+  }
+
+  /**
+   * Return true or false if competition is ongoing
+   * @author Kristian Erendi, Reptilo 2012-05-05  
+   */
+  public function isActiveCompetition() {
+    try {
+      if ($this->getTyp() == 'medlem') {
+        return '';
+      } else { //foretag 
+        return $this->getForetag()->isActiveCompetition();
+      }
+    } catch (Exception $e) {
+      return 'ERROR';
+    }
+  }
+
+  /**
+   * Return CSS-class name if competition is ongoing or not
+   * This is to aid to Smarty tempate
+   * 
+   * @author Kristian Erendi, Reptilo 2012-05-05  
+   */
+  public function isActiveCompetitionCSS() {
+    try {
+      if ($this->getTyp() == 'medlem') {
+        return '';
+      } else { //foretag 
+        return $this->getForetag()->isActiveCompetitionCSS();
+      }
+    } catch (Exception $e) {
+      return 'ERROR';
+    }
+  }
+
   /*
     public function getPayerName()
     {

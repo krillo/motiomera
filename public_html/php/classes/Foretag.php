@@ -28,6 +28,9 @@ class Foretag extends Mobject {
   protected $giltig; // string
   protected $epost; // string
   protected $startdatum; // string
+  protected $startdatumUnix; // string
+  protected $slutdatum; // string
+  protected $slutdatumUnix; // string
   protected $antalAnstallda;
   protected $nycklar = array(); // strings
   protected $medlemmar = array(); // objects: Medlem
@@ -147,6 +150,9 @@ class Foretag extends Mobject {
       $this->setKanal($kanal);
       $this->setCompAffCode($compAffCode);
       $this->commit();
+      
+      $this->getSlutdatum();  //save slutdatum
+      $this->getSlutdatumUnix();  //save slutdatum
     }
   }
 
@@ -1790,8 +1796,8 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
    * @author Aller Internet, Kristian Erendi
    */
   public function getSlutdatumUnix() {
-    $slutdatumUnix = strtotime($this->startdatum) + (60 * 60 * 24 * (self::TAVLINGSPERIOD_DAGAR));
-    return $slutdatumUnix;
+    $this->slutdatumUnix = strtotime($this->startdatum) + (60 * 60 * 24 * (self::TAVLINGSPERIOD_DAGAR));
+    return $this->slutdatumUnix;
   }
 
   /**
@@ -1801,10 +1807,39 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
    * @author Aller Internet, Kristian Erendi
    */
   public function getSlutdatum() {
-    $slutdatum = date("Y-m-d", $this->getSlutdatumUnix());
-    return $slutdatum;
+    $this->slutdatum = date("Y-m-d", $this->getSlutdatumUnix());
+    return $this->slutdatum;
   }
 
+  
+  /**
+   * return true or false if company has an ongoing competition
+   * @author Kristian Erendi, Reptilo 2012-05-05
+   */
+  public function isActiveCompetition() {
+    $today = date("Y-m-d");
+    if ($this->getStartdatum() <= $today && $today <= $this->getSlutdatum()) {
+      return true;
+    } else {
+      return false;
+    }
+  }  
+
+  /**
+   * return different CSS-classes if company has an ongoing competition
+   * This is to aid to Smarty tempate
+   * 
+   * @author Kristian Erendi, Reptilo 2012-05-05
+   */  
+  public function isActiveCompetitionCSS() {
+    if ($this->isActiveCompetition()) {
+      return "mmGreen";
+    } else {
+      return "mmLightGrey";
+    }
+  }  
+  
+  
   /**
    * Function getCurrentTavlingId
    * returns the competition id that this company is currently active in

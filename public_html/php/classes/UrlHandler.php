@@ -183,7 +183,7 @@ class UrlHandler
 		) ,
 		"Foretag" => array(
 			URL_NEW_CONTEST => '/actions/save.php?table=newcontest&fid=*0',
-			URL_ADMIN_LIST => "/admin/pages/listforetag.php?search=&field=id&limit=20&offset=0&showValid=true",
+			URL_ADMIN_LIST => "/admin/pages/listforetag.php?search=&field=id&offset=0&showValid=true",
 			URL_ADMIN_EDIT => "/admin/pages/editforetag.php?fid=*0",
 			URL_ADMIN_SAVE => "/admin/actions/save.php?table=foretag",
 			URL_LIST => "/pages/listforetag.php",
@@ -199,7 +199,7 @@ class UrlHandler
 		) ,
 		"Order" => array(
 			URL_SEND => "/actions/sendorder.php",
-			URL_ADMIN_ORDER_LIST => "/admin/pages/listorder.php?search=&field=id&limit=20&offset=0&showValid=true",		
+			URL_ADMIN_ORDER_LIST => "/admin/pages/listorder.php?search=&field=id&offset=0&showValid=true",		
 		) ,		
 		"Foretagstavling" => array(
 			URL_VIEW => "/pages/foretagstavling.php",

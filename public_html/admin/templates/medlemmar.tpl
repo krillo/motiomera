@@ -40,6 +40,9 @@
 				<a href="{$urlHandler->getUrl(Medlem, URL_ADMIN_LIST)}?sort=skapad&amp;way={$way}">Skapad</a>
 			</th>
 			<th>
+				Betald till
+			</th>      
+			<th>
 				Profil
 			</th>
 			<th>
@@ -51,6 +54,9 @@
 			<th>
 				Företag
 			</th>
+			<th>
+				Tävlingsdatum
+			</th>      
 		</tr>
 	</thead>
 	<tbody>
@@ -76,18 +82,24 @@
 			<td class="mmList1">
 				{$medlem->getSkapadDateOnly()}
 			</td>
+			<td class="mmList2 {$medlem->isActiveAccountCSS()}">        
+				{$medlem->getPaidUntil()}
+			</td>         
 			<td class="mmList2">
 				<a style="text-decoration: underline; color: blue;" href="{$urlHandler->getUrl(Medlem, URL_VIEW, $medlem->getId())}">Visa profil</a>
 			</td>
 			<td class="mmList1 mmRed">
 			{if !$medlem->getEpostBekraftad()}Ej aktiverad{/if}
-			</td>
+			</td>        
 			<td class="mmList2">
 				<a style="text-decoration: underline; color: blue;" href="{$urlHandler->getUrl(Medlem, URL_ADMIN_EDIT, $medlem->getId())}">Redigera</a>
 			</td>
 			<td class="mmList1">
         <a href="/admin/pages/listorder.php?search=&field=id&limit=40&offset=0&showValid=true&foretagid={$medlem->getForetagsId()}" style="text-decoration: underline; color: blue;">{$medlem->getForetagsNamn()}</a>
 			</td>
+			<td class="mmList2 {$medlem->isActiveCompetitionCSS()}">        
+				{$medlem->getForetagStartdatum()} - {$medlem->getForetagSlutdatum()}
+			</td>           
 		</tr>
 		{/foreach}
 	</tbody>

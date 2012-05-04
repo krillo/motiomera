@@ -1074,6 +1074,16 @@ table#alh_navtable
 {
 	background: #fff;
 }
+.mmCellAdmin{
+  text-indent: 2px;
+}
+
+.mmCellAdmin a{
+  position: relative;
+	top: 3px;  
+  text-decoration: underline;
+}
+
 .mmAdressbokTable .mmCell1 a
 {
 	position: relative;
@@ -1456,8 +1466,16 @@ table#alh_navtable
 {
 	color: #FFF;
 }
+.mmLightGrey{
+	color: #B7B7B7;
+	font-weight: normal;
+}
 .mmGray{
 	color: #555;
+	font-weight: normal;
+}
+.mmAdminColor{
+	color: #F29F10;
 	font-weight: normal;
 }
 .mmGrafikPositionBottom

@@ -4,7 +4,7 @@ if(Security::authorized(ADMIN)) {
 ?>
 <span class="mmRed hide" id="mmForetagsnyckelError"></span>
 <p>
-<strong>Lägg till nycklar till <?=$foretag->getNamn()?>:</strong><br />
+<strong class="mmAdminColor">Lägg till nycklar till <?=$foretag->getNamn()?>:</strong><br />
 
 <form>
   <input type="hidden" name="table" value="newkeys" />

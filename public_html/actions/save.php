@@ -487,7 +487,7 @@ switch($_REQUEST["table"]){
 				$foretag->generateNycklar($keys,true, $_GET['orderid']);
 			}
 		}
-		$urlHandler->redirect("Foretag", URL_EDIT,array((int)$_GET['foretagsid'],3));
+		$urlHandler->redirect("Foretag", URL_EDIT,array((int)$_GET['foretagsid'],4));
 		break;		
 	case "kommundialekt":
 		$kommun = Kommun::loadById($_POST["kid"]);		

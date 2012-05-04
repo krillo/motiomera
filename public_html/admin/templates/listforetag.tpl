@@ -33,7 +33,7 @@
 				<a href="{$urlHandler->getUrl(Foretag, URL_ADMIN_LIST)}">Företagsnamn</a>
 			</th>
 			<th>	
-				<a href="{$urlHandler->getUrl(Foretag, URL_ADMIN_LIST)}">Start</a>
+				<a href="{$urlHandler->getUrl(Foretag, URL_ADMIN_LIST)}">Tävlingsdatum</a>
 			</th>
       <th>
         <a href="{$urlHandler->getUrl(Foretag, URL_ADMIN_LIST)}">Användarnamn</a>
@@ -91,7 +91,7 @@
 		<tr>
 			<td class="mmList1"><a style="text-decoration: underline; color: blue;" href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}&foretagid={$thisForetag->getId()}">{$thisForetag->getId()}</a></td>
 			<td class="mmList2"><a style="text-decoration: underline; color: blue;" href="{$urlHandler->getUrl(Foretag, URL_EDIT, $thisForetag->getId())}">{$thisForetag->getNamn()}</a></td>
-			<td class="mmList1">{$thisForetag->getStartDatum()}</td>
+			<td class="mmList1 {$thisForetag->isActiveCompetitionCSS()}">{$thisForetag->getStartDatum()} - {$thisForetag->getSlutDatum()}</td>
       <td class="mmList2">{$thisForetag->getANamn()}</td>      
 			<td class="mmList1">{$thisForetag->getIsValid()}</td>			
 			<td class="mmList2">{$thisForetag->getKanal()}</td>

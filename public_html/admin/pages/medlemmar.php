@@ -44,7 +44,7 @@ if(!empty($_GET['search'])){
 	if(!empty($_GET['limit'])){
 		$limit=$_GET['limit'];
 	}else{
-		$limit=20;
+		$limit=40;
 	}
 
 	if(!empty($_GET['sort'])){

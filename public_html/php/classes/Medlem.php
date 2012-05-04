@@ -817,6 +817,58 @@ class Medlem extends Mobject {
     return $this->paidUntil;
   }
 
+  /**
+   * return true or false if paiduntil date has expired 
+   */
+  public function isActiveAccount() {
+    $today = date("Y-m-d");
+    if ($today <= $this->paidUntil) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function isActiveAccountCSS() {
+    if ($this->isActiveAccount()) {
+      return "mmGreen";
+    } else {
+      return "mmLightGrey";
+    }
+  }
+
+  /**
+   * Return true or false if competition is ongoing
+   * @author Kristian Erendi, Reptilo 2012-05-05  
+   */
+  public function isActiveCompetition() {
+    if (!$foretag) {
+      $foretag = $this->getForetag();
+    }
+    if ($foretag) {    
+      return $foretag->isActiveCompetition();
+    } else {
+      return null;
+    }
+  }
+
+  /**
+   * Return CSS-class name if competition is ongoing or not
+   * This is to aid to Smarty tempate
+   * 
+   * @author Kristian Erendi, Reptilo 2012-05-05  
+   */  
+  public function isActiveCompetitionCSS() {
+    if (!$foretag) {
+      $foretag = $this->getForetag();
+    }
+    if ($foretag) {    
+      return $foretag->isActiveCompetitionCSS();
+    } else {
+      return null;
+    }
+  }
+
   public function getPokalStart() {
     return ($this->pokalStart == "0000-00-00" || $this->pokalStart == "") ? null : $this->pokalStart;
   }
@@ -1258,15 +1310,37 @@ class Medlem extends Mobject {
 
   public function getForetagsNamn($activeOnly = false) {
     if (!$this->foretag) {
-      $this->foretag = Foretag::loadByMedlem($this, $activeOnly);      
+      $this->foretag = Foretag::loadByMedlem($this, $activeOnly);
     }
-    if(isset($this->foretag)){
+    if (isset($this->foretag)) {
       return $this->foretag->getNamn();
     } else {
       return null;
-    }    
+    }
   }
-  
+
+  public function getForetagStartdatum() {
+    if (!$this->foretag) {
+      $this->foretag = Foretag::loadByMedlem($this, $activeOnly);
+    }
+    if (isset($this->foretag)) {
+      return $this->foretag->getStartdatum();
+    } else {
+      return null;
+    }
+  }
+
+  public function getForetagSlutdatum() {
+    if (!$this->foretag) {
+      $this->foretag = Foretag::loadByMedlem($this, $activeOnly);
+    }
+    if (isset($this->foretag)) {
+      return $this->foretag->getSlutdatum();
+    } else {
+      return null;
+    }
+  }
+
   public function getLag() {
 
     if (!$this->lag) {
