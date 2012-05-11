@@ -2395,7 +2395,7 @@ class Medlem extends Mobject {
    */
   public static function getTavlingMedlemmar($startTid, $slutTid, $antal_medlemmar, $antal_steg, $procent_pro) {
     global $db;
-    $sqlg = "SELECT a.id, a.epost, a.aNamn, a.levelId, SUM(steg) as steg FROM " . self::TABLE . " a, " . Steg::TABLE . " b  
+    $sqlg = "SELECT a.id, a.epost, a.aNamn, a.levelId, a.paidUntil , SUM(steg) as steg FROM " . self::TABLE . " a, " . Steg::TABLE . " b  
 			WHERE a.id = b.medlem_id 
 			AND b.datum >= '" . $startTid . "' 
 			AND b.datum <= '" . $slutTid . "' ";

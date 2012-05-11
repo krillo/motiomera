@@ -10,21 +10,21 @@ $forraVeckan_start_nice = date("Y-m-d", strtotime($forraVeckan_slut) - (59 * 60 
 $steg = array();
 
 for ($i = 1; $i <= 700; $i++) {
-	$steg[] = $i * 1000;
+  $steg[] = $i * 1000;
 }
 $smarty->assign('steg', $steg);
 $antalMedlemmar = Medlem::getAntalMedlemmar();
 $antal = array();
 for ($i = 1; $i <= $antalMedlemmar; $i++) {
-	$antal[] = $i;
+  $antal[] = $i;
 }
 
 $smarty->assign('antalMedlemmar', $antal);
 $percent = array();
 $percentTimes = array();
 for ($i = 0; $i <= 99; $i++) {
-	$percent[] = $i;
-	$percentTimes[] = '0.' . $i;
+  $percent[] = $i;
+  $percentTimes[] = '0.' . $i;
 }
 
 $percent[] = 100;
@@ -33,52 +33,63 @@ $smarty->assign('percent', $percent);
 $smarty->assign('percentTimes', $percentTimes);
 $dates = array();
 for ($i = 1; $i < 365; $i++) {
-	$dates[] = date('Y-m-d', strtotime('-' . $i . ' days'));
+  $dates[] = date('Y-m-d', strtotime('-' . $i . ' days'));
 }
 if (isset($_POST['startTid'])) {
-	$stt =  $_POST['startTid'];
+  $stt = $_POST['startTid'];
 } else {
-	$stt = $forraVeckan_start_nice;
+  $stt = $forraVeckan_start_nice;
 }
 if (isset($_POST['slutTid'])) {
-	$slt =  $_POST['slutTid'];
+  $slt = $_POST['slutTid'];
 } else {
-	$slt = $forraVeckan_slut_nice;
+  $slt = $forraVeckan_slut_nice;
 }
 if (isset($_POST['antal_medlemmar'])) {
-	$am =  $_POST['antal_medlemmar'];
+  $am = $_POST['antal_medlemmar'];
 } else {
-	$am = 10;
+  $am = 10;
 }
 if (isset($_POST['antal_steg'])) {
-	$as = $_POST['antal_steg'];
+  $as = $_POST['antal_steg'];
 } else {
-	$as = 49000;
+  $as = 49000;
 }
 if (isset($_POST['procent_pro'])) {
-	$per = $_POST['procent_pro'];
+  $per = $_POST['procent_pro'];
 } else {
-	$per = 0.5;
+  $per = 1.0;
 }
 $userArray = Medlem::getTavlingMedlemmar($stt, $slt, $am, $as, $per);
+//print_r($userArray); 
 
 if (count($userArray) > 0) {
-	// echo count($userArray);
-	$smarty->assign('userArray', $userArray);
-	$att = null;
-	$html = "<h2>";
-	foreach($userArray as $arr) {
-		foreach($arr as $key => $value) {
-			$att.= $value . "	";
-		}
-		$att.= "\n";
-		$html .= "<a href=\"".$urlHandler->getUrl('Medlem', URL_VIEW, $arr['id'])."\">".$arr['aNamn']."</a><br />";
-	}
-	$html .= "</h2>";
-	$file = '/files/tavling/' . $stt . "-" . $slt . '_tavling.txt';
-	$smarty->assign('html', htmlspecialchars($html));
-	$smarty->assign('fileUrl', $file);
-	file_put_contents(ROOT . $file, "id	epost	aNamn	pro	steg\n" . $att);
+  $att = null;
+  $emaillist = '';
+  $html = "<h2>";
+  foreach ($userArray as $arr) {
+    foreach ($arr as $key => $value) {
+      $att.= $value . "	";
+    }
+    $att.= "\n";
+    $html .= "<a href=\"" . $urlHandler->getUrl('Medlem', URL_VIEW, $arr['id']) . "\">" . $arr['aNamn'] . "</a><br />";
+    $emaillist .= $arr['epost'] . ", ";
+  }
+  $html .= "</h2>";
+
+  //get company name
+  foreach ($userArray as $key => $value) {
+    $mem = medlem::loadById($userArray[$key]['id']);
+    $comp = $mem->getForetagsNamn();
+    $userArray[$key]['comp'] = $comp;
+  }
+  $smarty->assign('userArray', $userArray);
+
+  $file = '/files/tavling/' . $stt . "-" . $slt . '_tavling.txt';
+  $smarty->assign('html', htmlspecialchars($html));
+  $smarty->assign('emaillist', $emaillist);
+  $smarty->assign('fileUrl', $file);
+  file_put_contents(ROOT . $file, "id	epost	aNamn	pro	steg\n" . $att);
 }
 // $stt, $slt, $am, $as, $per
 $smarty->assign('startTid_sel', $stt);

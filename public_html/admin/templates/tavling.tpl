@@ -47,6 +47,11 @@
 	<td>
 		Antal steg
 	</td>
+	<td>
+		Medlem t.o.m.
+	</td>
+	<td>
+	</td>
 </tr>
 
 {foreach from=$userArray item=user name=userLoop}
@@ -67,15 +72,26 @@
 		{$user.steg}
 	</td>
 	<td class="mmList2">
+		{$user.paidUntil}
+	</td> 
+	<td class="mmList1">
+		{$user.comp}
+	</td>   
+	<td class="mmList2">
 		{if $user.levelId eq 1}Pro{else}Gratis{/if}
 	</td>
 </tr>
 {/foreach}
 </table>
 <p>
-Html-kod att klistra in på textsidan där vinnarna presenteras:<br />
+Html-kod att klistra in på textsidan där vinnarna presenteras:<br /><br />
 {$html}
+</p><br /><br />
+<p>
+Emaillista:<br /><br />
+{$emaillist}
 </p>
+
 {else}
 Inga Träffar!
 {/if}
