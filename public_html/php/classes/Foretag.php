@@ -2145,6 +2145,7 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@a
   public function listLag() {
     if (!$this->lag)
       $this->lag = Lag::listByForetag($this);
+    //print_r($this->lag);
     return $this->lag;
   }
 

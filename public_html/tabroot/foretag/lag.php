@@ -14,7 +14,8 @@ Du kan också byta namn på lagen och lägga till egna lagsymboler om du vill.
 
 <?php
 $withoutLag=$foretag->getMembersWithoutLag();
-if($withoutLag>0) {
+if($withoutLag>0) 
+{
 ?>
 <br /><br />
 <span class="mmRed">
@@ -30,7 +31,7 @@ if($withoutLag>0) {
 	global $FORETAG;
 	$lag = $foretag->listLag();
 ?>
-<?php if(Lag::kanSkapaLag($foretag)){ ?>
+<?php //if(Lag::kanSkapaLag($foretag)){ ?>
 <table border="0" cellpadding="0" cellspacing="0">
 
 	<tr class="mmHeight20">
@@ -72,4 +73,4 @@ if($withoutLag>0) {
 	
 </table>
 
-<?php } ?>
+<?php //} ?>

@@ -20,20 +20,43 @@
     {/if}
     {*}
 
-    <div style="text-align:center;">
+    <!-- div style="text-align:center;">      
       <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:220%;">Stegtävling för ert företag</h1>
         <div style="text-align:left;float:left;padding-left:50px;">
           <h2 style="text-align:left;float:left;">Fem veckors tävling och vi sköter allt!</h2><div class="clear"></div>
           <p style="text-align:left;font-size:14px;">
-            <!-- Just nu 15% rabatt!<br/><br/-->
-            <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span--> 144kr per person<br/>
-            <!--span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span--> 245kr per person med stegräknare
-          </p>
-        </div>        
-      </a>
-      <a href="/pages/skapaforetag.php"><img src="img/bestall_knapp.jpg" alt="Stegtävling" title="Stegtävling"/></a>
-    </div>
-    <!-- a href="/pages/skapaforetag.php"><img src="img/varmed.png" alt="Höstens stora tävling 26sept - 30okt" /></a -->
+      
+    <!-- Just nu 15% rabatt!<br/><br/-->
+    <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span-- > 144kr per person<br/>
+    <!--span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span-- > 245kr per person med stegräknare
+  </p>
+</div>        
+</a>
+<a href="/pages/skapaforetag.php"><img src="img/bestall_knapp.jpg" alt="Stegtävling" title="Stegtävling"/></a>
+</div -->
+
+
+    <div id="fb-root"></div>
+    <script>
+      {literal}
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/sv_SE/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+      {/literal}
+    </script>
+    <div style="color:#3B5998;font-family:lucida,tahoma,verdana,arial,sans-serif;margin-left: 20px;">
+      <h2 style="font-size: 21px;font-weight: bold;" >Bli social med motiomera på Facebook!</h2>
+      <p style="font-size: 12px;">Vi efterlyser dina bilder där du och dina kollegor är ute och motiomerar.</p> 
+      
+
+      <div class="fb-like" data-send="false" data-width="430" data-show-faces="true"></div>
+
+
+    </div>       
     <div class="mmGrayLineMiddle"></div>
 
     <script>
