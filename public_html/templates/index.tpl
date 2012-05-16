@@ -48,12 +48,12 @@
 }(document, 'script', 'facebook-jssdk'));
       {/literal}
     </script>
-    <div style="color:#3B5998;font-family:lucida,tahoma,verdana,arial,sans-serif;margin-left: 20px;">
+    <div style="color:#3B5998;font-family:lucida,tahoma,verdana,arial,sans-serif;margin-left: 20px;margin-bottom: 20px;">
       <h2 style="font-size: 21px;font-weight: bold;" >Bli social med motiomera på Facebook!</h2>
       <p style="font-size: 12px;">Vi efterlyser dina bilder där du och dina kollegor är ute och motiomerar.</p> 
       
 
-      <div class="fb-like" data-send="false" data-width="430" data-show-faces="true"></div>
+      <div class="fb-like" data-send="false" data-width="400" data-show-faces="true"></div>
 
 
     </div>       
