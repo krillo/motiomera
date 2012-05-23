@@ -985,10 +985,10 @@ class Order extends Mobject {
   }
 
   public function getMedlem() {
-
     if (!$this->medlem)
       $this->medlem = Medlem::loadById($this->getMedlemId());
     return $this->medlem;
+    
   }
 
   public function getMedlemId() {
@@ -1110,7 +1110,7 @@ class Order extends Mobject {
 
   public function getReciverName() {
     try {
-      if ($this->getTyp() == 'medlem') {
+      if ($this->getTyp() == 'medlem' OR $this->getTyp() ==  'medlem_extend') {
         return $this->getMedlem()->getFNamn() . ' ' . $this->getMedlem()->getENamn();
       } else { //foretag aso
         return $this->getForetag()->getReciverName();
