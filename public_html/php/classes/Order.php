@@ -1052,7 +1052,7 @@ class Order extends Mobject {
    */
   public function getPayerEmail() {
     try {
-      if ($this->getTyp() == 'medlem') {
+      if ($this->getTyp() == 'medlem' OR $this->getTyp() ==  'medlem_extend') {
         return $this->getMedlem()->getEpost();
       } else { //foretag aso
         return $this->getForetag()->getPayerEmail();
@@ -1070,7 +1070,7 @@ class Order extends Mobject {
    */
   public function getPayerName() {
     try {
-      if ($this->getTyp() == 'medlem') {
+      if ($this->getTyp() == 'medlem' OR $this->getTyp() ==  'medlem_extend') {
         return $this->getMedlem()->getFNamn() . ' ' . $this->getMedlem()->getENamn();
       } else { //foretag aso
         return $this->getForetag()->getPayerName();
@@ -1082,7 +1082,7 @@ class Order extends Mobject {
 
   public function getPayerPhone() {
     try {
-      if ($this->getTyp() == 'medlem') {
+      if ($this->getTyp() == 'medlem' OR $this->getTyp() ==  'medlem_extend') {
         return $this->getMedlem()->getPhone();
       } else { //foretag aso
         return $this->getForetag()->getPayerPhone();
@@ -1098,7 +1098,7 @@ class Order extends Mobject {
    */
   public function getReciverEmail() {
     try {
-      if ($this->getTyp() == 'medlem') {
+      if ($this->getTyp() == 'medlem' OR $this->getTyp() ==  'medlem_extend') {
         return $this->getMedlem()->getEpost();
       } else { //foretag aso
         return $this->getForetag()->getReciverEmail();
@@ -1122,7 +1122,7 @@ class Order extends Mobject {
 
   public function getReciverPhone() {
     try {
-      if ($this->getTyp() == 'medlem') {
+      if ($this->getTyp() == 'medlem' OR $this->getTyp() ==  'medlem_extend') {
         return $this->getMedlem()->getPhone();
       } else { //foretag 
         return $this->getForetag()->getReciverPhone();
@@ -1134,7 +1134,7 @@ class Order extends Mobject {
 
   public function getStartdatum() {
     try {
-      if ($this->getTyp() == 'medlem') {
+      if ($this->getTyp() == 'medlem' OR $this->getTyp() ==  'medlem_extend') {
         return '';
       } else { //foretag 
         return $this->getForetag()->getStartdatum();
@@ -1150,7 +1150,7 @@ class Order extends Mobject {
    */
   public function getSlutdatum() {
     try {
-      if ($this->getTyp() == 'medlem') {
+      if ($this->getTyp() == 'medlem' OR $this->getTyp() ==  'medlem_extend') {
         return '';
       } else { //foretag 
         return $this->getForetag()->getSlutdatum();
@@ -1166,7 +1166,7 @@ class Order extends Mobject {
    */
   public function isActiveCompetition() {
     try {
-      if ($this->getTyp() == 'medlem') {
+      if ($this->getTyp() == 'medlem' OR $this->getTyp() ==  'medlem_extend') {
         return '';
       } else { //foretag 
         return $this->getForetag()->isActiveCompetition();
@@ -1184,7 +1184,7 @@ class Order extends Mobject {
    */
   public function isActiveCompetitionCSS() {
     try {
-      if ($this->getTyp() == 'medlem') {
+      if ($this->getTyp() == 'medlem' OR $this->getTyp() ==  'medlem_extend') {
         return '';
       } else { //foretag 
         return $this->getForetag()->isActiveCompetitionCSS();
