@@ -214,7 +214,7 @@
 								<tr>
 									<td>{$smarty.foreach.outer.iteration}.</td>
 									<td><a href="{$urlHandler->getUrl("Lag", URL_VIEW, $lag.lag_id)}">{$lag.lag_namn} från {$lag.foretag_namn}</a></td>
-									<td>{$lag.steg_medel|nice_tal}</td>
+									<td>{$lag.steg_medel|nice_tal_1}</td>
 								</tr>
 							{/foreach}
 						</table>
@@ -249,7 +249,7 @@
 								<tr>
 									<td>{$smarty.foreach.outer.iteration}.</td>
 									<td>{$comp.foretag_namn}</td>
-									<td>{$comp.foretag_steg_medel|nice_tal}</td>
+									<td>{$comp.foretag_steg_medel|nice_tal_1}</td>
 								</tr>
 							{/foreach}
 						</table>

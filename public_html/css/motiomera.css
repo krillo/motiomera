@@ -1948,6 +1948,7 @@ table#alh_navtable
 	border-top: none;
 	padding: 5px;
 }
+.mmRightMinSidaBox table{font-size: 9px;}
 .mmRightSideContestBar
 {
 	margin: -15px 0 0;
