@@ -28,7 +28,7 @@ Vill du anmäla fler deltagare till tävlingen gör du det under fliken <b>Till�
 <br/>
 {if (isset($tid)) }
 <br/>  
-<div class="mmRed"><h3>Er tävling är nu slut och här kan du se all <a href="http://motiomera.dev/pages/tavlingsres.php?fid={$foretaget->getId()}&tid={$tid}" class="mmRed" style="text-decoration:underline; ">statistik för tävlingen</a></h3></div>
+<div class="mmRed"><h3>Er tävling är nu slut och här kan du se all <a href="/pages/tavlingsres.php?fid={$foretaget->getId()}&tid={$tid}" class="mmRed" style="text-decoration:underline; ">statistik för tävlingen</a></h3></div>
 {/if}
 <br/>
 {if (isset($ADMIN)) }
