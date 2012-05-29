@@ -6,12 +6,14 @@ include $_SERVER["DOCUMENT_ROOT"]  . "/php/init.php";
 if(!empty($_GET["fid"]) && !(isset($FORETAG) && $FORETAG->getId() == $_GET["fid"])){
 	Security::demand(ADMIN);
 	$foretag = Foretag::loadById($_GET["fid"]);
-	
 }else{
 	Security::demand(FORETAG);
 	$foretag = $FORETAG;
 }
 $smarty = new MMSmarty();
+$tid = Tavling::getTavlingsId($foretag->getId());
+//echo $tid[tavlings_id];
+$smarty->assign("tid", $tid[tavlings_id]);
 $smarty->assign("pagetitle", "Redigera företag");
 
 $tabs = new TabBox("foretag", 590, null);

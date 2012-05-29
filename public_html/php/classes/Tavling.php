@@ -424,6 +424,22 @@ class Tavling extends Mobject
   }  
  
 
+/**
+ * Return the tavlingid for the company if there is one
+ *  
+ * @global type $db
+ * @param type $fid
+ * @return type 
+ * @author Reptilo, Kristian Erendi 2012-05-29
+ */
+public static function getTavlingsId($fid){
+    global $db;
+    $sql = "select distinct(tavlings_id) from mm_tavling_save where foretag_id = $fid";
+    //echo $sql;
+    $tid = $db->row($sql);    
+    return $tid;
+}  
+  
   
 } // END Class Tavling
 ?>
