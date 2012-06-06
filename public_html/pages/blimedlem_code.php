@@ -409,7 +409,7 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
         </li>
       </div> 
     </ul>
-
+    </form>
 
 
 

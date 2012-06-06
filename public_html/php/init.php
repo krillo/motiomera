@@ -1,16 +1,13 @@
 <?php
 
-session_start();
-
-
-    //print_r($_SESSION);
-    
-    
-
-if (!isset($noutf8) && !isset($js_header)) {
-  header("Content-Type: text/html; charset=utf-8");
-} else if (isset($js_header)) {
-  header("Content-Type: text/javascript");
+if (!$wp) {
+  session_start();
+  //print_r($_SESSION);
+  if (!isset($noutf8) && !isset($js_header)) {
+    header("Content-Type: text/html; charset=utf-8");
+  } else if (isset($js_header)) {
+    header("Content-Type: text/javascript");
+  }
 }
 
 define('INIT', true);

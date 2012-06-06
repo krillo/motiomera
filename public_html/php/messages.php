@@ -8,15 +8,11 @@ Helgen är nära och fortfarande finns chansen att snygga till siffrorna i stegt
 
 Efter företagstävlingens slut finns möjlighet för alla deltagare att fortsätta använda MotioMera som privatperson. Helt gratis. Du kommer att få ett mail med mer information vid tävlingens slut. Det är också möjligt för ditt företag att genast starta en ny tävlingsomgång om ni vill.
 
-Kör så det ryker! MVH
-
-/Tidningen MåBra och alla i MotioMera-teamet
+Kör så det ryker! Mvh - alla i MotioMera-teamet
 
 MotioMera - Sveriges roligaste stegtävling
 
-www.motiomera.se
-
-Allers förlag MåBra Kundservice 251 85 Helsingborg 042-44 430 31 kundservice@aller.se');
+www.motiomera.se');
 
 	$messages['Så här gick det i MotioMera!'] 
 	= array(
@@ -25,15 +21,13 @@ Allers förlag MåBra Kundservice 251 85 Helsingborg 042-44 430 31 kundservice@a
 
 Du hör nu till en av dem som har klarat av en tävlingsomgång i stegtävlingen MotioMera! Sammanlagt gick du '.$USER->getStegTotal($USER->getForetag()->getStartDatum(), $USER->getForetag()->getSlutDatum()).' steg! Du kan se hela slutresultatet genom att gå in på denna sida: http://www.motiomera.se/pages/tavlingsresultat.php?id='.$USER->getId().'
 
-Du vet väl att du kan fortsätta vara med i MotioMera som privatperson? Du registrerar dina steg precis som i företagstävlingen och du kan också skapa klubbar och bjuda in vänner. De steg som du gått under företagstävlingen följer automatiskt med. Vi har just nu ett gratiserbjudande på 3 månader. Klicka här för att anmäla dig!
+Du vet väl att du kan fortsätta vara med i MotioMera som privatperson? Du registrerar dina steg precis som i företagstävlingen och du kan också skapa klubbar och bjuda in vänner. De steg som du gått under företagstävlingen följer automatiskt med. Vi har just nu ett gratiserbjudande på 1 vecka. Klicka här för att anmäla dig!
 
-Hoppas att du har tyckt att tjänsten har varit givande och rolig. Maila oss gärna på motiomera@aller.se och säg vad du tyckte. Ris och ros. Vi lottar ut en stegräknare de luxe bland er som tycker till.
+Hoppas att du har tyckt att tjänsten har varit givande och rolig. Maila oss gärna på kontakt@motiomera.se och säg vad du tyckte. Ris och ros. Vi lottar ut något passande bland er som tycker till.
 
-Tack för denna gång och hoppas vi ses snart igen på MotioMera! Hälsn /Tidningen MåBra och alla i MotioMera-teamet
+Tack för denna gång och hoppas vi ses snart igen på MotioMera! Hälsn alla i MotioMera-teamet
 
 MotioMera - Sveriges roligaste stegtävling
 
-www.motiomera.se
-
-Allers förlag MåBra Kundservice 251 85 Helsingborg 042-44 430 31 kundservice@aller.se');
+www.motiomera.se');
 ?>
