@@ -1689,10 +1689,8 @@ table#alh_navtable
 {
 	background-color: #9CC;
 }
-.mmMarginBottom
-{
-	margin-bottom: 10px;
-}
+.mmMarginBottom{margin-bottom: 10px;}
+.mmMarginBottomBig{margin-bottom: 30px;}
 .mmMarginLeft10
 {
 	margin-left: 10px;

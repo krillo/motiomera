@@ -21,7 +21,7 @@
 		<b>Grattis!</b><br />
 		<img src="{$medaljBild}" align="left" style="margin-right: 5px;" />
 		Du har registrerat mer än {$medaljLimit} poäng denna vecka och har fått {$medaljNamn}.<br />
-		Du har också kvalificerat dig till veckans utlottning!
+		Du har också kvalificerat dig till veckans utlottning. (OBS gäller bara under vår- och höstkampanjen!
 	</div>
 	{/if}	
 	<div class="mmGuldNivaInfo"></div>Guldnivå
