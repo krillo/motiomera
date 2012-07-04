@@ -3,7 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
 //error_reporting(E_ALL);
 //ini_set('display_errors', '1');
 $campaignCodes = Order::$campaignCodes;
-$kommuner = Misc::arrayKeyMerge(array("" => "V√§lj..."), Kommun::listNamn());
+$kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
 $actionFile = "http://motiomera.dev/api/api_comp_campaign_code.php";
 ?>
 
@@ -156,8 +156,8 @@ $actionFile = "http://motiomera.dev/api/api_comp_campaign_code.php";
  
  
     //ajax-check if campaign code is valid
-    jQuery("#code").blur(function() {
-      var dataString = "code=" + jQuery("#code").val();
+    jQuery("#compcampcode").blur(function() {
+      var dataString = "compcampcode=" + jQuery("#compcampcode").val();
       var self = jQuery(this);
       jQuery.ajax({
         type: "POST",
@@ -165,13 +165,13 @@ $actionFile = "http://motiomera.dev/api/api_comp_campaign_code.php";
         data: dataString,
         cache: false,
         success: function(id){
-          alert(id);
           if(id > 0){
-            jQuery('#apa').html(id);
-            jQuery('#wrongcode').hide();
+            jQuery('#valid').show();
+            //jQuery('#valid').html(id);
+            jQuery('#invalid').hide();
           } else{
-            jQuery('#apa').hide();
-            jQuery('#wrongcode').show();            
+            jQuery('#valid').hide();
+            jQuery('#invalid').show();            
           }
         }
       });
@@ -201,7 +201,7 @@ $actionFile = "http://motiomera.dev/api/api_comp_campaign_code.php";
 
 
 <div id="member-private" class="show">
-  <form action="/actions/payson_privat.php" method="post" id="checkout">
+  <form action="/actions/medlem_foretagskod.php" method="post" id="checkout">
     <input type="hidden" name="type" value="company_campaign">         
 
     <style>
@@ -214,25 +214,31 @@ $actionFile = "http://motiomera.dev/api/api_comp_campaign_code.php";
       #checkout-ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
       #checkout-ul input{height:18px;font-size: 14px;}
       #checkout-ul a{text-decoration: underline;}
-
+      
+      #pay {font-size: 14px;margin-top: 35px;}
+      #integrity{margin-bottom: 20px;width: 350px;}
+      #pay div{float:left;}
+      #pay input{font-size: 15px;width:200px;height:25px; margin-left:130px;}
+      #pay ul{margin-left: 2px;padding-left: 15px;}
+      .margin{margin-top:30px;} 
     </style>
 
 
     <p class="mmMarginBottomBig">
       För att verifiera dig så ska du slå in först slå in koden som du har fått från din tävlingsansvarig
       i rutan Verikationskod. Fyll därefter i alla registrerings-fält. 
-      
+
       Ditt konto blir genast aktiverat och du kan börja registrera steg eller andra aktiviteter om du vill.
       Inga steg som registreras innan tävlingsstart kommer att räknas in i tävlingen.
-      
+
       Motiomera skickar en stegräknare till dig (om ditt företag har beställt det).
     </p>
-    
+
     <ul id="checkout-ul">
       <li class="mmMarginBottomBig"><label for="alias">Verifikationskod</label>
         <input type="text" name="compcampcode" id="compcampcode" class="" />
-        <span id="apa" class=""></span>
-        <span id="wrongcode" class="mmRed mmFormError">Felaktigt</span>        
+        <span id="valid" class="validicon"><img src="/img/icons/gronbock_25.png"></span>
+        <span id="invalid" class="mmRed mmFormError">Felaktigt</span>        
       </li>
       <li><label for="alias">Välj alias</label>
         <input type="text" name="anamn" id="anamn" class="" onfocus="getById('mmANamnError').style.display = 'none';" onblur="mm_ajaxValidera('mmANamnError', 'anamn', this.value);"/>
@@ -266,11 +272,11 @@ $actionFile = "http://motiomera.dev/api/api_comp_campaign_code.php";
         <li><label for="email2">E-post igen</label><input type="text" name="email2" id="email2" class=""/></li><div class="clear"></div>
         <li><label for="pass">Lösenord</label><input type="password" name="pass" id="pass" class=""/></li><div class="clear"></div>
         <li><label for="pass2">Lösenord igen</label><input type="password" name="pass2" id="pass2" class=""/></li><div class="clear"></div>        
-        <li><label for="firstname">F√∂rnamn</label><input type="text" name="firstname" id="firstname" class=""/></li><div class="clear"></div>
+        <li><label for="firstname">Förnamn</label><input type="text" name="firstname" id="firstname" class=""/></li><div class="clear"></div>
         <li><label for="lastname">Efternamn</label><input type="text" name="lastname" id="lastname" class=""/></li><div class="clear"></div>
         <li><label><a href="" id="co-toggle">c/o ?</a></label><input type="text" name="co" id="co" class="hidden"/></li><div class="clear"></div>                 
         <li><label for="phone">Mobil/telefon</label><input type="text" name="phone" id="phone"/></li><div class="clear"></div>
-        <li><label for="street1">Postadress</label><input type="text" name="street1" id="street1"/></li><div class="clear"></div>
+        <li><label for="street1">Gata</label><input type="text" name="street1" id="street1"/></li><div class="clear"></div>
         <li><label><a href="" id="address-toggle">Fler rader ?</a></label> 
           <div id="extra-address"class="hidden">
             <input type="text" name="street2" id="street2"/><div class="clear"></div>
@@ -284,7 +290,10 @@ $actionFile = "http://motiomera.dev/api/api_comp_campaign_code.php";
         <div class="clear"></div>           
 
         <div id="margin"></div>
-
+        <div class="margin"></div>
+        <div id="pay">
+          <input id="payson" type="submit" name="ok" value="Ok">
+        </div>
 
       </div> 
     </ul>
