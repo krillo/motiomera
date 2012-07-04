@@ -11,6 +11,19 @@ $actionFile = "http://motiomera.dev/api/api_comp_campaign_code.php";
 <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
 <script type="text/javascript">    
   $(function() {
+    
+    
+    /*
+     *   const MIN_LENGTH_ANAMN = 3;
+  const MIN_LENGTH_FNAMN = 2;
+  const MIN_LENGTH_ENAMN = 2;
+  const MIN_LENGTH_LOSEN = 4;
+  const MAX_LENGTH_FNAMN = 40;
+  const MAX_LENGTH_ENAMN = 40;
+  const MAX_LENGTH_ANAMN = 20;
+     */
+    
+    
     //do input validation
     var validator = $("#checkout").validate({
       errorClass: "invalid",

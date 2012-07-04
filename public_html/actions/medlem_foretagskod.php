@@ -37,34 +37,26 @@ $order->street = $order->street1;
 if ($order->email == '' OR $order->fname == '' OR $order->lname == '') {
   throw new UserException('Du måste fylla i alla fält', 'Du måste fylla i alla fält. <a href="/pages/foretag_kampanj.php?email=' . $order->email . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '" >Prova igen</a>');
 }
-$companyId = Foretag::getCompanyIdByCampaignMemberCode();
-if (is_int($companyId) && $companyId > 0) {
+$companyId = Foretag::getCompanyIdByCampaignMemberCode($order->compcampcode);
+if (is_numeric($companyId) && $companyId > 0) {
   //everthing looks fine sofar, create the user
   try {
     $foretag = Foretag::loadById($companyId);
-    $foretagsnyckel = $foretag->generateNycklar(1, true, -1);
-    
-    print_r($foretagsnyckel);
-    
+    $foretagsnyckel = $foretag->generateNycklar(1, true, $foretag->getOrderId());
     $kommun = Kommun::loadById($order->kid);
     $kontotyp = ''; //legacy or not used right now
     $maffcode = ''; //legacy or not used right now
     $medlem = new Medlem($order->email, $order->anamn, $kommun, $order->sex, $order->fname, $order->lname, $kontotyp, $maffcode);
     $medlem->confirm($order->pass);
-
     $medlem->setAddress($order->street);
     $medlem->setCo($order->co);
     $medlem->setZip($order->zip);
     $medlem->setCity($order->city);
     $medlem->setPhone($order->phone);
     $medlem->setCountry($order->country);
-    $ordertyp = "medlem";
     $medlem->setEpostBekraftad(1); //medlem valid
     $medlem->setLevelId(1);
-    
-    
-    
-    $medlem->setForetagsnyckel($order->nyckel);
+    $medlem->setForetagsnyckel($foretagsnyckel[0]);
     $medlem->commit();
     $medlem->loggaIn($order->email, $order->pass, true);
   } catch (Exception $e) {
