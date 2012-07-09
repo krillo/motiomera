@@ -1,10 +1,11 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
+global $SETTINGS;
 //error_reporting(E_ALL);
 //ini_set('display_errors', '1');
 $campaignCodes = Order::$campaignCodes;
 $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
-$actionFile = "http://motiomera.dev/api/api_comp_campaign_code.php";
+$actionFile = $SETTINGS["url"]."/api/api_comp_campaign_code.php";
 ?>
 
 
