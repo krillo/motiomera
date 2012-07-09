@@ -35,10 +35,14 @@ $actionFile = "http://motiomera.dev/api/api_comp_campaign_code.php";
           minlength: <?php echo Medlem::MIN_LENGTH_ANAMN; ?>          
         },
         firstname: {
-          required: true
+          required: true,
+          maxlength: <?php echo Medlem::MAX_LENGTH_FNAMN; ?>, 
+          minlength: <?php echo Medlem::MIN_LENGTH_FNAMN; ?>            
         },
         lastname: {
-          required: true
+          required: true,
+          maxlength: <?php echo Medlem::MAX_LENGTH_ENAMN; ?>, 
+          minlength: <?php echo Medlem::MIN_LENGTH_ENAMN; ?>            
         },
         mailone: {
           required: true,
@@ -74,10 +78,14 @@ $actionFile = "http://motiomera.dev/api/api_comp_campaign_code.php";
           minlength: 'För kort'
         },
         firstname: {
-          required: ''
+          required: '',
+          maxlength: 'För långt',
+          minlength: 'För kort'          
         },
         lastname: {
-          required: ''
+          required: '',
+          maxlength: 'För långt',
+          minlength: 'För kort'
         },
         street1: {
           required: ''

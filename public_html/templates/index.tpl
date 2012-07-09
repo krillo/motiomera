@@ -1,41 +1,26 @@
 <div class="mmFlash">
   <div id="mmSplash">
-    {*}
-    {if $browser eq IE6}
-    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"  codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="430" height="290" id="slideshow" align="middle">
-    <param name="allowFullScreen" value="false" />
-    <param name="movie" value="/slideshow/slideshow.swf" />
-    <param name="quality" value="high" />
-    <param name="bgcolor" value="#ffffff" />
-    <param name="allowScriptAccess" value="sameDomain" />
-    <embed src="/slideshow/slideshow.swf" quality="high" bgcolor="#ffffff" width="430" height="290" name="slideshow" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
-    </object>
-    {else}
-    <object type="application/x-shockwave-flash" data="/slideshow/slideshow.swf" width="430" height="290" id="slideshow" align="middle">
-    <param name="movie" value="/slideshow/slideshow.swf" />
-    <param name="quality" value="high" />
-    <param name="allowFullScreen" value="false" />
-    <param name="scale" value="showall" />
-    </object>
-    {/if}
-    {*}
 
-    <!-- div style="text-align:center;">      
-      <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:220%;">Stegtävling för ert företag</h1>
+
+    <div style="text-align:center;">      
+      <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Stegtävling för ditt företag</h1>
         <div style="text-align:left;float:left;padding-left:50px;">
-          <h2 style="text-align:left;float:left;">Fem veckors tävling och vi sköter allt!</h2><div class="clear"></div>
+          <h2 style="text-align:left;float:left;">Var med i vår stora hösttävling! <br/> 24 sep - 28 okt. 
+            <br/><br/>Fem veckors tävling - vi sköter allt det praktiska!
+          </h2>
+          <div class="clear"></div>
           <p style="text-align:left;font-size:14px;">
       
     <!-- Just nu 15% rabatt!<br/><br/-->
-    <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span-- > 144kr per person<br/>
-    <!--span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span-- > 245kr per person med stegräknare
+    <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span--> 169 kr per person<br/>
+    <!--span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span--> 289 kr per person med stegräknare
   </p>
 </div>        
 </a>
 <a href="/pages/skapaforetag.php"><img src="img/bestall_knapp.jpg" alt="Stegtävling" title="Stegtävling"/></a>
-</div -->
+</div>
 
-
+    <div class="mmGrayLineMiddle"></div>
     <div id="fb-root"></div>
     <script>
       {literal}
@@ -49,8 +34,8 @@
       {/literal}
     </script>
     <div style="color:#3B5998;font-family:lucida,tahoma,verdana,arial,sans-serif;margin-left: 20px;margin-bottom: 20px;">
-      <h2 style="font-size: 21px;font-weight: bold;" >Bli social med motiomera på Facebook!</h2>
-      <p style="font-size: 12px;">Vi efterlyser dina bilder där du och dina kollegor är ute och motiomerar.</p> 
+      <h2 style="font-size: 21px;font-weight: bold;" >Har du sett motiomera på Facebook?</h2>
+      <p style="font-size: 12px;">Dela dina egna motionsbilder på vår Facebooksida!</p> 
       
 
       <div class="fb-like" data-send="false" data-width="400" data-show-faces="true"></div>
