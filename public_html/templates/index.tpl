@@ -35,12 +35,8 @@
     </script>
     <div style="color:#3B5998;font-family:lucida,tahoma,verdana,arial,sans-serif;margin-left: 20px;margin-bottom: 20px;">
       <h2 style="font-size: 21px;font-weight: bold;" >Har du sett motiomera på Facebook?</h2>
-      <p style="font-size: 12px;">Dela dina egna motionsbilder på vår Facebooksida!</p> 
-      
-
+      <p style="font-size: 12px;color:#3B5998;">Dela dina egna motionsbilder på vår <a href="http://www.facebook.com/pages/MotioMera/63606043494" style="color:#3B5998;text-decoration: underline;">Facebooksida!</p></a> 
       <div class="fb-like" data-send="false" data-width="400" data-show-faces="true"></div>
-
-
     </div>       
     <div class="mmGrayLineMiddle"></div>
 
