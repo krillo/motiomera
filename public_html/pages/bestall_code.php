@@ -8,18 +8,19 @@ $fname = '';
 $lname = '';
 !empty($_REQUEST['mmForetagsnyckel']) ? $nyckel = $_REQUEST['mmForetagsnyckel'] : $nyckel = '';
 $user = Medlem::getInloggad();
-if(!empty($user)){
+if (!empty($user)) {
   $email = $user->getEpost();
   $fname = $user->getFNamn();
   $lname = $user->getENamn();
 }
-
 ?>
 
 
 <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
 <script type="text/javascript">    
   $(function() {
+    sum();  //run the sum function to validate pre-checked ratio buttons 
+    
     //do input validation
     var validator = $("#checkout").validate({
       errorClass: "invalid",
@@ -131,10 +132,10 @@ if(!empty($user)){
 
 <style>
   #key{ background: none repeat scroll 0 0 #EAF4E2;padding: 4px;
-       -moz-border-radius: 10px;
-       -webkit-border-radius: 10px;
-       -khtml-border-radius: 10px;
-       border-radius: 10px;border: #DFEED4 1px solid;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -khtml-border-radius: 10px;
+        border-radius: 10px;border: #DFEED4 1px solid;
   }
   #key input{font-size: 15px;height: 25px;width: 100px;margin-right: 15px;}
   #key ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
@@ -144,7 +145,7 @@ if(!empty($user)){
 <form action="/actions/medlem_foretagsnyckel.php" method="post" id="key">
   <input type="hidden" name="type" value="foretagsnyckel">  
   <ul id="">
-    <li><label for="foretagsnyckel">Företagsnyckel?</label>
+    <li><label for="foretagsnyckel">Om du har du en företagsnyckel?</label>
       <input id="mmForetagsnyckel" type="text" name="mmForetagsnyckel" value="<?php echo $nyckel; ?>" onfocus="getById('mmFNyckelError').style.display = 'none';" onblur="mm_ajaxValidera('mmForetagsnyckelError', 'foretagsnyckel', this.value);"  />
       <span class="mmFormError mmRed" id="mmForetagsnyckelError">Ogiltig företagsnyckel</span>
       <input id="extend" name="extend" type="hidden" value="true">
@@ -171,7 +172,8 @@ if(!empty($user)){
 
 
 <style>
-  #calc {margin-top: 50px;margin-bottom: 10px;font-size: 14px;border-bottom: 1px solid black;float:left;}
+  #member-private form h2{margin-top: 45px; font-family: Trebuchet ms,Tahoma,Arial,Helvetica;font-size: 180%;font-weight: bold;}
+  #calc {margin-top: 25px;margin-bottom: 10px;font-size: 14px;border-bottom: 1px solid black;float:left;}
   #calc input{width:18px;height:18px;font-size: 14px;float:left;}
   #calc div{font-size: 14px;float:left;}
   .step-check{margin-left: 20px;}
@@ -193,7 +195,7 @@ if(!empty($user)){
 
 
 
-<div id="member-private" class="">
+<div id="member-private" class="">  
   <form action="/actions/payson_privat.php" method="post" id="checkout">
     <input type="hidden" name="type" value="medlem_extend">         
     <input type="hidden" name="m_total"   id="m_total" value="">                    
@@ -203,8 +205,8 @@ if(!empty($user)){
     <input type="hidden" name="m_frakt02" id="m_frakt02" value="">
 
 
-
-    <div id="calc">
+<h2>Välj hur du vill förlänga ditt medlemskap</h2>
+    <div id="calc">      
       <div id="short">
         <input type="radio" id="short-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV3']['pris']; ?>" /><div id="short-text"><?php echo $campaignCodes['PRIV3']['text']; ?><span > <?php echo $campaignCodes['PRIV3']['pris']; ?> kr</span></div>
         <div class="clear"></div>
@@ -213,7 +215,7 @@ if(!empty($user)){
       <div id="sum-short"><span class="nbr">0</span> kr</div>
       <div class="clear"></div>
       <div id="long">
-        <input type="radio" id="long-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV12']['pris']; ?>" /><div id="long-text"><?php echo $campaignCodes['PRIV12']['text']; ?><span > <?php echo $campaignCodes['PRIV12']['pris']; ?> kr</span></div>
+        <input type="radio" id="long-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV12']['pris']; ?>" checked /><div id="long-text"><?php echo $campaignCodes['PRIV12']['text']; ?><span > <?php echo $campaignCodes['PRIV12']['pris']; ?> kr</span></div>
         <div class="clear"></div>
         <div id=""class="step-check"><input type="checkbox" id="long-check" name="long-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /><div id="long-text"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></div>    
       </div>

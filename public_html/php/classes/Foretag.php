@@ -80,6 +80,7 @@ class Foretag extends Mobject {
   protected $updated_date;
   protected $created_date;
   protected $orderId;
+  protected $campaignMemberCode;
   protected $fields = array(
       "namn" => "str",
       "kommun_id" => "int",
@@ -120,6 +121,7 @@ class Foretag extends Mobject {
       "updated_date" => "str",
       "created_date" => "str",
       "orderId" => "str",
+      "campaignMemberCode" => "str",
   );
 
   const KEY_TABLE = "mm_foretagsnycklar";
@@ -150,7 +152,7 @@ class Foretag extends Mobject {
       $this->setKanal($kanal);
       $this->setCompAffCode($compAffCode);
       $this->commit();
-      
+
       $this->getSlutdatum();  //save slutdatum
       $this->getSlutdatumUnix();  //save slutdatum
     }
@@ -162,6 +164,41 @@ class Foretag extends Mobject {
   }
 
   // STATIC FUNCTION ////////////////////////////////////////
+
+
+
+  /**
+   * Return all valid campaign member codes
+   * the field campaignMemberCode in mmforetag and startdatum > today - 5 weeks
+   * see: pages/foretag_kampanj.php
+   * Krillo 12-07-24
+   * 
+   * @global type $db
+   * @return array of valid codes and their companyid  
+   */
+  public static function getValidCampaignMemberCodes() {
+    global $db;
+    $validDate = JDate::addWeeks(-5);
+    $validDate = $validDate['date'];
+    $sql = "SELECT id, campaignMemberCode FROM " . self::TABLE . " WHERE campaignMemberCode is not null and startdatum >= '". $validDate ."'";
+    return $db->allValuesAsArray($sql);
+  }
+  
+  /**
+   * Return the id of the company for the campaign member code.
+   * No validation if it is valid or not.
+   * see: pages/foretag_kampanj.php (payson_privat.php)
+   * Krillo 12-07-24
+   * 
+   * @global type $db
+   * @return companyId
+   */
+  public static function getCompanyIdByCampaignMemberCode($code) {
+    global $db;
+    $validDate = $validDate['date'];
+    $sql = "SELECT id FROM " . self::TABLE . " WHERE campaignMemberCode = '". $code ."'";
+    return $db->value($sql);
+  }
 
   /**
    * Det händer att företag lägger flera ordrar fast vill att alla deltagarna ska tillhöra samma tävling. 
@@ -350,15 +387,11 @@ Helgen är nära och fortfarande finns chansen att snygga till siffrorna i stegt
 
 Efter företagstävlingens slut finns möjlighet för alla deltagare att fortsätta använda MotioMera som privatperson. Helt gratis. Du kommer att få ett mail med mer information vid tävlingens slut. Det är också möjligt för ditt företag att genast starta en ny tävlingsomgång om ni vill.
 
-Kör så det ryker! MVH
-
-/Tidningen MåBra och alla i MotioMera-teamet
+Kör så det ryker! MVH - alla i MotioMera-teamet
 
 MotioMera - Sveriges roligaste stegtävling
 
-www.motiomera.se
-
-Allers förlag MåBra Kundservice 251 85 Helsingborg 042-444 30 25 kundservice@aller.se';
+www.motiomera.se';
 
     $i = 1;
     $users = $db->valuesAsArray($sql);
@@ -999,7 +1032,7 @@ www.motiomera.se';
     $orderList["foretagANamn"] = $this->getANamn();
     $orderList["startDatum"] = $this->getStartdatum();
     $orderList["pro_order"] = false;
-    $orderList["payerCompanyName"] = $this->getPayerCompanyName();    
+    $orderList["payerCompanyName"] = $this->getPayerCompanyName();
     $orderList["payerName"] = $this->getPayerName();
     $orderList["payerAddress"] = $this->getPayerAddress();
     $orderList["payerCo"] = $this->getPayerCo();
@@ -1100,23 +1133,23 @@ www.motiomera.se';
       $orderRefCode = $orderItems[0]['orderRefCode'];
       $msg = "FAKTURA \n\n";
       $msg .= $this->getPayerCompanyName() . "\n";
-      $msg .= $this->getPayerName() . "  (". $this->getPayerEmail() . " " . $this->getPayerPhone() . ")\n\n";      
+      $msg .= $this->getPayerName() . "  (" . $this->getPayerEmail() . " " . $this->getPayerPhone() . ")\n\n";
 
       $msg .= $this->getPayerCo() . "\n";
       $msg .= $this->getPayerAddress() . "\n";
       $msg .= $this->getPayerZipCode() . "  " . $this->getPayerCity() . "\n";
       $msg .= $this->getPayerCountry() . "\n\n";
-      
+
       $msg .= "Fakturadatum: " . $orderItems[0]['skapadDatum'] . " \n\n";
-      
+
       $msg .= "Artiklar: \n";
       $msg .= "Kostnadsställe/ref/kod: " . $orderRefCode . "\n";
       foreach ($orderItems as $orderItem) {
         $msg .= $orderItem['item'] . "    " . $orderItem['antal'] . "    " . $orderItem['price'] . "\n";
         $orderIdArray[] = $orderItem['id'];
       }
-      $msg .= "\nSumma: " .$orderItem['sum'] . " Kr \n";
-      $msg .= "Summa: " .$orderItem['sumMoms'] . " Kr ink moms\n\n\n";
+      $msg .= "\nSumma: " . $orderItem['sum'] . " Kr \n";
+      $msg .= "Summa: " . $orderItem['sumMoms'] . " Kr ink moms\n\n\n";
 
       $fd = fopen($lokalFil, "a");
       if ($fd != false) {
@@ -1136,7 +1169,6 @@ www.motiomera.se';
       }
     }
   }
-
 
   /**
    * Gets all orders in status 30 for this company and creates a textfile for each company 
@@ -1173,9 +1205,9 @@ www.motiomera.se';
     $kundnummer = $this->getKundnummer();
     $foretagsnamn = $this->getReciverCompanyName();
     $co = ($this->getReciverCo());
-    if($co != ''){
+    if ($co != '') {
       $foretagsnamn = $foretagsnamn . "\nc/o " . $co;
-    }    
+    }
     $losenord = $this->getTempLosenord();
     $namn = ($this->getReciverName());
     $adress = ($this->getReciverAddress());
@@ -1196,7 +1228,7 @@ www.motiomera.se';
     //iterate all the order rows
     foreach ($orderIdArray as $orderId) {
       $order = Order::loadById($orderId);
-      $articlesNSum .= "\n" . $order->getAntal() . ' ' . $order->getItem() . ' ' . $order->getPrice() ." ex moms";
+      $articlesNSum .= "\n" . $order->getAntal() . ' ' . $order->getItem() . ' ' . $order->getPrice() . " ex moms";
       $sumMoms = $order->getSumMoms();
       $ordId = $orderId;
       switch ($order->getCampaignId()) {
@@ -1216,18 +1248,18 @@ www.motiomera.se';
       }
     }
     $filnamn = $this->setFilnamnAuto($fileNamePrefix, 'pdf');
-    
+
     $payerCompanyName = $this->getPayerCompanyName();
     $payerCo = $this->getPayerCo();
-    if($payerCo != ''){
+    if ($payerCo != '') {
       $payerCompanyName = $payerCompanyName . "\nc/o " . $payerCo;
-    }      
-    
+    }
+
     //PDF preface
     $pdf = new PDF();
     $a = array(
         'FULLNAME' => $namn,
-        'COMPANY' => $foretagsnamn,        
+        'COMPANY' => $foretagsnamn,
         'ADDRESS' => $adress,
         'ZIPCODE' => $zip,
         'CITY' => $city,
@@ -1239,17 +1271,15 @@ www.motiomera.se';
         'COUNT' => $stegraknare,
         'FILENAME' => $filnamn,
         'ORDERID' => $ordId,
-        
         'fak-name' => $this->getPayerName(),
-        'fak-companyname' => $payerCompanyName,        
+        'fak-companyname' => $payerCompanyName,
         'fak-adress' => $this->getPayerAddress(),
         'fak-zip' => $this->getPayerZipCode(),
         'fak-city' => $this->getPayerCity(),
         'fak-country' => $this->getPayerCountry(),
         'fak-email' => $this->getPayerEmail(),
         'fak-phone' => $this->getPayerPhone(),
-        
-        'articlesNSum' => $articlesNSum . "\n" . 'Totalsumma: ' . $sumMoms . ' ink moms' ,
+        'articlesNSum' => $articlesNSum . "\n" . 'Totalsumma: ' . $sumMoms . ' ink moms',
     );
     $pdf->PagePreface($a);
 
@@ -1262,7 +1292,7 @@ www.motiomera.se';
     $customerInfo = array(
         'COMPANY' => $foretagsnamn,
         'CUSTOMERNO' => $kundnummer,
-        'ORDERID'  => $ordId,
+        'ORDERID' => $ordId,
         'CONTENDERS' => $deltagare,
         'PEDOMETERS' => $stegraknare,
     );
@@ -1271,7 +1301,7 @@ www.motiomera.se';
     $filter_tillagg = array(
         '[CUSTOMER]' => $foretagsnamn,
         '[CUSTOMERNO]' => $kundnummer,
-        '[ORDERID]'  => $ordId,        
+        '[ORDERID]' => $ordId,
         '[STEPCOUNTERS]' => $stegraknare,
         '[ADDITIONALCOUNTER]' => $deltagare,
         '[STARTDATE]' => $startdatum,
@@ -1296,7 +1326,7 @@ www.motiomera.se';
     }
 
     //close and write PDF document to disk
-    
+
     $lokalFil = FORETAGSFIL_LOCAL_PATH . "/" . $filnamn;
     $pdf->Output($lokalFil);
     if (!file_exists($lokalFil)) {
@@ -1426,7 +1456,7 @@ www.motiomera.se';
     }
     if ($prefix != '') {
       $prefix = $prefix . "_";
-    }    
+    }
     if ($middlefix != '') {
       $middlefix = $middlefix . "_";
     }
@@ -1442,7 +1472,7 @@ www.motiomera.se';
         $path = MEDLEMSFIL_LOCAL_PATH . "/";
         break;
       default:
-        $path = FORETAGSFIL_LOCAL_PATH . "/";        
+        $path = FORETAGSFIL_LOCAL_PATH . "/";
         break;
     }
 
@@ -1475,6 +1505,7 @@ www.motiomera.se';
     }
     Misc::logMotiomera("End: Foretag::uploadOrderFilesFTP()", 'info');
   }
+
   /**
    * Uploads order fktura files in status 50 on the FTP
    * Lift the order rows to status 60 on success
@@ -1575,9 +1606,9 @@ www.motiomera.se';
     $fileName = $this->setFilnamnAuto('REKL', 'pdf');
     $foretagsnamn = $this->getReciverCompanyName();
     $co = ($this->getReciverCo());
-    if($co != ''){
+    if ($co != '') {
       $foretagsnamn = $foretagsnamn . "\nc/o " . $co;
-    }       
+    }
     $pdf = new PDF();
     $a = array(
         'FULLNAME' => $this->getPayerName(),
@@ -1589,13 +1620,12 @@ www.motiomera.se';
         'STARTDATE' => $this->getStartdatum(),
         'CONTESTERS' => 0,
         'COUNT' => $nbr,
-        'FILENAME' => $fileName,        
+        'FILENAME' => $fileName,
     );
     $pdf->PagePreface($a);
     $filter = array(
         '[CUSTOMER]' => $this->getReciverCompanyName(),
         '[CUSTOMERNO]' => $this->getKundnummer(),
-
         '[STEPCOUNTERS]' => $nbr,
     );
     $pdf->PageDoa($filter);
@@ -1809,7 +1839,6 @@ www.motiomera.se';
     return $this->slutdatum;
   }
 
-  
   /**
    * return true or false if company has an ongoing competition
    * @author Kristian Erendi, Reptilo 2012-05-05
@@ -1821,23 +1850,22 @@ www.motiomera.se';
     } else {
       return false;
     }
-  }  
+  }
 
   /**
    * return different CSS-classes if company has an ongoing competition
    * This is to aid to Smarty tempate
    * 
    * @author Kristian Erendi, Reptilo 2012-05-05
-   */  
+   */
   public function isActiveCompetitionCSS() {
     if ($this->isActiveCompetition()) {
       return "mmGreen";
     } else {
       return "mmLightGrey";
     }
-  }  
-  
-  
+  }
+
   /**
    * Function getCurrentTavlingId
    * returns the competition id that this company is currently active in
@@ -1986,8 +2014,9 @@ www.motiomera.se';
   public function getCompanyName() {
     return htmlspecialchars_decode($this->companyName);
   }
+
   public function getPayerCompanyName() {
-      return htmlspecialchars_decode($this->payerCompanyName);
+    return htmlspecialchars_decode($this->payerCompanyName);
   }
 
   public function getPayerName() {
@@ -2084,6 +2113,10 @@ www.motiomera.se';
 
   public function getOrderId() {
     return $this->orderId;
+  }
+
+  public function getCampaignMemberCode() {
+    return $this->campaignMemberCode;
   }
 
   /**
@@ -2275,9 +2308,11 @@ www.motiomera.se';
   public function setCompanyName($name) {
     $this->companyName = $name;
   }
+
   public function setPayerCompanyName($name) {
     $this->payerCompanyName = $name;
   }
+
   public function setPayerName($payerName) {
     $this->payerName = $payerName;
   }
@@ -2373,6 +2408,10 @@ www.motiomera.se';
 
   public function setOrderId($arg) {
     $this->orderId = $arg;
+  }
+
+  public function setCampaignMemberCode($arg) {
+    $this->campaignMemberCode = $arg;
   }
 
   public function getCreationDate() {

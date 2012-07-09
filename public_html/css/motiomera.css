@@ -1689,10 +1689,8 @@ table#alh_navtable
 {
 	background-color: #9CC;
 }
-.mmMarginBottom
-{
-	margin-bottom: 10px;
-}
+.mmMarginBottom{margin-bottom: 10px;}
+.mmMarginBottomBig{margin-bottom: 30px;}
 .mmMarginLeft10
 {
 	margin-left: 10px;
@@ -1899,6 +1897,7 @@ table#alh_navtable
 	width: 180px;
 	height: 98px;
 }
+.validicon{width: 25px;height:25px;margin-left: 5px;display:none;}
 .mmQuizKommunImg
 {
 	width: 240px;
@@ -1948,6 +1947,7 @@ table#alh_navtable
 	border-top: none;
 	padding: 5px;
 }
+.mmRightMinSidaBox table{font-size: 9px;}
 .mmRightSideContestBar
 {
 	margin: -15px 0 0;
