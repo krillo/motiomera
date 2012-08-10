@@ -9,21 +9,24 @@ get_header();
   <div id="content" role="main">
 
     <?php while (have_posts()) : the_post(); ?>
-      <?php get_template_part('content', 'page'); ?>
-      <?php the_content(); ?>
+
+    <article>
       <?php
+      /*
       $userId = get_current_user_id();
       if ($userId != 0) {
         echo "userid = " . $userId;
       } else {
         echo "Not allowed";
       }
+       * 
+       */
       ?>
 
       <?php
       require_once($_SERVER["DOCUMENT_ROOT"] . "/../public_html/php/init.php");
 
-      //print_r($USER);
+      print_r($USER);
       ?>
 
 
@@ -51,9 +54,8 @@ get_header();
 
 
     <?php endwhile; // end of the loop.  ?>
-
+      </article>
   </div><!-- #content -->
 </div><!-- #container -->
-
-<?php get_sidebar(); ?>
+<div class="clear"></div>
 <?php get_footer(); ?>

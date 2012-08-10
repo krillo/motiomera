@@ -13,8 +13,8 @@ $page_promo = get_page_by_title("page-promo");
     <?php endif; ?>
     <div id="page-promo-right-one"><?php echo get_field("text_one_right", $page_promo->ID); ?></div>
     <div id="page-promo-right-two"><?php echo get_field("text_two_right", $page_promo->ID); ?></div>
-    <a href="http://google.com"><div id="page-promo-right-private" class="page-promo-button"><?php echo get_field("link_private", $page_promo->ID); ?></div></a>
-    <a href=""><div id="page-promo-right-company" class="page-promo-button"><?php echo get_field("link_company", $page_promo->ID); ?></div></a>
+    <a href="<?php echo get_field("the_link_private", $page_promo->ID); ?>"><div id="page-promo-right-private" class="page-promo-button"><?php echo get_field("link_private", $page_promo->ID); ?></div></a>
+    <a href="<?php echo get_field("the_link_company", $page_promo->ID); ?>"><div id="page-promo-right-company" class="page-promo-button"><?php echo get_field("link_company", $page_promo->ID); ?></div></a>
   </div>
 </div>
 <div class="clear"></div>

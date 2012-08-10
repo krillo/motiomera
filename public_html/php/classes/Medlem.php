@@ -2217,13 +2217,12 @@ class Medlem extends Mobject {
   /**
    * 	Returnerar medlemsobjektet för den inloggade medlemmen, eller false om besökaren inte är inloggad
    */
-  public static function getInloggad() {
-
+  public static function getInloggad() {     
     if (empty($_SESSION["mm_mid"]) && empty($_SESSION["mm_sid"]) && !empty($_COOKIE["mm_mid"]) && !empty($_COOKIE["mm_sid"])) { // försöker hämta från cookie
       $_SESSION["mm_mid"] = $_COOKIE["mm_mid"];
       $_SESSION["mm_sid"] = $_COOKIE["mm_sid"];
     }
-
+      
     if (!empty($_SESSION["mm_mid"])) {
       try {
         $medlem = Medlem::loadById($_SESSION["mm_mid"]);

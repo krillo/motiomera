@@ -118,8 +118,11 @@ body{
 nav{ background-color: #314D00; height:40px; z-index: 10; width:1800px;margin:auto;}
 #menu{width:960px;margin:auto;}
 .hide{display: none;}
+.fixed {position: fixed;}
+.follow-menu{padding-top: 40px;}
 #motiomera-logo-mini{background-image:url('img/motiomera_logo_mini.png');background-repeat:no-repeat;width:180px;height:40px;float:left;}
 #wp-nav-menu{float:right;font-family:Verdana;font-size: 12px;text-transform: uppercase;padding-top: 10px;}
+
 header{}
 #page{width:960px;margin:auto;}
 #head-logo{float:left;height: 127px;width:960px;}
@@ -251,7 +254,7 @@ hgroup{height:127px; float:left;}
 
 
 #page-promo{width:100%;float:left;margin:35px 0 35px 0;}
-#page-promo-left{float:left;width:460px;margin-right: 20px;font-size: 38px;color:#fff;}
+#page-promo-left{float:left;width:440px;margin-right: 20px;margin-left: 20px;font-size: 38px;color:#fff;}
 #page-promo-right{width:438px;padding: 20px;float:left;
 background-color: #8aa25a;
   border-color: #6a7d45 #6a7d45 #6a7d45 #6a7d45;
@@ -261,12 +264,11 @@ background-color: #8aa25a;
   border-radius: 7px 7px / 7px 7px;
 }
 #page-promo-right-one{font-size: 20px;color:#fff;width:300px;}
-#page-promo-right-two{font-size: 20px;color:#2f4c00;width:300px;}
+#page-promo-right-two{font-size: 20px;color:#2f4c00;width:300px;margin-bottom: 15px;}
 #page-promo-right img{float:right;}
 #page-promo-right-private{margin-right: 5px;}
 #page-promo-right-company{}
 .page-promo-button{
-  margin-top: 15px;
   float:left;
   width:184px;
   padding:15px 10px 15px 20px;
@@ -284,6 +286,34 @@ background-color: #8aa25a;
 }
 .page-promo-button:hover{border-color: #a8b985 #a8b985 #a8b985 #a8b985;}
 
+#page-promo-footer{width:918px;padding: 20px;float:left;
+background-color: #8aa25a;
+  border-color: #6a7d45 #6a7d45 #6a7d45 #6a7d45;
+  border-style: solid;
+  border-width: 1px;  
+  -moz-border-radius: 7px 7px / 7px 7px;
+  border-radius: 7px 7px / 7px 7px;
+}
+#page-promo-footer-one{font-size: 20px;color:#fff;width:450px;margin-top: 15px;}
+#page-promo-footer-two{font-size: 20px;color:#2f4c00;width:450px;}
+
+
+article{
+  float:left;
+  width:890px;
+  padding: 50px 35px;
+  background-color: #fff;
+  border-color: #fff #fff #fff #fff;
+  border-style: solid;
+  border-width: 1px;  
+  -moz-border-radius: 7px 7px / 7px 7px;
+  border-radius: 7px 7px / 7px 7px;
+}
+article h2{color:#889d59;font-size: 36px;}
+article p{color:#5c5c5c;font-size: 14px;font-family: arial;}
+
+
+
 #testimonial{background-image:url('img/testimonial.png');height: 120px;}
 #counter{background-image:url('img/counter.png');height: 260px;}
 
@@ -293,10 +323,13 @@ footer a, footer a:visited{color:white;}
 
 #site-info{width:960px;margin:auto;margin-top: 30px;}
 .motiomera-logo-small{background-image:url('img/motiomera_logo_small.png');background-repeat:no-repeat;background-position:0 8px;width: 265px;height: 60px; float:left;}
-#site-info ul{list-style: none outside none;margin: 0;padding-left: 0;display:inline;}
-#site-info ul li{display:inline;margin-right: 10px;}
+#site-info ul{list-style-image: url("img/bullet.png");margin: 0;padding-left: 0;}
+#site-info ul li{float: left;margin-right: 25px;padding-left: 0px;}
+#site-info ul li:first-child {list-style: none outside none;}
 #footer-last{background-image:url('img/footer.png');background-repeat:no-repeat;background-position: center bottom; height: 360px; }
 
+.menu-footer-container{padding-top:25px;font-family:verdana;font-size: 11px; float: left;margin-left: 30px;}
+.menu-footer-container a{text-decoration: none;}
 
 
 .clear{clear:both;}

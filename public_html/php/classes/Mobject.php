@@ -213,10 +213,8 @@ abstract class Mobject
 	 * @uses Misc::arrayKeyMerge() to merge the objects loaded by buffer or memcache with those loaded from database
 	 * @return array an array of objects
 	 */
-	protected static function loadByIds($IDs, $objName, $field = "id", $orderBy = null)
-	{
-		global $db;
-
+	protected static function loadByIds($IDs, $objName, $field = "id", $orderBy = null){
+ 		global $db;
 		$loadDebug = defined("DEBUG") && DEBUG && isset($_GET["load_debug"]);
 		$bufferObjects = $db->getBufferObjects();
 		$result = array();
