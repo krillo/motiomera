@@ -149,6 +149,16 @@ add_action('wp_enqueue_scripts', 'motiomera_scripts');
 add_action('init', 'create_post_type');
 
 function create_post_type() {
+  register_post_type('faq', array(
+      'labels' => array(
+          'name' => __('FAQ'),
+          'singular_name' => __('FAQ')
+      ),
+      'public' => true,
+      'has_archive' => false,
+      'supports' => array('title', 'editor', 'thumbnail'),
+          )
+  );  
   register_post_type('interesting', array(
       'labels' => array(
           'name' => __('intresseväckare'),

@@ -332,6 +332,16 @@ footer a, footer a:visited{color:white;}
 .menu-footer-container a{text-decoration: none;}
 
 
+#faq{}
+
+#faq div{float:left;color: #889D59;font-size: 20px;clear:both;}
+#faq h1{float:left;color: #889D59;font-size: 30px;}
+.faq-head{float:left;color: #889D59;font-size: 30px;}
+#faq h2{float:left;color: #5C5C5C;font-size: 25px;}
+#faq p{font-size: 20px;}
+.faq-a{float:left;color:#2f4c00;font-family: arial;font-size: 20px;margin-top: 20px;}
+.faq-a:visited{color:#2f4c00;}
+
 .clear{clear:both;}
 
 body,
