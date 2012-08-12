@@ -139,6 +139,7 @@ hgroup{height:127px; float:left;}
   box-shadow: inset -1px -1px 1px #CEE596;
   padding: 15px 15px 15px 15px;
   width:930px;
+  margin-top: 30px;
 }
 #login-input{float:left;margin-right:10px;}
 #login-input input{height:35px;background-color: #CEE596;color:#2A4400;margin-right: 5px;}
@@ -333,14 +334,31 @@ footer a, footer a:visited{color:white;}
 
 
 #faq{}
+#faq-header{float:left;color: #889D59;font-size: 20px;clear:both;}
+#faq-header p{font-size: 20px;margin-bottom: 0;}
+.indent{margin-left:35px;}
 
-#faq div{float:left;color: #889D59;font-size: 20px;clear:both;}
-#faq h1{float:left;color: #889D59;font-size: 30px;}
-.faq-head{float:left;color: #889D59;font-size: 30px;}
-#faq h2{float:left;color: #5C5C5C;font-size: 25px;}
-#faq p{font-size: 20px;}
+
+.faq-answer{float:left;color: #889D59;font-size: 18px;clear:both;margin-bottom: 15px;
+ float:left;
+  width:760px;
+  padding: 35px 35px;
+  background-color: #E1EACF;
+  border-color: #5C7C00 #5C7C00 #5C7C00 #5C7C00;
+  border-style: solid;
+  border-width: 1px;  
+  -moz-border-radius: 7px 7px / 7px 7px;
+  border-radius: 7px 7px / 7px 7px;
+}
+#faq h1{float:left;color: #889D59;font-size: 38px;}
+.faq-head{float:left;color: #889D59;font-size: 30px;margin-top: 40px;}
+#faq h2{float:left;color: #5C5C5C;font-size: 24px;}
+#faq h2:hover{color:#000;}
+.faq-answer p{font-size: 20px;margin-bottom: 0;}
 .faq-a{float:left;color:#2f4c00;font-family: arial;font-size: 20px;margin-top: 20px;}
 .faq-a:visited{color:#2f4c00;}
+
+
 
 .clear{clear:both;}
 
@@ -496,15 +514,7 @@ button:hover,
 html input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
-  background: #f5f5f5; /* Old browsers */
-  background: -moz-linear-gradient(top,  #f5f5f5 60%, #dcdcdc 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,#f5f5f5), color-stop(100%,#dcdcdc)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  #f5f5f5 60%,#dcdcdc 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  #f5f5f5 60%,#dcdcdc 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  #f5f5f5 60%,#dcdcdc 100%); /* IE10+ */
-  background: linear-gradient(top,  #f5f5f5 60%,#dcdcdc 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#dcdcdc',GradientType=0 ); /* IE6-9 */
-  border-color: #bbb #bbb #aaa #bbb;
+  border-color: #CEE596 #CEE596 #CEE596 #CEE596;
 }
 button:focus,
 html input[type="button"]:focus,

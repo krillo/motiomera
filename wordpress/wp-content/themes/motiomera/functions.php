@@ -120,6 +120,10 @@ function motiomera_scripts() {
   wp_deregister_script('jquery');
   wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js');
   wp_enqueue_script('jquery');
+
+
+  wp_register_script('jquery-ui', get_bloginfo('template_url') . '/js/jquery-ui-1.8.22.custom.min.js');
+  wp_enqueue_script('jquery-ui');
 }
 
 add_action('wp_enqueue_scripts', 'motiomera_scripts');
@@ -158,7 +162,7 @@ function create_post_type() {
       'has_archive' => false,
       'supports' => array('title', 'editor', 'thumbnail'),
           )
-  );  
+  );
   register_post_type('interesting', array(
       'labels' => array(
           'name' => __('intresseväckare'),
@@ -190,14 +194,27 @@ $mmStatus->normal_page = 0;
 $mmStatus->mm_logged_in = 0;
 $mmStatus->mm_mid = 0;
 $mmStatus->mm_sid = 0;
+$mmStatus->fb_user_id = 0;
+$mmStatus->fb_name = null;
+$mmStatus->fb_first_name = null;
+$mmStatus->fb_last_name = null;
+$mmStatus->fb_link = null;
+$mmStatus->fb_gender = null;
+$mmStatus->fb_email = null;
+$mmStatus->fb_login_url = null;
+$facebook = null;
+
 
 /**
  * Set some statuses that can be used in the pages
  */
 function mm_status() {
   global $mmStatus;
+  global $facebook;
+  global $fbLoginUrl;
   @session_start();  //just to be able to read mm variables (logged in or not)
   if (empty($_SESSION["mm_mid"]) && empty($_SESSION["mm_sid"])) {
+    
   } else {
     $mmStatus->mm_logged_in = 1;
     $mmStatus->mm_mid = $_SESSION["mm_mid"];
@@ -209,8 +226,48 @@ function mm_status() {
   if (is_front_page()) {
     $mmStatus->front_page = 1;
   }
+  //facebookInit();
 }
 
+function facebookInit(){
+  //Facebook login url
+  require ABSPATH . '../lib/facebook-php-sdk/src/facebook.php';
+  $facebook = new Facebook(array(
+              'appId' => '108867119251826',
+              'secret' => 'f8a8d39798810a4f5a51cdb867508ee6',
+          ));
+  
+  $fb_params = array(
+      'scope' => 'read_stream',
+      'redirect_uri' => 'http://mm.dev/faq/',
+      'display' => 'popup'
+  );
+   $mmStatus->fb_login_url = $facebook->getLoginUrl($fb_params);
+
+  //Logged in on Facebook?
+  $user = null;
+  $user = $facebook->getUser();
+  //print_r($user);
+  if ($user) {
+    try {
+      // Proceed knowing you have a logged in user who's authenticated.
+      $user_profile = $facebook->api('/me');
+      $mmStatus->fb_user_id = $user_profile['id'];
+      $mmStatus->fb_name = $user_profile['name'];
+      $mmStatus->fb_first_name = $user_profile['first_name'];
+      $mmStatus->fb_last_name = $user_profile['last_name'];
+      $mmStatus->fb_link = $user_profile['link'];
+      $mmStatus->fb_gender = $user_profile['gender'];
+      $mmStatus->fb_email = $user_profile['email'];
+    } catch (FacebookApiException $e) {
+      //echo '<pre>'.htmlspecialchars(print_r($e, true)).'</pre>';
+      $user = null;
+    }
+  }
+  
+  echo '<div style="color:#ccc;">' . print_r($mmStatus, true) . '</div>';
+  //echo '<br/><img src="https://graph.facebook.com/' . $user . '/picture">';
+}
 
 /**
  * Include snippets
@@ -229,7 +286,7 @@ function includeSnippet($file) {
       }
       break;
     //on front page show big logo area, else small area  
-    case 'inc_big_logo_area.php':  
+    case 'inc_big_logo_area.php':
       if ($mmStatus->front_page == 1) {
         include $file;
       }
