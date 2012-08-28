@@ -8,6 +8,9 @@ ini_set('display_errors', '1');
 
 $order = new stdClass;
 !empty($_REQUEST['compcampcode']) ? $order->compcampcode = $_REQUEST['compcampcode'] : $order->compcampcode = '';
+$order->compcampcode = mb_convert_case(urldecode($order->compcampcode), MB_CASE_LOWER, "UTF-8");
+$order->compcampcode = trim($order->compcampcode);  //trim whitespaces
+$order->compcampcode = trim($order->compcampcode, '"');  //trim "
 !empty($_REQUEST['type']) ? $order->type = $_REQUEST['type'] : $order->type = 'company_campaign';
 !empty($_REQUEST['anamn']) ? $order->anamn = $_REQUEST['anamn'] : $order->anamn = '';
 !empty($_REQUEST['sex']) ? $order->sex = $_REQUEST['sex'] : $order->sex = '';
@@ -31,6 +34,7 @@ $order->street = $order->street1;
 !empty($order->street3) ? $order->street = $order->street . ' ' . $order->street3 : null;
 
 $redirPage = $SETTINGS["url"] . "/pages/foretag_kampanj.php?anamn=" . $order->anamn . "&mailone=" . $order->email . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '&co=' . $order->co . '&phone=' . $order->phone . '&street1=' . $order->street1 . '&street2=' . $order->street2 . '&street3=' . $order->street3 . '&zip=' . $order->zip . '&city=' . $order->city;
+
 
 if ($order->compcampcode == '' OR $order->email == '' OR $order->fname == '' OR $order->lname == '') {
   Misc::logMotiomera("Error action/medlem_foretagskod.php  Fält saknas!  \n Params:\n" . print_r($order, true) . "\n ", 'ERROR');
