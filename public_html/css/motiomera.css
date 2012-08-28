@@ -1323,13 +1323,7 @@ table#alh_navtable
 	font-size: 13px;
 }
 
-.mmObsBiggerText
-{
-	font-size: 17px;
-}
-
-
-
+.mmObsBiggerText{font-size: 17px;}
 .mmBorderNone,.motiomera_form_table .mmLastRow td,.motiomera_form_table .mmLastRow th,#move_to_folder
 {
 	border: none;

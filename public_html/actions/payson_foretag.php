@@ -49,6 +49,7 @@ $req = new stdClass;
 !empty($_REQUEST['channel']) ? $req->channel = $_REQUEST['channel'] : $req->channel = '';
 !empty($_REQUEST['paytype']) ? $req->paytype = $_REQUEST['paytype'] : $req->paytype = '';
 !empty($_REQUEST['campcode']) ? $req->campcode = $_REQUEST['campcode'] : $req->campcode = '';
+!empty($_REQUEST['veckor']) ? $req->veckor = $_REQUEST['veckor'] : $req->veckor = '';
 
 
 //copy delivery data to buyer date
@@ -128,6 +129,7 @@ if (($req->RE03 == 0 && $req->RE04 == 0)) { //return to checkout
     $foretag->setReciverCountry($req->delCountry);
     $foretag->setCompanyName($req->company);
     $foretag->setCreatedDate();
+    $foretag->setVeckor($req->veckor);    
     $foretag->commit();
 
     $token = null;

@@ -6,14 +6,30 @@ global $SETTINGS;
 $campaignCodes = Order::$campaignCodes;
 $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
 $actionFile = $SETTINGS["url"]."/api/api_comp_campaign_code.php";
+
+$order = new stdClass;
+!empty($_REQUEST['compcampcode']) ? $order->compcampcode = $_REQUEST['compcampcode'] : $order->compcampcode = '';
+!empty($_REQUEST['type']) ? $order->type = $_REQUEST['type'] : $order->type = 'company_campaign';
+!empty($_REQUEST['anamn']) ? $order->anamn = $_REQUEST['anamn'] : $order->anamn = '';
+!empty($_REQUEST['mailone']) ? $order->email = $_REQUEST['mailone'] : $order->email = '';
+!empty($_REQUEST['email2']) ? $order->email2 = $_REQUEST['email2'] : $order->email2 = '';
+!empty($_REQUEST['firstname']) ? $order->fname = $_REQUEST['firstname'] : $order->fname = '';
+!empty($_REQUEST['lastname']) ? $order->lname = $_REQUEST['lastname'] : $order->lname = '';
+!empty($_REQUEST['co']) ? $order->co = $_REQUEST['co'] : $order->co = '';
+!empty($_REQUEST['phone']) ? $order->phone = $_REQUEST['phone'] : $order->phone = '';
+!empty($_REQUEST['street1']) ? $order->street1 = $_REQUEST['street1'] : $order->street1 = '';
+!empty($_REQUEST['street2']) ? $order->street2 = $_REQUEST['street2'] : $order->street2 = '';
+!empty($_REQUEST['street3']) ? $order->street3 = $_REQUEST['street3'] : $order->street3 = '';
+!empty($_REQUEST['zip']) ? $order->zip = $_REQUEST['zip'] : $order->zip = '';
+!empty($_REQUEST['city']) ? $order->city = $_REQUEST['city'] : $order->city = '';
+!empty($_REQUEST['country']) ? $order->country = $_REQUEST['country'] : $order->country = '';
+!empty($_REQUEST['msg']) ? $order->msg = $_REQUEST['msg'] : $order->msg = '';
 ?>
 
 
 <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
 <script type="text/javascript">    
   $(function() {
-    
-    
     /*
      *   const MIN_LENGTH_ANAMN = 3;
   const MIN_LENGTH_FNAMN = 2;
@@ -23,13 +39,14 @@ $actionFile = $SETTINGS["url"]."/api/api_comp_campaign_code.php";
   const MAX_LENGTH_ENAMN = 40;
   const MAX_LENGTH_ANAMN = 20;
      */
-    
-    
     //do input validation
     var validator = $("#checkout").validate({
       errorClass: "invalid",
       validClass: "valid",
       rules: {
+        compcampcode: {
+          required: true
+        },        
         anamn: {
           required: true,
           maxlength: <?php echo Medlem::MAX_LENGTH_ANAMN; ?>, 
@@ -65,7 +82,8 @@ $actionFile = $SETTINGS["url"]."/api/api_comp_campaign_code.php";
           required: true
         },
         pass: {
-          required: true
+          required: true,
+          minlength: <?php echo Medlem::MIN_LENGTH_LOSEN; ?>     
           //min: 4
         },
         pass2: {
@@ -73,6 +91,9 @@ $actionFile = $SETTINGS["url"]."/api/api_comp_campaign_code.php";
         }       
       },  
       messages: {
+        compcampcode: {
+          required: ''
+        },
         anamn: {
           required: '',
           maxlength: 'För långt',
@@ -108,7 +129,8 @@ $actionFile = $SETTINGS["url"]."/api/api_comp_campaign_code.php";
           equalTo: ''
         },        
         pass: {
-          required: ''
+          required: '', 
+          minlength: 'För kort'          
           //min: 'minst 4 tecken'
         },        
         pass2: {
@@ -119,7 +141,6 @@ $actionFile = $SETTINGS["url"]."/api/api_comp_campaign_code.php";
 
 
   
-
 
     //catch keyup where the alias is submitted 
     $('#anamn').keyup(function() {
@@ -206,11 +227,6 @@ $actionFile = $SETTINGS["url"]."/api/api_comp_campaign_code.php";
  
  
  
- 
- 
- 
- 
- 
   });
 </script>    
 
@@ -255,7 +271,23 @@ $actionFile = $SETTINGS["url"]."/api/api_comp_campaign_code.php";
 
       Motiomera skickar en stegräknare till dig (om ditt företag har beställt det).
     </p>
-
+    
+    <?php 
+   switch ($order->msg) {
+   case 'fields_missing':
+     echo '<p class="mmRed mmObsBiggerText">Du måste fylla i alla fälten!</p>';
+   break;
+   case 'unknown_error':
+     echo '<p class="mmRed mmObsBiggerText">Fel, prova igen!</p>';
+   break;
+   case 'wrong_code':
+     echo '<p class="mmRed mmObsBiggerText">Fel kod, prova igen!</p>';
+   break;
+   default:  //empty
+   break;
+   }
+   ?>
+    
     <ul id="checkout-ul">
       <li class="mmMarginBottomBig"><label for="alias">Verifikationskod</label>
         <input type="text" name="compcampcode" id="compcampcode" class="" />
@@ -263,7 +295,7 @@ $actionFile = $SETTINGS["url"]."/api/api_comp_campaign_code.php";
         <span id="invalid" class="mmRed mmFormError">Felaktigt</span>        
       </li>
       <li><label for="alias">Välj alias</label>
-        <input type="text" name="anamn" id="anamn" class="" onfocus="getById('mmANamnError').style.display = 'none';" onblur="mm_ajaxValidera('mmANamnError', 'anamn', this.value);"/>
+        <input type="text" name="anamn" id="anamn" class="" onfocus="getById('mmANamnError').style.display = 'none';" onblur="mm_ajaxValidera('mmANamnError', 'anamn', this.value);" value="<?php echo $order->anamn; ?>"/>
         <span id="mmANamnError" class="mmRed mmFormError">Upptaget</span>
       </li>
       <div class="clear"></div>
@@ -287,27 +319,27 @@ $actionFile = $SETTINGS["url"]."/api/api_comp_campaign_code.php";
         </li>
 
         <li><label for="mailone">E-post</label>
-          <input type="text" name="mailone" id="mailone" class="" onfocus="getById('mmEpostError').style.display = 'none';" onblur="mm_ajaxValidera('mmEpostError', 'epost', this.value);"/>
-          <span id="mmEpostError" class="mmRed mmFormError">Upptagen, <a href="/pages/glomtlosen.php?email="  class="mmRed" >glömt lösenord?</a></span><br />
+          <input type="text" name="mailone" id="mailone" class="" onfocus="getById('mmEpostError').style.display = 'none';" onblur="mm_ajaxValidera('mmEpostError', 'epost', this.value);" value="<?php echo $order->email; ?>"/>
+          <span id="mmEpostError" class="mmRed mmFormError">Upptagen! <a onclick="motiomera_visaMailform(); return false;" href="#" style="color:red;" >Maila</a> oss så hjälper vi dig</span><br />
         </li>
         <div class="clear"></div>
-        <li><label for="email2">E-post igen</label><input type="text" name="email2" id="email2" class=""/></li><div class="clear"></div>
+        <li><label for="email2">E-post igen</label><input type="text" name="email2" id="email2" class="" value="<?php echo $order->email; ?>" /></li><div class="clear"></div>
         <li><label for="pass">Lösenord</label><input type="password" name="pass" id="pass" class=""/></li><div class="clear"></div>
         <li><label for="pass2">Lösenord igen</label><input type="password" name="pass2" id="pass2" class=""/></li><div class="clear"></div>        
-        <li><label for="firstname">Förnamn</label><input type="text" name="firstname" id="firstname" class=""/></li><div class="clear"></div>
-        <li><label for="lastname">Efternamn</label><input type="text" name="lastname" id="lastname" class=""/></li><div class="clear"></div>
-        <li><label><a href="" id="co-toggle">c/o ?</a></label><input type="text" name="co" id="co" class="hidden"/></li><div class="clear"></div>                 
-        <li><label for="phone">Mobil/telefon</label><input type="text" name="phone" id="phone"/></li><div class="clear"></div>
-        <li><label for="street1">Gata</label><input type="text" name="street1" id="street1"/></li><div class="clear"></div>
+        <li><label for="firstname">Förnamn</label><input type="text" name="firstname" id="firstname" class="" value="<?php echo $order->fname; ?>" /></li><div class="clear"></div>
+        <li><label for="lastname">Efternamn</label><input type="text" name="lastname" id="lastname" class="" value="<?php echo $order->lname; ?>" /></li><div class="clear"></div>
+        <li><label><a href="" id="co-toggle">c/o ?</a></label><input type="text" name="co" id="co" class="hidden" value="<?php echo $order->co; ?>"/></li><div class="clear"></div>                 
+        <li><label for="phone">Mobil/telefon</label><input type="text" name="phone" id="phone" value="<?php echo $order->phone; ?>"/></li><div class="clear"></div>
+        <li><label for="street1">Gata</label><input type="text" name="street1" id="street1" value="<?php echo $order->street1; ?>"/></li><div class="clear"></div>
         <li><label><a href="" id="address-toggle">Fler rader ?</a></label> 
           <div id="extra-address"class="hidden">
-            <input type="text" name="street2" id="street2"/><div class="clear"></div>
-            <label>&nbsp;</label><input type="text" name="street3" id="street3"/>
+            <input type="text" name="street2" id="street2" value="<?php echo $order->street2; ?>"/><div class="clear"></div>
+            <label>&nbsp;</label><input type="text" name="street3" id="street3" value="<?php echo $order->street3; ?>"/>
           </div>
         </li>
         <div class="clear"></div>
-        <li><label for="zip">Postnummer</label><input type="text" name="zip" id="zip"/></li><div class="clear"></div>
-        <li><label for="city">Ort</label><input type="text" name="city" id="city"/></li><div class="clear"></div>
+        <li><label for="zip">Postnummer</label><input type="text" name="zip" id="zip" value="<?php echo $order->zip; ?>"/></li><div class="clear"></div>
+        <li><label for="city">Ort</label><input type="text" name="city" id="city" value="<?php echo $order->city; ?>"/></li><div class="clear"></div>
         <li><label><a href="" id="country-toggle">Land</a></label><input type="text" name="country" id="country" class="" value="Sverige"/></li>
         <div class="clear"></div>           
 
@@ -316,11 +348,6 @@ $actionFile = $SETTINGS["url"]."/api/api_comp_campaign_code.php";
         <div id="pay">
           <input id="payson" type="submit" name="ok" value="Ok">
         </div>
-
       </div> 
     </ul>
-
-
-
-
 </div> <!-- end member-private -->  

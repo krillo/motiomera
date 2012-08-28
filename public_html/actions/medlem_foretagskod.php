@@ -26,16 +26,16 @@ $order = new stdClass;
 !empty($_REQUEST['zip']) ? $order->zip = $_REQUEST['zip'] : $order->zip = '';
 !empty($_REQUEST['city']) ? $order->city = $_REQUEST['city'] : $order->city = '';
 !empty($_REQUEST['country']) ? $order->country = $_REQUEST['country'] : $order->country = '';
-
-
 $order->street = $order->street1;
 !empty($order->street2) ? $order->street = $order->street . ' ' . $order->street2 : null;
 !empty($order->street3) ? $order->street = $order->street . ' ' . $order->street3 : null;
 
+$redirPage = $SETTINGS["url"] . "/pages/foretag_kampanj.php?anamn=" . $order->anamn . "&mailone=" . $order->email . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '&co=' . $order->co . '&phone=' . $order->phone . '&street1=' . $order->street1 . '&street2=' . $order->street2 . '&street3=' . $order->street3 . '&zip=' . $order->zip . '&city=' . $order->city;
 
-
-if ($order->email == '' OR $order->fname == '' OR $order->lname == '') {
-  throw new UserException('Du måste fylla i alla fält', 'Du måste fylla i alla fält. <a href="/pages/foretag_kampanj.php?email=' . $order->email . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '" >Prova igen</a>');
+if ($order->compcampcode == '' OR $order->email == '' OR $order->fname == '' OR $order->lname == '') {
+  Misc::logMotiomera("Error action/medlem_foretagskod.php  Fält saknas!  \n Params:\n" . print_r($order, true) . "\n ", 'ERROR');
+  $redirPage .= "&msg=fields_missing";
+  header('Location: ' . $redirPage);
 }
 $companyId = Foretag::getCompanyIdByCampaignMemberCode($order->compcampcode);
 if (is_numeric($companyId) && $companyId > 0) {
@@ -59,17 +59,16 @@ if (is_numeric($companyId) && $companyId > 0) {
     $medlem->setForetagsnyckel($foretagsnyckel[0]);
     $medlem->commit();
     $medlem->loggaIn($order->email, $order->pass, true);
+    //header("Location: " . '/pages/minsida.php?mmForetagsnyckel=' . $foretagsnyckel[0]);
+    header("Location: " . '/pages/minsida.php');
   } catch (Exception $e) {
     $msg = $e->getMessage();
-    throw new UserException($msg, null, $urlHandler->getUrl('Medlem', URL_CREATE), 'Tillbaka');
+    Misc::logMotiomera("Exception -  medlem_foretagskod.php  Params:\n" . print_r($order, true) . "\n CompanyId = $companyId \n Foretagsnyckel  \n " . print_r($foretagsnyckel, true) . "\n msg: " . $msg. "\n", 'ERROR');
+    $redirPage .= "&msg=unknown_error";
+    header('Location: ' . $redirPage);
   }
 } else {
-  throw new UserException("Något gick fel", 'Försök igen: <a href="/pages/foretag_kampanj.php?email=' . $order->email . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '" >Prova igen</a>');
+  Misc::logMotiomera("Error action/medlem_foretagskod.php  Fel Verifikationskod! \n Params:\n" . print_r($order, true) . "\n CompanyId = $companyId \n Foretagsnyckel  \n " . print_r($foretagsnyckel, true), 'ERROR');
+  $redirPage .= "&msg=wrong_code";
+  header('Location: ' . $redirPage);
 }
-
-
-
-
-
-header("Location: " . '/pages/minsida.php?mmForetagsnyckel=' . $order->nyckel);
-?>

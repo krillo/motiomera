@@ -156,6 +156,7 @@ class Foretag extends Mobject {
       $this->setLosenord($losenord);
       $this->setKanal($kanal);
       $this->setCompAffCode($compAffCode);
+      $this->setCampaignMemberCode(null);
       $this->commit();
 
       //$this->getSlutdatum();  //save slutdatum
@@ -183,7 +184,7 @@ class Foretag extends Mobject {
     global $db;
     $jDate = new JDate();
     $validDate = $jDate->subWeeks(self::DEFAULT_NO_WEEKS)->getDate();
-    $sql = "SELECT id, campaignMemberCode FROM mm_foretag WHERE campaignMemberCode is not null and startdatum >= '$validDate'";
+    $sql = "SELECT id, campaignMemberCode FROM mm_foretag WHERE campaignMemberCode IS NOT NULL AND  campaignMemberCode != '' AND startdatum >= '$validDate'";
     return $db->allValuesAsArray($sql);
   }
 
@@ -198,9 +199,12 @@ class Foretag extends Mobject {
    */
   public static function getCompanyIdByCampaignMemberCode($code) {
     global $db;
-    $validDate = $validDate['date'];
-    $sql = "SELECT id FROM " . self::TABLE . " WHERE campaignMemberCode = '" . $code . "'";
-    return $db->value($sql);
+    if ($code != null && $code != '') {
+      $sql = "SELECT id FROM mm_foretag WHERE campaignMemberCode = '" . $code . "'";
+      return $db->value($sql);
+    } else{
+      return -1;
+    }
   }
 
   /**
@@ -369,8 +373,6 @@ class Foretag extends Mobject {
     }
   }
 
-  
-  
   /**
    * krillo 120821 Rewrote all
    * The sql gets all competitors with "slutdatum" max 4 days in the future, using the new db-field slutDatum 
@@ -412,19 +414,18 @@ www.motiomera.se';
       @file_put_contents(EMAIL_SEND_LOG_FILE, "\n**********  " . $emailName . " - " . count($users) . " adresser att skicka till *********** \n", FILE_APPEND);
       $i = 1;
       foreach ($users as $user) {
-          try {
-            $logMessage = $i++ . ' |  id: ' . $user['foretag_id'] . ' | ' . $user['foretag_namn'] . ' | user_id: ' . $user['id'] . ' | ' . $user['user_anamn'] . ' | start. ' . $user['startDatum'] . ' | slut: ' . $user['slutDatum'];            
-            Misc::sendEmail($user['user_epost'], $SETTINGS["email"], $subject, $message, $logMessage);
-          } catch (Exception $e) {
-            echo 'Message: ' .$e->getMessage();
-          }        
+        try {
+          $logMessage = $i++ . ' |  id: ' . $user['foretag_id'] . ' | ' . $user['foretag_namn'] . ' | user_id: ' . $user['id'] . ' | ' . $user['user_anamn'] . ' | start. ' . $user['startDatum'] . ' | slut: ' . $user['slutDatum'];
+          Misc::sendEmail($user['user_epost'], $SETTINGS["email"], $subject, $message, $logMessage);
+        } catch (Exception $e) {
+          echo 'Message: ' . $e->getMessage();
+        }
       }
       Misc::logMotiomera("End foretag::sendRemindAboutSteg()", 'info');
     }
   }
 
-  
-   /**
+  /**
    * This function sends email to all members that hava finished a tavling.
    * This function gets the lastes written post in mm_tavling_save and checks if the stop_datum (for the competition) 
    * is less than 4 days ago, then send email to all with same tavlings_id.
@@ -458,9 +459,7 @@ www.motiomera.se';
       Misc::logMotiomera("No tavling ended the last sunday", 'info');
     }
     Misc::logMotiomera("End foretag::foretagsTavlingEndSendEmail()", 'info');
-  } 
-  
-  
+  }
 
   /**
    * This function sends the email
@@ -529,9 +528,9 @@ www.motiomera.se';
             WHERE a.id = b.medlem_id
             AND b.foretag_id = c.id
             AND a.epostBekraftad = 1
-            AND UNIX_TIMESTAMP(c.slutDatum) BETWEEN ' .$subDays  . ' AND ' . $jDate->getOrigDate(true);
-    $users = $db->allValuesAsArray($sql);    
-    
+            AND UNIX_TIMESTAMP(c.slutDatum) BETWEEN ' . $subDays . ' AND ' . $jDate->getOrigDate(true);
+    $users = $db->allValuesAsArray($sql);
+
     $tavling = new Tavling('0000-00-00', '0000-00-00');
     $save = array();
     $i = 1;
@@ -567,7 +566,7 @@ www.motiomera.se';
                     'tavlings_id' => $tavling->getId(),
                     'steg' => $steg,
                     'start_datum' => $startDatum,
-                    'stop_datum' => $slutDatum, 
+                    'stop_datum' => $slutDatum,
                     'antal_dagar' => $antal_dagar
                 );
                 Misc::logMotiomera(" " . $i++ . " tavling_id: " . $tavling->getId() . " | " . $medlem->getForetag()->getNamn() . ' | id: ' . $medlem->getId() . ' | ' . $medlem->getAnamn() . " | steg: $steg" . " | email: " . $medlem->getEpost(), 'ok');
@@ -1875,12 +1874,10 @@ www.motiomera.se';
    * Nbr of competition days from db
    * added by krillo 120814
    */
-  public function getAntalTavlingsDagar() {    
+  public function getAntalTavlingsDagar() {
     return $this->getVeckor() * 7;
   }
- 
-  
-  
+
   /**
    * return true or false if company has an ongoing competition
    * @author Kristian Erendi, Reptilo 2012-05-05
@@ -2339,7 +2336,7 @@ www.motiomera.se';
   public function setStartdatum($datum) {
     $this->startdatum = $datum;
     $jDate = new JDate($datum);
-    $this->setSlutdatum($jDate->addDays($this->getVeckor()*7 -1)->getDate());
+    $this->setSlutdatum($jDate->addDays($this->getVeckor() * 7 - 1)->getDate());
   }
 
   /**
@@ -2359,7 +2356,7 @@ www.motiomera.se';
   public function setVeckor($arg) {
     $this->veckor = $arg;
     $jDate = new JDate($this->getStartdatum());
-    $this->setSlutdatum($jDate->addDays($arg * 7 - 1)->getDate());        
+    $this->setSlutdatum($jDate->addDays($arg * 7 - 1)->getDate());
   }
 
   /**
