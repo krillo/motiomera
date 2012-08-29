@@ -46,7 +46,6 @@ if (is_numeric($companyId) && $companyId > 0) {
   //everthing looks fine sofar, create the user
   try {
     $foretag = Foretag::loadById($companyId);
-    $foretagsnyckel = $foretag->generateNycklar(1, true, $foretag->getOrderId());
     $kommun = Kommun::loadById($order->kid);
     $kontotyp = ''; //legacy or not used right now
     $maffcode = ''; //legacy or not used right now
@@ -60,6 +59,7 @@ if (is_numeric($companyId) && $companyId > 0) {
     $medlem->setCountry($order->country);
     $medlem->setEpostBekraftad(1); //medlem valid
     $medlem->setLevelId(1);
+    $foretagsnyckel = $foretag->generateNycklar(1, true, $foretag->getOrderId());    
     $medlem->setForetagsnyckel($foretagsnyckel[0]);
     $medlem->commit();
     $medlem->loggaIn($order->email, $order->pass, true);
@@ -68,7 +68,7 @@ if (is_numeric($companyId) && $companyId > 0) {
   } catch (Exception $e) {
     $msg = $e->getMessage();
     Misc::logMotiomera("Exception -  medlem_foretagskod.php  Params:\n" . print_r($order, true) . "\n CompanyId = $companyId \n Foretagsnyckel  \n " . print_r($foretagsnyckel, true) . "\n msg: " . $msg. "\n", 'ERROR');
-    $redirPage .= "&msg=unknown_error";
+    $redirPage .= "&msg=" . urlencode($msg);
     header('Location: ' . $redirPage);
   }
 } else {

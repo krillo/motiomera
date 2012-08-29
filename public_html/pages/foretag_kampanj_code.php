@@ -283,7 +283,8 @@ $order = new stdClass;
    case 'wrong_code':
      echo '<p class="mmRed mmObsBiggerText">Fel kod, prova igen!</p>';
    break;
-   default:  //empty
+   default:
+     echo '<p class="mmRed mmObsBiggerText">'. $order->msg .'</p>';
    break;
    }
    ?>
@@ -294,7 +295,7 @@ $order = new stdClass;
         <span id="valid" class="validicon"><img src="/img/icons/gronbock_25.png"></span>
         <span id="invalid" class="mmRed mmFormError">Felaktigt</span>        
       </li>
-      <li><label for="alias">Välj alias</label>
+      <li><label for="alias">Unikt användarnamn</label>
         <input type="text" name="anamn" id="anamn" class="" onfocus="getById('mmANamnError').style.display = 'none';" onblur="mm_ajaxValidera('mmANamnError', 'anamn', this.value);" value="<?php echo $order->anamn; ?>"/>
         <span id="mmANamnError" class="mmRed mmFormError">Upptaget</span>
       </li>
