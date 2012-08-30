@@ -28,9 +28,10 @@ class Foretag extends Mobject {
   protected $giltig; // string
   protected $epost; // string
   protected $startdatum; // string
-  protected $startdatumUnix; // string
+  protected $startdatumUnix; // int
   protected $slutdatum; // string
-  protected $slutdatumUnix; // string
+  protected $slutdatumUnix; // int
+  protected $veckor; // int  
   protected $antalAnstallda;
   protected $nycklar = array(); // strings
   protected $medlemmar = array(); // objects: Medlem
@@ -89,6 +90,8 @@ class Foretag extends Mobject {
       "sessionId" => "str",
       "giltig" => "str",
       "startdatum" => "str",
+      "slutdatum" => "str",
+      "veckor" => "int",
       "epost" => "str",
       "kanal" => "str",
       "compAffCode" => "str",
@@ -136,36 +139,37 @@ class Foretag extends Mobject {
   const FORETAGSMEDLEMS_EXTRA_DAYS = 7;  //one week free after competition is finished
   const TAVLINGSPERIOD_DAGAR = 34;    //5 weeks -1 day
   const MAX_LENGTH_AFFCODE = 20;
+  const DEFAULT_NO_WEEKS = 5;
 
   /**
    * Create a new Foretag
    * Since the isValid is a not null field it must always be read
    */
-  public function __construct($namn, Kommun $kommun, $losenord, $startdatum, $kanal, $compAffCode, $isValid, $dummy_object = false) {
+  public function __construct($namn, Kommun $kommun, $losenord, $startdatum, $kanal, $compAffCode, $isValid, $veckor = self::DEFAULT_NO_WEEKS, $dummy_object = false) {
     $this->setIsValid($isValid);
     if (!$dummy_object) {
       $this->setNamn($namn);
       $this->setKommun($kommun);
       $this->setANamn($this->skapaANamn());
-      $this->setStartdatum($startdatum);
+      $this->setVeckor($veckor);
+      $this->setStartdatum($startdatum);  //this calculates the slutdatum
       $this->setLosenord($losenord);
       $this->setKanal($kanal);
       $this->setCompAffCode($compAffCode);
+      $this->setCampaignMemberCode(null);
       $this->commit();
 
-      $this->getSlutdatum();  //save slutdatum
-      $this->getSlutdatumUnix();  //save slutdatum
+      //$this->getSlutdatum();  //save slutdatum
+      //$this->getSlutdatumUnix();  //save slutdatum
     }
   }
 
   public static function __getEmptyObject() {
     $class = get_class();
-    return new $class(null, Kommun::__getEmptyObject(), null, null, null, null, null, 1, true);   //"isValid" and is set to 1 until correct order flow is implemented  Krillo 090428		
+    return new $class(null, Kommun::__getEmptyObject(), null, null, null, null, 1, self::DEFAULT_NO_WEEKS, true);   //"isValid" and is set to 1 until correct order flow is implemented  Krillo 090428		
   }
 
   // STATIC FUNCTION ////////////////////////////////////////
-
-
 
   /**
    * Return all valid campaign member codes
@@ -178,12 +182,12 @@ class Foretag extends Mobject {
    */
   public static function getValidCampaignMemberCodes() {
     global $db;
-    $validDate = JDate::addWeeks(-5);
-    $validDate = $validDate['date'];
-    $sql = "SELECT id, campaignMemberCode FROM " . self::TABLE . " WHERE campaignMemberCode is not null and startdatum >= '". $validDate ."'";
+    $jDate = new JDate();
+    $validDate = $jDate->subWeeks(self::DEFAULT_NO_WEEKS)->getDate();
+    $sql = "SELECT id, campaignMemberCode FROM mm_foretag WHERE campaignMemberCode IS NOT NULL AND  campaignMemberCode != '' AND startdatum >= '$validDate'";
     return $db->allValuesAsArray($sql);
   }
-  
+
   /**
    * Return the id of the company for the campaign member code.
    * No validation if it is valid or not.
@@ -195,9 +199,12 @@ class Foretag extends Mobject {
    */
   public static function getCompanyIdByCampaignMemberCode($code) {
     global $db;
-    $validDate = $validDate['date'];
-    $sql = "SELECT id FROM " . self::TABLE . " WHERE campaignMemberCode = '". $code ."'";
-    return $db->value($sql);
+    if ($code != null && $code != '') {
+      $sql = "SELECT id FROM mm_foretag WHERE campaignMemberCode = '" . $code . "'";
+      return $db->value($sql);
+    } else{
+      return -1;
+    }
   }
 
   /**
@@ -322,6 +329,7 @@ class Foretag extends Mobject {
   public static function loadByMedlem(Medlem $medlem, $activeOnly = false) {
     global $db;
     $sql = "SELECT foretag_id, nyckel FROM " . self::KEY_TABLE . " WHERE medlem_id = " . $medlem->getId() . " ORDER BY datum DESC LIMIT 1";
+    //echo $sql . "\n"; 
     $result = $db->row($sql);
 
     $id = $result["foretag_id"];
@@ -366,26 +374,36 @@ class Foretag extends Mobject {
   }
 
   /**
-   * krillo 091026 changed the sql to only get the records that have a competition thats ending.
-   * This will work if the mail is sent on a friday
+   * krillo 120821 Rewrote all
+   * The sql gets all competitors with "slutdatum" max 4 days in the future, using the new db-field slutDatum 
+   * This will work fine on fridays
+   *
+   * @global type $db
+   * @param type $sendEmail if set to false no email will be sent and the users array will be retuned 
+   * @return type 
    */
-  public static function sendRemindAboutSteg() {
-    Misc::logMotiomera("Start foretag::sendRemindAboutSteg(),  Commence email sending for ended tavling. Please see email.log file", 'info');
-    $emailName = "Tavling slutar - fredag";
+  public static function sendRemindAboutSteg($sendEmail = true) {
     global $db;
-    $sql = 'SELECT a.id FROM mm_medlem a, mm_foretagsnycklar b, mm_foretag c
-    WHERE a.id = b.medlem_id
-    AND b.foretag_id = c.id
-    AND a.epostBekraftad = 1
-    AND UNIX_TIMESTAMP(c.startDatum) >= ' . (time() - ((self::TAVLINGSPERIOD_DAGAR) * 86400)) .
-            ' AND UNIX_TIMESTAMP(c.startDatum) < ' . (time() - ((self::TAVLINGSPERIOD_DAGAR - 4) * 86400));
-
-    $subject = 'Öka takten, sista kvarten!';
-    $message = 'Hej kära MotioMera-deltagare,
+    $jDate = new JDate();
+    $plusDays = $jDate->addDays(4)->getDate(true); // today + 4 days in unixtime
+    $sql = 'SELECT c.id as foretag_id, namn as foretag_namn,  a.id, a.aNamn as user_anamn, a.epost as user_epost, c.startDatum, c.slutDatum FROM mm_medlem a, mm_foretagsnycklar b, mm_foretag c
+            WHERE a.id = b.medlem_id
+            AND b.foretag_id = c.id
+            AND a.epostBekraftad = 1
+            AND UNIX_TIMESTAMP(c.slutDatum) BETWEEN ' . time() . ' AND ' . $plusDays;
+    echo $sql;
+    $users = $db->allValuesAsArray($sql);
+    if (!$sendEmail) {
+      return $users;
+    } else {
+      Misc::logMotiomera("Start foretag::sendRemindAboutSteg(),  Commence email sending for ended tavling. Please see email.log file", 'info');
+      $emailName = "Tavling slutar - fredag";
+      $subject = 'Öka takten, sista kvarten!';
+      $message = 'Hej kära MotioMera-deltagare,
 
 Helgen är nära och fortfarande finns chansen att snygga till siffrorna i stegtävlingen. Söndag är tävlingens sista dag, men under hela måndagen kan du registrera dina steg. På tisdag presenteras sen slutesultatet. Glöm alltså inte att registrera dina steg senast under måndagen!
 
-Efter företagstävlingens slut finns möjlighet för alla deltagare att fortsätta använda MotioMera som privatperson. Helt gratis. Du kommer att få ett mail med mer information vid tävlingens slut. Det är också möjligt för ditt företag att genast starta en ny tävlingsomgång om ni vill.
+Efter företagstävlingens slut finns möjlighet för alla deltagare att fortsätta använda MotioMera som privatperson. Helt gratis. Du kommer att få ett mail med mer information vid tävlingens slut.
 
 Kör så det ryker! MVH - alla i MotioMera-teamet
 
@@ -393,21 +411,18 @@ MotioMera - Sveriges roligaste stegtävling
 
 www.motiomera.se';
 
-    $i = 1;
-    $users = $db->valuesAsArray($sql);
-    @file_put_contents(EMAIL_SEND_LOG_FILE, "\n**********  " . $emailName . " - " . count($users) . " adresser att skicka till *********** \n", FILE_APPEND);
-    foreach ($users as $user) {
-      $medlem = Medlem::loadById($user);
-      if (isset($medlem)) {
+      @file_put_contents(EMAIL_SEND_LOG_FILE, "\n**********  " . $emailName . " - " . count($users) . " adresser att skicka till *********** \n", FILE_APPEND);
+      $i = 1;
+      foreach ($users as $user) {
         try {
-          $logMessage = $i++ . ' | ' . $medlem->getForetag()->getNamn() . ' | id: ' . $medlem->getId() . ' | ' . $medlem->getAnamn();
-          Misc::sendEmail($medlem->getEpost(), $SETTINGS["email"], $subject, $message, $logMessage);
+          $logMessage = $i++ . ' |  id: ' . $user['foretag_id'] . ' | ' . $user['foretag_namn'] . ' | user_id: ' . $user['id'] . ' | ' . $user['user_anamn'] . ' | start. ' . $user['startDatum'] . ' | slut: ' . $user['slutDatum'];
+          Misc::sendEmail($user['user_epost'], $SETTINGS["email"], $subject, $message, $logMessage);
         } catch (Exception $e) {
-          //
+          echo 'Message: ' . $e->getMessage();
         }
       }
+      Misc::logMotiomera("End foretag::sendRemindAboutSteg()", 'info');
     }
-    Misc::logMotiomera("End foretag::sendRemindAboutSteg()", 'info');
   }
 
   /**
@@ -420,7 +435,7 @@ www.motiomera.se';
    * 
    * @author krillo
    */
-  public static function foretagsTavlingEndSendEmail() {
+  public static function foretagsTavlingEndSendEmail($sendEmail = true) {
     global $db;
     Misc::logMotiomera("Start foretag::foretagsTavlingEndSendEmail(), Commence email sending for ended tavling ", 'info');
     //get last user from mm_tavling_save, if correct date then send emails  
@@ -429,8 +444,6 @@ www.motiomera.se';
     $tavlingsId = $lastUser['tavlings_id'];
     $stopDate = date("Ymd", $lastUser['stop_datum']);
     $today = date("Ymd");
-    //$daysBetween = $today - $stopDate;  //not correct calculation..
-
     $between = time() - $lastUser['stop_datum'];
     $secPerDay = 24 * 60 * 60;
     $daysBetween = intval(floor($between / $secPerDay));
@@ -506,35 +519,30 @@ www.motiomera.se';
    * krillo 110511 changed to add extra days after closed competition FORETAGSMEDLEMS_EXTRA_DAYS
    * krillo 110817 changed to take a date parameter to be bale to run from admin. Please use only Tuesdays after finished competition
    */
-  public static function saveAndEndForetagsTavling($date = null) {
+  public static function saveAndEndForetagsTavling($date = false) {
     Misc::logMotiomera("Start foretag::saveAndEndForetagsTavling() ", 'info');
     global $db;
-    if ($date == null) {
-      $date = date("Ymd");
-    }
-    $time = strtotime($date);
-
-    $sql = 'SELECT a.id FROM mm_medlem a, mm_foretagsnycklar b, mm_foretag c
-    WHERE a.id = b.medlem_id
-    AND b.foretag_id = c.id
-    AND a.epostBekraftad = 1
-    AND UNIX_TIMESTAMP(c.startDatum) >= ' . ($time - ((self::TAVLINGSPERIOD_DAGAR + 3) * 86400)) .
-            ' AND UNIX_TIMESTAMP(c.startDatum) < ' . ($time - ((self::TAVLINGSPERIOD_DAGAR) * 86400));
-    //echo $sql;
+    $jDate = new JDate($date);
+    $subDays = $jDate->subDays(3)->getDate(true); // today - 3 days in unixtime
+    $sql = 'SELECT c.id as foretag_id, namn as foretag_namn,  a.id, a.aNamn as user_anamn, a.epost as user_epost, c.startDatum, c.slutDatum FROM mm_medlem a, mm_foretagsnycklar b, mm_foretag c
+            WHERE a.id = b.medlem_id
+            AND b.foretag_id = c.id
+            AND a.epostBekraftad = 1
+            AND UNIX_TIMESTAMP(c.slutDatum) BETWEEN ' . $subDays . ' AND ' . $jDate->getOrigDate(true);
+    $users = $db->allValuesAsArray($sql);
 
     $tavling = new Tavling('0000-00-00', '0000-00-00');
     $save = array();
     $i = 1;
-    $users = $db->valuesAsArray($sql);
     if (count($users) == 0) {
       Misc::logMotiomera("No tavling ended this last sunday", 'info');
     } else {  //commence saving
       Misc::logMotiomera("End of tavling, saving data for " . count($users) . " members", 'info');
       foreach ($users as $user) {
-        $medlem = Medlem::loadById($user);
+        $medlem = Medlem::loadById($user['id']);
         if (isset($medlem)) {
-          $startDatum = $medlem->getForetag()->getStartDatum();
-          $slutDatum = $medlem->getForetag()->getSlutdatum();
+          $startDatum = $user['startDatum']; //$medlem->getForetag()->getStartDatum();
+          $slutDatum = $user['slutDatum']; //$medlem->getForetag()->getSlutdatum();
           if ($tavling->getStartDatum() == '0000-00-00') {
             $tavling->setStartDatum($startDatum);  // give the Tavling object a correct startdate as soon as we've got one (we only do this once)
             $tavling->setSlutDatum($slutDatum);
@@ -547,6 +555,7 @@ www.motiomera.se';
               $lagId = 0;
             }
             $steg = $medlem->getStegTotal($startDatum, $slutDatum);
+            $antal_dagar = $medlem->getForetag()->getAntalTavlingsDagar();
             if ($steg > 0) {  //only save data for members who have more than 0 steg
               try {
                 $save[] = array(
@@ -557,11 +566,11 @@ www.motiomera.se';
                     'tavlings_id' => $tavling->getId(),
                     'steg' => $steg,
                     'start_datum' => $startDatum,
-                    'stop_datum' => $slutDatum
+                    'stop_datum' => $slutDatum,
+                    'antal_dagar' => $antal_dagar
                 );
                 Misc::logMotiomera(" " . $i++ . " tavling_id: " . $tavling->getId() . " | " . $medlem->getForetag()->getNamn() . ' | id: ' . $medlem->getId() . ' | ' . $medlem->getAnamn() . " | steg: $steg" . " | email: " . $medlem->getEpost(), 'ok');
-                //add some extra days after finished competition
-                $medlem->addPaidUntil(self::FORETAGSMEDLEMS_EXTRA_DAYS);
+                $medlem->addPaidUntil(self::FORETAGSMEDLEMS_EXTRA_DAYS);  //add some extra days after finished competition
                 $medlem->commit();
               } catch (Exception $e) {
                 Misc::logMotiomera(" " . $i++ . " | something went wrong", 'error');
@@ -584,7 +593,7 @@ www.motiomera.se';
         $sql = "INSERT INTO " . Tavling::RELATION_TABLE . " SET ";
         foreach ($m as $field => $value) {
           $i++;
-          if ($i == 8) {
+          if ($i == 9) {
             $sql.= $field . " = '" . $value . "'";
           } else {
             $sql.= $field . " = '" . $value . "', ";
@@ -1819,24 +1828,54 @@ www.motiomera.se';
 
   /**
    * returns the slutdatum in seconds (unix timestamp),  which is calculated from the startdate
+   *    
+   * Change by Krillo 120814:
+   * The slutdatum is now stored in the db
    *
    * @return int
    * @author Aller Internet, Kristian Erendi
    */
   public function getSlutdatumUnix() {
-    $this->slutdatumUnix = strtotime($this->startdatum) + (60 * 60 * 24 * (self::TAVLINGSPERIOD_DAGAR));
+    $this->slutdatumUnix = strtotime($this->slutdatum);
     return $this->slutdatumUnix;
+
+
+    //old code, reference, Krillo 120814
+    //$this->slutdatumUnix = strtotime($this->startdatum) + (60 * 60 * 24 * (self::TAVLINGSPERIOD_DAGAR));
+    //return $this->slutdatumUnix;
   }
 
   /**
    * returns the slutdatum as a date (2010-08-01),  which is calculated from the startdate
    *
+   * Change by Krillo 120814:
+   * The slutdatum is now stored in the db
+   * 
    * @return string 
    * @author Aller Internet, Kristian Erendi
    */
   public function getSlutdatum() {
-    $this->slutdatum = date("Y-m-d", $this->getSlutdatumUnix());
     return $this->slutdatum;
+
+    //old code, reference, Krillo 120814    
+    //$this->slutdatum = date("Y-m-d", $this->getSlutdatumUnix());
+    //return $this->slutdatum;
+  }
+
+  /**
+   * get veckor from db
+   * added by krillo 120814 
+   */
+  public function getVeckor() {
+    return $this->veckor;
+  }
+
+  /**
+   * Nbr of competition days from db
+   * added by krillo 120814
+   */
+  public function getAntalTavlingsDagar() {
+    return $this->getVeckor() * 7;
   }
 
   /**
@@ -2287,13 +2326,37 @@ www.motiomera.se';
     $this->giltig = $datum;
   }
 
+  /**
+   * Change Krillo 120814:
+   * Since the slutdatum now also is in the db, then any changes to startdatum must change the slutdautm as well.
+   * get the 'veckor' from db  and calculate the new slutdatum
+   * 
+   * @param type $datum 
+   */
   public function setStartdatum($datum) {
-
-    //		Security::demand(FORETAG, $this);
-    //		if(!Misc::isDate($datum, "Y-m-d"))
-    //			throw new ForetagException('$datum har ett felaktigt format', -11);
-
     $this->startdatum = $datum;
+    $jDate = new JDate($datum);
+    $this->setSlutdatum($jDate->addDays($this->getVeckor() * 7 - 1)->getDate());
+  }
+
+  /**
+   * Set slutdatum (to db)
+   * added by krillo 120814
+   * @param type $datum 
+   */
+  public function setSlutdatum($arg) {
+    $this->slutdatum = $arg;
+  }
+
+  /**
+   * Set veckor (to db)
+   * added by krillo 120814
+   * @param type $datum 
+   */
+  public function setVeckor($arg) {
+    $this->veckor = $arg;
+    $jDate = new JDate($this->getStartdatum());
+    $this->setSlutdatum($jDate->addDays($arg * 7 - 1)->getDate());
   }
 
   /**

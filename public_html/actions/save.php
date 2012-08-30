@@ -276,6 +276,8 @@ switch($_REQUEST["table"]){
 					$foretag->setNamn($_POST["namn"]);
 				if(!empty($_POST["startdatum"]))
 					$foretag->setStartdatum($_POST["startdatum"]);
+				if(!empty($_POST["veckor"]))
+					$foretag->setVeckor($_POST["veckor"]);
 			}
 			$foretag->commit();
 		}

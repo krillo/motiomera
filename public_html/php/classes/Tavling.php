@@ -282,15 +282,16 @@ class Tavling extends Mobject
   
   /**
    * Get all companys for one competition in descending order
-   * If $foretagid is submitted the only that company is fetched
-   * compDays is the number of days to divide with to get the average
+   * If $foretagid is submitted then only that company is fetched
+   * 
+   * 2012-08-23 Change by Krillo
+   * The parameter $compDays is removed, the number of competition days are stored in the db and used for calc average
    * 
    * @author Krillo
    * @param string $tavlingsid
-   * @param int $compDays   the number of days that the competition is held  (five weeks gives 35 days)
    * @param int $foretagid  optional
    */ 
-  public static function getResultCompany($tavlingsid, $compDays, $limit, $foretagid='' ){
+  public static function getResultCompany($tavlingsid, $limit, $foretagid='' ){
     global $db;
     $addCompany = '';
     if(!empty($foretagid)){
@@ -300,7 +301,7 @@ class Tavling extends Mobject
     if($limit > 0 ){
       $addLimit = " LIMIT $limit ";
     }                 
-    $sql = "SELECT a.foretag_id, c.namn as foretag_namn, sum(a.steg) as foretag_steg_tot, sum(a.steg)/(COUNT(a.medlem_id)*$compDays) as foretag_steg_medel, a.start_datum, a.stop_datum
+    $sql = "SELECT a.foretag_id, c.namn as foretag_namn, sum(a.steg) as foretag_steg_tot, sum(a.steg)/(COUNT(a.medlem_id)*a.antal_dagar) as foretag_steg_medel, a.start_datum, a.stop_datum
       FROM " . self::RELATION_TABLE . " a, " . Foretag::TABLE ." c  
       WHERE a.tavlings_id = $tavlingsid ";
     $sql .= $addCompany;          
@@ -317,16 +318,17 @@ class Tavling extends Mobject
   /**
    * Get all compeditors for one competition in descending order
    * If $foretagid is submitted then only that company is fetched
-   * compDays is the number of days to divide with to get the average
    * It also adds a rank (rownum) to each member
    * 
+   * 2012-08-23 Change by Krillo
+   * The parameter $compDays is removed, the number of competition days are stored in the db and used for calc average 
+   * 
    * @author Krillo
-   * @param string $tavlingsid
-   * @param int $compDays   the number of days that the competition is held  (five weeks gives 35 days) 
+   * @param string $tavlingsid 
    * @param int $limit      if a number bigger than 0 is submitted then the result is limited at that number
    * @param int $foretagid  optional
    */ 
-  public static function getResultAllMembers($tavlingsid, $compDays, $limit, $foretagid=''){
+  public static function getResultAllMembers($tavlingsid, $limit, $foretagid=''){
     global $db;
     //reset rownum in db
     $var = "SET @rownum := 0;";
@@ -339,7 +341,7 @@ class Tavling extends Mobject
     if($limit > 0 ){
       $addLimit = " LIMIT $limit ";
     }    
-    $sql = "SELECT a.medlem_id, d.anamn as medlem_namn, a.foretag_id, a.steg, a.steg/$compDays as steg_medel ,a.start_datum, a.stop_datum, @rownum := @rownum + 1 AS rank
+    $sql = "SELECT a.medlem_id, d.anamn as medlem_namn, a.foretag_id, a.steg, a.steg/a.antal_dagar as steg_medel ,a.start_datum, a.stop_datum, @rownum := @rownum + 1 AS rank
       FROM " . self::RELATION_TABLE . " a, mm_medlem d   
       WHERE a.tavlings_id = $tavlingsid 
       AND d.id = a.medlem_id ";

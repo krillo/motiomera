@@ -1,113 +1,359 @@
 <?php
 
+/**
+ * A class for handling dates
+ *
+ * @author Jonas Bjork <jonas.bjork@aller.se>
+ * @author Kristian Erendi <kristian.erendi@aller.se>
+ *
+ * @copyright Aller media AB - 2011
+ * @license GNU General Public License, GPLv3
+ * @version 1.0
+ *
+ */
 class JDate {
 
-/**
- * Can take unix timestamp (as int), "Y-m-d", "Y-m-d H:i:s"
- * and nothing (null) as argument. Will return an array with
- * information about the week.
- *
- * @author Jonas Björk, jonas@jonasbjork.net
- */
-  public static function getWeek($date = false) {
-    $week = array();
-    if (!$date) {
-    $date = time();
-    }
-    if (is_int($date)) {
-      $date = $date;
-      $week['date'] = date("Y-m-d", $date);
-      $week['date_unix'] = $date;
-      $week['year'] = date("Y", $date);
+  private $unixtime = 0;
+  private $orig_unixtime = 0;
+
+// If we don't specify a date we use systems local time
+  function __construct($date = false) {
+    if (($date != false) && (!is_int($date))) {
+      $set_date = strtotime($date);
+    } else if (($date != false)) {
+      $set_date = $date;
     } else {
-      $week['date'] = $date;
-      $date = strtotime($date);
-      $week['date_unix'] = $date;
-      $week['year'] = date("Y", $date);      
+      $set_date = time();
     }
-    if(date("w", $date)==1) {
-      $week['monday'] = date("Y-m-d", $date);
-      $week['monday_unix'] = $date;
+    $this->unixtime = $set_date;
+    $this->orig_unixtime = $set_date;
+  }
+
+  /**
+   * Get object date in YYYY-MM-DD or UNIXTIME format
+   *
+   * @param boolean $unix sets the return format in unixtime
+   * @return string|int with date in format YYYY-MM-DD or UNIXTIME
+   */
+  public function getDate($unix = FALSE) {
+    if ($unix) {
+      return $this->unixtime;
     } else {
-      $week['monday'] = date("Y-m-d", strtotime("last Monday", $date));
-      $week['monday_unix'] = strtotime("last Monday", $date);
+      return date("Y-m-d", $this->unixtime);
     }
-    if(date("w", $date)==0) {
-      $week['sunday'] = date("Y-m-d", $date);
-      $week['sunday_unix'] = $date;
+  }
+
+
+  /**
+   * Get object date in YYYY-MM-DD HH:ii:ss where the time is always 00:00:00 or UNIXTIME format
+   *
+   * @param boolean $unix sets the return format in unixtime
+   * @return string|int with date in format YYYY-MM-DD HH:ii:ss or UNIXTIME
+   */
+  public function getDateTimeZero($unix = FALSE) {
+    if ($unix) {
+      return $this->unixtime;
     } else {
-      $week['sunday'] = date("Y-m-d", strtotime("next Sunday", $date));
-      $week['sunday_unix'] = strtotime("next Sunday", $date);
+      return date("Y-m-d H:i:s", $this->unixtime);
     }
-    $week['week_number'] = date("W", $date);
+  }
+
+
+  /**
+   * Get object original date, useful after we have used add/sub methods
+   * for days and weeks
+   *
+   * @param boolean $unix sets the return format in unixtime
+   * @return string|int with date in format YYYY-MM-DD or UNIXTIME
+   */
+  public function getOrigDate($unix = FALSE) {
+    if ($unix) {
+      return $this->orig_unixtime;
+    } else {
+      return date("Y-m-d", $this->orig_unixtime);
+    }
+  }
+
+  /**
+   * Get the year from the date
+   * @return int with the year
+   */
+  public function getYear() {
+    return date("Y", $this->unixtime);
+  }
+
+  /**
+   * Get the month from the date.
+   *
+   * @param boolean $zeropad switches leading zero on/off
+   * @return int with the month number
+   */
+  public function getMonth($zeropad = FALSE) {
+    $pad = ($zeropad) ? "n" : "m";
+    return date($pad, $this->unixtime);
+  }
+
+  /**
+   * Get the day from the date.
+   *
+   * @param boolean $zeropad switches leading zero on/off
+   * @return int with the day number
+   */
+  public function getDay($zeropad = FALSE) {
+    $pad = ($zeropad) ? "j" : "d";
+    return date($pad, $this->unixtime);
+  }
+
+  /**
+   * Get the week from the date.
+   *
+   * @param boolean $zeropad switches leading zero on/off
+   * @return int with the week number
+   */
+  public function getWeek($zeropad = FALSE) {
+    $week = date("W", $this->unixtime);
+    if ($zeropad) {
+      $week = ltrim($week, "0");
+    }
     return $week;
   }
-   
-/**
- * This function returns the week array for the requested year and week
- *
- * @param string $year 
- * @param string $week 
- * @return array weekarray
- * @author Aller Internet, Kristian Erendi
- */
-  public static function getDateFromWeek($year, $week) {
-   $udate = strtotime("01 January $year + $week weeks");
-   return self::getWeek(date('Y-m-d', $udate));
-  }
-   
-   
-/**
- * this function adds or subtracts weeks to the submitted date
- * if no date is submitted then current time is used
- *
- * @param string $date
- * @param int $i 
- * @return array weekarray
- * @author Aller Internet, Kristian Erendi
- */  
-  public static function addWeeks($i, $date=false) {
-    if (!$date) {
-      $udate = time();
-    }else{
-      if (is_int($date)) {
-        $udate = $date;
-      } else{
-        $udate = strtotime($date);
-      }
-    }
-    if($i > 0 ){
-      $i = '+'.$i;
-    } 
-    $date = date("Y-m-d", strtotime(date("Y-m-d", $udate) . " $i week"));
-    return self::getWeek($date);
-  } 
 
-/**
- * this function adds or subtracts days to the submitted date
- * if no date is submitted then current time is used
- *
- * @param string $date 
- * @param int $i 
- * @return array weekarray
- * @author Aller Internet, Kristian Erendi
- */    
-  public static function addDays($i, $date=false){
-    if (!$date) {
-      $udate = time();
-    }else{
-      if (is_int($date)) {
-        $udate = $date;
-      }else{
-        $udate = strtotime($date);
-      }
+  /**
+   * Reset the date to what we initialised the object with
+   */
+  public function reset() {
+    $this->unixtime = $this->orig_unixtime;
+  }
+
+  /**
+   * Returns the weekday name of the current date
+   * @return string weekday name
+   */
+  public function getWeekday() {
+    $wd = getdate($this->unixtime);
+    return $wd['weekday'];
+  }
+
+
+  /**
+   * Private helper method for getMonday, getTuesday..
+   *
+   * @param int $day is the day number in week (1=monday)
+   * @param boolean $unix decides if we want the return in unixtime format or not
+   * @return string|int with date in YYYY-MM-DD or UNIXTIME format
+   */
+  private function _getWeekday($day, $unix = FALSE) {
+    $day = $day - 1;
+    if (date("w", $this->unixtime) == 1) {
+      $monday = $this->unixtime;
+    } else {
+      $monday = strtotime("last Monday", $this->unixtime);
     }
-    if($i > 0 ){
-      $i = '+'.$i;
-    } 
-    $date = date("Y-m-d", strtotime(date("Y-m-d", $udate) . " $i day"));
-    return self::getWeek($date);
-  } 
-    
+    $time = strtotime(date("Y-m-d", $monday) . "+$day day");
+    if ($unix) {
+      return $time;
+    } else {
+      return date("Y-m-d", $time);
+    }
+  }
+
+  /**
+   * Get the monday in dateobject week
+   *
+   * @param boolean $unix decides if we want the return in unixtime format or not
+   * @return string|int with date in YYYY-MM-DD or UNIXTIME format
+   */
+  public function getMonday($unix = FALSE) {
+    return $this->_getWeekday(1, $unix);
+  }
+
+  /**
+   * Get the tuesday in dateobject week
+   *
+   * @param boolean $unix decides if we want the return in unixtime format or not
+   * @return string|int with date in YYYY-MM-DD or UNIXTIME format
+   */
+  public function getTuesday($unix = FALSE) {
+    return $this->_getWeekday(2, $unix);
+  }
+
+  /**
+   * Get the wednesday in dateobject week
+   *
+   * @param boolean $unix decides if we want the return in unixtime format or not
+   * @return string|int with date in YYYY-MM-DD or UNIXTIME format
+   */
+  public function getWednesday($unix = FALSE) {
+    return $this->_getWeekday(3, $unix);
+  }
+
+  /**
+   * Get the thursday in dateobject week
+   *
+   * @param boolean $unix decides if we want the return in unixtime format or not
+   * @return string|int with date in YYYY-MM-DD or UNIXTIME format
+   */
+  public function getThursday($unix = FALSE) {
+    return $this->_getWeekday(4, $unix);
+  }
+
+  /**
+   * Get the friday in dateobject week
+   *
+   * @param boolean $unix decides if we want the return in unixtime format or not
+   * @return string|int with date in YYYY-MM-DD or UNIXTIME format
+   */
+  public function getFriday($unix = FALSE) {
+    return $this->_getWeekday(5, $unix);
+  }
+
+  /**
+   * Get the saturday in dateobject week
+   *
+   * @param boolean $unix decides if we want the return in unixtime format or not
+   * @return string|int with date in YYYY-MM-DD or UNIXTIME format
+   */
+  public function getSaturday($unix = FALSE) {
+    return $this->_getWeekday(6, $unix);
+  }
+
+  /**
+   * Get the sunday in dateobject week
+   *
+   * @param boolean $unix decides if we want the return in unixtime format or not
+   * @return string|int with date in YYYY-MM-DD or UNIXTIME format
+   */
+  public function getSunday($unix = FALSE) {
+    return $this->_getWeekday(7, $unix);
+  }
+
+  /**
+   * Add day or days to the date
+   *
+   * @param int $days adds specified days to the date
+   */
+  public function addDays($days) {
+    if (!is_int($days))
+      return FALSE;
+
+    if ($days > 0) {
+      $this->unixtime = strtotime(date("Y-m-d", $this->unixtime) . "+$days day");
+      return $this;
+    }
+  }
+
+  /**
+   * Subtract day or days from the date
+   *
+   * @param int $days subtracts specified days from the date
+   */
+  public function subDays($days) {
+    if (!is_int($days))
+      return FALSE;
+
+    if ($days > 0) {
+      $this->unixtime = strtotime(date("Y-m-d", $this->unixtime) . "-$days day");
+      return $this;
+    }
+  }
+
+  /**
+   * Add hours to the date
+   * @param int $hours adds specified hours to the date
+   */
+  public function addHours($hours) {
+    if (!is_int($hours))
+      return FALSE;
+
+    if ($hours > 0) {
+      $this->unixtime = strtotime(date("Y-m-d H:i:s", $this->unixtime) . "+$hours hour");
+      return $this;
+    }
+  }
+
+  /**
+   * Subtract hours from the date
+   * @param int $hours subtracts specified hours from the date
+   */
+  public function subHours($hours) {
+    if (!is_int($hours))
+      return FALSE;
+
+    if ($hours > 0) {
+      $this->unixtime = strtotime(date("Y-m-d H:i:s", $this->unixtime) . "-$hours hour");
+      return $this;
+    }
+  }
+
+
+  /**
+   * Add week or weeks to the date
+   *
+   * @param int $weeks adds specified weeks to the date
+   */
+  public function addWeeks($weeks) {
+    if (!is_int($weeks))
+      return FALSE;
+
+    if ($weeks > 0) {
+      $this->unixtime = strtotime(date("Y-m-d", $this->unixtime) . "+$weeks week");
+      return $this;
+    }
+  }
+
+  /**
+   * Subtract week or weeks from the date
+   *
+   * @param int $weeks subtracts specified weeks from the date
+   */
+  public function subWeeks($weeks) {
+    if (!is_int($weeks))
+      return FALSE;
+
+    if ($weeks > 0) {
+      $this->unixtime = strtotime(date("Y-m-d", $this->unixtime) . "-$weeks week");
+      return $this;
+    }
+  }
+
+  /**
+   * Set the date from specified year and week number. Always is a monday.
+   *
+   * @param int $year is the year
+   * @param int $week is the week number
+   */
+  public function setDateFromWeek($year, $week) {
+    $this->unixtime = strtotime("01 January $year + $week weeks");
+    $this->unixtime = $this->getMonday(true);
+    return $this;
+  }
+  
+  
+  /**
+   * Return how many days between two dates
+   * 
+   * @param <type> $start
+   * @param <type> $end
+   * @return <type> 
+   */
+  public static function dateDaysDiff($start, $end){
+    $start_ts = strtotime($start);
+    $end_ts = strtotime($end);
+    $diff =  $end_ts - $start_ts;
+    return round($diff / 86400);
+  }
+
+
+  /**
+   * 
+   * 
+   * @param <type> $start
+   * @param <type> $end
+   * @return <type> 
+   */
+  public static function dateWeekDiff($start, $end){
+    $days = self::dateDaysDiff($start, $end);
+    return round($days / 7);
+  }
+  
 }
-?>

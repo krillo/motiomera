@@ -1,4 +1,28 @@
 <?php
+
+/**
+ *
+ * 
+ * 
+ * NO longer in use    Krillo 2012
+ * 
+ * 
+ * 
+ * 
+ * 
+ *  
+ */
+
+
+
+
+
+
+
+
+
+
+
 	global $USER;
 	$smarty = new MMSmarty();
 	

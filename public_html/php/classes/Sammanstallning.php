@@ -46,6 +46,7 @@ class Sammanstallning
  * 
  * This function should be run every morning as a batch
  *
+ * 
  * @return void
  * @author Aller Internet, Kristian Erendi
  */
@@ -75,7 +76,7 @@ class Sammanstallning
          $pokalStartDate = $medlem->getPokalStart();
        }
 
-       $pokalStopDateArray = JDate::addDays(self::KVARTAL + 1, $pokalStartDate);  //one extra day slack on date
+       $pokalStopDateArray = JDateLegacy::addDays(self::KVARTAL + 1, $pokalStartDate);  //one extra day slack on date
        if(time() > $pokalStopDateArray['date_unix']){
         //pokal date expired, use this date to check if pokal is deserved and reset pokal start date
         $steg = $medlem->getStegTotal($pokalStartDate , $today);
@@ -148,9 +149,10 @@ class Sammanstallning
     $medalj = null;
     try {
       if ($year != null && $week != null) {
-        $weekArray = JDate::getDateFromWeek($year, $week);
+        
+        $weekArray = JDateLegacy::getDateFromWeek($year, $week);
       } else {
-        $weekArray = JDate::addWeeks(-1);
+        $weekArray = JDateLegacy::addWeeks(-1);
       }
       Misc::logMotiomera("Start: Sammanstallning::sammanstallMedaljer() , year: " . $weekArray['year'] . ", week: " . $weekArray['week_number'], 'INFO');
       $medlemmar = Medlem::listAll();

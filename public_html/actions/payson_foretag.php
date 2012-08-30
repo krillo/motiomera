@@ -17,6 +17,7 @@ $req = new stdClass;
 !empty($_REQUEST['m_total']) ? $req->total = $_REQUEST['m_total'] : $req->total = 0;
 !empty($_REQUEST['m_incmoms']) ? $req->incmoms = $_REQUEST['m_incmoms'] : $req->incmoms = 0;
 !empty($_REQUEST['startdatumRadio']) ? $req->startdatumRadio = $_REQUEST['startdatumRadio'] : $req->startdatumRadio = 0;
+!empty($_REQUEST['weeks']) ? $req->weeks = $_REQUEST['weeks'] : $req->weeks = Foretag::DEFAULT_NO_WEEKS;
 !empty($_REQUEST['discount']) ? $req->discount = $_REQUEST['discount'] : $req->discount = '';
 !empty($_REQUEST['RE03']) ? $req->RE03 = $_REQUEST['RE03'] : $req->RE03 = 0;
 !empty($_REQUEST['RE04']) ? $req->RE04 = $_REQUEST['RE04'] : $req->RE04 = 0;
@@ -48,6 +49,7 @@ $req = new stdClass;
 !empty($_REQUEST['channel']) ? $req->channel = $_REQUEST['channel'] : $req->channel = '';
 !empty($_REQUEST['paytype']) ? $req->paytype = $_REQUEST['paytype'] : $req->paytype = '';
 !empty($_REQUEST['campcode']) ? $req->campcode = $_REQUEST['campcode'] : $req->campcode = '';
+!empty($_REQUEST['veckor']) ? $req->veckor = $_REQUEST['veckor'] : $req->veckor = '';
 
 
 //copy delivery data to buyer date
@@ -94,9 +96,9 @@ if (($req->RE03 == 0 && $req->RE04 == 0)) { //return to checkout
     //everthing looks fine sofar, create the company 
     $kommun = Kommun::loadById(150);  //Use Ale - legacy
     $foretagLosen = Foretag::skapaLosen();  //a new is created in api/order if a purchase is made
-    $isValid = 0;
-    $foretag = new Foretag($req->delCompany, $kommun, $foretagLosen, $req->startdatum, $req->channel, $req->campcode, $isValid);  //last param is "Order::isValid" and is set to 0 - i.e. not a valid order yet
-    $foretag->setTempLosenord($foretagLosen);  //a new is created in api/order if a purchase is made. Store this!
+    $isValid = 0;          
+    $foretag = new Foretag($req->delCompany, $kommun, $foretagLosen, $req->startdatum, $req->channel, $req->campcode, $isValid, $req->weeks);  //param "Order::isValid" and is set to 0 - i.e. not a valid order yet
+    $foretag->setTempLosenord($foretagLosen);  //a new is created in api/order if a purchase is made. Store this one!
     $foretag->setPayerCompanyName($req->company);
     $foretag->setPayerName($req->fname . ' ' . $req->lname);
     $foretag->setPayerFName($req->fname);
@@ -127,6 +129,7 @@ if (($req->RE03 == 0 && $req->RE04 == 0)) { //return to checkout
     $foretag->setReciverCountry($req->delCountry);
     $foretag->setCompanyName($req->company);
     $foretag->setCreatedDate();
+    $foretag->setVeckor($req->veckor);    
     $foretag->commit();
 
     $token = null;

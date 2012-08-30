@@ -1,7 +1,6 @@
 <?php
 
 include $_SERVER["DOCUMENT_ROOT"] . '/php/init.php';
-define("COMPETITION_DAYS", 35);
 define("DELTAGARTOPPEN_MAX", 200);
 define("LAGTOPPEN_MAX", 25);
 define("FORETAGSTOPPEN_MAX", 400);
@@ -19,10 +18,11 @@ if ($tid != null) {
       //print_r($medlemArray); 
       $foretag_namn = $medlemArray[0]['foretag_namn'];
       $foretag_id = $medlemArray[0]['foretag_id'];
-      $foretagArray = Tavling::getResultCompany($tid, COMPETITION_DAYS, - 1, $foretag_id);       //get the submitted companys data
+      
+      $foretagArray = Tavling::getResultCompany($tid, - 1, $foretag_id);       //get the submitted companys data
       //print_r($foretagArray);     
       $foretagLagArray = Tavling::getResultTeam($tid, $foretag_id);   //get all the teams with median for the submitted company  Lagtoppen
-      //print_r($foretagLagArray);   
+      //print_r($foretagLagArray);  
       $allaLag = array();       //get all the teams with member data for the submitted company   Slutresultat inom lagen
       foreach ($foretagLagArray as $key => $lag) {
         $foretagMedlemArray = Tavling::getResultCompanyTeamMember($tid, $lag['lag_id']);
@@ -31,18 +31,18 @@ if ($tid != null) {
       //print_r($allaLag);  
       //get all members for the submitted company
       //Deltagartoppen  no limit - all members (-1) 
-      $allCompMembArray = Tavling::getResultAllMembers($tid, COMPETITION_DAYS, -1, $foretag_id);
+      $allCompMembArray = Tavling::getResultAllMembers($tid, -1, $foretag_id);
       //print_r($allCompMembArray);  
       //get all members for the whole contest    Deltagartoppen
       //if the member ranks lower than DELTAGARTOPPEN_MAX then add her the the array
-      $allMembArray = Tavling::getResultAllMembers($tid, COMPETITION_DAYS, DELTAGARTOPPEN_MAX);
+      $allMembArray = Tavling::getResultAllMembers($tid, DELTAGARTOPPEN_MAX);
       if ($medlemArray[0]['rank'] > DELTAGARTOPPEN_MAX) {
         array_push($allMembArray, $medlemArray[0]);
       }
       //print_r($allMembArray);  	    
       $lagArray = Tavling::getResultTeam($tid);   //get all the teams with median  Lagtoppen
       //print_r($foretagLagArray);   
-      $allForetagArray = Tavling::getResultCompany($tid, COMPETITION_DAYS, FORETAGSTOPPEN_MAX);       //get all companys average   Foretagstoppen
+      $allForetagArray = Tavling::getResultCompany($tid, FORETAGSTOPPEN_MAX);       //get all companys average   Foretagstoppen
       //print_r($allForetagArray);   
       $medlem = Medlem::loadById($mid);
       $foretag = Foretag::loadById($medlem->getForetag()->getId());
@@ -50,7 +50,7 @@ if ($tid != null) {
       $smarty->assign("medlem", $medlem);      
       break;
     case isset($fid):
-      $foretagArray = Tavling::getResultCompany($tid, COMPETITION_DAYS, - 1, $fid);       //get the submitted companys data
+      $foretagArray = Tavling::getResultCompany($tid, - 1, $fid);       //get the submitted companys data
       //print_r($foretagArray);
       $foretagLagArray = Tavling::getResultTeam($tid, $fid);   //get all the teams with median for the submitted company  Lagtoppen
       //print_r($foretagLagArray);         
@@ -62,15 +62,15 @@ if ($tid != null) {
       //print_r($allaLag);  
       //get all members for the submitted company
       //Deltagartoppen  no limit - all members (-1) 
-      $allCompMembArray = Tavling::getResultAllMembers($tid, COMPETITION_DAYS, -1, $fid);
+      $allCompMembArray = Tavling::getResultAllMembers($tid, -1, $fid);
       //print_r($allCompMembArray);  
       //get all members for the whole contest    Deltagartoppen
       //if the member ranks lower than DELTAGARTOPPEN_MAX then add her the the array
-      $allMembArray = Tavling::getResultAllMembers($tid, COMPETITION_DAYS, DELTAGARTOPPEN_MAX);
+      $allMembArray = Tavling::getResultAllMembers($tid, DELTAGARTOPPEN_MAX);
       //print_r($allMembArray);  	    
       $lagArray = Tavling::getResultTeam($tid);   //get all the teams with median  Lagtoppen
       //print_r($foretagLagArray);   
-      $allForetagArray = Tavling::getResultCompany($tid, COMPETITION_DAYS, FORETAGSTOPPEN_MAX);       //get all companys average   Foretagstoppen
+      $allForetagArray = Tavling::getResultCompany($tid, FORETAGSTOPPEN_MAX);       //get all companys average   Foretagstoppen
       //print_r($allForetagArray);   
       $foretag = Foretag::loadById($fid);
       break;

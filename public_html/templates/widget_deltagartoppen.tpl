@@ -7,8 +7,7 @@
 	<div class="mmAlbumBoxTop">
 		<h3 {if $hof}style="position:relative; font-size:18px; color:#BB2523; text-align:center; top:60px;"{else} class="mmWhite BoxTitle"{/if}>Deltagartoppen</h3>
 	</div>
-	<div class="mmRightMinSidaBox">
-	
+	<div class="mmRightMinSidaBox">    
 	<strong>Snitt per dag från start</strong><br /><br />
 	<table width="155" class="toplista" cellpadding="0" cellspacing="0" border="0">
 		<tr>
@@ -35,3 +34,4 @@
 	</table>
 	</div>
 </div>
+  
