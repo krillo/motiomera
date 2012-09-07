@@ -213,6 +213,7 @@ function mm_status() {
   global $facebook;
   global $fbLoginUrl;
   @session_start();  //just to be able to read mm variables (logged in or not)
+ 
   if (empty($_SESSION["mm_mid"]) && empty($_SESSION["mm_sid"])) {
     
   } else {
@@ -278,6 +279,8 @@ function facebookInit(){
  */
 function includeSnippet($file) {
   global $mmStatus;
+  //print_r($mmStatus);
+  
   switch ($file) {
     //if not logged - show login area
     case 'inc_login_area.php':
@@ -293,10 +296,28 @@ function includeSnippet($file) {
       break;
     case 'inc_login_area.php':
       if ($mmStatus->mm_logged_in == 0) {
-        include "inc_login_area.php";
+        include $file;
       }
       break;
-
+    case 'inc_logged_in_menu.php':
+      if ($mmStatus->mm_logged_in == 1) {
+        include $file;
+      }
+      break;
+    case 'inc_page_promo_header.php':  //normal page, not logged in - show the promo area
+      if ($mmStatus->normal_page == 1){ // && $mmStatus->mm_logged_in == 0) {
+        include $file;
+      } 
+      break;
+    case 'inc_page_promo_footer.php':  //normal page, not logged in - show the promo area
+      if ($mmStatus->normal_page == 1){ // && $mmStatus->mm_logged_in == 0) {
+        include $file;
+      }
+      break;
+      
+      
+      
+      
     default:
       break;
   }

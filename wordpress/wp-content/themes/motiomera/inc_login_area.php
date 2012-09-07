@@ -2,11 +2,10 @@
   // toggle between login and new password
   var actionNyttLosen = "<?php echo MM_SERVER_ROOT_URL; ?>/actions/nyttlosen.php";
   var actionLogin = "<?php echo MM_SERVER_ROOT_URL; ?>/actions/login.php";
-  //var $j = jQuery.noConflict();
+  var $j = jQuery.noConflict();
   $j(document).ready(function() {
-    $j('#new-pass').change(function() {      
-      var newPassCheck = $j('input:#new-pass:checked').val();   
-      alert(newPassCheck);
+    $j('#new-pass').change(function() {  
+      var newPassCheck = $j('#new-pass:checked').val();   
       if(typeof newPassCheck == 'undefined'){
         $j('#login-submit').val('Logga in »');
         $j("#login-form").attr("action", actionLogin);
@@ -42,7 +41,6 @@
 
 <?php
 //global $mmStatus;
-print_r($mmStatus);
-
-  echo '<a href="'. $mmStatus->fb_login_url . '"> FAcebook login </a> ';
+//print_r($mmStatus);
+  echo '<a href="'. $mmStatus->fb_login_url . '"> Facebook login </a> ';
   ?>

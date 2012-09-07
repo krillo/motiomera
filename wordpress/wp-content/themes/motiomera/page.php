@@ -17,5 +17,5 @@
 			</div><!-- #content -->
 		</div><!-- #primary .site-content -->
     <div class="clear"></div>
-<?php if($mmStatus->normal_page){ include "inc_page_promo_footer.php"; }  //normal page - show the promo area ?>
+    <?php includeSnippet("inc_page_promo_footer.php");?>
 <?php get_footer(); ?>

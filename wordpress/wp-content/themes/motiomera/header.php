@@ -8,7 +8,7 @@
  * @since Motiomera 1.0
  */
 mm_status();
-global $mmStatus; 
+global $mmStatus;
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
   <head>
@@ -62,15 +62,18 @@ if ($site_description && ( is_home() || is_front_page() )) {
         <a href="<?php echo home_url('/'); ?>" title="http://motiomera.se" rel="home"><div id="motiomera-logo-mini" class=""></div></a>
         <div id="wp-nav-menu"><?php wp_nav_menu(array('theme_location' => 'primary')); ?></div>
       </div>
+      <?php includeSnippet("inc_logged_in_menu.php"); ?>           
     </nav>
- 
+    <div class="clear"></div>
+
+
     <div id="page" class="hfeed site">  
       <header id="masthead" class="site-header" role="banner">
-        <?php includeSnippet("inc_big_logo_area.php");?>        
+        <?php includeSnippet("inc_big_logo_area.php"); ?>        
         <div class="clear"></div>
-        <?php includeSnippet("inc_login_area.php");?>
-      
+        <?php includeSnippet("inc_login_area.php"); ?>
+
       </header>
-      <?php if($mmStatus->normal_page){ include "inc_page_promo_header.php"; }  //normal page - show the promo area ?>
+      <?php includeSnippet("inc_page_promo_header.php"); ?>         
       <div id="main">
-        
+
