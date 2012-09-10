@@ -207,6 +207,24 @@ class Foretag extends Mobject {
     }
   }
 
+
+  /**
+   * Return all active companys for today or a submitted date
+   * Krillo 12-09-10
+   * 
+   * @global type $db
+   * @param type $date
+   * @return array of all companys 
+   */
+  public static function getAllActiveCompanys($date = false) {
+    global $db;
+    $jDate = new JDate($date);
+    $theDate = $jDate->getDate();
+    $sql = "SELECT count(n.id) AS count, f.id id, namn, startdatum, slutdatum FROM mm_foretag f, mm_foretagsnycklar n WHERE f.id = n.foretag_id AND isvalid = 1 AND '$theDate' BETWEEN startdatum AND slutdatum group by f.id order by namn asc";
+    return $db->allValuesAsArray($sql);
+  }
+  
+  
   /**
    * Det händer att företag lägger flera ordrar fast vill att alla deltagarna ska tillhöra samma tävling. 
    * Denna metod slår ihop dessa ordrar genom att alla nycklarna för det första föreataget får det andra företagets id.

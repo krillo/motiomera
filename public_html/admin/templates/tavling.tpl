@@ -23,7 +23,52 @@
 </select>
 <select name="slutTid">
 {html_options values=$dates output=$dates selected=$slutTid_sel})
-</select>
+</select><br /><br/>
+
+
+
+{literal}
+<script type="text/javascript">
+  jQuery(document).ready(function(){
+
+
+    //progress wheel
+    jQuery("#loading")
+      .hide()  // hide it initially
+      .ajaxStart(function() {
+        jQuery(this).show();
+      })
+      .ajaxStop(function() {
+        jQuery(this).hide();
+    });
+
+
+    jQuery("#all").click(function(event) {
+      var all = jQuery("#all:checked").val();
+      if(all === undefined){
+        $('[type=checkbox]').attr('checked', false);
+      } else {
+        $('[type=checkbox]').attr('checked', true);
+
+      }  
+    });
+
+
+    
+  });
+</script>
+{/literal}
+
+
+
+
+
+
+
+<strong>Välj företag</strong><br/>
+{$checkbox}
+<br/>
+
 <input type="submit" value="Hämta" name="submit" />
 </form>
 <br />
@@ -83,6 +128,8 @@
 </tr>
 {/foreach}
 </table>
+
+
 <p>
 Html-kod att klistra in på textsidan där vinnarna presenteras:<br /><br />
 {$html}

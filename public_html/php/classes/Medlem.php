@@ -75,6 +75,8 @@ class Medlem extends Mobject {
   protected $city;
   protected $phone;
   protected $country;
+  protected $veckotavling;
+  protected $veckotavling_datum;
   protected $fields = array(
       "fNamn" => "str",
       "eNamn" => "str",
@@ -114,9 +116,10 @@ class Medlem extends Mobject {
       "city" => "str",
       "phone" => "str",
       "country" => "str",
+      "veckotavling" => "str",
+      "veckotavling_datum" => "str",
   );
 
-  const GET_PREN_URL = "http://mabra.allers.dropit.se/Templates/UserService____51240.aspx?key=aorkmfdfgge74hd8h2vd7&get=Subscriptions&customerid=";
   const MIN_LENGTH_ANAMN = 3;
   const MIN_LENGTH_FNAMN = 2;
   const MIN_LENGTH_ENAMN = 2;
@@ -845,7 +848,7 @@ class Medlem extends Mobject {
     if (!$foretag) {
       $foretag = $this->getForetag();
     }
-    if ($foretag) {    
+    if ($foretag) {
       return $foretag->isActiveCompetition();
     } else {
       return null;
@@ -857,12 +860,12 @@ class Medlem extends Mobject {
    * This is to aid to Smarty tempate
    * 
    * @author Kristian Erendi, Reptilo 2012-05-05  
-   */  
+   */
   public function isActiveCompetitionCSS() {
     if (!$foretag) {
       $foretag = $this->getForetag();
     }
-    if ($foretag) {    
+    if ($foretag) {
       return $foretag->isActiveCompetitionCSS();
     } else {
       return null;
@@ -923,6 +926,14 @@ class Medlem extends Mobject {
 
   public function getPhone() {
     return $this->phone;
+  }
+
+  public function getVeckotavling() {
+    return $this->veckotavling;
+  }
+
+  public function getVeckotavlingDatum() {
+    return $this->veckotavling_datum;
   }
 
   public function getLevelId() {
@@ -1405,6 +1416,14 @@ class Medlem extends Mobject {
 
   public function setCountry($arg) {
     $this->country = $arg;
+  }
+
+  public function setVeckotavling($arg) {
+    $this->veckotavling = $arg;
+  }
+
+  public function setVeckotavlingDatum($arg) {
+    $this->veckotavling_datum = $arg;
   }
 
   public function setANamn($anamn) {
@@ -2386,6 +2405,73 @@ class Medlem extends Mobject {
   }
 
   /**
+   * Gets winners
+   * Krillo 2012-09-10
+   * 
+   * @global $db $db
+   * @param type $date a date in the selected week
+   * @param type $antal_medlemmar return this nbr of winners 
+   * @param type $antal_steg  min nbr of steps to attend 
+   * @param type $foretagList select only from these companys
+   * @param type $prevWinners  select also from previous winners
+   * @return type 
+   */
+  public static function getVeckoVinnare($date, $antal_medlemmar, $antal_steg, $foretagList, $prevWinners) {
+    global $db;
+    $jDate = new JDate($date);
+    $monday = $jDate->getMonday();
+    $sunday = $jDate->getSunday();
+    if ($prevWinners) {
+      $prev = ' ';
+    } else {
+      $prev = " AND a.veckotavling = 0 ";
+    }
+
+    $sql =
+      "SELECT a.id, a.epost, a.aNamn, a.levelId, a.paidUntil, a.veckotavling, a.veckotavling_datum, SUM(steg) as steg, f.namn AS companyname, f.startdatum, f.slutdatum 
+      FROM mm_medlem a, mm_steg b, mm_foretagsnycklar n, mm_foretag f   
+			WHERE a.id = n.medlem_id 
+      AND n.foretag_id IN ($foretagList) 
+      AND n.foretag_id = f.id
+      $prev 
+      AND a.id = b.medlem_id 
+			AND b.datum >= '" . $monday . "' 
+			AND b.datum <= '" . $sunday . "' 
+      GROUP BY a.id 
+      HAVING SUM(steg) >= '" . $antal_steg . "' ";
+    //echo "<br>" . $sql;
+    $medlemmar = $db->allValuesAsArray($sql);
+    //print_r($medlemmar);
+
+    if (count($medlemmar) > $antal_medlemmar) {
+      $medlemmar = Misc::shuffle_assoc($medlemmar, 0);
+      $medlemmar = array_slice($medlemmar, 0, $antal_medlemmar);
+    }
+    return Misc::shuffle_assoc($medlemmar, 0);
+  }
+
+  
+  /**
+   * Update the members to be a week winner
+   * Krillo 2012-09-10
+   * 
+   * @global $db $db
+   * @param type $idArray
+   * @return type 
+   */
+  public static function updateVeckoVinnare($idArray) {
+    global $db;
+    $jDate = new JDate();    
+    $idArray = implode (',', $idArray);
+    $sql = "UPDATE mm_medlem SET veckotavling = 1, veckotavling_datum = '".$jDate->getDate()."' WHERE id IN ($idArray);";
+    $status = $db->query($sql);
+    return $status;
+  }
+  
+  
+  
+  
+  /**
    * Function getTavlingMedlemmar
    *
    * Returns an array with aNamn and ids and steg
@@ -2406,7 +2492,7 @@ class Medlem extends Mobject {
       $sqlp.= "GROUP BY a.id ";
       $sqlp.= "HAVING SUM(steg) >= '" . $antal_steg . "' ";
 
-      // echo $sqlg.$sqlp;
+      echo $sqlg . $sqlp;
       $medlemmarPro = $db->allValuesAsArray($sqlg . $sqlp);
 
       if (count($medlemmarPro) > $proAntal) {
@@ -2423,6 +2509,7 @@ class Medlem extends Mobject {
       $sqlg.= "AND levelId = 0 ";
       $sqlg.= "GROUP BY a.id ";
       $sqlg.= "HAVING SUM(steg) >= '" . $antal_steg . "' ";
+      echo $sqlg . $sqlp;
       $medlemmarGratis = $db->allValuesAsArray($sqlg);
 
       if (count($medlemmarGratis) > ($antal_medlemmar - $proAntal)) {
@@ -2443,6 +2530,7 @@ class Medlem extends Mobject {
     } else {
       $sqlg.= "GROUP BY a.id ";
       $sqlg.= "HAVING SUM(steg) >= '" . $antal_steg . "' ";
+      echo $sqlg . $sqlp;
       $medlemmar = $db->allValuesAsArray($sqlg);
 
       if (count($medlemmar) > $antal_medlemmar) {

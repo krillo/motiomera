@@ -6,7 +6,7 @@
       <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Stegtävling för ditt företag</h1>
         <div style="text-align:left;float:left;padding-left:50px;">
           <h2 style="text-align:left;float:left;">Var med i vår stora hösttävling! <br/> 24 sep - 28 okt. 
-            <br/><br/>Fem veckors tävling - vi sköter allt det praktiska!
+            <br/><br/>Välj från 5 till 8 veckors tävling <br/> vi sköter allt det praktiska!
           </h2>
           <div class="clear"></div>
           <p style="text-align:left;font-size:14px;">
@@ -34,8 +34,8 @@
       {/literal}
     </script>
     <div style="color:#3B5998;font-family:lucida,tahoma,verdana,arial,sans-serif;margin-left: 20px;margin-bottom: 20px;">
-      <h2 style="font-size: 21px;font-weight: bold;" >Har du sett motiomera på Facebook?</h2>
-      <p style="font-size: 12px;color:#3B5998;">Dela dina egna motionsbilder på vår <a href="http://www.facebook.com/pages/MotioMera/63606043494" style="color:#3B5998;text-decoration: underline;">Facebooksida!</p></a> 
+      <h2 style="font-size: 21px;font-weight: bold;" >Har du sett Motiomera.se på Facebook?</h2>
+      <p style="font-size: 12px;color:#3B5998;">Dela dina egna motiomerabilder på vår <a href="http://www.facebook.com/pages/MotioMera/63606043494" style="color:#3B5998;text-decoration: underline;">Facebooksida!</p></a> 
       <div class="fb-like" data-send="false" data-width="400" data-show-faces="true"></div>
     </div>       
     <div class="mmGrayLineMiddle"></div>
