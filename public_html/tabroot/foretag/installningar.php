@@ -22,6 +22,10 @@ Här kan du ändra lösenordet till denna administrationssida, samt ladda upp er
 			<th>Startdatum</th>
 			<td><input type="text" name="startdatum" value="<?php if (isset($foretag)) echo $foretag->getStartDatum(); ?>" /></td>
 		</tr>
+		<tr>
+			<th>Antal veckor</th>
+			<td><input type="text" name="veckor" value="<?php if (isset($foretag)) echo $foretag->getVeckor(); ?>" /></td>
+		</tr>
 		<?php } ?>	
 		<tr>
 			<th>Lösenord</th>

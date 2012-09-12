@@ -233,7 +233,7 @@ Order::getMondays(15);
 
 
 <!--form action="/actions/sendorder.php" method="get" --> <!--onsubmit="return motiomera_validateSkapaForetagForm(this)" -->
-<form action="/actions/payson_foretag.php" method="get" id="checkout">
+<form action="/actions/payson_foretag.php" method="post" id="checkout">
   <input type="hidden" name="type" value="foretag">
   <input type="hidden" name="m_exmoms"  id="m_exmoms" value=""> 
   <input type="hidden" name="m_freight" id="m_freight"  value="">         
@@ -299,14 +299,14 @@ Order::getMondays(15);
     <div class="clear"></div>
 
     <li><h2>Välj ert startdatum (valfri måndag)</h2>      
-      <!--input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2012-05-07" checked><label for="startdatumRadio1" id="startdatumRadio-label" style="font-size: 13px;display: inline;">Den 7 maj</label>
-      <div class="clear"></div -->
-      <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum" checked >
+      <input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2012-09-24" checked><label for="startdatumRadio1" id="startdatumRadio-label" style="font-size: 13px;display: inline;">Den stora hösttävlingen 24 september</label>
+      <div class="clear"></div>
+      <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum"  >
       <select name="startdatum" id="startdatum" onchange="updateStartRadio();">
         <?php echo Order::getMondays(20); ?>
       </select>
       <div class="clear"></div>
-      <div id="early-info">Ring Kristian 0761-393855 om ni önskar tidigare datum.</div>
+      <div id="early-info">Ring Kristian 0761-393855 om ni önskar tidigare datum eller fler veckor.</div>
     </li>
 
     <div class="clear"></div>
