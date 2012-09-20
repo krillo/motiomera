@@ -2428,7 +2428,7 @@ class Medlem extends Mobject {
     }
 
     $sql =
-      "SELECT a.id, a.epost, a.aNamn, a.levelId, a.paidUntil, a.veckotavling, a.veckotavling_datum, SUM(steg) as steg, f.namn AS companyname, f.startdatum, f.slutdatum 
+      "SELECT a.id, a.epost, a.aNamn, a.fNamn, a.eNamn, a.levelId, a.paidUntil, a.veckotavling, a.veckotavling_datum, SUM(steg) as steg, f.namn AS companyname, f.startdatum, f.slutdatum 
       FROM mm_medlem a, mm_steg b, mm_foretagsnycklar n, mm_foretag f   
 			WHERE a.id = n.medlem_id 
       AND n.foretag_id IN ($foretagList) 

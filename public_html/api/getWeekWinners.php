@@ -20,13 +20,16 @@ ini_set('display_errors', '1');
 //echo $prevWinners .'  '.$nbrWinners . '  '.$nbrSteps .'  '.$comps .'  '.$date;
 
 $winners = Medlem::getVeckoVinnare($date, $nbrWinners, $nbrSteps, $comps, $prevWinners);
-
+$i = 0;
 $winnertable = '<table id=""><tr>';
-$winnertable .= '<tr><th>ID</th><th>Namn</th><th>epost</th><th>steg</th><th>Företag</th><th>Datum</th><th>Tidigare vinst</th><tr/>';
+$winnertable .= '<tr><th></th><th>ID</th><th>Alias</th><th>Namn</th><th>epost</th><th>steg</th><th>Företag</th><th>Datum</th><th>Tidigare vinst</th><tr/>';
 foreach ($winners as $id => $medlem) {
+  $i++;
   $winnertable .= '<tr >                    
+                     <td class="mmList2">'.$i.'</td>
                      <td class="mmList1">'.$medlem["id"].'</td>
                      <td class="mmList2">'.$medlem["aNamn"].'</td>
+                     <td class="mmList2">'.$medlem["fNamn"].' '.$medlem["eNamn"].'</td>
                      <td class="mmList1">'.$medlem["epost"].'</td>
                      <td class="mmList2">'.$medlem["steg"].'</td>
                      <td class="mmList1">'.$medlem["companyname"].'</td>
@@ -44,12 +47,14 @@ if (count($winners) > 0) {
   $att = null;
   $emaillist = '';
   $winnerIds = '';
+  $namelist = '<br/>';
   $html = "<h2>VINNARE VECKA $week</h2><h2>";
   foreach ($winners as $id => $medlem) {
     $att.= "\n";
     $html .= '<a href="/pages/profil.php?mid='.$medlem["id"].'">'.$medlem["aNamn"].'</a><br />';
     $emaillist .= $medlem["epost"] . ", ";
     $winnerIds .= $medlem["id"] . ", "; 
+    $namelist .= $medlem["fNamn"].' '.$medlem["eNamn"].' - '.$medlem["epost"].' - '.$medlem["steg"]. '<br />';    
   }
   $html .= "</h2>";
   $winnerIds = substr($winnerIds, 0, strlen($winnerIds)-2); 
@@ -76,3 +81,4 @@ echo '<input type="button" value="Godkänn vinnare" id="reg-winners"/>';
 
 echo '<br/><div><p style="font-weight:bold">HTML för att klistra in på presentationssidan</p>' . htmlspecialchars($html) . '</div>'; 
 echo '<br/><div><p style="font-weight:bold">Epostlista</p>' . htmlspecialchars($emaillist) . '</div>'; 
+echo '<br/><div><p style="font-weight:bold">Namnlista</p>'.$namelist.'</div>'; 
