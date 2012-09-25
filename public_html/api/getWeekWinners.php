@@ -22,7 +22,7 @@ ini_set('display_errors', '1');
 $winners = Medlem::getVeckoVinnare($date, $nbrWinners, $nbrSteps, $comps, $prevWinners);
 $i = 0;
 $winnertable = '<table id=""><tr>';
-$winnertable .= '<tr><th></th><th>ID</th><th>Alias</th><th>Namn</th><th>epost</th><th>steg</th><th>Företag</th><th>Datum</th><th>Tidigare vinst</th><tr/>';
+$winnertable .= '<tr><th></th><th>ID</th><th>Alias</th><th>Namn</th><th>epost</th><th>steg</th><th>Företag</th><th>Tävlingdatum</th><th>Tidigare vinst status</th><th>Vecka</th><th>Datum</th><tr/>';
 foreach ($winners as $id => $medlem) {
   $i++;
   $winnertable .= '<tr >                    
@@ -33,7 +33,9 @@ foreach ($winners as $id => $medlem) {
                      <td class="mmList1">'.$medlem["epost"].'</td>
                      <td class="mmList2">'.$medlem["steg"].'</td>
                      <td class="mmList1">'.$medlem["companyname"].'</td>
-                     <td class="mmList2">'.$medlem["startdatum"].' - '.$medlem["slutdatum"].'</td>
+                     <td class="mmList2">'.$medlem["startdatum"].' - '.$medlem["slutdatum"].'</td>                       
+                     <td class="mmList1" id="win-date-'.$medlem["id"].'">'.$medlem["veckotavling_status"].'</td>
+                     <td class="mmList2" id="win-date-'.$medlem["id"].'">'.$medlem["veckotavling_week"].'</td>
                      <td class="mmList1" id="win-date-'.$medlem["id"].'">'.$medlem["veckotavling_datum"].'</td>
                    </tr>';
 }
@@ -64,10 +66,11 @@ echo
 '<script type="text/javascript">
   $(function(){
     $("#reg-winners").click(function(event) {
+      thedate = $("#the-date").html(); 
       $.ajax({
         type: "POST",
         url: "/api/regWeekWinners.php",
-        data: "&winnerIds='.$winnerIds.'" ,
+        data: "&winnerIds='.$winnerIds.'&date=" + thedate ,
         success: function(data){
           $("#status").html(data).fadeIn();            
         }

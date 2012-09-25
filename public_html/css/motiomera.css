@@ -2985,3 +2985,8 @@ margin-left: -15px;
 #veckovinnare #options div{float:left;}
 #company-list table{max-width:612px;}
 #company-list a{text-decoration: underline;color:blue;}
+#minvinst-ul{float:left;width:340px;list-style: none;margin-left: 20px;padding:0;}
+#minvinst-ul li{margin:5px 0 0 0;}
+#minvinst-ul label {float: left;font-size: 14px;width: 130px;}
+#minvinst-result{float:left;font-size: 14px;margin: 20px 0 0 20px;}
+#mmMenuLeft #vinnare-menu{color:#0000FF;}

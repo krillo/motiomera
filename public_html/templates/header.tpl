@@ -226,7 +226,9 @@
                       <li class="mmMenuBG"><a{if $urlChecker->getMarkedMenu() eq "TOPPLISTOR"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretagstavling, URL_VIEW)}">F&Ouml;RETAGST&Auml;VLING</a></li>
                     {/if}
                   {/if}
-
+                  {if $USER->isVeckoVinnare()}
+                    <li><a href="/pages/minvinst.php" id="vinnare-menu">DU ÄR VINNARE</a></li>
+                  {/if}
                   <li><a{if $urlChecker->getMarkedMenu() eq "MOTIOMERAMAIL"} class="mmMarkedMenu"{/if} href="/pages/mail.php">MOTIOMERAMAIL</a></li>
                   <li><a{if $urlChecker->getMarkedMenu() eq "FOTOALBUM"} class="mmMarkedMenu"{/if} href="/pages/fotoalbum.php">FOTOALBUM</a></li>
                   {if isset($USER) && $sajtDelarObj->medlemHasAccess($USER,'minaQuiz')}

@@ -75,8 +75,11 @@ class Medlem extends Mobject {
   protected $city;
   protected $phone;
   protected $country;
-  protected $veckotavling;
+  protected $veckotavling_status;
+  protected $veckotavling_week;
   protected $veckotavling_datum;
+  protected $veckotavling_price;
+  protected $veckotavling_price_text;
   protected $fields = array(
       "fNamn" => "str",
       "eNamn" => "str",
@@ -116,8 +119,11 @@ class Medlem extends Mobject {
       "city" => "str",
       "phone" => "str",
       "country" => "str",
-      "veckotavling" => "str",
+      "veckotavling_status" => "str",
+      "veckotavling_week" => "str",
       "veckotavling_datum" => "str",
+      "veckotavling_price" => "str",
+      "veckotavling_price_text" => "str",
   );
 
   const MIN_LENGTH_ANAMN = 3;
@@ -928,14 +934,24 @@ class Medlem extends Mobject {
     return $this->phone;
   }
 
-  public function getVeckotavling() {
-    return $this->veckotavling;
+  public function getVeckotavlingStatus() {
+    return $this->veckotavling_status;
+  }
+
+  public function getVeckotavlingWeek() {
+    return $this->veckotavling_week;
   }
 
   public function getVeckotavlingDatum() {
     return $this->veckotavling_datum;
   }
-
+  public function getVeckotavlingPrice() {
+    return $this->veckotavling_price;
+  }
+  public function getVeckotavlingPriceText() {
+    return $this->veckotavling_price_text;
+  }
+ 
   public function getLevelId() {
     return $this->levelId;
   }
@@ -1418,14 +1434,28 @@ class Medlem extends Mobject {
     $this->country = $arg;
   }
 
-  public function setVeckotavling($arg) {
-    $this->veckotavling = $arg;
+  public function setVeckotavlingStatus($arg) {
+    $this->veckotavling_status = $arg;
+  }
+
+  public function setVeckotavlingWeek($arg) {
+    $this->veckotavling_week = $arg;
   }
 
   public function setVeckotavlingDatum($arg) {
     $this->veckotavling_datum = $arg;
   }
 
+  public function setVeckotavlingPrice($arg) {
+    $this->veckotavling_price = $arg;
+  }
+
+  public function setVeckotavlingPriceText($arg) {
+    $this->veckotavling_price_text = $arg;
+  }
+
+  
+  
   public function setANamn($anamn) {
 
     if ($this->aNamn) {
@@ -2424,11 +2454,11 @@ class Medlem extends Mobject {
     if ($prevWinners) {
       $prev = ' ';
     } else {
-      $prev = " AND a.veckotavling = 0 ";
+      $prev = " AND a.veckotavling_status = 0 ";
     }
 
     $sql =
-      "SELECT a.id, a.epost, a.aNamn, a.fNamn, a.eNamn, a.levelId, a.paidUntil, a.veckotavling, a.veckotavling_datum, SUM(steg) as steg, f.namn AS companyname, f.startdatum, f.slutdatum 
+      "SELECT a.id, a.epost, a.aNamn, a.fNamn, a.eNamn, a.levelId, a.paidUntil, a.veckotavling_status, a.veckotavling_week, a.veckotavling_datum, a.veckotavling_price_text, SUM(steg) as steg, f.namn AS companyname, f.startdatum, f.slutdatum 
       FROM mm_medlem a, mm_steg b, mm_foretagsnycklar n, mm_foretag f   
 			WHERE a.id = n.medlem_id 
       AND n.foretag_id IN ($foretagList) 
@@ -2459,13 +2489,46 @@ class Medlem extends Mobject {
    * @param type $idArray
    * @return type 
    */
-  public static function updateVeckoVinnare($idArray) {
+  public static function updateVeckoVinnare($idArray, $date) {
     global $db;
-    $jDate = new JDate();    
+    $jDate = new JDate($date);    
     $idArray = implode (',', $idArray);
-    $sql = "UPDATE mm_medlem SET veckotavling = 1, veckotavling_datum = '".$jDate->getDate()."' WHERE id IN ($idArray);";
+    $sql = "UPDATE mm_medlem SET veckotavling_status = 1, veckotavling_week = '".$jDate->getYear(). '-' .$jDate->getWeek()."' WHERE id IN ($idArray);";
     $status = $db->query($sql);
     return $status;
+  }
+  
+
+  /**
+   * The user has choosen a price
+   * Update in db and set veckotavling_status value to 2 ( = price choosen)
+   * 
+   * @global $db $db
+   * @return type 
+   */
+  public function acceptVeckoVinst($priceId, $priceText) {
+    $now = date("Y-m-d H:i:s");
+    $this->setVeckotavlingDatum($now);
+    $this->setVeckotavlingStatus(2);
+    $this->setVeckotavlingPrice($priceId);
+    $this->setVeckotavlingPriceText($priceText);
+    $this->commit();
+    return "Din vinst är registrerad och kommer att bli skickad!";
+
+  }
+  
+  
+  /**
+   * If veckotavling value in db is 1 then the user is a winner and may choose the price.
+   *
+   * @return boolean 
+   */
+  public function isVeckoVinnare() {
+    if($this->getVeckotavlingStatus() == 1){
+      return true;
+    } else {
+      return false;
+    }
   }
   
   
