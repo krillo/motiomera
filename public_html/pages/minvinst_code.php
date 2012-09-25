@@ -83,7 +83,7 @@ $week = substr($yearWeek, 5);
             data: dataString,
             cache: false,
             success: function(data){
-              console.log(data);
+              //console.log(data);
               jQuery("#minvinst-result").html(data);
             }
           });
