@@ -1,7 +1,9 @@
 <?php
 
 function exception_handler($e) {
-	
+
+  //echo $e;
+  
 	if ((defined('DEBUG_MAIL') && DEBUG_MAIL) or (defined('DEBUG_IM') && DEBUG_IM) && (!DEBUG) && !(!get_class($e) =="GruppException" && !get_class($e) == "MedlemException" && !get_class($e) == "SecurityException")) {
 		$smarty = new MMSmarty;
 		$smarty->assign('error', $e);

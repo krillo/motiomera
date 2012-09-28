@@ -1690,12 +1690,29 @@ class Medlem extends Mobject {
     return $this->fastrutt_id;
   }
 
+  /**
+   * krillo 2012-09-27 use the new function in stead (setPaidUntilDateByForetag)
+   * @param type $days 
+   */
   public function setPaidUntilByForetag($days) { // OBS: kräver manuell commit()
     if ($this->levelId == 0) {
       $this->setPaidUntil(date("Y-m-d"));
     }
     $start = (strtotime($this->paidUntil) > time()) ? strtotime($this->paidUntil) : strtotime(date('Y-m-d'));
     $this->paidUntil = date('Y-m-d', $start + $days * 24 * 60 * 60);
+  }
+
+  /**
+   * Set the paid until date to the submitted.
+   * The date must be in the format: 2012-09-27
+   * Don't forget commit
+   * 
+   * Added by Krillo 2012-09-27
+   * 
+   * @param type $date 
+   */
+  public function setPaidUntilDateByForetag($date) { 
+    $this->paidUntil = $date;
   }
 
   public function setPokalStart($datum) {

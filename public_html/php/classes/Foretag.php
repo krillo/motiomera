@@ -998,15 +998,10 @@ www.motiomera.se';
       $lag = Lag::loadById($lid);
       $lag->addMedlem($medlem);
     }
-
-    //$medlem->setPaidUntilByForetag(date("Y-m-d", strtotime($this->getStartdatum()) + (60*60*24*self::TAVLINGSPERIOD_DAGAR)));
-    //days until tavlingstart (if used after tavlingsstart they still get self::TAVLINGSPERIOD_DAGAR days
-
-    $extradays = ceil((strtotime($this->getStartdatum()) - time()) / (60 * 60 * 24));
-
-    if ($extradays < 0)
-      $extradays = 0;
-    $medlem->setPaidUntilByForetag(self::TAVLINGSPERIOD_MEDLEMS_DAGAR + $extradays);
+    
+    //new code by krillo 2012-09-27
+    $jDate = new JDate($this->getSlutdatum());    
+    $medlem->setPaidUntilDateByForetag($jDate->addDays(self::FORETAGSMEDLEMS_EXTRA_DAYS)->getDate());
     $medlem->setLevelId(1);
     $medlem->commit();
   }
