@@ -1159,7 +1159,25 @@ class Order extends Mobject {
       return 'ERROR';
     }
   }
+  
+  /**
+   * Return veckor
+   * @author Kristian Erendi, Reptilo 2012-05-05  
+   */
+  public function getVeckor() {
+    try {
+      if ($this->getTyp() == 'medlem' OR $this->getTyp() ==  'medlem_extend') {
+        return '';
+      } else { //foretag 
+        return $this->getForetag()->getVeckor();
+      }
+    } catch (Exception $e) {
+      return 'ERROR';
+    }
+  }
 
+  
+  
   /**
    * Return true or false if competition is ongoing
    * @author Kristian Erendi, Reptilo 2012-05-05  

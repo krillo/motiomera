@@ -1237,22 +1237,33 @@ www.motiomera.se';
     $city = ($this->getReciverCity());
     $country = ($this->getReciverCountry());
     $startdatum = $this->getStartdatum();
+    $slutdatum = $this->getSlutdatum();
+    $weeks = $this->getVeckor();
     $anamn = $this->getANamn();
+    $anamn = $this->getCreationDate();
+    
 
     $deltagare = 0;
     $stegraknare = 0;
+    $sum = 0;
     $typeForetag = false;
     $typeTillagg = false;
-    $fileNamePrefix = '';
-    $articlesNSum = '';
+    $fileNamePrefix = '';    
+    $articles = "Artiklar:";
+    
     $sumMoms = '';
     $ordId = '';
     //iterate all the order rows
     foreach ($orderIdArray as $orderId) {
       $order = Order::loadById($orderId);
-      $articlesNSum .= "\n" . $order->getAntal() . ' ' . $order->getItem() . ' ' . $order->getPrice() . " ex moms";
-      $sumMoms = $order->getSumMoms();
       $ordId = $orderId;
+      $fakturaDate = "Fakturadatum: " . $order->getSkapadDatum();
+      $kostnadsatalle = "Kostnadsställe/ref/kod: " . $order->getOrderRefCode();      
+      $sumMoms = "Summa: " . $order->getSumMoms() . " Kr  ink moms";
+      
+      $articles .= "\n" . $order->getItem() . '   ' . $order->getAntal() . '   ' . $order->getPrice() ;
+      $sum = $sum + (int) $order->getPrice();
+      
       switch ($order->getCampaignId()) {
         case 'RE03':
           $deltagare += $order->getAntal();
@@ -1289,6 +1300,8 @@ www.motiomera.se';
         'EMAIL' => $this->getReciverEmail(),
         'PHONE' => $this->getReciverPhone(),
         'STARTDATE' => $startdatum,
+        'STOPDATE' => $slutdatum,
+        'WEEKS' => $weeks,
         'CONTESTERS' => $deltagare,
         'COUNT' => $stegraknare,
         'FILENAME' => $filnamn,
@@ -1301,13 +1314,19 @@ www.motiomera.se';
         'fak-country' => $this->getPayerCountry(),
         'fak-email' => $this->getPayerEmail(),
         'fak-phone' => $this->getPayerPhone(),
-        'articlesNSum' => $articlesNSum . "\n" . 'Totalsumma: ' . $sumMoms . ' ink moms',
+        'fak-date' => $fakturaDate,
+        'fak-refcode' => $kostnadsatalle,
+        'articles' => $articles . ' Kr',
+        'sum' => "Summa: " . $sum . ' Kr',
+        'sumMoms' => $sumMoms,        
     );
     $pdf->PagePreface($a);
 
     //PDF tavlingsansvarig
     $filter = array(
         '[STARTDATE]' => $startdatum,
+        '[STOPDATE]' => $slutdatum,
+        '[WEEKS]' => $weeks,        
         '[USERNAME]' => $anamn,
         '[PASSWORD]' => $losenord,
     );
@@ -1327,6 +1346,8 @@ www.motiomera.se';
         '[STEPCOUNTERS]' => $stegraknare,
         '[ADDITIONALCOUNTER]' => $deltagare,
         '[STARTDATE]' => $startdatum,
+        '[STOPDATE]' => $slutdatum,
+        '[WEEKS]' => $weeks,                
     );
 
     if ($typeForetag) {
@@ -1343,6 +1364,8 @@ www.motiomera.se';
       $filter = array(
           '[USERCODE]' => $key,
           '[STARTDATE]' => $startdatum,
+          '[STOPDATE]' => $slutdatum,
+          '[WEEKS]' => $weeks,
       );
       $pdf->PageParticipant($filter, $i++);
     }
