@@ -181,19 +181,19 @@
                   <li><a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">ORDER</a></li>		
                   <li><a href="{$urlHandler->getUrl(Foretag, URL_ADMIN_LIST)}">FÖRETAG</a></li>          
                   <li><a href="{$urlHandler->getUrl(Medlem, URL_ADMIN_LIST)}">MEDLEMMAR</a></li>
+                  <li><a href="/admin/pages/veckovinnare.php">VECKOVINNARE</a></li>
+                  <li><a href="{$urlHandler->getUrl(TextEditor, URL_ADMIN_LIST)}">TEXTHANTERING</a></li>
                   <li><a href="{$urlHandler->getUrl(Kommun, URL_ADMIN_LIST)}">KOMMUNER</a></li>
                   <li><a href="{$urlHandler->getUrl(Aktivitet, URL_ADMIN_LIST)}">AKTIVITETER</a></li>
                   <li><a href="{$urlHandler->getUrl(Visningsbild, URL_ADMIN_LIST)}">VISNINGSBILDER</a></li>
                   <li><a href="{$urlHandler->getUrl(Avatar, URL_ADMIN_LIST)}">AVATARER</a></li>
                   <li><a href="{$urlHandler->getUrl(ProfilData, URL_ADMIN_LIST)}">PROFILINFORMATION</a></li>
-                  <li><a href="{$urlHandler->getUrl(Paminnelser, URL_ADMIN_LIST)}">PÅMINNELSER</a></li>	
-                  <li><a href="{$urlHandler->getUrl(TextEditor, URL_ADMIN_LIST)}">TEXTHANTERING</a></li>
+                  <li><a href="{$urlHandler->getUrl(Paminnelser, URL_ADMIN_LIST)}">PÅMINNELSER</a></li>	                  
                   <li><a href="{$urlHandler->getUrl(Help, URL_ADMIN_LIST)}">HJÄLPRUTOR</a></li>
                   <li><a href="{$urlHandler->getUrl(KontrolleraBilder, URL_ADMIN_LIST)}">BILDKONTROLL</a></li>
                   {if $ADMIN->isTyp(ADMIN)}
                     <li><a href="{$urlHandler->getUrl(Level, URL_ADMIN_LIST)}">MEDLEMSNIVÅER</a></li> 
-                    <li><a href="{$urlHandler->getUrl(LagNamn, URL_ADMIN_LIST)}">LAGNAMN</a></li> 
-                    <li><a href="/admin/pages/tavling.php">TÄVLING</a></li>
+                    <li><a href="{$urlHandler->getUrl(LagNamn, URL_ADMIN_LIST)}">LAGNAMN</a></li>                     
                     <li><a href="/admin/pages/proquiz.php">PROQUIZ</a></li>
                     <li><a href="{$urlHandler->getUrl(FastaUtmaningar, URL_ADMIN_LIST)}">FASTA RUTTER</a></li>
                     <li><a href="{$urlHandler->getUrl(Kommundialekt, URL_ADMIN_LIST)}">KOMMUNDIALEKTER</a></li>
@@ -226,7 +226,9 @@
                       <li class="mmMenuBG"><a{if $urlChecker->getMarkedMenu() eq "TOPPLISTOR"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretagstavling, URL_VIEW)}">F&Ouml;RETAGST&Auml;VLING</a></li>
                     {/if}
                   {/if}
-
+                  {if $USER->isVeckoVinnare()}
+                    <li><a href="/pages/minvinst.php" id="vinnare-menu">DU ÄR VINNARE</a></li>
+                  {/if}
                   <li><a{if $urlChecker->getMarkedMenu() eq "MOTIOMERAMAIL"} class="mmMarkedMenu"{/if} href="/pages/mail.php">MOTIOMERAMAIL</a></li>
                   <li><a{if $urlChecker->getMarkedMenu() eq "FOTOALBUM"} class="mmMarkedMenu"{/if} href="/pages/fotoalbum.php">FOTOALBUM</a></li>
                   {if isset($USER) && $sajtDelarObj->medlemHasAccess($USER,'minaQuiz')}

@@ -200,7 +200,6 @@ class Security
 	
 	public static function demand($typ, $object = null)
 	{
-
 		// se authorized()
 		// kastar undantag vid ogiltigt inlogg
 

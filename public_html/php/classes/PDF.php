@@ -375,10 +375,9 @@ class PDF extends FPDF {
   function PagePreFace($content) {
     $address = utf8_decode(
             $content['COMPANY'] . "\r\n" .
-            'ATT: ' . $content['FULLNAME'] . "\r\n" .
+            'Att: ' . $content['FULLNAME'] . "\r\n" .
             $content['ADDRESS'] . "\r\n" .
-            $content['ZIPCODE'] . " " .
-            $content['CITY'] . "\r\n" .
+            $content['ZIPCODE'] . " " . $content['CITY'] . "\r\n" .            
             $content['COUNTRY'] . "\r\n\n" .
             $content['EMAIL'] . "\r\n" .
             $content['PHONE']
@@ -404,19 +403,26 @@ class PDF extends FPDF {
     $this->SetFont('Arial', 'B', 12);
     $this->SetXY(120, 50);
     $this->Cell(10, 30, utf8_decode('Startdatum: ' . $content['STARTDATE']));
+    $this->SetXY(120, 55);    
+    $this->Cell(10, 30, utf8_decode('Slutdatum: ' . $content['STOPDATE']));
+    $this->SetXY(120, 60);    
+    $this->Cell(10, 30, utf8_decode('Antal veckor: ' . $content['WEEKS']));
 
 
     $payerAddress = utf8_decode(
             'Fakturaadress' . "\r\n" .
             $content['fak-companyname'] . "\r\n" .
-            'ATT: ' . $content['fak-name'] . "\r\n" .
+            'Att: ' . $content['fak-name'] . "\r\n" .
             $content['fak-adress'] . "\r\n" .
-            $content['fak-zip'] . " " .
-            $content['fak-city'] . "\r\n" .
-            $content['fak-country'] . "\r\n" .
+            $content['fak-zip'] . " " . $content['fak-city'] . "\r\n" .
+            $content['fak-country'] . "\r\n\r\n" .
             $content['fak-email'] . "\r\n" .
             $content['fak-phone'] . "\r\n" .
-            $content['articlesNSum']
+            $content['fak-date'] . "\r\n" .
+            $content['fak-refcode'] . "\r\n\r\n" .
+            $content['articles'] . "\r\n" .
+            $content['sum'] . "\r\n" .
+            $content['sumMoms'] . "\r\n"
     );
 
     $this->SetFont('Arial', '', 12);

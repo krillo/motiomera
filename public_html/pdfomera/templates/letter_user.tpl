@@ -1,7 +1,8 @@
 =h1 Hej och välkommen till MotioMera - Sveriges roligaste stegtävling!
 Här kommer instruktioner och den företagsnyckel som du behöver för att registera dig till MotioMera. Gör detta så snart du kan så att lagen är fulltaliga när tävlingen startar.
 
-Din företagsnyckel är: <b>[USERCODE]</b> , tävlingen pågår i fem (5) veckor med start <b>[STARTDATE]</b>.
+Din företagsnyckel är: <b>[USERCODE]</b>. 
+Tävlingen pågår i [WEEKS] veckor, mellan <b>[STARTDATE]</b> och <b>[STOPDATE]</b>.
 
 Så här gör du för att registera dig:
 

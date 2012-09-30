@@ -43,6 +43,9 @@
           <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Datum</a>
         </th>
         <th>	
+          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Veckor </a>
+        </th>
+        <th>	
           <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Tävlingsdatum</a>
         </th>
         <th>  
@@ -68,9 +71,6 @@
         </th>
         <th style="padding-right: 5px;">	
           <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Betalning</a>
-        </th>
-        <th style="padding-right: 5px;">	
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Startdatum</a>
         </th>
         <th style="padding-right: 5px;">  
           <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Namn</a>
@@ -115,16 +115,16 @@
           <td class="mmList1"><a style="text-decoration: underline; color: blue;" href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}&foretagid={$thisOrder->getForetagId()}">{$thisOrder->getForetagId()}</a></td>						
           <td class="mmList2">{$thisOrder->getTyp()}</td>
           <td class="mmList1">{$thisOrder->getSkapadDatum()}</td>
-          <td class="mmList2 {$thisOrder->isActiveCompetitionCSS()}">{$thisOrder->getStartdatum()} - {$thisOrder->getSlutdatum()}</td>           
-          <td class="mmList1">{$thisOrder->getKanal()}</td>								
-          <td class="mmList2">{$thisOrder->getIsValid()}</td>	            
-          <td class="mmList1">{$thisOrder->getOrderStatus()}</td> 			
-          <td class="mmList2">{$thisOrder->getAntal()}</td>
-          <td class="mmList1">{$thisOrder->getQuantity()}</td>			
-          <td class="mmList2">{$thisOrder->getPrice()}</td>						
-          <td class="mmList1">{$thisOrder->getSumMoms()}</td>						
-          <td class="mmList2">{$thisOrder->getPayment()}</td>	
-          <td class="mmList1">{$thisOrder->getStartdatum()}</td>	
+          <td class="mmList2 ">{$thisOrder->getVeckor()}</td>
+          <td class="mmList1 {$thisOrder->isActiveCompetitionCSS()}">{$thisOrder->getStartdatum()} - {$thisOrder->getSlutdatum()}</td>           
+          <td class="mmList2">{$thisOrder->getKanal()}</td>								
+          <td class="mmList1">{$thisOrder->getIsValid()}</td>	            
+          <td class="mmList2">{$thisOrder->getOrderStatus()}</td> 			
+          <td class="mmList1">{$thisOrder->getAntal()}</td>
+          <td class="mmList2">{$thisOrder->getQuantity()}</td>			
+          <td class="mmList1">{$thisOrder->getPrice()}</td>						
+          <td class="mmList2">{$thisOrder->getSumMoms()}</td>						
+          <td class="mmList1">{$thisOrder->getPayment()}</td>		
           <td class="mmList2">{$thisOrder->getReciverName()}</td> 
           <td class="mmList1">{$thisOrder->getReciverEmail()}</td>     		      									
           <td class="mmList2">{$thisOrder->getReciverPhone()}</td>     		      									

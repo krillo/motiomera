@@ -2977,3 +2977,16 @@ margin-left: -15px;
 .slides{width:430px;height:290px;}
 .slides_container {width:440px;height:290px;}
 .slides_container div {width:470px;height:170px;display:block;}
+
+#mmColumnMiddle #veckovinnare{font-size: 12px;width:900px;}
+#datepicker{float:left;}
+#the-date{float:left;margin-left:20px;font-size: 20px; }
+#veckovinnare #options{display:none;}
+#veckovinnare #options div{float:left;}
+#company-list table{max-width:612px;}
+#company-list a{text-decoration: underline;color:blue;}
+#minvinst-ul{float:left;width:340px;list-style: none;margin-left: 20px;padding:0;}
+#minvinst-ul li{margin:5px 0 0 0;}
+#minvinst-ul label {float: left;font-size: 14px;width: 130px;}
+#minvinst-result{float:left;font-size: 14px;margin: 20px 0 0 20px;}
+#mmMenuLeft #vinnare-menu{color:#0000FF;}

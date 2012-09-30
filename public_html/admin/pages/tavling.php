@@ -60,7 +60,23 @@ if (isset($_POST['procent_pro'])) {
 } else {
   $per = 1.0;
 }
-$userArray = Medlem::getTavlingMedlemmar($stt, $slt, $am, $as, $per);
+
+//get the array of companys
+!empty($_REQUEST['company']) ? $companyArray = $_REQUEST['company'] : $companyArray = '';
+
+
+//get all active companys, make checkboxes 
+$copmArray = Foretag::getAllActiveCompanys();
+$checkbox = '<input type="checkbox" value="alla" id="all" name="all-companys" checked><label for="all">Alla eller ingen</label><br/><br/>';
+foreach ($copmArray as $id => $comp) {
+  $checkbox .= '<input type="checkbox" value="'.$id.'" id="'.$id.'" name="company[]" checked><label for="'.$id.'">'.$id.' <a href="/pages/editforetag.php?fid='.$id.'&tab=2" >'.$comp[namn].'</a></label><br/>';
+}
+$smarty->assign('checkbox', $checkbox);
+
+
+
+
+$userArray = Medlem::getTavlingMedlemmar($stt, $slt, $am, $as, $per, $companyArray);
 //print_r($userArray); 
 
 if (count($userArray) > 0) {

@@ -207,6 +207,24 @@ class Foretag extends Mobject {
     }
   }
 
+
+  /**
+   * Return all active companys for today or a submitted date
+   * Krillo 12-09-10
+   * 
+   * @global type $db
+   * @param type $date
+   * @return array of all companys 
+   */
+  public static function getAllActiveCompanys($date = false) {
+    global $db;
+    $jDate = new JDate($date);
+    $theDate = $jDate->getDate();
+    $sql = "SELECT count(n.id) AS count, f.id id, namn, startdatum, slutdatum FROM mm_foretag f, mm_foretagsnycklar n WHERE f.id = n.foretag_id AND isvalid = 1 AND '$theDate' BETWEEN startdatum AND slutdatum group by f.id order by namn asc";
+    return $db->allValuesAsArray($sql);
+  }
+  
+  
   /**
    * Det händer att företag lägger flera ordrar fast vill att alla deltagarna ska tillhöra samma tävling. 
    * Denna metod slår ihop dessa ordrar genom att alla nycklarna för det första föreataget får det andra företagets id.
@@ -980,15 +998,10 @@ www.motiomera.se';
       $lag = Lag::loadById($lid);
       $lag->addMedlem($medlem);
     }
-
-    //$medlem->setPaidUntilByForetag(date("Y-m-d", strtotime($this->getStartdatum()) + (60*60*24*self::TAVLINGSPERIOD_DAGAR)));
-    //days until tavlingstart (if used after tavlingsstart they still get self::TAVLINGSPERIOD_DAGAR days
-
-    $extradays = ceil((strtotime($this->getStartdatum()) - time()) / (60 * 60 * 24));
-
-    if ($extradays < 0)
-      $extradays = 0;
-    $medlem->setPaidUntilByForetag(self::TAVLINGSPERIOD_MEDLEMS_DAGAR + $extradays);
+    
+    //new code by krillo 2012-09-27
+    $jDate = new JDate($this->getSlutdatum());    
+    $medlem->setPaidUntilDateByForetag($jDate->addDays(self::FORETAGSMEDLEMS_EXTRA_DAYS)->getDate());
     $medlem->setLevelId(1);
     $medlem->commit();
   }
@@ -1224,22 +1237,33 @@ www.motiomera.se';
     $city = ($this->getReciverCity());
     $country = ($this->getReciverCountry());
     $startdatum = $this->getStartdatum();
+    $slutdatum = $this->getSlutdatum();
+    $weeks = $this->getVeckor();
     $anamn = $this->getANamn();
+    $anamn = $this->getCreationDate();
+    
 
     $deltagare = 0;
     $stegraknare = 0;
+    $sum = 0;
     $typeForetag = false;
     $typeTillagg = false;
-    $fileNamePrefix = '';
-    $articlesNSum = '';
+    $fileNamePrefix = '';    
+    $articles = "Artiklar:";
+    
     $sumMoms = '';
     $ordId = '';
     //iterate all the order rows
     foreach ($orderIdArray as $orderId) {
       $order = Order::loadById($orderId);
-      $articlesNSum .= "\n" . $order->getAntal() . ' ' . $order->getItem() . ' ' . $order->getPrice() . " ex moms";
-      $sumMoms = $order->getSumMoms();
       $ordId = $orderId;
+      $fakturaDate = "Fakturadatum: " . $order->getSkapadDatum();
+      $kostnadsatalle = "Kostnadsställe/ref/kod: " . $order->getOrderRefCode();      
+      $sumMoms = "Summa: " . $order->getSumMoms() . " Kr  ink moms";
+      
+      $articles .= "\n" . $order->getItem() . '   ' . $order->getAntal() . '   ' . $order->getPrice() ;
+      $sum = $sum + (int) $order->getPrice();
+      
       switch ($order->getCampaignId()) {
         case 'RE03':
           $deltagare += $order->getAntal();
@@ -1276,6 +1300,8 @@ www.motiomera.se';
         'EMAIL' => $this->getReciverEmail(),
         'PHONE' => $this->getReciverPhone(),
         'STARTDATE' => $startdatum,
+        'STOPDATE' => $slutdatum,
+        'WEEKS' => $weeks,
         'CONTESTERS' => $deltagare,
         'COUNT' => $stegraknare,
         'FILENAME' => $filnamn,
@@ -1288,13 +1314,19 @@ www.motiomera.se';
         'fak-country' => $this->getPayerCountry(),
         'fak-email' => $this->getPayerEmail(),
         'fak-phone' => $this->getPayerPhone(),
-        'articlesNSum' => $articlesNSum . "\n" . 'Totalsumma: ' . $sumMoms . ' ink moms',
+        'fak-date' => $fakturaDate,
+        'fak-refcode' => $kostnadsatalle,
+        'articles' => $articles . ' Kr',
+        'sum' => "Summa: " . $sum . ' Kr',
+        'sumMoms' => $sumMoms,        
     );
     $pdf->PagePreface($a);
 
     //PDF tavlingsansvarig
     $filter = array(
         '[STARTDATE]' => $startdatum,
+        '[STOPDATE]' => $slutdatum,
+        '[WEEKS]' => $weeks,        
         '[USERNAME]' => $anamn,
         '[PASSWORD]' => $losenord,
     );
@@ -1314,6 +1346,8 @@ www.motiomera.se';
         '[STEPCOUNTERS]' => $stegraknare,
         '[ADDITIONALCOUNTER]' => $deltagare,
         '[STARTDATE]' => $startdatum,
+        '[STOPDATE]' => $slutdatum,
+        '[WEEKS]' => $weeks,                
     );
 
     if ($typeForetag) {
@@ -1330,6 +1364,8 @@ www.motiomera.se';
       $filter = array(
           '[USERCODE]' => $key,
           '[STARTDATE]' => $startdatum,
+          '[STOPDATE]' => $slutdatum,
+          '[WEEKS]' => $weeks,
       );
       $pdf->PageParticipant($filter, $i++);
     }

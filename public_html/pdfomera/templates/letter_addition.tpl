@@ -8,8 +8,7 @@ Tack för din tilläggsbeställning! Beställningen innehåller allt dina anstä
 
 Glöm inte heller att gå in på administrationssidan och dela in de nya deltagarna i rätt lag.
 
-Tävlingen pågår i 5 veckor. Ert startdatum är: [STARTDATE]
-
+Tävlingen pågår i [WEEKS] veckor, mellan <b>[STARTDATE]</b> och <b>[STOPDATE]</b>.
 
 Lycka till med er MotioMera-tävling! 
 Önskar Motiomera-gänget
