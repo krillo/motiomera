@@ -5,8 +5,8 @@
     <div style="text-align:center;">      
       <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Stegtävling för ditt företag</h1>
         <div style="text-align:left;float:left;padding-left:50px;">
-          <h2 style="text-align:left;float:left;">Var med i vår stora hösttävling! <br/> 24 sep - 28 okt. 
-            <br/><br/>Välj från 5 till 8 veckors tävling <br/> vi sköter allt det praktiska!
+          <h2 style="text-align:left;float:left;"> 
+            Välj mellan 5 till 8 veckors tävling<br/>Vi sköter allt det praktiska!
           </h2>
           <div class="clear"></div>
           <p style="text-align:left;font-size:14px;">
