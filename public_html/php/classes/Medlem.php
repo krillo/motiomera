@@ -30,6 +30,7 @@
 class Medlem extends Mobject {
 
   protected $id; // int
+  protected $fb_id; // int
   protected $fNamn; // string
   protected $eNamn; // string
   protected $aNamn; // string
@@ -81,6 +82,7 @@ class Medlem extends Mobject {
   protected $veckotavling_price;
   protected $veckotavling_price_text;
   protected $fields = array(
+      "fb_id" => "str",
       "fNamn" => "str",
       "eNamn" => "str",
       "aNamn" => "str",
@@ -894,6 +896,10 @@ class Medlem extends Mobject {
     return $this->currentMal;
   }
 
+  public function getFbId() {
+    return $this->fb_id;
+  }
+
   public function getFNamn() {
     return stripslashes($this->fNamn);
   }
@@ -945,13 +951,15 @@ class Medlem extends Mobject {
   public function getVeckotavlingDatum() {
     return $this->veckotavling_datum;
   }
+
   public function getVeckotavlingPrice() {
     return $this->veckotavling_price;
   }
+
   public function getVeckotavlingPriceText() {
     return $this->veckotavling_price_text;
   }
- 
+
   public function getLevelId() {
     return $this->levelId;
   }
@@ -1384,6 +1392,10 @@ class Medlem extends Mobject {
     $this->userOnStaticRoute = $set;
   }
 
+  public function setFbId($arg) {
+    $this->fb_id = $arg;
+  }
+
   public function setFNamn($fNamn) {
 
     if (strlen($fNamn) < self::MIN_LENGTH_FNAMN) {
@@ -1454,8 +1466,6 @@ class Medlem extends Mobject {
     $this->veckotavling_price_text = $arg;
   }
 
-  
-  
   public function setANamn($anamn) {
 
     if ($this->aNamn) {
@@ -1711,7 +1721,7 @@ class Medlem extends Mobject {
    * 
    * @param type $date 
    */
-  public function setPaidUntilDateByForetag($date) { 
+  public function setPaidUntilDateByForetag($date) {
     $this->paidUntil = $date;
   }
 
@@ -2150,6 +2160,8 @@ class Medlem extends Mobject {
     return $ret;
   }
 
+
+
   public static function loadById($id) {
     return parent::loadById($id, get_class());
   }
@@ -2262,9 +2274,42 @@ class Medlem extends Mobject {
     }
   }
 
+
   /**
-   * Just log in the current user
-   *  
+   * Log in by FB-id.
+   * If it does not exist in db then check for matching email.
+   * If an email is found store the fbid for future.
+   * 
+   * @global $db $db
+   * @param type $fbid
+   * @param type $email
+   * @return boolean true for succes else false
+   */
+  public static function loggaInFb($fbid, $email) {
+    global $db;
+    $fbid = Security::secure_postdata($fbid);
+    $sql = "SELECT id FROM mm_medlem WHERE fb_id = '$fbid'";
+    $id = $db->value($sql);
+    if ($id != '') {
+      $medlem = Medlem::loadById($id);
+      $medlem->loggInCurrentUser();
+      return true;
+    } else {
+      $id = Medlem::getIdByEmail($email);   
+      if ($id > 0) { //a matching email - store the fb_id
+        $medlem = Medlem::loadById($id);
+        $medlem->setFbId($fbid);
+        $medlem->commit();
+        $medlem->loggInCurrentUser();
+        return true;
+      }
+      return false;
+    }
+    return false;
+  }
+
+  /**
+   * Just log in the current user  
    */
   public function loggInCurrentUser() {
     $sessionId = self::generateSessionId();
@@ -2279,16 +2324,36 @@ class Medlem extends Mobject {
       setcookie("mm_sid", $sessionId, time() + 60 * 60 * 24 * 30, "/");
     }
   }
+  
+  /**
+   * Does the email exist? 
+   * Added by krillo 2012-10-01
+   * 
+   * @global $db $db
+   * @param type $epost
+   * @return int 
+   */
+  public static function getIdByEmail($epost) {
+    global $db;
+    $sql = "SELECT id FROM mm_medlem WHERE epost = '" . $epost . "'";
+    $id = $db->value($sql);
+    if ($id > 0) {
+      return $id;
+    } else {
+      return 0;
+    }
+  }  
+  
 
   /**
    * 	Returnerar medlemsobjektet för den inloggade medlemmen, eller false om besökaren inte är inloggad
    */
-  public static function getInloggad() {     
+  public static function getInloggad() {
     if (empty($_SESSION["mm_mid"]) && empty($_SESSION["mm_sid"]) && !empty($_COOKIE["mm_mid"]) && !empty($_COOKIE["mm_sid"])) { // försöker hämta från cookie
       $_SESSION["mm_mid"] = $_COOKIE["mm_mid"];
       $_SESSION["mm_sid"] = $_COOKIE["mm_sid"];
     }
-      
+
     if (!empty($_SESSION["mm_mid"])) {
       try {
         $medlem = Medlem::loadById($_SESSION["mm_mid"]);
@@ -2474,7 +2539,7 @@ class Medlem extends Mobject {
     }
 
     $sql =
-      "SELECT a.id, a.epost, a.aNamn, a.fNamn, a.eNamn, a.levelId, a.paidUntil, a.veckotavling_status, a.veckotavling_week, a.veckotavling_datum, a.veckotavling_price_text, SUM(steg) as steg, f.namn AS companyname, f.startdatum, f.slutdatum 
+            "SELECT a.id, a.epost, a.aNamn, a.fNamn, a.eNamn, a.levelId, a.paidUntil, a.veckotavling_status, a.veckotavling_week, a.veckotavling_datum, a.veckotavling_price_text, SUM(steg) as steg, f.namn AS companyname, f.startdatum, f.slutdatum 
       FROM mm_medlem a, mm_steg b, mm_foretagsnycklar n, mm_foretag f   
 			WHERE a.id = n.medlem_id 
       AND n.foretag_id IN ($foretagList) 
@@ -2496,7 +2561,6 @@ class Medlem extends Mobject {
     return Misc::shuffle_assoc($medlemmar, 0);
   }
 
-  
   /**
    * Update the members to be a week winner
    * Krillo 2012-09-10
@@ -2507,13 +2571,12 @@ class Medlem extends Mobject {
    */
   public static function updateVeckoVinnare($idArray, $date) {
     global $db;
-    $jDate = new JDate($date);    
-    $idArray = implode (',', $idArray);
-    $sql = "UPDATE mm_medlem SET veckotavling_status = 1, veckotavling_week = '".$jDate->getYear(). '-' .$jDate->getWeek()."' WHERE id IN ($idArray);";
+    $jDate = new JDate($date);
+    $idArray = implode(',', $idArray);
+    $sql = "UPDATE mm_medlem SET veckotavling_status = 1, veckotavling_week = '" . $jDate->getYear() . '-' . $jDate->getWeek() . "' WHERE id IN ($idArray);";
     $status = $db->query($sql);
     return $status;
   }
-  
 
   /**
    * The user has choosen a price
@@ -2530,26 +2593,21 @@ class Medlem extends Mobject {
     $this->setVeckotavlingPriceText($priceText);
     $this->commit();
     return "Din vinst är registrerad och kommer att bli skickad!";
-
   }
-  
-  
+
   /**
    * If veckotavling value in db is 1 then the user is a winner and may choose the price.
    *
    * @return boolean 
    */
   public function isVeckoVinnare() {
-    if($this->getVeckotavlingStatus() == 1){
+    if ($this->getVeckotavlingStatus() == 1) {
       return true;
     } else {
       return false;
     }
   }
-  
-  
-  
-  
+
   /**
    * Function getTavlingMedlemmar
    *

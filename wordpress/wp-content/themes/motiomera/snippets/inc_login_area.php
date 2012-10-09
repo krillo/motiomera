@@ -2,6 +2,7 @@
   // toggle between login and new password
   var actionNyttLosen = "<?php echo MM_SERVER_ROOT_URL; ?>/actions/nyttlosen.php";
   var actionLogin = "<?php echo MM_SERVER_ROOT_URL; ?>/actions/login.php";
+  var actionLoginFb = "<?php echo MM_SERVER_ROOT_URL; ?>/actions/loginfb.php";
   var $j = jQuery.noConflict();
   $j(document).ready(function() {
     $j('#new-pass').change(function() {  
@@ -16,6 +17,47 @@
         $j("#username").attr("name", 'epost');        
       }
     });
+    
+    
+    //login with facebook
+    $j("#login-fb").click(function(event) {
+      FB.login(function(response) {
+        if (response.authResponse) {
+          console.log('Welcome!  Fetching your information.... ');
+          FB.api('/me', function(response) {
+            console.log('Good to see you, ' + response.name + '  Email: ' + response.email + '  Id: ' + response.id);            
+            var dataString = "fbid=" + response.id + "&email=" + response.email;
+            console.log(dataString);
+            if(dataString==""){
+            } else{
+              $j.ajax({
+                type: "POST",
+                url: actionLoginFb,
+                data: dataString,
+                cache: false,
+                success: function(data){
+                  console.log(data);
+                  if(data.loggedin == 1){
+                    window.location = "/pages/minsida.php";    
+                  }                  
+                }
+              });
+            }
+            return false;            
+            
+            
+            
+          });
+        } else {
+          console.log('User cancelled login or did not fully authorize.');
+        }
+      });
+
+    });
+
+
+    
+    
   });  
 </script>
 <div id="login">
@@ -42,5 +84,5 @@
 <?php
 //global $mmStatus;
 //print_r($mmStatus);
-  echo '<a href="'. $mmStatus->fb_login_url . '"> Facebook login </a> ';
-  ?>
+echo '<a href="' . $mmStatus->fb_login_url . '"> Facebook login </a> ';
+?>

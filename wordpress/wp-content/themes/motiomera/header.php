@@ -36,9 +36,36 @@ if ($site_description && ( is_home() || is_front_page() )) {
   <body <?php body_class(); ?>>
     <?php do_action('before'); ?>
 
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '108867119251826', // App ID
+          channelUrl : '//motiomera.se/channel.html', // Channel File
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          xfbml      : true  // parse XFBML
+        });
+
+        // Additional initialization code here
+      };
+
+      // Load the SDK Asynchronously
+      (function(d){
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+      }(document));
+    </script>
+
+
+
+
+
     <script type="text/javascript">
       var $j = jQuery.noConflict();
-
       $j(document).ready(function() {  
         var offset = $j('#wp-nav').offset();  
         $j(window).scroll(function () {  

@@ -1,6 +1,6 @@
 <?php
 /**
-  Template Name: FB login
+  Template Name: FB js login
  */
 get_header();
 ?>
@@ -13,6 +13,10 @@ get_header();
 
 
 
+    
+    
+    
+    
 
       <?php
       error_reporting(E_ALL);

@@ -46,5 +46,3 @@ if(!isset($status) || !$status) { // Felaktigt inlogg
 	$USER->saveBrowserAndIp();
 	header("location: /pages/minsida.php");
 }
-
-?>

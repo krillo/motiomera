@@ -285,33 +285,33 @@ function includeSnippet($file) {
     //if not logged - show login area
     case 'inc_login_area.php':
       if ($mmStatus->mm_logged_in == 0) {
-        include $file;
+        include 'snippets/' . $file;
       }
       break;
     //on front page show big logo area, else small area  
     case 'inc_big_logo_area.php':
       if ($mmStatus->front_page == 1) {
-        include $file;
+        include 'snippets/' . $file;
       }
       break;
     case 'inc_login_area.php':
       if ($mmStatus->mm_logged_in == 0) {
-        include $file;
+        include 'snippets/' . $file;
       }
       break;
     case 'inc_logged_in_menu.php':
       if ($mmStatus->mm_logged_in == 1) {
-        include $file;
+        include 'snippets/' . $file;
       }
       break;
     case 'inc_page_promo_header.php':  //normal page, not logged in - show the promo area
       if ($mmStatus->normal_page == 1){ // && $mmStatus->mm_logged_in == 0) {
-        include $file;
+        include 'snippets/' . $file;
       } 
       break;
     case 'inc_page_promo_footer.php':  //normal page, not logged in - show the promo area
       if ($mmStatus->normal_page == 1){ // && $mmStatus->mm_logged_in == 0) {
-        include $file;
+        include 'snippets/' . $file;
       }
       break;
       
