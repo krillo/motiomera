@@ -173,7 +173,6 @@ hgroup{height:127px; float:left;}
   box-shadow: inset -1px -1px 1px #CEE596;
   padding: 15px 15px 15px 15px;
   width:930px;
-  margin-top: 30px;
 }
 #login-input{float:left;margin-right:10px;}
 #login-input input{height:35px;background-color: #CEE596;color:#2A4400;margin-right: 5px;}
@@ -189,10 +188,38 @@ hgroup{height:127px; float:left;}
 #info{width:650px;height:350px;background-color: yellow;position: relative;z-index: 5;left:0px;top:-150px;display: none;border-radius: 10px 10px / 10px 10px;}
 #interest{list-style-image:url('img/interest_bullet.png');color:#FCFDFA;font-size: 24px;margin:20px 0 0 45px;}
 #interest li{margin-bottom: 7px;} 
-#splash{margin-top:80px;margin-left:85px;color:white;font-size:30px;width: 215px;text-shadow: 1px 1px 1px #000;font-weight:bold;}
+#splash{padding: 36px 0 70px 85px;color:white;font-size:30px;width: 180px;text-shadow: 1px 1px 1px #000;font-weight:bold;background-image:url('img/splash.png');background-repeat:no-repeat;background-position:46px 0px;}
 #splash-text{font-size: 15px;}
 
+
+
+
+
+
+
+
+
 #buy{float:left;margin: 20px 0 0 10px;}
+.margin-top{margin-top:30px;}
+.buy-heading{font-size: 23px; margin-bottom: 10px;}
+.buy-table{margin:0;}
+.buy-box-outer{padding:0 30px;font-weight:normal;font-size: 20px;text-shadow:none;color:#393939;}
+.buy-box{  
+  float:left;
+  padding:15px;
+  background-color: #EDEDED;
+  border-color: #d3d3d3 #FEFEFE #FEFEFE #d3d3d3;
+  -moz-border-radius: 7px 7px / 7px 7px;
+  border-radius: 7px 7px / 7px 7px;
+  border-style: solid;
+  border-width: 1px;
+  width: 380px;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+
+
 
 /******* buy company ********/
 #buy-company{float:left;background-image:url('img/company.png');width:470px;height: 100%;padding-bottom: 30px;border-right: 1px solid #FFFFFF;}
@@ -219,26 +246,87 @@ hgroup{height:127px; float:left;}
 }
 #buy-company-top a{color:yellow;font-size:15px;float:right;text-transform: uppercase;padding-top: 7px;}
 #buy-company-price{
-  background-image:url('img/bg_company.png');background-repeat:no-repeat;height: 270px;
+  background-image:url('img/bg_company.png');background-repeat:no-repeat;height: 245px;
   padding:35px 30px 20px 30px;
   text-align: center;
   font-size: 23px;
 }
-#nbr-sum-total-freight span{font-size: 100px;}
-#buy-company-calc{color:#393939;}
-#buy-company-calc{padding:0 30px;font-weight:normal;font-size: 20px;text-shadow:none;}
+#nbr-sum-total-freight-nbr{font-size: 100px;}
+.currency{font-size: 20px;padding: 58px 0 0 10px;position: absolute;}
+#buy-company-calc{}
 #buy-company-calc-text{margin-top: -20px;padding:0 0 30px 0;float:left;}
-#buy-company-calc-input{
-  float:left;
-  padding:15px;
-  background-color: #EDEDED;
-  border-color: #d3d3d3 #FEFEFE #FEFEFE #d3d3d3;
-  -moz-border-radius: 7px 7px / 7px 7px;
-  border-radius: 7px 7px / 7px 7px;
-  border-style: solid;
-  border-width: 1px;
+#buy-company-calc-input{}
 
+
+
+#buy-company-2{float:left;background-image:url('img/private.png');width:470px;height: 100%;padding-bottom: 30px;}
+#buy-company-2{
+  background: #EFEFEF;
+  -moz-border-radius: 0px 0px / 10px 10px;
+  border-radius: 0 0 10px 0 / 10px 10px;
+  color:white;text-shadow: 1px 1px 1px #000;font-weight:normal;
 }
+
+
+
+
+
+    #checkout-ul h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
+    #checkout-ul .h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
+    #checkout-ul li{margin-top: 5px;}
+
+    #checkout-ul label{width:130px;font-size: 14px;float:left}
+    #checkout-ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
+    #checkout-ul input{height:18px;font-size: 14px;}
+    #checkout-ul a{text-decoration: underline;}
+    #calc{border-bottom: solid black 1px;}
+
+    #nbr-with-text, #nbr-without-text{float: left;width:120px;margin-bottom: 15px;font-size: 15px;}
+    #nbr-with-text span, #nbr-without-text span{color:#427F10;}
+
+    #nbr-with, #nbr-without{margin-right: 15px;width:45px;height:31px;font-size: 22px;color:#888;padding-left: 5px;}
+
+    #nbr-with-sum, #nbr-without-sum {float:left;color: #555;font-family: Arial;font-size: 15px;width: 100px;}
+    #nbr-with-sum span, #nbr-without-sum span{margin-right: 5px;}
+    .nbr{font-size: 25px;}
+    .hide-calc{}
+    .hidden{display: none;}
+    
+    #freight-label{display:block;}
+    #freight{float:left;}
+    #nbr-sum-total-freight{margin-left: auto;}
+    #nbr-sum-total-freight-moms{float:left;color:#427F10;}
+    .line{border-top: 1px solid #333;}
+
+    #veckor{}
+    #checkout-ul #startdatumRadio-label{font-size: 13px;display: inline;width:300px;}
+    #startdatumRadio1, #startdatumRadio2{float:left;margin: 0 10px 0 0;height: 20px;width: 20px;} 
+    #startdatum{height: 25px; width: 280px;}
+    #early-info{margin-top: 10px;font-size: 14px;}
+
+    .buy-ul{width:100%;font-size: 20px;list-style: none outside none;margin: 0;}
+    .buy-ul li{margin-bottom: 1px;}    
+    .buy-ul li input{color: #888888; height: 25px; padding: 15px; width: 345px;}    
+    #payer li{margin-bottom: 2px; margin-top: 0;display:block;float:left;}
+    #payer li div{width:130px;font-size: 14px;float:left}
+    #payer li input{width:180px;float:left;}
+    #payer #payer-label{margin-bottom: 10px;display:block;margin-top: 40px;font-size:18px;}
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /******* buy private ********/
 #buy-private{float:left;background-image:url('img/private.png');width:470px;height: 100%;padding-bottom: 30px;}
@@ -269,7 +357,7 @@ hgroup{height:127px; float:left;}
   padding-top: 35px;
   font-size: 23px;
 }
-#nbr-sum-total-freight span{font-size: 100px;}
+/*#nbr-sum-total-freight span{font-size: 100px;} */
 #buy-private-calc{color:#393939;}
 #buy-private-calc{padding:0 30px;font-weight:normal;font-size: 20px;text-shadow:none;}
 #buy-private-calc-text{margin-top: -20px;padding:0 0 30px 0;float:left;}
@@ -440,6 +528,7 @@ dt {
 dd {
   margin: 0 1.5em 1.5em;
 }
+
 b, strong {
   font-weight: bold;
 }
@@ -580,17 +669,16 @@ input::-moz-focus-inner { /* Corrects inner padding and border displayed oddly i
   border: 0;
   padding: 0;
 }
-input[type=text],
-textarea {
+input[type=text], input[type=email], textarea {
   color: #666;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-input[type=text]:focus,
+input[type=text]:focus, input[type=email]:focus, 
 textarea:focus {
   color: #111;
 }
-input[type=text] {
+input[type=text], input[type=email] {
   padding: 3px;
 }
 textarea {

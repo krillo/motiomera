@@ -77,12 +77,4 @@
       <input type="button" id="login-fb" name="login-fb" value="Logga in &raquo;" />
     </div>
   </form>
-</div>      
-
-
-
-<?php
-//global $mmStatus;
-//print_r($mmStatus);
-echo '<a href="' . $mmStatus->fb_login_url . '"> Facebook login </a> ';
-?>
+</div>

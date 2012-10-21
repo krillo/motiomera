@@ -314,6 +314,17 @@ function includeSnippet($file) {
         include 'snippets/' . $file;
       }
       break;
+    case 'inc_private_calc.php':  //
+      if ($mmStatus->normal_page == 1){ // not correct include....!!!!!!!!!!!!!!!!!!!!!!!!!
+        include 'snippets/' . $file;
+      }
+      break;
+    case 'inc_buy.php':
+        include 'snippets/' . $file;
+      break;      
+      
+      
+      
       
       
       
@@ -323,7 +334,3 @@ function includeSnippet($file) {
   }
 }
 
-/**
- * Implement the Custom Header feature
- */
-//require( get_template_directory() . '/inc/custom-header.php' );
