@@ -198,7 +198,8 @@ hgroup{height:127px; float:left;}
 
 
 
-
+/******* buy ********/
+.buy-ul li .invalid{border-color:red;}
 #buy{float:left;margin: 20px 0 0 10px;}
 .margin-top{margin-top:30px;}
 .buy-heading{font-size: 23px; margin-bottom: 10px;}
@@ -217,25 +218,18 @@ hgroup{height:127px; float:left;}
   font-size: 15px;
   margin-bottom: 10px;
 }
-
-
-
+.buy-container{float:left;width:470px;height: 100%;padding-bottom: 30px;  background: #EFEFEF; -moz-border-radius: 10px 10px / 10px 10px;border-radius: 10px 10px / 10px 10px;font-weight:normal}
+.full-width{width:880px;}
 
 /******* buy company ********/
-#buy-company{float:left;background-image:url('img/company.png');width:470px;height: 100%;padding-bottom: 30px;border-right: 1px solid #FFFFFF;}
-#buy-company{
-  background: #EFEFEF;
-  -moz-border-radius: 10px 10px / 10px 10px;
-  border-radius: 10px 10px / 10px 10px;
-  color:white;text-shadow: 1px 1px 1px #000;font-weight:normal;
-}
-
-
+#buy-company{border-right: 1px solid #FFFFFF;}
 #buy-company-top{
   height:45px;
   padding:20px 30px;
   font-size:24px;
-  background: #2f4d00;  
+  background: #2f4d00;
+  color:white;
+  text-shadow: 1px 1px 1px #000;
   -webkit-border-top-left-radius: 10px;
   -webkit-border-top-right-radius: 10px;
   -moz-border-radius-topleft: 10px;
@@ -244,12 +238,16 @@ hgroup{height:127px; float:left;}
   border-top-right-radius: 10px;
   border-bottom: white solid 1px;  
 }
-#buy-company-top a{color:yellow;font-size:15px;float:right;text-transform: uppercase;padding-top: 7px;}
+#buy-company-top a{float:right;color:yellow;font-size:15px;text-transform: uppercase;padding-top: 7px;}
+#link-stegtavling{}
+#link-private{margin-left: 284px;}
 #buy-company-price{
   background-image:url('img/bg_company.png');background-repeat:no-repeat;height: 245px;
   padding:35px 30px 20px 30px;
   text-align: center;
   font-size: 23px;
+  color:white;
+  text-shadow: 1px 1px 1px #000;
 }
 #nbr-sum-total-freight-nbr{font-size: 100px;}
 .currency{font-size: 20px;padding: 58px 0 0 10px;position: absolute;}
@@ -258,70 +256,91 @@ hgroup{height:127px; float:left;}
 #buy-company-calc-input{}
 
 
+/******* buy company address ********/
+#buy-company-2{margin-top: 85px;}
+#checkout-ul h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
+#checkout-ul .h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
+#checkout-ul li{margin-top: 5px;}
 
-#buy-company-2{float:left;background-image:url('img/private.png');width:470px;height: 100%;padding-bottom: 30px;}
-#buy-company-2{
-  background: #EFEFEF;
-  -moz-border-radius: 0px 0px / 10px 10px;
-  border-radius: 0 0 10px 0 / 10px 10px;
-  color:white;text-shadow: 1px 1px 1px #000;font-weight:normal;
+#checkout-ul label{width:130px;font-size: 14px;float:left}
+#checkout-ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
+#checkout-ul input{height:18px;font-size: 14px;}
+#checkout-ul a{text-decoration: underline;}
+#calc{border-bottom: solid black 1px;}
+
+#nbr-with-text, #nbr-without-text{float: left;width:120px;margin-bottom: 15px;font-size: 15px;}
+#nbr-with-text span, #nbr-without-text span{color:#336600;}
+
+#nbr-with, #nbr-without{margin-right: 15px;width:45px;height:31px;font-size: 22px;color:#888;padding-left: 5px;}
+
+#nbr-with-sum, #nbr-without-sum {float:left;color: #555;font-family: Arial;font-size: 15px;width: 100px;}
+#nbr-with-sum span, #nbr-without-sum span{margin-right: 5px;}
+.nbr{font-size: 25px;}
+.hide-calc{}
+.hidden{display: none;}
+
+#freight-label{display:block;}
+#freight{float:left;}
+#nbr-sum-total-freight{margin-left: auto;}
+#nbr-sum-total-freight-moms{float:left;color:#427F10;}
+.line{border-top: 1px solid #333;}
+
+#veckor{}
+#checkout-ul #startdatumRadio-label{font-size: 13px;display: inline;width:300px;}
+#startdatumRadio1, #startdatumRadio2{float:left;margin: 0 10px 0 0;height: 20px;width: 20px;} 
+#startdatum{height: 25px; width: 280px;}
+#early-info{margin-top: 10px;font-size: 14px;}
+
+.buy-ul{width:100%;font-size: 20px;list-style: none outside none;margin: 0;}
+.buy-ul li{margin-bottom: 1px;}    
+.buy-ul li input{color: #888888; height: 15px; padding: 15px; width: 345px;}    
+#payer li{margin-bottom: 2px; margin-top: 0;display:block;float:left;}
+#payer li div{width:130px;font-size: 14px;float:left}
+#payer li input{width:180px;float:left;}
+#payer #payer-label{margin-bottom: 10px;display:block;margin-top: 40px;font-size:18px;}
+    
+    
+/******* buy company bubble ********/
+#buy-contact{padding:30px 30px 0; width: 410px;height:245px;}
+#buy-contact img{float:left;border: 7px solid #FFFFFF;-moz-border-radius: 10px 10px / 10px 10px;border-radius: 10px 10px / 10px 10px;}
+#bubble{float:left;margin-left:10px; padding: 15px 0 0 50px; background-image:url('img/bubble.png');background-repeat:no-repeat;height: 245px;width:253px;font-size: 24px;height: 231px;}
+#buy-contact-tel{color:#404040;font-family: helvetica; font-size: 36px;font-weight: bold;text-decoration: none;}
+#buy-contact-tel:hover{color:#888;}
+
+
+/******* buy company bubble ********/
+#buy-payment{padding:15px 30px; width: 410px;}
+#buy-payment-buttons-area{float:left;height:80px;}
+.buy-payment-buttons{
+  float:left;
+    font-size: 20px;
+    overflow: hidden;
+    padding-left: 8px;
+    text-align: left;
+    height:55px;    
+    font-family: cabin condensed;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
-
-
-
-
-
-    #checkout-ul h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
-    #checkout-ul .h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
-    #checkout-ul li{margin-top: 5px;}
-
-    #checkout-ul label{width:130px;font-size: 14px;float:left}
-    #checkout-ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
-    #checkout-ul input{height:18px;font-size: 14px;}
-    #checkout-ul a{text-decoration: underline;}
-    #calc{border-bottom: solid black 1px;}
-
-    #nbr-with-text, #nbr-without-text{float: left;width:120px;margin-bottom: 15px;font-size: 15px;}
-    #nbr-with-text span, #nbr-without-text span{color:#427F10;}
-
-    #nbr-with, #nbr-without{margin-right: 15px;width:45px;height:31px;font-size: 22px;color:#888;padding-left: 5px;}
-
-    #nbr-with-sum, #nbr-without-sum {float:left;color: #555;font-family: Arial;font-size: 15px;width: 100px;}
-    #nbr-with-sum span, #nbr-without-sum span{margin-right: 5px;}
-    .nbr{font-size: 25px;}
-    .hide-calc{}
-    .hidden{display: none;}
+#payson{
+  background-image: url("img/payson-button.png");
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    width:205px;
+    margin-right: 10px;
+    border-color: #fff #ccc #ccc #fff;
     
-    #freight-label{display:block;}
-    #freight{float:left;}
-    #nbr-sum-total-freight{margin-left: auto;}
-    #nbr-sum-total-freight-moms{float:left;color:#427F10;}
-    .line{border-top: 1px solid #333;}
+}
+#faktura{  background-image: url("img/faktura-button.png");
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    width:195px;
+    border-color: #fff #ccc #ccc #fff;
+}
+#faktura:hover, #payson:hover{border-color: #ccc #fff #fff #ccc;}
 
-    #veckor{}
-    #checkout-ul #startdatumRadio-label{font-size: 13px;display: inline;width:300px;}
-    #startdatumRadio1, #startdatumRadio2{float:left;margin: 0 10px 0 0;height: 20px;width: 20px;} 
-    #startdatum{height: 25px; width: 280px;}
-    #early-info{margin-top: 10px;font-size: 14px;}
-
-    .buy-ul{width:100%;font-size: 20px;list-style: none outside none;margin: 0;}
-    .buy-ul li{margin-bottom: 1px;}    
-    .buy-ul li input{color: #888888; height: 25px; padding: 15px; width: 345px;}    
-    #payer li{margin-bottom: 2px; margin-top: 0;display:block;float:left;}
-    #payer li div{width:130px;font-size: 14px;float:left}
-    #payer li input{width:180px;float:left;}
-    #payer #payer-label{margin-bottom: 10px;display:block;margin-top: 40px;font-size:18px;}
-    
-    
-
-
-
-
-
-
-
-
-
+#buy-payment-options{float:left;height:143px;background-image: url("img/payment_options.png");background-repeat: no-repeat;background-position:0 33px;}
+#integrity{clear: both;}
 
 
 
@@ -336,7 +355,7 @@ hgroup{height:127px; float:left;}
   border-radius: 10px 10px / 10px 10px;
   color:white;text-shadow: 1px 1px 1px #000;font-weight:normal;
 }
-#buy-private-top{
+#buy-private-top, #buy-private-top-left{
   height:45px;
   padding:20px 30px;
   font-size:24px;
@@ -349,7 +368,7 @@ hgroup{height:127px; float:left;}
   border-top-right-radius: 10px;
   border-bottom: white solid 1px;  
 }
-#buy-private-top a{color:yellow;font-size:15px;}
+#buy-private-top-left a{color:white;font-size:15px;text-transform: uppercase;padding-top: 7px;color:white;text-shadow: 1px 1px 1px #000;}
 #buy-private-price{
   background-image:url('img/bg_private.png');background-repeat:no-repeat;height: 270px;
   padding-left:30px;
@@ -357,7 +376,7 @@ hgroup{height:127px; float:left;}
   padding-top: 35px;
   font-size: 23px;
 }
-/*#nbr-sum-total-freight span{font-size: 100px;} */
+#priv-the-price{font-size: 100px;}
 #buy-private-calc{color:#393939;}
 #buy-private-calc{padding:0 30px;font-weight:normal;font-size: 20px;text-shadow:none;}
 #buy-private-calc-text{margin-top: -20px;padding:0 0 30px 0;float:left;}
@@ -372,6 +391,40 @@ hgroup{height:127px; float:left;}
   -moz-border-radius: 7px 7px / 7px 7px;
   border-radius: 7px 7px / 7px 7px;
 }
+
+
+
+
+
+
+
+  #calc {width:100%;font-size: 14px;border-bottom: 1px solid black;float:left;}
+  #calc input{width:18px;height:18px;font-size: 14px;float:left;}
+  #calc div{font-size: 14px;}
+  .step-check{margin-left: 20px;}
+  #short, #long, #freight{float:left;margin-bottom: 25px;width: 75%;}
+  #freight{margin: 0 0 10px 28px;width:253px;}
+  #sum-short, #sum-long, #freight-sum{float:right;}
+  .nbr{font-size: 22px; font-weight: normal;}
+  #nbr-sum-total-freight .currency{width:90px;font-size: 20px;}
+  #sum-freight{float:right;}
+  #sum-total{float:right;margin-bottom:40px;}
+
+  #pay {font-size: 14px;margin-top: 45px;}
+  #integrity{margin-bottom: 20px;width: 350px;}
+
+  #pay div{float:left;}
+  #pay input{font-size: 15px;width:200px;height:25px;}
+  #pay ul{margin-left: 2px;padding-left: 15px;}
+  #payalt{color:#494949;font-size:11px;margin:5px 0 0 10PX;}
+
+
+
+
+
+
+
+
 
 /*******  ********/
 
@@ -628,7 +681,7 @@ input[type="submit"] {
   cursor: pointer; /* Improves usability and consistency of cursor style between image-type 'input' and others */
   -webkit-appearance: button; /* Corrects inability to style clickable 'input' types in iOS */
   font-size: 12px;
-  font-size: 1.4rem;
+  font-size: 1.2em;
   padding: 0.4em 0.5em 0.6em;
   text-shadow: 0 1px 0 rgba(0,0,0,.5); 
 }
@@ -636,7 +689,7 @@ button:hover,
 html input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
-  border-color: #CEE596 #CEE596 #CEE596 #CEE596;
+  border-color: #000 #CEE596 #CEE596 #000;
 }
 button:focus,
 html input[type="button"]:focus,
@@ -690,15 +743,15 @@ textarea {
 
 /* Links */
 a {
-  color: royalblue;
+  color: #336600;
 }
 a:visited {
-  color: purple;
+  color: #336600;
 }
 a:hover,
 a:focus,
 a:active {
-  color: midnightblue;
+  color: #243f08;
 }
 
 /* Alignment */
