@@ -14,6 +14,7 @@ global $mmStatus;
   <head>
     <meta charset="<?php bloginfo('charset'); ?>" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="<?php bloginfo('stylesheet_directory'); ?>/favicon.ico" />
     <title><?php
 global $page, $paged;
 wp_title('|', true, 'right');
@@ -32,8 +33,8 @@ if ($site_description && ( is_home() || is_front_page() )) {
     <![endif]-->
 
 
-    
-    
+
+
     <?php wp_head(); ?>
   </head>
   <body <?php body_class(); ?>>

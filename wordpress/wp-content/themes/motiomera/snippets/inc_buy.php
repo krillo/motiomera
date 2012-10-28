@@ -226,8 +226,6 @@ Order::getMondays(15);
     });
 
     function sum_private(){
-      alert("sum_private");
-      
       radio  = $('input:radio[name=radio-priv]:checked').val();
       if(typeof radio != 'undefined'){  //one of the radios are checked
         shortRadio = <?php echo $campaignCodes['PRIV3']['pris']; ?>;
@@ -268,10 +266,10 @@ Order::getMondays(15);
         sumLong = parseInt(longRadio) + parseInt(longCheck);        
         sumTotal = sumShort + sumLong + sumFreight;
    
-        $('#sum-short span').html(sumShort);
-        $('#sum-long span').html(sumLong);
-        $('#sum-freight span').html(sumFreight);
-        $('#sum-total span').html(sumTotal);
+        $('#sum-short').html(sumShort);
+        $('#sum-long').html(sumLong);
+        $('#sum-freight').html(sumFreight);
+        $('#sum-total').html(sumTotal);
         $('#priv-the-price').html(sumTotal);
      
    
@@ -333,7 +331,7 @@ Order::getMondays(15);
     <div id="buy-private-top-left"><a href="#" id="link-company" name="company" class="hide-company hidden">För företag från 169 kr?</a></div>
     <div class="buy-box-outer">
       <div class="buy-box margin-top">
-        <div class="buy-heading">Adress</div>
+        <div class="buy-heading">Uppgifter</div>
         <ul class="buy-ul">
           <li><input type="text" name="del-company" id="del-company" class="" placeholder="Företagets namn*"/></li>
           <li><input type="text" name="del-co" id="del-co" class="" placeholder="c/o"/></li>
@@ -373,13 +371,13 @@ Order::getMondays(15);
               <td><div id="nbr-with-text"><?php echo $campaignCodes['RE03']['text']; ?><br/><!--span style="color:black;text-decoration: line-through;">289 </span--><span><?php echo $campaignCodes['RE03']['pris']; ?> kr/person</span></div></td>
               <td><input type="text" name="RE03" id="nbr-with"/></td>
               <td><div id="nbr-with-sum"><span class="nbr">0</span></div></td>
-              <td>kr ex moms</td>
+              <td class="kr">kr ex moms</td>
             </tr>
             <tr>
               <td><div id="nbr-without-text"><?php echo $campaignCodes['RE04']['text']; ?><br/><!--span style="color:black;text-decoration: line-through;">169 </span--><span><?php echo $campaignCodes['RE04']['pris']; ?> kr/person</span></div></td>
               <td><input type="text" name="RE04" id="nbr-without" /></td>
               <td><div id="nbr-without-sum"><span class="nbr">0</span></div></td>
-              <td>kr ex moms</td>
+              <td class="kr">kr ex moms</td>
             </tr>
             <tr class="hide-company hidden">
               <td colspan="2" ><div id="freight-label">Frakt</div></td>
@@ -390,13 +388,13 @@ Order::getMondays(15);
               <td></td>
               <td></td>
               <td class="line"><div id="nbr-sum-total-freight"><span class="nbr">0</span></div></td>
-              <td class="line">kr ex moms</td>
+              <td class="line kr">kr ex moms</td>
             </tr>
             <tr class="hide-company hidden">
               <td></td>
               <td></td>
               <td><div id="nbr-sum-total-freight-moms"><span class="nbr"> 0</span></div></td>
-              <td>kr inkl moms</td>
+              <td class="kr">kr inkl moms</td>
             </tr>
           </tbody>
         </table>
@@ -409,6 +407,7 @@ Order::getMondays(15);
           <option value="7">7</option>
           <option value="8">8</option>
         </select>
+        <div class="early-info">Ring Kristian på 0761-393855 om ni önskar fler veckor.</div>
       </div>
       <div class="buy-box hide-company hidden">
         <div class="buy-heading">Välj ert startdatum (valfri måndag)</div>            
@@ -418,8 +417,7 @@ Order::getMondays(15);
         <select name="startdatum" id="startdatum" onchange="updateStartRadio();">
           <?php echo Order::getMondays(20); ?>
         </select>
-        <div class="clear"></div>
-        <div id="early-info">Ring Kristian 0761-393855 om ni önskar tidigare datum.</div>    
+        <div class="early-info">Ring Kristian på 0761-393855 om ni önskar tidigare datum.</div>    
       </div>
     </div>
     <div id="buy-contact" class="buy-container hide-company hidden">
@@ -495,37 +493,50 @@ Order::getMondays(15);
     </div>
 
 
-
-
-
-
-
-
-
+    
     <div id="buy-company-calc" class="buy-box-outer">
       <div id="buy-company-calc-text">För dig som vill röra på dig och samtidigt ha kul! Det är enkelt, allt du behöver är en stegräknare.</div>
-      <div id="buy-company-calc-input" class="buy-box">
-        <div id="short">
-          <input type="radio" id="short-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV3']['pris']; ?>" /><div id="short-text"><?php echo $campaignCodes['PRIV3']['text']; ?><span > <?php echo $campaignCodes['PRIV3']['pris']; ?> kr</span></div>
-          <div class="clear"></div>
-          <div id="" class="step-check"><input type="checkbox" id="short-check" name="short-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /><div id="short-text"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></div>    
-        </div>
-        <div id="sum-short"><span class="nbr">0</span> kr</div>
-        <div class="clear"></div>
-        <div id="long">
-          <input type="radio" id="long-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV12']['pris']; ?>" /><div id="long-text"><?php echo $campaignCodes['PRIV12']['text']; ?><span > <?php echo $campaignCodes['PRIV12']['pris']; ?> kr</span></div>
-          <div class="clear"></div>
-          <div id=""class="step-check"><input type="checkbox" id="long-check" name="long-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /><div id="long-text"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></div>    
-        </div>
-        <div id="sum-long"><span class="nbr">0</span> kr</div>
-        <div class="clear"></div>
-        <div id="freight">Frakt (<?php echo $campaignCodes['FRAKT02']['pris']; ?> kr)</div><div id="sum-freight"><span class="nbr">0</span> kr</div>
-        <div class="clear"></div>
-      </div>
-      <div id="sum-total"><span class="nbr">0</span> kr</div>
-      <div class="clear"></div>
-
-
+      <div  class="buy-box">
+        <table class="buy-table"> 
+          <tbody >
+            <tr>
+              <td><input type="radio" id="short-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV3']['pris']; ?>" /></td>
+              <td colspan="2"><div id="short-text"><?php echo $campaignCodes['PRIV3']['text']; ?><span > <?php echo $campaignCodes['PRIV3']['pris']; ?> kr</span></div></td>
+              <td rowspan="2" style="width:100px;"><div id="sum-short" class="nbr">0</div></td>
+              <td rowspan="2" style="width:100px;" class="kr">kr</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td style="width:25px;"><div id="" class="step-check"><input type="checkbox" id="short-check" name="short-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /></td>
+              <td><div id="short-text" style="margin-bottom:20px;"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></td>
+            </tr>
+            <tr>            
+              <td><input type="radio" id="long-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV12']['pris']; ?>" /></td>
+              <td colspan="2"><div id="long-text"><?php echo $campaignCodes['PRIV12']['text']; ?><span > <?php echo $campaignCodes['PRIV12']['pris']; ?> kr</span></div></td>
+              <td rowspan="2"><div id="sum-long" class="nbr">0</span></td>
+              <td rowspan="2" style="width:100px;" class="kr">kr</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><div id=""class="step-check"><input type="checkbox" id="long-check" name="long-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /></td>
+              <td><div id="long-text" style="margin-bottom:20px;"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td colspan="2" class="kr"><div id="freight_private">Frakt (<?php echo $campaignCodes['FRAKT02']['pris']; ?> kr)</div></td>
+              <td><div id="sum-freight"class="nbr">0</div></td>
+              <td class="kr">kr</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td ></td>
+              <td class="line"><div id="sum-total" class="nbr">0</div></td>
+              <td class="line kr"> kr</td>
+            </tr>
+          </tbody>
+        </table>      
+      </div> 
 
 
 
