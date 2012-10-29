@@ -2,6 +2,13 @@
 
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
 
+//allow only Ystad and Helsingborg if not logged in
+$req_kommun =  $_SERVER['REQUEST_URI'];
+if(strcmp($req_kommun,'/kommun/Ystad/') != 0 && strcmp($req_kommun,'/kommun/Helsingborg/') != 0){
+  Security::demand(USER);
+}
+
+
 $from = array("aa", "ae", "oe", "AA", "AE", "OE");
 $to = array("å","ä","ö","Å","Ä","Ö");
 	
