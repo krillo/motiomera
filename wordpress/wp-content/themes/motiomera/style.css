@@ -295,7 +295,7 @@ hgroup{height:127px; float:left;}
 
 .buy-ul{width:100%;font-size: 20px;list-style: none outside none;margin: 0;}
 .buy-ul li{margin-bottom: 1px;}    
-.buy-ul li input{color: #888888; height: 15px; padding: 15px; width: 345px;}    
+.buy-ul li input{color: #888888; height: 26px; padding: 8px; width: 345px;}    
 #payer li{margin-bottom: 2px; margin-top: 0;display:block;float:left;}
 #payer li div{width:130px;font-size: 14px;float:left}
 #payer li input{width:180px;float:left;}
@@ -723,7 +723,7 @@ input::-moz-focus-inner { /* Corrects inner padding and border displayed oddly i
   border: 0;
   padding: 0;
 }
-input[type=text], input[type=email], textarea {
+input[type=text], input[type=email], input[type=password], textarea {
   color: #666;
   border: 1px solid #ccc;
   border-radius: 5px;

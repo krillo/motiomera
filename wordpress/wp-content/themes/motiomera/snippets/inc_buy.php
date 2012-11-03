@@ -1,16 +1,29 @@
 <?php
-//global $mmStatus;
-//print_r($mmStatus);
+error_reporting(E_ALL);
+//ini_set('display_errors', '1');
+//print_r($GLOBALS );               //display all wp-globals 
+//global $mmStatus;                 
+//print_r($mmStatus);               //display all mm-wp-globals 
 
-require_once MM_ROOT_ABSPATH . "/classes/Mobject.php";
-require_once MM_ROOT_ABSPATH . "/classes/UserException.php";
-require_once MM_ROOT_ABSPATH . "/classes/Misc.php";
-require_once MM_ROOT_ABSPATH . "/classes/Order.php";
+require_once(MM_ROOT_ABSPATH . "/init.php");
 
+/*
+  require_once MM_ROOT_ABSPATH . "/classes/Mobject.php";
+  require_once MM_ROOT_ABSPATH . "/classes/UserException.php";
+  require_once MM_ROOT_ABSPATH . "/classes/Misc.php";
+  require_once MM_ROOT_ABSPATH . "/classes/Order.php";
+  require_once MM_ROOT_ABSPATH . "/classes/Kommun.php";
+  require_once MM_ROOT_ABSPATH . "/classes/DB.php";
+ */
 
 $campaignCodes = Order::$campaignCodes;
 $moms = Order::$moms;
 Order::getMondays(15);
+
+//print_r(get_defined_vars());       //display all php-global variables
+
+
+$kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn(false, false, $db));
 ?>
 
 
@@ -19,11 +32,16 @@ Order::getMondays(15);
 <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
 <script type="text/javascript">    
   jQuery(function($) {
-    //do input validation
+    var type = "";
+        
+    /**
+     * Do input validation
+     * Fields that are hidden are not validated 
+     */ 
     var validator = $("#checkout").validate({
       errorClass: "invalid",
       validClass: "valid",
-      rules: {
+      rules: { 
         "del-company": {
           required: true
         },
@@ -48,8 +66,46 @@ Order::getMondays(15);
         },
         "del-phone": {
           required: true
-        }
-      },  
+        }, 
+        //private
+        anamn: {
+          required: true,
+          maxlength: <?php echo Medlem::MAX_LENGTH_ANAMN; ?>, 
+          minlength: <?php echo Medlem::MIN_LENGTH_ANAMN; ?>          
+        },
+        firstname: {
+          required: true
+        },
+        lastname: {
+          required: true
+        },
+        mailone: {
+          required: true,
+          email: true
+        },
+        email2: {
+          equalTo: "#mailone"
+        },        
+        street1: {
+          required: true
+        },
+        zip: {
+          required: true
+        },
+        city: {
+          required: true
+        },
+        phone: {
+          required: true
+        },
+        pass: {
+          required: true
+          //min: 4
+        },
+        pass2: {
+          equalTo: "#pass"
+        }       
+      },
       messages: {
         "del-company": {
           required: ''
@@ -75,39 +131,80 @@ Order::getMondays(15);
         "del-email": {
           required: '', 
           email: ''
-        }         
+        },        
+        //Private
+        "anamn": {
+          required: '',
+          maxlength: 'För långt',
+          minlength: 'För kort'
+        },
+        "firstname": {
+          required: ''
+        },
+        "lastname": {
+          required: ''
+        },
+        "street1": {
+          required: ''
+        },
+        "zip": {
+          required: ''
+        },
+        "city": {
+          required: ''
+        },
+        "phone": {
+          required: ''
+        },
+        "mailone": {
+          required: '', 
+          email: ''
+        },
+        "email2": {
+          equalTo: ''
+        },        
+        "pass": {
+          required: ''
+          //min: 'minst 4 tecken'
+        },        
+        "pass2": {
+          equalTo: ''
+        }
       }
     });
 
-    //catch keyup where the ammount is submitted 
-    $('#nbr-with').keyup(function() {
-      sum();     
-    });
-    $('#nbr-without').keyup(function() {
-      sum();
-    });
 
-    //check also when leaving field
-    $('#nbr-with').blur(function() {
-      sum();     
-    });
-    $('#nbr-without').keyup(function() {
-      sum();
-    });
-
-
-    //sum with and without stepcounter, add freight and moms
-    function sum(){
-      var sumWith, sumWithout, sumTotal, countWith, countWithout, freight, sumTotalFreight, sumTotalFreightMoms;
-           
-      //$('.hide-company').toggleClass("hidden");     
+    function showPrivateHideCompany(){
+      type = 'private';      
+      $('#type').val('private');
+      $('.hide-company').addClass("hidden");
+      $('#buy-company').addClass("hidden");
+      $('#buy-company-top').removeClass("full-width");
+      $('.hide-private').removeClass("hidden");
+      $('#buy-private-top-left').addClass("full-width");
+      $('#link-company').removeClass("hidden");  
+      $('#buy-payment').removeClass("hidden");  
+      $('#faktura').addClass("hidden");  
+    }
+    
+    function showCompanyHidePrivate(){
+      type = 'company';
+      $('#type').val('company');
       $('.hide-company').removeClass("hidden");
-      $('.hide-company').show("slow");
+      $('#buy-company').removeClass("hidden");
       $('#buy-company-top').addClass("full-width");
-      
       $('.hide-private').addClass("hidden");
-      
-      //$('.hidden').removeClass("hidden");
+      $('#buy-private-top-left').removeClass("full-width");
+      $('#buy-payment').removeClass("hidden");  
+    }   
+
+
+    /**
+     * Sum company with and without stepcounter, add freight and moms
+     */ 
+    function sum_company(){
+      var sumWith, sumWithout, sumTotal, countWith, countWithout, freight, sumTotalFreight, sumTotalFreightMoms;           
+      showCompanyHidePrivate();
       
       countWith = $('#nbr-with').val();
       sumWith =  countWith * <?php echo $campaignCodes['RE03']['pris']; ?>;
@@ -122,8 +219,7 @@ Order::getMondays(15);
         $('#freight span').html(<?php echo $campaignCodes['FRAKT01']['pris']; ?>);
         $('#freight-text').html('<?php echo $campaignCodes['FRAKT01']['extra']; ?>');
         $('#m_freight').val('FRAKT01');
-      } 
-  
+      }   
       countWithout = $('#nbr-without').val();
       sumWithout =  countWithout * <?php echo $campaignCodes['RE04']['pris']; ?>;
       $('#nbr-without-sum span').html(sumWithout);
@@ -135,97 +231,22 @@ Order::getMondays(15);
       sumTotalFreight = parseInt(freight) + parseInt(sumTotal);
       $('#nbr-sum-total-freight-nbr').html(sumTotalFreight);    
       $('#nbr-sum-total-freight span.nbr').html(sumTotalFreight);    
-        
-          
+                  
       sumTotalFreightMoms = sumTotalFreight * <?php echo $moms['percent']; ?>;
       sumTotalFreightMoms = Math.ceil(sumTotalFreightMoms);
       $('#nbr-sum-total-freight-moms span').html(sumTotalFreightMoms);
-
 
       $('#m_exmoms').val(sumTotal);          
       $('#m_total').val(sumTotalFreight);        
       $('#m_incmoms').val(sumTotalFreightMoms);
     }
         
-        
-        
-    //toggle from company to private    
-    $('#link-private').click(function(event) {
-      event.preventDefault();
-      $('.hide-company').addClass("hidden");
-      $('#buy-company').addClass("hidden");
-      $('#buy-company-top').removeClass("full-width");
-      $('.hide-private').removeClass("hidden");
-      $('#buy-private-top-left').addClass("full-width");
-    });
-        
-    //toggle from private to company    
-    $('#link-company').click(function(event) {
-      event.preventDefault();
-      $('.hide-company').removeClass("hidden");
-      $('#buy-company').removeClass("hidden");
-      $('#buy-company-top').addClass("full-width");
-      $('.hide-private').addClass("hidden");
-      $('#buy-private-top-left').removeClass("full-width");
-    });
-           
-        
-        
-        
-        
-        
-        
-    //catch keyup where the companyname is submitted 
-    $('#del-company').keypress(function() {
-      
-      $('#delivery').toggleClass("visible");
-      $('#delivery').show("slow");
-      $('#pay').toggleClass("visible");
-      $('#pay').show("slow");
-      $('#delivery-toggle').addClass("h3");      
-      //$('#delivery-toggle').toggleClass("visible");
-      $('#delivery-toggle').removeClass("hidden");            
-      $('#delivery-toggle').show("slow");
-    });
-        
-        
-    $('#delivery-toggle').click(function(event) {
-      event.preventDefault();
-      if($('#delivery-address').hasClass("visible")){        
-        $('#delivery-address').toggleClass("visible");
-        $('#delivery-address').hide("slow");
 
-      }else {
-        $('#delivery-address').toggleClass("visible");
-        $('#delivery-address').show("slow");
-      }
-    });
-
- 
- 
- 
- 
- 
- 
- 
-    /******************************
-     * private
-     ******************************/
-    $('#short-radio').change(function() {
-      sum_private(); 
-   
-    });
-    $('#long-radio').change(function() {
-      sum_private(); 
-    });
-    $('#short-check').change(function() {
-      sum_private(); 
-    });
-    $('#long-check').change(function() {
-      sum_private(); 
-    });
-
+    /**
+     * Sum private
+     */ 
     function sum_private(){
+      showPrivateHideCompany();
       radio  = $('input:radio[name=radio-priv]:checked').val();
       if(typeof radio != 'undefined'){  //one of the radios are checked
         shortRadio = <?php echo $campaignCodes['PRIV3']['pris']; ?>;
@@ -260,8 +281,7 @@ Order::getMondays(15);
           sumFreight = 0;
           $('#m_frakt02').val(0);
           $('#m_steg01').val(0);
-        }
-       
+        }       
         sumShort = parseInt(shortRadio) + parseInt(shortCheck);
         sumLong = parseInt(longRadio) + parseInt(longCheck);        
         sumTotal = sumShort + sumLong + sumFreight;
@@ -270,38 +290,88 @@ Order::getMondays(15);
         $('#sum-long').html(sumLong);
         $('#sum-freight').html(sumFreight);
         $('#sum-total').html(sumTotal);
-        $('#priv-the-price').html(sumTotal);
-     
-   
-       
+        $('#priv-the-price').html(sumTotal);       
         $('#m_total').val(sumTotal);        
         $('#m_freight').val(sumFreight);      
-   
-     
       } else { //radiobutton is undfined do nothing     
         //alert('apa');
       }
     }
 
+
+
+
+    /******************************
+     * Events
+     ******************************/
+        
+    //toggle from company to private    
+    $('#link-private').click(function(event) {
+      event.preventDefault();
+      showPrivateHideCompany();
+    });
+        
+    //toggle from private to company    
+    $('#link-company').click(function(event) {
+      event.preventDefault();
+      showCompanyHidePrivate();
+    });
+
+    //company catch keyup where the ammount is submitted 
+    $('#nbr-with').keyup(function() {
+      sum_company();     
+    });
+    $('#nbr-without').keyup(function() {
+      sum_company();
+    });
+    
+    //copmany check also when leaving field
+    $('#nbr-with').blur(function() {
+      sum_company();     
+    });
+    $('#nbr-without').keyup(function() {
+      sum_company();
+    });
+           
+    //company show or hide delicery address       
+    $('#delivery-toggle').click(function(event) {
+      event.preventDefault();
+      if($('#delivery-address').hasClass("visible")){        
+        $('#delivery-address').toggleClass("visible");
+        $('#delivery-address').hide("slow");
+
+      }else {
+        $('#delivery-address').toggleClass("visible");
+        $('#delivery-address').show("slow");
+      }
+    });
+
+
+    //private monitor changes on radio and checkbox  
+    $('#short-radio').change(function() {
+      sum_private();    
+    });
+    $('#long-radio').change(function() {
+      sum_private(); 
+    });
+    $('#short-check').change(function() {
+      sum_private(); 
+    });
+    $('#long-check').change(function() {
+      sum_private(); 
+    });
+
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+    //send form to company or private
+    $("#checkout").submit(function() {
+      if (type == "company") {
+        $("#checkout").attr("action", "/actions/payson_foretag.php");
+        return true;
+      } else {
+        $("#checkout").attr("action", "/actions/payson_privat.php")
+        return true;        
+      }
+    });
  
  
   });
@@ -312,19 +382,16 @@ Order::getMondays(15);
   }
 </script>    
 
-
-
-
-
-<form action="/actions/payson_foretag.php" method="post" id="checkout">
-  <input type="hidden" name="type" value="foretag">
+<form action="/actions/wp_buy.php" method="post" id="checkout">
+  <input type="hidden" name="type"      id="type" value="">
   <input type="hidden" name="m_exmoms"  id="m_exmoms" value=""> 
   <input type="hidden" name="m_freight" id="m_freight"  value="">         
   <input type="hidden" name="m_total"   id="m_total" value="">        
   <input type="hidden" name="m_incmoms" id="m_incmoms" value="">       
-
-
-
+  <input type="hidden" name="m_priv3"   id="m_priv3" value="">        
+  <input type="hidden" name="m_priv12"  id="m_priv12" value="">        
+  <input type="hidden" name="m_steg01"  id="m_steg01" value="">        
+  <input type="hidden" name="m_frakt02" id="m_frakt02" value="">  
 
 
   <div id="buy-private-2" class="buy-container hide-private hidden" >
@@ -333,24 +400,46 @@ Order::getMondays(15);
       <div class="buy-box margin-top">
         <div class="buy-heading">Uppgifter</div>
         <ul class="buy-ul">
-          <li><input type="text" name="del-company" id="del-company" class="" placeholder="Företagets namn*"/></li>
-          <li><input type="text" name="del-co" id="del-co" class="" placeholder="c/o"/></li>
-          <li><input type="text" name="del-street1" id="del-street1" placeholder="Adress*"/></li>
-          <li><input type="text" name="del-street2" id="del-street2" placeholder=""/></li>
-          <li><input type="text" name="del-zip" id="del-zip" placeholder="Postnummer*"/></li>
-          <li><input type="text" name="del-city" id="del-city" placeholder="Ort*"/></li>
-          <li><input type="text" name="del-country" id="del-country" class="" value="Sverige" placeholder=""/></li>
-          <li><input type="text" name="del-firstname" id="del-firstname" class="" placeholder="Förnamn*"/></li>
-          <li><input type="text" name="del-lastname" id="del-lastname" class="" placeholder="Efternamn*"/></li>
-          <li><input type="email" name="del-email" id="del-email" class="" placeholder="E-post*"/></li>
-          <li><input type="text" name="del-phone" id="del-phone" placeholder="Mobil/telefon*"/></li>
-          <li><input type="text" name="refcode" id="refcode" class="" placeholder="Kostnadsställe/Refkod"/></li>  
+          <li><input type="text" name="anamn" id="anamn" class="" minlength="<?php echo Medlem::MIN_LENGTH_ANAMN; ?>" maxlength="<?php echo Medlem::MAX_LENGTH_ANAMN; ?>" onfocus="getById('mmANamnError').style.display = 'none';" onblur="mm_ajaxValidera('mmANamnError', 'anamn', this.value);" placeholder="Välj alias*"/>
+            <span id="mmANamnError" class="mmRed mmFormError hide">Upptaget</span>
+          </li>
+          <li>
+            <select name="sex">
+              <option value="kvinna">Kvinna</option>
+              <option value="man">Man</option>
+            </select>
+            <label for="sex" style="margin-left:10px;">Kön</label>
+          </li>
+          <li>
+            <select name="kid" id="kid">
+              <?php
+              foreach ($kommuner as $key => $value) {
+                echo '<option label="' . $value . '" value="' . $key . '">' . $value . '</option>';
+              }
+              ?>
+            </select>
+            <label for="kid" style="margin-left:10px;">Startkommun</label>
+          </li>
+          <li>
+            <input type="text" name="mailone" id="mailone" class="required email" onfocus="getById('mmEpostError').style.display = 'none';" onblur="mm_ajaxValidera('mmEpostError', 'epost', this.value);" placeholder="E-post"/>
+            <span id="mmEpostError" class="mmRed mmFormError hide">Upptagen, <a href="/pages/glomtlosen.php?email="  class="mmRed hide" >glömt lösenord?</a></span><br />
+          </li>
+          <li><input type="text" name="email2" id="email2" class="required email" placeholder="E-post igen*"/></li>
+          <li><input type="password" name="pass" id="pass" class="required" placeholder="Lösenord*"/></li>
+          <li><input type="password" name="pass2" id="pass2" class="required" placeholder="Lösenord igen*"/></li>
+          <li><input type="text" name="firstname" id="firstname" class="required" placeholder="Förnamn*"/></li>
+          <li><input type="text" name="lastname" id="lastname" class="required" placeholder="Efternamn*"/></li>
+          <li><input type="text" name="co" id="co" class="" placeholder="c/o"/></li>
+          <li><input type="text" name="phone" id="phone"  class="required" placeholder="Mobil/telefon*"/></li>
+          <li><input type="text" name="street1" id="street1" class="required" placeholder="Adress*"/></li>
+          <li><input type="text" name="street2" id="street2" placeholder=""/></li>
+          <li><input type="text" name="zip" id="zip" class="required" placeholder="Postnummer*"/></li>
+          <li><input type="text" name="city" id="city" class="required" placeholder="Ort*"/></li>
+          <li><input type="text" name="country" id="country" class="" value="Sverige"/>
         </ul>
       </div>
     </div>
   </div> 
-
-
 
   <div id="buy-company" class="buy-container">
     <div id="buy-company-top">FÖRETAGSPAKET <a href="#" id="link-private" name="privat" class="hide-company hidden">Privat deltagare från 79 kr?</a> <a href="/stegtavling" name="stegtavling" id="link-stegtavling">läs mer om vår stegtävling</a></div>
@@ -431,13 +520,12 @@ Order::getMondays(15);
     </div>    
   </div>
 
-
   <div id="buy-company-2" class="buy-container hide-company hidden" >
     <div class="buy-box-outer">
       <div class="buy-box margin-top">
         <div class="buy-heading">Adress</div>
         <ul class="buy-ul">
-          <li><input type="text" name="del-company" id="del-company" class="" placeholder="Företagets namn*"/></li>
+          <li><input type="text" name="del-company" id="del-company" class="required" placeholder="Företagets namn*"/></li>
           <li><input type="text" name="del-co" id="del-co" class="" placeholder="c/o"/></li>
           <li><input type="text" name="del-street1" id="del-street1" placeholder="Adress*"/></li>
           <li><input type="text" name="del-street2" id="del-street2" placeholder=""/></li>
@@ -471,16 +559,6 @@ Order::getMondays(15);
       </div>
     </div>
   </div>
-  <div id="buy-payment" class="buy-container hide-company hidden" >
-    <div class="buy-heading">Betalning</div>
-    <div id="buy-payment-buttons" >
-      <input type="submit" id="payson" class="buy-payment-buttons" name="paytype" value="Betala med">     
-      <input type="submit" id="faktura" class="buy-payment-buttons" name="paytype" value="Betala med faktura">
-    </div>  
-    <div id="buy-payment-options">Via Payson kan du betala med följande alternativ:</div>
-    <div id="integrity">Genom att fortsätta betalningen godkänner jag <br/><a target="_blank" href="integritetspolicy.php">Motiomeras avtal samt integritetspolicy</a> och är över 18 år</div>
-  </div>  
-
 
   <!-- private --> 
   <div id="buy-private" class="hide-private">
@@ -492,8 +570,6 @@ Order::getMondays(15);
       </div>    
     </div>
 
-
-    
     <div id="buy-company-calc" class="buy-box-outer">
       <div id="buy-company-calc-text">För dig som vill röra på dig och samtidigt ha kul! Det är enkelt, allt du behöver är en stegräknare.</div>
       <div  class="buy-box">
@@ -537,15 +613,17 @@ Order::getMondays(15);
           </tbody>
         </table>      
       </div> 
-
-
-
-
     </div>
   </div>
 
-
-</div>
-
+  <div id="buy-payment" class="buy-container hidden" >
+    <div class="buy-heading">Betalning</div>
+    <div id="buy-payment-buttons" >
+      <input type="submit" id="payson" class="buy-payment-buttons" name="paytype" value="Betala med" />     
+      <input type="submit" id="faktura" class="buy-payment-buttons" name="paytype" value="Betala med faktura" />
+    </div>  
+    <div id="buy-payment-options">Via Payson kan du betala med följande alternativ:</div>
+    <div id="integrity">Genom att fortsätta betalningen godkänner jag <br/><a target="_blank" href="integritetspolicy.php">Motiomeras avtal samt integritetspolicy</a> och är över 18 år</div>
+  </div>  
 
 </form>

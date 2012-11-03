@@ -310,9 +310,22 @@ class Kommun extends Mobject
 		return parent::listField($field, get_class() , $order);
 	}
 	
-	public static function listNamn($abroad = false, $multi = false)
-	{
-		global $db;
+  /**
+   * Get all kommun names
+   * Krillo changed this 2012-11-07 - to receive dbObject as well since it was dergisteredin wp?! 
+   * 
+   * @global type $db
+   * @param type $abroad
+   * @param type $multi
+   * @param type $dbObject
+   * @return type 
+   */
+	public static function listNamn($abroad = false, $multi = false, $dbObject = null){    
+    if($dbObject == null){
+      global $db;
+    } else {
+      $db = $dbObject;
+    }
 		$sql = 'SELECT id, namn FROM ' . self::classToTable(get_class());
 		
 		if ($abroad == false) {
