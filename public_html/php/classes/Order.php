@@ -179,9 +179,10 @@ class Order extends Mobject {
           "typ" => "foretag",
           "text" => "Med stegräknare",
           "extra" => " ex. moms.",
-          "pris" => 289, //original
+          //"pris" => 289, //original
           //"pris" => 260, //10%                    
           //"pris" => 246, //15%                    
+          "pris" => 200, //30%                    
           "dagar" => 31,
           "popupid" => 22,
           "public" => TRUE,
@@ -190,9 +191,10 @@ class Order extends Mobject {
           "typ" => "foretag",
           "text" => "Utan stegräknare",
           "extra" => " ex. moms.",
-          "pris" => 169, //original
+          //"pris" => 169, //original
           //"pris" => 152, //10%          
           //"pris" => 144, //15%          
+          "pris" => 120, //30%          
           "dagar" => 31,
           "popupid" => 21,
           "public" => TRUE,
