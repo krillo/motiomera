@@ -18,7 +18,7 @@ $order = new stdClass;
 !empty($_REQUEST['anamn']) ? $order->anamn = $_REQUEST['anamn'] : $order->anamn = '';
 !empty($_REQUEST['sex']) ? $order->sex = $_REQUEST['sex'] : $order->sex = '';
 !empty($_REQUEST['kid']) ? $order->kid = $_REQUEST['kid'] : $order->kid = '18';  //default to Helsingborg :)
-!empty($_REQUEST['mailone']) ? $order->email = $_REQUEST['mailone'] : $order->email = '';
+!empty($_REQUEST['email1']) ? $order->email = $_REQUEST['email1'] : $order->email = '';
 !empty($_REQUEST['email2']) ? $order->email2 = $_REQUEST['email2'] : $order->email2 = '';
 !empty($_REQUEST['pass']) ? $order->pass = $_REQUEST['pass'] : $order->pass = '';
 !empty($_REQUEST['pass2']) ? $order->pass2 = $_REQUEST['pass2'] : $order->pass2 = '';

@@ -34,9 +34,78 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn(false,
   jQuery(function($) {
     var type = "";
         
+        
+    /**
+     * Custom Email ajax validation for the jQuery Validator plugin
+     * Krillo 2012 
+     */       
+    var emailFree = true;
+    $.validator.addMethod("mmEmail", function(email, element) {
+      email = $('#email1').val();
+      var data = {
+        typ: 'epost',
+        varde: email
+      };          
+      $.ajax({
+        type: "POST",
+        url: "/ajax/actions/validate.php",
+        async: false,
+        data: data,
+        cache: false,
+        timeout: 30000,
+        error: function(){
+          return true;
+        }
+      }).done(function ( data ) { 
+        if(data == "1"){
+          //console.log('true');
+          emailFree =  true;
+        }else{
+          //console.log('false');
+          emailFree = false;
+        }
+      }); return emailFree;
+    }, "Upptagen epostadress");   
+        
+
+    /**
+     * Custom alias ajax validation for the jQuery Validator plugin
+     * Krillo 2012 
+     */       
+    var anamnFree = true;
+    $.validator.addMethod("mmAnamn", function(anamn, element) {
+      anamn = $('#anamn').val();
+      var data = {
+        typ: 'anamn',
+        varde: anamn
+      };          
+      $.ajax({
+        type: "POST",
+        url: "/ajax/actions/validate.php",
+        async: false,
+        data: data,
+        cache: false,
+        timeout: 30000,
+        error: function(){
+          return true;
+        }
+      }).done(function ( data ) { 
+        if(data == "1"){
+          //console.log('true');
+          anamnFree =  true;
+        }else{
+          //console.log('false');
+          anamnFree = false;
+        }
+      }); return anamnFree;
+    }, "Upptaget alias, välj ett annat");   
+
+
+        
     /**
      * Do input validation
      * Fields that are hidden are not validated 
+     * jQuery Validator plugin
      */ 
     var validator = $("#checkout").validate({
       errorClass: "invalid",
@@ -71,7 +140,8 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn(false,
         anamn: {
           required: true,
           maxlength: <?php echo Medlem::MAX_LENGTH_ANAMN; ?>, 
-          minlength: <?php echo Medlem::MIN_LENGTH_ANAMN; ?>          
+          minlength: <?php echo Medlem::MIN_LENGTH_ANAMN; ?>,
+          mmAnamn: true          
         },
         firstname: {
           required: true
@@ -79,12 +149,14 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn(false,
         lastname: {
           required: true
         },
-        mailone: {
+        email1: {
           required: true,
-          email: true
+          email: true,
+          mmEmail: true
         },
         email2: {
-          equalTo: "#mailone"
+          email: '',
+          equalTo: "#email1"
         },        
         street1: {
           required: true
@@ -156,12 +228,13 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn(false,
         "phone": {
           required: ''
         },
-        "mailone": {
+        "email1": {
           required: '', 
-          email: ''
+          email: 'Skriv en korrekt e-postadress'
         },
         "email2": {
-          equalTo: ''
+          equalTo: '', 
+          email: 'Skriv en korrekt e-postadress'
         },        
         "pass": {
           required: ''
@@ -299,10 +372,36 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn(false,
     }
 
 
+    
+    /**
+     * do ajax check if free to use     
+    function inUseAlready(type, value, elementId){
+      var data = {
+        typ: type,
+        varde: value
+      };          
+      $.ajax({
+        type: "POST",
+        url: "/ajax/actions/validate.php",
+        data: data,
+        cache: false,
+        success: function(data){
+          //console.log(data);
+          if(data == "1"){
+            $(elementId).addClass('hide');
+          }else{
+            $(elementId).removeClass('hide');
+          }
+        }
+      });
+      return false;
+    }
+*/
+
 
 
     /******************************
-     * Events
+     * Catch events
      ******************************/
         
     //toggle from company to private    
@@ -400,8 +499,8 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn(false,
       <div class="buy-box margin-top">
         <div class="buy-heading">Uppgifter</div>
         <ul class="buy-ul">
-          <li><input type="text" name="anamn" id="anamn" class="" minlength="<?php echo Medlem::MIN_LENGTH_ANAMN; ?>" maxlength="<?php echo Medlem::MAX_LENGTH_ANAMN; ?>" onfocus="getById('mmANamnError').style.display = 'none';" onblur="mm_ajaxValidera('mmANamnError', 'anamn', this.value);" placeholder="Välj alias*"/>
-            <span id="mmANamnError" class="mmRed mmFormError hide">Upptaget</span>
+          <li><input type="text" name="anamn" id="anamn" class="" minlength="<?php echo Medlem::MIN_LENGTH_ANAMN; ?>" maxlength="<?php echo Medlem::MAX_LENGTH_ANAMN; ?>"  placeholder="Välj alias*"/>
+            <span id="mmANamnError" class="invalid hide">Upptaget</span>
           </li>
           <li>
             <select name="sex">
@@ -421,20 +520,21 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn(false,
             <label for="kid" style="margin-left:10px;">Startkommun</label>
           </li>
           <li>
-            <input type="text" name="mailone" id="mailone" class="required email" onfocus="getById('mmEpostError').style.display = 'none';" onblur="mm_ajaxValidera('mmEpostError', 'epost', this.value);" placeholder="E-post"/>
-            <span id="mmEpostError" class="mmRed mmFormError hide">Upptagen, <a href="/pages/glomtlosen.php?email="  class="mmRed hide" >glömt lösenord?</a></span><br />
+            <input type="text" name="email1" id="email1" class="" placeholder="E-post"/>
+            <label class="invalid" for="email1" generated="false" style="display: none;">Upptagen epostadress <a href="/pages/glomtlosen.php?email=" > glömt ditt lösenord?</a></label>
+            <div id="mmEpostError" class="invalid hide">Upptagen, <a href="/pages/glomtlosen.php?email=" > glömt ditt lösenord?</a></div>
           </li>
-          <li><input type="text" name="email2" id="email2" class="required email" placeholder="E-post igen*"/></li>
-          <li><input type="password" name="pass" id="pass" class="required" placeholder="Lösenord*"/></li>
-          <li><input type="password" name="pass2" id="pass2" class="required" placeholder="Lösenord igen*"/></li>
+          <li><input type="text" name="email2" id="email2" class="" placeholder="E-post igen*"/></li>
+          <li><input type="password" name="pass" id="pass" class="" placeholder="Lösenord*"/></li>
+          <li><input type="password" name="pass2" id="pass2" class="" placeholder="Lösenord igen*"/></li>
           <li><input type="text" name="firstname" id="firstname" class="required" placeholder="Förnamn*"/></li>
           <li><input type="text" name="lastname" id="lastname" class="required" placeholder="Efternamn*"/></li>
           <li><input type="text" name="co" id="co" class="" placeholder="c/o"/></li>
           <li><input type="text" name="phone" id="phone"  class="required" placeholder="Mobil/telefon*"/></li>
           <li><input type="text" name="street1" id="street1" class="required" placeholder="Adress*"/></li>
           <li><input type="text" name="street2" id="street2" placeholder=""/></li>
-          <li><input type="text" name="zip" id="zip" class="required" placeholder="Postnummer*"/></li>
-          <li><input type="text" name="city" id="city" class="required" placeholder="Ort*"/></li>
+          <li><input type="text" name="zip" id="zip" class="" placeholder="Postnummer*"/></li>
+          <li><input type="text" name="city" id="city" class="" placeholder="Ort*"/></li>
           <li><input type="text" name="country" id="country" class="" value="Sverige"/>
         </ul>
       </div>

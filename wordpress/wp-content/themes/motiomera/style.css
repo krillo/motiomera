@@ -201,6 +201,8 @@ hgroup{height:127px; float:left;}
 /******* buy ********/
 .kr{padding-top:7px;}
 .buy-ul li .invalid{border-color:red;}
+.invalid{border-color:red; color:red;}
+.invalid a{color:red;}
 #buy{float:left;margin: 20px 0 0 10px;}
 .margin-top{margin-top:30px;}
 .buy-heading{font-size: 23px; margin-bottom: 10px;}
