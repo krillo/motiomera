@@ -1,5 +1,5 @@
 <div class="mmAlbumBoxTop">
-	<h3 class="mmWhite BoxTitle">Fotoalbum</h3>
+	<h3 class="BoxTitle">Fotoalbum</h3>
 </div>		
 	<div class="mmRightMinSidaBox">
 		{if $bildblock == false}

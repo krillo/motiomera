@@ -17,15 +17,17 @@ class MMSmarty extends Smarty
 {
 	var $showSidebar = false;
 	var $showHeaderFooter = true;
-	
+	var $footer = '';
+  
 	private $contentCacheLifetime;
 	const HEADERTPL = "header.tpl";
 	const FOOTERTPL = "footer.tpl";
 	const SIDEBARTPL = "sidebar.tpl";
+  
 	
 	public function __construct($cache = false, $cacheLiftime = 3600)
 	{
-		global $USER, $ADMIN, $FORETAG, $urlHandler, $security, $adressbok, $urlChecker, $db, $sajtDelarObj;
+		global $USER, $ADMIN, $FORETAG, $urlHandler, $security, $adressbok, $urlChecker, $db, $sajtDelarObj, $footer;
 		$this->template_dir = ROOT . '/templates';
 		$this->compile_dir = ROOT . '/templates_c';
 		$this->config_dir = ROOT . '/php/libs/smarty/configs';
@@ -91,7 +93,26 @@ class MMSmarty extends Smarty
 			'Steg',
 			'stegToKm'
 		));
+    
+    /*
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, 'http://mm.dev/api-footer/');
+    $footer = curl_exec($ch);
+    curl_close($ch);
+     * 
+     */
+
+          
+    //$this->footer = file_get_contents('http://mm.dev/api-footer/');
+
 	}
+
+
+  public function getMMWPFooter(){
+    return $this->footer;
+  } 
+  
 	function showSidebar()
 	{
 		$this->showSidebar = true;
@@ -130,6 +151,7 @@ class MMSmarty extends Smarty
 		
 		if ($this->showHeaderFooter) {
 			$this->assign("querycount", $db->getQuerycount());
+			$this->assign("footer", $this->footer);
 			$this->cache_lifetime = 0;
 			$this->fetch(self::FOOTERTPL, null, null, true);
 		}

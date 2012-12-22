@@ -204,7 +204,6 @@ $mmStatus->fb_email = null;
 $mmStatus->fb_login_url = null;
 $facebook = null;
 
-
 /**
  * Set some statuses that can be used in the pages
  */
@@ -213,7 +212,7 @@ function mm_status() {
   global $facebook;
   global $fbLoginUrl;
   @session_start();  //just to be able to read mm variables (logged in or not)
- 
+
   if (empty($_SESSION["mm_mid"]) && empty($_SESSION["mm_sid"])) {
     
   } else {
@@ -230,20 +229,20 @@ function mm_status() {
   //facebookInit();
 }
 
-function facebookInit(){
+function facebookInit() {
   //Facebook login url
   require ABSPATH . '../lib/facebook-php-sdk/src/facebook.php';
   $facebook = new Facebook(array(
               'appId' => '108867119251826',
               'secret' => 'f8a8d39798810a4f5a51cdb867508ee6',
           ));
-  
+
   $fb_params = array(
       'scope' => 'read_stream',
       'redirect_uri' => 'http://mm.dev/faq/',
       'display' => 'popup'
   );
-   $mmStatus->fb_login_url = $facebook->getLoginUrl($fb_params);
+  $mmStatus->fb_login_url = $facebook->getLoginUrl($fb_params);
 
   //Logged in on Facebook?
   $user = null;
@@ -265,7 +264,7 @@ function facebookInit(){
       $user = null;
     }
   }
-  
+
   echo '<div style="color:#ccc;">' . print_r($mmStatus, true) . '</div>';
   //echo '<br/><img src="https://graph.facebook.com/' . $user . '/picture">';
 }
@@ -280,7 +279,7 @@ function facebookInit(){
 function includeSnippet($file) {
   global $mmStatus;
   //print_r($mmStatus);
-  
+
   switch ($file) {
     //if not logged - show login area
     case 'inc_login_area.php':
@@ -305,30 +304,30 @@ function includeSnippet($file) {
       }
       break;
     case 'inc_page_promo_header.php':  //normal page, not logged in - show the promo area
-      if ($mmStatus->normal_page == 1){ // && $mmStatus->mm_logged_in == 0) {
+      if ($mmStatus->normal_page == 1) { // && $mmStatus->mm_logged_in == 0) {
         include 'snippets/' . $file;
-      } 
+      }
       break;
     case 'inc_page_promo_footer.php':  //normal page, not logged in - show the promo area
-      if ($mmStatus->normal_page == 1){ // && $mmStatus->mm_logged_in == 0) {
+      if ($mmStatus->normal_page == 1) { // && $mmStatus->mm_logged_in == 0) {
         include 'snippets/' . $file;
       }
       break;
     case 'inc_private_calc.php':  //
-      if ($mmStatus->normal_page == 1){ // not correct include....!!!!!!!!!!!!!!!!!!!!!!!!!
+      if ($mmStatus->normal_page == 1) { // not correct include....!!!!!!!!!!!!!!!!!!!!!!!!!
         include 'snippets/' . $file;
       }
       break;
     case 'inc_buy.php':
-        include 'snippets/' . $file;
-      break;      
-      
-      
-      
-      
-      
-      
-      
+      include 'snippets/' . $file;
+      break;
+
+
+
+
+
+
+
     default:
       break;
   }

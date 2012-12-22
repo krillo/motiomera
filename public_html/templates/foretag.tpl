@@ -20,7 +20,7 @@
 	<br />
 
 		<div class="mmAlbumBoxTop">
-			<h3 class="mmWhite BoxTitle">Deltagartoppen</h3>
+			<h3 class="BoxTitle">Deltagartoppen</h3>
 		</div>
 		<div class="mmRightMinSidaBox">
 		
@@ -91,7 +91,7 @@
 {include file="stegstaplar.tpl"}
 
 <div class="mmBlueBoxContainer">
-<div class="mmBlueBoxTop"><h3 class="mmWhite BoxTitle">Deltagande Lag</h3></div>
+<div class="mmBlueBoxTop"><h3 class="BoxTitle">Deltagande Lag</h3></div>
 <div class="mmBlueBoxBg">
 	<table class="mmMedlemmarTabell" border="0" cellpadding="5" cellspacing="0">
 		<tr>
@@ -124,7 +124,7 @@
 </p>{*}
 		{*}<div class="mmAnslagstavla">
 			
-			<div class="mmAnslagstavlaBoxTop"><h3 class="mmWhite BoxTitle AnslagTitle">Anslagstavlan</h3></div>
+			<div class="mmAnslagstavlaBoxTop"><h3 class="BoxTitle AnslagTitle">Anslagstavlan</h3></div>
 			<div class="mmAnslagstavlaBoxBg">
 				
 

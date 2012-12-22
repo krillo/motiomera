@@ -1,9 +1,9 @@
 <?php
 error_reporting(E_ALL);
-//ini_set('display_errors', '1');
+ini_set('display_errors', '1');
 //print_r($GLOBALS );               //display all wp-globals 
-//global $mmStatus;                 
-//print_r($mmStatus);               //display all mm-wp-globals 
+global $mmStatus;                 
+print_r($mmStatus);               //display all mm-wp-globals 
 
 require_once(MM_ROOT_ABSPATH . "/init.php");
 

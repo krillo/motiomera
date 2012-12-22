@@ -69,20 +69,19 @@ if ($site_description && ( is_home() || is_front_page() )) {
 
 
     <script type="text/javascript">
-      var $j = jQuery.noConflict();
-      $j(document).ready(function() {  
-        var offset = $j('#wp-nav').offset();  
-        $j(window).scroll(function () {  
-          var scrollTop = $j(window).scrollTop(); // check the visible top of the browser  
+      jQuery(document).ready(function($) {  
+        var offset = $('#wp-nav').offset();  
+        $(window).scroll(function () {  
+          var scrollTop = $(window).scrollTop(); // check the visible top of the browser  
 
           if (offset.top<scrollTop){
-            $j('#wp-nav').addClass('fixed');
-            $j('#masthead').addClass('follow-menu');
-            //$j('#motiomera-logo-mini').show();
+            $('#wp-nav').addClass('fixed');
+            $('#masthead').addClass('follow-menu');
+            //$('#motiomera-logo-mini').show();
           } else {
-            $j('#wp-nav').removeClass('fixed');
-            $j('#masthead').removeClass('follow-menu');
-            //$j('#motiomera-logo-mini').show();
+            $('#wp-nav').removeClass('fixed');
+            $('#masthead').removeClass('follow-menu');
+            //$('#motiomera-logo-mini').show();
           }
         });  
       });  

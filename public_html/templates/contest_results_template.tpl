@@ -29,13 +29,13 @@
 <br />
 <div class="mmFloatLeft mmBlueBoxContainer mmWidthFyraEttNollPixlar">
   <div class="mmBlueBoxTop">
-    <h3 class="mmWhite BoxTitle">Slutresultat inom lagen</h3>
+    <h3 class="BoxTitle">Slutresultat inom lagen</h3>
   </div>
   <div class="mmBlueBoxBg">
     {foreach from=$CompanyTeams name=lagLoop item=team}
       <div class="eventResults">
         <div class="mmAlbumBoxTop">
-          <h3 class="mmWhite BoxTitle">{$team->getNamn()}</h3>
+          <h3 class="BoxTitle">{$team->getNamn()}</h3>
         </div>
         <div class="mmRightMinSidaBox">
           <div class="mmHeightTvaNollPixlar"><b>Steg sen start</b></div>
@@ -67,7 +67,7 @@
 </div>
 <div class="mmFloatLeft mmRightSideContestBar">
   <div class="mmAlbumBoxTop">
-    <h3 class="mmWhite BoxTitle">Lagtoppen</h3>
+    <h3 class="BoxTitle">Lagtoppen</h3>
   </div>
   <div class="mmRightMinSidaBox">
     <div class="mmHeightTvaNollPixlar"><b>Snitt per deltagare från start</b></div>
@@ -89,7 +89,7 @@
   </div>
   <br />
   <div class="mmAlbumBoxTop">
-    <h3 class="mmWhite BoxTitle">Deltagartoppen</h3>
+    <h3 class="BoxTitle">Deltagartoppen</h3>
   </div>
   <div class="mmRightMinSidaBox">
     <div class="mmHeightTvaNollPixlar"><b>Steg sen start</b></div>
@@ -129,7 +129,7 @@
       <td>
         <div class="mmTopplistaRuta">
           <div class="mmAlbumBoxTop">
-            <h3 class="mmWhite BoxTitle">Deltagartoppen</h3>
+            <h3 class="BoxTitle">Deltagartoppen</h3>
           </div>
           <div class="mmRightMinSidaBox">
             <strong>Snitt per deltagare från start</strong><br /><br />
@@ -151,7 +151,7 @@
         </div>
         <div class="mmTopplistaRuta">
           <div class="mmAlbumBoxTop">
-            <h3 class="mmWhite BoxTitle">Lagtoppen</h3>
+            <h3 class="BoxTitle">Lagtoppen</h3>
           </div>
           <div class="mmRightMinSidaBox">
             <strong>Snitt per deltagare från start</strong><br /><br />
@@ -175,7 +175,7 @@
         <div class="mmTopplistaRuta">
       
           <div class="mmAlbumBoxTop">
-            <h3 class="mmWhite BoxTitle">F&ouml;retagstoppen</h3>
+            <h3 class="BoxTitle">F&ouml;retagstoppen</h3>
           </div>
           <div class="mmRightMinSidaBox">
             <strong>Dagligt snitt per deltagare från start</strong><br /><br />

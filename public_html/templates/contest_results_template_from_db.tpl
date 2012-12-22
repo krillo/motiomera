@@ -43,13 +43,13 @@
 <br />
 <div class="mmFloatLeft mmBlueBoxContainer mmWidthFyraEttNollPixlar">
   <div class="mmBlueBoxTop">
-    <h3 class="mmWhite BoxTitle">Slutresultat inom lagen</h3>
+    <h3 class="BoxTitle">Slutresultat inom lagen</h3>
   </div>
   <div class="mmBlueBoxBg">
     {foreach name=outer item=lag from=$allaLag}
       <div class="eventResults">
         <div class="mmAlbumBoxTop">
-          <h3 class="mmWhite BoxTitle">{$lag.0.lag_namn}</h3>
+          <h3 class="BoxTitle">{$lag.0.lag_namn}</h3>
         </div>
         <div class="mmRightMinSidaBox">
           <div class="mmHeightTvaNollPixlar"><b>Antal steg under tävlingen</b></div>
@@ -89,7 +89,7 @@
 
 <div class="mmFloatLeft mmRightSideContestBar">
 	<div class="mmAlbumBoxTop">
-		<h3 class="mmWhite BoxTitle">Lagtoppen</h3>
+		<h3 class="BoxTitle">Lagtoppen</h3>
 	</div>
 	<div class="mmRightMinSidaBox">
 		<div class="mmHeightTvaNollPixlar"><b>Snitt per deltagare och lag</b></div>	
@@ -120,7 +120,7 @@
 {/foreach*}
 	
 	<div class="mmAlbumBoxTop">
-		<h3 class="mmWhite BoxTitle">Deltagartoppen</h3>
+		<h3 class="BoxTitle">Deltagartoppen</h3>
 	</div>
 	<div class="mmRightMinSidaBox">
 		<div class="mmHeightTvaNollPixlar"><b>Antal steg under tävlingen</b></div>
@@ -167,7 +167,7 @@
 			<td>
 				<div class="mmTopplistaRuta">
 					<div class="mmAlbumBoxTop">
-						<h3 class="mmWhite BoxTitle">Deltagartoppen</h3>
+						<h3 class="BoxTitle">Deltagartoppen</h3>
 					</div>
 					<div class="mmRightMinSidaBox">
 						<strong>Antal steg under tävlingen</strong><br /><br />
@@ -200,7 +200,7 @@
 				
 				<div class="mmTopplistaRuta">
 					<div class="mmAlbumBoxTop">
-						<h3 class="mmWhite BoxTitle">Lagtoppen</h3>
+						<h3 class="BoxTitle">Lagtoppen</h3>
 					</div>
 					<div class="mmRightMinSidaBox">
 						<strong>Snitt per deltagare och lag</strong><br /><br />
@@ -235,7 +235,7 @@
 {/foreach*}  				
 						
 					<div class="mmAlbumBoxTop">
-						<h3 class="mmWhite BoxTitle">F&ouml;retagstoppen</h3>
+						<h3 class="BoxTitle">F&ouml;retagstoppen</h3>
 					</div>
 					<div class="mmRightMinSidaBox">
 						<strong>Dagligt snitt per företag och deltagare</strong><br /><br />

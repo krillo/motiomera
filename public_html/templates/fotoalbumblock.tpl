@@ -1,8 +1,9 @@
 	<div class="mmAlbumBoxTop">
-		<h3 class="mmWhite BoxTitle">Fotoalbum</h3>
+		<h3 class="BoxTitle">Fotoalbum</h3>
 	</div>
 	<div class="mmAlbumBoxBg">
-		<div class="mmAlbumBoxBgBilder">
+		<!--div class="mmAlbumBoxBgBilder"-->
+		<div class="mmRightMinSidaBox">
 			{if $bildblock == false}
 			<span><br />&nbsp;&nbsp;Inga bilder.</span>
 			{else}
@@ -35,17 +36,14 @@
 			{/if}
 		</div>
 
-		<div class="mmAlbumBoxBgAlbumLank">
+		<div class="show-more-link">
 			{if $isProfil}
-				<a href="{$urlHandler->getUrl(Fotoalbum, URL_LIST, $medlem->getId())}">Se hela albumet</a>
-				<a href="{$urlHandler->getUrl(Fotoalbum, URL_LIST, $medlem->getId())}"><img src="/img/icons/ArrowCircleBlue.gif" alt="" /></a><br/>
+				<a href="{$urlHandler->getUrl(Fotoalbum, URL_LIST, $medlem->getId())}">Se hela albumet &raquo;</a><br/>
 			{else}
-				<a href="{$urlHandler->getUrl(Fotoalbum, URL_LIST)}">Se hela albumet</a>
-				<a href="{$urlHandler->getUrl(Fotoalbum, URL_LIST)}"><img src="/img/icons/ArrowCircleBlue.gif" alt="" /></a><br/>
-				<a href="{$urlHandler->getUrl(FotoalbumBild, URL_CREATE, 0)}">Ladda upp bilder</a>
-				<a href="{$urlHandler->getUrl(FotoalbumBild, URL_CREATE, 0)}"><img src="/img/icons/ArrowCircleBlue.gif" alt="" /></a>
+				<a href="{$urlHandler->getUrl(Fotoalbum, URL_LIST)}">Se hela albumet &raquo;</a><br/>
+				<a href="{$urlHandler->getUrl(FotoalbumBild, URL_CREATE, 0)}">Ladda upp bilder &raquo;</a>
 			{/if}
 		</div>
-		<br clear="all" />
+		<div class="clear"></div>
 	</div>
 {include file="highslide_controlbar.tpl"}

@@ -123,76 +123,29 @@
 
 
 <div id="mmColumnRightMinSida">
-
-	<div class="mmAlbumBoxTop">
-		<h3 class="mmWhite BoxTitle">Placeringar</h3>
-	</div>
-	<div class="mmRightMinSidaBox">
+  {include file="widget_steglista.tpl"}  
+  {include file="widget_klubbar.tpl"}  
+	{include file="fotoalbumblock.tpl"}  
 	
-	<strong>Steglistan senaste 7 dagarna</strong><br /><br />
-	<table width="155" cellpadding="0" cellspacing="0" border="0">
-		<tr>
-		  <td>&nbsp;</td>
-		  <td><b>Medlem</b></td>
-		  <td><b>Steg</b></td>
-		</tr>
-
-		{foreach name=steglista from=$topplista->getTopplista(10,$medlem) item=placering}
-		
-		{if $placering.placering == 11}
-
-			{assign var=tomrad value=1}
-
-		{/if}
-		
-		{if $placering.placering > 10 && $tomrad == 0}
-		
-			{assign var=tomrad value=1}
-			
-			<tr><td>&nbsp;</td></tr>
-		
-		{/if}
-		
-		<tr>
-			<td>{$placering.placering}.</td>
-			<td><a href="{$urlHandler->getUrl("Medlem", URL_VIEW, $placering.medlem->getId())}">{if $placering.medlem->getId() == $medlem->getId()}<strong class="mm_topplista_markerad">{$placering.medlem->getANamn()|truncate:16}</strong>{else}{$placering.medlem->getANamn()|truncate:16}{/if}</a></td>
-			<td class="mmNoBr">{if $placering.medlem->getId() == $medlem->getId()}<strong class="mm_topplista_markerad">{$placering.steg|nice_tal}</strong>{else}{$placering.steg|nice_tal}{/if}</td>
-		</tr>
-			
-		{/foreach}
-	</table>
-	
-	<br/>
-	<a href="{$urlHandler->getUrl("Topplista", URL_LIST,$topplista_array)}">Visa fler topplistor <img src="/img/icons/ArrowCircleBlue.gif" alt="" /></a>
-	
-	</div>
-	
-	<br/>
-	
-	<div class="mmAlbumBoxTop">
+  
+	<!-- div class="mmAlbumBoxTop">
 		<h3 class="mmWhite BoxTitle">Klubbar</h3>
 	</div>
-	<div class="mmRightMinSidaBox">
+	<div class="mmRightMinSidaBox"-->
 	
-	{foreach from=$grupper item=grupp}
+	{*foreach from=$grupper item=grupp}
 		<a href="{$urlHandler->getUrl(Grupp, URL_VIEW, $grupp->getId())}">{$grupp->getNamn()}</a>
 		{if $grupp->getSkapareId() == $medlem->getId()}<img src="/img/icons/star.gif" alt="" class="mmStarText" />{/if}
 		<br />
-	{/foreach}
-	
-	<br/>
+	{/foreach*}
+	<!--br/>
 	<img src="/img/icons/star.gif" alt="" /> = skapad av denna medlem
+	</div>	
+	<br/-->	
+  
+  
 
-	</div>
-	
-	<br/>	
-
-	{include file="fotoalbumblock.tpl"}
-
-	<br />
-	{if $sajtDelarObj->medlemHasAccess($USER,'minaQuizVisa')}
-		{include file="minaquizblock.tpl"}
-	{/if}
 </div>
 
+  
 {include file="kommunjakten.tpl"}

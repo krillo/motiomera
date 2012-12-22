@@ -77,11 +77,102 @@
         {/if}
       </ul>
     </div>       
-<div class="mmClearBoth"></div>
 
-  <div id="mmPage">
+
+
+
+    <div id="mmPage">
+      <div id="mmWrapTop"></div>
       <div id="mmWrapMiddle">
-      {if !isset($doldMeny)}
+
+
+        <div id="mmHeader">
+          <div id="mmLogo">
+            <a href="/"><img src="/img/framework/mmLogo.gif" alt="Motiomera stegtävling för företag" title="Motiomera stegtävling för företag"/></a>
+          </div>
+          <div class="noprint">
+            {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
+              <div id="mmCommunityToolbar">
+                {if !isset($inAdmin) && !isset($FORETAG) && $USER->getOlastaMail() > 0}
+
+                  {if $USER->getOlastaMail() > 1}
+                    <a href="{$urlHandler->getUrl("InternMail", URL_VIEW)}"><img src="/img/icons/MailUnreadIcon_greenBG.gif" alt="{$USER->getOlastaMail()} olästa mail" /></a> <a href="{$urlHandler->getUrl("InternMail", URL_VIEW)}">{$USER->getOlastaMail()} olästa mail</a>
+                  {else}
+                    <a href="{$urlHandler->getUrl("InternMail", URL_VIEW)}"><img src="/img/icons/MailUnreadIcon_greenBG.gif" alt="1 oläst mail" /></a> <a href="{$urlHandler->getUrl("InternMail", URL_VIEW)}">1 oläst mail</a>
+                  {/if}
+
+                {/if}
+                <br/><br/>
+                {if $adressbok}
+                  {if $adressbok->listForfragningar()|@count > 0}
+                    <a href="{$urlHandler->getUrl(Adressbok, URL_VIEW, 3)}"><img src="/img/icons/AdressbokAddIcon.gif" alt="Vänner" class="mmMarginLeft20" /></a> <a href="{$urlHandler->getUrl(Adressbok, URL_VIEW, 3)}">{$adressbok->listForfragningar()|@count} {$adressbok->listForfragningar()|@count|mm_countable:"ny vän":"nya vänner"}</a>
+                  {/if}
+                {/if}
+              </div>
+              <div id="mmInloggad">
+                {if isset($inAdmin)}
+                  Välkommen <strong>{$ADMIN->getANamn()}</strong><br />
+                  <a href="/admin/actions/logout.php">Logga ut</a>
+                {elseif isset($FORETAG)}
+                  Välkommen <strong>{$FORETAG->getNamn()}</strong><br />
+                  <a href="/actions/logout.php">Logga ut</a>
+                {else}
+                  Välkommen <strong>{$USER->getANamn()}!</strong><br />
+                  <a href="/actions/logout.php">Logga ut</a>
+                {/if}
+              </div>
+            {elseif isset($tavlingsresultatsidan) && isset($medlem)}
+              <div id="mmCommunityToolbar">
+              </div>
+              <div id="mmInloggad">
+                Välkommen <strong>{$medlem->getANamn()}!</strong><br />
+                <a href="/">Till startsidan</a>
+              </div>
+            {else}
+              <div id="mmLoggaIn" class="mmFontWhite">
+                <form action="/actions/login.php" method="post">
+                  <table width="290" cellspacing="1" cellpadding="0" border="0">
+                    <tr>
+                      <td class="mmLoggaInTitle">E-postadress: </td>
+                      <td><input name="username" id="username" value="" class="mmTextField" size="17" type="text" maxlength="96" tabindex="1" /></td>
+                      <td class="mmLoggaInCheckbox"><input type="checkbox" id="autologin" name="autologin" value="on" tabindex="3" /> <label for="autologin">Kom ihåg mig</label></td>
+                    </tr>
+                    <tr>
+                      <td class="mmLoggaInTitle">L&ouml;senord: </td>
+                      <td><input name="password" id="password" value="" size="17" class="mmTextField" type="password" maxlength="96" tabindex="2"/></td>
+                      <td><input type="hidden" name="login" value="Login"/><input type="image" src="/img/icons/LoggaInIcon.gif" alt="Logga in" tabindex="4" /></td>
+                    </tr>
+                  </table>
+                </form>
+              </div>
+            {/if}
+            <div id="mmMaBraLogo">
+              {if isset($USER) || isset($FORETAG)}
+                {foreach from=$helpers item=helper}
+                  <a href="javascript:;" onclick="mm_rapportera_show_help({$helper->getId()},{$helper->getSizeX()},{$helper->getSizeY()},'topleft')"><img src="/img/icons/FaqCircleRed.gif" alt="Hjälp" class="mmFloatRight" /></a>
+                {/foreach}
+              {/if}
+              {*}<a href="javascript:;" onclick="rapportera_show_help(1,480,200,'topleft')"><img src="/img/icons/FaqCircleGreen.gif" alt="Hjälp" class="mmPositionRelative mmFloatRight" /></a>{*}
+              {*}
+              <a href="http://www.mabra.com/" title="Gå till Mabra.com">
+              <span>En tj&auml;nst fr&aring;n tidningen</span>
+              <img src="/img/framework/MaBraLogo.gif" alt="M&aring; Bra" />
+              </a>
+              {*}
+
+
+            </div>
+            {if !isset($USER) && !isset($ADMIN) && !isset($FORETAG)}
+              <div id="mmMenuTop">
+                <a href="/pages/skapaforetag.php" title="stegtävling">FÖR FÖRETAG</a> |
+                <a href="/pages/blimedlem.php" title="stegräknare">BLI MEDLEM</a> |
+                <a href="/pages/glomtlosen.php">GL&Ouml;MT L&Ouml;SENORDET?</a>			
+              </div>
+            {/if}
+          </div>
+        </div>
+
+        {if !isset($doldMeny)}
           <div id="mmColumnLeft">
             <div id="mmMenuLeft">
               <ul>
@@ -117,7 +208,7 @@
                   <hr/>
                 {/if}
 
-       
+                <li><a {if $urlChecker->getMarkedMenu() eq "HEM"} class="mmMarkedMenu"{/if} href="/">HEM</a></li>
                 {if isset($FORETAG)}
                   <li><a {if $urlChecker->getMarkedMenu() eq "HANTERA FÖRETAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretag, URL_EDIT, $FORETAG->getId())}">HANTERA F&Ouml;RETAG</a></li>
                 {/if}
@@ -140,15 +231,24 @@
                   {/if}
                   <li><a{if $urlChecker->getMarkedMenu() eq "MOTIOMERAMAIL"} class="mmMarkedMenu"{/if} href="/pages/mail.php">MOTIOMERAMAIL</a></li>
                   <li><a{if $urlChecker->getMarkedMenu() eq "FOTOALBUM"} class="mmMarkedMenu"{/if} href="/pages/fotoalbum.php">FOTOALBUM</a></li>
-                  {*if isset($USER) && $sajtDelarObj->medlemHasAccess($USER,'minaQuiz')}
+                  {if isset($USER) && $sajtDelarObj->medlemHasAccess($USER,'minaQuiz')}
                     <li><a{if $urlChecker->getMarkedMenu() eq "QUIZ"} class="mmMarkedMenu"{/if} href="/pages/minaquiz.php">MINA QUIZ</a></li>
-                  {/if*}
+                  {/if}
                   <li><a{if $urlChecker->getMarkedMenu() eq "MINA VÄNNER"} class="mmMarkedMenu"{/if} href="/pages/adressbok.php">MINA VÄNNER</a></li>
                   <li><a{if $urlChecker->getMarkedMenu() eq "KLUBBAR"} class="mmMarkedMenu"{/if} href="/pages/klubbar.php">KLUBBAR</a></li>
                   <li><a{if $urlChecker->getMarkedMenu() eq "INSTÄLLNINGAR"} class="mmMarkedMenu"{/if} href="/pages/installningar.php">INST&Auml;LLNINGAR</a></li>
-                  <li><a{if $urlChecker->getMarkedMenu() eq "TOPPLISTOR"} class="mmMarkedMenu"{/if} href="/pages/topplistor.php">TOPPLISTOR</a></li>
 
                 {/if}
+                <li><a{if $urlChecker->getMarkedMenu() eq "OM MOTIOMERA"} class="mmMarkedMenu"{/if} href="/pages/ommotiomera.php" class="utLoggadMenuVal">OM MOTIOMERA</a></li>
+                <li><a{if $urlChecker->getMarkedMenu() eq "VANLIGA FRÅGOR"} class="mmMarkedMenu"{/if} href="/pages/vanligafragor.php" class="utLoggadMenuVal">VANLIGA FR&Aring;GOR</a></li>
+                <li><a{if $urlChecker->getMarkedMenu() eq "TÄVLINGAR"} class="mmMarkedMenu"{/if} href="/pages/tavlingar.php" class="utLoggadMenuVal">T&Auml;VLINGAR</a></li>
+                <li><a{if $urlChecker->getMarkedMenu() eq "KOMMUNJAKTEN"} class="mmMarkedMenu"{/if} href="/pages/kommunjakten.php" class="utLoggadMenuVal">KOMMUNJAKTEN</a></li>
+                {if isset($FORETAG)}
+                  <li><a{if $urlChecker->getMarkedMenu() eq "FÖR FÖRETAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretag, URL_EDIT, $FORETAG->getId())}" class="utLoggadMenuVal" title="om stegtävling">F&Ouml;R F&Ouml;RETAG</a></li>
+                {else}
+                  <li><a{if $urlChecker->getMarkedMenu() eq "FÖR FÖRETAG"} class="mmMarkedMenu"{/if} href="/pages/for_foretag.php" class="utLoggadMenuVal" title="om stegtävling">F&Ouml;R F&Ouml;RETAG</a></li>
+                {/if}
+
               </ul>
             </div>
             {if isset($USER)}
