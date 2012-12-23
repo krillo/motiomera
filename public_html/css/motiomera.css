@@ -44,7 +44,7 @@ body
   background-repeat: no-repeat;
   color: #333;
   font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
-  font-size: 11px;
+  font-size: 13px;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -1420,7 +1420,7 @@ table#alh_navtable
 }
 .mmFeedTable
 {
-  width: 373px;
+  width: 495px;
 }
 .mmFileUpload
 {
@@ -1966,7 +1966,7 @@ table#alh_navtable
   border-radius: 0 0 10px 10px ;  
 }
 .table-padding{padding: 10px 0 10px 0;width: 210px;}
-.mmRightMinSidaBox table{font-size: 11px;width:210px;}
+.mmRightMinSidaBox table{font-size: 12px;width:210px;}
 .mmRightMinSidaBox table tr{height: 25px;}
 .odd{background-color: #D0E0C7;}
 .mmRightSideContestBar
