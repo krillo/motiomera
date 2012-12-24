@@ -320,7 +320,7 @@ table#alh_navtable
 }
 #mmFotoalbumTopRight
 {
-  width: 300px;
+  width: 330px;
   text-align: right;
   height: 30px;
   float: right;
@@ -948,15 +948,14 @@ table#alh_navtable
 }
 .BoxTitle
 {
-  color:#5e7825;
+  color:#fff;
   position: absolute;
   margin: 10px 0 0 15px;
   font-family: 'Cabin Condensed', sans-serif;
   font-weight: normal;
   font-size: 18px;
 }
-
-
+.BoxTitle-wide{font-size: 22px;margin-top:15px;}
 .controlbar .close
 {
   width: 36px;
@@ -1311,7 +1310,7 @@ table#alh_navtable
   background: url(../img/framework/mmBlueBoxWideBottom.gif) no-repeat;
   width: 601px;
   height: 10px;
-  margin: 0;
+  margin-bottom: 25px;
 }
 .mmBlueBoxWideBottom
 {
@@ -1321,13 +1320,13 @@ table#alh_navtable
   margin: 0;
   padding: 10px;
 }
-.mmBlueBoxWideTop
-{
-  background: url(../img/framework/mmBlueBoxWideTop.gif) bottom no-repeat;
-  width: 601px;
-  height: 31px;
+.mmBlueBoxWideTop{
+  width: 760px;
+  height: 45px;
   margin: 0;
   padding: 0;
+  background-color: #5B7A19;
+  border-radius: 10px 10px 0 0;
 }
 .mmBlue
 {
@@ -1373,11 +1372,7 @@ table#alh_navtable
   width: 440px;
   margin: 10px 0 0 150px;
 }
-.mmBoxTitleTextRight
-{
-  position: absolute;
-  margin: 10px 0 0 500px;
-}
+.mmBoxTitleTextRight{float: right;margin: 15px 15px 0 0;position: relative;}
 .mmCenterText,.mmAlignCenter,.mmAlbumBoxBgBilder table td,.mmQuizBoxBgQuiz table td,table#alh_navtable td.alh_image
 {
   text-align: center;
@@ -1418,10 +1413,8 @@ table#alh_navtable
   width: 12px;
   font-size: 9px;
 }
-.mmFeedTable
-{
-  width: 495px;
-}
+.mmFeedTable{width: 495px;}
+.mmFeedTable td{height: 20px;}
 .mmFileUpload
 {
   border: 1px solid #eee;
@@ -1685,6 +1678,7 @@ table#alh_navtable
   text-align: right;
   white-space:nowrap;
 }
+#mail-Box-list{margin-top:10px;}
 .mmMailCellGray1
 {
   background: #ccc;
@@ -1693,9 +1687,10 @@ table#alh_navtable
 }
 .mmMailCellGreen1
 {
-  background: #9cdf69;
+  background: #5B7A19;
   font-weight: bold;
   vertical-align: middle;
+  color:#fff;
 }
 .mmMailCellGreen2
 {
@@ -2920,11 +2915,7 @@ td.number
   width: 160px;
   margin: 0 10px;
 }
-.BoxTitle a
-{
-  width: 410px;
-  display: block;
-}
+.BoxTitle a{width: 410px;display: block;color:#fff;}
 .mmKontotypTable th
 {
   width: auto;

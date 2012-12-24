@@ -24,7 +24,7 @@
 <br/>
 {foreach from=$fotoalbum item=album}
 
-	<div class="mmBlueBoxWideTop"><h3 class="mmFontWhite BoxTitle"><a href="{$urlHandler->getUrl("Fotoalbum", URL_VIEW, $album.id)}">{$album.namn|truncate:35:"...":true}</a></h3><div class="mmFontWhite mmBoxTitleTextRight"><a href="{$urlHandler->getUrl("Fotoalbum", URL_VIEW, $album.id)}">Se alla bilder</a>&nbsp; <a href="{$urlHandler->getUrl("Fotoalbum", URL_VIEW, $album.id)}"><img src="/img/icons/AlbumImages.gif" alt="Bilder" class="mmMarginTop-6" /></a></div></div>
+	<div class="mmBlueBoxWideTop"><h3 class="BoxTitle BoxTitle-wide"><a href="{$urlHandler->getUrl("Fotoalbum", URL_VIEW, $album.id)}">{$album.namn|truncate:35:"...":true}</a></h3><div class="mmFontWhite mmBoxTitleTextRight"><a href="{$urlHandler->getUrl("Fotoalbum", URL_VIEW, $album.id)}">Se alla bilder</a>&nbsp; <a href="{$urlHandler->getUrl("Fotoalbum", URL_VIEW, $album.id)}"><img src="/img/icons/AlbumImages.gif" alt="Bilder" class="mmMarginTop-6" /></a></div></div>
 	
 	<div class="mmBlueBoxWideBgMain">
 	<div class="mmBlueBoxWideBgMainPadding">

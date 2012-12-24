@@ -2,10 +2,6 @@
 <div class="mmBlueBoxBg">
 
 	<table class="mmFeedTable" border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td></td>
-			<td></td>
-		</tr>
 		{foreach from=$feed item=feedRow name="feedLoop"}
 		{if !isset($senaste) || $senaste neq $feedRow->getDatum()|nice_date:"j F":"d"}
 		<tr>

@@ -1,7 +1,7 @@
 <script type="text/javascript">
 	var checked_ids = new Array();
 </script>
-<table width="100%" cellpadding="4" cellspacing="2">
+<table width="100%" cellpadding="4" cellspacing="2" id="mail-Box-list">
 	<tr class="mmMailCellGreen1">
 		<td class="mmWidthTreNollPixlar">&nbsp;</td>
 		<td class="mmWidthTreNollPixlar"><input type="checkbox" name="select_all_mail" id="select_all_mail" onclick="selectAllMails()" /></td>
