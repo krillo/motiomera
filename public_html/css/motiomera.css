@@ -43,7 +43,7 @@ body
   background-position: center top;
   background-repeat: no-repeat;
   color: #333;
-  font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
+  font-family: 'Cabin Condensed', Arial, Verdana;
   font-size: 13px;
   height: 100%;
   margin: 0;
@@ -51,24 +51,24 @@ body
 }
 h1
 {
-  font-family: Trebuchet ms, Tahoma, Arial, Helvetica;
+  font-family: 'Cabin Condensed', Arial, Verdana;
   font-weight: bold;
   font-size: 180%;
   margin: 0 0 15px;
 }
 h2
 {
-  font-family: Trebuchet ms, Tahoma, Arial, Helvetica;
+  font-family: 'Cabin Condensed', Arial, Verdana;
   font-size: 18px;
   font-weight: normal;
   margin: 15px 0 5px;
 }
 h3
 {
-  font-family: Trebuchet ms, Tahoma, Arial, Helvetica;
+  font-family: 'Cabin Condensed', Arial, Verdana;
   font-size: 14px;
   font-weight: bold;
-  line-height: 14px;
+  line-height: 20px;
   margin: 3px 0 5px;
 }
 small
@@ -1279,7 +1279,7 @@ table#alh_navtable
   background-color: #D0E0C7;
   border-radius: 10px 10px 0 0;
   width: 520px;
-  height: 31px;
+  height: 40px;
   margin: 0;
   padding: 0;
 }
@@ -1290,8 +1290,8 @@ table#alh_navtable
 }
 .mmBlueBoxWideBgMain
 {
-  background: url(../img/framework/mmBlueBoxWideBg.gif) repeat-y;
-  width: 601px;
+ /* background: url(../img/framework/mmBlueBoxWideBg.gif) repeat-y; */
+  width: 760px;
   margin: 0;
 }
 .mmBlueBoxWideBg
@@ -1301,13 +1301,12 @@ table#alh_navtable
   margin: 0;
   padding: 10px 15px;
 }
-.mmBlueBoxWideBottomMainPadding,.time_is_up
+.time_is_up
 {
   padding: 10px;
 }
 .mmBlueBoxWideBottomMain
 {
-  background: url(../img/framework/mmBlueBoxWideBottom.gif) no-repeat;
   width: 601px;
   height: 10px;
   margin-bottom: 25px;
@@ -2912,7 +2911,7 @@ td.number
 {
   overflow: hidden;
   float: left;
-  width: 160px;
+  width: 158px;
   margin: 0 10px;
 }
 .BoxTitle a{width: 410px;display: block;color:#fff;}

@@ -144,7 +144,7 @@
                     <li><a{if $urlChecker->getMarkedMenu() eq "QUIZ"} class="mmMarkedMenu"{/if} href="/pages/minaquiz.php">MINA QUIZ</a></li>
                   {/if*}
                   <li><a{if $urlChecker->getMarkedMenu() eq "MINA VÄNNER"} class="mmMarkedMenu"{/if} href="/pages/adressbok.php">MINA VÄNNER</a></li>
-                  <li><a{if $urlChecker->getMarkedMenu() eq "KLUBBAR"} class="mmMarkedMenu"{/if} href="/pages/klubbar.php">KLUBBAR</a></li>
+                  <!-- li><a{* if $urlChecker->getMarkedMenu() eq "KLUBBAR" *} class="mmMarkedMenu"{* /if *} href="/pages/klubbar.php">KLUBBAR</a></li-->
                   <li><a{if $urlChecker->getMarkedMenu() eq "INSTÄLLNINGAR"} class="mmMarkedMenu"{/if} href="/pages/installningar.php">INST&Auml;LLNINGAR</a></li>
                   <li><a{if $urlChecker->getMarkedMenu() eq "TOPPLISTOR"} class="mmMarkedMenu"{/if} href="/pages/topplistor.php">TOPPLISTOR</a></li>
 

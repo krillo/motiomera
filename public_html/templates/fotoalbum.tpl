@@ -48,7 +48,7 @@
 					
 				{php}
 				global $x;
-				if (($x % 3) == 0) {
+				if (($x % 4) == 0) {
 					$this->assign("show", true);
 				} else {
 					$this->assign("show", false);
@@ -76,7 +76,7 @@
 	</div>
 
 
-	<div class="mmBlueBoxWideBottomMain"><div class="mmBlueBoxWideBottomMainPadding"></div></div>
+	<div class="mmBlueBoxWideBottomMain"></div>
 	<div class="mmClearBoth"></div>
 
 {/foreach}
