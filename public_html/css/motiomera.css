@@ -52,9 +52,10 @@ body
 h1
 {
   font-family: 'Cabin Condensed', Arial, Verdana;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 180%;
   margin: 0 0 15px;
+  color:#4f6916;
 }
 h2
 {
@@ -62,6 +63,7 @@ h2
   font-size: 18px;
   font-weight: normal;
   margin: 15px 0 5px;
+  color:#4f6916;
 }
 h3
 {
@@ -70,6 +72,7 @@ h3
   font-weight: bold;
   line-height: 20px;
   margin: 3px 0 5px;
+  color:#4f6916;
 }
 small
 {
@@ -1552,7 +1555,7 @@ table#alh_navtable
 .mmh1
 {
   margin-bottom: 18px;
-  font-family: 'Cabin Condensed';
+  font-family: 'Cabin Condensed', Arial, Verdana;
   font-size: 28px;
   font-weight: normal;
   line-height: 24px;
@@ -1560,26 +1563,29 @@ table#alh_navtable
 }
 .mmh2
 {
-  font-family: Trebuchet MS, Helvetica, Arial, sans-serif;
+  font-family: 'Cabin Condensed', Arial, Verdana;
   font-size: 18px;
   line-height: 20px;
   font-weight: normal;
+  color:#4f6916;
 }
 .mmh3Box
 {
-  font-family: Trebuchet MS, Helvetica, Arial, sans-serif;
+  font-family: 'Cabin Condensed', Arial, Verdana;
   font-size: 14px;
   font-weight: bold;
   line-height: 14px;
   position: absolute;
   margin: 10px 0 0 13px;
+  color:#4f6916;
 }
 .mmh3
 {
-  font-family: Trebuchet MS, Helvetica, Arial, sans-serif;
+  font-family: 'Cabin Condensed', Arial, Verdana;
   font-size: 14px;
   font-weight: bold;
   line-height: 14px;
+  color:#4f6916;
 }
 .mmHeightTvaNollPixlar
 {
@@ -2078,7 +2084,7 @@ table#alh_navtable
 {
   margin-top: 4px;
   height: 23px;
-  border-bottom: 1px solid #89cfe8;
+  border-bottom: 1px solid #90e889;
 }
 .mmTabBoxTabSelected table
 {
@@ -3020,3 +3026,4 @@ td.number
 .route{background-position: 138px 10px; }
 .graph{background-position: 188px 10px;float:right;}
 #report-data{float:left;margin-left: 30px;color:#fff;}
+.margin-top{margin-top: 15px;}
