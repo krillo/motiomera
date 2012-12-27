@@ -990,11 +990,6 @@ table#alh_navtable
   width: 167px;
   height: 34px;
 }
-.eventResults
-{
-  float: left;
-  margin: 5px;
-}
 .fetchImgSize
 {
   position: absolute;
@@ -1959,19 +1954,20 @@ table#alh_navtable
 }
 .mmRightMinSidaBox
 {
-  width: 190px;
+  width: 210px;
   border-top: none;
-  padding: 10px;
+  padding: 10px 0;
   background-color: #e0edd9;
   border-radius: 0 0 10px 10px ;  
 }
 .table-padding{padding: 10px 0 10px 0;width: 210px;}
+.mmRightMinSidaBox td{padding-left:10px;}
 .mmRightMinSidaBox table{font-size: 12px;width:210px;}
 .mmRightMinSidaBox table tr{height: 25px;}
 .odd{background-color: #D0E0C7;}
 .mmRightSideContestBar
 {
-  margin: -15px 0 0;
+  margin: -15px 0 0 16px;
 }
 .mmRuttKommunGron
 {
@@ -2124,11 +2120,7 @@ table#alh_navtable
   padding-left: 20px;
   margin: 0;
 }
-.mmTopplistaRuta
-{
-  float: left;
-  margin: 0 7px;
-}
+.mmTopplistaRuta{float: left;}
 .mmTotaltAntalSteg
 {
   padding-top: 21px;
@@ -2517,22 +2509,18 @@ table#alh_navtable
 .mmFloatLeft {
   float:left;
 }
-.eventResults
+/* .eventResults
 {
   float: left;
   margin: 5px
-}
-.mmTopplistaRuta
-{
-  margin: 0 7px;
-}
+}*/
 .mmWidthFyraEttNollPixlar
 {
   width: 410px;
 }
 .mmRightSideContestBar
 {
-  margin: -15px 0 0;
+  margin: -15px 0 0 16px;
 }
 .mmCurrentUser
 {
@@ -3027,3 +3015,11 @@ td.number
 .graph{background-position: 188px 10px;float:right;}
 #report-data{float:left;margin-left: 30px;color:#fff;}
 .margin-top{margin-top: 15px;}
+.margin-right{margin-right: 15px;}
+
+.tavlingsresult-mid-width{width:500px;}
+.tavlingsresult-width{width:242px;}
+.tavlingsresult{float: left;margin-top: 10px;}
+.tavlingsresult-width table{width:242px;}
+.tavlingsresult-width-max{width:760px;padding:0;}
+.mmRightMinSidaBox-submenu {height:20px;margin-left:10px;}
