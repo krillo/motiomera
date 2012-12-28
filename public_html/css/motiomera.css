@@ -694,7 +694,7 @@ table#alh_navtable
   padding-bottom: 70px;
 }
 #mmStegOverTextcontainer{
-  float:left;width:595px;height:20px;
+  float:left;width:760px;height:40px;
   /*position: relative;
     top: -30px;
     margin-bottom: -20px;	*/
@@ -3016,6 +3016,7 @@ td.number
 #report-data{float:left;margin-left: 30px;color:#fff;}
 .margin-top{margin-top: 15px;}
 .margin-right{margin-right: 15px;}
+#info-area{height:20px;whith:760px;background-color:#8aa25a;border-bottom: 1px solid #fff;padding:10px 10px 10px 10px;color:#fff;}
 
 .tavlingsresult-mid-width{width:500px;}
 .tavlingsresult-width{width:242px;}

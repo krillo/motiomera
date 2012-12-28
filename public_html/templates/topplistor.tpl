@@ -1,11 +1,11 @@
 <h1>Topplistor{if isset($gruppnamn)} för klubben {$gruppnamn}{else} för hela Motiomera{/if}</h1>
 
 
-<div class="mmTopplistaRuta">
-	<div class="mmAlbumBoxTop">
+<div class="mmTopplistaRuta tavlingsresult-width margin-right">
+	<div class="mmAlbumBoxTop tavlingsresult-width">
 		<h3 class="mmWhite BoxTitle">Steglistan 4 veckor</h3>
 	</div>
-	<div class="mmRightMinSidaBox">
+	<div class="mmRightMinSidaBox tavlingsresult-width">
 	<table width="155" cellpadding="0" cellspacing="0" border="0">
 		<tr>
 		  <td>&nbsp;</td>
@@ -34,11 +34,11 @@
 
 
 
-<div class="mmTopplistaRuta">
-	<div class="mmAlbumBoxTop">
+<div class="mmTopplistaRuta tavlingsresult-width margin-right">
+	<div class="mmAlbumBoxTop tavlingsresult-width">
 		<h3 class="mmWhite BoxTitle">Steglistan 7 dagar</h3>
 	</div>
-	<div class="mmRightMinSidaBox">
+	<div class="mmRightMinSidaBox tavlingsresult-width">
 	<table width="155" cellpadding="0" cellspacing="0" border="0">
 		<tr>
 		  <td>&nbsp;</td>
@@ -66,11 +66,11 @@
 
 
   
-<div class="mmTopplistaRuta">
-	<div class="mmAlbumBoxTop">
+<div class="mmTopplistaRuta tavlingsresult-width">
+	<div class="mmAlbumBoxTop tavlingsresult-width">
 		<h3 class="mmWhite BoxTitle">Kommunquiz 7 dagar</h3>
 	</div>
-	<div class="mmRightMinSidaBox">	
+	<div class="mmRightMinSidaBox tavlingsresult-width">	
 	<table width="155" cellpadding="0" cellspacing="0" border="0">
 		<tr>
 		  <td>&nbsp;</td>
@@ -100,11 +100,11 @@
 
 
 
-<div class="mmTopplistaRuta margin-top">
-	<div class="mmAlbumBoxTop">
+<div class="mmTopplistaRuta margin-top tavlingsresult-width">
+	<div class="mmAlbumBoxTop tavlingsresult-width">
 		<h3 class="mmWhite BoxTitle">Kommuner 7 dagar</h3>
 	</div>
-	<div class="mmRightMinSidaBox">
+	<div class="mmRightMinSidaBox tavlingsresult-width">
 	<table width="155" cellpadding="0" cellspacing="0" border="0">
 		<tr>
 		  <td>&nbsp;</td>

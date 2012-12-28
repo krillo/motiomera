@@ -1,29 +1,21 @@
 {if !isset($isProfil) && isset($startKommun) && isset($slutmal)}
-  <div id="mmStegOverTextcontainer">
+<div id="info-area">
     {if isset($lagnamn) && isset($foretagnamn)}
       <div class="mmStegOverText" style="float:left;height:20px;width:595px;">Du tävlar just nu för lag <a href="{$urlHandler->getUrl("Lag", URL_VIEW, $lagid)}">{$lagnamn}</a> från {$foretagnamn}{if isset($tavlingstart)}. Tävlingen startar om {$tavlingstart} dagar{/if}</div>
     {/if}
-
-    <div class="mmStegOverText">
-      Du började i
-      <a href="{$urlHandler->getUrl(Kommun, URL_VIEW, $startKommun->getUrlNamn())}">
-        <strong>
-          {$startKommun->getNamn()}
-        </strong>
-      </a>
-      och har nu gått genom
-      <strong>
-        {$antalKommuner}
-      </strong>
-      kommuner.
-      {if $totalKmKvar < 1}
-        Du har kommit fram till ditt mål: <a href="{$urlHandler->getUrl(Kommun, URL_VIEW, $slutmal->getUrlNamn())}"><strong>{$slutmal->getNamn()}</strong></a>!{else}
-        Det är {*}<strong>{$antalKommunerKvar}</strong> kommuner och {*}<strong>{$totalKmKvar|nice_tal}</strong> km kvar till ditt slutmål <a href="{$urlHandler->getUrl(Kommun, URL_VIEW, $slutmal->getUrlNamn())}"><strong>{$slutmal->getNamn()}</strong></a>.
-      {/if}
-    </div>
-  </div>
+  
+  Du började i &nbsp;
+  <a href="{$urlHandler->getUrl(Kommun, URL_VIEW, $startKommun->getUrlNamn())}"><strong>{$startKommun->getNamn()}</strong>&nbsp;</a>
+  och har nu gått genom&nbsp;{$antalKommuner}&nbsp;kommuner.
+  {if $totalKmKvar < 1}
+    Du har kommit fram till ditt mål: &nbsp;<a href="{$urlHandler->getUrl(Kommun, URL_VIEW, $slutmal->getUrlNamn())}"><strong>{$slutmal->getNamn()}</strong></a>&nbsp;!{else}
+    Det är {*}<strong>{$antalKommunerKvar}</strong> kommuner och {*}<strong>{$totalKmKvar|nice_tal}</strong> km kvar till ditt slutmål <a href="{$urlHandler->getUrl(Kommun, URL_VIEW, $slutmal->getUrlNamn())}"><strong>{$slutmal->getNamn()}</strong></a>.
+  {/if}
+</div>    
   <div style="clear:both;"></div>
 {/if}
+
+
 {if $sajtDelarObj->medlemHasAccess($medlem,"minSidaGmaps")}
   <script type="text/javascript">
     google.load("maps", "2");
@@ -353,24 +345,8 @@ if(end > 0) {
 {/if}
 
 
-<div id="info-area">
-  Du började i
-  <a href="{$urlHandler->getUrl(Kommun, URL_VIEW, $startKommun->getUrlNamn())}">
-    <strong>
-      {$startKommun->getNamn()}
-    </strong>
-  </a>
-  och har nu gått genom
-  <strong>
-    {$antalKommuner}
-  </strong>
-  kommuner.
-  {if $totalKmKvar < 1}
-    Du har kommit fram till ditt mål: <a href="{$urlHandler->getUrl(Kommun, URL_VIEW, $slutmal->getUrlNamn())}"><strong>{$slutmal->getNamn()}</strong></a>!{else}
-    Det är {*}<strong>{$antalKommunerKvar}</strong> kommuner och {*}<strong>{$totalKmKvar|nice_tal}</strong> km kvar till ditt slutmål <a href="{$urlHandler->getUrl(Kommun, URL_VIEW, $slutmal->getUrlNamn())}"><strong>{$slutmal->getNamn()}</strong></a>.
-  {/if}
 
-</div>
+  
 <div id="report-area">
   {if !isset($isProfil)}
     <a class="report-button" href="#" onclick="motiomera_steg_rapportera(); return false;"><img src="/img/design12/report.png" class="report" alt=""/>Rapportera dina steg!</a>
