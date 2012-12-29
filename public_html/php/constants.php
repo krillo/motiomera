@@ -46,5 +46,4 @@ define('URL_RANDOMIZE_TEAMS', 'url_random');
 define('URL_RESET_STEG','url_reset_steg');
 define('URL_ADMIN_MERGE','url_admin_merge');
 define('URL_RECLAMATION','url_reclamation');
-
 ?>

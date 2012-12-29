@@ -49,6 +49,25 @@ class Adressbok
 	{
 		return new Adressbok($medlem);
 	}
+  
+  
+  /**
+   * Added 12-12-29
+   * Kristian Erendi, Reptilo.se
+   * @global $db $db
+   * @param type $id
+   * @return type
+   */
+  public static function getUnreadContacts($id){
+    global $db;
+    if(!empty($id)){
+      $sql = "SELECT count(id) FROM mm_kontakt WHERE last = 0 and kontakt_id = $id";
+      return $db->value($sql);    
+    } else {
+      return '';
+    }   
+    
+  }  
 
 	// PUBLIC FUNCTIONS ///////////////////////////////////////
 	

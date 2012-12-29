@@ -1,26 +1,25 @@
 <script type="text/javascript">
-  // toggle between login and new password
   var actionNyttLosen = "<?php echo MM_SERVER_ROOT_URL; ?>/actions/nyttlosen.php";
   var actionLogin = "<?php echo MM_SERVER_ROOT_URL; ?>/actions/login.php";
   var actionLoginFb = "<?php echo MM_SERVER_ROOT_URL; ?>/actions/loginfb.php";
-  var $j = jQuery.noConflict();
-  $j(document).ready(function() {
-    $j('#new-pass').change(function() {  
-      var newPassCheck = $j('#new-pass:checked').val();   
+  jQuery(document).ready(function($) {
+    
+    // toggle between login and new password
+    $('#new-pass').change(function() {  
+      var newPassCheck = $('#new-pass:checked').val();   
       if(typeof newPassCheck == 'undefined'){
-        $j('#login-submit').val('Logga in »');
-        $j("#login-form").attr("action", actionLogin);
-        $j("#username").attr("name", 'username');
+        $('#login-submit').val('Logga in »');
+        $("#login-form").attr("action", actionLogin);
+        $("#username").attr("name", 'username');
       } else {
-        $j('#login-submit').val('Nytt lösen »');
-        $j("#login-form").attr("action", actionNyttLosen);
-        $j("#username").attr("name", 'epost');        
+        $('#login-submit').val('Nytt lösen »');
+        $("#login-form").attr("action", actionNyttLosen);
+        $("#username").attr("name", 'epost');        
       }
     });
-    
-    
+        
     //login with facebook
-    $j("#login-fb").click(function(event) {
+    $("#login-fb").click(function(event) {
       FB.login(function(response) {
         if (response.authResponse) {
           console.log('Welcome!  Fetching your information.... ');
@@ -30,7 +29,7 @@
             console.log(dataString);
             if(dataString==""){
             } else{
-              $j.ajax({
+              $.ajax({
                 type: "POST",
                 url: actionLoginFb,
                 data: dataString,
@@ -44,20 +43,12 @@
               });
             }
             return false;            
-            
-            
-            
           });
         } else {
           console.log('User cancelled login or did not fully authorize.');
         }
       });
-
     });
-
-
-    
-    
   });  
 </script>
 <div id="login">

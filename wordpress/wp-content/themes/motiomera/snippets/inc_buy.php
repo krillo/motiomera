@@ -2,19 +2,18 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 //print_r($GLOBALS );               //display all wp-globals 
-global $mmStatus;                 
-print_r($mmStatus);               //display all mm-wp-globals 
+//global $mmStatus;                 
+//print_r($mmStatus);               //display all mm-wp-globals 
 
-require_once(MM_ROOT_ABSPATH . "/init.php");
+//require_once(MM_ROOT_ABSPATH . "/init.php");
 
-/*
   require_once MM_ROOT_ABSPATH . "/classes/Mobject.php";
   require_once MM_ROOT_ABSPATH . "/classes/UserException.php";
   require_once MM_ROOT_ABSPATH . "/classes/Misc.php";
   require_once MM_ROOT_ABSPATH . "/classes/Order.php";
   require_once MM_ROOT_ABSPATH . "/classes/Kommun.php";
-  require_once MM_ROOT_ABSPATH . "/classes/DB.php";
- */
+  //require_once MM_ROOT_ABSPATH . "/classes/DB.php";
+  require_once MM_ROOT_ABSPATH . "/classes/Medlem.php";
 
 $campaignCodes = Order::$campaignCodes;
 $moms = Order::$moms;
@@ -23,7 +22,11 @@ Order::getMondays(15);
 //print_r(get_defined_vars());       //display all php-global variables
 
 
-$kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn(false, false, $db));
+
+//$kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn(false, false, $dbObject));
+
+
+//getKommuner();
 ?>
 
 
@@ -510,13 +513,7 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn(false,
             <label for="sex" style="margin-left:10px;">Kön</label>
           </li>
           <li>
-            <select name="kid" id="kid">
-              <?php
-              foreach ($kommuner as $key => $value) {
-                echo '<option label="' . $value . '" value="' . $key . '">' . $value . '</option>';
-              }
-              ?>
-            </select>
+            <?php echo getKommuner(); ?>
             <label for="kid" style="margin-left:10px;">Startkommun</label>
           </li>
           <li>

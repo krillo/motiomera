@@ -22,22 +22,22 @@ if (MM_WP_INIT != 1) {
 }
 
 
-
 define('INIT', true);
 
 if (!defined('ROOT')) {
   //define('ROOT', $_SERVER["DOCUMENT_ROOT"]);  //original mm code
-  $root = __DIR__ . '/../';                     //special just so that it will be correct both in original mm and wp 
-  define('ROOT', $root);
+  $root = __DIR__ . '/../';                     //special just so that it will be correct both in core mm and wp 
+  define('ROOT', $root);  
+  //echo 'ROOT is just defined: ' . ROOT . "<br>";
+} else {
+  //echo 'ROOT is defined: ' . ROOT;
 }
 
-require_once ROOT . '/php/constants.php';
-require_once ROOT . '/php/settings.php';
-require_once ROOT . '/php/settings_app.php';
-require_once ROOT . '/php/classes/Medlem.php';
+require_once ROOT . 'php/constants.php';
+require_once ROOT . 'php/settings.php';
+require_once ROOT . 'php/settings_app.php';
+require_once ROOT . 'php/classes/Medlem.php';
 require_once SMARTY_DIR . 'Smarty.class.php';
-
-// Errorhandling flyttad till efter DEBUG-konstanten. /Micke
 
 if (MEMCACHE) {
   $Memcache = new Mem;
@@ -97,5 +97,3 @@ function __autoload($class_name) {
   if ($class_name != "LoggerPropertyConfigurator" && $class_name != "utf_normalizer" && $class_name != "PEAR_Error" && $class_name != "pear")
     require_once ROOT . "/php/classes/$class_name.php";
 }
-
-?>

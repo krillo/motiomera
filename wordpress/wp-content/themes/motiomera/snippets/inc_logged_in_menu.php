@@ -13,37 +13,33 @@ if (!$USER) {
  */
 //global $mmStatus;
 //print_r($mmStatus);
-
 ?>
+<div id="mm_id" class="hidden"><?php echo $mmStatus->mm_mid; ?></div>
+      <script type="text/javascript">
+        jQuery(document).ready(function($){    
+          
+          var mm_id = $("#mm_id").html(); 
+          if(mm_id !== undefined){  
+            //MotiomeraMail
+            var data = {mm_id : mm_id};
+            $.post('/ajax/includes/mailcount.php', data, function(response){
+            $("#logged-in-email-id li").append(response);
+            });
 
-<div id="logged-in-menu">
+            //Mina vanner
+            var data = {mm_id : mm_id};
+            $.post('/ajax/includes/addresscount.php', data, function(response){
+            $("#logged-in-friend li").append(response);
+            });
+          }
+            
+        });  
+      </script>  
+
+    <div id="logged-in-menu">
       <ul>
-        <a href="#" id="logged-in-friend"><li>Du har en vänförfrågan</li></a>
-        <a href="/pages/mail.php?do=inbox" id="logged-in-email"><li>Motiomeramail</li></a>
+        <a href="/pages/adressbok.php?tab=3" id="logged-in-friend"><li>Mina vänner</li></a>
+        <a href="/pages/mail.php?do=inbox" id="logged-in-email-id" class="logged-in-email"><li><span class="">Motiomeramail</span></li></a>        
         <a href="/actions/logout.php" id="logged-in-logout"><li>Logga ut</li></a>
       </ul>
-    </div>
-
-
-
-
-<!--
-
-            {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
-              <div id="mmCommunityToolbar">
-                {if !isset($inAdmin) && !isset($FORETAG) && $USER->getOlastaMail() > 0}
-
-                  {if $USER->getOlastaMail() > 1}
-                    <a href="{$urlHandler->getUrl("InternMail", URL_VIEW)}"><img src="/img/icons/MailUnreadIcon_greenBG.gif" alt="{$USER->getOlastaMail()} olästa mail" /></a> <a href="{$urlHandler->getUrl("InternMail", URL_VIEW)}">{$USER->getOlastaMail()} olästa mail</a>
-                  {else}
-                    <a href="{$urlHandler->getUrl("InternMail", URL_VIEW)}"><img src="/img/icons/MailUnreadIcon_greenBG.gif" alt="1 oläst mail" /></a> <a href="{$urlHandler->getUrl("InternMail", URL_VIEW)}">1 oläst mail</a>
-                  {/if}
-
-                {/if}
-                <br/><br/>
-                {if $adressbok}
-                  {if $adressbok->listForfragningar()|@count > 0}
-                    <a href="{$urlHandler->getUrl(Adressbok, URL_VIEW, 3)}"><img src="/img/icons/AdressbokAddIcon.gif" alt="Vänner" class="mmMarginLeft20" /></a> <a href="{$urlHandler->getUrl(Adressbok, URL_VIEW, 3)}">{$adressbok->listForfragningar()|@count} {$adressbok->listForfragningar()|@count|mm_countable:"ny vän":"nya vänner"}</a>
-                  {/if}
-
--->
+    </div> 

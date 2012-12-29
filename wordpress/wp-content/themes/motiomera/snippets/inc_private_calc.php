@@ -8,12 +8,10 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
 ?>
 
 <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-  var $j = jQuery.noConflict();
-  
-  $j(function() {
+<script type="text/javascript">  
+  jQurey(function($) {
     //do input validation
-    var validator = $j("#checkout").validate({
+    var validator = $("#checkout").validate({
       errorClass: "invalid",
       validClass: "valid",
       rules: {
@@ -97,39 +95,39 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
     });
 
 
-    $j('#short-radio').change(function() {
+    $('#short-radio').change(function() {
       sum(); 
     });
-    $j('#long-radio').change(function() {
+    $('#long-radio').change(function() {
       sum(); 
     });
-    $j('#short-check').change(function() {
+    $('#short-check').change(function() {
       sum(); 
     });
-    $j('#long-check').change(function() {
+    $('#long-check').change(function() {
       sum(); 
     });
  
     function sum(){
-      radio  = $j('input:radio[name=radio-priv]:checked').val();
+      radio  = $('input:radio[name=radio-priv]:checked').val();
       if(typeof radio != 'undefined'){  //one of the radios are checked
         shortRadio = <?php echo $campaignCodes['PRIV3']['pris']; ?>;
         longRadio = <?php echo $campaignCodes['PRIV12']['pris']; ?>;
         
         if(radio == <?php echo $campaignCodes['PRIV3']['pris']; ?>){          
-          $j('input:#long-check').attr('checked', false);
+          $('input:#long-check').attr('checked', false);
           longRadio = 0;
-          $j('#m_priv3').val(1);   
-          $j('#m_priv12').val(0);   
+          $('#m_priv3').val(1);   
+          $('#m_priv12').val(0);   
         }
         if(radio == <?php echo $campaignCodes['PRIV12']['pris']; ?>){            
-          $j('input:#short-check').attr('checked', false);
+          $('input:#short-check').attr('checked', false);
           shortRadio = 0;
-          $j('#m_priv12').val(1);
-          $j('#m_priv3').val(0);
+          $('#m_priv12').val(1);
+          $('#m_priv3').val(0);
         }
-        shortCheck = $j('input:#short-check:checked').val();
-        longCheck = $j('input:#long-check:checked').val();        
+        shortCheck = $('input:#short-check:checked').val();
+        longCheck = $('input:#long-check:checked').val();        
         if(typeof shortCheck == 'undefined'){
           shortCheck = 0;
         }
@@ -139,28 +137,28 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
         //alert('radio: ' + radio + ' shortCheck: ' + shortCheck+ ' longCheck: ' + longCheck);
         if(shortCheck != 0 || longCheck != 0){
           sumFreight = parseInt(<?php echo $campaignCodes['FRAKT02']['pris']; ?>);
-          $j('#m_frakt02').val(1);
-          $j('#m_steg01').val(1);          
+          $('#m_frakt02').val(1);
+          $('#m_steg01').val(1);          
         } else{
           sumFreight = 0;
-          $j('#m_frakt02').val(0);
-          $j('#m_steg01').val(0);
+          $('#m_frakt02').val(0);
+          $('#m_steg01').val(0);
         }
           
         sumShort = parseInt(shortRadio) + parseInt(shortCheck);
         sumLong = parseInt(longRadio) + parseInt(longCheck);        
         sumTotal = sumShort + sumLong + sumFreight;
       
-        $j('#sum-short span').html(sumShort);
-        $j('#sum-long span').html(sumLong);
-        $j('#sum-freight span').html(sumFreight);
-        $j('#sum-total span').html(sumTotal);
-        $j('#priv-the-price').html(sumTotal);
+        $('#sum-short span').html(sumShort);
+        $('#sum-long span').html(sumLong);
+        $('#sum-freight span').html(sumFreight);
+        $('#sum-total span').html(sumTotal);
+        $('#priv-the-price').html(sumTotal);
         
       
           
-        $j('#m_total').val(sumTotal);        
-        $j('#m_freight').val(sumFreight);      
+        $('#m_total').val(sumTotal);        
+        $('#m_freight').val(sumFreight);      
       
         
       } else { //radiobutton is undfined do nothing     
@@ -170,67 +168,67 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
 
 
     //catch keyup where the alias is submitted 
-    $j('#anamn').keyup(function() {
-      $j('#fields-hidden').toggleClass("visible");
-      $j('#fields-hidden').show("slow");
+    $('#anamn').keyup(function() {
+      $('#fields-hidden').toggleClass("visible");
+      $('#fields-hidden').show("slow");
     });
 
 
-    $j('#private-toggle').click(function(event) {
+    $('#private-toggle').click(function(event) {
       event.preventDefault(); 
-      if($j('#member-private').hasClass("visible")){
-        $j('#member-private').toggleClass("visible");
-        $j('#member-private').hide("slow");
+      if($('#member-private').hasClass("visible")){
+        $('#member-private').toggleClass("visible");
+        $('#member-private').hide("slow");
       }else {
-        $j('#member-private').toggleClass("visible");
-        $j('#member-private').show("slow");
+        $('#member-private').toggleClass("visible");
+        $('#member-private').show("slow");
       }       
     });   
 
         
-    $j('#address-toggle').click(function(event) {
+    $('#address-toggle').click(function(event) {
       event.preventDefault(); 
-      if($j('#extra-address').hasClass("visible")){
-        $j('#extra-address').toggleClass("visible");
-        $j('#extra-address').hide("slow");
+      if($('#extra-address').hasClass("visible")){
+        $('#extra-address').toggleClass("visible");
+        $('#extra-address').hide("slow");
       }else {
-        $j('#extra-address').toggleClass("visible");
-        $j('#extra-address').show("slow");
+        $('#extra-address').toggleClass("visible");
+        $('#extra-address').show("slow");
       }       
     });
         
         
-    $j('#discount-toggle').click(function(event) {
+    $('#discount-toggle').click(function(event) {
       event.preventDefault(); 
-      if($j('#discount').hasClass("visible")){
-        $j('#discount').toggleClass("visible");
-        $j('#discount').hide("slow");
+      if($('#discount').hasClass("visible")){
+        $('#discount').toggleClass("visible");
+        $('#discount').hide("slow");
       }else {
-        $j('#discount').toggleClass("visible");
-        $j('#discount').show("slow");
+        $('#discount').toggleClass("visible");
+        $('#discount').show("slow");
       }       
     });        
 
 
-    $j('#co-toggle').click(function(event) {
+    $('#co-toggle').click(function(event) {
       event.preventDefault(); 
-      if($j('#co').hasClass("visible")){
-        $j('#co').toggleClass("visible");
-        $j('#co').hide("slow");
+      if($('#co').hasClass("visible")){
+        $('#co').toggleClass("visible");
+        $('#co').hide("slow");
       }else {
-        $j('#co').toggleClass("visible");
-        $j('#co').show("slow");
+        $('#co').toggleClass("visible");
+        $('#co').show("slow");
       }       
     });   
  
-    $j('#country-toggle').click(function(event) {
+    $('#country-toggle').click(function(event) {
       event.preventDefault(); 
-      if($j('#country').hasClass("visible")){
-        $j('#country').toggleClass("visible");
-        $j('#country').hide("slow");
+      if($('#country').hasClass("visible")){
+        $('#country').toggleClass("visible");
+        $('#country').hide("slow");
       }else {
-        $j('#country').toggleClass("visible");
-        $j('#country').show("slow");
+        $('#country').toggleClass("visible");
+        $('#country').show("slow");
       }       
     });   
  

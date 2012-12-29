@@ -1,10 +1,9 @@
-
 <div class="mmh1 mmMarginBottom mmProfilH1" style="float:left;width:400px;">
 {if $selfProfile}
 	<form action="" method="post" class="margin0" onsubmit="mm_saveStatus(this.status.value); return false;" id="mmUpdateStatusForm">
 {/if}  
 	{$USER->getANamn()}
-	<span class="mmGray editable">
+	<span class="mmGray editable local-status-update">
 		<span id="mmUpdateStatus">
 			<input type="text" name="status" id="mmStatusField" value=""  />
 			<input type="submit" name="save" value="Spara" id="save" />
@@ -24,7 +23,7 @@
 {if $selfProfile}
 	</form>
 {/if}
-<div style="float:left;width:200px;height: 30px;">
+<div class="facebook-like">
 <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FMotioMera%2F63606043494&amp;send=false&amp;layout=standard&amp;width=200&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=30" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>  
 </div>
 <div class="clear"></div>

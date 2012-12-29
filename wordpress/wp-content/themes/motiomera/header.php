@@ -1,7 +1,6 @@
 <?php
 /**
  * The Header for Motiomera.
- *
  * Displays all of the <head> section and everything up till <div id="main">
  *
  * @package Motiomera
@@ -14,7 +13,7 @@ global $mmStatus;
   <head>
     <meta charset="<?php bloginfo('charset'); ?>" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="shortcut icon" href="<?php bloginfo('stylesheet_directory'); ?>/favicon.ico" />
+    <link rel="shortcut icon" href="<?php bloginfo('stylesheet_directory'); ?>/favicon.ico" />    
     <title><?php
 global $page, $paged;
 wp_title('|', true, 'right');
@@ -34,8 +33,8 @@ if ($site_description && ( is_home() || is_front_page() )) {
 
 
 
-
     <?php wp_head(); ?>
+    <link rel='stylesheet' id='menu-css'  href='<?php bloginfo('stylesheet_directory'); ?>/css/menu.css' type='text/css' media='all' />
   </head>
   <body <?php body_class(); ?>>
     <?php do_action('before'); ?>
@@ -102,8 +101,6 @@ if ($site_description && ( is_home() || is_front_page() )) {
         <?php includeSnippet("inc_big_logo_area.php"); ?>        
         <div class="clear"></div>
         <?php includeSnippet("inc_login_area.php"); ?>
-
       </header>
       <?php includeSnippet("inc_page_promo_header.php"); ?>         
       <div id="main">
-

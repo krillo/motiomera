@@ -20,8 +20,7 @@ class UserException extends Exception
 	
 	protected $backlink;
 	
-	public function __construct($title, $msg, $backlink = null, $backlinktitle = null)
-	{
+	public function __construct($title, $msg, $backlink = null, $backlinktitle = null){
 		parent::__construct($msg, null);
 		global $SETTINGS;
 		$this->setTitle($title);
@@ -33,7 +32,9 @@ class UserException extends Exception
 			$smarty->assign("backlinktitle", $backlinktitle);
 		} else {
 			$smarty->assign("backlinktitle", "Gå tillbaka");
-		}
+		}    
+    //echo '<h1>'.$title.'</h1>';
+    //echo '<p>'.$msg.'</p>';
 		$smarty->display('userexception.tpl');
 		exit;
 	}

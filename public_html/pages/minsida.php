@@ -1,7 +1,8 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
 Security::demand(USER);
-
+//print_r($USER->getId());
+//print_r($USER);
 
 //added by krillo 2011-01-19  keep expired user locket out
 if($USER->getPaidUntil() < date("Y-m-d")){

@@ -27,16 +27,8 @@ a.highslide-full-expand
   height: 34px;
   margin: 0 10px 10px 0;
 }
-a:hover
-{
-  color: #333;
-  text-decoration: underline;
-}
-a
-{
-  color: #5b7a19;
-  text-decoration: none;
-}
+a:hover{color: #768d4a;text-decoration: none;}
+a{color: #5b7a19;text-decoration: none;}
 body
 {
   background-image: url("/img/design12/mmbg_page.png");
@@ -1701,7 +1693,7 @@ table#alh_navtable
 {
   background-color: #9CC;
 }
-.mmMarginBottom{margin-bottom: 10px;}
+.mmMarginBottom{margin-bottom: 15px;}
 .mmMarginBottomBig{margin-bottom: 30px;}
 .mmMarginLeft10
 {
@@ -2756,13 +2748,14 @@ td.number
 }
 .editable #mmMedlemStatusText
 {
-  padding: 2px 19px 1px 5px;
-  border: 1px solid #aaa;
-  font-size: 50%;
+  padding: 3px 42px 3px 5px;
+  border: 1px solid #5B7A19;
+  font-size: 75%;
   position: relative;
   top: -4px;
-  background: #fff url(/img/icon-pen.png) no-repeat right -2px;
+  background: #fff url(/img/design12/up_to.png) no-repeat right 0px; 
   line-height: 20px;
+  border-radius: 5px 5px 5px 5px;
 }
 .mailTextarea
 {
@@ -3024,3 +3017,5 @@ td.number
 .tavlingsresult-width table{width:242px;}
 .tavlingsresult-width-max{width:760px;padding:0;}
 .mmRightMinSidaBox-submenu {height:20px;margin-left:10px;}
+.local-status-update{margin-left: 15px;}
+.facebook-like{float:right;width:200px;height: 30px;}

@@ -9,9 +9,11 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="Stegtävling för företag. Motiomera är Sveriges roligaste stegtävling för alla som vill röra på sig och ha kul. Häng bara på dig stegräknaren och börja gå." />
     <meta name="keywords" content="motoimera stegtävling, stegtävling för företag, stegtävling på jobbet, stegtävling korpen, tävla med stegräknare, friskvård åt företag, avdragsgill friskvårdsaktivitet, motionera stegtävling, köp stegräknare, billig stegräknare, motionera mera, friskvård stegräknare, stegtävling omvandling, friskvårdsaktivitet, friskvårdsaktiviteter" />
+    <link rel='stylesheet' id='menu-css'  href='http://mm.dev/wp-content/themes/motiomera/css/menu.css' type='text/css' media='all' />
     <link rel="stylesheet" href="/css/motiomera.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/css/checkout.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js?ver=3.3.2'></script>    
     {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
       {if !NO_INTERNET || GOOGLEMAPS_OVERRIDE_NO_INTERNET}
         {if $urlChecker->getFileName() eq 'minsida.php' or 'fastautmaningar.php'}
@@ -23,7 +25,7 @@
       <script type="text/javascript" src="{$file}"></script>
     {/foreach}
     <script type="text/javascript">
-      {literal}
+    {literal}
 		var mmPopup;
 		// remove the registerOverlay call to disable the controlbar
 		hs.registerOverlay(
@@ -39,7 +41,7 @@
 		hs.outlineType = 'rounded-white';
 		// Tell Highslide to use the thumbnails title for captions
 		hs.captionEval = 'this.thumb.title';
-      {/literal}
+    {/literal}
     </script>
 
 
@@ -56,9 +58,32 @@
         })();
       </script>
     {/literal}
-  </head>	
-  <body id="body" class="{$BROWSER} {$currentPage}">
+    {literal}
+      <script type="text/javascript">
+        jQuery(document).ready(function($){    
+          var mm_id = $("#mm_id").html(); 
+          if(mm_id !== undefined){  
+            //MotiomeraMail
+            var data = {mm_id : mm_id};
+            $.post('/ajax/includes/mailcount.php', data, function(response){
+            $("#logged-in-email-id li").append(response);
+            });
 
+            //Mina vanner
+            var data = {mm_id : mm_id};
+            $.post('/ajax/includes/addresscount.php', data, function(response){
+            $("#logged-in-friend li").append(response);
+            });
+          }
+        });  
+      </script>  
+    {/literal}
+
+
+
+  </head>	
+  <body id="body" class="{$BROWSER} {$currentPage}">    
+    <div id="mm_id" class="hidden">{$USER->getId()}</div>    
     {php}
       global $SETTINGS;
       $menu = file_get_contents($SETTINGS["url"].'/api-menu/');
@@ -66,8 +91,8 @@
     {/php}    
     <div id="logged-in-menu">
       <ul>
-        <a href="#" id="logged-in-friend"><li>Du har en vänförfrågan</li></a>
-        <a href="/pages/mail.php?do=inbox" id="logged-in-email"><li>Motiomeramail</li></a>
+        <a href="/pages/adressbok.php?tab=3" id="logged-in-friend"><li>Mina vänner</li></a>
+        <a href="/pages/mail.php?do=inbox" id="logged-in-email-id" class="logged-in-email"><li><span class="">Motiomeramail</span></li></a>        
         {if isset($inAdmin)}
           <a href="/admin/actions/logout.php" id="logged-in-logout"><li>Logga ut</li></a>
         {elseif isset($FORETAG)}
@@ -77,11 +102,11 @@
         {/if}
       </ul>
     </div>       
-<div class="mmClearBoth"></div>
+    <div class="mmClearBoth"></div>
 
-  <div id="mmPage">
+    <div id="mmPage">
       <div id="mmWrapMiddle">
-      {if !isset($doldMeny)}
+        {if !isset($doldMeny)}
           <div id="mmColumnLeft">
             <div id="mmMenuLeft">
               <ul>
@@ -117,7 +142,7 @@
                   <hr/>
                 {/if}
 
-       
+
                 {if isset($FORETAG)}
                   <li><a {if $urlChecker->getMarkedMenu() eq "HANTERA FÖRETAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretag, URL_EDIT, $FORETAG->getId())}">HANTERA F&Ouml;RETAG</a></li>
                 {/if}
@@ -141,7 +166,7 @@
                   <li><a{if $urlChecker->getMarkedMenu() eq "MOTIOMERAMAIL"} class="mmMarkedMenu"{/if} href="/pages/mail.php">MOTIOMERAMAIL</a></li>
                   <li><a{if $urlChecker->getMarkedMenu() eq "FOTOALBUM"} class="mmMarkedMenu"{/if} href="/pages/fotoalbum.php">FOTOALBUM</a></li>
                   {*if isset($USER) && $sajtDelarObj->medlemHasAccess($USER,'minaQuiz')}
-                    <li><a{if $urlChecker->getMarkedMenu() eq "QUIZ"} class="mmMarkedMenu"{/if} href="/pages/minaquiz.php">MINA QUIZ</a></li>
+                  <li><a{if $urlChecker->getMarkedMenu() eq "QUIZ"} class="mmMarkedMenu"{/if} href="/pages/minaquiz.php">MINA QUIZ</a></li>
                   {/if*}
                   <li><a{if $urlChecker->getMarkedMenu() eq "MINA VÄNNER"} class="mmMarkedMenu"{/if} href="/pages/adressbok.php">MINA VÄNNER</a></li>
                   <!-- li><a{* if $urlChecker->getMarkedMenu() eq "KLUBBAR" *} class="mmMarkedMenu"{* /if *} href="/pages/klubbar.php">KLUBBAR</a></li-->

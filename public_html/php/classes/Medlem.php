@@ -888,6 +888,7 @@ class Medlem extends Mobject {
     return $this->olastaMail;
   }
 
+  
   public function getCurrentMal() {
 
     if (!$this->currentMal) {
@@ -898,6 +899,10 @@ class Medlem extends Mobject {
 
   public function getFbId() {
     return $this->fb_id;
+  }
+
+  public function getId() {
+    return $this->id;
   }
 
   public function getFNamn() {

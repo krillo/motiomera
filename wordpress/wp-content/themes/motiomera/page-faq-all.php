@@ -5,12 +5,11 @@
 ?>
 <?php get_header(); ?>
 <script>
-  //var $j = jQuery.noConflict();
-  $j(function() {    
-    $j("#faq-common" ).accordion({ active: false });
+  jQuery(function($) {    
+    $("#faq-common" ).accordion({ active: false });
   });
-  $j(function() {    
-    $j("#faq-company" ).accordion({ active: false });
+  jQuery(function($) {    
+    $("#faq-company" ).accordion({ active: false });
   });
 </script>
 

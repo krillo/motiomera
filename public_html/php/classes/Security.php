@@ -202,7 +202,6 @@ class Security
 	{
 		// se authorized()
 		// kastar undantag vid ogiltigt inlogg
-
 		
 		if (!self::authorized($typ, $object)) {
 			throw new SecurityException("Denna sida kan ej visas", "Detta kan bero på att sidan är privat, att du inte loggat in eller att du blivit utloggad.");
@@ -225,6 +224,7 @@ class SecurityException extends UserException
 	
 	public function __construct($title, $msg, $backlink = null, $backlinktitle = null)
 	{
+    
 		header('HTTP/1.1 403 Forbidden');
 		parent::__construct($title, $msg);
 	}
