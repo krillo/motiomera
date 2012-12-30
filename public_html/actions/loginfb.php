@@ -1,5 +1,4 @@
 <?php
-
 require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
@@ -7,22 +6,19 @@ ini_set('display_errors', '1');
 $fb = new stdClass;
 !empty($_REQUEST['email']) ? $fb->email = Security::secure_postdata($_REQUEST['email']) : $fb->email = '';
 !empty($_REQUEST['fbid']) ? $fb->fbid = Security::secure_postdata($_REQUEST['fbid']) : $fb->fbid = '';
-
-
 try {
   $status = Medlem::loggaInFb($fb->fbid, $fb->email);
-  if ($status) {
+  if ($status > 0) {
     $fb->loggedin = 1;
+    $fb->mm_id = $status;    
   } else {
     $fb->loggedin = 0;
   }
-
   //write it as json
   header('Cache-Control: no-cache, must-revalidate');
   header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
   header('Content-type: application/json');
   echo json_encode($fb);
-  
   
 } catch (MedlemException $e) {
   if ($e->getCode() == -5) {
@@ -35,7 +31,6 @@ try {
 		<form method='get' action='/actions/activate.php'><input type='text' name='q' value='" . (isset($_GET['q']) ? $_GET['q'] : "") . "' size=50><br><input type='submit' value='Aktivera'></form>		
 		");
   } else if ($e->getCode() == -19) {
-
     $urlHandler->redirect("Medlem", URL_BUY, $e->getMedlemId());
   }
 }

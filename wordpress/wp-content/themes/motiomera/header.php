@@ -44,7 +44,7 @@ if ($site_description && ( is_home() || is_front_page() )) {
       window.fbAsyncInit = function() {
         FB.init({
           appId      : '108867119251826', // App ID
-          channelUrl : '//motiomera.se/channel.html', // Channel File
+          channelUrl : '//mm.dev/wp-content/themes/motiomera/fb-js-channel.php', // Channel File
           status     : true, // check login status
           cookie     : true, // enable cookies to allow the server to access the session
           xfbml      : true  // parse XFBML

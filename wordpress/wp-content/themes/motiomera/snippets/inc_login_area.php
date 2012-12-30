@@ -22,11 +22,11 @@
     $("#login-fb").click(function(event) {
       FB.login(function(response) {
         if (response.authResponse) {
-          console.log('Welcome!  Fetching your information.... ');
+          //console.log('Welcome!  Fetching your information.... ');
           FB.api('/me', function(response) {
-            console.log('Good to see you, ' + response.name + '  Email: ' + response.email + '  Id: ' + response.id);            
+            //console.log(response);
+            //console.log('Good to see you, ' + response.name + '  Email: ' + response.email + '  Id: ' + response.id);            
             var dataString = "fbid=" + response.id + "&email=" + response.email;
-            console.log(dataString);
             if(dataString==""){
             } else{
               $.ajax({
@@ -35,7 +35,7 @@
                 data: dataString,
                 cache: false,
                 success: function(data){
-                  console.log(data);
+                  //console.log(data);
                   if(data.loggedin == 1){
                     window.location = "/pages/minsida.php";    
                   }                  
@@ -47,7 +47,7 @@
         } else {
           console.log('User cancelled login or did not fully authorize.');
         }
-      });
+      },{scope: 'email'});
     });
   });  
 </script>

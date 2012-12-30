@@ -2298,15 +2298,15 @@ class Medlem extends Mobject {
     if ($id != '') {
       $medlem = Medlem::loadById($id);
       $medlem->loggInCurrentUser();
-      return true;
+      return $id;
     } else {
-      $id = Medlem::getIdByEmail($email);   
+      $id = Medlem::getIdByEmail($email);
       if ($id > 0) { //a matching email - store the fb_id
         $medlem = Medlem::loadById($id);
         $medlem->setFbId($fbid);
         $medlem->commit();
         $medlem->loggInCurrentUser();
-        return true;
+        return $id;
       }
       return false;
     }

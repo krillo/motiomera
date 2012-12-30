@@ -1,0 +1,78 @@
+/*
+    Document   : menu
+    Created on : 2012-dec-29, 14:01:18
+    Author     : krillo
+    Description: The style for the menu used both in wp and mm
+*/
+#site-info{width:960px;margin:auto;margin-top: 30px;}
+.fixed {position: fixed;}
+#motiomera-logo-mini{background-image:url('/wp-content/themes/motiomera/img/motiomera_logo_mini.png');background-repeat:no-repeat;width:180px;height:40px;float:left;}  
+
+/********* legacy ***************/
+/*
+.main-navigation ul ul {
+  -moz-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+  display: none;
+  float: left;
+  position: absolute;
+  top: 1.5em;
+  left: 0;
+  z-index: 99999;
+}
+.main-navigation ul ul ul {left: 100%;top: 0;}
+.main-navigation ul ul a {width: 200px;}
+.main-navigation ul ul li {}
+.main-navigation li:hover > a {}
+.main-navigation ul ul :hover > a {}
+.main-navigation ul ul a:hover {}
+.main-navigation ul li:hover > ul {display: block;}
+.main-navigation li.current_page_item a,
+.main-navigation li.current-menu-item a {}
+/ * Small menu * /
+.menu-toggle {cursor: pointer;}
+.main-small-navigation .menu {display: none;}
+*/
+/********* end legacy ***************/
+
+
+/** menu **/
+.main-navigation {clear: both;display: block;float: left;width: 100%;}
+nav{ background-color: #314D00; height:40px; z-index: 10; width:1800px;margin:auto;}  
+#menu {margin: auto;width: 960px;}
+.main-navigation a {color: white;display: block;text-decoration: none;} 
+.main-navigation a:hover {color: #768d4a;text-decoration: none;} 
+#wp-nav-menu{float:right;font-family:Verdana;font-size: 12px;text-transform: uppercase;padding-top: 10px;margin-bottom: 12px;}    
+.main-navigation ul {list-style-image: url("/wp-content/themes/motiomera/img/bullet.png");margin: 0;padding-left: 0;}
+.main-navigation li:first-child {list-style: none outside none;}
+.main-navigation li {float: left;margin-right: 36px;padding-left: 10px;position: relative;}
+  
+#logged-in-menu{margin: auto;width: 960px;}
+#logged-in-menu ul{float:right;list-style: none;padding-left: 0;background-color: #314D00;color:#fff;font-family: arial;font-size: 12px;
+   margin: 0 0 15px 0;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom: #768d4a solid 1px;  
+  border-right: #768d4a solid 1px;  
+  border-top: #768d4a dashed 1px;  
+}
+#logged-in-menu ul a{display: inline;    color: white;text-decoration: none;}
+#logged-in-menu ul a:hover{color: #768d4a;}
+#logged-in-menu ul li{float: left;margin:0;padding:10px 15px 10px 40px;border-right:#768d4a dashed 1px;}
+#logged-in-menu ul li:last-child{border-right: none;}
+#logged-in-friend li{background-image:url('/wp-content/themes/motiomera/img/friends_icon.png');background-repeat:no-repeat;background-position:10px 7px;}
+.logged-in-email li{background-image:url('/wp-content/themes/motiomera/img/email_icon.png');background-repeat:no-repeat;background-position:10px 7px;}
+#logged-in-logout li{background-image:url('/wp-content/themes/motiomera/img/logout_icon.png');background-repeat:no-repeat;background-position:10px 7px;}
+#logged-in-friend li:hover{background-image:url('/wp-content/themes/motiomera/img/friends_icon_hover.png');}
+.logged-in-email li:hover{background-image:url('/wp-content/themes/motiomera/img/email_icon_hover.png');}
+#logged-in-logout li:hover{background-image:url('/wp-content/themes/motiomera/img/logout_icon_hover.png');}  
+.logged-in-email-unread{background-image: url("/wp-content/themes/motiomera/img/count_red.png");background-position: 0 center;background-repeat: no-repeat;padding: 9px;margin: -28px 0 0 -43px;}
+.logged-in-friend-unread{background-image: url("/wp-content/themes/motiomera/img/count_red.png");background-position: 0 center;background-repeat: no-repeat;padding: 9px;margin: -28px 0 0 -43px;}
+
+
+
