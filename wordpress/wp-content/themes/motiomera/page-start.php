@@ -20,13 +20,9 @@ get_header();
         <div id="splash-text"><?php the_field("splash_text"); ?></div>
       </div>
       
-      
-      
       <div id="buy">
         <?php includeSnippet("inc_buy.php"); ?>
       </div>
-      
-      
       
       <div class="clear"></div>
       <div id="testimonial">        

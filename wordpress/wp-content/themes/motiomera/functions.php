@@ -30,8 +30,13 @@ function motiomera_scripts() {
   wp_enqueue_style('style', get_stylesheet_uri());
   wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js');
   wp_enqueue_script('jquery');
-  wp_register_script('jquery-ui', get_bloginfo('template_url') . '/js/jquery-ui-1.8.22.custom.min.js');
+  wp_register_script('jquery-ui', get_bloginfo('template_url') . '/js/jquery-ui-1.9.2.custom.min.js');
   wp_enqueue_script('jquery-ui');
+  
+  wp_register_style('wp-mm-style', get_bloginfo('template_url') . '/css/wp_mm_common.css');
+  wp_enqueue_style('wp-mm-style');
+  wp_register_style('ui-lightness-style', get_bloginfo('template_url') . '/css/ui-lightness/jquery-ui-1.9.2.custom.min.css');
+  wp_enqueue_style('ui-lightness-style');
 }
 
 add_action('wp_enqueue_scripts', 'motiomera_scripts');

@@ -34,7 +34,6 @@ if ($site_description && ( is_home() || is_front_page() )) {
 
 
     <?php wp_head(); ?>
-    <link rel='stylesheet' id='menu-css'  href='<?php bloginfo('stylesheet_directory'); ?>/css/menu.css' type='text/css' media='all' />
   </head>
   <body <?php body_class(); ?>>
     <?php do_action('before'); ?>

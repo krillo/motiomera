@@ -9,7 +9,7 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="Stegtävling för företag. Motiomera är Sveriges roligaste stegtävling för alla som vill röra på sig och ha kul. Häng bara på dig stegräknaren och börja gå." />
     <meta name="keywords" content="motoimera stegtävling, stegtävling för företag, stegtävling på jobbet, stegtävling korpen, tävla med stegräknare, friskvård åt företag, avdragsgill friskvårdsaktivitet, motionera stegtävling, köp stegräknare, billig stegräknare, motionera mera, friskvård stegräknare, stegtävling omvandling, friskvårdsaktivitet, friskvårdsaktiviteter" />
-    <link rel='stylesheet' id='menu-css'  href='http://mm.dev/wp-content/themes/motiomera/css/menu.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='menu-css'  href='http://mm.dev/wp-content/themes/motiomera/css/wp_mm_common.css' type='text/css' media='all' />
     <link rel="stylesheet" href="/css/motiomera.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/css/checkout.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />

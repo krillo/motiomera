@@ -75,4 +75,7 @@ nav{ background-color: #314D00; height:40px; z-index: 10; width:1800px;margin:au
 .logged-in-friend-unread{background-image: url("/wp-content/themes/motiomera/img/count_red.png");background-position: 0 center;background-repeat: no-repeat;padding: 9px;margin: -28px 0 0 -43px;}
 
 
-
+/**** report steps *****/
+#dialog {
+    display: none;
+}
