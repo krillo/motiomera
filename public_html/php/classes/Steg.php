@@ -62,8 +62,19 @@ class Steg extends Mobject{
 
 	// STATIC FUNCTIONS ///////////////////////////////////////
 	
-	public static function listDatumByMedlem(Medlem $medlem)
-	{
+  
+  /**
+   * Delete a step row in the db
+   * Krillo 13-01-01  
+   */
+  public static function deleteStepRow($row_id){
+    global $db;
+		//Security::demand(USER, $this->getMedlem());
+    $sql = "DELETE FROM mm_steg WHERE id = $row_id ";
+		return $db->query($sql);
+  }  
+  
+	public static function listDatumByMedlem(Medlem $medlem){
 		global $db;
 		$sql = "SELECT datum, sum(steg) as steg FROM " . self::classToTable(get_class()) . " WHERE medlem_id = " . $medlem->getId() . " GROUP BY datum";
 		$res = $db->query($sql);
@@ -143,6 +154,8 @@ class Steg extends Mobject{
 	}
 
 	// PUBLIC FUNCTIONS ///////////////////////////////////////
+  
+
 	
 	public function delete()
 	{

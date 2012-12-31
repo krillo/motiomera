@@ -138,7 +138,6 @@ get_header();
             url: "http://mm.dev/ajax/actions/savesteps.php",
             data: data,
             success: function(data){
-              console.log(data);
               $('#preview-step-list').html(data).fadeIn();
             }
           });
@@ -147,25 +146,28 @@ get_header();
 
 
 
-      });  //functions below please
+});  //functions below please
 
-      /*
+
 
       function deleteRow(rowId){
-        //alert(rowId);
-        var date = $('#step-date').attr('value');
-         $.ajax({
-            type: "POST",
-            url: "step/delete/" + rowId +"/showStepsPreview/" + date,
-            data: '',
-            success: function(data){
-              $('#preview-step-list').html(data).show();
-            }
-          });
-          return false;
+        var data = {
+          row_id:  rowId,          
+          mm_id:   jQuery('#user-id').attr('value'),
+          date:    jQuery('#step-date').attr('value')
+        };            
+        jQuery.ajax({
+          type: "POST",
+          url: "http://mm.dev/ajax/actions/deletesteps.php",
+          data: data,
+          success: function(data){
+            jQuery('#preview-step-list').html(data).show();
+          }
+        });
+        return false;
       }
 
-
+      /*
       function addMessage(){
         var user_id = $('#user-id').attr('value');
         var date    = $('#step-date').attr('value');
@@ -200,7 +202,7 @@ get_header();
       }
 
        */
-
+      
     </script>
 
     <?php
