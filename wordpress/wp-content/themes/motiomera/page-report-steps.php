@@ -63,12 +63,14 @@ get_header();
           minDate: new Date(2011, 1, 15),  //todo set register date
           maxDate: new Date(),
           onSelect: function(dateText, inst) {  //display steps matrix for selected date
-            var user_id     = $('#user-id').attr('value');
-            var date        = $('#step-date').attr('value');
+            var data = {
+              mm_id:  $('#user-id').attr('value'),
+              date:   $('#step-date').attr('value')
+            }; 
             $.ajax({
               type: "POST",
-              url: "step/showStepsPreview",
-              data: "user_id="+ user_id +"&date="+ date,
+              url: "http://mm.dev/ajax/includes/display_step_rows.php",
+              data: data,
               success: function(data){
                 $('#preview-step-list').html(data).fadeIn();
               }
@@ -77,21 +79,25 @@ get_header();
           }
         });
 
-        /*
+
 
         //on page load - load todays steps list (only first time)  
-        var user_id = $('#user-id').attr('value');
-        var date1 = $('#step-date').attr('value');
+        var data = {
+          mm_id:  $('#user-id').attr('value'),
+          date:   $('#step-date').attr('value')
+        };              
         $.ajax({
           type: "POST",
-          url: "step/showStepsPreview",
-          data: "user_id="+ user_id +"&date="+ date1,
+          url: "http://mm.dev/ajax/includes/display_step_rows.php",
+          data: data,
           success: function(data){
             $('#preview-step-list').html(data).fadeIn();
           }
         });
 
 
+
+        /*
         //show other actions dropdown
         $("#activity-link").click(function(event){
           event.preventDefault();
@@ -121,7 +127,6 @@ get_header();
         //submit steps to db via ajax
         $("#submit").click(function(event) {
           event.preventDefault();
-          alert('jepp');
           var data = {
             mm_id:       $('#user-id').attr('value'),
             count:       $('#count').attr('value'),
@@ -130,11 +135,11 @@ get_header();
           };      
           $.ajax({
             type: "POST",
-            url: "http://mm.dev/ajax/includes/savesteps.php",
+            url: "http://mm.dev/ajax/actions/savesteps.php",
             data: data,
             success: function(data){
               console.log(data);
-              //$('#preview-step-list').html(data).fadeIn();
+              $('#preview-step-list').html(data).fadeIn();
             }
           });
           return false;
