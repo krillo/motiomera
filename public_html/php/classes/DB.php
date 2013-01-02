@@ -113,6 +113,24 @@ class DB
 		return $result;
 	}
 
+  
+  /**
+   * Return one row as a stdClass 
+   * krillo 13-01-03
+   */
+	public function oneRowAsObject($sql){
+		$res = $this->query($sql);
+		$result = new stdClass;
+		while ($data = mysql_fetch_assoc($res)) {
+			foreach ($data as $field => $value) {
+				$result->$field = stripslashes($value);       
+			}
+		}
+		unset($data);
+		return $result;
+	}
+  
+  
 	/** 
 	 * Returnerar en array med alla värden i alla fält (Tvådimensionell).
 	 * Lägger även resultatet 'id' som array key, om det finns

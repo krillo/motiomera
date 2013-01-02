@@ -13,7 +13,7 @@
 
 
 @session_start();   //krillo 20120808 added @ to suppress warning, thus wp has sometimes allready started a session  
-if (MM_WP_INIT != 1) {
+if ('MM_WP_INIT' != 1) {
   if (!isset($noutf8) && !isset($js_header)) {
     header("Content-Type: text/html; charset=utf-8");
   } else if (isset($js_header)) {

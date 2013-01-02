@@ -80,7 +80,6 @@ get_header();
         });
 
 
-
         //on page load - load todays steps list (only first time)  
         var data = {
           mm_id:  $('#user-id').attr('value'),
@@ -96,49 +95,46 @@ get_header();
         });
 
 
-
-        /*
-        //show other actions dropdown
-        $("#activity-link").click(function(event){
-          event.preventDefault();
-          $('#activity-list').fadeIn();
+        //on page load - the activity list
+        var data = {date:   $('#step-date').attr('value')};
+        $.ajax({
+          type: "POST",
+          url: "http://mm.dev/ajax/includes/display_activities.php",
+          data: data,
+          success: function(data){
+            $('#activity-list').html(data);
+            $('#activity-list').hide();
+            
+          }
         });
-
-
-        //get the activity serverities as a dropdown and display it
-        $("#activity-list").change(function() {
-          var activity_id = $('#activity-cat-id').attr('value');
-          $.ajax({
-            type: "POST",
-            url: "activities/same/" + activity_id,
-            success: function(data) {
-              $('#step-severity').html(data).fadeIn();
-            }
-          });
-          return false;
-        });
-    
-         */
-
-
-
 
 
         //submit steps to db via ajax
         $("#submit").click(function(event) {
           event.preventDefault();
+          //activity_id = $('#activity_id').attr('value');
+          activity_id = $('#activity-cat-id option:selected').val(); 
+          if(activity_id === undefined){
+            activity_id = 5;
+          }
           var data = {
             mm_id:       $('#user-id').attr('value'),
             count:       $('#count').attr('value'),
             date:        $('#step-date').attr('value'),
-            activity_id: $('#activity_id').attr('value')
-          };      
+            activity_id: activity_id
+          };
+          
           $.ajax({
             type: "POST",
             url: "http://mm.dev/ajax/actions/savesteps.php",
             data: data,
             success: function(data){
               $('#preview-step-list').html(data).fadeIn();
+              $('#activity-cat-id').val(5);
+              
+              $('#activity-list').hide();
+              $('#step-severity').hide();
+              
             }
           });
           return false;
@@ -146,7 +142,57 @@ get_header();
 
 
 
-});  //functions below please
+
+        /************ catch events ********************/
+        
+        //show other actions dropdown
+        $("#activity-link").click(function(event){
+          event.preventDefault();
+          $('#activity-list').fadeIn();
+        });        
+
+
+        //get the activity serverities as a dropdown and display it
+        $("#activity-list").change(function() {
+          var data = {
+            activity_id: $('#activity-cat-id').attr('value')
+          };
+          $.ajax({
+            type: "POST",
+            data: data,
+            url: "http://mm.dev/ajax/includes/display_severity.php",
+            success: function(data) {
+              $('#step-severity').html(data).fadeIn();              
+            }
+          });
+          return false;
+        });
+
+
+        $("#update-diary").click(function(event){
+          event.preventDefault();
+          alert('apa');
+          var data = {
+            mm_id:    $('#user-id').attr('value'),
+            comment:  $('#comment').attr('value'),
+            smiley:   $('input:radio:checked').attr('value'),
+            date:     $('#step-date').attr('value'),
+            diary_id: $('#diary-id').attr('value')
+          };                    
+          $.ajax({
+            type: "POST",
+            url: "http://mm.dev/ajax/actions/updatediary.php",
+            data: data,
+            success: function(data){
+              $('#preview-step-list').html(data).show();
+            }
+          });
+          return false;
+        });
+
+
+
+      });  //functions below please
 
 
 
@@ -166,6 +212,26 @@ get_header();
         });
         return false;
       }
+      
+      function updateDiary(diary_id){
+        var data = {
+          mm_id:    jQuery('#user-id').attr('value'),
+          comment:  jQuery('#comment').attr('value'),
+          smiley:   jQuery('input:radio:checked').attr('value'),
+          date:     jQuery('#step-date').attr('value'),
+          diary_id: diary_id //$('#diary-id').attr('value')
+        };                    
+        jQuery.ajax({
+          type: "POST",
+          url: "http://mm.dev/ajax/actions/updatediary.php",
+          data: data,
+          success: function(data){
+            jQuery('#preview-step-list').html(data).show();
+          }
+        });
+        return false;
+      }      
+      
 
       /*
       function addMessage(){
@@ -184,25 +250,27 @@ get_header();
           return false;
       }
 
-
+       */
+      /*
       function updateMessage(message_id){
-        var user_id = $('#user-id').attr('value');
-        var msg     = $('#message').attr('value');
-        var smiley  = $('input:radio:checked').attr('value');
-        var date    = $('#step-date').attr('value');
+        var data = {
+          mm_id:   $('#user-id').attr('value'),
+          comment: $('#comment').attr('value'),
+          smiley:  $('input:radio:checked').attr('value'),
+          date:    $('#step-date').attr('value')
+        };                    
          $.ajax({
             type: "POST",
-            url: "message/updatebyid/" + message_id,
-            data: "user_id="+ user_id +"&message="+ msg +"&smiley="+ smiley+"&date="+ date,
+            url: "http://mm.dev/ajax/actions/updatediary.php",
+            data: data,
             success: function(data){
               $('#preview-step-list').html(data).show();
             }
           });
           return false;
       }
-
-       */
       
+       */
     </script>
 
     <?php
@@ -210,11 +278,39 @@ get_header();
 //print_r($mmStatus);
     ?>
     <style>
+      #dialog{font-size: 16px; background-color: #fff;}
+      .ui-widget-header{background-color: #5B7A19;background-image: none;border-color: #384A0E;}
+      .ui-widget {font-family: 'Cabin Condensed';font-size: 1.1em;}
       #datepicker{float:left;}
       .ui-datepicker {width: 14em;}
-      #step-data-area{float:left;}
-      #count{width:3em;margin:0 0.3em 0 1em;}
+      #step-data-area{float:left;margin-left: 15px;}
+      #count{width:3em;margin:0 0.3em 0 0;}
+      #submit-steps{margin-bottom: 10px;}
       #activity-link{margin:0 1em;}
+      #activity-list, #step-severity{font-size: 14px;margin-top:5px;}
+      #preview-step-list{maring-top:15px;font-size: 14px;}
+      #motiomera_steg_preview_header {color: #333;background-color: #fff;}
+      #motiomera_steg_preview_header td{padding:0 10px 0 10px;}
+
+
+      .BoxTitle {
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: normal;
+        margin: 10px 0 0 15px;
+        position: absolute;
+      }
+      .mmAlbumBoxTop {
+        background-color: #D0E0C7;    
+        height: 34px;
+        margin-top: 2px;
+        padding: 10px 0 0 10px;
+        width: 100%;
+      }      
+      .mmAlbumBoxTop-first {border-radius: 10px 0 0 0;}
+      .mmAlbumBoxTop-last {border-radius: 0 10px 0 0;}
+      .odd {background-color: #E0EDD9;}
+      .even {background-color: #D0E0C7;}      
     </style>
 
 
@@ -228,16 +324,12 @@ get_header();
           <input type="hidden" name="step-date" id="step-date" value="<?php echo date("Y-m-d"); ?>" />
           <input type="text"  name="count" id="count" value="" />steg<a href="#" title="Annan aktivitet" id="activity-link">Annan aktivitet?</a>
           <input type="button" name="submit" id="submit" value="Lägg till" />
-          <div id="activity-list" style="display:none;">
-
-            <!--?php echo form_dropdown('activity_ id', $activites_data, '1', 'id="activity-cat-id"'); ?-->
-            <input id="activity_id" value="5"/>
-
-
+          <div id="activity-list" style="">
           </div>
           <div id="step-severity" style="display:none;"></div>
         </form>
         <div id="preview-step-list" style="display:none;"></div>
+
       </div>
       <div id="success" style="display: none;">Steps has been added.</div>
     </div>

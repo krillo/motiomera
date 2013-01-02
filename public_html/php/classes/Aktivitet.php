@@ -102,8 +102,28 @@ class Aktivitet extends Mobject
 		}
 		return $result;
 	}
+  
+  
+  /**
+   * Get all distinct activities 
+   * Krillo 13-01-02  
+   */  
+  public static function listDistinctActivities(){
+		global $db;
+		$sql = "select distinct(namn), id, enhet from mm_aktivitet where borttagen = 'nej' group by namn order by namn asc";
+		$res = $db->allValuesAsArray($sql);
+    return $res;    
+  }
 
-	// SETTERS & GETTERS ///////////////////////////////////////////////////////
+   public static function listSeveritys($activity_id){
+		global $db;
+		$sql = "select id, namn, svarighetsgrad from mm_aktivitet where namn = (select namn from mm_aktivitet where id = $activity_id)order by svarighetsgrad asc";
+		$res = $db->allValuesAsArray($sql);
+    return $res;        
+  }
+  
+
+  	// SETTERS & GETTERS ///////////////////////////////////////////////////////
 	
 	public function setNamn($namn)
 	{
