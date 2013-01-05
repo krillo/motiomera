@@ -32,7 +32,12 @@ function motiomera_scripts() {
   wp_enqueue_script('jquery');
   wp_register_script('jquery-ui', get_bloginfo('template_url') . '/js/jquery-ui-1.9.2.custom.min.js');
   wp_enqueue_script('jquery-ui');
-  
+  wp_register_script('jquery-flot', get_bloginfo('template_url') . '/js/jquery.flot.js');
+  wp_enqueue_script('jquery-flot');  
+  wp_register_script('jquery-flot-stack', get_bloginfo('template_url') . '/js/jquery.flot.stack.js');
+  wp_enqueue_script('jquery-flot-stack');
+    
+  //styles
   wp_register_style('wp-mm-style', get_bloginfo('template_url') . '/css/wp_mm_common.css');
   wp_enqueue_style('wp-mm-style');
   wp_register_style('ui-lightness-style', get_bloginfo('template_url') . '/css/ui-lightness/jquery-ui-1.9.2.custom.min.css');

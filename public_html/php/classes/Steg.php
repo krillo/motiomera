@@ -176,6 +176,91 @@ class Steg extends Mobject{
 		return $db->value($sql);
 	}
 	
+  
+  /**
+   * Description: Returns total sum steps per day per user. Data is returned from from_date to to_date 
+   * Date: 2013-01-04
+   * Author: Kristian Erendi 
+   * URI: http://reptilo.se 
+   * 
+   * in this format to suit jquery.flot.js:
+   * $steps = array(
+   *    array(1, 7120),
+   *    array(2, 5120),
+   *    array(3, 8120),
+   * );
+   */
+	public static function getStegTotalPerDays($mm_id, $from_date, $to_date){
+		global $db;
+    $sql = "SELECT SUM(steg) AS steg, datum  FROM mm_steg WHERE medlem_id = 30692 AND datum >= '$from_date' AND datum <= '$to_date' group by datum"; 
+    $dbResult = $db->allValuesAsArray($sql);
+    foreach ($dbResult as $key => $value) {
+      $i++;
+      $steps[] = array($i, (int)$value['steg']);
+    }
+    return $steps;
+  }
+
+
+  
+  /**
+   * Description: Returns total sum steps per day per ALL users. Data is returned from from_date to to_date 
+   * Date: 2013-01-04
+   * Author: Kristian Erendi 
+   * URI: http://reptilo.se 
+   * 
+   * in this format to suit jquery.flot.js:
+   * $steps = array(
+   *    array(1.3, 7120),
+   *    array(2.3, 5120),
+   *    array(3.3, 8120),
+   * );
+   */
+	public static function getStegTotalAveragePerDays($mm_id, $from_date, $to_date){
+		global $db;
+    $sql = "SELECT sum(steg) steps_day, count(distinct(medlem_id)) nof_users, cast((sum(steg) / count(distinct(medlem_id))) AS UNSIGNED INTEGER) AS average, s.datum FROM mm_steg s WHERE s.datum >= '$from_date' AND s.datum <= '$to_date' GROUP BY datum"; 
+    $dbResult = $db->allValuesAsArray($sql);
+    foreach ($dbResult as $key => $value) {
+      $i++;
+      $steps[] = array($i.'.3', (int)$value['average']);
+    }
+    return $steps;
+  }
+
+  /**
+   * Description: Returns an array to suit the ticks in jquery.flot.js 
+   * Date: 2013-01-04
+   * Author: Kristian Erendi 
+   * URI: http://reptilo.se 
+   * 
+   * $ticks = array(
+   *    array(1.3, "lör 29/12"),
+   *    array(2.3, "sön 30/12"),
+   *    array(3.3, "mån 31/12"),
+   * );
+   * [[1.3, "lör 29/12"],[2.3, "sön 30/12"],[3.3, "mån 31/12"], [4.3, "tis 1/1"], [5.3, "ons 2/1"], [6.3, "tor 3/1"], [7.3, "fre 4/1"]];  //javascript
+   */
+	public static function getTicks($from_date, $to_date){    
+    $from_jDate = new JDate($from_date);
+    $to_jDate = new JDate($to_date);
+    while($from_jDate <= $to_jDate){
+      $i++;
+      $ticks[] = array($i.'.3', $from_jDate->getWeekday(3, 'se') .' '. date('j/n', $from_jDate->getDate(true)));
+      $from_jDate->addDays(1);
+    } 
+    return $ticks;
+  }
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
 	public static function getStegTotal(Medlem $medlem, $start = null, $stop = null)
 	{
 		global $db;

@@ -4,12 +4,10 @@
  * A class for handling dates
  *
  * @author Jonas Bjork <jonas.bjork@aller.se>
- * @author Kristian Erendi <kristian.erendi@aller.se>
+ * @author Kristian Erendi <kristian@reptilo.se>
  *
- * @copyright Aller media AB - 2011
  * @license GNU General Public License, GPLv3
- * @version 1.0
- *
+ * @version 1.1
  */
 class JDate {
 
@@ -43,7 +41,6 @@ class JDate {
     }
   }
 
-
   /**
    * Get object date in YYYY-MM-DD HH:ii:ss where the time is always 00:00:00 or UNIXTIME format
    *
@@ -57,7 +54,6 @@ class JDate {
       return date("Y-m-d H:i:s", $this->unixtime);
     }
   }
-
 
   /**
    * Get object original date, useful after we have used add/sub methods
@@ -126,14 +122,46 @@ class JDate {
   }
 
   /**
-   * Returns the weekday name of the current date
+   * Returns the weekday name of the current date.
+   * Submit a number for truncating the string
+   * Submit a lang code e.g. 'se' for names in other language 
+   *   
    * @return string weekday name
    */
-  public function getWeekday() {
+  public function getWeekday($trunc = null, $lang = null) {
     $wd = getdate($this->unixtime);
-    return $wd['weekday'];
+    $wday = $wd['weekday'];
+    if ($lang != null) {
+      $weekdaynbr = date('w', $this->getDate(true));
+      $wday = $this->_getWeekday_lang($weekdaynbr, $lang);
+    }
+    if ($trunc != null) {
+      $wday = mb_substr($wday, 0, $trunc, 'UTF8');
+    }
+    return $wday;
   }
 
+  
+  /**
+   * Private helper method for getWeekday.
+   * Add your own language when needed
+   */  
+  private function _getWeekday_lang($weekdaynbr, $lang) {
+    switch ($lang) {
+      case 'se':
+        $weekday[0] = "söndag";
+        $weekday[1] = "måndag";
+        $weekday[2] = "tisdag";
+        $weekday[3] = "onsdag";
+        $weekday[4] = "torsdag";
+        $weekday[5] = "fredag";
+        $weekday[6] = "lördag";
+        break;
+      default:        
+        break;
+    }
+    return $weekday[$weekdaynbr];
+  }
 
   /**
    * Private helper method for getMonday, getTuesday..
@@ -285,7 +313,6 @@ class JDate {
     }
   }
 
-
   /**
    * Add week or weeks to the date
    *
@@ -327,8 +354,7 @@ class JDate {
     $this->unixtime = $this->getMonday(true);
     return $this;
   }
-  
-  
+
   /**
    * Return how many days between two dates
    * 
@@ -336,13 +362,12 @@ class JDate {
    * @param <type> $end
    * @return <type> 
    */
-  public static function dateDaysDiff($start, $end){
+  public static function dateDaysDiff($start, $end) {
     $start_ts = strtotime($start);
     $end_ts = strtotime($end);
-    $diff =  $end_ts - $start_ts;
+    $diff = $end_ts - $start_ts;
     return round($diff / 86400);
   }
-
 
   /**
    * 
@@ -351,9 +376,9 @@ class JDate {
    * @param <type> $end
    * @return <type> 
    */
-  public static function dateWeekDiff($start, $end){
+  public static function dateWeekDiff($start, $end) {
     $days = self::dateDaysDiff($start, $end);
     return round($days / 7);
   }
-  
+
 }
