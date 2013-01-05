@@ -14,7 +14,10 @@ class JDate {
   private $unixtime = 0;
   private $orig_unixtime = 0;
 
-// If we don't specify a date we use systems local time
+  /**
+   * If no date is submited the systems local time is used
+   * @param type $date 
+   */
   function __construct($date = false) {
     if (($date != false) && (!is_int($date))) {
       $set_date = strtotime($date);

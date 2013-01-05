@@ -135,17 +135,14 @@ get_header();
       <script type="text/javascript">
         jQuery(function ($) { 
           var steps = null; //[[1, 7500], [2, 8000], [3, 5600], [4, 14000], [5, 9040], [6, 11500], [7, 13000],]; 
-          var average = null; //[[1.3, 8100], [2.3, 8500], [3.3, 9200] ];   //, [4.3, 8700], [5.3, 8000], [6.3, 7500], [7.3, 9400]];
+          var average = null; //[[1.3, 8100], [2.3, 8500], [3.3, 9200], [4.3, 8700], [5.3, 8000], [6.3, 7500], [7.3, 9400]];
           var ticks = null; //[[1.3, "lör 29/12"],[2.3, "sön 30/12"],[3.3, "mån 31/12"], [4.3, "tis 1/1"], [5.3, "ons 2/1"], [6.3, "tor 3/1"], [7.3, "fre 4/1"]];
 
           //today and 6 days back
           var to_date = $.datepicker.formatDate('yy-mm-dd', new Date());
           var from_date = new Date(new Date().setDate(new Date().getDate()-6));
           from_date = $.datepicker.formatDate('yy-mm-dd', from_date);
-          //console.log(from_date);
-          //console.log(to_date);
-
-          //on page load - load 7 days steps
+          
           var data = {
             mm_id:     $('#user-id').attr('value'),
             from_date: from_date,
@@ -158,16 +155,12 @@ get_header();
             dataType: "json",
             async: false,
             success: function(data){
-              steps =  data.steps;
-              average =  data.average;
-              ticks = data.ticks;
+              steps =   data.steps;
+              average = data.average;
+              ticks =   data.ticks;
               onDataReceived();
-            }
-            
+            }            
           });
-          
-          
-          
           
           
           function onDataReceived(){

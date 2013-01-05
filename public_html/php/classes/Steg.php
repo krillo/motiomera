@@ -38,6 +38,8 @@ class Steg extends Mobject{
 	const VARNING_STEG_PER_RAPPORT = 30000;
 	const MAX_STEG_PER_DAG = 100000;
 	const MAX_STEG_PER_VECKA = 700000;
+	const KCAL = 0.05;
+  
 	
 	public function __construct(Medlem $medlem, Aktivitet $aktivitet, $datum, $antal, $nykommun = false, $dummy_object = false)
 	{
@@ -249,6 +251,33 @@ class Steg extends Mobject{
       $from_jDate->addDays(1);
     } 
     return $ticks;
+  }
+
+  /**
+   * Returns an array for the submited timespan 
+   * - total steps
+   * - total kcal
+   * - average steps
+   * - average kcal
+   *  
+   * @global type $db
+   * @param type $mm_id
+   * @param type $from_date
+   * @param type $to_date
+   * @return array 
+   */
+	public static function getStepStats($mm_id, $from_date, $to_date){    
+		global $db;
+    $nbrDays = JDate::dateDaysDiff(date($from_date), date($to_date));
+    $nbrDays++;  //nbr of all days
+    $sql = "SELECT SUM(steg) AS steps, cast((SUM(steg) / $nbrDays) AS UNSIGNED INTEGER) AS average  FROM mm_steg WHERE medlem_id = $mm_id AND datum >= '$from_date' AND datum <= '$to_date'"; 
+    $res = $db->oneRowAsObject($sql);
+    $stats['steps'] = $res->steps;
+    $stats['steps-kcal'] = (int)($res->steps * self::KCAL);
+    $stats['average'] = $res->average;
+    $stats['average-kcal'] = (int)($res->average * self::KCAL);
+    
+    return $stats;
   }
 
 

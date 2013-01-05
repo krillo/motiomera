@@ -33,7 +33,7 @@ $req = new stdClass;
 $steps = Steg::getStegTotalPerDays($req->mm_id, $req->from_date, $req->to_date);
 $average = Steg::getStegTotalAveragePerDays($req->mm_id, $req->from_date, $req->to_date);
 $ticks = Steg::getTicks($req->from_date, $req->to_date);
-
+$stats = Steg::getStepStats($req->mm_id, $req->from_date, $req->to_date);
 
 
 
@@ -41,6 +41,7 @@ $ticks = Steg::getTicks($req->from_date, $req->to_date);
 $response['steps'] = $steps;
 $response['average'] = $average;
 $response['ticks'] = $ticks;
+$response['stats'] = $stats;
 echo json_encode($response);
 
 
