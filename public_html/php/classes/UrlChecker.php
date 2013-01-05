@@ -76,7 +76,7 @@ class UrlChecker
 		) ,
 		"MIN SIDA" => array(
 			"minsida.php" => array(
-				"/js/jquery-1.2.6.min.js",
+				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 			"rapport.php" => array() ,

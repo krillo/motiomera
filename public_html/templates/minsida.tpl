@@ -43,6 +43,13 @@
 </div><!-- END mmColumnRight -->
 
 <!-- START mmColumnMiddle -->
-{include file="widget_framsteg.tpl"}
+<div style="min-height:340px;margin-bottom: 15px;float:left">
+{include file="widget_graph.tpl"}
+{*include file="widget_framsteg.tpl"*}
+</div>
+<div style="min-height:340px;margin-bottom: 15px;float:left">
 {include file="widget_kommunjakten.tpl"}
+</div>
+<div style="min-height:340px;margin-bottom: 15px;float:left">
 {include file="widget_handelser.tpl"}
+</div>

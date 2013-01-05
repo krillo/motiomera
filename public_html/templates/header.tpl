@@ -9,11 +9,26 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="Stegtävling för företag. Motiomera är Sveriges roligaste stegtävling för alla som vill röra på sig och ha kul. Häng bara på dig stegräknaren och börja gå." />
     <meta name="keywords" content="motoimera stegtävling, stegtävling för företag, stegtävling på jobbet, stegtävling korpen, tävla med stegräknare, friskvård åt företag, avdragsgill friskvårdsaktivitet, motionera stegtävling, köp stegräknare, billig stegräknare, motionera mera, friskvård stegräknare, stegtävling omvandling, friskvårdsaktivitet, friskvårdsaktiviteter" />
-    <link rel='stylesheet' id='menu-css'  href='http://mm.dev/wp-content/themes/motiomera/css/wp_mm_common.css' type='text/css' media='all' />
     <link rel="stylesheet" href="/css/motiomera.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/css/checkout.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
-    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js?ver=3.3.2'></script>    
+    
+    
+    
+    
+    
+<link rel='stylesheet' id='wp-mm-style-css'  href='http://mm.dev/wp-content/themes/motiomera/css/wp_mm_common.css?ver=3.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='ui-lightness-style-css'  href='http://mm.dev/wp-content/themes/motiomera/css/ui-lightness/jquery-ui-1.9.2.custom.min.css?ver=3.3.2' type='text/css' media='all' />
+<script type='text/javascript' src='http://mm.dev/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<script type='text/javascript' src='http://mm.dev/wp-content/themes/motiomera/js/jquery-ui-1.9.2.custom.min.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://mm.dev/wp-content/themes/motiomera/js/jquery.flot.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://mm.dev/wp-content/themes/motiomera/js/jquery.flot.stack.js?ver=3.3.2'></script>    
+    
+    
+    
+    
+    
+    
     {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
       {if !NO_INTERNET || GOOGLEMAPS_OVERRIDE_NO_INTERNET}
         {if $urlChecker->getFileName() eq 'minsida.php' or 'fastautmaningar.php'}
@@ -25,7 +40,7 @@
       <script type="text/javascript" src="{$file}"></script>
     {/foreach}
     <script type="text/javascript">
-    {literal}
+      {literal}
 		var mmPopup;
 		// remove the registerOverlay call to disable the controlbar
 		hs.registerOverlay(
@@ -41,7 +56,7 @@
 		hs.outlineType = 'rounded-white';
 		// Tell Highslide to use the thumbnails title for captions
 		hs.captionEval = 'this.thumb.title';
-    {/literal}
+      {/literal}
     </script>
 
 

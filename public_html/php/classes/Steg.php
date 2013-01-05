@@ -254,11 +254,15 @@ class Steg extends Mobject{
   }
 
   /**
-   * Returns an array for the submited timespan 
+   * Description: Returns an array for the submited timespan 
    * - total steps
    * - total kcal
    * - average steps
    * - average kcal
+   *  
+   * Date: 2013-01-05
+   * Author: Kristian Erendi 
+   * URI: http://reptilo.se 
    *  
    * @global type $db
    * @param type $mm_id
@@ -273,22 +277,13 @@ class Steg extends Mobject{
     $sql = "SELECT SUM(steg) AS steps, cast((SUM(steg) / $nbrDays) AS UNSIGNED INTEGER) AS average  FROM mm_steg WHERE medlem_id = $mm_id AND datum >= '$from_date' AND datum <= '$to_date'"; 
     $res = $db->oneRowAsObject($sql);
     $stats['steps'] = $res->steps;
-    $stats['steps-kcal'] = (int)($res->steps * self::KCAL);
+    $stats['steps_kcal'] = (int)($res->steps * self::KCAL);
     $stats['average'] = $res->average;
-    $stats['average-kcal'] = (int)($res->average * self::KCAL);
-    
+    $stats['average_kcal'] = (int)($res->average * self::KCAL);    
     return $stats;
   }
 
 
-  
-  
-  
-  
-  
-  
-  
-  
   
 	public static function getStegTotal(Medlem $medlem, $start = null, $stop = null)
 	{

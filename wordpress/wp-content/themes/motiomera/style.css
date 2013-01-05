@@ -641,6 +641,7 @@ input[type="submit"] {
   cursor: pointer;  
   font-size: 12px;
   padding: 0.4em 0.5em 0.6em;
+  color:#fff;  
 }
 button:hover,
 html input[type="button"]:hover,
