@@ -3,6 +3,9 @@
   * 12-12-31 Kristian Erendi, Reptilo.se
   * Yes, working on new years eve!
   */
+header('Cache-Control: no-cache, must-revalidate');
+header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+header('Content-type: application/json');
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
 $req = new stdClass;
 !empty($_REQUEST['mm_id']) ? $req->mm_id = addslashes($_REQUEST['mm_id']) : $req->mm_id = ''; 
@@ -14,4 +17,4 @@ $medlem = Medlem::loadById($req->mm_id);
 $activity = Aktivitet::loadById($req->activity_id);
 $steg = new Steg($medlem, $activity, date($req->date . " H:i:s"), $req->count, false);
 //print_r($steg);
-include($_SERVER["DOCUMENT_ROOT"]."/ajax/includes/display_step_rows.php");
+$response['status'] = 'ok';
