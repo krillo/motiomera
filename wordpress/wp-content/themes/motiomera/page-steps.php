@@ -57,7 +57,7 @@ get_header();
         var diary = null;
         loadActivityList()
         getUserData();
-       // addDatePicker();
+        //addDatePicker();
                 
         
         function loadActivityList(){
@@ -84,38 +84,26 @@ get_header();
             async: false,
             dataType: "json",            
             success: function(data){
-              printTable(data.table)
+              printTable(data.table);
               printDiary(data.diary);
             }
           });
         }
 
-       // function addDatePicker(){
-          $("#mm-datepicker").datepicker({
-            firstDay: 1,
-            monthNames: ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'],
-            dayNamesMin: [ 'sön', 'mån', 'tis', 'ons', 'tor', 'fre', 'lör'],
-            altField: "#mm-step-date",
-            dateFormat: 'yy-mm-dd',
-            minDate: new Date(2011, 1, 15),  //todo set register date
-            maxDate: new Date(),
-            onSelect: function(dateText, inst) {  //display steps matrix for selected date
-              var data = {
-                mm_id:  $('#mm-mm_id').attr('value'),
-                date:   $('#mm-step-date').attr('value')
-              }; 
-              $.ajax({
-                type: "POST",
-                url: "http://mm.dev/ajax/includes/display_step_rows.php",
-                data: data,
-                success: function(data){
-                  getUserData();
-                }
-              });
-              return false;
-            }
-          });
-      //  }
+        //function addDatePicker(){
+        $("#mm-datepicker").datepicker({
+          firstDay: 1,
+          monthNames: ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'],
+          dayNamesMin: [ 'sön', 'mån', 'tis', 'ons', 'tor', 'fre', 'lör'],
+          altField: "#mm-step-date",
+          dateFormat: 'yy-mm-dd',
+          minDate: new Date(2011, 1, 15),  //todo set register date
+          maxDate: new Date(),
+          onSelect: function(dateText, inst) {  //display steps matrix for selected date
+            getUserData();
+          }
+        });
+        //}
 
 
         function printDiary(diary){
@@ -159,7 +147,8 @@ get_header();
             url: "http://mm.dev/ajax/actions/deletesteps.php",
             data: data,
             success: function(data){
-              getUserData();
+              printTable(data.table);
+              printDiary(data.diary);
             }
           });
           return false;
@@ -187,12 +176,36 @@ get_header();
               $('#mm-activity-cat-id').val(5);
               $('#mm-activity-list').hide();
               $('#step-severity').hide();
-              getUserData();
+              printTable(data.table);
+              printDiary(data.diary);
             }
           });
           return false;
         });
        
+       
+        //save diary to db via ajax
+        $("#mm-diary-save").click(function(event) {
+          $("#mm-progress").show();
+          var data = {
+            mm_id:       $('#mm-mm_id').attr('value'),
+            comment:  jQuery('#mm-comment').attr('value'),
+            smiley:   jQuery('input:radio:checked').attr('value'),
+            date:     jQuery('#mm-step-date').attr('value')
+          };
+          $.ajax({
+            type: "POST",
+            url: "http://mm.dev/ajax/actions/savediary.php",
+            data: data,
+            success: function(data){
+              printTable(data.table);
+              printDiary(data.diary);
+            }
+          });
+          return false;
+        });
+  
+  
 
         //show other actions dropdown
         $("#mm-activity-link").click(function(event){
@@ -218,54 +231,21 @@ get_header();
         });
 
 
-        $("#mm-update-diary").click(function(event){
-          event.preventDefault();
-          alert('apa');
-          var data = {
-            mm_id:    $('#mm-mm_id').attr('value'),
-            comment:  $('#comment').attr('value'),
-            smiley:   $('input:radio:checked').attr('value'),
-            date:     $('#mm-step-date').attr('value'),
-            diary_id: $('#diary-id').attr('value')
-          };                    
-          $.ajax({
-            type: "POST",
-            url: "http://mm.dev/ajax/actions/updatediary.php",
-            data: data,
-            success: function(data){
-              $('#preview-step-list').html(data).show();
-            }
-          });
-          return false;
-        });
+
+
+
+
+        $(".mm-delete-x").click(function(event) {
+          var rowId = $(this).attr('id');
+          alert(rowId);
+        });        
+
+
+
 
 
 
       });  
-
-
-
-      
-      function updateDiary(diary_id){
-        var data = {
-          mm_id:    jQuery('#mm-mm_id').attr('value'),
-          comment:  jQuery('#comment').attr('value'),
-          smiley:   jQuery('input:radio:checked').attr('value'),
-          date:     jQuery('#mm-step-date').attr('value'),
-          diary_id: diary_id //$('#diary-id').attr('value')
-        };                    
-        jQuery.ajax({
-          type: "POST",
-          url: "http://mm.dev/ajax/actions/updatediary.php",
-          data: data,
-          success: function(data){
-            jQuery('#preview-step-list').html(data).show();
-          }
-        });
-        return false;
-      }      
-      
-
     </script>
 
     <?php
@@ -327,11 +307,22 @@ get_header();
       #mm-comment{margin:0 0 5px 10px;width:375px; height:40px;}
       .mm-smiley{margin-left:40px;}
       .mm-smiley-first{margin-left:14px;}
+      #mm-diary-save{float: right;margin-right: 10px;}
       #mm-progress{margin-left:100px;}
       .mm-delete{background-image: url("/wp-content/themes/motiomera/css/ui-lightness/images/ui-icons_ffffff_256x240.png");width:15px;height:15px;}
       .mm-delete:hover{background-image: url("/wp-content/themes/motiomera/css/ui-lightness/images/ui-icons_ef8c08_256x240.png");width:15px;height:15px;}
 
+      .mm-delete-x{background-image: url("/wp-content/themes/motiomera/css/ui-lightness/images/ui-icons_ffffff_256x240.png");width:15px;height:15px;}
+      .mm-delete-x:hover{background-image: url("/wp-content/themes/motiomera/css/ui-lightness/images/ui-icons_ef8c08_256x240.png");width:15px;height:15px;}
+
     </style>
+
+
+
+    <div class="mm-delete-x ui-icon-closethick" id="0"></div>
+    <div class="mm-delete-x ui-icon-closethick" id="1"></div>
+    <div class="mm-delete-x ui-icon-closethick" id="2"></div>
+
 
 
 
@@ -372,7 +363,7 @@ get_header();
                   <td class=""></td>
                   <td class="">8900</td>
                   <td class="">steg</td>
-                  <td class=""><div class="mm-delete ui-icon-closethick" id="delete-step-row1586230"></div></td>
+                  <td class=""><div class="mm-delete ui-icon-closethick" id="1586230"></div></td>
                 </tr>
                 <tr class="">
                   <td class="mm-first-cell">2013-01-06</td>
@@ -380,7 +371,7 @@ get_header();
                   <td class="">50</td>
                   <td class="">4000</td>
                   <td class="">steg</td>
-                  <td class=""><div class="mm-delete ui-icon-closethick" id="delete-step-row1586230"></div></td>
+                  <td class=""><div class="mm-delete ui-icon-closethick" id="1586231"></div></td>
                 </tr>
                 <tr class="mm-odd">
                   <td class="mm-first-cell">2013-01-06</td>
@@ -388,7 +379,7 @@ get_header();
                   <td class="">50</td>
                   <td class="">9500</td>
                   <td class="">steg</td>
-                  <td class=""><div class="mm-delete ui-icon-closethick" id="delete-step-row1586230"></div></td>
+                  <td class=""><div class="mm-delete ui-icon-closethick" id="1586232"></div></td>
                 </tr>
               </tbody>
             </table> 
@@ -409,9 +400,9 @@ get_header();
               <input type="radio" class="mm-smiley"       value="3" name="mm-smiley" id="mm-smiley3">
               <input type="radio" class="mm-smiley"       value="4" name="mm-smiley" id="mm-smiley4">
               <input type="radio" class="mm-smiley"       value="5" name="mm-smiley" id="mm-smiley5">
-              <input type="hidden" value="" id="mm-diary-id">
+              <input type="hidden" value="" id="mm-diary-id">              
             </div>
-
+            <input type="button" value="Spara" id="mm-diary-save">
           </div>
         </div>
 

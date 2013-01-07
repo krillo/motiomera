@@ -11,4 +11,4 @@ $req = new stdClass;
 !empty($_REQUEST['mm_id']) ? $req->mm_id = addslashes($_REQUEST['mm_id']) : $req->mm_id = ''; 
 !empty($_REQUEST['date']) ? $req->date = addslashes($_REQUEST['date']) : $req->date = ''; 
 $status = Steg::deleteStepRow($req->row_id);
-$response['status'] = 'ok';
+include($_SERVER["DOCUMENT_ROOT"]."/ajax/data/getUserSteps.php");

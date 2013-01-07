@@ -17,4 +17,4 @@ $medlem = Medlem::loadById($req->mm_id);
 $activity = Aktivitet::loadById($req->activity_id);
 $steg = new Steg($medlem, $activity, date($req->date . " H:i:s"), $req->count, false);
 //print_r($steg);
-$response['status'] = 'ok';
+include($_SERVER["DOCUMENT_ROOT"]."/ajax/data/getUserSteps.php");

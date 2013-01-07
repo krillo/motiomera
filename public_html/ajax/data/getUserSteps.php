@@ -12,38 +12,36 @@ header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 header('Content-type: application/json');
 require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
-$req = new stdClass;
-!empty($_REQUEST['mm_id']) ? $req->mm_id = addslashes($_REQUEST['mm_id']) : $req->mm_id = '';
-!empty($_REQUEST['count']) ? $req->count = addslashes($_REQUEST['count']) : $req->count = '';
-!empty($_REQUEST['date']) ? $req->date = addslashes($_REQUEST['date']) : $req->date = '';
-!empty($_REQUEST['activity_id']) ? $req->activity_id = addslashes($_REQUEST['activity_id']) : $req->activity_id = '';
-!empty($_REQUEST['diary']) ? $req->diary = addslashes($_REQUEST['diary']) : $req->diary = '';
-!empty($_REQUEST['grade']) ? $req->grade = addslashes($_REQUEST['grade']) : $req->grade = '';
+if (empty($req)) {
+  $req = new stdClass;
+  !empty($_REQUEST['mm_id']) ? $req->mm_id = addslashes($_REQUEST['mm_id']) : $req->mm_id = '';
+  !empty($_REQUEST['date']) ? $req->date = addslashes($_REQUEST['date']) : $req->date = '';
+}
 $medlem = Medlem::loadById($req->mm_id);
 $list = Steg::listByDatum($req->date, $medlem);
-foreach ($list as $stegId => $stegObject){ 
-   $i++;
-   $class = $i % 2 == 0 ? 'mm-even' : 'mm-odd';
-   $aktivitet = ''; 
-   $antal = ''; 
-   if($stegObject->getAktivitetId() != 5){
-     $aktivitet = $stegObject->getAktivitet()->getNamn();
-     $antal = $stegObject->getAntal(); 
-   }
-   $row = array($class, $req->date, $stegObject->getAktivitetId(), $aktivitet, $antal, $stegObject->getSteg(), $stegId);
-   $table[] = $row;      
-/*   
-   $rowObj = new stdClass;
-   $rowObj->id = $stegId;
-   $rowObj->class = $class;
-   $rowObj->date = $req->date;
-   $rowObj->activity = $aktivitet;
-   $rowObj->count = $antal;
-   $rowObj->steps = $stegObject->getSteg();   
-   $tab[$stegId] = $rowObj;
- */
- }
-$dagbok = Dagbok::getEntryBymmIdDate($req->mm_id, $req->date); 
+foreach ($list as $stegId => $stegObject) {
+  $i++;
+  $class = $i % 2 == 0 ? 'mm-even' : 'mm-odd';
+  $aktivitet = '';
+  $antal = '';
+  if ($stegObject->getAktivitetId() != 5) {
+    $aktivitet = $stegObject->getAktivitet()->getNamn();
+    $antal = $stegObject->getAntal();
+  }
+  $row = array($class, $req->date, $stegObject->getAktivitetId(), $aktivitet, $antal, $stegObject->getSteg(), $stegId);
+  $table[] = $row;
+  /*
+    $rowObj = new stdClass;
+    $rowObj->id = $stegId;
+    $rowObj->class = $class;
+    $rowObj->date = $req->date;
+    $rowObj->activity = $aktivitet;
+    $rowObj->count = $antal;
+    $rowObj->steps = $stegObject->getSteg();
+    $tab[$stegId] = $rowObj;
+   */
+}
+$dagbok = Dagbok::getEntryBymmIdDate($req->mm_id, $req->date);
 $response['table'] = $table;
 //$response['tab'] = $tab;
 $response['diary'] = $dagbok;

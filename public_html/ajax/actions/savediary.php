@@ -17,4 +17,4 @@ if($req->diary_id == NULL){
   $dagbok->setBetyg($req->smiley);
   $dagbok->commit();
 }
-include($_SERVER["DOCUMENT_ROOT"]."/ajax/includes/display_step_rows.php");
+include($_SERVER["DOCUMENT_ROOT"]."/ajax/data/getUserSteps.php");
