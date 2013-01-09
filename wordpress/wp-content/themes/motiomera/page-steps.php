@@ -56,10 +56,21 @@ get_header();
         var table = null;
         var diary = null;
         loadActivityList()
-        getUserData();
-        //addDatePicker();
-                
-        
+        getUserData();                
+
+        $("#mm-datepicker").datepicker({
+          firstDay: 1,
+          monthNames: ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'],
+          dayNamesMin: [ 'sön', 'mån', 'tis', 'ons', 'tor', 'fre', 'lör'],
+          altField: "#mm-step-date",
+          dateFormat: 'yy-mm-dd',
+          minDate: new Date(2011, 1, 15),  //todo set register date
+          maxDate: new Date(),
+          onSelect: function(dateText, inst) {  //display steps matrix for selected date
+            getUserData();
+          }
+        });
+
         function loadActivityList(){
           $.ajax({
             type: "POST",
@@ -89,22 +100,6 @@ get_header();
             }
           });
         }
-
-        //function addDatePicker(){
-        $("#mm-datepicker").datepicker({
-          firstDay: 1,
-          monthNames: ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'],
-          dayNamesMin: [ 'sön', 'mån', 'tis', 'ons', 'tor', 'fre', 'lör'],
-          altField: "#mm-step-date",
-          dateFormat: 'yy-mm-dd',
-          minDate: new Date(2011, 1, 15),  //todo set register date
-          maxDate: new Date(),
-          onSelect: function(dateText, inst) {  //display steps matrix for selected date
-            getUserData();
-          }
-        });
-        //}
-
 
         function printDiary(diary){
           $("#mm-comment").val(diary.kommentar);
