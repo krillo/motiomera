@@ -713,7 +713,9 @@ www.motiomera.se';
         "elefant",
         "ko",
         "sparv",
-        "get"
+        "get",
+        "sparv",
+        "anka"
     );
     do {
       $forslag = $namn[mt_rand(0, count($namn) - 1)] . mt_rand(10, 99) . $namn[mt_rand(0, count($namn) - 1)];
@@ -1928,6 +1930,21 @@ www.motiomera.se';
   }
 
   /**
+   * return true or false if companys competition is closed
+   * @author Kristian Erendi, Reptilo 2013-03-16
+   */
+  public function isOldCompetition() {
+    $today = date("Y-m-d");
+    if ($today > $this->getSlutdatum()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  
+  
+  /**
    * return different CSS-classes if company has an ongoing competition
    * This is to aid to Smarty tempate
    * 
@@ -1937,7 +1954,11 @@ www.motiomera.se';
     if ($this->isActiveCompetition()) {
       return "mmGreen";
     } else {
-      return "mmLightGrey";
+      if($this->isOldCompetition()){
+        return "mmLightGrey";
+      }else{
+        return "mmOrange";
+      }
     }
   }
 
