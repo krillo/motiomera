@@ -2,20 +2,24 @@
   <div id="mmSplash">
 
 
-    <div style="text-align:center;">      
-<a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Ge bort motion i julklapp</h1>
+    <div style="text-align:center;">
+<a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Teambuilding på jobbet!</h1>
   <div style="text-align:left;float:left;padding-left:50px;">
     <h2 style="text-align:left;float:left;"> 
-      Starta er tävling den 1 januari, lagom till nyårslöftet :) <br><br>
-      Starta valfri måndag och välj mellan 5 och 8 veckors tävling.
+      Vår stora vårtävlingen börjar den 22/4<br><br>
+      Välj mellan 5 och 8 veckors tävling<br>
+      till samma pris.
     </h2>
 
           <div class="clear"></div>
           <p style="text-align:left;font-size:14px;">
       
-     Nu 30% jul-rabatt!<br/><br/>
-    <span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 120 kr per person<br/>
-    <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 200 kr per person med stegräknare
+     <!--       
+     Fortfarande 15% rabatt!<br/><br/>
+    <span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144 kr per person<br/>
+    <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 246 kr per person med stegräknare -->
+    169 kr per person<br/>
+    289 kr per person med stegräknare
   </p>
 </div>        
 </a>
