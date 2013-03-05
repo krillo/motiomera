@@ -1240,7 +1240,7 @@ www.motiomera.se';
     $slutdatum = $this->getSlutdatum();
     $weeks = $this->getVeckor();
     $anamn = $this->getANamn();
-    $anamn = $this->getCreationDate();
+    $creationDate = $this->getCreationDate();
     
 
     $deltagare = 0;
