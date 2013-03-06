@@ -1,7 +1,7 @@
 <?php
 
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
-//Security::demand(USER);
+Security::demand(USER);
 if (isset($_GET['mid']) && Misc::isValidId($_GET['mid'])) {
 	$medlem = Medlem::loadById($_GET["mid"]);	
 } else {
