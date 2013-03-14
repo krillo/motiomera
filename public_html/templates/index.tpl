@@ -3,23 +3,25 @@
 
 
     <div style="text-align:center;">
-<a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Teambuilding på jobbet!</h1>
+<!--a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Teambuilding på jobbet!</h1-->
+<a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Sveriges roligaste stegtävling</h1>
   <div style="text-align:left;float:left;padding-left:50px;">
     <h2 style="text-align:left;float:left;"> 
+      Gå runt Sverige och jaga kommunvapen i kommunjakten<br><br>
       Vår stora vårtävlingen börjar den 22/4<br><br>
-      Välj mellan 5 och 8 veckors tävling<br>
-      till samma pris.
+      <span style="font-size:18px;color:#B71416;">Välj mellan 5 och 8 veckors tävling<br>
+      till samma pris.</span>
     </h2>
 
           <div class="clear"></div>
           <p style="text-align:left;font-size:14px;">
       
-     
-     15% boka-tidigt rabatt tom 24/3!<br/><br/>
-    <span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144 kr per person<br/>
-    <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 246 kr per person med stegräknare
-    <!--169 kr per person<br/>
-    289 kr per person med stegräknare -->
+    <!-- 
+     15% boka-tidigt rabatt tom 24/3!<br/><br/-->
+    <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144 kr per person<br/>
+    <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 246 kr per person med stegräknare  -->
+    169 kr per person<br/>
+    289 kr per person med stegräknare
   </p>
 </div>        
 </a>
