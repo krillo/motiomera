@@ -185,7 +185,7 @@
 			$smarty->assign("COMPANY", $COMPANY);
 		}
 	}
-		$smarty->assign("toplist_count", 11);
+		$smarty->assign("toplist_count", 400);
 	$output = $smarty->fetch('widget_deltagartoppen.tpl');
 	$output .= $smarty->fetch('widget_lagtoppen.tpl');
 	$output .= $smarty->fetch('widget_foretagstoppen.tpl');
