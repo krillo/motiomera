@@ -283,11 +283,11 @@ Order::getMondays(15);
     <li id="calc">
       <h2 >Antal deltagare för stegtävling</h2> 
       <div class="clear"></div>
-      <div id="nbr-with-text"><?php echo $campaignCodes['RE03'][text]; ?><br/><!--span style="color:black;text-decoration: line-through;">289 </span--><span>&nbsp;<?php echo $campaignCodes['RE03'][pris]; ?> kr/person</span></div>
+      <div id="nbr-with-text"><?php echo $campaignCodes['RE03'][text]; ?><br/><span style="color:black;text-decoration: line-through;">289 </span><span>&nbsp;<?php echo $campaignCodes['RE03'][pris]; ?> kr/person</span></div>
       <input type="text" name="RE03" id="nbr-with"/>
       <div id="nbr-with-sum"><span class="nbr">0</span> kr ex moms</div>
       <div class="clear"></div>
-      <div id="nbr-without-text"><?php echo $campaignCodes['RE04'][text]; ?><br/><!--span style="color:black;text-decoration: line-through;">169 </span--><span>&nbsp;<?php echo $campaignCodes['RE04'][pris]; ?> kr/person</span></div>
+      <div id="nbr-without-text"><?php echo $campaignCodes['RE04'][text]; ?><br/><span style="color:black;text-decoration: line-through;">169 </span><span>&nbsp;<?php echo $campaignCodes['RE04'][pris]; ?> kr/person</span></div>
       <input type="text" name="RE04" id="nbr-without" />       
       <div id="nbr-without-sum"><span class="nbr">0</span> kr ex moms</div>
       <div class="clear"></div>
