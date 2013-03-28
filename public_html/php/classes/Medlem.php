@@ -945,13 +945,15 @@ class Medlem extends Mobject {
   public function getVeckotavlingDatum() {
     return $this->veckotavling_datum;
   }
+
   public function getVeckotavlingPrice() {
     return $this->veckotavling_price;
   }
+
   public function getVeckotavlingPriceText() {
     return $this->veckotavling_price_text;
   }
- 
+
   public function getLevelId() {
     return $this->levelId;
   }
@@ -1454,8 +1456,6 @@ class Medlem extends Mobject {
     $this->veckotavling_price_text = $arg;
   }
 
-  
-  
   public function setANamn($anamn) {
 
     if ($this->aNamn) {
@@ -1480,6 +1480,43 @@ class Medlem extends Mobject {
       throw new MedlemException("Användarnamnet är upptaget", -7);
     }
     $this->aNamn = $anamn;
+  }
+
+  /**
+   * Change aNamn ajax-style
+   * No MedlemException is thrown, all errors and messages are returned in the response array 
+   * 
+   * @global $db $db
+   * @param type $anamn
+   * 
+   * Date: 2013-04-07
+   * Author: Kristian Erendi
+   * URI: http://reptilo.se 
+   */
+  public function changeANamnAjax($anamn) {
+    $anamn = Security::secure_data($anamn);
+    $response["success"] = 0;
+    if (strlen($anamn) < self::MIN_LENGTH_ANAMN) {
+      $response["msg"] = "Användarnamnet är för kort";
+      return $response;
+    }
+    if (strlen($anamn) > self::MAX_LENGTH_ANAMN) {
+      $response["msg"] = "Användarnamnet är för långt";
+      return $response;
+    }
+    global $db;
+    $sql = "SELECT id FROM mm_medlem WHERE anamn = '$anamn' ";
+    $exists = $db->value($sql);
+    if (isset($exists)) {
+      $response["msg"] = "Användarnamnet är upptaget, försök med ett annat";
+    } else {
+      $sql = "UPDATE mm_medlem SET anamn = '$anamn' WHERE id = ". $this->getId();
+      $success = $db->value($sql);
+      //print_r($success);
+      $response["msg"] = "Nytt användarnamn sparat";
+      $response["success"] = 1;
+    }
+    return $response;
   }
 
   public function setKon($kon) {
@@ -1711,7 +1748,7 @@ class Medlem extends Mobject {
    * 
    * @param type $date 
    */
-  public function setPaidUntilDateByForetag($date) { 
+  public function setPaidUntilDateByForetag($date) {
     $this->paidUntil = $date;
   }
 
@@ -2475,7 +2512,7 @@ class Medlem extends Mobject {
     }
 
     $sql =
-      "SELECT a.id, a.epost, a.aNamn, a.fNamn, a.eNamn, a.levelId, a.paidUntil, a.veckotavling_status, a.veckotavling_week, a.veckotavling_datum, a.veckotavling_price_text, SUM(steg) as steg, f.namn AS companyname, f.startdatum, f.slutdatum 
+            "SELECT a.id, a.epost, a.aNamn, a.fNamn, a.eNamn, a.levelId, a.paidUntil, a.veckotavling_status, a.veckotavling_week, a.veckotavling_datum, a.veckotavling_price_text, SUM(steg) as steg, f.namn AS companyname, f.startdatum, f.slutdatum 
       FROM mm_medlem a, mm_steg b, mm_foretagsnycklar n, mm_foretag f   
 			WHERE a.id = n.medlem_id 
       AND n.foretag_id IN ($foretagList) 
@@ -2497,7 +2534,6 @@ class Medlem extends Mobject {
     return Misc::shuffle_assoc($medlemmar, 0);
   }
 
-  
   /**
    * Update the members to be a week winner
    * Krillo 2012-09-10
@@ -2508,13 +2544,12 @@ class Medlem extends Mobject {
    */
   public static function updateVeckoVinnare($idArray, $date) {
     global $db;
-    $jDate = new JDate($date);    
-    $idArray = implode (',', $idArray);
-    $sql = "UPDATE mm_medlem SET veckotavling_status = 1, veckotavling_week = '".$jDate->getYear(). '-' .$jDate->getWeek()."' WHERE id IN ($idArray);";
+    $jDate = new JDate($date);
+    $idArray = implode(',', $idArray);
+    $sql = "UPDATE mm_medlem SET veckotavling_status = 1, veckotavling_week = '" . $jDate->getYear() . '-' . $jDate->getWeek() . "' WHERE id IN ($idArray);";
     $status = $db->query($sql);
     return $status;
   }
-  
 
   /**
    * The user has choosen a price
@@ -2531,26 +2566,21 @@ class Medlem extends Mobject {
     $this->setVeckotavlingPriceText($priceText);
     $this->commit();
     return "Din vinst är registrerad och kommer att bli skickad!";
-
   }
-  
-  
+
   /**
    * If veckotavling value in db is 1 then the user is a winner and may choose the price.
    *
    * @return boolean 
    */
   public function isVeckoVinnare() {
-    if($this->getVeckotavlingStatus() == 1){
+    if ($this->getVeckotavlingStatus() == 1) {
       return true;
     } else {
       return false;
     }
   }
-  
-  
-  
-  
+
   /**
    * Function getTavlingMedlemmar
    *
