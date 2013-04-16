@@ -29,5 +29,6 @@ if(isset($_GET["passmsg"])){
   $smarty->assign("passmsg",rawurldecode($_GET["passmsg"]));  
 }
 $smarty->assign("sel_level",$medlem_level);
+$smarty->assign("url",$SETTINGS["url"]);
 $smarty->display('medlem.tpl');
 ?>

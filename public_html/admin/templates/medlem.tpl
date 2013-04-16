@@ -10,7 +10,7 @@
      };    
      $.ajax({
        type: "POST",
-       url: "http://motiomera.dev/ajax/actions/changeanamn.php",
+       url: "{/literal}{$url}{literal}/ajax/actions/changeanamn.php",
        dataType: 'json',
        data: data,
        success: function(data){

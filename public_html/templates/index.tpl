@@ -8,9 +8,8 @@
   <div style="text-align:left;float:left;padding-left:50px;">
     <h2 style="text-align:left;float:left;"> 
       Gå runt Sverige och jaga kommunvapen i kommunjakten<br><br>
-      Vår stora vårtävlingen börjar den 22/4<br><br>
-      Välj mellan 5 och 8 veckors tävling<br>
-      till samma pris.
+      Starta valfri måndag och välj mellan </br> 
+      5 och 8 veckors tävling till samma pris.
       <!--span style="font-size:18px;color:#B71416;">Välj mellan 5 och 8 veckors tävling<br>
       till samma pris.</span-->
     </h2>
@@ -18,14 +17,14 @@
     <div class="clear"></div>
     
     <br/>
-    <span style="font-size:18px;color:#B71416;">15% rabatt</span><br/>      
+    <!--span style="font-size:18px;color:#B71416;">15% rabatt</span><br/-->      
     <p style="text-align:left;font-size:14px;">
-    <span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144 kr per person<br/>
-    <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 246 kr per person med stegräknare 
-    <!--
+    <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144 kr per person<br/>
+    <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 246 kr per person med stegräknare  -->
+    
     169 kr per person<br/>
     289 kr per person med stegräknare
-    -->
+    
   </p>
 </div>        
 </a>
