@@ -316,7 +316,7 @@ Order::getMondays(15);
     <li><h2>Välj ert startdatum (valfri måndag)</h2>      
       <input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2013-04-22" disabled ><label for="startdatumRadio1" id="startdatumRadio-label" style="text-decoration: line-through; font-size: 13px;display: inline;">Den stora vårtävlingen 22/4 - 26/5</label>
       <div style="clear:both;"></div>
-      <div style="color:red;font-size: 13px;display: block;line-height: 20px;margin-left: 48px;margin-bottom: 10px;">Vill ni vara med på den stora vårtävlingen så ring Kristian</div>
+      <div style="color:red;font-size: 13px;display: block;line-height: 20px;margin-left: 48px;margin-bottom: 10px;">Vårtävlingen pågår i en 8 vekors-period, v16 - v24 så ni kan ändå<br/> var med fastän ni startar senare, ring Kristian för mer info.</div>
       <div class="clear"></div>
       <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum" checked >
       <select name="startdatum" id="startdatum" onchange="updateStartRadio();">

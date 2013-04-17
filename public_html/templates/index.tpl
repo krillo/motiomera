@@ -9,10 +9,16 @@
     <h2 style="text-align:left;float:left;"> 
       Gå runt Sverige och jaga kommunvapen i kommunjakten<br><br>
       Starta valfri måndag och välj mellan </br> 
-      5 och 8 veckors tävling till samma pris.
+      5 och 8 veckors tävling till samma pris.</h2>
+    
+    <br/><br/>
+      
+      <div style="color:red;font-size: 14px;display: block;line-height: 20px;margin-bottom: 10px;margin-top: 30px;">Vårtävlingen pågår i en 8 vekors-period, v16 - v24 så ni kan ändå var med fastän ni startar senare, ring Kristian för mer info.</div>
+   
+      
       <!--span style="font-size:18px;color:#B71416;">Välj mellan 5 och 8 veckors tävling<br>
       till samma pris.</span-->
-    </h2>
+    
 
     <div class="clear"></div>
     
