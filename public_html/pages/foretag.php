@@ -1,23 +1,48 @@
 <?php
 
-include $_SERVER["DOCUMENT_ROOT"]  . "/php/init.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/php/init.php";
 
 $smarty = new MMSmarty();
-if(!empty($_GET["fid"])){
-	$foretag = Foretag::loadById($_GET["fid"]);
-}elseif(isset($USER)){
-	$foretag = $USER->getForetag();
+if (!empty($_GET["fid"])) {
+  $foretag = Foretag::loadById($_GET["fid"]);
+} elseif (isset($USER)) {
+  $foretag = $USER->getForetag();
 }
-	
 
-$smarty->assign("pagetitle", ucfirst($foretag->getNamn())." &mdash; Företag");
 
-if(!isset($FORETAG) && !isset($USER) && !isset($ADMIN) || 
-	(isset($USER) && !$foretag->isAnstalld($USER)) ||
-	(isset($FORETAG) && $foretag->getId() != $FORETAG->getId())	
-	)
-	throw new UserException("Du tillhör inte det här företaget", "Du måste tillhöra det här företaget för att kunna se den här sidan.");
+$smarty->assign("pagetitle", ucfirst($foretag->getNamn()) . " &mdash; Företag");
 
+//print_r($USER) ;
+//print_r($ADMIN) ;
+print_r($FORETAG) ;
+//print_r($foretag) ;
+
+
+/*
+if (!isset($FORETAG) && !isset($USER)) {//&& !isset($ADMIN)){
+  echo 'gå inte vidare 1';
+}
+
+
+if (isset($USER) && !$foretag->isAnstalld($USER)) {
+  echo 'gå inte vidare 2';
+}
+
+
+if (isset($FORETAG) && $foretag->getId() != $FORETAG->getId()) {
+  echo 'gå inte vidare 3';
+}
+
+*/
+
+
+
+
+if (!isset($ADMIN)) {  //admin overrides it all
+  if (!isset($FORETAG) && !isset($USER) && !isset($ADMIN) || (isset($USER) && !$foretag->isAnstalld($USER)) || (isset($FORETAG) && $foretag->getId() != $FORETAG->getId())) {
+    throw new UserException("Du tillhör inte det här företaget", "Du måste tillhöra det här företaget för att kunna se den här sidan.");
+  }
+}
 $kommun = $foretag->getKommun();
 
 $smarty->assign("foretag", $foretag);
@@ -33,55 +58,51 @@ $smarty->assign("lagList", $lagList);
 
 // steggrafik
 
-$smarty->assign("medlem",$USER);
+$smarty->assign("medlem", $USER);
 
 
-if(count($lagList) > 0 && $foretag->getStartDatum() <= date("Y-m-d")){
-	$smarty->assign("medlemmar", $medlemmar);
+if (count($lagList) > 0 && $foretag->getStartDatum() <= date("Y-m-d")) {
+  $smarty->assign("medlemmar", $medlemmar);
 
-	
-	$topplistan = $foretag->getTopplistaLag(false, true);
-	$flagslice = null;
-	
-	$nr = null;
-	
-	if(count($topplistan) < 2)
-	{
-		$multiplier = 0;
-	}
-	else
-	{
-		if(count($topplistan)>10){
-			$flagslice = true;
-			$nr=9;
-		}else{
-			$nr=count($topplistan)-1;
-		}
-		if (empty($nr))	{
-			$nr = 1;
-		}
-		$multiplier = 500/($nr);
-	}
-	$i = 0;		
-	$positioner = array();
-	foreach($topplistan as $lag){
-		$positioner[$i] = $lag;
-		// echo $lag->getStegTotal() ."<br />";
-		$i++;
-	}
-	
-	$positioner = array_reverse($positioner);
-	if(count($positioner)>10){
-		$positioner = array_slice($positioner, count($positioner)-10, 10);
-	}
-	
-	$smarty->assign("positioner", $positioner);
-	$smarty->assign("nr", $nr);
-	
-	
-	$smarty->assign("multiply", $multiplier);
-	$smarty->assign("topplistan", $topplistan);		
-	
+
+  $topplistan = $foretag->getTopplistaLag(false, true);
+  $flagslice = null;
+
+  $nr = null;
+
+  if (count($topplistan) < 2) {
+    $multiplier = 0;
+  } else {
+    if (count($topplistan) > 10) {
+      $flagslice = true;
+      $nr = 9;
+    } else {
+      $nr = count($topplistan) - 1;
+    }
+    if (empty($nr)) {
+      $nr = 1;
+    }
+    $multiplier = 500 / ($nr);
+  }
+  $i = 0;
+  $positioner = array();
+  foreach ($topplistan as $lag) {
+    $positioner[$i] = $lag;
+    // echo $lag->getStegTotal() ."<br />";
+    $i++;
+  }
+
+  $positioner = array_reverse($positioner);
+  if (count($positioner) > 10) {
+    $positioner = array_slice($positioner, count($positioner) - 10, 10);
+  }
+
+  $smarty->assign("positioner", $positioner);
+  $smarty->assign("nr", $nr);
+
+
+  $smarty->assign("multiply", $multiplier);
+  $smarty->assign("topplistan", $topplistan);
 }
 
 //false if no custom added
@@ -95,9 +116,9 @@ $topplistaDeltagare->addParameter(Topplista::PARAM_STOP, $foretag->getSlutdatum(
 $smarty->assign("topplistaDeltagare", $topplistaDeltagare);
 
 
-/*$topplistaForetag = Foretag::getTopplistaForetag();
-$smarty->assign("topplistaForetag", $topplistaForetag);
-*/
+/* $topplistaForetag = Foretag::getTopplistaForetag();
+  $smarty->assign("topplistaForetag", $topplistaForetag);
+ */
 // Fotoalbum
 $bildblock = FotoalbumBild::loadForetagsBildblock($foretag, $antal = 20);
 $smarty->assign("bildblock", $bildblock);
@@ -107,11 +128,11 @@ $smarty->assign("bildblock", $bildblock);
 include_once ROOT . '/php/libs/php-ofc-library/open-flash-chart-object.php';
 
 ob_start();
-open_flash_chart_object( 300, 200, '/data/veckograf.php?fid=' . $foretag->getId(),false,'/' );
+open_flash_chart_object(300, 200, '/data/veckograf.php?fid=' . $foretag->getId(), false, '/');
 $graf = ob_get_contents();
 ob_end_clean();
 
-$smarty->assign("graf",$graf);
+$smarty->assign("graf", $graf);
 
 $smarty->display('foretag.tpl');
 ?>
