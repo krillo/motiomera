@@ -26,14 +26,18 @@ Vill du anmäla fler deltagare till tävlingen gör du det under fliken <b>Till�
 </table> 
 
 <br/>
+<br/>
+<a href="/pages/foretag.php?fid={$foretaget->getId()}"><button type="button" class="button">Statistik under tävlingen</button></a>
+<br/>
 {if (isset($tid)) }
-<br/>  
-<div class="mmRed"><h3>Er tävling är nu slut och här kan du se all <a href="/pages/tavlingsres.php?fid={$foretaget->getId()}&tid={$tid}" class="mmRed" style="text-decoration:underline; ">statistik för tävlingen</a></h3></div>
+<br/>
+<a href="/pages/tavlingsres.php?fid={$foretaget->getId()}&tid={$tid}"><button type="button" class="button">Statistik för avslutad tävling</button></a>
+<!-- div class="mmRed"><h3>Er tävling är nu slut och här kan du se all <a href="/pages/tavlingsres.php?fid={* $foretaget->getId() *}&tid={* $tid *}" class="mmRed" style="text-decoration:underline; ">statistik för tävlingen</a></h3></div-->
 {/if}
+<br/>
 <br/>
 {if (isset($ADMIN)) }
 <div class="mmAdminColor"><h3>Se alla <a href="/admin/pages/listorder.php?search=&field=id&offset=0&showValid=true&foretagid={$foretaget->getId()}" class="mmAdminColor" style="text-decoration:underline; ">ordrar</a></h3></div>
 {/if}
-
 <br/>
 {$tabs->printTabBox()}
