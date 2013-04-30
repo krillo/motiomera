@@ -22,12 +22,13 @@ if (!isset($ADMIN)) {  //if not admin - next test
 }
 
 $kommun = $foretag->getKommun();
-$smarty->assign("foretag", $foretag);
+$smarty->assign("this_foretag", $foretag);
 $smarty->assign("kommun", $kommun);
 $medlemmar = $foretag->listMedlemmar();
 $lagList = $foretag->listLag();
 $smarty->assign("medlemmar", $medlemmar);
 $smarty->assign("lagList", $lagList);
+
 
 // steggrafik
 $smarty->assign("medlem", $USER);
