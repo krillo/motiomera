@@ -1,3 +1,4 @@
+{debug}
 <div class="mmTotaltAntalSteg"><b>Totalt:</b> {$this_foretag->getStegTotal()|nice_tal} steg</div>
 	<div class="mmKlubbarAvatarTop"><img src="{if $foretagCustomBild!=null}{$foretagCustomBild}{else}/img/icons/AvatarKlubbTop.gif{/if}" alt="" /></div>
 		<div class="mmh2">{$this_foretag->getNamn()}</div>

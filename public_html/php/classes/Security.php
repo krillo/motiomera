@@ -130,12 +130,10 @@ class Security
 		return $result;
 	}
 	
-	public function authorized($typ, $object = null)
-	{
-
+	public function authorized($typ, $object = null){
 		// Kollar om inloggad medlem/admin/företag har en viss behörighet.
 		// $object är en instans av den medlem/admin/företag som man vill kolla är inloggad.
-
+    
 		global $USER, $ADMIN, $FORETAG, $adminLevels;
 		$authorized = true;
 		
