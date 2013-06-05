@@ -2002,6 +2002,8 @@ class Medlem extends Mobject {
 
   // STATIC FUNCTIONS
 
+  
+  
   public function setUsedTrialKonto($mail) {
     global $db;
     $sql = "INSERT INTO mm_gratisperiod SET  mail='" . $mail . "'";
@@ -2020,6 +2022,19 @@ class Medlem extends Mobject {
     }
   }
 
+  public static function isValidUserId($id){
+    if(Misc::isValidId($id)){
+      global $db;
+      $sql = "SELECT id FROM mm_medlem WHERE id = $id ";
+      if ($db->value($sql)) {
+        return true;
+      } 
+    return false;
+    }  
+  }
+  
+  
+  
   public static function upptagenEpost($epost) {
     global $db;
     $sql = "SELECT epost FROM " . self::classToTable(get_class()) . " WHERE epost = '" . Security::secure_data($epost) . "' ";

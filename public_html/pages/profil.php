@@ -1,19 +1,32 @@
 <?php
-phpinfo();
-die();
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
-//Security::demand(USER);
-Security::demand(FORETAG);
-//Security::demand(ADMIN);
-if (isset($_GET['mid']) && Misc::isValidId($_GET['mid'])) {
-	$medlem = Medlem::loadById($_GET["mid"]);	
-} else {
+!empty($_GET['mid']) ? $mid = addslashes($_GET['mid']) : $mid = NULL;
+if($mid && !Medlem::isValidUserId($mid)) {
 	throw new UserException('Profilen finns inte', 'Den medlem du söker har antingen tagit bort sig eller ej funnits');
+} else{
+  $medlem = Medlem::loadById($mid);
 }
 
-if(!$medlem->synlig() && !(isset($USER) && $USER->getId() == $medlem->getId())){
+global $USER, $ADMIN, $FORETAG;
+$authorized = 0;
+if($ADMIN && $mid){
+  $authorized = 10; //'admin';
+}
+if(!$authorized && $FORETAG && $mid){
+  if($FORETAG->isAnstalldByMId($mid)){
+    $authorized = 5; //'foretag';
+  }
+}
+if(!$authorized && $USER && $mid) {
+  $authorized = 1; // logged in user 
+  if($USER->getId() === $medlem->getId()){
+    $authorized = 3; // same user
+  }  
+}
+
+//no access - don't show profile
+if($authorized < 2){
 	switch($medlem->getAtkomst()){
-		default:
 		case "medlem":
 			$msg = "Du måste vara inloggad på MotioMera för att ta del av den här profilen.<br/>Logga in ovan eller skaffa ett inlogg idag:<p/><a href='/pages/blimedlem.php' style='font-weight:bold;'><img src='/img/icons/BliMedlemIcon.gif' alt='Bli Medlem'/></a>";
 			break;
@@ -26,11 +39,13 @@ if(!$medlem->synlig() && !(isset($USER) && $USER->getId() == $medlem->getId())){
 		case "foretag":
 			$msg = "Denna profil är endast synlig för medlemmar av samma företag.";
 			break;
-	}
-	if(!Security::authorized(ADMIN)){
-		throw new UserException("Kan ej visa profil", $msg);
-	}
+    default:
+			$msg = "Ett fel har uppstått på profilsidan.";
+			break;      
+	}	
+	throw new UserException("Kan ej visa profil", $msg);
 }
+
 
 $smarty = new MMSmarty;
 $grupper = Grupp::listByMedlem($medlem);

@@ -885,6 +885,13 @@ www.motiomera.se';
     return ($value == 0) ? false : true;
   }
 
+  public function isAnstalldByMId($mid) {
+    global $db;
+    $sql = "SELECT count(*) FROM " . self::KEY_TABLE . " WHERE foretag_id = " . $this->getId() . " AND medlem_id = " . $mid;
+    $value = $db->value($sql);
+    return ($value == 0) ? false : true;
+  }
+  
   public function genereraLag() {
     global $db;
     $lag = $this->listLag();
