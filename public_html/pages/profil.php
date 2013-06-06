@@ -19,9 +19,12 @@ if(!$authorized && $FORETAG && $mid){
 }
 if(!$authorized && $USER && $mid) {
   $authorized = 1; // logged in user 
-  if($USER->getId() === $medlem->getId()){
+  $usrId = $USER->getId();
+  if($usrId == $mid){
     $authorized = 3; // same user
-  }  
+  }else if(Medlem::isInSameCompany($USER->getId(), $mid)){
+    $authorized = 2; // same company
+  }
 }
 
 //no access - don't show profile
@@ -30,13 +33,16 @@ if($authorized < 2){
 		case "medlem":
 			$msg = "Du måste vara inloggad på MotioMera för att ta del av den här profilen.<br/>Logga in ovan eller skaffa ett inlogg idag:<p/><a href='/pages/blimedlem.php' style='font-weight:bold;'><img src='/img/icons/BliMedlemIcon.gif' alt='Bli Medlem'/></a>";
 			break;
-		case "adress":
+		case "adressbok":
 			$msg = "Den här personen har valt att begränsa tillgången till profilen till sina vänner.";
 			break;
 		case "ingen":
 			$msg = "Den här personen har valt att inte visa sin profil för någon.";
 			break;
 		case "foretag":
+			$msg = "Denna profil är endast synlig för medlemmar av samma företag.";
+			break;
+		case "alla":
 			$msg = "Denna profil är endast synlig för medlemmar av samma företag.";
 			break;
     default:

@@ -204,10 +204,10 @@ class Medlem extends Mobject {
 
     // skapa första/default fotoalbum
     new Fotoalbum(array(
-                "namn" => "Mina bilder",
-                "beskrivning" => "",
-                "tilltrade" => "alla"
-                    ), $this);
+        "namn" => "Mina bilder",
+        "beskrivning" => "",
+        "tilltrade" => "alla"
+            ), $this);
     new FeedItem("valkommen", null, $this);
   }
 
@@ -1163,7 +1163,8 @@ class Medlem extends Mobject {
             $this->commit();
           }
         }
-      } else
+      }
+      else
         $this->avatar = Avatar::loadStandard();
     }
     return $this->avatar;
@@ -1510,7 +1511,7 @@ class Medlem extends Mobject {
     if (isset($exists)) {
       $response["msg"] = "Användarnamnet är upptaget, försök med ett annat";
     } else {
-      $sql = "UPDATE mm_medlem SET anamn = '$anamn' WHERE id = ". $this->getId();
+      $sql = "UPDATE mm_medlem SET anamn = '$anamn' WHERE id = " . $this->getId();
       $success = $db->value($sql);
       //print_r($success);
       $response["msg"] = "Nytt användarnamn sparat";
@@ -2002,8 +2003,8 @@ class Medlem extends Mobject {
 
   // STATIC FUNCTIONS
 
-  
-  
+
+
   public function setUsedTrialKonto($mail) {
     global $db;
     $sql = "INSERT INTO mm_gratisperiod SET  mail='" . $mail . "'";
@@ -2022,19 +2023,33 @@ class Medlem extends Mobject {
     }
   }
 
-  public static function isValidUserId($id){
-    if(Misc::isValidId($id)){
+  
+  
+  public static function isInSameCompany($id1, $id2) {
+    global $db;
+    $m1 = Medlem::loadById($id1);
+    $m2 = Medlem::loadById($id2);
+    $nyckel1 = $m1->getForetagsnyckel(false, true);
+    $nyckel2 = $m2->getForetagsnyckel(false, true);
+    if(count($nyckel1)==2 && count($nyckel2)==2){
+      if($nyckel1['foretag_id'] == $nyckel2['foretag_id']){
+        return $nyckel1['foretag_id'];
+      }
+    }
+    return false;
+  }
+
+  public static function isValidUserId($id) {
+    if (Misc::isValidId($id)) {
       global $db;
       $sql = "SELECT id FROM mm_medlem WHERE id = $id ";
       if ($db->value($sql)) {
         return true;
-      } 
-    return false;
-    }  
+      }
+      return false;
+    }
   }
-  
-  
-  
+
   public static function upptagenEpost($epost) {
     global $db;
     $sql = "SELECT epost FROM " . self::classToTable(get_class()) . " WHERE epost = '" . Security::secure_data($epost) . "' ";
