@@ -13,7 +13,7 @@
     
     <br/><br/>
       
-      <div style="color:red;font-size: 14px;display: block;line-height: 20px;margin-bottom: 10px;margin-top: 30px;">Vårtävlingen pågår i en 8 vekors-period, v16 - v24 så ni kan ändå var med fastän ni startar senare, ring Kristian för mer info.</div>
+      <!--div style="color:red;font-size: 14px;display: block;line-height: 20px;margin-bottom: 10px;margin-top: 30px;">Vårtävlingen pågår i en 8 vekors-period, v16 - v24 så ni kan ändå var med fastän ni startar senare, ring Kristian för mer info.</div-->
    
       
       <!--span style="font-size:18px;color:#B71416;">Välj mellan 5 och 8 veckors tävling<br>
