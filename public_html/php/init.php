@@ -1,5 +1,4 @@
 <?php
-
 /*
   function handleError($errno, $errstr, $errfile, $errline, array $errcontext){
   // error was suppressed with the @-operator
@@ -10,8 +9,6 @@
   }
   set_error_handler('handleError');
  */
-
-
 @session_start();   //krillo 20120808 added @ to suppress warning, thus wp has sometimes allready started a session  
 if ('MM_WP_INIT' != 1) {
   if (!isset($noutf8) && !isset($js_header)) {
@@ -20,6 +17,12 @@ if ('MM_WP_INIT' != 1) {
     header("Content-Type: text/javascript");
   }
 }
+
+
+//mm and wp settings
+//MM_SERVER_ROOT_URL
+//WP_SERVER_ROOT_URL
+
 
 
 define('INIT', true);
