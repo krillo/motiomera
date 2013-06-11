@@ -189,16 +189,24 @@ class Steg extends Mobject{
    * $steps = array(
    *    array(1, 7120),
    *    array(2, 5120),
-   *    array(3, 8120),
+   *    array(3, 0),
+   *    array(4, 8120),
    * );
+   * notice that days with no steps has to be handled
    */
 	public static function getStegTotalPerDays($mm_id, $from_date, $to_date){
 		global $db;
-    $sql = "SELECT SUM(steg) AS steg, datum  FROM mm_steg WHERE medlem_id = 30692 AND datum >= '$from_date' AND datum <= '$to_date' group by datum"; 
+    $sql = "SELECT SUM(steg) AS steg, datum  FROM mm_steg WHERE medlem_id = $mm_id AND datum >= '$from_date' AND datum <= '$to_date' group by datum"; 
     $dbResult = $db->allValuesAsArray($sql);
     foreach ($dbResult as $key => $value) {
-      $i++;
-      $steps[] = array($i, (int)$value['steg']);
+      $date_step[$value['datum']] = (int)$value['steg'];
+    }
+    $fdate = new JDate($from_date);
+    $nbr_days = (int)JDate::dateDaysDiff($from_date, $to_date);
+    $nbr_days += 2;
+    for($n = 1; $n < $nbr_days; $n++){
+      $steps[] = array($n, $date_step[$fdate->getDate()]);
+      $fdate->addDays(1);
     }
     return $steps;
   }

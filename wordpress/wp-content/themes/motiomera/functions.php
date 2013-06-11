@@ -36,6 +36,8 @@ function motiomera_scripts() {
   wp_enqueue_script('jquery-flot');  
   wp_register_script('jquery-flot-stack', get_bloginfo('template_url') . '/js/jquery.flot.stack.js');
   wp_enqueue_script('jquery-flot-stack');
+  wp_register_script('jquery-validate', get_bloginfo('template_url') . '/js/jquery.validate.min.js');
+  wp_enqueue_script('jquery-validate');
     
   //styles
   wp_register_style('wp-mm-style', get_bloginfo('template_url') . '/css/wp_mm_common.css');
