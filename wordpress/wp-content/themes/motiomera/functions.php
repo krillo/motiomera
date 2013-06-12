@@ -227,3 +227,9 @@ function getKommuner($html = true) {
   }
   return $result;
 }
+
+
+function register_my_menu() {
+  register_nav_menu('header_logged_in',__( 'Header Logged In Menu' ));
+}
+add_action( 'init', 'register_my_menu' );
