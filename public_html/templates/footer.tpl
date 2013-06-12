@@ -10,7 +10,6 @@
 </div>
 
 {php}
-//print_r($GLOBALS);
 global $SETTINGS;
 $footer = file_get_contents($SETTINGS["url"].'/api-footer/');
 print($footer);

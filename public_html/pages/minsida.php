@@ -311,7 +311,5 @@ $smarty->assign('selfProfile', true);
 //tavlingar
 $tavlingArray = Tavling::getMemberCompetitions($USER->getid());
 $smarty->assign('tavlingArray', $tavlingArray);
-
-
 $smarty->display('minsida.tpl');
 ?>
