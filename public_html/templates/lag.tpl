@@ -21,14 +21,14 @@
 				  <td><b>Steg</b></td>
 				</tr>
 		
-				{foreach name=steglista from=$topplista->getTopplista(10,$medlem) item=placering}
-				{if $placering.placering == 11}
+				{foreach name=steglista from=$topplista->getTopplista(100,$medlem) item=placering}
+				{if $placering.placering == 101}
 		
 					{assign var=tomrad value=1}
 		
 				{/if}
 				
-				{if $placering.placering > 10 && $tomrad == 0}
+				{if $placering.placering > 100 && $tomrad == 0}
 				
 					{assign var=tomrad value=1}
 					

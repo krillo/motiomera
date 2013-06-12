@@ -206,10 +206,10 @@ class Medlem extends Mobject {
 
     // skapa första/default fotoalbum
     new Fotoalbum(array(
-                "namn" => "Mina bilder",
-                "beskrivning" => "",
-                "tilltrade" => "alla"
-                    ), $this);
+        "namn" => "Mina bilder",
+        "beskrivning" => "",
+        "tilltrade" => "alla"
+            ), $this);
     new FeedItem("valkommen", null, $this);
   }
 
@@ -1174,7 +1174,8 @@ class Medlem extends Mobject {
             $this->commit();
           }
         }
-      } else
+      }
+      else
         $this->avatar = Avatar::loadStandard();
     }
     return $this->avatar;
@@ -1495,6 +1496,43 @@ class Medlem extends Mobject {
       throw new MedlemException("Användarnamnet är upptaget", -7);
     }
     $this->aNamn = $anamn;
+  }
+
+  /**
+   * Change aNamn ajax-style
+   * No MedlemException is thrown, all errors and messages are returned in the response array 
+   * 
+   * @global $db $db
+   * @param type $anamn
+   * 
+   * Date: 2013-04-07
+   * Author: Kristian Erendi
+   * URI: http://reptilo.se 
+   */
+  public function changeANamnAjax($anamn) {
+    $anamn = Security::secure_data($anamn);
+    $response["success"] = 0;
+    if (strlen($anamn) < self::MIN_LENGTH_ANAMN) {
+      $response["msg"] = "Användarnamnet är för kort";
+      return $response;
+    }
+    if (strlen($anamn) > self::MAX_LENGTH_ANAMN) {
+      $response["msg"] = "Användarnamnet är för långt";
+      return $response;
+    }
+    global $db;
+    $sql = "SELECT id FROM mm_medlem WHERE anamn = '$anamn' ";
+    $exists = $db->value($sql);
+    if (isset($exists)) {
+      $response["msg"] = "Användarnamnet är upptaget, försök med ett annat";
+    } else {
+      $sql = "UPDATE mm_medlem SET anamn = '$anamn' WHERE id = " . $this->getId();
+      $success = $db->value($sql);
+      //print_r($success);
+      $response["msg"] = "Nytt användarnamn sparat";
+      $response["success"] = 1;
+    }
+    return $response;
   }
 
   public function setKon($kon) {
@@ -1980,6 +2018,8 @@ class Medlem extends Mobject {
 
   // STATIC FUNCTIONS
 
+
+
   public function setUsedTrialKonto($mail) {
     global $db;
     $sql = "INSERT INTO mm_gratisperiod SET  mail='" . $mail . "'";
@@ -1994,6 +2034,33 @@ class Medlem extends Mobject {
     if ($db->value($sql) > 1) {
       return true;
     } else {
+      return false;
+    }
+  }
+
+  
+  
+  public static function isInSameCompany($id1, $id2) {
+    global $db;
+    $m1 = Medlem::loadById($id1);
+    $m2 = Medlem::loadById($id2);
+    $nyckel1 = $m1->getForetagsnyckel(false, true);
+    $nyckel2 = $m2->getForetagsnyckel(false, true);
+    if(count($nyckel1)==2 && count($nyckel2)==2){
+      if($nyckel1['foretag_id'] == $nyckel2['foretag_id']){
+        return $nyckel1['foretag_id'];
+      }
+    }
+    return false;
+  }
+
+  public static function isValidUserId($id) {
+    if (Misc::isValidId($id)) {
+      global $db;
+      $sql = "SELECT id FROM mm_medlem WHERE id = $id ";
+      if ($db->value($sql)) {
+        return true;
+      }
       return false;
     }
   }

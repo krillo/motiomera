@@ -175,6 +175,15 @@ class Order extends Mobject {
           "popupid" => 22,
           "public" => TRUE,
       ),
+      "FRAKT03" => array(
+          "typ" => "frakt",
+          "text" => "Frakt",
+          "extra" => " kr ex. moms.",
+          "pris" => 140,
+          "dagar" => 0,
+          "popupid" => 22,
+          "public" => TRUE,
+      ),
       "RE03" => array(
           "typ" => "foretag",
           "text" => "Med stegräknare",
@@ -182,6 +191,7 @@ class Order extends Mobject {
           "pris" => 289, //original
           //"pris" => 260, //10%                    
           //"pris" => 246, //15%                    
+          //"pris" => 200, //30%                    
           "dagar" => 31,
           "popupid" => 22,
           "public" => TRUE,
@@ -193,6 +203,7 @@ class Order extends Mobject {
           "pris" => 169, //original
           //"pris" => 152, //10%          
           //"pris" => 144, //15%          
+          //"pris" => 120, //30%          
           "dagar" => 31,
           "popupid" => 21,
           "public" => TRUE,

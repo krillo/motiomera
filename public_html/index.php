@@ -1,4 +1,5 @@
 <?php
+//phpinfo(); die();
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
 $smarty = new MMSmarty;
 $medlemsprofiler = Medlem::getMedlemmarFrontpage(3);
@@ -33,4 +34,3 @@ $smarty->assign("rss", $rss);
 // throw new Exception("testar");
 // echo Medlem::loadById(12431243);
 $smarty->display("index.tpl");
-?>

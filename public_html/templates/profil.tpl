@@ -1,3 +1,4 @@
+{debug}
 {if isset($USER) && !$selfProfile}
 	<div id="mmProfilAdressbok">
 		{if isset($invitable)}
@@ -30,6 +31,7 @@
 		{/if}
 </div>
 {/if}
+
 
 {if $selfProfile}
 	<form action="" method="post" class="margin0" onsubmit="mm_saveStatus(this.status.value); return false;" id="mmUpdateStatusForm">

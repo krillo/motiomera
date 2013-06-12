@@ -3,7 +3,7 @@
 </div>
 <h1>Kommunjakten</h1>
 
-Alla kommuner i Sverige ingår i MotioMeras tävling Kommunjakten. Som MotioMera-medlem samlar du troféer genom att gå genom så många kommuner som möjligt och lösa Kommun-quizar. Varje vecka kan du vinna fina priser, <a href="tavlingar.php">läs mer</a>. Navigera dig till den kommun du önskar för att läsa om kommunen och lösa roliga quizar<br/>
+Alla kommuner i Sverige ingår i MotioMeras tävling Kommunjakten. Som MotioMera-medlem samlar du troféer genom att gå genom så många kommuner som möjligt och lösa Kommun-quizar. Navigera dig till den kommun du önskar för att läsa om kommunen och lösa roliga quizar<br/>
 <br/>
 
 {*}Här kan du göra våra underhållande och utmanande kommunquiz!

@@ -1468,6 +1468,10 @@ table#alh_navtable
   color: #B7B7B7;
   font-weight: normal;
 }
+.mmOrange{
+	color: #F8901E;
+	font-weight: normal;
+}
 .mmGray{
   color: #555;
   font-weight: normal;
@@ -2994,6 +2998,11 @@ td.number
 #minvinst-ul label {float: left;font-size: 14px;width: 130px;}
 #minvinst-result{float:left;font-size: 14px;margin: 20px 0 0 20px;}
 #mmMenuLeft #vinnare-menu{color:#0000FF;}
+
+
+
+.button{ font-size: 1.2em;padding: 0.4em 1em; border-radius:0.5em;}
+
 
 
 /* New mm style 2012 Added by krillo  */

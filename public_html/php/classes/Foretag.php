@@ -202,11 +202,10 @@ class Foretag extends Mobject {
     if ($code != null && $code != '') {
       $sql = "SELECT id FROM mm_foretag WHERE campaignMemberCode = '" . $code . "'";
       return $db->value($sql);
-    } else{
+    } else {
       return -1;
     }
   }
-
 
   /**
    * Return all active companys for today or a submitted date
@@ -223,8 +222,7 @@ class Foretag extends Mobject {
     $sql = "SELECT count(n.id) AS count, f.id id, namn, startdatum, slutdatum FROM mm_foretag f, mm_foretagsnycklar n WHERE f.id = n.foretag_id AND isvalid = 1 AND '$theDate' BETWEEN startdatum AND slutdatum group by f.id order by namn asc";
     return $db->allValuesAsArray($sql);
   }
-  
-  
+
   /**
    * Det händer att företag lägger flera ordrar fast vill att alla deltagarna ska tillhöra samma tävling. 
    * Denna metod slår ihop dessa ordrar genom att alla nycklarna för det första föreataget får det andra företagets id.
@@ -713,7 +711,9 @@ www.motiomera.se';
         "elefant",
         "ko",
         "sparv",
-        "get"
+        "get",
+        "sparv",
+        "anka"
     );
     do {
       $forslag = $namn[mt_rand(0, count($namn) - 1)] . mt_rand(10, 99) . $namn[mt_rand(0, count($namn) - 1)];
@@ -883,6 +883,13 @@ www.motiomera.se';
     return ($value == 0) ? false : true;
   }
 
+  public function isAnstalldByMId($mid) {
+    global $db;
+    $sql = "SELECT count(*) FROM " . self::KEY_TABLE . " WHERE foretag_id = " . $this->getId() . " AND medlem_id = " . $mid;
+    $value = $db->value($sql);
+    return ($value == 0) ? false : true;
+  }
+
   public function genereraLag() {
     global $db;
     $lag = $this->listLag();
@@ -998,9 +1005,9 @@ www.motiomera.se';
       $lag = Lag::loadById($lid);
       $lag->addMedlem($medlem);
     }
-    
+
     //new code by krillo 2012-09-27
-    $jDate = new JDate($this->getSlutdatum());    
+    $jDate = new JDate($this->getSlutdatum());
     $medlem->setPaidUntilDateByForetag($jDate->addDays(self::FORETAGSMEDLEMS_EXTRA_DAYS)->getDate());
     $medlem->setLevelId(1);
     $medlem->commit();
@@ -1240,17 +1247,17 @@ www.motiomera.se';
     $slutdatum = $this->getSlutdatum();
     $weeks = $this->getVeckor();
     $anamn = $this->getANamn();
-    $anamn = $this->getCreationDate();
-    
+    $creationDate = $this->getCreationDate();
+
 
     $deltagare = 0;
     $stegraknare = 0;
     $sum = 0;
     $typeForetag = false;
     $typeTillagg = false;
-    $fileNamePrefix = '';    
+    $fileNamePrefix = '';
     $articles = "Artiklar:";
-    
+
     $sumMoms = '';
     $ordId = '';
     //iterate all the order rows
@@ -1258,12 +1265,12 @@ www.motiomera.se';
       $order = Order::loadById($orderId);
       $ordId = $orderId;
       $fakturaDate = "Fakturadatum: " . $order->getSkapadDatum();
-      $kostnadsatalle = "Kostnadsställe/ref/kod: " . $order->getOrderRefCode();      
+      $kostnadsatalle = "Kostnadsställe/ref/kod: " . $order->getOrderRefCode();
       $sumMoms = "Summa: " . $order->getSumMoms() . " Kr  ink moms";
-      
-      $articles .= "\n" . $order->getItem() . '   ' . $order->getAntal() . '   ' . $order->getPrice() ;
+
+      $articles .= "\n" . $order->getItem() . '   ' . $order->getAntal() . '   ' . $order->getPrice();
       $sum = $sum + (int) $order->getPrice();
-      
+
       switch ($order->getCampaignId()) {
         case 'RE03':
           $deltagare += $order->getAntal();
@@ -1318,7 +1325,7 @@ www.motiomera.se';
         'fak-refcode' => $kostnadsatalle,
         'articles' => $articles . ' Kr',
         'sum' => "Summa: " . $sum . ' Kr',
-        'sumMoms' => $sumMoms,        
+        'sumMoms' => $sumMoms,
     );
     $pdf->PagePreface($a);
 
@@ -1326,7 +1333,7 @@ www.motiomera.se';
     $filter = array(
         '[STARTDATE]' => $startdatum,
         '[STOPDATE]' => $slutdatum,
-        '[WEEKS]' => $weeks,        
+        '[WEEKS]' => $weeks,
         '[USERNAME]' => $anamn,
         '[PASSWORD]' => $losenord,
     );
@@ -1347,7 +1354,7 @@ www.motiomera.se';
         '[ADDITIONALCOUNTER]' => $deltagare,
         '[STARTDATE]' => $startdatum,
         '[STOPDATE]' => $slutdatum,
-        '[WEEKS]' => $weeks,                
+        '[WEEKS]' => $weeks,
     );
 
     if ($typeForetag) {
@@ -1927,6 +1934,27 @@ www.motiomera.se';
     }
   }
 
+  public static function isInSameCompany($id1, $id2) {
+    global $db;
+    $sql = "SELECT * FROM mm_foretagsnycklar WHERE medlem_id in ($id1,$id2)";
+    $res = $db->query($sql);
+    
+    return 1;
+  }
+
+  /**
+   * return true or false if companys competition is closed
+   * @author Kristian Erendi, Reptilo 2013-03-16
+   */
+  public function isOldCompetition() {
+    $today = date("Y-m-d");
+    if ($today > $this->getSlutdatum()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   /**
    * return different CSS-classes if company has an ongoing competition
    * This is to aid to Smarty tempate
@@ -1937,7 +1965,11 @@ www.motiomera.se';
     if ($this->isActiveCompetition()) {
       return "mmGreen";
     } else {
-      return "mmLightGrey";
+      if ($this->isOldCompetition()) {
+        return "mmLightGrey";
+      } else {
+        return "mmOrange";
+      }
     }
   }
 
@@ -2530,8 +2562,10 @@ www.motiomera.se';
 
 }
 
+
+
 class ForetagException extends Exception {
-  
+
 }
 
 ?>

@@ -2,18 +2,35 @@
   <div id="mmSplash">
 
 
-    <div style="text-align:center;">      
-      <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Stegtävling för ditt företag</h1>
-        <div style="text-align:left;float:left;padding-left:50px;">
-          <h2 style="text-align:left;float:left;"> 
-            Välj mellan 5 till 8 veckors tävling<br/>Vi sköter allt det praktiska!
-          </h2>
-          <div class="clear"></div>
-          <p style="text-align:left;font-size:14px;">
+    <div style="text-align:center;">
+<!--a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Teambuilding på jobbet!</h1-->
+<a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Sveriges roligaste stegtävling</h1>
+  <div style="text-align:left;float:left;padding-left:50px;">
+    <h2 style="text-align:left;float:left;"> 
+      Gå runt Sverige och jaga kommunvapen i kommunjakten<br><br>
+      Starta valfri måndag och välj mellan </br> 
+      5 och 8 veckors tävling till samma pris.</h2>
+    
+    <br/><br/>
       
-    <!-- Just nu 15% rabatt!<br/><br/-->
-    <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span--> 169 kr per person<br/>
-    <!--span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span--> 289 kr per person med stegräknare
+      <!--div style="color:red;font-size: 14px;display: block;line-height: 20px;margin-bottom: 10px;margin-top: 30px;">Vårtävlingen pågår i en 8 vekors-period, v16 - v24 så ni kan ändå var med fastän ni startar senare, ring Kristian för mer info.</div-->
+   
+      
+      <!--span style="font-size:18px;color:#B71416;">Välj mellan 5 och 8 veckors tävling<br>
+      till samma pris.</span-->
+    
+
+    <div class="clear"></div>
+    
+    <br/>
+    <!--span style="font-size:18px;color:#B71416;">15% rabatt</span><br/-->      
+    <p style="text-align:left;font-size:14px;">
+    <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144 kr per person<br/>
+    <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 246 kr per person med stegräknare  -->
+    
+    169 kr per person<br/>
+    289 kr per person med stegräknare
+    
   </p>
 </div>        
 </a>

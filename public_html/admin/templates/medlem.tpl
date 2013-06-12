@@ -1,11 +1,41 @@
+{literal}
+<script type="text/javascript">
+  jQuery(document).ready(function($){   
+
+   $("#cahngeanamn").click(function(event) {
+     event.preventDefault();
+     var data = {
+       mm_id:       $('#mm_id').attr('value'),
+       anamn:       $('#anamn').attr('value')
+     };    
+     $.ajax({
+       type: "POST",
+       url: "{/literal}{$url}{literal}/ajax/actions/changeanamn.php",
+       dataType: 'json',
+       data: data,
+       success: function(data){
+         $('#anamn-action').html(data.msg);
+       }
+     });
+     return false;
+   });
+
+
+        
+});
+</script>        
+{/literal}
+
 <h1>Hantera medlem</h1>
 <p><a href="{$urlHandler->getUrl(Medlem, URL_ADMIN_LIST)}">&laquo; Tillbaka</a></p>
 <form action="{$urlHandler->getUrl(Medlem, URL_ADMIN_SAVE)}" method="post">
-  <input type="hidden" value="{$medlem->getId()}" name="medlem_id" />
+  <input type="hidden" value="{$medlem->getId()}" name="medlem_id" id="mm_id"/>
   <table border="0" cellpadding="0" cellspacing="0" class="motiomera_form_table">
     <tr>
       <th>Användarnamn</th>
-      <td class="mmRawText"><a href="{$urlHandler->getUrl(Medlem, URL_VIEW, $medlem->getId())}">{$medlem->getANamn()}</a></td>
+      <td><input type="text" id="anamn" name="anamn" value="{$medlem->getANamn()}"  size="25"/></td>
+      <td><input type="button" id="cahngeanamn" name="cahngeanamn" value="Byt alias"  /></td>
+      <td id="anamn-action"></td>
     </tr>
     <tr>
       <th>Namn</th>
@@ -14,7 +44,7 @@
     <tr>
       <th>E-post</th>
       <!-- td class="mmRawText"><a href="mailto:{*$medlem->getEpost()*}">{*$medlem->getEpost()*}</a></td-->
-      <td><input type="text" name="epost" value="{$medlem->getEpost()}"  size="40"/></td>
+      <td><input type="text" name="epost" value="{$medlem->getEpost()}"  size="25"/></td>
       <!--td><input type="submit" name="setEmail" value="Spara epost" /></td-->		
     </tr>    
     <tr>
