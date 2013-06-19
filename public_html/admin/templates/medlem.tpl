@@ -38,6 +38,11 @@
       <td id="anamn-action"></td>
     </tr>
     <tr>
+      <th>Facebook</th>
+        <td class="mmRawText">{$medlem->getFbId()}</td>
+        <td class="mmRawText"><a href="http://facebook.com/{$medlem->getFbId()}" style="text-decoration: underline; color: blue;" target="_blank">facebook.com/{$medlem->getFbId()}</a></td>
+    </tr>
+    <tr>
       <th>Namn</th>
       <td class="mmRawText">{$medlem->getFNamn()} {$medlem->getENamn()}</td>
     </tr>

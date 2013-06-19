@@ -2,6 +2,8 @@
 /**
   Template Name: Motiomera-start
  */
+$page_promo = get_page_by_title("page-promo");
+$pageId = $page_promo->ID;
 get_header();
 ?>
 <div id="primary" class="site-content">
@@ -9,10 +11,10 @@ get_header();
     <?php while (have_posts()) : the_post(); ?>
       <div id="info"><?php the_content(); ?></div>     
       <ul id="interest">
-        <li><h2><?php the_field("short1"); ?></h2></li>
-        <li><h2><?php the_field("short2"); ?></h2></li>
-        <li><h2><?php the_field("short3"); ?></h2></li>
-        <li><h2><?php the_field("short4"); ?></h2></li>
+        <li><h2><?php the_field("short1", $pageId); ?></h2></li>
+        <li><h2><?php the_field("short2", $pageId); ?></h2></li>
+        <li><h2><?php the_field("short3", $pageId); ?></h2></li>
+        <li><h2><?php the_field("short4", $pageId); ?></h2></li>
       </ul>
 
       <div id="splash">

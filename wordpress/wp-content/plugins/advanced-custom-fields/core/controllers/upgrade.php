@@ -8,13 +8,9 @@
 *  @created: 23/06/12
 */
 
- 
 class acf_upgrade 
 {
 
-	var $parent;
-		
-	
 	/*
 	*  __construct
 	*
@@ -23,18 +19,14 @@ class acf_upgrade
 	*  @created: 23/06/12
 	*/
 	
-	function __construct($parent)
+	function __construct()
 	{
-	
-		// vars
-		$this->parent = $parent;
-		
-		
 		// actions
-		add_action('init', array($this,'init'));
 		add_action('admin_menu', array($this,'admin_menu'), 11);
-		add_action('wp_ajax_acf_upgrade', array($this, 'upgrade_ajax'));
 		
+		
+		// ajax
+		add_action('wp_ajax_acf_upgrade', array($this, 'upgrade_ajax'));
 	}
 	
 	
@@ -48,37 +40,127 @@ class acf_upgrade
 	
 	function admin_menu()
 	{
+		// dont run on plugin activate!
+		if( isset($_GET['action']) && $_GET['action'] == 'activate-plugin' )
+		{
+			return;
+		}
+		
+		
+		// vars
+		$new_version = apply_filters('acf/get_info', 'version');
+		$old_version = get_option('acf_version', false);
+		
+		
+		if( $new_version != $old_version )
+		{
+			update_option('acf_version', $new_version );
+			
+			if( !$old_version )
+			{
+				// do nothing, this is a fresh install
+			}
+			elseif( $old_version < '4.0.0' && $new_version >= '4.0.0')
+			{
+				$url = admin_url('edit.php?post_type=acf&info=whats-new');
+				wp_redirect( $url );
+				exit;
+				
+			}
+		}
+		
+		
+		// update info
+		global $pagenow;
+		
+		if( $pagenow == 'plugins.php' )
+		{
+			$hook = apply_filters('acf/get_info', 'hook');
+			
+			wp_enqueue_style( 'acf-global' );
+			add_action( 'in_plugin_update_message-' . $hook, array($this, 'in_plugin_update_message'), 10, 2 );
+		}
+		
+		
+		// update admin page
 		add_submenu_page('edit.php?post_type=acf', __('Upgrade','acf'), __('Upgrade','acf'), 'manage_options','acf-upgrade', array($this,'html') );
 	}
 	
+
+	
 	
 	/*
-	*  init
+	*  in_plugin_update_message
 	*
-	*  @description: 
-	*  @since 3.1.8
-	*  @created: 23/06/12
+	*  Displays an update message for plugin list screens.
+	*  Shows only the version updates from the current until the newest version
+	*
+	*  @type	function
+	*  @date	5/06/13
+	*
+	*  @param	{array}		$plugin_data
+	*  @param	{object}	$r
 	*/
 	
-	function init()
+	function in_plugin_update_message( $plugin_data, $r )
 	{
-		$version = get_option('acf_version', false);
-		if( $version )
+		// vars
+		$version = apply_filters('acf/get_info', 'version');
+		$readme = file_get_contents( 'http://plugins.svn.wordpress.org/advanced-custom-fields/trunk/readme.txt' );
+		$regexp = '/== Changelog ==(.*)= ' . $version . ' =/sm';
+		$o = '';
+		
+		
+		// validate
+		if( !$readme )
 		{
-			if( $version < $this->parent->upgrade_version )
+			return;
+		}
+		
+		
+		// regexp
+		preg_match( $regexp, $readme, $matches );
+		
+		
+		if( ! isset($matches[1]) )
+		{
+			return;
+		}
+
+		
+		// render changelog
+		$changelog = explode('*', $matches[1]);
+		array_shift( $changelog );
+		
+		
+		if( !empty($changelog) )
+		{
+			$o .= '<div class="acf-plugin-update-info">';
+			$o .= '<h3>' . __("What's new", 'acf') . '</h3>';
+			$o .= '<ul>';
+			
+			foreach( $changelog as $item )
 			{
-				$this->parent->admin_message('<p>' . __("Advanced Custom Fields",'acf') . ' v' . $this->parent->version . ' ' . __("requires a database upgrade",'acf') .' (<a class="thickbox" href="' . admin_url() . 'plugin-install.php?tab=plugin-information&plugin=advanced-custom-fields&section=changelog&TB_iframe=true&width=640&height=559">' . __("why?",'acf') .'</a>). ' . __("Please",'acf') .' <a href="http://codex.wordpress.org/Backing_Up_Your_Database">' . __("backup your database",'acf') .'</a>, '. __("then click",'acf') . ' <a href="' . admin_url() . 'edit.php?post_type=acf&page=acf-upgrade" class="button">' . __("Upgrade Database",'acf') . '</a></p>');
+				$item = explode('http', $item);
+				
+				$o .= '<li>' . $item[0];
+				
+				if( isset($item[1]) )
+				{
+					$o .= '<a href="http' . $item[1] . '" target="_blank">' . __("credits",'acf') . '</a>';
+				}
+				
+				$o .= '</li>';
+				
 				
 			}
-			elseif( $version < $this->parent->version)
-			{
-				update_option('acf_version', $this->parent->version );
-			}
+			
+			$o .= '</ul></div>';
 		}
-		else
-		{
-			update_option('acf_version', $this->parent->version );
-		}
+		
+		echo $o;
+		
+		
 	}
 	
 	
@@ -545,7 +627,7 @@ class acf_upgrade
 				{
 					foreach($rows as $row)
 					{
-						// origional name
+						// original name
 						$field_name = $row['meta_key'];
 						
 						
@@ -826,5 +908,7 @@ class acf_upgrade
 	
 			
 }
+
+new acf_upgrade();
 
 ?>

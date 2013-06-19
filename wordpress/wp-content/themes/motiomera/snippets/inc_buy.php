@@ -19,24 +19,19 @@ $campaignCodes = Order::$campaignCodes;
 $moms = Order::$moms;
 Order::getMondays(15);
 
-//print_r(get_defined_vars());       //display all php-global variables
-
-
-
-//$kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn(false, false, $dbObject));
-
-
-//getKommuner();
+!empty($_REQUEST['buy']) ? $buy = $_REQUEST['buy'] : $buy = '';
 ?>
-
-
 
 
 <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
 <script type="text/javascript">    
   jQuery(function($) {
-    var type = "";
-        
+    var type = $("#type").val();
+    if(type === "private"){
+      showPrivateHideCompany();
+    } else if(type === "company"){
+      showCompanyHidePrivate();
+    }
         
     /**
      * Custom Email ajax validation for the jQuery Validator plugin
@@ -485,7 +480,7 @@ Order::getMondays(15);
 </script>    
 
 <form action="/actions/wp_buy.php" method="post" id="checkout">
-  <input type="hidden" name="type"      id="type" value="">
+  <input type="hidden" name="type"      id="type" value="<?php echo $buy; ?>">
   <input type="hidden" name="m_exmoms"  id="m_exmoms" value=""> 
   <input type="hidden" name="m_freight" id="m_freight"  value="">         
   <input type="hidden" name="m_total"   id="m_total" value="">        
