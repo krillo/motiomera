@@ -18,8 +18,8 @@ get_header();
       </ul>
 
       <div id="splash">
-        <div id="splash-head"><?php the_field("splash_head"); ?></div>
-        <div id="splash-text"><?php the_field("splash_text"); ?></div>
+        <div id="splash-head"><?php the_field("splash_head", $pageId); ?></div>
+        <div id="splash-text"><?php the_field("splash_text", $pageId); ?></div>
       </div>
       
       <div id="buy">
