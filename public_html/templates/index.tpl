@@ -4,11 +4,11 @@
 
     <div style="text-align:center;">
 <!--a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Teambuilding på jobbet!</h1-->
-<a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Sveriges roligaste stegtävling</h1>
+<a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Gå runt Sverige och samla kommunvapen</h1>
   <div style="text-align:left;float:left;padding-left:50px;">
     <h2 style="text-align:left;float:left;"> 
-      Gå runt Sverige och jaga kommunvapen i kommunjakten<br><br>
-      Starta valfri måndag och välj mellan </br> 
+      Delta i vår stegtävling och samla kommunvapen i kommunjakten<br><br>
+      Den stora hösttävlingen startar den 23 sep</br> 
       5 och 8 veckors tävling till samma pris.</h2>
     
     <br/><br/>
