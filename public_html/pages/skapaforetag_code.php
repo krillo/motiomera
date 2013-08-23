@@ -2,20 +2,6 @@
 $campaignCodes = Order::$campaignCodes;
 $moms = Order::$moms;
 Order::getMondays(15);
-
-
-curl_setopt_array($ch = curl_init(), array(
-  CURLOPT_URL => "https://api.pushover.net/1/messages.json",
-  CURLOPT_POSTFIELDS => array(
-    "token" => "assirAR25PaXiQ5JXFVceqhtXHSmUz",
-    "user" => "u9WXxcPqw94p2khp2qEC3jwyrDZzKK",
-    "message" => "Motiomera is it!",
-  )));
-curl_exec($ch);
-curl_close($ch);
-
-
-
 ?>
 
 <script src="/js/jquery.validate.min.js" type="text/javascript"></script>

@@ -199,11 +199,12 @@ if (!empty($order) && !empty($orderItemList)) {
 
 
     //Use the pushover app to display the purchase on iPhone  krillo 2013-08-20
-    $pushover_msg = $orderTyp . ', summa:' . $orderList["sum"];
+    $pushover_msg = $orderTyp . ', ' . $orderList["sum"] . ' kr';
     if (($orderTyp != "medlem") && ($orderTyp != "medlem_extend")) {
       $pushover_msg .= ', '. $orderList["companyName"]; 
     }
     curl_setopt_array($ch = curl_init(), array(
+      CURLOPT_RETURNTRANSFER => 1, 
       CURLOPT_URL => "https://api.pushover.net/1/messages.json",
       CURLOPT_POSTFIELDS => array(
         "token" => "assirAR25PaXiQ5JXFVceqhtXHSmUz",
