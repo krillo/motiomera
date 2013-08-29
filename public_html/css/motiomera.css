@@ -2993,6 +2993,5 @@ margin-left: -15px;
 #minvinst-ul li{margin:5px 0 0 0;}
 #minvinst-ul label {float: left;font-size: 14px;width: 130px;}
 #minvinst-result{float:left;font-size: 14px;margin: 20px 0 0 20px;}
-#mmMenuLeft #vinnare-menu{color:#0000FF;}
-
+#mmMenuLeft .vinnare-menu{color:#0000FF;}
 .button{ font-size: 1.2em;padding: 0.4em 1em; border-radius:0.5em;}

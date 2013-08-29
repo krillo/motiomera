@@ -210,7 +210,7 @@
 
                 <li><a {if $urlChecker->getMarkedMenu() eq "HEM"} class="mmMarkedMenu"{/if} href="/">HEM</a></li>
                 {if isset($FORETAG)}
-                  <li><a {if $urlChecker->getMarkedMenu() eq "HANTERA FÖRETAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretag, URL_EDIT, $FORETAG->getId())}">HANTERA F&Ouml;RETAG</a></li>
+                <li><a   class="vinnare-menu"   href="{$urlHandler->getUrl(Foretag, URL_EDIT, $FORETAG->getId())}">HANTERA F&Ouml;RETAG</a></li>
                 {/if}
                 {if isset($USER)}
                   <li class="mmMenuBG"><a{if $urlChecker->getMarkedMenu() eq "MIN SIDA"} class="mmMarkedMenu"{/if} href="/pages/minsida.php">MIN SIDA</a><img src="/img/ftag/minsida_icon.gif" class="mmMarginLeft5" alt="" /></li>
@@ -227,7 +227,7 @@
                     {/if}
                   {/if}
                   {if $USER->isVeckoVinnare()}
-                    <li><a href="/pages/minvinst.php" id="vinnare-menu">DU ÄR VINNARE</a></li>
+                    <li><a href="/pages/minvinst.php" class="vinnare-menu">DU ÄR VINNARE</a></li>
                   {/if}
                   <li><a{if $urlChecker->getMarkedMenu() eq "MOTIOMERAMAIL"} class="mmMarkedMenu"{/if} href="/pages/mail.php">MOTIOMERAMAIL</a></li>
                   <li><a{if $urlChecker->getMarkedMenu() eq "FOTOALBUM"} class="mmMarkedMenu"{/if} href="/pages/fotoalbum.php">FOTOALBUM</a></li>

@@ -2309,12 +2309,19 @@ class Medlem extends Mobject {
       $medlem->commit();
       $_SESSION["mm_mid"] = $id;
       $_SESSION["mm_sid"] = $sessionId;
-
+        
       if ($cookie) {
         setcookie("mm_mid", $id, time() + 60 * 60 * 24 * 30, "/");
         setcookie("mm_sid", $sessionId, time() + 60 * 60 * 24 * 30, "/");
       }
 
+      //if foretags_id in db, try to log in as foretagsadmin 
+      $fId = $medlem->getAdmin();
+      if($fId > 0){
+        $foretag = Foretag::loadById($fId);
+        $foretag->doubleLogIn($fId);
+      }      
+      
       // if levelId is set (ie, the member used to be a pro), it gets reset to zero, and an exception is thrown (which leads to to the user being redirected to the buy page)
 
       if ($medlem->getPaidUntil() < date("Y-m-d")) {  // && $medlem->getLevelId() > 0) {   //old stuff removed by krillo 2011-01-19,  always lock them out 

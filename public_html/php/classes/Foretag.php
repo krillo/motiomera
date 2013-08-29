@@ -639,7 +639,7 @@ www.motiomera.se';
     $id = $db->value($sql);
 
     if ($id == "") {
-      throw new ForetagException("Felaktigt anv㭤arnamn", -10);
+      throw new ForetagException("Felaktigt användarnamn", -10);
     }
     $foretag = Foretag::loadById($id);
     $losenordKrypterat = Security::encrypt_password($id, $losenord);
@@ -657,8 +657,29 @@ www.motiomera.se';
       }
       return true;
     } else {
-      throw new ForetagException("Felaktigt l??ord", -5);
+      throw new ForetagException("Felaktigt lösenord", -5);
     }
+  }
+
+  /**
+   * Try to do a double log in if a user has the foretag id in the admin kollumn in db
+   * 
+   * @global type $db
+   * @return boolean
+   * @throws ForetagException
+   */
+  public function doubleLogIn($id) {
+    $sessionId = Security::generateSessionId();
+    $this->setSessionId($sessionId);
+    $this->commit();
+    $_SESSION["mm_foretag_aid"] = $id;
+    $_SESSION["mm_foretag_sid"] = $sessionId;
+
+    //if ($cookie) {
+      setcookie("mm_foretag_aid", $id, time() + 60 * 60 * 24 * 30, "/");
+      setcookie("mm_foretag_Sid", $sessionId, time() + 60 * 60 * 24 * 30, "/");
+    //}
+    return true;
   }
 
   public static function getInloggad() {
@@ -1938,7 +1959,7 @@ www.motiomera.se';
     global $db;
     $sql = "SELECT * FROM mm_foretagsnycklar WHERE medlem_id in ($id1,$id2)";
     $res = $db->query($sql);
-    
+
     return 1;
   }
 
@@ -2562,10 +2583,8 @@ www.motiomera.se';
 
 }
 
-
-
 class ForetagException extends Exception {
-
+  
 }
 
 ?>
