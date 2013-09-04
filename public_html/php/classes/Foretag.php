@@ -676,8 +676,8 @@ www.motiomera.se';
     $_SESSION["mm_foretag_sid"] = $sessionId;
 
     //if ($cookie) {
-      setcookie("mm_foretag_aid", $id, time() + 60 * 60 * 24 * 30, "/");
-      setcookie("mm_foretag_Sid", $sessionId, time() + 60 * 60 * 24 * 30, "/");
+    setcookie("mm_foretag_aid", $id, time() + 60 * 60 * 24 * 30, "/");
+    setcookie("mm_foretag_Sid", $sessionId, time() + 60 * 60 * 24 * 30, "/");
     //}
     return true;
   }
@@ -2284,6 +2284,25 @@ www.motiomera.se';
     return $this->medlemmar;
   }
 
+  /**
+   * Rest all the fadmin in tghe db for this company
+   * @author Krillo Reptilo AB
+   * @date 2013-09-02
+   * @global type $db
+   * @return type
+   */
+  public function resetAllFadmin() {
+    $medlemmar = $this->listMedlemmar();
+    $ids = array();
+    foreach ($medlemmar as $key => $medlem) {
+      $ids[] = $key;
+    }
+    global $db;
+    $sql = "UPDATE mm_medlem SET fadmin = 0 WHERE id in (" . implode(',', $ids) . ") ";
+    $result = $db->query($sql);
+    return $result;
+  }
+
   public function countMedlemmar() {
     global $db, $foretag_countmedlemmar_cache;
     if (!isset($foretag_countmedlemmar_cache)) {
@@ -2583,8 +2602,10 @@ www.motiomera.se';
 
 }
 
+
+
 class ForetagException extends Exception {
-  
+
 }
 
 ?>

@@ -184,7 +184,9 @@ class Misc
 
 	public static function isEmail($email)
 	{
-		return eregi('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$', $email);
+		//return eregi('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$', $email);
+		return preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i', $email);
+    
 	}
 
 	public static function isDate($date, $format = "Y-m-d H:i:s")
@@ -194,11 +196,13 @@ class Misc
 
 		switch ($format) {
 		case "Y-m-d":
-			return eregi('^' . $dateereg . '$', $date);
+			//return eregi('^' . $dateereg . '$', $date);
+			return preg_match('/^' . $dateereg . '$/', $date);
 			break;
 
 		case "Y-m-d H:i:s":
-			return eregi('^' . $dateereg . ' ' . $timeereg . '$', $date);
+			//return eregi('^' . $dateereg . ' ' . $timeereg . '$', $date);
+			return preg_match('/^' . $dateereg . ' ' . $timeereg . '$/', $date);
 			break;
 
 		default:

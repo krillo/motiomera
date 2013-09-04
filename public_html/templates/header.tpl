@@ -210,7 +210,7 @@
 
                 <li><a {if $urlChecker->getMarkedMenu() eq "HEM"} class="mmMarkedMenu"{/if} href="/">HEM</a></li>
                 {if isset($FORETAG)}
-                <li><a   class="vinnare-menu"   href="{$urlHandler->getUrl(Foretag, URL_EDIT, $FORETAG->getId())}">HANTERA F&Ouml;RETAG</a></li>
+                <li><a   class="vinnare-menu"   href="/pages/editforetag.php?fid={$FORETAG->getId()}&tab=2">HANTERA FÖRETAG</a></li>
                 {/if}
                 {if isset($USER)}
                   <li class="mmMenuBG"><a{if $urlChecker->getMarkedMenu() eq "MIN SIDA"} class="mmMarkedMenu"{/if} href="/pages/minsida.php">MIN SIDA</a><img src="/img/ftag/minsida_icon.gif" class="mmMarginLeft5" alt="" /></li>

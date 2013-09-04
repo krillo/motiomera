@@ -54,7 +54,7 @@ class DB
 	 */
 	public function query($sql)
 	{
-    $sqlDebug = defined("DEBUG") && DEBUG && isset($_GET["sql_debug"]);
+    $sqlDebug = defined("DEBUG") && DEBUG && isset($_REQUEST["sql_debug"]);
 		$sql = $sql;
 
 		if ($sqlDebug) {
@@ -208,7 +208,26 @@ class DB
 			}
 		}
 	}
-	
+
+
+  /**
+   * Remove one object from the bufferObjects 
+   * 
+   * @author Krillo 
+   * @date 2013-09-04
+   * @param type $typ
+   * @param type $id
+   */
+	public function removeBufferObject($typ = false, $id = 0){
+		if($typ) {
+			if(isset($this->bufferObjects[$typ])) {
+				if($id) {
+					unset($this->bufferObjects[$typ][$id]);
+				}
+			}
+		}
+	}  
+  
 	/**
 	 * Function getBufferMedlemObjects
 	 * 
