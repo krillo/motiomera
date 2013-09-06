@@ -186,12 +186,6 @@ class Medlem extends Mobject {
       $this->setBrowser();
       $this->setIpNr();
       $this->setLevelId(0);
-
-
-#			AVMARKERAT eftersom trial inte ska sätta något datum
-#			if ($kontotyp == "trial") {
-#				$this->addPaidUntil(92);
-#			}
     }
   }
 

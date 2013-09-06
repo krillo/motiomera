@@ -2285,6 +2285,21 @@ www.motiomera.se';
   }
 
   /**
+   * Return a list with all medlem ids
+   * 
+   * @author kristian Erendi <kristian@reptilo.se>
+   * @date 2013-09-06
+   * @global type $db
+   * @return type
+   */
+  public function listMedlemIds() {
+    global $db;
+    $sql = "SELECT medlem_id FROM mm_foretagsnycklar WHERE foretag_id = " . $this->getId() . " and medlem_id is not null";
+    $ids = $db->valuesAsArray($sql);
+    return $ids;
+  }
+
+  /**
    * Rest all the fadmin in tghe db for this company
    * @author Krillo Reptilo AB
    * @date 2013-09-02
@@ -2457,14 +2472,34 @@ www.motiomera.se';
   }
 
   /**
-   * Set veckor (to db)
+   * Set slutdatum for all members.
+   * This adds automatically 10 days to the the submitted date
+   * 
+   * added by krillo 130906
+   * @param type $datum 
+   */
+  public function updateSlutdatumAllMembers($arg) {
+    global $db;
+    $jDate = new JDate($arg);
+    $endDate = $jDate->addDays(10)->getDate();
+    $ids = $this->listMedlemIds();
+    $idsList = implode(',', $ids);
+    $sql = "UPDATE mm_medlem SET paidUntil = '$endDate' WHERE id in ($idsList)";
+    $result = $db->value($sql);
+    return $result; 
+  }
+
+  /**
+   * Set veckor (to db), return the new date.
    * added by krillo 120814
    * @param type $datum 
    */
   public function setVeckor($arg) {
     $this->veckor = $arg;
     $jDate = new JDate($this->getStartdatum());
-    $this->setSlutdatum($jDate->addDays($arg * 7 - 1)->getDate());
+    $newDate = $jDate->addDays($arg * 7 - 1)->getDate();
+    $this->setSlutdatum($newDate);
+    return $newDate;
   }
 
   /**
@@ -2602,10 +2637,8 @@ www.motiomera.se';
 
 }
 
-
-
 class ForetagException extends Exception {
-
+  
 }
 
 ?>
