@@ -2473,7 +2473,7 @@ www.motiomera.se';
 
   /**
    * Set slutdatum for all members.
-   * This adds automatically 10 days to the the submitted date
+   * This adds automatically 7 days to the the submitted date
    * 
    * added by krillo 130906
    * @param type $datum 
@@ -2481,7 +2481,7 @@ www.motiomera.se';
   public function updateSlutdatumAllMembers($arg) {
     global $db;
     $jDate = new JDate($arg);
-    $endDate = $jDate->addDays(10)->getDate();
+    $endDate = $jDate->addDays(7)->getDate();
     $ids = $this->listMedlemIds();
     $idsList = implode(',', $ids);
     $sql = "UPDATE mm_medlem SET paidUntil = '$endDate' WHERE id in ($idsList)";
