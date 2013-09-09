@@ -45,11 +45,11 @@ $sendResultDate = date('Y-m-d', strtotime(date("Y-m-d", strtotime($foretag->getS
 $showPageUtilDate = date('Y-m-d', strtotime(date("Y-m-d", strtotime($foretag->getSlutDatum())) . " +7 days"));
 
 $datesArray = array(
-array($foretag->getStartdatum(), Misc::veckodag(date('N', strtotime($foretag->getStartdatum()))), 'Startdatum för er företagstävling'),
-array($foretag->getSlutDatum(), Misc::veckodag(date('N', strtotime($showPageUtilDate))), 'Slutdatum för er företagstävling'),
-array($registerUntilDate, Misc::veckodag(date('N', strtotime($registerUntilDate))), 'Sista dagen för registrering av steg'),
-array($sendResultDate, Misc::veckodag(date('N', strtotime($sendResultDate))), 'Tävlingsresultatet skickas per mail till alla deltagare'),
-array($showPageUtilDate, Misc::veckodag(date('N', strtotime($showPageUtilDate))), 'Administrationssidan är tillgänglig tom detta datum'),
+array("v " . date("W", strtotime($foretag->getStartdatum())) . ' &nbsp;&nbsp; '. $foretag->getStartdatum(), Misc::veckodag(date('N', strtotime($foretag->getStartdatum()))), 'Startdatum för er företagstävling'),
+array("v " . date("W", strtotime($foretag->getSlutDatum())) . ' &nbsp;&nbsp; '. $foretag->getSlutDatum(), Misc::veckodag(date('N', strtotime($showPageUtilDate))), 'Slutdatum för er företagstävling'),
+array("v " . date("W", strtotime($registerUntilDate)) . ' &nbsp;&nbsp; '. $registerUntilDate, Misc::veckodag(date('N', strtotime($registerUntilDate))), 'Sista dagen för registrering av steg'),
+array("v " . date("W", strtotime($sendResultDate)) . ' &nbsp;&nbsp; '. $sendResultDate, Misc::veckodag(date('N', strtotime($sendResultDate))), 'Tävlingsresultatet skickas per mail till alla deltagare'),
+array("v " . date("W", strtotime($showPageUtilDate)) . ' &nbsp;&nbsp; '. $showPageUtilDate, Misc::veckodag(date('N', strtotime($showPageUtilDate))), 'Administrationssidan är tillgänglig tom detta datum'),
 );
 $smarty->assign("datesArray", $datesArray);
 
