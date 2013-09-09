@@ -2483,10 +2483,14 @@ www.motiomera.se';
     $jDate = new JDate($arg);
     $endDate = $jDate->addDays(7)->getDate();
     $ids = $this->listMedlemIds();
-    $idsList = implode(',', $ids);
-    $sql = "UPDATE mm_medlem SET paidUntil = '$endDate' WHERE id in ($idsList)";
-    $result = $db->value($sql);
-    return $result; 
+    if ($ids) {
+      $idsList = implode(',', $ids);
+      $sql = "UPDATE mm_medlem SET paidUntil = '$endDate' WHERE id in ($idsList)";
+      $result = $db->value($sql);
+      return $result;
+    } else {
+      return -1;
+    }
   }
 
   /**
