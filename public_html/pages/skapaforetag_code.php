@@ -266,7 +266,7 @@ Order::getMondays(15);
 
     #checkout-ul #startdatumRadio-label{font-size: 13px;display: inline;width:300px;}
     #startdatumRadio1, #startdatumRadio2{width:40px;float:left;} 
-    #startdatum{width:175px;height:22px;font-size: 12px;}
+    #startdatum{width:265px;height:24px;font-size: 13px;}
     #early-info{margin-left: 20px; margin-top: 10px;}
 
     #payer li{margin-bottom: 2px; margin-top: 0;display:block;float:left;}

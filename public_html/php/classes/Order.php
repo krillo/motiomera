@@ -669,7 +669,7 @@ class Order extends Mobject {
     $monday = $firstMonday;
     for ($i = 0; $i < $count; ++$i) {
       $datumalternativ = $monday;
-      $datumstralt = "Måndagen den " . date('j', strtotime($monday)) . " " . ucfirst(Misc::month(date('n', strtotime($monday))));   //nice format
+      $datumstralt = "v " . date("W", strtotime($monday)) . " - måndagen den " . date('j', strtotime($monday)) . " " . ucfirst(Misc::month(date('n', strtotime($monday))));   //nice format
       $monday = date("Y-m-d", strtotime($monday . "+7 days"));
       $output .= '<option value="' . $datumalternativ . '">' . $datumstralt . '</option>';
     }
