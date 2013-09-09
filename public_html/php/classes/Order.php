@@ -1480,6 +1480,19 @@ class Order extends Mobject {
     }
   }
 
+ 
+  
+  public static function getFileNamesByFId($fid) {
+    try {
+      global $db;
+      $sql = "SELECT distinct filnamn FROM mm_order WHERE foretag_id = $fid";
+      $filename = $db->valuesAsArray($sql);
+      return $filename;
+    } catch (Exception $e) {
+      return "0";
+    }
+  }  
+  
   public function setOrderStatus($orderStatus) {
     $this->orderStatus = $orderStatus;
   }
