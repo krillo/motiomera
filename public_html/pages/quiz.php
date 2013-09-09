@@ -1,10 +1,15 @@
 <?php
 include $_SERVER["DOCUMENT_ROOT"] . "/php/init.php";
-$access = new Access();
-$access->logged_in = true;
-if(!$access->accessTo()){
-  throw new UserException('Vänligen logga in för att se sidan', '');
+
+$req_kommun =  $_SERVER['REQUEST_URI'];
+if(strcmp($req_kommun,'/kommun/Ystad/quiz/') != 0 && strcmp($req_kommun,'/kommun/ystad/quiz/') != 0 && strcmp($req_kommun,'/kommun/Helsingborg/quiz/') != 0 && strcmp($req_kommun,'/kommun/helsingborg/quiz/') != 0){
+  $access = new Access();
+  $access->logged_in = true;
+  if(!$access->accessTo()){
+    throw new UserException('Vänligen logga in för att se sidan', '');
+  }
 }
+
 
 
 $smarty = new MMSmarty();

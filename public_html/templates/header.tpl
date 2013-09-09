@@ -159,7 +159,7 @@
 
 
                 {if isset($FORETAG)}
-                  <li><a {if $urlChecker->getMarkedMenu() eq "HANTERA FÖRETAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretag, URL_EDIT, $FORETAG->getId())}">HANTERA F&Ouml;RETAG</a></li>
+                <li><a   class="vinnare-menu"   href="/pages/editforetag.php?fid={$FORETAG->getId()}&tab=2">HANTERA FÖRETAG</a></li>
                 {/if}
                 {if isset($USER)}
                   <li class="mmMenuBG"><a{if $urlChecker->getMarkedMenu() eq "MIN SIDA"} class="mmMarkedMenu"{/if} href="/pages/minsida.php">MIN SIDA</a><img src="/img/ftag/minsida_icon.gif" class="mmMarginLeft5" alt="" /></li>
@@ -176,15 +176,15 @@
                     {/if}
                   {/if}
                   {if $USER->isVeckoVinnare()}
-                    <li><a href="/pages/minvinst.php" id="vinnare-menu">DU ÄR VINNARE</a></li>
+                    <li><a href="/pages/minvinst.php" class="vinnare-menu">DU ÄR VINNARE</a></li>
                   {/if}
                   <li><a{if $urlChecker->getMarkedMenu() eq "MOTIOMERAMAIL"} class="mmMarkedMenu"{/if} href="/pages/mail.php">MOTIOMERAMAIL</a></li>
                   <li><a{if $urlChecker->getMarkedMenu() eq "FOTOALBUM"} class="mmMarkedMenu"{/if} href="/pages/fotoalbum.php">FOTOALBUM</a></li>
-                  {*if isset($USER) && $sajtDelarObj->medlemHasAccess($USER,'minaQuiz')}
-                  <li><a{if $urlChecker->getMarkedMenu() eq "QUIZ"} class="mmMarkedMenu"{/if} href="/pages/minaquiz.php">MINA QUIZ</a></li>
-                  {/if*}
+                  {* if isset($USER) && $sajtDelarObj->medlemHasAccess($USER,'minaQuiz')}
+                    <li><a{if $urlChecker->getMarkedMenu() eq "QUIZ"} class="mmMarkedMenu"{/if} href="/pages/minaquiz.php">MINA QUIZ</a></li>
+                  {/if *}
                   <li><a{if $urlChecker->getMarkedMenu() eq "MINA VÄNNER"} class="mmMarkedMenu"{/if} href="/pages/adressbok.php">MINA VÄNNER</a></li>
-                  <!-- li><a{* if $urlChecker->getMarkedMenu() eq "KLUBBAR" *} class="mmMarkedMenu"{* /if *} href="/pages/klubbar.php">KLUBBAR</a></li-->
+                  {* <li><a{if $urlChecker->getMarkedMenu() eq "KLUBBAR"} class="mmMarkedMenu"{/if} href="/pages/klubbar.php">KLUBBAR</a></li>  *}
                   <li><a{if $urlChecker->getMarkedMenu() eq "INSTÄLLNINGAR"} class="mmMarkedMenu"{/if} href="/pages/installningar.php">INST&Auml;LLNINGAR</a></li>
                   <li><a{if $urlChecker->getMarkedMenu() eq "TOPPLISTOR"} class="mmMarkedMenu"{/if} href="/pages/topplistor.php">TOPPLISTOR</a></li>
 

@@ -48,6 +48,7 @@ class Medlem extends Mobject {
   protected $skapad; // datetime
   protected $sessionId; // string
   protected $admin; // int
+  protected $fadmin; // int
   protected $foretag; // object: Foretag
   protected $lag; // object: Lag
   protected $visningsbild_filename; // string
@@ -99,6 +100,7 @@ class Medlem extends Mobject {
       "avatar_filename" => "str",
       "sessionId" => "str",
       "admin" => "str",
+      "fadmin" => "str",
       "atkomst" => "str",
       "block_mail" => "str",
       "customerId" => "int",
@@ -186,11 +188,6 @@ class Medlem extends Mobject {
       $this->setBrowser();
       $this->setIpNr();
       $this->setLevelId(0);
-
-#			AVMARKERAT eftersom trial inte ska sätta något datum
-#			if ($kontotyp == "trial") {
-#				$this->addPaidUntil(92);
-#			}
     }
   }
 
@@ -1043,6 +1040,10 @@ class Medlem extends Mobject {
     return $this->admin;
   }
 
+  public function getFadmin() {
+    return $this->fadmin;
+  }
+
   public function getMAffCode() {
     return $this->mAffCode;
   }
@@ -1683,6 +1684,13 @@ class Medlem extends Mobject {
     $this->admin = ($admin) ? 1 : 0;
   }
 
+  public function setFadmin($id, $security = true) {
+    if ($security) {
+      Security::demand(USER);
+    }
+    $this->fadmin = (int)$id;
+  }
+
   public function setMAffCode($mAffCode) {
     if (strlen($mAffCode) > self::MAX_LENGTH_AFFCODE) {
       $mAffCode = substr($mAffCode, 0, self::MAX_LENGTH_AFFCODE - 1);
@@ -2038,16 +2046,14 @@ class Medlem extends Mobject {
     }
   }
 
-  
-  
   public static function isInSameCompany($id1, $id2) {
     global $db;
     $m1 = Medlem::loadById($id1);
     $m2 = Medlem::loadById($id2);
     $nyckel1 = $m1->getForetagsnyckel(false, true);
     $nyckel2 = $m2->getForetagsnyckel(false, true);
-    if(count($nyckel1)==2 && count($nyckel2)==2){
-      if($nyckel1['foretag_id'] == $nyckel2['foretag_id']){
+    if (count($nyckel1) == 2 && count($nyckel2) == 2) {
+      if ($nyckel1['foretag_id'] == $nyckel2['foretag_id']) {
         return $nyckel1['foretag_id'];
       }
     }
@@ -2330,6 +2336,13 @@ class Medlem extends Mobject {
       if ($cookie) {
         setcookie("mm_mid", $id, time() + 60 * 60 * 24 * 30, "/");
         setcookie("mm_sid", $sessionId, time() + 60 * 60 * 24 * 30, "/");
+      }
+
+      //if foretags_id in db, try to log in as foretagsadmin 
+      $fId = $medlem->getFadmin();
+      if ($fId > 0) {
+        $foretag = Foretag::loadById($fId);
+        $foretag->doubleLogIn($fId);
       }
 
       // if levelId is set (ie, the member used to be a pro), it gets reset to zero, and an exception is thrown (which leads to to the user being redirected to the buy page)

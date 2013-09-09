@@ -45,16 +45,27 @@ if ($order->extend == 'true') {
   $kontotyp = ''; //legacy or not used right now
   $maffcode = ''; //legacy or not used right now
   $medlem = new Medlem($order->email, $order->anamn, $kommun, $order->sex, $order->fname, $order->lname, $kontotyp, $maffcode);
-  $medlem->setEpostBekraftad(1); //medlem valid
-  $medlem->setLevelId(1);
+  $medlem->setEpostBekraftad(1); //medlem valid from start
+  $medlem->setLevelId(1);  //pro from start
   $medlem->confirm($order->pass);
   $medlem->setForetagsnyckel_temp($order->nyckel);
   $medlem->setForetagsnyckel($order->nyckel);
+  
+  //krillo 2013-08-29 if the users email the same as the buyers - set her as foretagsadmin in db (mm_medlem:fadmin) 
+  $foretag = Foretag::loadByForetagsnyckel($order->nyckel);
+  $payer_email = $foretag->getPayerEmail();
+  if ($payer_email == $order->email) {
+    $reset = $foretag->resetAllFadmin();
+    if ($reset) {
+      $fid = $foretag->getId();
+      $medlem->setFadmin($fid, false);
+    }
+  }
   $medlem->commit();
+  //clear mm_medlem in cache, force to reload from the updated db
+  global $db;
+	$db->removeBufferObject('Medlem', $medlem->getId());
   $medlem->loggaIn($order->email, $order->pass, true);
 }
-
-
-
 header("Location: " . '/pages/minsida.php?mmForetagsnyckel=' . $order->nyckel);
 ?>

@@ -266,7 +266,7 @@ Order::getMondays(15);
 
     #checkout-ul #startdatumRadio-label{font-size: 13px;display: inline;width:300px;}
     #startdatumRadio1, #startdatumRadio2{width:40px;float:left;} 
-    #startdatum{width:175px;height:22px;font-size: 12px;}
+    #startdatum{width:265px;height:24px;font-size: 13px;}
     #early-info{margin-left: 20px; margin-top: 10px;}
 
     #payer li{margin-bottom: 2px; margin-top: 0;display:block;float:left;}
@@ -315,11 +315,11 @@ Order::getMondays(15);
     
     
     <li><h2>Välj ert startdatum (valfri måndag)</h2>      
-      <input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2013-04-22" disabled ><label for="startdatumRadio1" id="startdatumRadio-label" style="text-decoration: line-through; font-size: 13px;display: inline;">Den stora vårtävlingen 22/4 - 26/5</label>
+      <input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2013-09-23" checked><label for="startdatumRadio1" id="startdatumRadio-label" style="text-decoration: none; font-size: 13px;display: inline;">Vår stora hösttävling 23/9 - 27/10</label>
       <div style="clear:both;"></div>
-      <div style="color:red;font-size: 13px;display: block;line-height: 20px;margin-left: 48px;margin-bottom: 10px;">Vårtävlingen pågår i en 8 vekors-period, v16 - v24 så ni kan ändå<br/> var med fastän ni startar senare, maila Kristian för mer info.</div>
+      <div style="color:red;font-size: 13px;display: block;line-height: 20px;margin-left: 48px;margin-bottom: 10px;">Hösttävlingen pågår under en 8 vekors-period, v39 - v46 så ni kan ändå<br/> var med fastän ni startar senare, maila Kristian för mer info.</div>
       <div class="clear"></div>
-      <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum" checked >
+      <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum" >
       <select name="startdatum" id="startdatum" onchange="updateStartRadio();">
         <?php echo Order::getMondays(20); ?>
       </select>

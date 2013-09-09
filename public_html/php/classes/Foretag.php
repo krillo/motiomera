@@ -639,7 +639,7 @@ www.motiomera.se';
     $id = $db->value($sql);
 
     if ($id == "") {
-      throw new ForetagException("Felaktigt anv㭤arnamn", -10);
+      throw new ForetagException("Felaktigt användarnamn", -10);
     }
     $foretag = Foretag::loadById($id);
     $losenordKrypterat = Security::encrypt_password($id, $losenord);
@@ -657,8 +657,29 @@ www.motiomera.se';
       }
       return true;
     } else {
-      throw new ForetagException("Felaktigt l??ord", -5);
+      throw new ForetagException("Felaktigt lösenord", -5);
     }
+  }
+
+  /**
+   * Try to do a double log in if a user has the foretag id in the admin kollumn in db
+   * 
+   * @global type $db
+   * @return boolean
+   * @throws ForetagException
+   */
+  public function doubleLogIn($id) {
+    $sessionId = Security::generateSessionId();
+    $this->setSessionId($sessionId);
+    $this->commit();
+    $_SESSION["mm_foretag_aid"] = $id;
+    $_SESSION["mm_foretag_sid"] = $sessionId;
+
+    //if ($cookie) {
+    setcookie("mm_foretag_aid", $id, time() + 60 * 60 * 24 * 30, "/");
+    setcookie("mm_foretag_Sid", $sessionId, time() + 60 * 60 * 24 * 30, "/");
+    //}
+    return true;
   }
 
   public static function getInloggad() {
@@ -1938,7 +1959,7 @@ www.motiomera.se';
     global $db;
     $sql = "SELECT * FROM mm_foretagsnycklar WHERE medlem_id in ($id1,$id2)";
     $res = $db->query($sql);
-    
+
     return 1;
   }
 
@@ -2263,6 +2284,40 @@ www.motiomera.se';
     return $this->medlemmar;
   }
 
+  /**
+   * Return a list with all medlem ids
+   * 
+   * @author kristian Erendi <kristian@reptilo.se>
+   * @date 2013-09-06
+   * @global type $db
+   * @return type
+   */
+  public function listMedlemIds() {
+    global $db;
+    $sql = "SELECT medlem_id FROM mm_foretagsnycklar WHERE foretag_id = " . $this->getId() . " and medlem_id is not null";
+    $ids = $db->valuesAsArray($sql);
+    return $ids;
+  }
+
+  /**
+   * Rest all the fadmin in tghe db for this company
+   * @author Krillo Reptilo AB
+   * @date 2013-09-02
+   * @global type $db
+   * @return type
+   */
+  public function resetAllFadmin() {
+    $medlemmar = $this->listMedlemmar();
+    $ids = array();
+    foreach ($medlemmar as $key => $medlem) {
+      $ids[] = $key;
+    }
+    global $db;
+    $sql = "UPDATE mm_medlem SET fadmin = 0 WHERE id in (" . implode(',', $ids) . ") ";
+    $result = $db->query($sql);
+    return $result;
+  }
+
   public function countMedlemmar() {
     global $db, $foretag_countmedlemmar_cache;
     if (!isset($foretag_countmedlemmar_cache)) {
@@ -2417,14 +2472,38 @@ www.motiomera.se';
   }
 
   /**
-   * Set veckor (to db)
+   * Set slutdatum for all members.
+   * This adds automatically 7 days to the the submitted date
+   * 
+   * added by krillo 130906
+   * @param type $datum 
+   */
+  public function updateSlutdatumAllMembers($arg) {
+    global $db;
+    $jDate = new JDate($arg);
+    $endDate = $jDate->addDays(7)->getDate();
+    $ids = $this->listMedlemIds();
+    if ($ids) {
+      $idsList = implode(',', $ids);
+      $sql = "UPDATE mm_medlem SET paidUntil = '$endDate' WHERE id in ($idsList)";
+      $result = $db->value($sql);
+      return $result;
+    } else {
+      return -1;
+    }
+  }
+
+  /**
+   * Set veckor (to db), return the new date.
    * added by krillo 120814
    * @param type $datum 
    */
   public function setVeckor($arg) {
     $this->veckor = $arg;
     $jDate = new JDate($this->getStartdatum());
-    $this->setSlutdatum($jDate->addDays($arg * 7 - 1)->getDate());
+    $newDate = $jDate->addDays($arg * 7 - 1)->getDate();
+    $this->setSlutdatum($newDate);
+    return $newDate;
   }
 
   /**
@@ -2562,10 +2641,8 @@ www.motiomera.se';
 
 }
 
-
-
 class ForetagException extends Exception {
-
+  
 }
 
 ?>
