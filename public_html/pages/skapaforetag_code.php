@@ -283,11 +283,11 @@ Order::getMondays(15);
     <li id="calc">
       <h2 >Antal deltagare för stegtävling</h2> 
       <div class="clear"></div>
-      <div id="nbr-with-text"><?php echo $campaignCodes['RE03'][text]; ?><br/><!--span style="color:black;text-decoration: line-through;">289 </span--><span>&nbsp;<?php echo $campaignCodes['RE03'][pris]; ?> kr/person</span></div>
+      <div id="nbr-with-text"><?php echo $campaignCodes['RE03'][text]; ?><br/><span style="color:black;text-decoration: line-through;">289 </span><span>&nbsp;<?php echo $campaignCodes['RE03'][pris]; ?> kr/person</span></div>
       <input type="text" name="RE03" id="nbr-with"/>
       <div id="nbr-with-sum"><span class="nbr">0</span> kr ex moms</div>
       <div class="clear"></div>
-      <div id="nbr-without-text"><?php echo $campaignCodes['RE04'][text]; ?><br/><!--span style="color:black;text-decoration: line-through;">169 </span--><span>&nbsp;<?php echo $campaignCodes['RE04'][pris]; ?> kr/person</span></div>
+      <div id="nbr-without-text"><?php echo $campaignCodes['RE04'][text]; ?><br/><span style="color:black;text-decoration: line-through;">169 </span><span>&nbsp;<?php echo $campaignCodes['RE04'][pris]; ?> kr/person</span></div>
       <input type="text" name="RE04" id="nbr-without" />       
       <div id="nbr-without-sum"><span class="nbr">0</span> kr ex moms</div>
       <div class="clear"></div>
@@ -308,8 +308,8 @@ Order::getMondays(15);
         <option value="7">7</option>
         <option value="8">8</option>
       </select>
-      <!--div id="" style="float:left;margin-left: 15px;">Ring Kristian 0761-393855 om ni önskar fler veckor.</div-->
-      <div id="" style="float:left;margin-left: 15px;">Maila <a href="mailto:kristian@motiomera.se">kristian@motiomera.se</a> om ni önskar fler veckor.</div>
+      <div id="" style="float:left;margin-left: 15px;">Ring Kristian 0761-393855 om ni önskar fler veckor.</div>
+      <!--div id="" style="float:left;margin-left: 15px;">Maila <a href="mailto:kristian@motiomera.se">kristian@motiomera.se</a> om ni önskar fler veckor.</div-->
     </li>
     <div class="clear"></div>
     
@@ -324,8 +324,8 @@ Order::getMondays(15);
         <?php echo Order::getMondays(20); ?>
       </select>
       <div class="clear"></div>
-      <!--div id="early-info">Ring Kristian 0761-393855 om ni önskar tidigare datum.</div-->
-      <div id="early-info">Maila <a href="mailto:kristian@motiomera.se">kristian@motiomera.se</a> om ni önskar tidigare datum.</div>
+      <div id="early-info">Ring Kristian 0761-393855 om ni önskar tidigare datum.</div>
+      <!--div id="early-info">Maila <a href="mailto:kristian@motiomera.se">kristian@motiomera.se</a> om ni önskar tidigare datum.</div-->
     </li>
 
     <div class="clear"></div>
@@ -435,7 +435,7 @@ Order::getMondays(15);
   </div>
   <div id="pers-text" style="float:left;padding-left:15px;width:450px;padding-top:5px">
     <span  class="mmObs mmObsText">För mer information eller om du vill ha en powerpoint-presentation. Kontakta Kristian på:<br/>
-      <!-- 0761-393855<br/>  -->
+      0761-393855<br/>  
       <a href="mailto:kristian@motiomera.se" >kristian@motiomera.se</a>
     </span>
   </div>
