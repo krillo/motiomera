@@ -161,7 +161,7 @@ class Order extends Mobject {
           "typ" => "frakt",
           "text" => "Frakt",
           "extra" => " kr ex. moms.",
-          "pris" => 70,
+          "pris" => 80,
           "dagar" => 0,
           "popupid" => 22,
           "public" => TRUE,
