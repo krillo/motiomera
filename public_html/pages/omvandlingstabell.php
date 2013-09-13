@@ -3,9 +3,9 @@
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
 
 $smarty = new MMSmarty;
-$smarty->assign("pagetitle", "Omräkningstabell");
+$smarty->assign("pagetitle", "Omvandlingstabell");
 
-$namn = "omrakningstabell";
+$namn = "omvandlingstabell";
 
 $texteditor = TextEditor::loadByNamn($namn);
 

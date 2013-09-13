@@ -1521,6 +1521,41 @@ class Medlem extends Mobject {
     return $response;
   }
 
+  /**
+   * Change fnyckel ajax-style
+   * No MedlemException is thrown, all errors and messages are returned in the response array 
+   * 
+   * @global $db $db
+   * @param type $anamn
+   * 
+   * Date: 2013-09-13
+   * Author: Kristian Erendi
+   * URI: http://reptilo.se 
+   */
+  public function setFnyckelAjax($fnyckel) {
+    $anamn = Security::secure_data($fnyckel);
+    $response["success"] = 0;
+    $response["msg"] = "Error";
+    $giltig = Foretag::giltigForetagsnyckel($fnyckel);
+    $response["giltig"] = $giltig;
+    if($giltig === -2){
+      $response["msg"] = "Ogiltig";
+      return $response;      
+    }
+    if($giltig === -1){
+      $response["msg"] = "Upptagen";
+      return $response;      
+    }
+    if($giltig){
+      $this->setForetagsnyckel($fnyckel);
+      $this->commit();
+      $foretag = Foretag::loadByForetagsnyckel($fnyckel);
+      $response["msg"] = "Tillhör företag: " . $foretag->getNamn();
+      $response["success"] = 1;
+    }
+    return $response;    
+  }
+
   public function setKon($kon) {
 
     if ($kon != "man" && $kon != "kvinna") {
