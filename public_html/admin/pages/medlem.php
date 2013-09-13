@@ -1,11 +1,7 @@
 <?php
-
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
-
 Security::demand(ADMIN);
-
 $smarty = new AdminSmarty;
-
 $medlem = Medlem::loadById($_GET["id"]);
 $smarty->assign("medlem", $medlem);
 

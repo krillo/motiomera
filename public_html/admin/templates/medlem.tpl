@@ -1,36 +1,55 @@
 {literal}
-<script type="text/javascript">
-  jQuery(document).ready(function($){   
+  <script type="text/javascript">
+    jQuery(document).ready(function($) {
 
-   $("#cahngeanamn").click(function(event) {
-     event.preventDefault();
-     var data = {
-       mm_id:       $('#mm_id').attr('value'),
-       anamn:       $('#anamn').attr('value')
-     };    
-     $.ajax({
-       type: "POST",
-       url: "{/literal}{$url}{literal}/ajax/actions/changeanamn.php",
-       dataType: 'json',
-       data: data,
-       success: function(data){
-         $('#anamn-action').html(data.msg);
-       }
-     });
-     return false;
-   });
+      $("#cahngeanamn").click(function(event) {
+        event.preventDefault();
+        var data = {
+          mm_id: $('#mm_id').attr('value'),
+          anamn: $('#anamn').attr('value')
+        };
+        $.ajax({
+          type: "POST",
+          url: "{/literal}{$url}{literal}/ajax/actions/changeanamn.php",
+          dataType: 'json',
+          data: data,
+          success: function(data) {
+            $('#anamn-action').html(data.msg);
+          }
+        });
+        return false;
+      });
+
+      $("#setfnyckel").click(function(event) {
+        event.preventDefault();
+        var data = {
+          mm_id: $('#mm_id').attr('value'),
+          fnyckel: $('#fnyckel').attr('value')
+        };
+        $.ajax({
+          type: "POST",
+          url: "{/literal}{$url}{literal}/ajax/actions/setfnyckel.php",
+          dataType: 'json',
+          data: data,
+          success: function(data) {
+            console.log(data);
+            $('#fnyckel-action').html(data.msg);
+          }
+        });
+        return false;
+      });
 
 
-        
-});
-</script>        
+
+    });
+  </script>        
 {/literal}
 
 <h1>Hantera medlem</h1>
 <p><a href="{$urlHandler->getUrl(Medlem, URL_ADMIN_LIST)}">&laquo; Tillbaka</a></p>
 <form action="{$urlHandler->getUrl(Medlem, URL_ADMIN_SAVE)}" method="post">
   <input type="hidden" value="{$medlem->getId()}" name="medlem_id" id="mm_id"/>
-  <table border="0" cellpadding="0" cellspacing="0" class="motiomera_form_table">
+  <table border="0" cellpadding="0" cellspacing="0" class="motiomera_form_table extra-width">
     <tr>
       <th>Användarnamn</th>
       <td><input type="text" id="anamn" name="anamn" value="{$medlem->getANamn()}"  size="25"/></td>
@@ -77,6 +96,16 @@
       <td>{mm_html_options name=levelId options=$opt_levels selected=$sel_level}</td>
     </tr>
     <tr>
+      <th>Företagsnyckel</th>
+      <td colspan="3">Obs om det finns nyckel sedan tidigare så sätts ett till, inga poster raderas i db</td>
+    </tr>  
+    <tr>
+      <th></th>
+      <td><input type="text" id="fnyckel" name="fnyckel" value="{$medlem->getForetagsnyckel(true)}"  size="25"/></td>
+      <td><input type="button" id="setfnyckel" name="setfnyckel" value="Sätt företagsnyckel"  /></td>
+      <td id="fnyckel-action"></td>      
+    </tr>  
+    <tr>
       <th>Företag</th>
       <td >
         <a href="/admin/pages/listorder.php?search=&field=id&limit=40&offset=0&showValid=true&foretagid={$medlem->getForetagsId()}" style="text-decoration: underline; color: blue;">{$medlem->getForetagsNamn()}</a>
@@ -105,7 +134,8 @@
 <br />
 <form action="{$urlHandler->getUrl(Medlem, URL_ADMIN_DELETE, $medlem->getId())}" method="post">
 
-  <input type="submit" name="tabort" value="Ta bort medlem" onclick="var q = confirm('Är du säker på att du vill ta bort den här medlemmen?'); return q;" />
+  <input type="submit" name="tabort" value="Ta bort medlem" onclick="var q = confirm('Är du säker på att du vill ta bort den här medlemmen?');
+    return q;" />
 
 
 

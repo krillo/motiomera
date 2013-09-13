@@ -7,9 +7,11 @@
 <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Gå runt Sverige och samla kommunvapen</h1>
   <div style="text-align:left;float:left;padding-left:50px;">
     <h2 style="text-align:left;float:left;"> 
-      Delta i vår stegtävling och samla kommunvapen i kommunjakten<br><br>
+      Delta i vår stegtävling och samla kommunvapen i kommunjakten. <br/><br/>
+      Välj mellan 5 till 8 veckors för samma pris.<br/><br/>
       Den stora hösttävlingen startar den 23 sep</br> 
-      5 och 8 veckors tävling till samma pris.</h2>
+      15% rabatt om ni beställer före den 17 sep<br/>
+      </h2>
     
     <br/><br/>
       
@@ -25,11 +27,11 @@
     <br/>
     <!--span style="font-size:18px;color:#B71416;">15% rabatt</span><br/-->      
     <p style="text-align:left;font-size:14px;">
-    <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144 kr per person<br/>
-    <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 246 kr per person med stegräknare  -->
+    <span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144 kr per person<br/>
+    <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 246 kr per person med stegräknare  
     
-    169 kr per person<br/>
-    289 kr per person med stegräknare
+    <!-- 169 kr per person<br/-->
+    <!--289 kr per person med stegräknare -->
     
   </p>
 </div>        
