@@ -77,6 +77,14 @@ class Dagbok extends Mobject {
     global $db;
     $sql = "SELECT id, mm_id, kommentar, betyg, datum FROM " . self::TABLE . " WHERE mm_id = $mm_id AND datum = '$date'" ;
     $result = $db->oneRowAsObject($sql);
+    if(!isset($result->id)){ //set defaut
+      $result = new stdClass();
+      $result->id = 0;
+      $result->mm_id = $mm_id;
+      $result->kommentar = '';
+      $result->betyg = 0;
+      $result->datum = $date;
+    }
     return $result;
   }
 
