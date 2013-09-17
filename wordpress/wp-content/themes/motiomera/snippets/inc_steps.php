@@ -101,6 +101,7 @@
       } else {
         $("#mm-smiley" + diary.betyg).attr('checked', 'checked');
       }
+      return false;
     }
 
     function printTable(table) {
@@ -111,13 +112,18 @@
         row += '<td class="mm-activity-cell">' + value[3] + '</td>';
         row += '<td class="">' + value[4] + '</td>';
         row += '<td class="">' + value[5] + '</td>';
-        row += '<td class="">steg</td>';
-        row += '<td class=""><div class="mm-delete ui-icon-closethick" id="' + value[6] + '"></div></td>';
+        //row += '<td class="">steg</td>';
+        if (value[0].indexOf('mm-sum') >= 0) {
+          row += '<td class="">Steg</td>';
+        } else {
+          row += '<td class=""><div class="mm-delete ui-icon-closethick" id="' + value[6] + '"></div></td>';
+        }
         row += '</tr>';
         rows += row;
       });
       $('#mm-step-list-table tbody').html(rows).fadeIn();
       $("#mm-progress").hide();
+      return false;
     }
 
 
@@ -145,17 +151,24 @@
           printDiary(data.diary);
         }
       });
-      return true;
+      return false;
     }
+
+
 
     /************ catch events ********************/
 
     $('#mm-count').keyup(function(e) {
-    	//alert(e.keyCode);
-      if (e.keyCode === 13) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      if (e.keyCode === $.ui.keyCode.ENTER) {
         submitSteps();
+        return false;
       }
+      return false;
     });
+
 
 
 
@@ -292,8 +305,8 @@
   #mm-step-data-area{float:left;margin-left: 15px;width:400px;}
 
   #mm-step-list{min-width:400px;width:400px;font-size: 12px;}
-  #mm-step-list-table{margin:0;}
-  #mm-step-list-table th{color:#333;}
+  #mm-step-list-table{margin:0;width:100%;}
+  #mm-step-list-table th{color:#333;text-decoration: none;}
   .mm-activities {
     background-color: #D0E0C7;
     border-radius: 10px 10px 0 0;
@@ -321,7 +334,7 @@
 
   .mm-odd {background-color: #D0E0C7;}
   .mm-even {background-color: #E0EDD9;}
-  #mm-step-list-table th{color:#333;text-decoration: none;}
+  .mm-sum td{border-top:1px solid #5B7A19;}
   th.mm-first-cell, td.mm-first-cell{padding-left: 10px;width:75px;}
   .mm-activity-cell{width:185px;color:#333;}
   #mm-activity-link{text-decoration: underline;}
@@ -336,6 +349,17 @@
   .mm-delete-x{background-image: url("/wp-content/themes/motiomera/css/ui-lightness/images/ui-icons_ffffff_256x240.png");width:15px;height:15px;}
   .mm-delete-x:hover{background-image: url("/wp-content/themes/motiomera/css/ui-lightness/images/ui-icons_ef8c08_256x240.png");width:15px;height:15px;}
 
+  html input[type="button"]{
+    border: 1px solid #ccc;
+    border-color: #CEE596 #555555 #555555 #CEE596;
+    border-radius: 5px;
+    background-color: #5A7919;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0.6em 0.5em 0.6em 0.5em;
+    color: #fff;  
+  }
+  html input[type="button"]:hover{border-color: #555 #CEE596 #CEE596 #555;} /*padding: 0.55em 0.55em 0.65em 0.45em; } */
 </style>
 
 

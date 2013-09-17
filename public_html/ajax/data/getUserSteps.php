@@ -17,6 +17,8 @@ if (empty($req)) {
   !empty($_REQUEST['mm_id']) ? $req->mm_id = addslashes($_REQUEST['mm_id']) : $req->mm_id = '';
   !empty($_REQUEST['date']) ? $req->date = addslashes($_REQUEST['date']) : $req->date = '';
 }
+$class = '';
+$i = 0;
 $medlem = Medlem::loadById($req->mm_id);
 $list = Steg::listByDatum($req->date, $medlem);
 foreach ($list as $stegId => $stegObject) {
@@ -40,7 +42,14 @@ foreach ($list as $stegId => $stegObject) {
     $rowObj->steps = $stegObject->getSteg();
     $tab[$stegId] = $rowObj;
    */
+  $sum += $stegObject->getSteg();
 }
+$i++;
+$class = $i % 2 == 0 ? 'mm-even' : 'mm-odd';
+$row = array($class . ' mm-sum', '', '', '', '', $sum, '');
+$table[] = $row;
+
+
 $dagbok = Dagbok::getEntryBymmIdDate($req->mm_id, $req->date);
 $response['table'] = $table;
 //$response['tab'] = $tab;
