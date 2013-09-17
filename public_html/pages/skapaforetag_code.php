@@ -283,11 +283,11 @@ Order::getMondays(15);
     <li id="calc">
       <h2 >Antal deltagare för stegtävling</h2> 
       <div class="clear"></div>
-      <div id="nbr-with-text"><?php echo $campaignCodes['RE03'][text]; ?><br/><span style="color:black;text-decoration: line-through;">289 </span><span>&nbsp;<?php echo $campaignCodes['RE03'][pris]; ?> kr/person</span></div>
+      <div id="nbr-with-text"><?php echo $campaignCodes['RE03'][text]; ?><br/><!--span style="color:black;text-decoration: line-through;">289 </span--><span>&nbsp;<?php echo $campaignCodes['RE03'][pris]; ?> kr/person</span></div>
       <input type="text" name="RE03" id="nbr-with"/>
       <div id="nbr-with-sum"><span class="nbr">0</span> kr ex moms</div>
       <div class="clear"></div>
-      <div id="nbr-without-text"><?php echo $campaignCodes['RE04'][text]; ?><br/><span style="color:black;text-decoration: line-through;">169 </span><span>&nbsp;<?php echo $campaignCodes['RE04'][pris]; ?> kr/person</span></div>
+      <div id="nbr-without-text"><?php echo $campaignCodes['RE04'][text]; ?><br/><!--span style="color:black;text-decoration: line-through;">169 </span--><span>&nbsp;<?php echo $campaignCodes['RE04'][pris]; ?> kr/person</span></div>
       <input type="text" name="RE04" id="nbr-without" />       
       <div id="nbr-without-sum"><span class="nbr">0</span> kr ex moms</div>
       <div class="clear"></div>
@@ -315,11 +315,11 @@ Order::getMondays(15);
     
     
     <li><h2>Välj ert startdatum (valfri måndag)</h2>      
-      <input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2013-09-23" checked><label for="startdatumRadio1" id="startdatumRadio-label" style="text-decoration: none; font-size: 13px;display: inline;">Vår stora hösttävling 23/9 - 27/10</label>
+      <input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2013-09-23" disabled><label for="startdatumRadio1" id="startdatumRadio-label" style="text-decoration: none; font-size: 13px;display: inline;color:lightgray;">Vår stora hösttävling 23/9 - 27/10</label>
       <div style="clear:both;"></div>
-      <div style="color:red;font-size: 13px;display: block;line-height: 20px;margin-left: 48px;margin-bottom: 10px;">Hösttävlingen pågår under en 8 vekors-period, v39 - v46 så ni kan ändå<br/> var med fastän ni startar senare, maila Kristian för mer info.</div>
+      <div style="color:red;font-size: 13px;display: block;line-height: 20px;margin-left: 48px;margin-bottom: 10px;">Hösttävlingen pågår under v39 - v46 så ni kan ändå<br/> var med fastän ni startar senare, ring Kristian för mer info.</div>
       <div class="clear"></div>
-      <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum" >
+      <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum" checked>
       <select name="startdatum" id="startdatum" onchange="updateStartRadio();">
         <?php echo Order::getMondays(20); ?>
       </select>
