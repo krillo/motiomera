@@ -144,7 +144,7 @@
       .mm-legend-average{background-color: #306EFF;}
       .mm-legend-gold{background-color: #F2D897;}
       .mm-legend-silver{background-color: #CCC;}
-      #mm-legend-right{float:right;width:190px;hight:50px;}
+      #mm-legend-right{float:right;width:190px;height:50px;}
       #mm-legend-steps{width:90px;float:left;}
       #mm-legend-average{width:90px;float:left;}
 
@@ -167,8 +167,7 @@
       }      
       #mm-nbr-days{width:25px;}
     </style>
-
-    <input type="hidden" name="mm_id" id="mm_id" value="<?php echo $mmStatus->mm_mid; ?>" />    
+        
     <div class="mmBlueBoxTop">
       <h3 class="BoxTitle">Framsteg de senaste <input type="text" id="mm-nbr-days" value="7" /> dagarna <input type="button" value="ok" id="mm-nbr-days-ok"></h3> 
     </div>    

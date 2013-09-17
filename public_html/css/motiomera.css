@@ -2557,9 +2557,9 @@ table#alh_navtable
 {
   margin: 235px 0 0 0;
 }
-thead th, thead th a
+thead th a
 {
-  color: blue !important;
+  color: blue;
   text-decoration: underline;
 }
 td.number

@@ -10,6 +10,7 @@
 <script type="text/javascript">
   jQuery(document).ready(function($) {
     var mm_url = $("#mm_url").html();
+    var mm_id = $("#mm_id").html();
 
     //refresh the stepdata
     function refreshData() {
@@ -73,7 +74,7 @@
     function getUserData() {
       $("#mm-progress").show();
       var data = {
-        mm_id: $('#mm-mm_id').attr('value'),
+        mm_id: mm_id,
         date: $('#mm-step-date').attr('value')
       };
       $.ajax({
@@ -120,15 +121,52 @@
     }
 
 
+    function submitSteps() {
+      $("#mm-progress").show();
+      activity_id = $('#mm-activity-cat-id option:selected').val();
+      if (activity_id === undefined) {
+        activity_id = 5;
+      }
+      var data = {
+        mm_id: mm_id,
+        count: $('#mm-count').attr('value'),
+        date: $('#mm-step-date').attr('value'),
+        activity_id: activity_id
+      };
+      $.ajax({
+        type: "POST",
+        url: mm_url + "/ajax/actions/savesteps.php",
+        data: data,
+        success: function(data) {
+          $('#mm-activity-cat-id').val(5);
+          $('#mm-activity-list').hide();
+          $('#step-severity').hide();
+          printTable(data.table);
+          printDiary(data.diary);
+        }
+      });
+      return true;
+    }
+
     /************ catch events ********************/
 
+    $('#mm-count').keyup(function(e) {
+    	//alert(e.keyCode);
+      if (e.keyCode === 13) {
+        submitSteps();
+      }
+    });
+
+
+
+
     //delete activity row
-    $(".mm-delete").live('click',function() {
+    $(".mm-delete").live('click', function() {
       $("#mm-progress").show();
       var rowId = $(this).attr('id');
       var data = {
         row_id: rowId,
-        mm_id: jQuery('#mm-mm_id').attr('value'),
+        mm_id: mm_id,
         date: jQuery('#mm-step-date').attr('value')
       };
       jQuery.ajax({
@@ -146,30 +184,34 @@
 
     //submit steps to db via ajax
     $("#mm-submit").click(function(event) {
-      $("#mm-progress").show();
-      activity_id = $('#mm-activity-cat-id option:selected').val();
-      if (activity_id === undefined) {
-        activity_id = 5;
-      }
-      var data = {
-        mm_id: $('#mm-mm_id').attr('value'),
-        count: $('#mm-count').attr('value'),
-        date: $('#mm-step-date').attr('value'),
-        activity_id: activity_id
-      };
-      $.ajax({
-        type: "POST",
-        url: mm_url + "/ajax/actions/savesteps.php",
-        data: data,
-        success: function(data) {
-          $('#mm-activity-cat-id').val(5);
-          $('#mm-activity-list').hide();
-          $('#step-severity').hide();
-          printTable(data.table);
-          printDiary(data.diary);
-        }
-      });
+      submitSteps();
+      /*
+       $("#mm-progress").show();
+       activity_id = $('#mm-activity-cat-id option:selected').val();
+       if (activity_id === undefined) {
+       activity_id = 5;
+       }
+       var data = {
+       mm_id: mm_id,
+       count: $('#mm-count').attr('value'),
+       date: $('#mm-step-date').attr('value'),
+       activity_id: activity_id
+       };
+       $.ajax({
+       type: "POST",
+       url: mm_url + "/ajax/actions/savesteps.php",
+       data: data,
+       success: function(data) {
+       $('#mm-activity-cat-id').val(5);
+       $('#mm-activity-list').hide();
+       $('#step-severity').hide();
+       printTable(data.table);
+       printDiary(data.diary);
+       }
+       });
+       */
       return false;
+
     });
 
 
@@ -177,7 +219,7 @@
     $("#mm-diary-save").click(function(event) {
       $("#mm-progress").show();
       var data = {
-        mm_id: $('#mm-mm_id').attr('value'),
+        mm_id: mm_id,
         comment: jQuery('#mm-comment').attr('value'),
         smiley: jQuery('input:radio:checked').attr('value'),
         date: jQuery('#mm-step-date').attr('value')
@@ -232,6 +274,7 @@
   .ui-widget-header{background-color: #5B7A19;background-image: none;border-color: #384A0E;}
   .ui-widget {font-family: 'Cabin Condensed';font-size: 1.1em;}
   #mm-datepicker{float:left;}
+  .ui-datepicker-calendar thead tr th span{color:#333;text-decoration: none;}
   .ui-datepicker {width: 14em;}
 
   #mm-count{width:3em;margin:0 0.3em 0 0;}
@@ -250,7 +293,8 @@
 
   #mm-step-list{min-width:400px;width:400px;font-size: 12px;}
   #mm-step-list-table{margin:0;}
-  .mmAlbumBoxTop {
+  #mm-step-list-table th{color:#333;}
+  .mm-activities {
     background-color: #D0E0C7;
     border-radius: 10px 10px 0 0;
     height: 34px;
@@ -258,7 +302,7 @@
     padding: 0;
     width: 400px;
   }
-  .BoxTitle {
+  .mm-boxtitle {
     color: #FFFFFF;
     font-family: 'Cabin Condensed',sans-serif;
     font-size: 18px;
@@ -266,7 +310,7 @@
     margin: 5px 0 0 15px;
     position: absolute;
   }
-  .mmRightMinSidaBox {
+  .mm-activities-box {
     background-color: #E0EDD9;
     border-radius: 0 0 10px 10px;
     border-top: medium none;
@@ -276,9 +320,11 @@
   }     
 
   .mm-odd {background-color: #D0E0C7;}
-  .mm-even {background-color: #E0EDD9;}      
-  .mm-first-cell{padding-left: 10px;width:75px;}
-  .mm-activity-cell{width:185px;}
+  .mm-even {background-color: #E0EDD9;}
+  #mm-step-list-table th{color:#333;text-decoration: none;}
+  th.mm-first-cell, td.mm-first-cell{padding-left: 10px;width:75px;}
+  .mm-activity-cell{width:185px;color:#333;}
+  #mm-activity-link{text-decoration: underline;}
   #mm-comment{margin:0 0 5px 10px;width:375px; height:40px;}
   .mm-smiley{margin-left:40px;}
   .mm-smiley-first{margin-left:14px;}
@@ -297,16 +343,12 @@
 <div class="grid_3">
   <button id="mm-report-steps">Rapportera Steg</button>
 </div>    
-<div class="mm-delete-x ui-icon-closethick" id="0"></div>
-<div class="mm-delete-x ui-icon-closethick" id="1"></div>
-<div class="mm-delete-x ui-icon-closethick" id="2"></div>
 
 
 <div id="mm-dialog" title="Rapportera steg" style="display:none;">
   <div id="mm-datepicker" ></div>
   <div id="mm-step-data-area">
     <form id="submit-steps" method="post">
-      <input type="hidden" name="mm-mm_id" id="mm-mm_id" value="<?php echo $mmStatus->mm_mid; ?>" />
       <input type="hidden" name="mm-step-date" id="mm-step-date" value="<?php echo date("Y-m-d"); ?>" />
       <input type="text"  name="mm-count" id="mm-count" value="" />steg<a href="#" title="Annan aktivitet" id="mm-activity-link">Annan aktivitet?</a>
       <input type="button" name="mm-submit" id="mm-submit" value="Lägg till" />
@@ -315,10 +357,10 @@
       <div id="step-severity" style="display:none;"></div>
     </form>
     <div id="mm-step-list" >
-      <div class="mmAlbumBoxTop">
-        <h3 class="BoxTitle">Dina aktiviteter idag <span></span></h3>
+      <div class="mm-activities">
+        <h3 class="mm-boxtitle">Dina aktiviteter idag <span></span></h3>
       </div>  
-      <div class="mmRightMinSidaBox">
+      <div class="mm-activities-box">
         <table id="mm-step-list-table">
           <thead>
             <tr>
@@ -330,39 +372,15 @@
             </tr>
           </thead>
           <tbody id="">
-            <tr class="mm-odd">
-              <td class="mm-first-cell">2013-01-06</td>
-              <td class="mm-activity-cell"></td>
-              <td class=""></td>
-              <td class="">8900</td>
-              <td class="">steg</td>
-              <td class=""><div class="mm-delete ui-icon-closethick" id="1586230"></div></td>
-            </tr>
-            <tr class="">
-              <td class="mm-first-cell">2013-01-06</td>
-              <td class="mm-activity-cell">Cykling</td>
-              <td class="">50</td>
-              <td class="">4000</td>
-              <td class="">steg</td>
-              <td class=""><div class="mm-delete ui-icon-closethick" id="1586231"></div></td>
-            </tr>
-            <tr class="mm-odd">
-              <td class="mm-first-cell">2013-01-06</td>
-              <td class="mm-activity-cell">Vandring ryggsäck (10-15 kg)</td>
-              <td class="">50</td>
-              <td class="">9500</td>
-              <td class="">steg</td>
-              <td class=""><div class="mm-delete ui-icon-closethick" id="1586232"></div></td>
-            </tr>
           </tbody>
         </table> 
       </div>
     </div>
     <div id="mm-diary" >
-      <div class="mmAlbumBoxTop">
-        <h3 class="BoxTitle">Kommentera dagens motion &nbsp;<span></span></h3>
+      <div class="mm-activities">
+        <h3 class="mm-boxtitle">Kommentera dagens motion &nbsp;<span></span></h3>
       </div>  
-      <div class="mmRightMinSidaBox" style="float:left;">
+      <div class="mm-activities-box" style="float:left;">
         <textarea cols="40" rows="2" name="mm-comment" id="mm-comment"></textarea>
         <div style="float:left;width:285px;">
           <img alt="" src="/wp-content/themes/motiomera/img/smileys.png">

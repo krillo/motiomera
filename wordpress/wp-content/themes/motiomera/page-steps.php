@@ -6,6 +6,7 @@ get_header();
 ?>
 <div id="primary" class="site-content">
   <div id="content" role="main">
+  <input type="hidden" name="mm_id" id="mm_id" value="<?php echo $mmStatus->mm_mid; ?>" />  
   <?php includeSnippet("inc_steps.php"); ?>
   </div><!-- #content -->
 </div><!-- #primary .site-content -->
