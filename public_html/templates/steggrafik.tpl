@@ -349,7 +349,7 @@ if(end > 0) {
   
 <div id="report-area">
   {if !isset($isProfil)}
-    <a class="report-button" href="#" onclick="motiomera_steg_rapportera(); return false;"><img src="/img/design12/report.png" class="report" alt=""/>Rapportera dina steg!</a>
+    <a class="report-button" href="#" id="mm-report-steps"><img src="/img/design12/report.png" class="report" alt=""/>Rapportera dina steg!</a>
     <a class="report-button route" href="{$urlHandler->getUrl(Rutt, URL_VIEW, $medlem->getId())}" ><img src="/img/design12/route.png" class="route_x" alt=""/>Välj en rutt!</a>
     {/if}
   <div id="report-data">

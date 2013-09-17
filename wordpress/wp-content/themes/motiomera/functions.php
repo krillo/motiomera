@@ -96,6 +96,7 @@ function create_post_type() {
 define('MM_WP_INIT', true);
 
 $mmStatus = new stdClass();
+$mmStatus->url = get_bloginfo('url');
 $mmStatus->front_page = 0;
 $mmStatus->normal_page = 0;
 $mmStatus->mm_logged_in = 0;
@@ -233,6 +234,12 @@ function includeSnippet($file) {
       }
       break;
     case 'inc_buy.php':
+      include 'snippets/' . $file;
+      break;
+    case 'inc_graph.php':
+      include 'snippets/' . $file;
+      break;
+    case 'inc_steps.php':
       include 'snippets/' . $file;
       break;
     default:

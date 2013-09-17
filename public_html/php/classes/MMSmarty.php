@@ -27,7 +27,7 @@ class MMSmarty extends Smarty
 	
 	public function __construct($cache = false, $cacheLiftime = 3600)
 	{
-		global $USER, $ADMIN, $FORETAG, $urlHandler, $security, $adressbok, $urlChecker, $db, $sajtDelarObj, $footer;
+		global $USER, $ADMIN, $FORETAG, $SETTINGS, $urlHandler, $security, $adressbok, $urlChecker, $db, $sajtDelarObj, $footer;
 		$this->template_dir = ROOT . '/templates';
 		$this->compile_dir = ROOT . '/templates_c';
 		$this->config_dir = ROOT . '/php/libs/smarty/configs';
@@ -56,6 +56,7 @@ class MMSmarty extends Smarty
 		$this->assign("security", $security);
 		$this->assign("GOOGLEMAPS_APIKEY", GOOGLEMAPS_APIKEY);
 		$this->assign("DEBUG", DEBUG);
+		$this->assign("mm_url", $SETTINGS['url']);
 		$this->contentCacheLifetime = $cacheLiftime;
 		$this->compile_check = true;
 

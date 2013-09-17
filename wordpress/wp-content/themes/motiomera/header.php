@@ -8,6 +8,7 @@
  */
 mm_status();
 global $mmStatus;
+//print_r($mmStatus);
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
   <head>
@@ -37,7 +38,7 @@ if ($site_description && ( is_home() || is_front_page() )) {
   </head>
   <body <?php body_class(); ?>>
     <?php do_action('before'); ?>
-
+    <div id="mm_url" style="display: none;"><?php echo home_url(''); ?></div>
     <div id="fb-root"></div>
     <script>
       window.fbAsyncInit = function() {

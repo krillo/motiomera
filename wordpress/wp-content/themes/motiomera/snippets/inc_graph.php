@@ -1,9 +1,22 @@
-{literal}   
-<script type="text/javascript">
+<?php
+/**
+ * Description: The complete code for the graph
+ * 
+ * Date: 2013-09-16
+ * Author: Kristian Erendi 
+ * URI: http://reptilo.se 
+ * 
+ * Testdata
+ *      var steps = null; //[[1, 7500], [2, 8000], [3, 5600], [4, 14000], [5, 9040], [6, 11500], [7, 13000],]; 
+ *      var average = null; //[[1.3, 8100], [2.3, 8500], [3.3, 9200], [4.3, 8700], [5.3, 8000], [6.3, 7500], [7.3, 9400]];
+ *      var ticks = null; //[[1.3, "lör 29/12"],[2.3, "sön 30/12"],[3.3, "mån 31/12"], [4.3, "tis 1/1"], [5.3, "ons 2/1"], [6.3, "tor 3/1"], [7.3, "fre 4/1"]];
+ *
+ */?>
+    <script type="text/javascript">
       jQuery(function ($) { 
-        var steps = null; //[[1, 7500], [2, 8000], [3, 5600], [4, 14000], [5, 9040], [6, 11500], [7, 13000],]; 
-        var average = null; //[[1.3, 8100], [2.3, 8500], [3.3, 9200], [4.3, 8700], [5.3, 8000], [6.3, 7500], [7.3, 9400]];
-        var ticks = null; //[[1.3, "lör 29/12"],[2.3, "sön 30/12"],[3.3, "mån 31/12"], [4.3, "tis 1/1"], [5.3, "ons 2/1"], [6.3, "tor 3/1"], [7.3, "fre 4/1"]];
+        var steps = null;
+        var average = null;
+        var ticks = null;
         var stats = null;
         var nbr_days = $("#mm-nbr-days").val();
         getStepData();
@@ -13,8 +26,9 @@
           var to_date = $.datepicker.formatDate('yy-mm-dd', new Date());
           var from_date = new Date(new Date().setDate(new Date().getDate() - nbr_days + 1));
           from_date = $.datepicker.formatDate('yy-mm-dd', from_date);
+          
           var data = {
-            mm_id:     $("#mm_id").html(),
+            mm_id:     $('#mm_id').html(),
             from_date: from_date,
             to_date:   to_date          
           };              
@@ -106,10 +120,22 @@
         
       });      
     </script>  
+
     <style>
-      #mm-graph{width:520px; float:left;}
-      #placeholder{width:520px;height:300px;float:left;background-color: #EDFCE4;}
-      #mm-legend-area{width:500px;background-color: #8AA25A;border-radius: 0 0 10px 10px;border-top: 1px solid #FFF;height: 40px;margin-bottom: 35px;padding: 10px;float:left;color:#fff;font-size: 13px;}
+      #mm-graph{width:520px; float:left; border-color:#666;}
+      #placeholder{width:520px;height:300px;float:left}
+      .xAxis{color:#2E4B00;}
+
+      #mm-legend-area{width:500px;background-color: #8AA25A;
+                      border-radius: 0 0 10px 10px;
+                      border-top: 1px solid #FFFFFF;
+                      height: 40px;
+                      margin-bottom: 35px;
+                      padding: 10px;
+                      float:left;
+                      color:#fff;
+                      font-size: 13px;
+      }
       #mm-legend-left{float:left;width:277px;}
       .mm-legend-container-long{float: left;width:175px;}
       .mm-legend-container{float: left;width:100px;}
@@ -121,11 +147,28 @@
       #mm-legend-right{float:right;width:190px;hight:50px;}
       #mm-legend-steps{width:90px;float:left;}
       #mm-legend-average{width:90px;float:left;}
-      .mmBlueBoxTop {background-color: #D0E0C7;border-radius: 10px 10px 0 0;height: 40px;margin: 0;padding: 0;width: 520px;}      
-      .BoxTitle {color: #FFF;font-family: 'Cabin Condensed',sans-serif;font-size: 18px;font-weight: normal;margin: 10px 0 0 15px;position: absolute;}      
+
+
+      .mmBlueBoxTop {
+        background-color: #D0E0C7;
+        border-radius: 10px 10px 0 0;
+        height: 40px;
+        margin: 0;
+        padding: 0;
+        width: 520px;
+      }      
+      .BoxTitle {
+        color: #FFFFFF;
+        font-family: 'Cabin Condensed',sans-serif;
+        font-size: 18px;
+        font-weight: normal;
+        margin: 10px 0 0 15px;
+        position: absolute;
+      }      
       #mm-nbr-days{width:25px;}
     </style>
-{/literal}        
+
+    <input type="hidden" name="mm_id" id="mm_id" value="<?php echo $mmStatus->mm_mid; ?>" />    
     <div class="mmBlueBoxTop">
       <h3 class="BoxTitle">Framsteg de senaste <input type="text" id="mm-nbr-days" value="7" /> dagarna <input type="button" value="ok" id="mm-nbr-days-ok"></h3> 
     </div>    

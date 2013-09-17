@@ -44,8 +44,13 @@
 
 <!-- START mmColumnMiddle -->
 <div style="min-height:340px;margin-bottom: 15px;float:left">
-{include file="widget_graph.tpl"}
-{*include file="widget_framsteg.tpl"*}
+{*include file="widget_graph.tpl"*}
+{php}
+  include('/var/www/motiomera/wordpress/wp-content/themes/motiomera/snippets/inc_graph.php');
+{/php}
+{php}
+  include('/var/www/motiomera/wordpress/wp-content/themes/motiomera/snippets/inc_steps.php');
+{/php}
 </div>
 <div style="min-height:340px;margin-bottom: 15px;float:left">
 {include file="widget_kommunjakten.tpl"}
