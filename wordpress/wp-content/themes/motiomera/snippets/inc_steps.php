@@ -112,7 +112,6 @@
         row += '<td class="mm-activity-cell">' + value[3] + '</td>';
         row += '<td class="">' + value[4] + '</td>';
         row += '<td class="">' + value[5] + '</td>';
-        //row += '<td class="">steg</td>';
         if (value[0].indexOf('mm-sum') >= 0) {
           row += '<td class="">Steg</td>';
         } else {
@@ -122,6 +121,11 @@
         rows += row;
       });
       $('#mm-step-list-table tbody').html(rows).fadeIn();
+      if ($("#mm-step-date-today").val() === $("#mm-step-date").val()) {
+        $("#mm-step-list-date").html('idag');
+      } else{
+        $("#mm-step-list-date").html($("#mm-step-date").val());
+      }
       $("#mm-progress").hide();
       return false;
     }
@@ -292,20 +296,18 @@
 
   #mm-count{width:3em;margin:0 0.3em 0 0;}
   #submit-steps{margin-bottom: 10px;}
+  #submit-steps input, #submit-steps img{display:inline;}
   #mm-activity-link{margin:0 1em;}
   #mm-activity-list, #step-severity{font-size: 14px;margin-top:5px;}
   #preview-step-list{maring-top:15px;font-size: 14px;}
   #motiomera_steg_preview_header {color: #333;background-color: #fff;}
   #motiomera_steg_preview_header td{padding:0 10px 0 10px;}
 
-
-
-  /************** New stuff ******************/
   #mm-dialog{font-size: 16px; background-color: #fff;}      
   #mm-step-data-area{float:left;margin-left: 15px;width:400px;}
 
   #mm-step-list{min-width:400px;width:400px;font-size: 12px;}
-  #mm-step-list-table{margin:0;width:100%;}
+  #mm-step-list-table{margin:0;width:100%;border-spacing: 0;}
   #mm-step-list-table th{color:#333;text-decoration: none;}
   .mm-activities {
     background-color: #D0E0C7;
@@ -334,7 +336,7 @@
 
   .mm-odd {background-color: #D0E0C7;}
   .mm-even {background-color: #E0EDD9;}
-  .mm-sum td{border-top:1px solid #5B7A19;}
+  .mm-sum td{border-top:3px solid #5B7A19;height: 2em;vertical-align: middle;}
   th.mm-first-cell, td.mm-first-cell{padding-left: 10px;width:75px;}
   .mm-activity-cell{width:185px;color:#333;}
   #mm-activity-link{text-decoration: underline;}
@@ -342,7 +344,7 @@
   .mm-smiley{margin-left:40px;}
   .mm-smiley-first{margin-left:14px;}
   #mm-diary-save{float: right;margin-right: 10px;}
-  #mm-progress{margin-left:100px;}
+  #mm-progress{margin-left:10px;}
   .mm-delete{background-image: url("/wp-content/themes/motiomera/css/ui-lightness/images/ui-icons_ffffff_256x240.png");width:15px;height:15px;}
   .mm-delete:hover{background-image: url("/wp-content/themes/motiomera/css/ui-lightness/images/ui-icons_ef8c08_256x240.png");width:15px;height:15px;}
 
@@ -373,6 +375,7 @@
   <div id="mm-datepicker" ></div>
   <div id="mm-step-data-area">
     <form id="submit-steps" method="post">
+      <input type="hidden" name="mm-step-date-today" id="mm-step-date-today" value="<?php echo date("Y-m-d"); ?>" />
       <input type="hidden" name="mm-step-date" id="mm-step-date" value="<?php echo date("Y-m-d"); ?>" />
       <input type="text"  name="mm-count" id="mm-count" value="" />steg<a href="#" title="Annan aktivitet" id="mm-activity-link">Annan aktivitet?</a>
       <input type="button" name="mm-submit" id="mm-submit" value="Lägg till" />
@@ -382,7 +385,7 @@
     </form>
     <div id="mm-step-list" >
       <div class="mm-activities">
-        <h3 class="mm-boxtitle">Dina aktiviteter idag <span></span></h3>
+        <h3 class="mm-boxtitle">Dina aktiviteter <span id="mm-step-list-date">idag</span></h3>
       </div>  
       <div class="mm-activities-box">
         <table id="mm-step-list-table">

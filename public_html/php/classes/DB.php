@@ -152,7 +152,32 @@ class DB
 		unset($data);
 		return $result;
 	}
-	
+
+	/** 
+	 * Returnerar en array med alla värden i alla fält (Tvådimensionell).
+	 * Lägger även $key som array key, om det finns.
+   * 2013-09-18 Krillo
+	 */ 
+	public function allValuesAsArrayOptKey($sql, $key){
+		$res = $this->query($sql);
+		$result = array();
+		while ($data = mysql_fetch_assoc($res)) {
+			foreach ($data as $field => $value) {
+				$data[$field] = stripslashes($value);
+			}
+			if (isset($data[$key])) {
+				$result[$data[$key]] = $data;
+			} else {
+				$result[] = $data;
+			}
+		}
+		unset($data);
+		return $result;
+	}
+	  
+  
+  
+  
 	public function closeConnection()
 	{
 		mysql_close($this->connection);

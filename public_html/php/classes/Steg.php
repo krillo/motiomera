@@ -214,7 +214,8 @@ class Steg extends Mobject{
 
   
   /**
-   * Description: Returns total sum steps per day per ALL users. Data is returned from from_date to to_date 
+   * Description: Returns total sum steps per day per ALL users. Data is returned from from_date to to_date, 
+   * Loop the dates so to catch dates with no step data
    * Date: 2013-01-04
    * Author: Kristian Erendi 
    * URI: http://reptilo.se 
@@ -227,16 +228,25 @@ class Steg extends Mobject{
    * );
    */
 	public static function getStegTotalAveragePerDays($mm_id, $from_date, $to_date){
-		global $db;
+		$jdate = new JDate($from_date);
+    global $db;
     $sql = "SELECT sum(steg) steps_day, count(distinct(medlem_id)) nof_users, cast((sum(steg) / count(distinct(medlem_id))) AS UNSIGNED INTEGER) AS average, s.datum FROM mm_steg s WHERE s.datum >= '$from_date' AND s.datum <= '$to_date' GROUP BY datum"; 
-    $dbResult = $db->allValuesAsArray($sql);
-    foreach ($dbResult as $key => $value) {
+    $dbResult = $db->allValuesAsArrayOptKey($sql, 'datum');
+    while($jdate->getDate() <= $to_date){
       $i++;
-      $steps[] = array($i.'.3', (int)$value['average']);
+      if(array_key_exists($jdate->getDate(), $dbResult)){
+        $data = $dbResult[$jdate->getDate()];
+        $steps[] = array($i.'.3', (int)$data['average']);
+      } else {
+        $steps[] = array($i.'.3', 0);
+      }
+      $jdate->addDays(1);
     }
     return $steps;
   }
-
+  
+  
+  
   /**
    * Description: Returns an array to suit the ticks in jquery.flot.js 
    * Date: 2013-01-04
