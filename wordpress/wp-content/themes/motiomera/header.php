@@ -32,8 +32,6 @@ if ($site_description && ( is_home() || is_front_page() )) {
     <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
     <![endif]-->
 
-
-
     <?php wp_head(); ?>
   </head>
   <body <?php body_class(); ?>>
@@ -64,9 +62,6 @@ if ($site_description && ( is_home() || is_front_page() )) {
     </script>
 
 
-
-
-
     <script type="text/javascript">
       jQuery(document).ready(function($) {  
         var offset = $('#wp-nav').offset();  
@@ -89,12 +84,15 @@ if ($site_description && ( is_home() || is_front_page() )) {
     <nav role="navigation" class="site-navigation main-navigation" id="wp-nav">
       <div id="menu">
         <a href="<?php echo home_url('/'); ?>" title="http://motiomera.se" rel="home"><div id="motiomera-logo-mini" class=""></div></a>
-        <div id="wp-nav-menu"><?php wp_nav_menu(array('theme_location' => 'primary')); ?></div>
+        <?php if ($mmStatus->mm_logged_in == 1): ?>
+          <div id="wp-nav-menu"><?php wp_nav_menu(array('theme_location' => 'header_logged_in')); ?></div>
+        <?php else: //primary = logged out ?>
+          <div id="wp-nav-menu"><?php wp_nav_menu(array('theme_location' => 'primary')); ?></div>
+        <?php endif; ?>
       </div>
       <?php includeSnippet("inc_logged_in_menu.php"); ?>           
     </nav>
     <div class="clear"></div>
-
 
     <div id="page" class="hfeed site">  
       <header id="masthead" class="site-header" role="banner">

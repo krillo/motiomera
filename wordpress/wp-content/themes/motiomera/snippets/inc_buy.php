@@ -615,7 +615,7 @@ Order::getMondays(15);
   <div id="buy-company-2" class="buy-container hide-company hidden" >
     <div class="buy-box-outer">
       <div class="buy-box margin-top">
-        <div class="buy-heading">Adress</div>
+        <div class="buy-heading">Leverans-adress</div>
         <ul class="buy-ul">
           <li><input type="text" name="del-company" id="del-company" class="required" placeholder="Företagets namn*"/></li>
           <li><input type="text" name="del-co" id="del-co" class="" placeholder="c/o"/></li>
