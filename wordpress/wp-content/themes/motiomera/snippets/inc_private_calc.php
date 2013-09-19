@@ -272,20 +272,9 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
 
 </style>
 
-
-
-
 <div id="buy-private-calc">
   <div id="buy-private-calc-text">För dig som vill röra på dig och samtidigt ha kul! Det är enkelt, allt du behöver är en stegräknare.</div>
   <div id="buy-private-calc-input">
-
-
-
-
-
-
-
-
     <form action="/actions/payson_privat.php" method="post" id="checkout">
       <input type="hidden" name="type" value="medlem">         
       <input type="hidden" name="m_total"   id="m_total" value="">                    
@@ -392,10 +381,6 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
         </ul>
       </div> <!-- end member-private -->      
     </form>    
-
-
-
-
 
 
 

@@ -240,7 +240,7 @@ hgroup{height:127px; float:left;}
 #checkout-ul a{text-decoration: underline;}
 #calc{border-bottom: solid black 1px;}
 
-#nbr-with-text, #nbr-without-text{float: left;width:120px;margin-bottom: 15px;font-size: 15px;}
+#nbr-with-text, #nbr-without-text{float: left;width:120px;margin-bottom: 10px;font-size: 14px;}
 #nbr-with-text span, #nbr-without-text span{color:#336600;}
 
 #nbr-with, #nbr-without{margin-right: 15px;width:45px;height:31px;font-size: 22px;color:#888;padding-left: 5px;}
@@ -374,7 +374,7 @@ hgroup{height:127px; float:left;}
   #calc input{width:18px;height:18px;font-size: 14px;float:left;}
   #calc div{font-size: 14px;}
   .step-check{}
-  #short, #long, #freight{float:left;margin-bottom: 25px;width: 75%;}
+  #short, #long, #freight{float:left;margin-bottom: 15px;width: 75%;}
   #freight_private{margin: 0 0 10px 0;width:253px;}
   #sum-short, #sum-long, #freight-sum{float:left;}
   #nbr-sum-total-freight .currency{width:90px;font-size: 20px;}

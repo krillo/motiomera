@@ -4,16 +4,15 @@ ini_set('display_errors', '1');
 //print_r($GLOBALS );               //display all wp-globals 
 //global $mmStatus;                 
 //print_r($mmStatus);               //display all mm-wp-globals 
-
 //require_once(MM_ROOT_ABSPATH . "/init.php");
 
-  require_once MM_ROOT_ABSPATH . "/classes/Mobject.php";
-  require_once MM_ROOT_ABSPATH . "/classes/UserException.php";
-  require_once MM_ROOT_ABSPATH . "/classes/Misc.php";
-  require_once MM_ROOT_ABSPATH . "/classes/Order.php";
-  require_once MM_ROOT_ABSPATH . "/classes/Kommun.php";
-  //require_once MM_ROOT_ABSPATH . "/classes/DB.php";
-  require_once MM_ROOT_ABSPATH . "/classes/Medlem.php";
+require_once MM_ROOT_ABSPATH . "/classes/Mobject.php";
+require_once MM_ROOT_ABSPATH . "/classes/UserException.php";
+require_once MM_ROOT_ABSPATH . "/classes/Misc.php";
+require_once MM_ROOT_ABSPATH . "/classes/Order.php";
+require_once MM_ROOT_ABSPATH . "/classes/Kommun.php";
+//require_once MM_ROOT_ABSPATH . "/classes/DB.php";
+require_once MM_ROOT_ABSPATH . "/classes/Medlem.php";
 
 $campaignCodes = Order::$campaignCodes;
 $moms = Order::$moms;
@@ -24,26 +23,26 @@ Order::getMondays(15);
 
 
 <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
-<script type="text/javascript">    
+<script type="text/javascript">
   jQuery(function($) {
     var type = $("#type").val();
-    if(type === "private"){
+    if (type === "private") {
       showPrivateHideCompany();
-    } else if(type === "company"){
+    } else if (type === "company") {
       showCompanyHidePrivate();
     }
-        
+
     /**
      * Custom Email ajax validation for the jQuery Validator plugin
      * Krillo 2012 
-     */       
+     */
     var emailFree = true;
     $.validator.addMethod("mmEmail", function(email, element) {
       email = $('#email1').val();
       var data = {
         typ: 'epost',
         varde: email
-      };          
+      };
       $.ajax({
         type: "POST",
         url: "/ajax/actions/validate.php",
@@ -51,32 +50,33 @@ Order::getMondays(15);
         data: data,
         cache: false,
         timeout: 30000,
-        error: function(){
+        error: function() {
           return true;
         }
-      }).done(function ( data ) { 
-        if(data == "1"){
+      }).done(function(data) {
+        if (data == "1") {
           //console.log('true');
-          emailFree =  true;
-        }else{
+          emailFree = true;
+        } else {
           //console.log('false');
           emailFree = false;
         }
-      }); return emailFree;
-    }, "Upptagen epostadress");   
-        
+      });
+      return emailFree;
+    }, "Upptagen epostadress");
+
 
     /**
      * Custom alias ajax validation for the jQuery Validator plugin
      * Krillo 2012 
-     */       
+     */
     var anamnFree = true;
     $.validator.addMethod("mmAnamn", function(anamn, element) {
       anamn = $('#anamn').val();
       var data = {
         typ: 'anamn',
         varde: anamn
-      };          
+      };
       $.ajax({
         type: "POST",
         url: "/ajax/actions/validate.php",
@@ -84,31 +84,32 @@ Order::getMondays(15);
         data: data,
         cache: false,
         timeout: 30000,
-        error: function(){
+        error: function() {
           return true;
         }
-      }).done(function ( data ) { 
-        if(data == "1"){
+      }).done(function(data) {
+        if (data == "1") {
           //console.log('true');
-          anamnFree =  true;
-        }else{
+          anamnFree = true;
+        } else {
           //console.log('false');
           anamnFree = false;
         }
-      }); return anamnFree;
-    }, "Upptaget alias, välj ett annat");   
+      });
+      return anamnFree;
+    }, "Upptaget alias, välj ett annat");
 
 
-        
+
     /**
      * Do input validation
      * Fields that are hidden are not validated 
      * jQuery Validator plugin
-     */ 
+     */
     var validator = $("#checkout").validate({
       errorClass: "invalid",
       validClass: "valid",
-      rules: { 
+      rules: {
         "del-company": {
           required: true
         },
@@ -133,13 +134,13 @@ Order::getMondays(15);
         },
         "del-phone": {
           required: true
-        }, 
+        },
         //private
         anamn: {
           required: true,
-          maxlength: <?php echo Medlem::MAX_LENGTH_ANAMN; ?>, 
+          maxlength: <?php echo Medlem::MAX_LENGTH_ANAMN; ?>,
           minlength: <?php echo Medlem::MIN_LENGTH_ANAMN; ?>,
-          mmAnamn: true          
+          mmAnamn: true
         },
         firstname: {
           required: true
@@ -155,7 +156,7 @@ Order::getMondays(15);
         email2: {
           email: '',
           equalTo: "#email1"
-        },        
+        },
         street1: {
           required: true
         },
@@ -170,11 +171,11 @@ Order::getMondays(15);
         },
         pass: {
           required: true
-          //min: 4
+                  //min: 4
         },
         pass2: {
           equalTo: "#pass"
-        }       
+        }
       },
       messages: {
         "del-company": {
@@ -199,9 +200,9 @@ Order::getMondays(15);
           required: ''
         },
         "del-email": {
-          required: '', 
+          required: '',
           email: ''
-        },        
+        },
         //Private
         "anamn": {
           required: '',
@@ -227,17 +228,17 @@ Order::getMondays(15);
           required: ''
         },
         "email1": {
-          required: '', 
+          required: '',
           email: 'Skriv en korrekt e-postadress'
         },
         "email2": {
-          equalTo: '', 
+          equalTo: '',
           email: 'Skriv en korrekt e-postadress'
-        },        
+        },
         "pass": {
           required: ''
-          //min: 'minst 4 tecken'
-        },        
+                  //min: 'minst 4 tecken'
+        },
         "pass2": {
           equalTo: ''
         }
@@ -245,20 +246,20 @@ Order::getMondays(15);
     });
 
 
-    function showPrivateHideCompany(){
-      type = 'private';      
+    function showPrivateHideCompany() {
+      type = 'private';
       $('#type').val('private');
       $('.hide-company').addClass("hidden");
       $('#buy-company').addClass("hidden");
       $('#buy-company-top').removeClass("full-width");
       $('.hide-private').removeClass("hidden");
       $('#buy-private-top-left').addClass("full-width");
-      $('#link-company').removeClass("hidden");  
-      $('#buy-payment').removeClass("hidden");  
-      $('#faktura').addClass("hidden");  
+      $('#link-company').removeClass("hidden");
+      $('#buy-payment').removeClass("hidden");
+      $('#faktura').addClass("hidden");
     }
-    
-    function showCompanyHidePrivate(){
+
+    function showCompanyHidePrivate() {
       type = 'company';
       $('#type').val('company');
       $('.hide-company').removeClass("hidden");
@@ -266,148 +267,158 @@ Order::getMondays(15);
       $('#buy-company-top').addClass("full-width");
       $('.hide-private').addClass("hidden");
       $('#buy-private-top-left').removeClass("full-width");
-      $('#buy-payment').removeClass("hidden");  
-    }   
+      $('#buy-payment').removeClass("hidden");
+    }
 
 
     /**
      * Sum company with and without stepcounter, add freight and moms
-     */ 
-    function sum_company(){
-      var sumWith, sumWithout, sumTotal, countWith, countWithout, freight, sumTotalFreight, sumTotalFreightMoms;           
+     */
+    function sum_company() {
+      var sumWith, sumWithout, sumTotal, countWith, countWithout, freight, sumTotalFreight, sumTotalFreightMoms;
       showCompanyHidePrivate();
-      
+
       countWith = $('#nbr-with').val();
-      sumWith =  countWith * <?php echo $campaignCodes['RE03']['pris']; ?>;
+      sumWith = countWith * <?php echo $campaignCodes['RE03']['pris']; ?>;
       $('#nbr-with-sum span').html(sumWith);
-  
-      if(sumWith == 0){
+
+      if (sumWith == 0) {
         //FRAKT00 is 0 kr
         $('#freight span').html(<?php echo $campaignCodes['FRAKT00']['pris']; ?>);
         $('#freight-text').html('<?php echo $campaignCodes['FRAKT00']['extra']; ?>');
         $('#m_freight').val('FRAKT00');
-      } else {             
+      } else {
         $('#freight span').html(<?php echo $campaignCodes['FRAKT01']['pris']; ?>);
         $('#freight-text').html('<?php echo $campaignCodes['FRAKT01']['extra']; ?>');
         $('#m_freight').val('FRAKT01');
-      }   
+      }
       countWithout = $('#nbr-without').val();
-      sumWithout =  countWithout * <?php echo $campaignCodes['RE04']['pris']; ?>;
+      sumWithout = countWithout * <?php echo $campaignCodes['RE04']['pris']; ?>;
       $('#nbr-without-sum span').html(sumWithout);
-        
-      sumTotal = sumWith + sumWithout;  
+
+      sumTotal = sumWith + sumWithout;
       $('#nbr-sum-total span').html(sumTotal);
-          
+
       freight = $('#freight span').html();
       sumTotalFreight = parseInt(freight) + parseInt(sumTotal);
-      $('#nbr-sum-total-freight-nbr').html(sumTotalFreight);    
-      $('#nbr-sum-total-freight span.nbr').html(sumTotalFreight);    
-                  
+      $('#nbr-sum-total-freight-nbr').html(sumTotalFreight);
+      $('#nbr-sum-total-freight span.nbr').html(sumTotalFreight);
+
       sumTotalFreightMoms = sumTotalFreight * <?php echo $moms['percent']; ?>;
       sumTotalFreightMoms = Math.ceil(sumTotalFreightMoms);
       $('#nbr-sum-total-freight-moms span').html(sumTotalFreightMoms);
 
-      $('#m_exmoms').val(sumTotal);          
-      $('#m_total').val(sumTotalFreight);        
+      $('#m_exmoms').val(sumTotal);
+      $('#m_total').val(sumTotalFreight);
       $('#m_incmoms').val(sumTotalFreightMoms);
     }
-        
+
 
     /**
      * Sum private
-     */ 
-    function sum_private(){
+     */
+    function sum_private() {
       showPrivateHideCompany();
-      radio  = $('input:radio[name=radio-priv]:checked').val();
-      if(typeof radio != 'undefined'){  //one of the radios are checked
+      radio = $('input:radio[name=radio-priv]:checked').val();
+      if (typeof radio != 'undefined') {  //one of the radios are checked
         shortRadio = <?php echo $campaignCodes['PRIV3']['pris']; ?>;
         longRadio = <?php echo $campaignCodes['PRIV12']['pris']; ?>;
-     
-        if(radio == <?php echo $campaignCodes['PRIV3']['pris']; ?>){          
+
+        if (radio == <?php echo $campaignCodes['PRIV3']['pris']; ?>) {
           $('#long-check').attr('checked', false);
           longRadio = 0;
-          $('#m_priv3').val(1);   
-          $('#m_priv12').val(0);   
+          $('#m_priv3').val(1);
+          $('#m_priv12').val(0);
         }
-        if(radio == <?php echo $campaignCodes['PRIV12']['pris']; ?>){            
+        if (radio == <?php echo $campaignCodes['PRIV12']['pris']; ?>) {
           $('#short-check').attr('checked', false);
           shortRadio = 0;
           $('#m_priv12').val(1);
           $('#m_priv3').val(0);
         }
         shortCheck = $('#short-check:checked').val();
-        longCheck = $('#long-check:checked').val();        
-        if(typeof shortCheck == 'undefined'){
+        longCheck = $('#long-check:checked').val();
+        if (typeof shortCheck == 'undefined') {
           shortCheck = 0;
         }
-        if(typeof longCheck == 'undefined'){
+        if (typeof longCheck == 'undefined') {
           longCheck = 0;
-        } 
+        }
         //alert('radio: ' + radio + ' shortCheck: ' + shortCheck+ ' longCheck: ' + longCheck);
-        if(shortCheck != 0 || longCheck != 0){
+        if (shortCheck != 0 || longCheck != 0) {
           sumFreight = parseInt(<?php echo $campaignCodes['FRAKT02']['pris']; ?>);
           $('#m_frakt02').val(1);
-          $('#m_steg01').val(1);          
-        } else{
+          $('#m_steg01').val(1);
+        } else {
           sumFreight = 0;
           $('#m_frakt02').val(0);
           $('#m_steg01').val(0);
-        }       
+        }
         sumShort = parseInt(shortRadio) + parseInt(shortCheck);
-        sumLong = parseInt(longRadio) + parseInt(longCheck);        
+        sumLong = parseInt(longRadio) + parseInt(longCheck);
         sumTotal = sumShort + sumLong + sumFreight;
-   
+
         $('#sum-short').html(sumShort);
         $('#sum-long').html(sumLong);
         $('#sum-freight').html(sumFreight);
         $('#sum-total').html(sumTotal);
-        $('#priv-the-price').html(sumTotal);       
-        $('#m_total').val(sumTotal);        
-        $('#m_freight').val(sumFreight);      
+        $('#priv-the-price').html(sumTotal);
+        $('#m_total').val(sumTotal);
+        $('#m_freight').val(sumFreight);
       } else { //radiobutton is undfined do nothing     
         //alert('apa');
       }
     }
 
+    /**
+     * Scroll so that buy is at top ov browser
+     * @returns {Boolean}     
+     */
+    function scrollToBuy() {
+      $('html, body').animate({
+        scrollTop: $("#buy").offset().top - 40
+      }, 1000);
+      return true;
+    }
 
-    
+
     /**
      * do ajax check if free to use     
-    function inUseAlready(type, value, elementId){
-      var data = {
-        typ: type,
-        varde: value
-      };          
-      $.ajax({
-        type: "POST",
-        url: "/ajax/actions/validate.php",
-        data: data,
-        cache: false,
-        success: function(data){
-          //console.log(data);
-          if(data == "1"){
-            $(elementId).addClass('hide');
-          }else{
-            $(elementId).removeClass('hide');
-          }
-        }
-      });
-      return false;
-    }
-*/
+     function inUseAlready(type, value, elementId){
+     var data = {
+     typ: type,
+     varde: value
+     };          
+     $.ajax({
+     type: "POST",
+     url: "/ajax/actions/validate.php",
+     data: data,
+     cache: false,
+     success: function(data){
+     //console.log(data);
+     if(data == "1"){
+     $(elementId).addClass('hide');
+     }else{
+     $(elementId).removeClass('hide');
+     }
+     }
+     });
+     return false;
+     }
+     */
 
 
 
     /******************************
      * Catch events
      ******************************/
-        
+
     //toggle from company to private    
     $('#link-private').click(function(event) {
       event.preventDefault();
       showPrivateHideCompany();
     });
-        
+
     //toggle from private to company    
     $('#link-company').click(function(event) {
       event.preventDefault();
@@ -416,28 +427,30 @@ Order::getMondays(15);
 
     //company catch keyup where the ammount is submitted 
     $('#nbr-with').keyup(function() {
-      sum_company();     
-    });
-    $('#nbr-without').keyup(function() {
+      scrollToBuy()
       sum_company();
     });
-    
+    $('#nbr-without').keyup(function() {
+      scrollToBuy()
+      sum_company();
+    });
+
     //copmany check also when leaving field
     $('#nbr-with').blur(function() {
-      sum_company();     
+      sum_company();
     });
     $('#nbr-without').keyup(function() {
       sum_company();
     });
-           
+
     //company show or hide delicery address       
     $('#delivery-toggle').click(function(event) {
       event.preventDefault();
-      if($('#delivery-address').hasClass("visible")){        
+      if ($('#delivery-address').hasClass("visible")) {
         $('#delivery-address').toggleClass("visible");
         $('#delivery-address').hide("slow");
 
-      }else {
+      } else {
         $('#delivery-address').toggleClass("visible");
         $('#delivery-address').show("slow");
       }
@@ -446,19 +459,19 @@ Order::getMondays(15);
 
     //private monitor changes on radio and checkbox  
     $('#short-radio').change(function() {
-      sum_private();    
+      sum_private();
     });
     $('#long-radio').change(function() {
-      sum_private(); 
+      sum_private();
     });
     $('#short-check').change(function() {
-      sum_private(); 
+      sum_private();
     });
     $('#long-check').change(function() {
-      sum_private(); 
+      sum_private();
     });
 
- 
+
     //send form to company or private
     $("#checkout").submit(function() {
       if (type == "company") {
@@ -466,16 +479,16 @@ Order::getMondays(15);
         return true;
       } else {
         $("#checkout").attr("action", "/actions/payson_privat.php")
-        return true;        
+        return true;
       }
     });
- 
- 
+
+
   });
-    
-    
-  function updateStartRadio(){
-    jQuery("#startdatumRadio2").attr('checked', true); 
+
+
+  function updateStartRadio() {
+    jQuery("#startdatumRadio2").attr('checked', true);
   }
 </script>    
 
@@ -508,7 +521,7 @@ Order::getMondays(15);
             <label for="sex" style="margin-left:10px;">Kön</label>
           </li>
           <li>
-            <?php echo getKommuner(); ?>
+<?php echo getKommuner(); ?>
             <label for="kid" style="margin-left:10px;">Startkommun</label>
           </li>
           <li>
@@ -596,7 +609,7 @@ Order::getMondays(15);
         <div class="clear"></div>
         <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum" checked >
         <select name="startdatum" id="startdatum" onchange="updateStartRadio();">
-          <?php echo Order::getMondays(20); ?>
+<?php echo Order::getMondays(20); ?>
         </select>
         <div class="early-info">Ring Kristian på 0761-393855 om ni önskar tidigare datum.</div>    
       </div>
