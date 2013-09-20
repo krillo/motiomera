@@ -19,10 +19,12 @@ Så här gör du för att registera dig:
 4. I fortsättningen loggar du in på startsidan http://motiomera.se med din e-postadress och det lösenord som du själv valde när du registerade dig.
 
 <b>För dig som fått en stegräknare i ditt paket kommer lite information här:</b>
-Instruktioner finns i asken, men väldigt kortfattat fungerar det så här:
-1. Dra loss den lilla pilformade flärpen som skyddar batteriet. Nu startar stegräknaren.
-2. Placera stegräknaren på höften, helst på sidan precis ovanför höftbenet.
-3. Börja gå.
-4. Registrera de steg stegräknaren visar varje dag på http://motiomera.se. Nollställ sedan stegräknaren genom att hålla knappen reset intryckt under några sekunder.
-  
+Instruktioner finns i paketet, men väldigt kortfattat fungerar det så här:
+1. Sätt i batteriet.
+2. Montera stroppen uppe i hörnet.
+3. Placera stegräknaren på höften, helst på sidan precis ovanför höftbenet.
+4. Börja gå...
+5. Registrera de steg stegräknaren visar varje dag på http://motiomera.se. Nollställ sedan stegräknaren genom att hålla båda knappar intryckta under några sekunder.
+
+
 Lycka till med ditt MotioMerande!

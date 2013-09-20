@@ -375,7 +375,7 @@ class PDF extends FPDF {
   function PagePreFace($content) {
     $address = utf8_decode(
             $content['COMPANY'] . "\r\n" .
-            'Att: ' . $content['FULLNAME'] . "\r\n" .
+            'c/o ' . $content['FULLNAME'] . "\r\n" .
             $content['ADDRESS'] . "\r\n" .
             $content['ZIPCODE'] . " " . $content['CITY'] . "\r\n" .            
             $content['COUNTRY'] . "\r\n\n" .
@@ -412,7 +412,7 @@ class PDF extends FPDF {
     $payerAddress = utf8_decode(
             'Fakturaadress' . "\r\n" .
             $content['fak-companyname'] . "\r\n" .
-            'Att: ' . $content['fak-name'] . "\r\n" .
+            'c/o ' . $content['fak-name'] . "\r\n" .
             $content['fak-adress'] . "\r\n" .
             $content['fak-zip'] . " " . $content['fak-city'] . "\r\n" .
             $content['fak-country'] . "\r\n\r\n" .
