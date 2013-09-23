@@ -25,12 +25,43 @@ Order::getMondays(15);
 <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
 <script type="text/javascript">
   jQuery(function($) {
+    
+  /*  use # instead of parameters
+   * 
     var type = $("#type").val();
     if (type === "private") {
       showPrivateHideCompany();
     } else if (type === "company") {
       showCompanyHidePrivate();
     }
+*/
+
+    var hash1 = location.hash;
+    hashHandler(hash1);
+
+    $(window).on('hashchange', function() {
+      var hash2 = location.hash;
+      hashHandler(hash2);
+    });
+
+
+    function hashHandler(hash) {
+      hash = hash.replace('#', '');
+      if (hash === 'buy/private') {
+        scrollToBuy();
+        showPrivateHideCompany();
+      }
+      if (hash === 'buy/company') {
+        scrollToBuy();
+        showCompanyHidePrivate();
+      }
+    }
+
+
+
+
+
+
 
     /**
      * Custom Email ajax validation for the jQuery Validator plugin
@@ -376,36 +407,10 @@ Order::getMondays(15);
      */
     function scrollToBuy() {
       $('html, body').animate({
-        scrollTop: $("#buy").offset().top - 40
+        scrollTop: $("#buy").offset().top - 60
       }, 1000);
       return true;
     }
-
-
-    /**
-     * do ajax check if free to use     
-     function inUseAlready(type, value, elementId){
-     var data = {
-     typ: type,
-     varde: value
-     };          
-     $.ajax({
-     type: "POST",
-     url: "/ajax/actions/validate.php",
-     data: data,
-     cache: false,
-     success: function(data){
-     //console.log(data);
-     if(data == "1"){
-     $(elementId).addClass('hide');
-     }else{
-     $(elementId).removeClass('hide');
-     }
-     }
-     });
-     return false;
-     }
-     */
 
 
 
@@ -427,11 +432,11 @@ Order::getMondays(15);
 
     //company catch keyup where the ammount is submitted 
     $('#nbr-with').keyup(function() {
-      scrollToBuy()
+      scrollToBuy();
       sum_company();
     });
     $('#nbr-without').keyup(function() {
-      scrollToBuy()
+      scrollToBuy();
       sum_company();
     });
 
@@ -459,15 +464,19 @@ Order::getMondays(15);
 
     //private monitor changes on radio and checkbox  
     $('#short-radio').change(function() {
+      scrollToBuy();
       sum_private();
     });
     $('#long-radio').change(function() {
+      scrollToBuy();
       sum_private();
     });
     $('#short-check').change(function() {
+      scrollToBuy();
       sum_private();
     });
     $('#long-check').change(function() {
+      scrollToBuy();
       sum_private();
     });
 
@@ -521,7 +530,7 @@ Order::getMondays(15);
             <label for="sex" style="margin-left:10px;">Kön</label>
           </li>
           <li>
-<?php echo getKommuner(); ?>
+            <?php echo getKommuner(); ?>
             <label for="kid" style="margin-left:10px;">Startkommun</label>
           </li>
           <li>
@@ -609,7 +618,7 @@ Order::getMondays(15);
         <div class="clear"></div>
         <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum" checked >
         <select name="startdatum" id="startdatum" onchange="updateStartRadio();">
-<?php echo Order::getMondays(20); ?>
+          <?php echo Order::getMondays(20); ?>
         </select>
         <div class="early-info">Ring Kristian på 0761-393855 om ni önskar tidigare datum.</div>    
       </div>

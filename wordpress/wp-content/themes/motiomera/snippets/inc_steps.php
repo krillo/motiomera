@@ -12,6 +12,7 @@
     var mm_url = $("#mm_url").html();
     var mm_id = $("#mm_id").html();
 
+/*
     //refresh the stepdata
     function refreshData() {
       $.ajax({
@@ -24,7 +25,7 @@
       });
       return false;
     }
-
+*/
 
     //open report steps dialog on click
     //when dialog closes update stuff..
@@ -35,7 +36,14 @@
         height: 420,
         width: 680,
         close: function() {
-          refreshData();
+          
+        //alert('apa');
+        //getStepData();
+        refreshStepdata();
+          if ($.isFunction(window.refreshstepdata)){
+          //if ($.isFunction($.fn.getStepData)) {
+            refreshStepdata();
+          }
         }
       });
     });
@@ -123,7 +131,7 @@
       $('#mm-step-list-table tbody').html(rows).fadeIn();
       if ($("#mm-step-date-today").val() === $("#mm-step-date").val()) {
         $("#mm-step-list-date").html('idag');
-      } else{
+      } else {
         $("#mm-step-list-date").html($("#mm-step-date").val());
       }
       $("#mm-progress").hide();
@@ -202,33 +210,7 @@
     //submit steps to db via ajax
     $("#mm-submit").click(function(event) {
       submitSteps();
-      /*
-       $("#mm-progress").show();
-       activity_id = $('#mm-activity-cat-id option:selected').val();
-       if (activity_id === undefined) {
-       activity_id = 5;
-       }
-       var data = {
-       mm_id: mm_id,
-       count: $('#mm-count').attr('value'),
-       date: $('#mm-step-date').attr('value'),
-       activity_id: activity_id
-       };
-       $.ajax({
-       type: "POST",
-       url: mm_url + "/ajax/actions/savesteps.php",
-       data: data,
-       success: function(data) {
-       $('#mm-activity-cat-id').val(5);
-       $('#mm-activity-list').hide();
-       $('#step-severity').hide();
-       printTable(data.table);
-       printDiary(data.diary);
-       }
-       });
-       */
       return false;
-
     });
 
 
@@ -362,13 +344,8 @@
     color: #fff;  
   }
   html input[type="button"]:hover{border-color: #555 #CEE596 #CEE596 #555;} /*padding: 0.55em 0.55em 0.65em 0.45em; } */
+  
 </style>
-
-
-
-<div class="grid_3">
-  <button id="mm-report-steps">Rapportera Steg</button>
-</div>    
 
 
 <div id="mm-dialog" title="Rapportera steg" style="display:none;">

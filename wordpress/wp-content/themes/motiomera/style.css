@@ -270,8 +270,8 @@ hgroup{height:127px; float:left;}
 #payer li div{width:130px;font-size: 14px;float:left}
 #payer li input{width:180px;float:left;}
 #payer #payer-label{margin-bottom: 10px;display:block;margin-top: 40px;font-size:18px;}
-    
-    
+
+
 /******* buy company bubble ********/
 #buy-contact{padding:30px 30px 0; width: 410px;height:245px;}
 #buy-contact img{float:left;border: 7px solid #FFFFFF;-moz-border-radius: 10px 10px / 10px 10px;border-radius: 10px 10px / 10px 10px;}
@@ -285,33 +285,37 @@ hgroup{height:127px; float:left;}
 #buy-payment-buttons-area{float:left;height:80px;}
 .buy-payment-buttons{
   float:left;
-    font-size: 20px;
-    overflow: hidden;
-    padding-left: 8px;
-    text-align: left;
-    height:55px;    
-    font-family: cabin condensed;
-    font-size: 20px;
-    margin-bottom: 10px;
+  font-size: 20px;
+  overflow: hidden;
+  padding-left: 8px;
+  text-align: left;
+  height:55px;    
+  font-family: cabin condensed;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 #payson{
   background-image: url("img/payson-button.png");
-    background-position: 0px 0px;
-    background-repeat: no-repeat;
-    width:205px;
-    margin-right: 10px;
-    border-color: #fff #ccc #ccc #fff;
-    
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  width:205px;
+  margin-right: 10px;
+  border-color: #fff #ccc #ccc #fff;
+  color: #555555;
+  font-size: 18px;
 }
-#faktura{  background-image: url("img/faktura-button.png");
-    background-position: 0px 0px;
-    background-repeat: no-repeat;
-    width:195px;
-    border-color: #fff #ccc #ccc #fff;
+#faktura{  
+  background-image: url("img/faktura-button.png");
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  width:195px;
+  border-color: #fff #ccc #ccc #fff;
+  color: #555555;
+  font-size: 18px;
 }
 #faktura:hover, #payson:hover{border-color: #ccc #fff #fff #ccc;}
 
-#buy-payment-options{float:left;height:143px;background-image: url("img/payment_options.png");background-repeat: no-repeat;background-position:0 33px;}
+#buy-payment-options{float:left;height:143px;width:400px;background-image: url("img/payment_options.png");background-repeat: no-repeat;background-position:0 33px;}
 #integrity{clear: both;}
 
 
@@ -370,24 +374,24 @@ hgroup{height:127px; float:left;}
 
 
 
-  #calc {width:100%;font-size: 14px;border-bottom: 1px solid black;float:left;}
-  #calc input{width:18px;height:18px;font-size: 14px;float:left;}
-  #calc div{font-size: 14px;}
-  .step-check{}
-  #short, #long, #freight{float:left;margin-bottom: 15px;width: 75%;}
-  #freight_private{margin: 0 0 10px 0;width:253px;}
-  #sum-short, #sum-long, #freight-sum{float:left;}
-  #nbr-sum-total-freight .currency{width:90px;font-size: 20px;}
-  #sum-freight{float:left;}
-  #sum-total{float:left;color: #427F10;}
+#calc {width:100%;font-size: 14px;border-bottom: 1px solid black;float:left;}
+#calc input{width:18px;height:18px;font-size: 14px;float:left;}
+#calc div{font-size: 14px;}
+.step-check{}
+#short, #long, #freight{float:left;margin-bottom: 15px;width: 75%;}
+#freight_private{margin: 0 0 10px 0;width:253px;}
+#sum-short, #sum-long, #freight-sum{float:left;}
+#nbr-sum-total-freight .currency{width:90px;font-size: 20px;}
+#sum-freight{float:left;}
+#sum-total{float:left;color: #427F10;}
 
-  #pay {font-size: 14px;margin-top: 45px;}
-  #integrity{margin-bottom: 20px;width: 350px;}
+#pay {font-size: 14px;margin-top: 45px;}
+#integrity{margin-bottom: 20px;width: 350px;}
 
-  #pay div{float:left;}
-  #pay input{font-size: 15px;width:200px;height:25px;}
-  #pay ul{margin-left: 2px;padding-left: 15px;}
-  #payalt{color:#494949;font-size:11px;margin:5px 0 0 10PX;}
+#pay div{float:left;}
+#pay input{font-size: 15px;width:200px;height:25px;}
+#pay ul{margin-left: 2px;padding-left: 15px;}
+#payalt{color:#494949;font-size:11px;margin:5px 0 0 10PX;}
 
 
 
@@ -403,12 +407,12 @@ hgroup{height:127px; float:left;}
 #page-promo{width:100%;float:left;margin:35px 0 35px 0;}
 #page-promo-left{float:left;width:440px;margin-right: 20px;margin-left: 20px;font-size: 38px;color:#fff;}
 #page-promo-right{width:438px;padding: 20px;float:left;
-background-color: #8aa25a;
-  border-color: #6a7d45 #6a7d45 #6a7d45 #6a7d45;
-  border-style: solid;
-  border-width: 1px;  
-  -moz-border-radius: 7px 7px / 7px 7px;
-  border-radius: 7px 7px / 7px 7px;
+                  background-color: #8aa25a;
+                  border-color: #6a7d45 #6a7d45 #6a7d45 #6a7d45;
+                  border-style: solid;
+                  border-width: 1px;  
+                  -moz-border-radius: 7px 7px / 7px 7px;
+                  border-radius: 7px 7px / 7px 7px;
 }
 #page-promo-right-one{font-size: 20px;color:#fff;width:300px;}
 #page-promo-right-two{font-size: 20px;color:#2f4c00;width:300px;margin-bottom: 15px;}
@@ -434,12 +438,12 @@ background-color: #8aa25a;
 .page-promo-button:hover{border-color: #555 #CEE596 #CEE596 #555;background-position: 186px 28px;padding: 13px 12px 17px 18px;}
 
 #page-promo-footer{width:918px;padding: 20px;float:left;
-background-color: #8aa25a;
-  border-color: #6a7d45 #6a7d45 #6a7d45 #6a7d45;
-  border-style: solid;
-  border-width: 1px;  
-  -moz-border-radius: 7px 7px / 7px 7px;
-  border-radius: 7px 7px / 7px 7px;
+                   background-color: #8aa25a;
+                   border-color: #6a7d45 #6a7d45 #6a7d45 #6a7d45;
+                   border-style: solid;
+                   border-width: 1px;  
+                   -moz-border-radius: 7px 7px / 7px 7px;
+                   border-radius: 7px 7px / 7px 7px;
 }
 #page-promo-footer-one{font-size: 20px;color:#fff;width:450px;margin-top: 15px;}
 #page-promo-footer-two{font-size: 20px;color:#2f4c00;width:450px;}
@@ -485,15 +489,15 @@ footer a, footer a:visited{color:white;}
 
 
 .faq-answer{float:left;color: #889D59;font-size: 18px;clear:both;margin-bottom: 15px;
- float:left;
-  width:760px;
-  padding: 35px 35px;
-  background-color: #E1EACF;
-  border-color: #5C7C00 #5C7C00 #5C7C00 #5C7C00;
-  border-style: solid;
-  border-width: 1px;  
-  -moz-border-radius: 7px 7px / 7px 7px;
-  border-radius: 7px 7px / 7px 7px;
+            float:left;
+            width:760px;
+            padding: 35px 35px;
+            background-color: #E1EACF;
+            border-color: #5C7C00 #5C7C00 #5C7C00 #5C7C00;
+            border-style: solid;
+            border-width: 1px;  
+            -moz-border-radius: 7px 7px / 7px 7px;
+            border-radius: 7px 7px / 7px 7px;
 }
 #faq h1{float:left;color: #889D59;font-size: 38px;}
 .faq-head{float:left;color: #889D59;font-size: 30px;margin-top: 40px;}
