@@ -190,7 +190,7 @@ hgroup{height:127px; float:left;}
   font-size: 15px;
   margin-bottom: 10px;
 }
-.buy-container{float:left;width:470px;height: 100%;padding-bottom: 30px;  background: #EFEFEF; -moz-border-radius: 10px 10px / 10px 10px;border-radius: 10px 10px / 10px 10px;font-weight:normal}
+.buy-container{float:left;width:470px;height: 100%;padding-bottom: 30px;  background: #EFEFEF; -moz-border-radius: 10px 10px / 10px 10px;border-radius: 10px 10px / 10px 10px;font-weight:normal;margin-top: 1px;}
 .full-width{width:880px;}
 
 /******* buy company ********/
