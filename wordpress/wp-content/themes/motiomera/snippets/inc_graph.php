@@ -22,9 +22,9 @@
     var nbr_days = $("#mm-nbr-days").val();
     getStepData();
 
-function refreshStepdata(){
- alert('apa'); 
-}
+    function refreshStepdata() {
+      alert('apa');
+    }
 
 
     function getStepData() {
@@ -132,15 +132,16 @@ function refreshStepdata(){
   #placeholder{width:520px;height:300px;float:left}
   .xAxis{color:#2E4B00;}
 
-  #mm-legend-area{width:500px;background-color: #8AA25A;
-                  border-radius: 0 0 10px 10px;
-                  border-top: 1px solid #FFFFFF;
-                  height: 40px;
-                  margin-bottom: 35px;
-                  padding: 10px;
-                  float:left;
-                  color:#fff;
-                  font-size: 13px;
+  #mm-legend-area{
+    width:500px;background-color: #8AA25A;
+    border-radius: 0 0 10px 10px;
+    border-top: 1px solid #FFFFFF;
+    height: 40px;
+    margin-bottom: 35px;
+    padding: 10px;
+    float:left;
+    color:#fff;
+    font-size: 13px;
   }
   #mm-legend-left{float:left;width:277px;}
   .mm-legend-container-long{float: left;width:175px;}
