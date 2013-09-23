@@ -1153,6 +1153,7 @@ table#alh_navtable
   margin-top: 2px;
   padding: 0;
   border-radius: 10px 10px 0 0 ;
+  clear:both;
 }
 .box-margin-bottom{margin-bottom: 30px;}
 .mmAnslagstavlaBoxBg form
@@ -2587,6 +2588,7 @@ td.number
   height: 108px;
   width: 182px;
   background: url(/img/halloffame/mmHofTop.gif) no-repeat;
+  clear: both;
 }
 .hallOfFame .mmRightMinSidaBox
 {
