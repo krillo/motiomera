@@ -25,26 +25,18 @@ Order::getMondays(15);
 <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
 <script type="text/javascript">
   jQuery(function($) {
-    
-  /*  use # instead of parameters
-   * 
-    var type = $("#type").val();
-    if (type === "private") {
-      showPrivateHideCompany();
-    } else if (type === "company") {
-      showCompanyHidePrivate();
-    }
-*/
 
+    //is there a hash
     var hash1 = location.hash;
     hashHandler(hash1);
 
-    $(window).on('hashchange', function() {
-      var hash2 = location.hash;
-      hashHandler(hash2);
-    });
 
-
+    /**
+     * Handle hash. Mainly scroll to buy area and show correct area. 
+     *   
+     * @param {type} hash
+     * @returns {undefined}
+     */
     function hashHandler(hash) {
       hash = hash.replace('#', '');
       if (hash === 'buy/private') {
@@ -56,10 +48,6 @@ Order::getMondays(15);
         showCompanyHidePrivate();
       }
     }
-
-
-
-
 
 
 
@@ -417,6 +405,13 @@ Order::getMondays(15);
     /******************************
      * Catch events
      ******************************/
+    
+    //if hash changes on url and still on same page
+    $(window).on('hashchange', function() {
+      var hash2 = location.hash;
+      hashHandler(hash2);
+    });
+
 
     //toggle from company to private    
     $('#link-private').click(function(event) {
