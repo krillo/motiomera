@@ -18,6 +18,8 @@
     <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery-ui-1.9.2.custom.min.js?ver=3.3.2'></script>
     <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.js?ver=3.3.2'></script>
     <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.stack.js?ver=3.3.2'></script>    
+    <script type="text/javascript" src="{$mm_url}/wp-content/themes/motiomera/js/mm_wp.js?ver=3.5.1"></script>
+    
 
 
 
