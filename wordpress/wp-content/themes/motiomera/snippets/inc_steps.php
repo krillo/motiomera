@@ -30,7 +30,7 @@
     //open report steps dialog on click
     //when dialog closes update stuff..
     $("#mm-report-steps").click(function() {
-      event.preventDefault();
+      //event.preventDefault();
       $("#mm-dialog").dialog({
         title: "Rapportera steg",
         height: 420,
@@ -92,10 +92,15 @@
         async: false,
         dataType: "json",
         success: function(data) {
+          clearInputField();
           printTable(data.table);
           printDiary(data.diary);
         }
       });
+    }
+
+    function clearInputField(){
+      $('#mm-count').val('');
     }
 
     function printDiary(diary) {
