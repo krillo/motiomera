@@ -1,30 +1,10 @@
-<?php
-/*  commneted out by krillo 2012-03-17, doesn't work correctly
-session_start();
-$mc = new Memcache;
-$mc->connect("127.0.0.1", 11211);
-$filename = md5("kalender.js".$_SERVER['PHPSESSID']);
-$ttl = 3600; // 3600 sec = 1 hour
 
-$content = $mc->get($filename);
-
-if ($content) {
- header("Content-Type: text/javascript");
-         print $content;
-	         exit;
-		 } else {
-
-		 ob_start();
-		 // Cache whole output, in the end of this file we store it in memcached - jb
-*/     
-?>
-<?php $js_header = 1; include $_SERVER["DOCUMENT_ROOT"]  . "/php/init.php"; ?>
 // kalendrar
 var stegKalender = new motiomera_kalender("steg");
 	stegKalender.setDisableFutureDates(true);
 var	klubbKalender = new motiomera_kalender("klubbStartdatum");
 var skapaForetagKalender = new motiomera_kalender("skapaForetag");
-	skapaForetagKalender.selectedDate = ymdToDate('<?= FORETAG::STARTDATUM_INTERVAL_START ?>');
+	skapaForetagKalender.selectedDate = ymdToDate("2008-10-06");
 function motiomera_kalender(id){
 
 	this.id = id;
@@ -384,13 +364,3 @@ function motiomera_kalender(id){
 function motiomera_kalender_listManader(){
 		return new Array("Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec");
 }
-
-
-<?php
-/*  commneted out by krillo 2012-03-17, doesn't work correctly
-$content = ob_get_contents();
-$mc->set($filename, $content, MEMCACHE_COMPRESSED, $ttl);
-ob_end_clean();
-}
-*/
-?>

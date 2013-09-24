@@ -1,25 +1,3 @@
-<?php
-/*  commneted out by krillo 2012-03-17, doesn't work correctly
-$mc = new Memcache;
-$mc->connect("127.0.0.1", 11211);
-$filename = md5("validation.js".$_SERVER['PHPSESSID']);
-$ttl = 3600; // 3600 sec = 1 hour
-
-$content = $mc->get($filename);
-
-if ($content) {
- header("Content-Type: text/javascript");
-        print $content;
-        exit;
-} else {
-
-ob_start();
-// Cache whole output, in the end of this file we store it in memcached - jb
-*/
-?>
-
-<?php $js_header = 1; require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php"); ?>
-
 function motiomera_validateSkapaForetagForm(form){
 	
 	var RE03 = parseInt(document.getElementById("antalRE03").innerHTML);
@@ -61,19 +39,17 @@ function motiomera_validateBestallForm(form){
 }
 
 function motiomera_validateInstallningarForm(form){
-
-
-	if(form.fnamn.value.length < <?= Medlem::MIN_LENGTH_FNAMN ?>){
+	if(form.fnamn.value.length < 2){
 		alert("Förnamnet är för kort");
 		return false;
-	}else if(form.enamn.value.length < <?= Medlem::MIN_LENGTH_ENAMN ?>){
+	}else if(form.enamn.value.length < 2){
 		alert("Efternamnet är för kort");
 		return false;
-	}else if(form.fnamn.value.length > <?= Medlem::MAX_LENGTH_FNAMN ?>){
-		alert("Förnamnet är för långt\nMax längd för förnamn : " + <?= Medlem::MAX_LENGTH_FNAMN; ?> + " tecken");
+	}else if(form.fnamn.value.length > 40){
+		alert("Förnamnet är för långt\nMax längd för förnamn : 40 tecken");
 		return false;
-	}else if(form.enamn.value.length > <?= Medlem::MAX_LENGTH_ENAMN ?>){
-		alert("Efternamnet är för långt\nMax längd för efternamn : " + <?= Medlem::MAX_LENGTH_ENAMN; ?> + " tecken");
+	}else if(form.enamn.value.length > 40){
+		alert("Efternamnet är för långt\nMax längd för efternamn : 40 tecken");
 		return false;
 	}else if(form.kid.value == ""){
 		alert("Välj en ort");
@@ -81,8 +57,8 @@ function motiomera_validateInstallningarForm(form){
 	}else if(!email_regex.test(form.epost.value)){
 		alert("Ogiltig e-postadress");
 		return false;
-	}else if(form.andraLosen.value == 1 && form.losen.value.length < <?= Medlem::MIN_LENGTH_LOSEN ?>){
-		alert("Lösenordet måste vara minst <?= Medlem::MIN_LENGTH_LOSEN ?> tecken");
+	}else if(form.andraLosen.value == 1 && form.losen.value.length < 4){
+		alert("Lösenordet måste vara minst 4 tecken");
 		return false;
 	}else if(form.andraLosen.value == 1 && form.losen.value != form.losen2.value){
 		alert("Lösenorden matchar inte");
@@ -147,23 +123,24 @@ function motiomera_validateSkapaMedlemForm(form){
 		}
 	}
 	
-	if(form.anamn.value.length < <?= Medlem::MIN_LENGTH_ANAMN ?>){
+  
+	if(form.anamn.value.length < 3){
 		alert("Smeknamnet är för kort");
 		return false;
-	}else if(form.fnamn.value.length < <?= Medlem::MIN_LENGTH_FNAMN ?>){
+	}else if(form.fnamn.value.length < 2){
 		alert("Förnamnet är för kort");
 		return false;
-	}else if(form.enamn.value.length < <?= Medlem::MIN_LENGTH_ENAMN ?>){
+	}else if(form.enamn.value.length < 2){
 		alert("Efternamnet är för kort");
 		return false;
-	}else if(form.anamn.value.length > <?= Medlem::MAX_LENGTH_ANAMN ?>){
-		alert("Smeknamnet är för långt\nMax längd för smeknamn : " + <?= Medlem::MAX_LENGTH_ANAMN; ?> + " tecken");
+	}else if(form.anamn.value.length > 20){
+		alert("Smeknamnet är för långt\nMax längd för smeknamn : 20 tecken");
 		return false;
-	}else if(form.fnamn.value.length > <?= Medlem::MAX_LENGTH_FNAMN ?>){
-		alert("Förnamnet är för långt\nMax längd för förnamn : " + <?= Medlem::MAX_LENGTH_FNAMN; ?> + " tecken");
+	}else if(form.fnamn.value.length > 40){
+		alert("Förnamnet är för långt\nMax längd för förnamn : 40 tecken");
 		return false;
-	}else if(form.enamn.value.length > <?= Medlem::MAX_LENGTH_ENAMN ?>){
-		alert("Efternamnet är för långt\nMax längd för efternamn : " + <?= Medlem::MAX_LENGTH_ENAMN; ?> + " tecken");
+	}else if(form.enamn.value.length > 40){
+		alert("Efternamnet är för långt\nMax längd för efternamn : 40 tecken");
 		return false;
 	}else if(form.kid.value == ""){
 		alert("Välj en ort");
@@ -171,8 +148,8 @@ function motiomera_validateSkapaMedlemForm(form){
 	}else if(!email_regex.test(form.epost.value)){
 		alert("Ogiltig e-postadress");
 		return false;
-	}else if(form.losenord.value.length < <?= Medlem::MIN_LENGTH_LOSEN ?>){
-		alert("Lösenordet måste vara minst <?= Medlem::MIN_LENGTH_LOSEN ?> tecken");
+	}else if(form.losenord.value.length < 4){
+		alert("Lösenordet måste vara minst 4 tecken");
 		return false;
 	}else if(form.losenord.value != form.losenord2.value){
 		alert("Lösenorden matchade inte");
@@ -323,13 +300,3 @@ function mm_skapaGruppValidera(form){
 	}
 
 }
-
-
-<?php
-/*  commneted out by krillo 2012-03-17, doesn't work correctly
-$content = ob_get_contents();
-$mc->set($filename, $content, MEMCACHE_COMPRESSED, $ttl);
-ob_end_clean();
-}
-*/
-?>

@@ -41,15 +41,6 @@
 		</div>
 	</div>
 
-	<div class="mmGrayLineRight"></div>
-
-	<div class="mmBoxRight">
-		<img src="/img/icons/MedlemmarIcon.gif" alt="Medlemmar" align="right" />
-		<h3 class="mmGreen">Medlemmar i kommunen just nu:</h3>
-		{foreach from=$medlemmarIKommun item=medlem}
-			<a href="{$urlHandler->getUrl(Medlem, URL_VIEW, $medlem->getId())}">{$medlem->getANamn()}</a><br />
-		{/foreach}
-	</div>
 
 	<div class="mmGrayLineRight"></div>
 
@@ -61,14 +52,14 @@
 			{/foreach}
 	</div>
 	
+  
+  
+  
 	{if isset($USER) || $dialekter}
-	
 	<div class="mmGrayLineRight"></div>
-
 	<div class="mmBoxRight">
 		<h3 class="mmGreen">Dialekt:</h3>
 			{foreach from=$dialekter item=dialekt}
-			
 				<div class="mmKommundialektFlash">
 					<object type="application/x-shockwave-flash" data="/flash/soundPlayer.swf?url={$dialekt->getUrl()}" width="23" height="23" id="kommundialekt" align="middle">
 							<param name="movie" value="/flash/soundPlayer.swf?url={$dialekt->getUrl()}" />
@@ -89,16 +80,28 @@
 					{/if}
 				</div>
 				<div class="mmClearBoth"></div>
-
 			{/foreach}
 			{if isset($USER)}
 			<p>
 				<a href="{$urlHandler->getUrl(Kommundialekt, URL_CREATE, $kommun->getId())}">Har du ett eget exempel på dialekt från denna kommun? Klicka här.</a>
 			</p>
 			{/if}
-	</div>
-		
+	</div>		
 	{/if}
+  
+  
+ 	<div class="mmGrayLineRight"></div>
+	<div class="mmBoxRight">
+		<img src="/img/icons/MedlemmarIcon.gif" alt="Medlemmar" align="right" />
+		<h3 class="mmGreen">Medlemmar i kommunen just nu:</h3>
+		{foreach from=$medlemmarIKommun item=medlem}
+			<a href="{$urlHandler->getUrl(Medlem, URL_VIEW, $medlem->getId())}">{$medlem->getANamn()}</a><br />
+		{/foreach}
+	</div>
+ 
+  
+  
+  
 	{if $taggbilder}
 	<div class="mmGrayLineRight"></div>
 		<div class="mmBoxRight">

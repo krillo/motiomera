@@ -22,8 +22,6 @@ if (!function_exists('motiomera_setup')):
 endif; // motiomera_setup
 add_action('after_setup_theme', 'motiomera_setup');
 
-
-
 /**
  * Clean up the admin panel
  */
@@ -48,26 +46,39 @@ function remove_dashboard_widgets() {
 add_action('wp_dashboard_setup', 'hide_wp_welcome_panel');
 add_action('wp_dashboard_setup', 'remove_dashboard_widgets');
 
-
 /**
  * Enqueue scripts and styles
  */
 function motiomera_scripts() {
-  global $post;
+  //global $post;
+  //print_r($post);
+  global $mmStatus;
+  //print_r($mmStatus);
+
   wp_enqueue_style('style', get_stylesheet_uri());
-  wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js');
+  wp_register_script('jquery', 'http://code.jquery.com/jquery-latest.min.js');
   wp_enqueue_script('jquery');
+  
+  
   wp_register_script('jquery-ui', get_bloginfo('template_url') . '/js/jquery-ui-1.9.2.custom.min.js');
   wp_enqueue_script('jquery-ui');
-  wp_register_script('jquery-flot', get_bloginfo('template_url') . '/js/jquery.flot.js');
-  wp_enqueue_script('jquery-flot');  
-  wp_register_script('jquery-flot-stack', get_bloginfo('template_url') . '/js/jquery.flot.stack.js');
-  wp_enqueue_script('jquery-flot-stack');
-  wp_register_script('jquery-validate', get_bloginfo('template_url') . '/js/jquery.validate.min.js');
-  wp_enqueue_script('jquery-validate');
-  wp_register_script('mm_wp', get_bloginfo('template_url') . '/js/mm_wp.js');
-  wp_enqueue_script('mm_wp');
+  if (1 == 2) {  //this is only needed for steg and graph not in wp right now..
+    wp_register_script('jquery-flot', get_bloginfo('template_url') . '/js/jquery.flot.js');
+    wp_enqueue_script('jquery-flot');
+    wp_register_script('jquery-flot-stack', get_bloginfo('template_url') . '/js/jquery.flot.stack.js');
+    wp_enqueue_script('jquery-flot-stack');
+    wp_register_script('jquery-mmwp-steps', get_bloginfo('template_url') . '/js/jquery.mmwp.steps.js');
+    wp_enqueue_script('jquery-mmwp-steps');
+  }
+  if($mmStatus->front_page == 1){
+    wp_register_script('jquery-validate', get_bloginfo('template_url') . '/js/jquery.validate.min.js');
+    wp_enqueue_script('jquery-validate');
+    wp_register_script('jquery-mmwp-buy', get_bloginfo('template_url') . '/js/jquery.mmwp.buy.js');
+    wp_enqueue_script('jquery-mmwp-buy');
     
+  }
+  
+
   //styles
   wp_register_style('wp-mm-style', get_bloginfo('template_url') . '/css/wp_mm_common.css');
   wp_enqueue_style('wp-mm-style');
@@ -221,12 +232,12 @@ function includeSnippet($file) {
       }
       break;
     case 'inc_page_promo_header.php':  //normal page, not logged in - show the promo area
-      if ($mmStatus->normal_page == 1) { // && $mmStatus->mm_logged_in == 0) {
+      if ($mmStatus->normal_page == 1 && $mmStatus->mm_logged_in == 0) { // && $mmStatus->mm_logged_in == 0) {
         include 'snippets/' . $file;
       }
       break;
     case 'inc_page_promo_footer.php':  //normal page, not logged in - show the promo area
-      if ($mmStatus->normal_page == 1) { // && $mmStatus->mm_logged_in == 0) {
+      if ($mmStatus->normal_page == 1 && $mmStatus->mm_logged_in == 0) {
         include 'snippets/' . $file;
       }
       break;
@@ -264,8 +275,8 @@ function getKommuner($html = true) {
   return $result;
 }
 
-
 function register_my_menu() {
-  register_nav_menu('header_logged_in',__( 'Header Logged In Menu' ));
+  register_nav_menu('header_logged_in', __('Header Logged In Menu'));
 }
-add_action( 'init', 'register_my_menu' );
+
+add_action('init', 'register_my_menu');

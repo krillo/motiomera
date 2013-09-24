@@ -15,10 +15,7 @@ jQuery(document).ready(function($) {
       height: 420,
       width: 680,
       close: function() {
-        refreshStepdata();
-        if ($.isFunction(window.refreshstepdata)) {
-          getStepData();
-        }
+        getStepData();
       }
     });
   });

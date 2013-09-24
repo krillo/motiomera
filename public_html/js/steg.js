@@ -1,24 +1,4 @@
-<?php
-/*  commneted out by krillo 2012-03-17, doesn't work correctly
-$mc = new Memcache;
-$mc->connect("127.0.0.1", 11211);
-$filename = md5("steg.js".$_SERVER['PHPSESSID']);
-$ttl = 3600; // 3600 sec = 1 hour
 
-$content = $mc->get($filename);
-
-if ($content) {
- header("Content-Type: text/javascript");
-	print $content;
-	exit;
-} else {
-
-ob_start();
-// Cache whole output, in the end of this file we store it in memcached - jb
-*/
-?>
-
-<?php $js_header = 1; require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php"); ?>
 var gamlaSteg = new Array();
 
 function motiomera_steg_rapportera(){
@@ -84,6 +64,7 @@ function motiomera_steg_rapportera_show(response) {
 		
 		var flaggedDates = new Object();
 
+/*  krillo 2013-09-24
 		<?php
 		if(isset($USER)){
 			$datum = Steg::listDatumByMedlem($USER);
@@ -92,7 +73,7 @@ function motiomera_steg_rapportera_show(response) {
 			}
 		}
 		?>
-
+*/
 		stegKalender.setFlaggedDates(flaggedDates);
 
 		
@@ -380,6 +361,7 @@ function motiomera_steg_removeGamlaSteg(time, id){
 
 function motiomera_steg_getAktiviteter(){
 	var aktiviteter = new Object();
+  /*
 <?php 
 $aktiviteter = Aktivitet::listAll();
 foreach($aktiviteter as $aktivitet){
@@ -388,6 +370,7 @@ foreach($aktiviteter as $aktivitet){
 
 }
 ?>
+  */
 	return aktiviteter;
 }
 
@@ -412,6 +395,7 @@ function motiomera_steg_getGrades(aktivitet) {
 }
 
 function motiomera_steg_getAktivitetsVarde(aktivitetsid){
+  /*  krillo 2013-09-24
 <?
 $aktiviteter = Aktivitet::listAll();
 $first=true;
@@ -421,6 +405,7 @@ foreach($aktiviteter as $aktivitet){
 	$first=false;
 }
 ?>
+  */
 }
 
 function motiomera_steg_save(){
@@ -459,10 +444,8 @@ function motiomera_steg_doljAktiviteter(){
 
 
 function motiomera_steg_validera(){
-	
 	var date = new Date();
 	var futureDate;
-
 	if(date.getTime() < stegKalender.getSelectedDate().getTime())
 		var futureDate = true;
 
@@ -472,29 +455,20 @@ function motiomera_steg_validera(){
 	}else if(futureDate){
 		alert("Du kan inte ange ett datum i framtiden");
 		return false;
-	}else if(document.getElementById("motiomera_steg_antal").value >= <?= Steg::MAX_STEG_PER_RAPPORT ?>){
+	}else if(document.getElementById("motiomera_steg_antal").value >= 100000){
 		alert("Du kan inte rapportera så många steg.");
 		return false;
-	}else if(document.getElementById("motiomera_steg_antal").value >= <?= Steg::VARNING_STEG_PER_RAPPORT ?>){
+	}else if(document.getElementById("motiomera_steg_antal").value >= 30000){
 		return confirm("Vill du rapportera " +  document.getElementById("motiomera_steg_antal").value + "steg?");
 	}else if(document.getElementById("motiomera_steg_antal").value >= 1440 && motiomera_steg_getAktivitetsVarde(document.getElementById("steg_aid").value)!=1) {
 		alert("Du kan inte rapportera en aktivitet på så många minuter.");
 		return false;
-	}else if (motiomera_steg_getAktivitetsVarde(document.getElementById("steg_aid").value)*document.getElementById("motiomera_steg_antal").value > <?= Steg::MAX_STEG_PER_RAPPORT ?>){
+	}else if (motiomera_steg_getAktivitetsVarde(document.getElementById("steg_aid").value)*document.getElementById("motiomera_steg_antal").value > 100000){
 		alert("Du kan inte rapportera en aktivitet som motsvarar så många steg.");
 		return false;
-	}else if (motiomera_steg_getAktivitetsVarde(document.getElementById("steg_aid").value)*document.getElementById("motiomera_steg_antal").value > <?= Steg::VARNING_STEG_PER_RAPPORT ?>){
+	}else if (motiomera_steg_getAktivitetsVarde(document.getElementById("steg_aid").value)*document.getElementById("motiomera_steg_antal").value > 30000){
 		return confirm("Vill du rapportera " +  document.getElementById("motiomera_steg_antal").value + "minuter?");
 	}else{
 		return true;
 	}
 }
-
-<?php
-/*  commneted out by krillo 2012-03-17, doesn't work correctly
-$content = ob_get_contents();
-$mc->set($filename, $content, MEMCACHE_COMPRESSED, $ttl);
-ob_end_clean();
-}
-*/
-?>

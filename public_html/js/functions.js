@@ -1,24 +1,4 @@
-<?php
-/*  commneted out by krillo 2012-03-17, doesn't work correctly
-  
-$mc = new Memcache;
-$mc->connect("127.0.0.1", 11211);
-$filename = md5("functions.js".$_SERVER['PHPSESSID']);
-$ttl = 3600; // 3600 sec = 1 hour
-
-$content = $mc->get($filename);
-
-if ($content) {
- header("Content-Type: text/javascript");
-        print $content;
-        exit;
-} else {
-
-ob_start();
-// Cache whole output, in the end of this file we store it in memcached - jb
-*/
-?>
-<?php $js_header = 1; include $_SERVER["DOCUMENT_ROOT"]  . "/php/init.php"; ?>
+//<?php $js_header = 1; include $_SERVER["DOCUMENT_ROOT"]  . "/php/init.php"; ?>
 function isInt(val){
 	var int = val-0;
 	if(int == val && (val == 0 || val.substr(0,1) != "0"))
@@ -871,9 +851,10 @@ function mm_krillo_foretag_uppdateraPriser(antal, kamp){
 }
 
 
+/*
 function mm_foretag_uppdateraPriser(antal){
 	if(isInt(antal)){
-		var codes = new Array(<?php $temp = Order::getCampaignCodes("foretag"); $first = true; foreach($temp as $code=>$value){if($first){$first = false;}else{echo ", ";} echo "'" . $code . "'";}?>);
+		/var codes = new Array(<?php $temp = Order::getCampaignCodes("foretag"); $first = true; foreach($temp as $code=>$value){if($first){$first = false;}else{echo ", ";} echo "'" . $code . "'";}?>);
 		
 		for(var i = 0; i < codes.length; i++){
 			var code = codes[i];
@@ -883,7 +864,7 @@ function mm_foretag_uppdateraPriser(antal){
 		}	
 	}
 }
-
+*/
 
 
 
@@ -965,12 +946,3 @@ function mm_visningsbild_checkExtension() {
 mm_addOnLoad(targetBlank);
 
 window.onload = mm_onLoad;
-
-<?php
-/*  commneted out by krillo 2012-03-17, doesn't work correctly
-$content = ob_get_contents();
-$mc->set($filename, $content, MEMCACHE_COMPRESSED, $ttl);
-ob_end_clean();
-}
-*/
-?>
