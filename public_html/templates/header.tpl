@@ -23,6 +23,16 @@
       <script type="text/javascript" src="{$mm_url}/wp-content/themes/motiomera/js/jquery.mmwp.steps.js?ver=3.5.1"></script>
     {/if}
 
+    
+    {php}
+      //get all scripts and css from wp
+      global $SETTINGS;
+      $includes = file_get_contents($SETTINGS["url"].'/api-header/?page=kapten');
+      print($includes);
+    {/php} 
+    
+    
+    
     {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
       {if !NO_INTERNET || GOOGLEMAPS_OVERRIDE_NO_INTERNET}
         {if $urlChecker->getFileName() eq 'minsida.php' or 'fastautmaningar.php'}
