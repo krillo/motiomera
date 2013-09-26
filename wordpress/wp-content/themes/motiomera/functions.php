@@ -175,10 +175,11 @@ function mm_status() {
   
   @session_start();  //just to be able to read mm variables (logged in or not)
   
+  /*
   echo 'session - ';  
   print_r( $_SESSION);
- 
   echo ' - '; 
+   */
   
   if (empty($_SESSION["mm_mid"]) && empty($_SESSION["mm_sid"])) {
 

@@ -25,7 +25,7 @@ if (MM_WP_INIT === false) {
 //  print_r( $_SESSION);
 
 
-
+/*
 if(MM_WP_INIT === true){
 echo 'MM_WP_INIT är kört';
 
@@ -33,7 +33,7 @@ echo 'MM_WP_INIT är kört';
 }else {
   echo 'INTE... MM_WP_INIT';
 }
-
+*/
 
 
 
