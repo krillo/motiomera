@@ -6,7 +6,7 @@
  * @package Motiomera
  * @since Motiomera 1.0
  */
-mm_status();
+//mm_status();
 global $mmStatus;
 //print_r($mmStatus);
 ?><!DOCTYPE html>

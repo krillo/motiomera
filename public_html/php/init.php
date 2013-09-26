@@ -10,13 +10,34 @@
   set_error_handler('handleError');
  */
 @session_start();   //krillo 20120808 added @ to suppress warning, thus wp has sometimes allready started a session  
-if ('MM_WP_INIT' != 1) {
+if (MM_WP_INIT === false) {
   if (!isset($noutf8) && !isset($js_header)) {
     header("Content-Type: text/html; charset=utf-8");
   } else if (isset($js_header)) {
     header("Content-Type: text/javascript");
   }
 }
+
+
+
+
+//  echo session_status();
+//  print_r( $_SESSION);
+
+
+
+if(MM_WP_INIT === true){
+echo 'MM_WP_INIT är kört';
+
+
+}else {
+  echo 'INTE... MM_WP_INIT';
+}
+
+
+
+
+
 
 
 //mm and wp settings

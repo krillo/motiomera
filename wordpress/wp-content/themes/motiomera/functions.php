@@ -9,6 +9,7 @@
 function favicon() {
   echo '<link rel="shortcut icon" href="', get_template_directory_uri(), '/faviconadmin.ico" />', "\n";
 }
+
 add_action('admin_head', 'favicon');
 
 
@@ -21,12 +22,38 @@ if (!function_exists('motiomera_setup')):
     register_nav_menus(array(
         'primary' => __('Primary Menu', 'motiomera'),
         'footer' => __('Footer Menu', 'motiomera'),
+        'header_logged_in', __('Header Logged In Menu'),
     ));
     add_theme_support('post-formats', array('aside',));
   }
 
 endif; // motiomera_setup
 add_action('after_setup_theme', 'motiomera_setup');
+
+
+
+/**
+ * Add the "contact us"-mailto link to the footer menu
+ * Submit user details
+ * 
+ * @param string $items
+ * @param type $args
+ * @return string
+ */
+function add_contact_to_footer_menu($items, $args) {
+  if ($args->menu == 'footer') {
+    global $mmStatus;
+    $body = '';
+    if ($mmStatus->mm_mid != 0) {
+      $body = '?body=Namn:%20'. $mmStatus->mm_fnamn . ' ' . $mmStatus->mm_enamn . '%0AEmail:%20' . $mmStatus->mm_email . '%0AId:%20' . $mmStatus->mm_mid . '%0A------------ LÅT STÅ ---------------';
+    }
+    $contactlink = '<li class=""><a href="mailto:support@motiomera.se' . $body . '" target="_blank">Kontakta oss</a></li>';
+    $items = $items . $contactlink;
+  }
+  return $items;
+}
+
+add_filter('wp_nav_menu_items', 'add_contact_to_footer_menu', 10, 2);
 
 /**
  * Clean up the admin panel
@@ -53,20 +80,18 @@ add_action('wp_dashboard_setup', 'hide_wp_welcome_panel');
 add_action('wp_dashboard_setup', 'remove_dashboard_widgets');
 
 /**
- * Enqueue scripts and styles
+ * Enqueue javascripts and styles
  */
-function motiomera_scripts() {
+function enqueue_motiomera_scripts() {
   //global $post;
   //print_r($post);
   global $mmStatus;
   //print_r($mmStatus);
 
   wp_enqueue_style('style', get_stylesheet_uri());
-  //wp_register_script('jquery', 'http://code.jquery.com/jquery-latest.min.js');
-  //wp_enqueue_script('jquery');
 
-  
-  wp_register_script('jquery-ui', get_bloginfo('template_url') . '/js/jquery-ui-1.9.2.custom.min.js', array( 'jquery' ));
+
+  wp_register_script('jquery-ui', get_bloginfo('template_url') . '/js/jquery-ui-1.9.2.custom.min.js', array('jquery'));
   wp_enqueue_script('jquery-ui');
   if (1 == 2) {  //this is only needed for steg and graph not in wp right now..
     wp_register_script('jquery-flot', get_bloginfo('template_url') . '/js/jquery.flot.js');
@@ -91,7 +116,7 @@ function motiomera_scripts() {
   wp_enqueue_style('ui-lightness-style');
 }
 
-add_action('wp_enqueue_scripts', 'motiomera_scripts');
+add_action('wp_enqueue_scripts', 'enqueue_motiomera_scripts');
 
 
 //custom post type
@@ -110,16 +135,22 @@ function create_post_type() {
   );
 }
 
+
+
 // krillo - set this variable so that old motiomera can figure out if wp is initiated or not 
 define('MM_WP_INIT', true);
 
 $mmStatus = new stdClass();
 $mmStatus->url = get_bloginfo('url');
 $mmStatus->front_page = 0;
-$mmStatus->normal_page = 0;
+$mmStatus->wp_page = 0;
 $mmStatus->mm_logged_in = 0;
 $mmStatus->mm_mid = 0;
 $mmStatus->mm_sid = 0;
+$mmStatus->mm_fnamn = null;
+$mmStatus->mm_enamn = null;
+$mmStatus->mm_anamn = null;
+$mmStatus->mm_email = null;
 $mmStatus->fb_user_id = 0;
 $mmStatus->fb_name = null;
 $mmStatus->fb_first_name = null;
@@ -129,26 +160,40 @@ $mmStatus->fb_gender = null;
 $mmStatus->fb_email = null;
 $mmStatus->fb_login_url = null;
 $facebook = null;
+mm_status();
 
 /**
- * Set some statuses that can be used in the pages
+ * Set some statuses. If logged in then run the mm init.php to get even more data
  */
 function mm_status() {
   global $mmStatus;
   global $facebook;
   global $fbLoginUrl;
+  
+  
+  
+  
   @session_start();  //just to be able to read mm variables (logged in or not)
-
-
+  
+  echo 'session - ';  
+  print_r( $_SESSION);
+ 
+  echo ' - '; 
+  
   if (empty($_SESSION["mm_mid"]) && empty($_SESSION["mm_sid"])) {
-    
+
   } else {
     $mmStatus->mm_logged_in = 1;
     $mmStatus->mm_mid = $_SESSION["mm_mid"];
     $mmStatus->mm_sid = $_SESSION["mm_sid"];
+    $mm_user = getUserData($mmStatus->mm_mid);
+    $mmStatus->mm_fnamn = $mm_user->fnamn;
+    $mmStatus->mm_enamn = $mm_user->enamn;
+    $mmStatus->mm_anamn = $mm_user->anamn;
+    $mmStatus->mm_email = $mm_user->epost;
   }
   if (is_page() && !is_front_page()) {
-    $mmStatus->normal_page = 1;
+    $mmStatus->wp_page = 1;
   }
   if (is_front_page()) {
     $mmStatus->front_page = 1;
@@ -212,14 +257,12 @@ function includeSnippet($file) {
   //print_r($mmStatus);
 
   switch ($file) {
-    //if not logged - show login area
-    case 'inc_login_area.php':
+    case 'inc_login_area.php':   //if not logged - show login area
       if ($mmStatus->mm_logged_in == 0) {
         include 'snippets/' . $file;
       }
       break;
-    //on front page show big logo area, else small area  
-    case 'inc_big_logo_area.php':
+    case 'inc_big_logo_area.php':    //on front page show big logo area, else small area  
       if ($mmStatus->front_page == 1) {
         include 'snippets/' . $file;
       } else {
@@ -237,17 +280,12 @@ function includeSnippet($file) {
       }
       break;
     case 'inc_page_promo_header.php':  //normal page, not logged in - show the promo area
-      if ($mmStatus->normal_page == 1 && $mmStatus->mm_logged_in == 0) { // && $mmStatus->mm_logged_in == 0) {
+      if ($mmStatus->wp_page == 1 && $mmStatus->mm_logged_in == 0) {
         include 'snippets/' . $file;
       }
       break;
     case 'inc_page_promo_footer.php':  //normal page, not logged in - show the promo area
-      if ($mmStatus->normal_page == 1 && $mmStatus->mm_logged_in == 0) {
-        include 'snippets/' . $file;
-      }
-      break;
-    case 'inc_private_calc.php':  //
-      if ($mmStatus->normal_page == 1) { // not correct include....!!!!!!!!!!!!!!!!!!!!!!!!!
+      if ($mmStatus->wp_page == 1 && $mmStatus->mm_logged_in == 0) {
         include 'snippets/' . $file;
       }
       break;
@@ -280,8 +318,10 @@ function getKommuner($html = true) {
   return $result;
 }
 
-function register_my_menu() {
-  register_nav_menu('header_logged_in', __('Header Logged In Menu'));
+function getUserData($mid) {
+  global $wpdb;
+  $sql = "SELECT id, fnamn, enamn, anamn, epost FROM mm_medlem WHERE id = $mid ";
+  $result = $wpdb->get_results($sql);
+  return $result[0];
 }
 
-add_action('init', 'register_my_menu');
