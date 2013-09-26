@@ -6,6 +6,12 @@
  * @package Motiomera
  * @since Motiomera 1.0
  */
+function favicon() {
+  echo '<link rel="shortcut icon" href="', get_template_directory_uri(), '/faviconadmin.ico" />', "\n";
+}
+add_action('admin_head', 'favicon');
+
+
 if (!function_exists('motiomera_setup')):
 
   function motiomera_setup() {
@@ -56,11 +62,11 @@ function motiomera_scripts() {
   //print_r($mmStatus);
 
   wp_enqueue_style('style', get_stylesheet_uri());
-  wp_register_script('jquery', 'http://code.jquery.com/jquery-latest.min.js');
-  wp_enqueue_script('jquery');
+  //wp_register_script('jquery', 'http://code.jquery.com/jquery-latest.min.js');
+  //wp_enqueue_script('jquery');
+
   
-  
-  wp_register_script('jquery-ui', get_bloginfo('template_url') . '/js/jquery-ui-1.9.2.custom.min.js');
+  wp_register_script('jquery-ui', get_bloginfo('template_url') . '/js/jquery-ui-1.9.2.custom.min.js', array( 'jquery' ));
   wp_enqueue_script('jquery-ui');
   if (1 == 2) {  //this is only needed for steg and graph not in wp right now..
     wp_register_script('jquery-flot', get_bloginfo('template_url') . '/js/jquery.flot.js');
@@ -70,14 +76,13 @@ function motiomera_scripts() {
     wp_register_script('jquery-mmwp-steps', get_bloginfo('template_url') . '/js/jquery.mmwp.steps.js');
     wp_enqueue_script('jquery-mmwp-steps');
   }
-  if($mmStatus->front_page == 1){
+  if ($mmStatus->front_page == 1) {
     wp_register_script('jquery-validate', get_bloginfo('template_url') . '/js/jquery.validate.min.js');
     wp_enqueue_script('jquery-validate');
     wp_register_script('jquery-mmwp-buy', get_bloginfo('template_url') . '/js/jquery.mmwp.buy.js');
     wp_enqueue_script('jquery-mmwp-buy');
-    
   }
-  
+
 
   //styles
   wp_register_style('wp-mm-style', get_bloginfo('template_url') . '/css/wp_mm_common.css');

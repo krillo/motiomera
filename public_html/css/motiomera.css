@@ -717,7 +717,7 @@ table#alh_navtable
 {
   width: 780px;
   height: 10px;
- /* background: url('/img/framework/mmBgTop.gif') bottom no-repeat; */
+  /* background: url('/img/framework/mmBgTop.gif') bottom no-repeat; */
 }
 #motiomera_andra_losenord_link
 {
@@ -1279,14 +1279,14 @@ table#alh_navtable
   margin: 0;
   padding: 10px 15px;
 }
-.mmBlueBoxWideBgMain
-{
- /* background: url(../img/framework/mmBlueBoxWideBg.gif) repeat-y; */
+.mmBlueBoxWideBgMain{
   width: 760px;
   margin: 0;
+  border-top: none;
+  background-color: #e0edd9;
+  border-radius: 0 0 10px 10px;
 }
-.mmBlueBoxWideBg
-{
+.mmBlueBoxWideBg{
   background: url(../img/framework/mmBlueBoxWideBg.gif) repeat-y;
   width: 601px;
   margin: 0;
@@ -1470,8 +1470,8 @@ table#alh_navtable
   font-weight: normal;
 }
 .mmOrange{
-	color: #F8901E;
-	font-weight: normal;
+  color: #F8901E;
+  font-weight: normal;
 }
 .mmGray{
   color: #555;
@@ -2896,9 +2896,13 @@ td.number
   overflow: hidden;
   word-wrap: break-word;
 }
-.mmBlueBoxBg
-{
-  width: 520px !important;
+.mmBlueBoxBg{
+  width: 480px !important;
+  padding:20px;
+  margin: 0;
+  border-top: none;
+  background-color: #e0edd9;
+  border-radius: 0 0 10px 10px;  
 }
 .mmBlueBoxWideBgMainPadding td
 {
@@ -3017,8 +3021,8 @@ td.number
 .show-more-link{padding:8px 0 25px 0; float:right;font-size: 12px;}
 #report-area{height:50px;whith:760px;background-color:#8aa25a;border-radius: 0 0 10px 10px;border-top: 1px solid #fff;margin-bottom: 35px;padding:10px 10px 10px 0;}
 .report-button{background-color: #5b7a19;padding:0 35px 32px 0;border-radius:5px 5px 5px 5px;height:10px;color:#fff; float:left;margin-left: 10px;font-family:Cabin Condensed;font-size:18px;
-       background-image: url("/img/design12/arrow_yellow.png"); background-repeat: no-repeat;background-position: 205px 10px; 
-       border-color: #CEE596 #555 #555 #CEE596;border-width: 1px;border-style: solid;}
+               background-image: url("/img/design12/arrow_yellow.png"); background-repeat: no-repeat;background-position: 205px 10px; 
+               border-color: #CEE596 #555 #555 #CEE596;border-width: 1px;border-style: solid;}
 .report-button:hover{border-color: #555 #CEE596 #CEE596 #555;border-width: 1px;border-style: solid; text-decoration: none; color: #fff;}
 .report-button img{margin: 0 5px 0 5px;}
 .route{background-position: 138px 10px; }

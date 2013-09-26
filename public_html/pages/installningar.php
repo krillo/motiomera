@@ -8,7 +8,7 @@ $smarty = new MMSmarty();
 $smarty->assign("pagetitle", "Min profil");
 
 
-$tabs = new TabBox("installningar", 585, null);
+$tabs = new TabBox("installningar", 760, null);
 $tabs->addTab("Allm&auml;nt", "allmant");
 $tabs->addTab("Om mig", "ommig");
 $tabs->addTab("Detaljerat", "detaljerat");

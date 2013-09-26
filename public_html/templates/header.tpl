@@ -9,9 +9,17 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="Stegtävling för företag. Motiomera är Sveriges roligaste stegtävling för alla som vill röra på sig och ha kul. Häng bara på dig stegräknaren och börja gå." />
     <meta name="keywords" content="motoimera stegtävling, stegtävling för företag, stegtävling på jobbet, stegtävling korpen, tävla med stegräknare, friskvård åt företag, avdragsgill friskvårdsaktivitet, motionera stegtävling, köp stegräknare, billig stegräknare, motionera mera, friskvård stegräknare, stegtävling omvandling, friskvårdsaktivitet, friskvårdsaktiviteter" />
+    {if isset($ADMIN)}
+      <link rel="shortcut icon" href="{$mm_url}/wp-content/themes/motiomera/faviconadmin.ico" type="image/x-icon" />
+      <link rel="icon" href="{$mm_url}/wp-content/themes/motiomera/faviconadmin.ico" type="image/x-icon" />
+    {else}
+      <link rel="shortcut icon" href="{$mm_url}/wp-content/themes/motiomera/favicon.ico" type="image/x-icon" />
+      <link rel="icon" href="{$mm_url}/wp-content/themes/motiomera/favicon.ico" type="image/x-icon" />      
+    {/if} 
     <link rel="stylesheet" href="{$mm_url}/css/motiomera.css" type="text/css" media="screen" />
     <!--link rel="stylesheet" href="{$mm_url}/css/checkout.css" type="text/css" media="screen" /-->
     <!--link rel="stylesheet" href="{$mm_url}/css/print.css" type="text/css" media="print" /-->
+    
     <link rel='stylesheet' id='wp-mm-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/wp_mm_common.css?ver=3.3.2' type='text/css' media='all' />
 
     {if $pagetitle == 'Min sida' } 
@@ -28,7 +36,7 @@
       //get all scripts and css from wp
       global $SETTINGS;
       $includes = file_get_contents($SETTINGS["url"].'/api-header/?page=kapten');
-      print($includes);
+      //print($includes);
     {/php} 
     
     
