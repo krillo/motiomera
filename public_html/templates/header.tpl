@@ -4,8 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    {*}<title>{if isset($pagetitle)}{$pagetitle} &mdash; {/if}{$pagename}</title>{*}
-    <title>Stegtävling och friskvård för företag</title>
+    <title>{if isset($pagetitle)}{$pagetitle}{/if}</title>
+    <!--title>Stegtävling och friskvård för företag</title-->
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="Stegtävling för företag. Motiomera är Sveriges roligaste stegtävling för alla som vill röra på sig och ha kul. Häng bara på dig stegräknaren och börja gå." />
     <meta name="keywords" content="motoimera stegtävling, stegtävling för företag, stegtävling på jobbet, stegtävling korpen, tävla med stegräknare, friskvård åt företag, avdragsgill friskvårdsaktivitet, motionera stegtävling, köp stegräknare, billig stegräknare, motionera mera, friskvård stegräknare, stegtävling omvandling, friskvårdsaktivitet, friskvårdsaktiviteter" />
@@ -22,7 +22,9 @@
     
     <link rel='stylesheet' id='wp-mm-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/wp_mm_common.css?ver=3.3.2' type='text/css' media='all' />
 
-    {if $pagetitle == 'Min sida' } 
+    
+    
+    {if $pagetitle == 'Min sida' or  $pagetitle == 'Profilsida'} 
       <link rel='stylesheet' id='ui-lightness-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/ui-lightness/jquery-ui-1.9.2.custom.min.css?ver=3.3.2' type='text/css' media='all' />
       <script type='text/javascript' src='{$mm_url}/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
       <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery-ui-1.9.2.custom.min.js?ver=3.3.2'></script>
@@ -114,7 +116,8 @@
   </head>	
   <body id="body" class="{$BROWSER} {$currentPage}">    
     <div id="mm_id" style="display: none;">{$USER->getId()}</div>
-    <div id="mm_url" style="display: none;">{$mm_url}</div>  
+    <div id="mm_url" style="display: none;">{$mm_url}</div>
+    <div id="profil_id" style="display: none;">{$_GET.mid}</div>
     {php}
       //get menu from wp
       global $SETTINGS;

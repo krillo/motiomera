@@ -298,7 +298,7 @@ if (isset($USER) && $USER->getId() == $medlem->getId()) {
 $smarty->assign('selfProfile', $selfProfile);
 
 
-$smarty->assign("pagetitle", ucfirst($medlem->getANamn())." &mdash; Profil");
+//$smarty->assign("pagetitle", ucfirst($medlem->getANamn())." &mdash; Profil");
+$smarty->assign("pagetitle", "Profilsida");
 
 $smarty->display('profil.tpl');
-?>

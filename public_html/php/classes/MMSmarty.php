@@ -32,8 +32,6 @@ class MMSmarty extends Smarty
 		$this->compile_dir = ROOT . '/templates_c';
 		$this->config_dir = ROOT . '/php/libs/smarty/configs';
 		$this->cache_dir = ROOT . '/php/libs/smarty/cache';
-
-		// Visar t.ex. trunkomera.se ist�llet f�r MotioMera, om s� �r fallet.
 		
 		if ($_SERVER['HTTP_HOST'] != 'motiomera.se'):
 			$this->assign("pagename", ucfirst($_SERVER['HTTP_HOST']));

@@ -37,7 +37,7 @@
 {/if}
 
 <div class="mmh1 mmMarginBottom mmProfilH1">
-	{$medlem->getANamn()}
+	Profilsida: {$medlem->getANamn()}
 	
 	<span class="{if $selfProfile}editable {/if}mmGray">
 		
@@ -123,30 +123,18 @@
 
 
 
+
 <div id="mmColumnRightMinSida">
   {include file="widget_steglista.tpl"}  
-  {include file="widget_klubbar.tpl"}  
+  {*include file="widget_klubbar.tpl"*}  
 	{include file="fotoalbumblock.tpl"}  
-	
-  
-	<!-- div class="mmAlbumBoxTop">
-		<h3 class="mmWhite BoxTitle">Klubbar</h3>
-	</div>
-	<div class="mmRightMinSidaBox"-->
-	
-	{*foreach from=$grupper item=grupp}
-		<a href="{$urlHandler->getUrl(Grupp, URL_VIEW, $grupp->getId())}">{$grupp->getNamn()}</a>
-		{if $grupp->getSkapareId() == $medlem->getId()}<img src="/img/icons/star.gif" alt="" class="mmStarText" />{/if}
-		<br />
-	{/foreach*}
-	<!--br/>
-	<img src="/img/icons/star.gif" alt="" /> = skapad av denna medlem
-	</div>	
-	<br/-->	
-  
-  
-
 </div>
 
+{php}
+  include(BASE_PATH . '/wordpress/wp-content/themes/motiomera/snippets/inc_graph.php');
+{/php}
+
+<div style="min-height:340px;margin-bottom: 15px;float:left">
+{include file="widget_kommunjakten.tpl"}
+</div>  
   
-{include file="kommunjakten.tpl"}
