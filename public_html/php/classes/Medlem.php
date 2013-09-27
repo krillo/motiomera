@@ -885,7 +885,6 @@ class Medlem extends Mobject {
     return $this->olastaMail;
   }
 
-  
   public function getCurrentMal() {
 
     if (!$this->currentMal) {
@@ -1553,22 +1552,22 @@ class Medlem extends Mobject {
     $response["msg"] = "Error";
     $giltig = Foretag::giltigForetagsnyckel($fnyckel);
     $response["giltig"] = $giltig;
-    if($giltig === -2){
+    if ($giltig === -2) {
       $response["msg"] = "Ogiltig";
-      return $response;      
+      return $response;
     }
-    if($giltig === -1){
+    if ($giltig === -1) {
       $response["msg"] = "Upptagen";
-      return $response;      
+      return $response;
     }
-    if($giltig){
+    if ($giltig) {
       $this->setForetagsnyckel($fnyckel);
       $this->commit();
       $foretag = Foretag::loadByForetagsnyckel($fnyckel);
       $response["msg"] = "Tillhör företag: " . $foretag->getNamn();
       $response["success"] = 1;
     }
-    return $response;    
+    return $response;
   }
 
   public function setKon($kon) {
@@ -1723,7 +1722,7 @@ class Medlem extends Mobject {
     if ($security) {
       Security::demand(USER);
     }
-    $this->fadmin = (int)$id;
+    $this->fadmin = (int) $id;
   }
 
   public function setMAffCode($mAffCode) {
@@ -2273,8 +2272,6 @@ class Medlem extends Mobject {
     return $ret;
   }
 
-
-
   public static function loadById($id) {
     return parent::loadById($id, get_class());
   }
@@ -2394,7 +2391,6 @@ class Medlem extends Mobject {
     }
   }
 
-
   /**
    * Log in by FB-id.
    * If it does not exist in db then check for matching email.
@@ -2439,12 +2435,12 @@ class Medlem extends Mobject {
     $_SESSION["mm_mid"] = $this->id;
     $_SESSION["mm_sid"] = $sessionId;
 
-    if ($cookie) {
-      setcookie("mm_mid", $id, time() + 60 * 60 * 24 * 30, "/");
-      setcookie("mm_sid", $sessionId, time() + 60 * 60 * 24 * 30, "/");
-    }
+    /*
+    setcookie("mm_mid", $id, time() + 60 * 60 * 24 * 30, "/");
+    setcookie("mm_sid", $sessionId, time() + 60 * 60 * 24 * 30, "/");
+     */
   }
-  
+
   /**
    * Does the email exist? 
    * Added by krillo 2012-10-01
@@ -2462,8 +2458,7 @@ class Medlem extends Mobject {
     } else {
       return 0;
     }
-  }  
-  
+  }
 
   /**
    * 	Returnerar medlemsobjektet för den inloggade medlemmen, eller false om besökaren inte är inloggad
