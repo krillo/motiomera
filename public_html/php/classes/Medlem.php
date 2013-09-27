@@ -2399,7 +2399,7 @@ class Medlem extends Mobject {
    * @global $db $db
    * @param type $fbid
    * @param type $email
-   * @return boolean true for succes else false
+   * @return id or false for no matching email or fbid 
    */
   public static function loggaInFb($fbid, $email) {
     global $db;
@@ -2419,7 +2419,7 @@ class Medlem extends Mobject {
         $medlem->loggInCurrentUser();
         return $id;
       }
-      return false;
+      return false;   //no matching email in db
     }
     return false;
   }

@@ -10,7 +10,7 @@ try {
   $status = Medlem::loggaInFb($fb->fbid, $fb->email);
   if ($status > 0) {
     $fb->loggedin = 1;
-    $fb->mm_id = $status;    
+    $fb->mm_id = $status;       
   } else {
     $fb->loggedin = 0;
   }
