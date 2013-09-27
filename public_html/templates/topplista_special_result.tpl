@@ -2,7 +2,7 @@
 <table border="0" width="200" cellspacing="0" cellpadding="4" class="mmAdressbokTable">
 	{foreach from=$topplista->getTopplista() item=placering key=key}
 	{if ($key==0) }<tr class="mmAdressbokCellWhite1"><td>&nbsp;</td><td class="mmTextAlignLeft">Användarnamn</td><td class="mmTextAlignLeft">Född</td><td class="mmTextAlignLeft">Kön</td>{/if}
-	<tr class="mmAdressbokCell{if (($key%2)==0)}Blue{else}White{/if}1">
+	<tr class="mmMailCell{if (($key%2)==0)}Green{else}White{/if}2">
 		<td>#{$key+1}</td>
 		<td><a href="
 		{$urlHandler->getUrl(Medlem, URL_VIEW, $placering.medlem->getId())}

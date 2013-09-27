@@ -1,4 +1,3 @@
-{debug}
 {if isset($USER) && !$selfProfile}
 	<div id="mmProfilAdressbok">
 		{if isset($invitable)}

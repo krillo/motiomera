@@ -160,7 +160,6 @@ $mmStatus->fb_gender = null;
 $mmStatus->fb_email = null;
 $mmStatus->fb_login_url = null;
 $facebook = null;
-mm_status();
 
 /**
  * Set some statuses. If logged in then run the mm init.php to get even more data
