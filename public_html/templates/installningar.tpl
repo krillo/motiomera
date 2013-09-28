@@ -5,10 +5,10 @@
 	
 	{$tabs->printTabBox()}
 
+  <br/>
 	<table border="0" cellspacing="0" cellpadding="0" class="motiomera_form_table">
 		<tr>
-			<th></th>
-			<td><input type="image" src="/img/icons/SparaInstallningarIcon.gif" alt="Spara inställningar" /></td>
+			<th><input type="image" src="/img/icons/SparaInstallningarIcon.gif" alt="Spara inställningar" /></th>
 		</tr>
 	</table>
 
