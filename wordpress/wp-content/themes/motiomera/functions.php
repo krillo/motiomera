@@ -257,8 +257,13 @@ function includeSnippet($file) {
   //print_r($mmStatus);
 
   switch ($file) {
-    case 'inc_login_area.php':   //if not logged - show login area
+    case 'inc_login_area.php':   //if not logged in - show login area
       if ($mmStatus->mm_logged_in == 0) {
+        include 'snippets/' . $file;
+      }
+      break;
+    case 'inc_fb_root.php':   //if fisrt page and not logged in - show fb-root and FB javascript
+      if ($mmStatus->front_page == 1 && $mmStatus->mm_logged_in == 0) {
         include 'snippets/' . $file;
       }
       break;

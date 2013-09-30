@@ -1,23 +1,20 @@
 <script type="text/javascript">
-  var actionNyttLosen = "<?php echo MM_SERVER_ROOT_URL; ?>/actions/nyttlosen.php";
-  var actionLogin = "<?php echo MM_SERVER_ROOT_URL; ?>/actions/login.php";
-  var actionLoginFb = "<?php echo MM_SERVER_ROOT_URL; ?>/actions/loginfb.php";
   jQuery(document).ready(function($) {
-    
+
     // toggle between login and new password
-    $('#new-pass').change(function() {  
-      var newPassCheck = $('#new-pass:checked').val();   
-      if(typeof newPassCheck == 'undefined'){
+    $('#new-pass').change(function() {
+      var newPassCheck = $('#new-pass:checked').val();
+      if (typeof newPassCheck == 'undefined') {
         $('#login-submit').val('Logga in »');
-        $("#login-form").attr("action", actionLogin);
+        $("#login-form").attr("action", "/actions/login.php");
         $("#username").attr("name", 'username');
       } else {
         $('#login-submit').val('Nytt lösen »');
-        $("#login-form").attr("action", actionNyttLosen);
-        $("#username").attr("name", 'epost');        
+        $("#login-form").attr("action", "/actions/nyttlosen.php");
+        $("#username").attr("name", 'epost');
       }
     });
-        
+
     //login with facebook
     $("#login-fb").click(function(event) {
       FB.login(function(response) {
@@ -25,33 +22,33 @@
           //console.log('Welcome!  Fetching your information.... ');
           FB.api('/me', function(response) {
             //console.log(response);
-            //console.log('Good to see you, ' + response.name + '  Email: ' + response.email + '  Id: ' + response.id);            
-            var dataString = "fbid=" + response.id + "&email=" + response.email;
-            if(dataString==""){
-            } else{
-              $.ajax({
-                type: "POST",
-                url: actionLoginFb,
-                data: dataString,
-                cache: false,
-                success: function(data){
-                  //console.log(data);
-                  if(data.loggedin == 1){
-                    window.location = "/pages/minsida.php";    
-                  } else {
-                    alert("Du använder inte samma epostadress på Facebook som på MotioMera. Du måste logga in som vanligt först och göra Facebook-kopplingen på dina inställningar.")
-                  }                 
+            var data = {
+              fbid: response.id,
+              email: response.email,
+              type: 'login'
+            };
+            $.ajax({
+              type: "POST",
+              url: "/actions/loginfb.php",
+              data: data,
+              cache: false,
+              success: function(data) {
+                //console.log(data);
+                if (data.loggedin == 1) {
+                  window.location = "/pages/minsida.php";
+                } else {
+                  alert("Du använder inte samma epostadress på Facebook som på MotioMera. Du måste logga in som vanligt först och göra Facebook-kopplingen på dina inställningar.")
                 }
-              });
-            }
-            return false;            
+              }
+            });
+            return false;
           });
         } else {
           console.log('Avbrutet av användaren.');
         }
-      },{scope: 'email'});
+      }, {scope: 'email'});
     });
-  });  
+  });
 </script>
 <div id="login">
   <form id="login-form" action="<?php echo MM_SERVER_ROOT_URL; ?>/actions/login.php" method="post">

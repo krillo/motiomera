@@ -21,12 +21,12 @@
     <!--link rel="stylesheet" href="{$mm_url}/css/print.css" type="text/css" media="print" /-->
     
     <link rel='stylesheet' id='wp-mm-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/wp_mm_common.css?ver=3.3.2' type='text/css' media='all' />
+    <script type='text/javascript' src='{$mm_url}/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
 
     
     
     {if $pagetitle == 'Min sida' or  $pagetitle == 'Profilsida'} 
       <link rel='stylesheet' id='ui-lightness-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/ui-lightness/jquery-ui-1.9.2.custom.min.css?ver=3.3.2' type='text/css' media='all' />
-      <script type='text/javascript' src='{$mm_url}/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
       <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery-ui-1.9.2.custom.min.js?ver=3.3.2'></script>
       <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.js?ver=3.3.2'></script>
       <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.stack.js?ver=3.3.2'></script>    
@@ -121,6 +121,8 @@
     {php}
       //get menu from wp
       global $SETTINGS;
+      $fb = file_get_contents($SETTINGS["url"].'/api/?snippet=inc_fb_root');
+      print($fb);
       $menu = file_get_contents($SETTINGS["url"].'/api-menu/');
       print($menu);
     {/php}    

@@ -38,30 +38,7 @@ if ($site_description && ( is_home() || is_front_page() )) {
   <body <?php body_class(); ?>>
     <?php do_action('before'); ?>
     <div id="mm_url" style="display: none;"><?php echo home_url(''); ?></div>
-    <div id="fb-root"></div>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '108867119251826', // App ID
-          channelUrl : '//mm.dev/wp-content/themes/motiomera/fb-js-channel.php', // Channel File
-          status     : true, // check login status
-          cookie     : true, // enable cookies to allow the server to access the session
-          xfbml      : true  // parse XFBML
-        });
-
-        // Additional initialization code here
-      };
-
-      // Load the SDK Asynchronously
-      (function(d){
-        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement('script'); js.id = id; js.async = true;
-        js.src = "//connect.facebook.net/en_US/all.js";
-        ref.parentNode.insertBefore(js, ref);
-      }(document));
-    </script>
-
+    <?php includeSnippet("inc_fb_root.php"); ?>       
 
     <script type="text/javascript">
       jQuery(document).ready(function($) {  
@@ -84,7 +61,7 @@ if ($site_description && ( is_home() || is_front_page() )) {
 
     <nav role="navigation" class="site-navigation main-navigation" id="wp-nav">
       <div id="menu">
-        <a href="<?php echo home_url('/'); ?>" title="http://motiomera.se" rel="home"><div id="motiomera-logo-mini" class=""></div></a>
+        <a href="<?php echo home_url('/'); ?>" title="MotioMera.se stegtävling med stegräknare" rel="home"><div id="motiomera-logo-mini" class=""></div></a>
         <?php if ($mmStatus->mm_logged_in == 1): ?>
           <div id="wp-nav-menu"><?php wp_nav_menu(array('theme_location' => 'header_logged_in')); ?></div>
         <?php else: //primary = logged out ?>

@@ -2391,6 +2391,35 @@ class Medlem extends Mobject {
     }
   }
 
+  
+  
+  public function connectFb($fbid, $email) {
+    global $db;
+    $fbid = Security::secure_postdata($fbid);
+    $email = Security::secure_postdata($email);
+    $sql = "SELECT id FROM mm_medlem WHERE fb_id = '$fbid'";
+    $id = $db->value($sql);
+    if ($id != '') {
+      
+      $medlem = Medlem::loadById($id);
+      $medlem->loggInCurrentUser();
+      return $id;
+    } else {
+      $id = Medlem::getIdByEmail($email);
+      if ($id > 0) { //a matching email - store the fb_id
+        $medlem = Medlem::loadById($id);
+        $medlem->setFbId($fbid);
+        $medlem->commit();
+        $medlem->loggInCurrentUser();
+        return $id;
+      }
+      return false;   //no matching email in db
+    }
+    return false;
+  }
+  
+  
+  
   /**
    * Log in by FB-id.
    * If it does not exist in db then check for matching email.
@@ -2404,6 +2433,7 @@ class Medlem extends Mobject {
   public static function loggaInFb($fbid, $email) {
     global $db;
     $fbid = Security::secure_postdata($fbid);
+    $email = Security::secure_postdata($email);    
     $sql = "SELECT id FROM mm_medlem WHERE fb_id = '$fbid'";
     $id = $db->value($sql);
     if ($id != '') {

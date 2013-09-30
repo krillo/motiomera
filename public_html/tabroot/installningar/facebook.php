@@ -1,6 +1,44 @@
-<?php global $USER?>
+<?php global $USER ?>
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    var actionLoginFb = "/actions/loginfb.php";
+
+    //login with facebook
+    $("#login-fb").click(function(event) {
+      FB.login(function(response) {
+        if (response.authResponse) {
+          //console.log('Welcome!  Fetching your information.... ');
+          FB.api('/me', function(response) {
+            //console.log(response);
+            var data = {
+              fbid: response.id,
+              email: response.email,
+              type: 'connect'
+            };
+            $.ajax({
+              type: "POST",
+              url: actionLoginFb,
+              data: data,
+              cache: false,
+              success: function(data) {
+                //console.log(data);
+                alert(data.msg);
+                if(data.status === -1){  //allready connected to another account!? 
+                  window.location = "/fragor-och-svar/"; 
+                }
+              }
+            });
+            return false;
+          });
+        } else {
+          console.log('Avbrutet av användaren.');
+        }
+      }, {scope: 'email'});
+    });
+  });
+</script>
 <style>
-#login-fb {
+  #login-fb {
     background-image: url("/wp-content/themes/motiomera/img/fb_button.png");
     background-repeat: no-repeat;
     margin-left: 5px;
@@ -20,14 +58,13 @@
     font-size: 21px;
     cursor: pointer;
     padding:8px 10px 12px 38px;
-    
-}
+  }
 
-#login-fb:hover{
+  #login-fb:hover{
     border-color: #16223a #c4d5f3 #c4d5f3 #16223a;
-}
+  }
 
-  
+
 </style>
 <h2>Koppla ditt konto till Facebook</h2>
 <p>Genom att klicka på knappen och logga in på Facebook kopplar du ditt konto Motiomerakonto till Facebook</p>
