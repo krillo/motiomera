@@ -154,7 +154,7 @@ class UrlHandler
 			URL_CHOOSE => "/pages/valjKommun.php",
 		) ,
 		"Rutt" => array(
-			URL_VIEW => "/pages/rapport.php?id=*0",
+			URL_VIEW => "/pages/rutt.php?id=*0",
 			URL_EDIT => "/pages/valj_rutt.php"
 		) ,
 		"Mal" => array(

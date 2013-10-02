@@ -862,13 +862,16 @@ table#alh_navtable
   text-align: center;
   padding-top: 88px;
 }
-#motiomera_valjrutt_rutt
-{
-  position: absolute;
-  left: 5px;
-  background-color: #FFF;
-  z-index: 500;
+#motiomera_valjrutt_rutt {
+position: relative;
+left: 40px;
+background-color: #FFF;
+z-index: 9;
+float: left;
+display: inline;
 }
+
+
 #motiomera_valjrutt_flytande_knappar
 {
   position: absolute;
@@ -2680,10 +2683,18 @@ td.number
   margin-top:-5px;
   margin-right:5px;
 }
-#mapdiv 
-{
-  margin-left: -15px;
+
+#mapdiv {
+  margin-left: 155px;
+  z-index: 1;
+  float: left;
+  overflow: hidden;
+  position: absolute;
+  height: 1960px;
 }
+#mapdivsmall{margin-left: -15px;}
+
+
 .paddingLeft15
 {
   padding-left: 15px;
@@ -2967,10 +2978,14 @@ td.number
   left: 10px;
   margin-left: -3px;
 }
-.IE6 #mapdiv
-{
-  margin-left: -15px;
+.IE6 #mapdiv {
+  margin-left: 155px;
+  z-index: 1;
+  float: left;
+  position: absolute;
+  height: 1960px;
 }
+
 .IE6 .editable #mmMedlemStatusText
 {
   background: #fff url(/img/icon-pen.png) repeat-y right 4px;

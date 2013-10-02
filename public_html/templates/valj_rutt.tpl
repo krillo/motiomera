@@ -1,3 +1,5 @@
+<div id="valj_rutt_container" style="height:1960px;width:1px">
+
 {if !$ajax}<div id="motiomera_valjrutt_rutt">{/if}
 
 <div class="ShadowBox">
@@ -118,3 +120,5 @@ Kvar om du går 11.000 steg per dag: {$dagar11000} dagar<br/>
 </script> 
 
 {/if}
+
+</div> 

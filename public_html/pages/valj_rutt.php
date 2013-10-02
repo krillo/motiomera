@@ -1,21 +1,16 @@
 <?php
 
 include $_SERVER["DOCUMENT_ROOT"]  . "/php/init.php";
-
 Security::demand(USER);
-
 $smarty = new MMSmarty();
 $smarty->assign("pagetitle", "Välj rutt");
-
-
 $smarty->assign("doldMeny", true);
 
 
-
 $medlem = $USER;
-if(!empty($_GET["id"]))
+if(!empty($_GET["id"])){
 	$smarty->assign("notown", "true");
-
+}
 $smarty->assign("medlem", $medlem);
 
 
@@ -26,8 +21,6 @@ if(isset($_GET["ajax"])) {
 else {
 	$smarty->assign("ajax",false);
 }
-
-
 
 
 $stegtotal = $USER->getStegTotal();	
@@ -95,5 +88,3 @@ $smarty->assign("rutt", $rutt);
 include_once ROOT . '/php/libs/php-ofc-library/open-flash-chart-object.php';
 
 $smarty->display('valj_rutt.tpl');
-
-?>

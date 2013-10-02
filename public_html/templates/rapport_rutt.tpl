@@ -1,5 +1,5 @@
-<h1>Skapa egen rutt</h1>
-<div id="mapdiv" class="mmFloatRight mm-map-area">
+<h1>Skapa en rutt</h1>
+<div id="mapdivsmall" class="mmFloatRight mm-map-area">
 {if $abroadId}
 	<img src="{$abroadImage}" alt="" />
 {/if}
@@ -9,7 +9,7 @@
 <!--
 	var map = new FusionMaps("/maps/C_FCMap_SwedenKommuner.swf", "Map1Id", "400", "700", "0", "0");
 	map.setDataURL(escape("/maps/visited_kommuner.php?z=0&medlem={$medlem->getId()}"));
-	map.render("mapdiv");
+	map.render("mapdivsmall");
 -->
 </script>
 
@@ -20,7 +20,7 @@
 <div class="ShadowBoxTop"></div>
 <h2 class="mmMarginBottom">Aktuell rutt</h2>
 {if !isset($notown)}
-	<span style="padding-right:30px;">Här kan du skapa din egen rutt genom att klicka på "Skapa/utöka EGEN RUTT". <br/><br/></span>
+	<span style="padding-right:30px;margin-bottom: 30px;">Här kan du skapa din egen rutt genom att klicka på "Skapa/utöka EGEN RUTT".</span>
 {/if}
 {if isset($rutten)}
 <table border="0" cellpadding="0" cellspacing="0" class="mmWidthTvaTvaNollPixlar">
