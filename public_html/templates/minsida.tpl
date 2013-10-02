@@ -34,12 +34,8 @@
 {* include file="widget_userblogg.tpl" *}
 <div id="mmColumnRightMinSida">
   {include file="widget_steglista.tpl"}  
-  {include file="widget_tidigare_tavling.tpl"}  
-  {*include file="widget_klubbar.tpl"*}  
+  {include file="widget_tidigare_tavling.tpl"}    
 	{include file="fotoalbumblock.tpl"}
-	{*if $sajtDelarObj->medlemHasAccess($USER,'minaQuiz')}
-		{include file="minaquizblock.tpl"}
-	{/if*}
 </div><!-- END mmColumnRight -->
 
 <!-- START mmColumnMiddle -->
