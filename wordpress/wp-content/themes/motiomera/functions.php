@@ -30,8 +30,6 @@ if (!function_exists('motiomera_setup')):
 endif; // motiomera_setup
 add_action('after_setup_theme', 'motiomera_setup');
 
-
-
 /**
  * Add the "contact us"-mailto link to the footer menu
  * Submit user details
@@ -45,7 +43,7 @@ function add_contact_to_footer_menu($items, $args) {
     global $mmStatus;
     $body = '';
     if ($mmStatus->mm_mid != 0) {
-      $body = '?body=Namn:%20'. $mmStatus->mm_fnamn . ' ' . $mmStatus->mm_enamn . '%0AEmail:%20' . $mmStatus->mm_email . '%0AId:%20' . $mmStatus->mm_mid . '%0A------------ LÅT STÅ ---------------';
+      $body = '?body=Namn:%20' . $mmStatus->mm_fnamn . ' ' . $mmStatus->mm_enamn . '%0AEmail:%20' . $mmStatus->mm_email . '%0AId:%20' . $mmStatus->mm_mid . '%0A------------ LÅT STÅ ---------------';
     }
     $contactlink = '<li class=""><a href="mailto:support@motiomera.se' . $body . '" target="_blank">Kontakta oss</a></li>';
     $items = $items . $contactlink;
@@ -135,8 +133,6 @@ function create_post_type() {
   );
 }
 
-
-
 // krillo - set this variable so that old motiomera can figure out if wp is initiated or not 
 define('MM_WP_INIT', true);
 
@@ -168,20 +164,20 @@ function mm_status() {
   global $mmStatus;
   global $facebook;
   global $fbLoginUrl;
-  
-  
-  
-  
-  @session_start();  //just to be able to read mm variables (logged in or not)
-  
-  /*
-  echo 'session - ';  
-  print_r( $_SESSION);
-  echo ' - '; 
-   */
-  
-  if (empty($_SESSION["mm_mid"]) && empty($_SESSION["mm_sid"])) {
 
+
+
+
+  @session_start();  //just to be able to read mm variables (logged in or not)
+
+  /*
+    echo 'session - ';
+    print_r( $_SESSION);
+    echo ' - ';
+   */
+
+  if (empty($_SESSION["mm_mid"]) && empty($_SESSION["mm_sid"])) {
+    
   } else {
     $mmStatus->mm_logged_in = 1;
     $mmStatus->mm_mid = $_SESSION["mm_mid"];
@@ -305,6 +301,13 @@ function includeSnippet($file) {
       break;
     default:
       break;
+  }
+}
+
+function isLoggedIn() {
+  global $mmStatus;
+  if ($mmStatus->mm_logged_in == 1) {
+    echo 'main-navigation-logged-in';
   }
 }
 

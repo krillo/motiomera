@@ -459,6 +459,7 @@ article{
   border-radius: 7px 7px / 7px 7px;
   margin-bottom: 20px;
 }
+article h1{color:#60723D;font-size: 38px;font-weight: bold;text-transform: uppercase;margin-bottom: 12px;}
 article h2{color:#889d59;font-size: 36px;}
 article p{color:#5c5c5c;font-size: 14px;font-family: arial;}
 

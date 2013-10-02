@@ -39,6 +39,7 @@
 
 /** menu **/
 .main-navigation {clear: both;display: block;float: left;width: 100%;}
+.main-navigation-logged-in {margin-bottom: 40px;}
 nav{ background-color: #314D00; height:40px; z-index: 10; width:1800px;margin:auto;}  
 #menu {margin: auto;width: 960px;}
 .main-navigation a {color: white;display: block;text-decoration: none;} 

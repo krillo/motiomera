@@ -59,7 +59,7 @@ if ($site_description && ( is_home() || is_front_page() )) {
       });  
     </script>
 
-    <nav role="navigation" class="site-navigation main-navigation" id="wp-nav">
+    <nav role="navigation" class="site-navigation main-navigation <?php isLoggedIn(); ?>" id="wp-nav">
       <div id="menu">
         <a href="<?php echo home_url('/'); ?>" title="MotioMera.se stegtävling med stegräknare" rel="home"><div id="motiomera-logo-mini" class=""></div></a>
         <?php if ($mmStatus->mm_logged_in == 1): ?>

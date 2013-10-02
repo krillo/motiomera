@@ -118,7 +118,7 @@
 				<li><a href="{$urlHandler->getUrl("FastaUtmaningar", URL_SAVE, $utmaning.id)}" onclick="var q = confirm('Du har valt en fast rutt. Ifall du redan lagt upp en egen rutt kommer den att ersättas av den fasta rutten. De kommuner du redan besökt kommer dock att ligga kvar i listan.\n\nOm du klarar hela rutten får du en fin pokal till troféhyllan på Min sida. Lycka till!'); return q;">{$utmaning.namn}&nbsp;&nbsp;<img src="/img/icons/ArrowCircleBlue.gif" alt="Välj denna fasta rutt" /></a></li>
 			{/foreach}
 		</ul>
-<a href="/pages/fastarutter.php" class="laggTillKommunSmall">Läs mer om de fasta rutterna</a>
+<a href="/fasta-rutter/" class="laggTillKommunSmall">Läs mer om de fasta rutterna</a>
 {/if}
 {if $userOnStaticRoute}
 	<br />
