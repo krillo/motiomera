@@ -1,19 +1,3 @@
-<?php
-//echo $_SERVER["DOCUMENT_ROOT"] . "../public_html/php/init.php";
-//require_once($_SERVER["DOCUMENT_ROOT"] . "../public_html/php/init.php");  
-
-global $USER;
-//print_r($USER);
-/*
-$USER = Medlem::getInloggad();
-if (!$USER) {
-  unset($USER);
-}
- * 
- */
-//global $mmStatus;
-//print_r($mmStatus);
-?>
 <div id="mm_id" class="hidden"><?php echo $mmStatus->mm_mid; ?></div>
       <script type="text/javascript">
         jQuery(document).ready(function($){    

@@ -22,7 +22,7 @@ if (!function_exists('motiomera_setup')):
     register_nav_menus(array(
         'primary' => __('Primary Menu', 'motiomera'),
         'footer' => __('Footer Menu', 'motiomera'),
-        'header_logged_in', __('Header Logged In Menu'),
+        'header_logged_in', __('Header Logged In Menu', 'motiomera'),
     ));
     add_theme_support('post-formats', array('aside',));
   }
@@ -252,14 +252,34 @@ function includeSnippet($file) {
   global $mmStatus;
   //print_r($mmStatus);
 
+  
+  /*
+  <?php if ($mmStatus->mm_logged_in == 1): ?>
+          <div id="wp-nav-menu"><?php wp_nav_menu(array('menu' => 'header_logged_in')); ?></div>
+        <?php else: //primary = logged out ?>
+          <div id="wp-nav-menu"><?php wp_nav_menu(array('menu' => 'primary')); ?></div>
+        <?php endif; ?>
+  */
+  
+  
+  
+  
+  
   switch ($file) {
+    case 'main_menu':
+      if ($mmStatus->mm_logged_in == 1){
+          wp_nav_menu(array('menu' => 'header_logged_in'));
+        } else { //primary = logged out 
+          wp_nav_menu(array('menu' => 'primary'));
+        }
+      break;
     case 'inc_login_area.php':   //if not logged in - show login area
       if ($mmStatus->mm_logged_in == 0) {
         include 'snippets/' . $file;
       }
       break;
     case 'inc_fb_root.php':   //if fisrt page and not logged in - show fb-root and FB javascript
-      if ($mmStatus->front_page == 1 && $mmStatus->mm_logged_in == 0) {
+      if (($mmStatus->front_page == 1 || $mmStatus->wp_page == 1) && $mmStatus->mm_logged_in == 0 ) {
         include 'snippets/' . $file;
       }
       break;

@@ -19,12 +19,12 @@
     <link rel="stylesheet" href="{$mm_url}/css/motiomera.css" type="text/css" media="screen" />
     <!--link rel="stylesheet" href="{$mm_url}/css/checkout.css" type="text/css" media="screen" /-->
     <!--link rel="stylesheet" href="{$mm_url}/css/print.css" type="text/css" media="print" /-->
-    
+
     <link rel='stylesheet' id='wp-mm-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/wp_mm_common.css?ver=3.3.2' type='text/css' media='all' />
     <script type='text/javascript' src='{$mm_url}/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
 
-    
-    
+
+
     {if $pagetitle == 'Min sida' or  $pagetitle == 'Profilsida'} 
       <link rel='stylesheet' id='ui-lightness-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/ui-lightness/jquery-ui-1.9.2.custom.min.css?ver=3.3.2' type='text/css' media='all' />
       <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery-ui-1.9.2.custom.min.js?ver=3.3.2'></script>
@@ -33,16 +33,16 @@
       <script type="text/javascript" src="{$mm_url}/wp-content/themes/motiomera/js/jquery.mmwp.steps.js?ver=3.5.1"></script>
     {/if}
 
-    
+
     {php}
       //get all scripts and css from wp
       global $SETTINGS;
       $includes = file_get_contents($SETTINGS["url"].'/api-header/?page=kapten');
       //print($includes);
     {/php} 
-    
-    
-    
+
+
+
     {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
       {if !NO_INTERNET || GOOGLEMAPS_OVERRIDE_NO_INTERNET}
         {if $urlChecker->getFileName() eq 'minsida.php' or 'fastautmaningar.php'}
@@ -121,10 +121,11 @@
     {php}
       //get menu from wp
       global $SETTINGS;
-      $fb = file_get_contents($SETTINGS["url"].'/api/?snippet=inc_fb_root');
-      print($fb);
       $menu = file_get_contents($SETTINGS["url"].'/api-menu/');
-      print($menu);
+      $fb = file_get_contents($SETTINGS["url"].'/api/?snippet=inc_fb_root');
+      //$menu2 = file_get_contents($SETTINGS["url"].'/api/?snippet=logged_in_menu');
+      print($fb. $menu);
+      //print($menu2);
     {/php}    
     <div id="logged-in-menu">
       <ul>

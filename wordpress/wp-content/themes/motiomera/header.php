@@ -62,11 +62,7 @@ if ($site_description && ( is_home() || is_front_page() )) {
     <nav role="navigation" class="site-navigation main-navigation <?php isLoggedIn(); ?>" id="wp-nav">
       <div id="menu">
         <a href="<?php echo home_url('/'); ?>" title="MotioMera.se stegtävling med stegräknare" rel="home"><div id="motiomera-logo-mini" class=""></div></a>
-        <?php if ($mmStatus->mm_logged_in == 1): ?>
-          <div id="wp-nav-menu"><?php wp_nav_menu(array('theme_location' => 'header_logged_in')); ?></div>
-        <?php else: //primary = logged out ?>
-          <div id="wp-nav-menu"><?php wp_nav_menu(array('theme_location' => 'primary')); ?></div>
-        <?php endif; ?>
+        <div id="wp-nav-menu"><?php includeSnippet("main_menu"); ?> </div>
       </div>
       <?php includeSnippet("inc_logged_in_menu.php"); ?>           
     </nav>

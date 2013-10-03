@@ -10,7 +10,7 @@
 </div>
 
 {php}
-global $SETTINGS;
-$footer = file_get_contents($SETTINGS["url"].'/api-footer/');
+global $SETTINGS, $USER;
+$footer = file_get_contents($SETTINGS["url"].'/api/?snippet=footer&mmid='.$USER->getId() );
 print($footer);
 {/php}

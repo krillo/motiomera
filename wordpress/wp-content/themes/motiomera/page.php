@@ -19,11 +19,15 @@
 
 
     function hashHandler(hash) {
-      hash = hash.replace('#', '');
-      $('html, body').animate({
-        scrollTop: $("#" + hash).offset().top - 80
-      }, 1000);
-      return true;
+      if (hash !== '') {
+        hash = hash.replace('#', '');
+        if ($("#" + hash).length ) {  //does selector exist on page
+          $('html, body').animate({
+            scrollTop: $("#" + hash).offset().top - 80
+          }, 1000);
+          return true;
+        }
+      }
     }
   });
 </script>
