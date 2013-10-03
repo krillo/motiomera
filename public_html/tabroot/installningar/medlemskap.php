@@ -6,7 +6,7 @@ $level = $USER->getLevel();
 
 if($level > 0) {
 	?>
-	<p>Ditt <?=$level->getNamn()?>-medlemsskap är aktivt fram t.o.m. <?= $USER->getPaidUntil() ?></p>
+	<p>Ditt <?=$level->getNamn()?>-medlemsskap är aktivt fram t.o.m. <strong><?= $USER->getPaidUntil() ?></strong></p>
 	<p><a href="<?= $urlHandler->getUrl("Medlem", URL_BUY) ?>">Förläng ditt medlemsskap &raquo;</a></p>
 	<?php
 }

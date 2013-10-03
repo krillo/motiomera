@@ -28,15 +28,17 @@ a.highslide-full-expand
   margin: 0 10px 10px 0;
 }
 a:hover{color: #768d4a;text-decoration: none;}
-a{color: #5b7a19;text-decoration: none;}
+a{color: #4F6916;text-decoration: underline; line-height: 140%; 
+  /* border-bottom: 1px solid #4F6916;padding-bottom: 4px; */
+}
 body
 {
   background-image: url("/img/design12/mmbg_page.png");
   background-position: center top;
   background-repeat: no-repeat;
-  color: #333;
-  font-family: 'Cabin Condensed', Arial, Verdana;
-  font-size: 13px;
+  color: #5c5c5c;
+  font-family: Arial, Verdana, 'Cabin Condensed';
+  font-size: 15px;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -45,22 +47,22 @@ h1
 {
   font-family: 'Cabin Condensed', Arial, Verdana;
   font-weight: normal;
-  font-size: 180%;
+  font-size: 37px;
   margin: 0 0 15px;
   color:#4f6916;
 }
 h2
 {
   font-family: 'Cabin Condensed', Arial, Verdana;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: normal;
   margin: 15px 0 5px;
-  color:#4f6916;
+  color:#3B5A00;
 }
 h3
 {
   font-family: 'Cabin Condensed', Arial, Verdana;
-  font-size: 14px;
+  font-size: 22px;
   font-weight: bold;
   line-height: 20px;
   margin: 3px 0 5px;
@@ -102,6 +104,36 @@ table#alh_navtable
   border-spacing: 0;
   margin-left: 0;
   width: 100%;
+}
+textarea{
+  font-family: Arial, Verdana, 'Cabin Condensed';
+  font-size: 15px;
+  padding:4px 4px 6px 7px;
+  -moz-border-radius: 5px 5px / 5px 5px;
+  border-radius: 5px 5px / 5px 5px;
+  -moz-box-shadow: inset -1px -1px 1px #CEE596;
+  -webkit-box-shadow: inset -1px -1px 1px #CEE596;
+  box-shadow: inset -1px -1px 1px #CEE596;
+}
+select{
+  font-family: Arial, Verdana, 'Cabin Condensed';
+  font-size: 15px;
+  padding:4px 4px 6px 7px;
+  -moz-border-radius: 5px 5px / 5px 5px;
+  border-radius: 5px 5px / 5px 5px;
+  -moz-box-shadow: inset -1px -1px 1px #CEE596;
+  -webkit-box-shadow: inset -1px -1px 1px #CEE596;
+  box-shadow: inset -1px -1px 1px #CEE596;
+}
+input{
+  font-family: Arial, Verdana, 'Cabin Condensed';
+  font-size: 15px;
+  padding:4px 4px 6px 7px;
+  -moz-border-radius: 5px 5px / 5px 5px;
+  border-radius: 5px 5px / 5px 5px;
+  -moz-box-shadow: inset -1px -1px 1px #CEE596;
+  -webkit-box-shadow: inset -1px -1px 1px #CEE596;
+  box-shadow: inset -1px -1px 1px #CEE596;  
 }
 #map-container #loader
 {
@@ -863,12 +895,12 @@ table#alh_navtable
   padding-top: 88px;
 }
 #motiomera_valjrutt_rutt {
-position: relative;
-left: 40px;
-background-color: #FFF;
-z-index: 9;
-float: left;
-display: inline;
+  position: relative;
+  left: 40px;
+  background-color: #FFF;
+  z-index: 9;
+  float: left;
+  display: inline;
 }
 
 
@@ -2033,7 +2065,7 @@ display: inline;
 {
   background: url('/img/icons/tabboxbg.gif');
   background-repeat: repeat-x;
-  padding: 6px 0 0;
+  padding: 15px 0 0;
 }
 .mmTabBoxLeft
 {
@@ -2112,8 +2144,14 @@ display: inline;
 
 .mmTextField
 {
-  font-family: Arial, Verdana, "Trebuchet ms", Tahoma, Helvetica;
-  font-size: 11px;
+  font-family: Arial, Verdana, 'Cabin Condensed';
+  font-size: 15px;
+  padding:4px 4px 6px 7px;
+  -moz-border-radius: 5px 5px / 5px 5px;
+  border-radius: 5px 5px / 5px 5px;
+  -moz-box-shadow: inset -1px -1px 1px #CEE596;
+  -webkit-box-shadow: inset -1px -1px 1px #CEE596;
+  box-shadow: inset -1px -1px 1px #CEE596;
 }
 .mmTilltradeTd
 {
@@ -2299,17 +2337,17 @@ display: inline;
 }
 .motiomera_form_table td,.motiomera_form_table th
 {
-  border-bottom: 1px solid #eee;
-  padding: 3px 0;
+  /*border-bottom: 1px solid #eee; */
+  padding: 7px 0;
 }
 .motiomera_form_table th
 {
-  padding-top: 8px;
-  width: 100px;
+  padding: 8px 0 8px 0;
+  width: 140px;
 }
 .motiomera_form_table
 {
-  width: 435px;
+  width: 750px;
 }
 .motiomera_installningar_table textarea
 {

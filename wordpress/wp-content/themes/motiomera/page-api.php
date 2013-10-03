@@ -13,7 +13,7 @@ switch ($snippet) {
     break;
   default:
   case 'footer':
-    echo $mmid;
+    //echo $mmid;
     print (get_footer());
     break;
   default:

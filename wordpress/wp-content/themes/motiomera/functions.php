@@ -198,49 +198,6 @@ function mm_status() {
   //print_r($mmStatus);
 }
 
-/*
-  function facebookInit() {
-  //Facebook login url
-  require ABSPATH . '../lib/facebook-php-sdk/src/facebook.php';
-  $facebook = new Facebook(array(
-  'appId' => '108867119251826',
-  'secret' => 'f8a8d39798810a4f5a51cdb867508ee6',
-  ));
-
-  $fb_params = array(
-  'scope' => 'read_stream',
-  'redirect_uri' => 'http://mm.dev/faq/',
-  'display' => 'popup'
-  );
-  $mmStatus->fb_login_url = $facebook->getLoginUrl($fb_params);
-
-  //Logged in on Facebook?
-  $user = null;
-  $user = $facebook->getUser();
-  //print_r($user);
-  if ($user) {
-  try {
-  // Proceed knowing you have a logged in user who's authenticated.
-  $user_profile = $facebook->api('/me');
-  $mmStatus->fb_user_id = $user_profile['id'];
-  $mmStatus->fb_name = $user_profile['name'];
-  $mmStatus->fb_first_name = $user_profile['first_name'];
-  $mmStatus->fb_last_name = $user_profile['last_name'];
-  $mmStatus->fb_link = $user_profile['link'];
-  $mmStatus->fb_gender = $user_profile['gender'];
-  $mmStatus->fb_email = $user_profile['email'];
-  } catch (FacebookApiException $e) {
-  //echo '<pre>'.htmlspecialchars(print_r($e, true)).'</pre>';
-  $user = null;
-  }
-  }
-
-  echo '<div style="color:#ccc;">' . print_r($mmStatus, true) . '</div>';
-  //echo '<br/><img src="https://graph.facebook.com/' . $user . '/picture">';
-  }
- * 
- */
-
 /**
  * Include snippets
  * The pages show different snippets due to mmStatus
@@ -252,19 +209,6 @@ function includeSnippet($file) {
   global $mmStatus;
   //print_r($mmStatus);
 
-  
-  /*
-  <?php if ($mmStatus->mm_logged_in == 1): ?>
-          <div id="wp-nav-menu"><?php wp_nav_menu(array('menu' => 'header_logged_in')); ?></div>
-        <?php else: //primary = logged out ?>
-          <div id="wp-nav-menu"><?php wp_nav_menu(array('menu' => 'primary')); ?></div>
-        <?php endif; ?>
-  */
-  
-  
-  
-  
-  
   switch ($file) {
     case 'main_menu':
       if ($mmStatus->mm_logged_in == 1){
@@ -279,7 +223,7 @@ function includeSnippet($file) {
       }
       break;
     case 'inc_fb_root.php':   //if fisrt page and not logged in - show fb-root and FB javascript
-      if (($mmStatus->front_page == 1 || $mmStatus->wp_page == 1) && $mmStatus->mm_logged_in == 0 ) {
+      if (($mmStatus->front_page == 1 || $mmStatus->wp_page == 1 || is_404()) && $mmStatus->mm_logged_in == 0 ) {
         include 'snippets/' . $file;
       }
       break;

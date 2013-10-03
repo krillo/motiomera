@@ -7,7 +7,7 @@ Security::demand(USER);
 $smarty = new MMSmarty();
 
 
-$tabs = new TabBox("adressbok", 590, null);
+$tabs = new TabBox("adressbok", 750, null);
 $tabs->addTab("Mina vänner", "kontakter");
 $tabs->addTab("Sök medlem", "medlemmar");
 $tabs->addTab("Avancerad medlemssökning", "topplista_special");

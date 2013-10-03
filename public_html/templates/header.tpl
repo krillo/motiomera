@@ -21,27 +21,7 @@
     <!--link rel="stylesheet" href="{$mm_url}/css/print.css" type="text/css" media="print" /-->
 
     <link rel='stylesheet' id='wp-mm-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/wp_mm_common.css?ver=3.3.2' type='text/css' media='all' />
-    <script type='text/javascript' src='{$mm_url}/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
-
-
-
-    {if $pagetitle == 'Min sida' or  $pagetitle == 'Profilsida'} 
-      <link rel='stylesheet' id='ui-lightness-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/ui-lightness/jquery-ui-1.9.2.custom.min.css?ver=3.3.2' type='text/css' media='all' />
-      <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery-ui-1.9.2.custom.min.js?ver=3.3.2'></script>
-      <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.js?ver=3.3.2'></script>
-      <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.stack.js?ver=3.3.2'></script>    
-      <script type="text/javascript" src="{$mm_url}/wp-content/themes/motiomera/js/jquery.mmwp.steps.js?ver=3.5.1"></script>
-    {/if}
-
-
-    {php}
-      //get all scripts and css from wp
-      global $SETTINGS;
-      $includes = file_get_contents($SETTINGS["url"].'/api-header/?page=kapten');
-      //print($includes);
-    {/php} 
-
-
+    <script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
 
     {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
       {if !NO_INTERNET || GOOGLEMAPS_OVERRIDE_NO_INTERNET}
@@ -53,6 +33,29 @@
     {foreach from=$urlChecker->getJsPackage() item=file}
       <script type="text/javascript" src="{$file}"></script>
     {/foreach}
+    
+
+    {if $pagetitle == 'Min sida' or  $pagetitle == 'Profilsida'} 
+      <link rel='stylesheet' id='ui-lightness-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/ui-lightness/jquery-ui-1.9.2.custom.min.css?ver=3.3.2' type='text/css' media='all' />
+      <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery-ui-1.9.2.custom.min.js?ver=3.3.2'></script>
+      <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.js?ver=3.3.2'></script>
+      <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.stack.js?ver=3.3.2'></script>    
+      <script type="text/javascript" src="{$mm_url}/wp-content/themes/motiomera/js/jquery.mmwp.steps.js?ver=3.5.1"></script>
+    {/if}
+
+    
+    
+
+    {php}
+      //get all scripts and css from wp
+      global $SETTINGS;
+      $includes = file_get_contents($SETTINGS["url"].'/api-header/?page=kapten');
+      //print($includes);
+    {/php} 
+
+
+
+
     <script type="text/javascript">
       {literal}
         var mmPopup;

@@ -26,10 +26,6 @@
 			</td>
 		</tr>
 		<tr>
-			<th>Min blogg</th>
-			<th><input type="text" name="rssUrl" value="<?php echo $USER->getRssUrl() ?>" /><br /><i>Här kan du länka in rss flöden från din blogg, Om du inte har någon blogg kan du skapa en på <a href="http://www.blogg.se" title="blogg.se" />blogg.se</a></i></th>
-		</tr>
-		<tr>
 			<th>Beskrivning</th>
 			<td><textarea name="beskrivning" cols="40" rows="8" class="mmFontSizeNioNollProcent" ><?= $USER->getBeskrivning() ?></textarea></td>
 		</tr>
