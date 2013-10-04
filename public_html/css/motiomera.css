@@ -406,10 +406,24 @@ input{
 {
   margin-bottom: 20px;
 }
-#mmKvittoTable .mmRowHeading
-{
-  padding-top: 15px;
+.mmRowHeading{padding-top: 15px;}
+#mmKvittoTable{
+  margin-top: 30px;
+  padding:30px;
+  -moz-border-radius: 5px 5px / 5px 5px;
+  border-radius: 5px 5px / 5px 5px;
+  background-color: #E0EDD9;
+  border: 1px solid #D0E0C7;
 }
+.mm-alert-box{
+  margin-top: 30px;
+  padding:30px;
+  -moz-border-radius: 5px 5px / 5px 5px;
+  border-radius: 5px 5px / 5px 5px;
+  background-color: #E0EDD9;
+  border: 1px solid #D0E0C7;  
+}
+
 #mmLoggaIn .mmTextField
 {
   border-top: 1px solid #5da326;

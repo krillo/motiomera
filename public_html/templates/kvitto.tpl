@@ -27,43 +27,33 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
      {*}
 {/if}
 
-<table border="0" cellpadding="0" cellspacing="0" id="mmKvittoTable">
-	<tr>
-		<td class="mmWidthTvaHundraPixlar"></td><td></td><td></td>
-	</tr>
-	
+
+  {if $orderList.typ == "foretag_tillagg"}
+      <p>
+        <a href="/pages/editforetag.php?fid={$orderList.foretagsId}" class="noprint">Tillbaks till administrationssidan</a>
+      </p>
+  {/if}
+
+  
 	{if $orderList.typ == "foretag"} 
-	<tr>
-		<td colspan="3"><h2>Inloggningsuppgifter</h2></td>
-	</tr>
-	<tr>
-		<td colspan="3">
+    <div class="mm-alert-box">
+      <h2>Inloggningsuppgifter</h2>
 			<b>Användarnamn:</b> {$orderList.foretagANamn}<br />
 			<b>Lösenord:</b> {$orderList.foretagLosen}
 			<p>
 				<a href="/pages/foretaglogin.php?u={$orderList.foretagANamn}&p={$orderList.foretagLosen}" class="noprint">Klicka här för att komma till administrationssidan för er tävling</a> 
-			</p>
-		</td>
-	</tr>
+			</p>      
+    </div>  
 	{/if}
-
-  {if $orderList.typ == "foretag_tillagg"}
-  <tr> 
-    <td colspan="3">
-      <p>
-        <a href="/pages/editforetag.php?fid={$orderList.foretagsId}" class="noprint">Tillbaks till administrationssidan</a>
-      </p>
-    </td>
-  </tr>
-  {/if}
-
-
+  
+  
+<table border="0" cellpadding="0" cellspacing="0" id="mmKvittoTable">
 	{if $orderList.typ == "foretag" || $orderList.typ == "foretag_again" || $orderList.typ == "foretag_tillagg"}
 	<tr>
 		<td colspan="3"><h2>Kvitto</h2></td>
 	</tr>
 	<tr>
-		<td><b>Köpet genomfört:</b> {$orderList.date|date_format:"%Y-%m-%d %H:%m"}</td>
+		<td class="mmWidthTvaHundraPixlar"><b>Köpet genomfört:</b> {$orderList.date|date_format:"%Y-%m-%d %H:%m"}</td>
     <td colspan="2"><b>Betalsätt:</b><span style="text-transform: capitalize;"> {$orderList.payment}</span></td>		
 	</tr>	
 	<tr>
@@ -78,8 +68,7 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
 	</tr>
 	<tr>
 		<td><b>Er referenskod:</b> {$orderList.orderRefCode}</td>
-	</tr>
-  
+	</tr>  
 	<tr>
 		<td colspan="3" class="mmRowHeading"><h3>Artiklar</h3></td>
 	</tr>
@@ -91,8 +80,6 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
 		</tr>	
 	{/strip}
 	{/section}
-  
-  
  	<tr>
 		<td colspan="3" class="mmRowHeading"><h3>Leverans</h3></td>
 	</tr>
@@ -116,7 +103,6 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
 		<td></td>		
 		<td colspan="2"><b>Mobil:</b> {$orderList.reciverMobile} </td>		
 	</tr> 
-  
 	<tr>
 		<td colspan="3" class="mmRowHeading"><h3>Betalare</h3></td>
 	</tr>
@@ -139,15 +125,6 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
 	<tr>
 		<td></td>
 		<td colspan="2"><b>Mobil:</b> {$orderList.payerMobile} </td>
-	</tr>
-	
-	
-
-
-
+	</tr>	
 	{/if}
 </table>
-
-
-<p>
-

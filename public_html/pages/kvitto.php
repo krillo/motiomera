@@ -227,4 +227,3 @@ if (!empty($order) && !empty($orderItemList)) {
     throw new UserException("Kvittot har gått ut (2)", "Det här kvittots giltighetstid har gått ut och kan därför inte längre visas.");
   }
 }
-?>
