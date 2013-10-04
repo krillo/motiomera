@@ -118,7 +118,11 @@
 
   </head>	
   <body id="body" class="{$BROWSER} {$currentPage}">    
-    <div id="mm_id" style="display: none;">{$USER->getId()}</div>
+    {if isset($USER)}
+      <div id="mm_id" style="display: none;">{$USER->getId()}</div>
+    {else}
+      <div id="mm_id" style="display: none;">0</div>
+    {/if}
     <div id="mm_url" style="display: none;">{$mm_url}</div>
     <div id="profil_id" style="display: none;">{$_GET.mid}</div>
     {php}

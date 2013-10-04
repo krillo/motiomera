@@ -402,28 +402,18 @@ input{
   padding-left: 30px; 
   margin-bottom: 8px;
 }
-#mmKommunFakta,#lea_300x250
-{
-  margin-bottom: 20px;
-}
+#mmKommunFakta,#lea_300x250{margin-bottom: 20px;}
 .mmRowHeading{padding-top: 15px;}
-#mmKvittoTable{
-  margin-top: 30px;
-  padding:30px;
-  -moz-border-radius: 5px 5px / 5px 5px;
-  border-radius: 5px 5px / 5px 5px;
-  background-color: #E0EDD9;
-  border: 1px solid #D0E0C7;
-}
+#mmKvittoTable{}
 .mm-alert-box{
   margin-top: 30px;
-  padding:30px;
+  padding:10px 30px 30px 30px;
   -moz-border-radius: 5px 5px / 5px 5px;
   border-radius: 5px 5px / 5px 5px;
   background-color: #E0EDD9;
   border: 1px solid #D0E0C7;  
 }
-
+#mm-kvitto-cred{width:250px;}
 #mmLoggaIn .mmTextField
 {
   border-top: 1px solid #5da326;
@@ -432,8 +422,7 @@ input{
   border-left: 1px solid #5da326;
   padding: 2px;
 }
-#mmLoggaIn
-{
+#mmLoggaIn{
   width: 290px;
   height: 45px;
   position: absolute;
@@ -442,20 +431,13 @@ input{
   text-align: right;
   margin: 13px 0 0 455px;
 }
-/*
-#username, #password{
-  length:40px;
-}
-*/
-#mmLogo
-{
+#mmLogo{
   width: 386px;
   height: 76px;
   position: absolute;
   margin: -6px 0 0 5px;
 }
-#mmMaBraLogo a span
-{
+#mmMaBraLogo a span{
   position: relative;
   top: 2px;
 }

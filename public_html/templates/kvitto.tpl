@@ -36,7 +36,7 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
 
   
 	{if $orderList.typ == "foretag"} 
-    <div class="mm-alert-box">
+    <div class="mm-alert-box" id="mm-kvitto-cred">
       <h2>Inloggningsuppgifter</h2>
 			<b>Användarnamn:</b> {$orderList.foretagANamn}<br />
 			<b>Lösenord:</b> {$orderList.foretagLosen}
@@ -47,7 +47,7 @@ Hej och tack för din tilläggsbeställning! Nedan ser du ditt kvitto. Er tävli
 	{/if}
   
   
-<table border="0" cellpadding="0" cellspacing="0" id="mmKvittoTable">
+<table border="0" cellpadding="0" cellspacing="0" id="mmKvittoTable" class="mm-alert-box">
 	{if $orderList.typ == "foretag" || $orderList.typ == "foretag_again" || $orderList.typ == "foretag_tillagg"}
 	<tr>
 		<td colspan="3"><h2>Kvitto</h2></td>
