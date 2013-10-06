@@ -272,6 +272,8 @@ hgroup{height:127px; float:left;}
 #buy-contact-tel{color:#404040;font-family: helvetica; font-size: 36px;font-weight: bold;text-decoration: none;}
 #buy-contact-tel:hover{color:#888;}
 
+.invioce-area{padding:30px 30px 0;}
+
 
 /******* buy company bubble ********/
 #buy-payment{padding:15px 30px; width: 410px;}
@@ -297,19 +299,39 @@ hgroup{height:127px; float:left;}
   color: #555555;
   font-size: 18px;
 }
+/*  gul
 #faktura{  
-  background-image: url("img/faktura-button.png");
+  background-image: url("img/button_bg_yellow.png");
   background-position: 0px 0px;
+  background-repeat: repeat-x;
+  width:195px;
+  border-color: #fff #ccc #ccc #fff;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  font-size: 18px;
+  margin-top: 10px;
+  padding: 7px 9px 10px 9px;
+}  */
+#faktura{  
+  background-image: url("img/invoice_bg.png");
+  background-position: -30px 0px;
   background-repeat: no-repeat;
   width:195px;
   border-color: #fff #ccc #ccc #fff;
-  color: #555555;
+  border-width: 2px;
+  color: #000;
   font-size: 18px;
+  margin-top: 10px;
+  padding: 7px 9px 10px 9px;
+}
+#faktura:hover {
+  padding: 5px 11px 12px 7px;
+  background-position: -32px -2px;
 }
 #faktura:hover, #payson:hover{border-color: #ccc #fff #fff #ccc;}
 
 #buy-payment-options{float:left;height:143px;width:400px;background-image: url("img/payment_options.png");background-repeat: no-repeat;background-position:0 33px;}
-#integrity{clear: both;}
+#integrity{clear: both;font-size: 16px;}
 
 
 
