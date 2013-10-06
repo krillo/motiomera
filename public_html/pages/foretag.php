@@ -7,7 +7,7 @@ if (!empty($_GET["fid"])) {
 } elseif (isset($USER)) {
   $foretag = $USER->getForetag();
 }
-$smarty->assign("pagetitle", ucfirst($foretag->getNamn()) . " &mdash; Företag");
+$smarty->assign("pagetitle", "Företagssida");
 
 //print_r($USER);
 //print_r($ADMIN);

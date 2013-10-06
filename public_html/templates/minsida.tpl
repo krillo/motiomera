@@ -40,7 +40,6 @@
 
 <!-- START mmColumnMiddle -->
 <div style="min-height:340px;margin-bottom: 15px;float:left">
-{*include file="widget_graph.tpl"*}
 {php}
   include(BASE_PATH . '/wordpress/wp-content/themes/motiomera/snippets/inc_graph.php');
 {/php}

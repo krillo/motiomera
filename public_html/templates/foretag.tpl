@@ -1,3 +1,4 @@
+<div id="mm_fid" style="display: none;">{$this_foretag->getId()}</div>
 <div class="mmTotaltAntalSteg"><b>Totalt:</b> {$this_foretag->getStegTotal()|nice_tal} steg</div>
 	<div class="mmKlubbarAvatarTop"><img src="{if $foretagCustomBild!=null}{$foretagCustomBild}{else}/img/icons/AvatarKlubbTop.gif{/if}" alt="" /></div>
 		<div class="mmh2">{$this_foretag->getNamn()}</div>
@@ -44,7 +45,13 @@
 		{include file="bildblock.tpl"}	
 </div>
 
-{include file="stegstaplar.tpl"}
+{*include file="stegstaplar.tpl"*}
+{php}
+  include(BASE_PATH . '/wordpress/wp-content/themes/motiomera/snippets/inc_graph.php');
+{/php}
+<div class="mmClearBoth"></div>
+
+
 
 <div class="mmBlueBoxContainer">
 <div class="mmBlueBoxTop"><h3 class="BoxTitle">Deltagande Lag</h3></div>
@@ -67,60 +74,3 @@
 </div>
 <div class="mmBlueBoxBottom"></div>
 </div>
-
-
-{*}<p>
-	<b>Lag</b><br />
-
-	{foreach from=$lagList item=lag}
-	<a href="{$urlHandler->getUrl(Lag, URL_VIEW, $lag->getId())}">{$lag->getNamn()}</a> ({$lag->getAntalMedlemmar()} medlemmar)<br />
-	{foreachelse}
-	Inga lag ännu.
-	{/foreach}
-</p>{*}
-		{*}<div class="mmAnslagstavla">
-			
-			<div class="mmAnslagstavlaBoxTop"><h3 class="BoxTitle AnslagTitle">Anslagstavlan</h3></div>
-			<div class="mmAnslagstavlaBoxBg">
-				
-
-				{if $anslagstavlaantalrader > 0}
-				<table class="mmAnslagstavlaTabell" cellpadding="1" cellspacing="0">
-					{foreach from=$anslagstavlarader item=rad name=anslagstavlarader}
-					{assign var=radnr value=$anslagstavlaantalrader-$smarty.foreach.anslagstavlarader.iteration+1}
-					{assign var=tempMedlem value=$rad->getMedlem()}
-					<tr>
-						<td>#{$radnr}</td>
-						<td>{$tempMedlem->getANamn()}</td>
-						<td><em>{$rad->getDatum()|nice_date:"d M Y"}</em></td>
-						<td>{$rad->getText()}</td>
-					</tr>
-					{/foreach}
-				</table>
-				{/if}
-				
-				
-				
-				<div class="mmTextalignRight mmMarginRight10">
-					<a href="#">L&auml;s alla inlägg</a>
-					<a href="#">
-						<img src="/img/icons/ArrowCircleBlue.gif" alt="" class="mmMarginLeft3 mmArrow" />
-					</a>
-				</div>
-				{if $owner || $ismember}
-				<form action="{$urlHandler->getUrl(AnslagstavlaRad, URL_SAVE)}" method="post">
-					<input type="hidden" name="gid" value="{$lag2->getId()}"/>
-					<input type="hidden" name="aid" value="{$lag2->getAnslagstavlaId()}"/>
-					Skriv på anslagstavlan:<br/>
-					<textarea name="atext" rows="5" cols="5"></textarea>
-					<br/>
-					<input type="submit" value="Skicka"/><br/><br/>
-				</form>
-				{/if}
-			</div>
-
-			<div class="mmAnslagstavlaBoxBottom"></div>
-			
-		</div>
-
-		<div class="mmClearBoth"></div>{*}

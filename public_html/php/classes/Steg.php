@@ -197,6 +197,40 @@ class Steg extends Mobject{
 	public static function getStegTotalPerDays($mm_id, $from_date, $to_date){
 		global $db;
     $sql = "SELECT SUM(steg) AS steg, datum  FROM mm_steg WHERE medlem_id = $mm_id AND datum >= '$from_date' AND datum <= '$to_date' group by datum"; 
+    echo $sql; 
+    $dbResult = $db->allValuesAsArray($sql);
+    foreach ($dbResult as $key => $value) {
+      $date_step[$value['datum']] = (int)$value['steg'];
+    }
+    $fdate = new JDate($from_date);
+    $nbr_days = (int)JDate::dateDaysDiff($from_date, $to_date);
+    $nbr_days += 2;
+    for($n = 1; $n < $nbr_days; $n++){
+      $steps[] = array($n, $date_step[$fdate->getDate()]);
+      $fdate->addDays(1);
+    }
+    return $steps;
+  }
+  
+  /**
+   * Description: Returns total sum steps per day per team. Data is returned from from_date to to_date 
+   * Date: 2013-01-04
+   * Author: Kristian Erendi 
+   * URI: http://reptilo.se 
+   * 
+   * in this format to suit jquery.flot.js:
+   * $steps = array(
+   *    array(1, 7120),
+   *    array(2, 5120),
+   *    array(3, 0),
+   *    array(4, 8120),
+   * );
+   * notice that days with no steps has to be handled
+   */
+	public static function getStegTotalPerDaysPerTeam($mm_lid, $from_date, $to_date){
+		global $db;
+    $sql_ids = "SELECT medlem_id FROM mm_foretagsnycklar WHERE lag_id = $mm_lid and medlem_id is not null"; 
+    $sql = "SELECT SUM(steg) AS steg, datum  FROM mm_steg WHERE medlem_id in (SELECT medlem_id FROM mm_foretagsnycklar WHERE lag_id = $mm_lid and medlem_id is not null) AND datum >= '$from_date' AND datum <= '$to_date' group by datum"; 
     $dbResult = $db->allValuesAsArray($sql);
     foreach ($dbResult as $key => $value) {
       $date_step[$value['datum']] = (int)$value['steg'];
@@ -231,6 +265,41 @@ class Steg extends Mobject{
 		$jdate = new JDate($from_date);
     global $db;
     $sql = "SELECT sum(steg) steps_day, count(distinct(medlem_id)) nof_users, cast((sum(steg) / count(distinct(medlem_id))) AS UNSIGNED INTEGER) AS average, s.datum FROM mm_steg s WHERE s.datum >= '$from_date' AND s.datum <= '$to_date' GROUP BY datum"; 
+    $dbResult = $db->allValuesAsArrayOptKey($sql, 'datum');
+    while($jdate->getDate() <= $to_date){
+      $i++;
+      if(array_key_exists($jdate->getDate(), $dbResult)){
+        $data = $dbResult[$jdate->getDate()];
+        $steps[] = array($i.'.3', (int)$data['average']);
+      } else {
+        $steps[] = array($i.'.3', 0);
+      }
+      $jdate->addDays(1);
+    }
+    return $steps;
+  }
+  
+  
+  
+  /**
+   * Description: Returns total sum steps per day per users in gthe team. Data is returned from from_date to to_date, 
+   * Loop the dates so to catch dates with no step data
+   * Date: 2013-01-04
+   * Author: Kristian Erendi 
+   * URI: http://reptilo.se 
+   * 
+   * in this format to suit jquery.flot.js:
+   * $steps = array(
+   *    array(1.3, 7120),
+   *    array(2.3, 5120),
+   *    array(3.3, 8120),
+   * );
+   */
+	public static function getStegTotalAveragePerDaysPerTeam($mm_lid, $from_date, $to_date){
+		$jdate = new JDate($from_date);
+    global $db;
+    $sql = "SELECT sum(steg) steps_day, count(distinct(medlem_id)) nof_users, cast((sum(steg) / count(distinct(medlem_id))) AS UNSIGNED INTEGER) AS average, s.datum FROM mm_steg s WHERE s.datum >= '$from_date' AND s.datum <= '$to_date' GROUP BY datum"; 
+    echo $sql;
     $dbResult = $db->allValuesAsArrayOptKey($sql, 'datum');
     while($jdate->getDate() <= $to_date){
       $i++;

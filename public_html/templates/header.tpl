@@ -35,7 +35,7 @@
     {/foreach}
     
 
-    {if $pagetitle == 'Min sida' or  $pagetitle == 'Profilsida'} 
+    {if $pagetitle == 'Min sida' or  $pagetitle == 'Profilsida' or $pagetitle == 'Företagssida' or $pagetitle == 'Lagsidan'} 
       <link rel='stylesheet' id='ui-lightness-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/ui-lightness/jquery-ui-1.9.2.custom.min.css?ver=3.3.2' type='text/css' media='all' />
       <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery-ui-1.9.2.custom.min.js?ver=3.3.2'></script>
       <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.js?ver=3.3.2'></script>

@@ -255,6 +255,14 @@ jQuery(document).ready(function($) {
 
   var mm_url = $("#mm_url").html();
   var mm_id = $("#mm_id").html();
+  var mm_fid = $("#mm_fid").html();
+  if(mm_fid === undefined){
+    mm_fid = 0;
+  }
+  var mm_lid = $("#mm_lid").html();
+  if(mm_lid === undefined){
+    mm_lid = 0;
+  }
   var steps = null;
   var average = null;
   var ticks = null;
@@ -274,6 +282,8 @@ jQuery(document).ready(function($) {
     }
     var data = {
       mm_id: mm_id,
+      mm_fid: mm_fid,
+      mm_lid: mm_lid,
       from_date: from_date,
       to_date: to_date
     };

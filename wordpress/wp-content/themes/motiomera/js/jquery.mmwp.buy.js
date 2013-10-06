@@ -270,7 +270,7 @@ jQuery(document).ready(function($) {
       $('#buy-company-top').addClass("full-width");
       $('.hide-private').addClass("hidden");
       $('#buy-private-top-left').removeClass("full-width");
-      $('#buy-payment').removeClass("hidden");
+      $('#buy-payment').addClass("hidden");
       $('#faktura').removeClass("hidden");
     }
 

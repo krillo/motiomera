@@ -207,8 +207,12 @@ Order::getMondays(15);
       </div>
     </div>
     <div class="invioce-area">
-      <input type="submit" id="faktura" class="buy-payment-buttons" name="paytype" value="Betala med faktura" />
-          <div id="integrity">Genom att fortsätta betalningen godkänner jag <br/><a target="_blank" href="<?php echo esc_url(get_permalink(get_page_by_title('integritetspolicy'))); ?>">Motiomeras avtal och integritetspolicy</a> samt är över 18 år</div>
+      <div class="buy-box">
+        <div class="buy-heading">Betalning</div>
+        <input type="submit" id="faktura" class="buy-payment-buttons" name="paytype" value="Betala med faktura" />
+
+        <div id="integrity">Genom att fortsätta betalningen godkänner jag <br/><a target="_blank" href="<?php echo esc_url(get_permalink(get_page_by_title('integritetspolicy'))); ?>">Motiomeras avtal och integritetspolicy</a> samt är över 18 år</div>
+      </div>    
     </div>
   </div>
 
@@ -272,10 +276,12 @@ Order::getMondays(15);
     <div class="buy-heading">Betalning</div>
     <div id="buy-payment-buttons" >
       <input type="submit" id="payson" class="buy-payment-buttons" name="paytype" value="Betala med">     
-      <input type="submit" id="faktura" class="buy-payment-buttons" name="paytype" value="Betala med faktura" />
+      <!--input type="submit" id="faktura" class="buy-payment-buttons" name="paytype" value="Betala med faktura" /-->
     </div>  
-    <div id="buy-payment-options">Via Payson kan du betala med följande alternativ:</div>
-    <div id="integrity">Genom att fortsätta betalningen godkänner jag <br/><a target="_blank" href="<?php echo esc_url(get_permalink(get_page_by_title('integritetspolicy'))); ?>">Motiomeras avtal och integritetspolicy</a> samt är över 18 år</div>
+    <div class="buy-box">
+      <div id="buy-payment-options">Via Payson kan du betala med följande alternativ:</div>
+      <div id="integrity">Genom att fortsätta betalningen godkänner jag <br/><a target="_blank" href="<?php echo esc_url(get_permalink(get_page_by_title('integritetspolicy'))); ?>">Motiomeras avtal och integritetspolicy</a> samt är över 18 år</div>
+    </div>
   </div>  
 
 </form>

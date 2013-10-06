@@ -289,6 +289,7 @@ hgroup{height:127px; float:left;}
   font-size: 20px;
   margin-bottom: 10px;
 }
+/*  silver
 #payson{
   background-image: url("img/payson-button.png");
   background-position: 0px 0px;
@@ -298,6 +299,17 @@ hgroup{height:127px; float:left;}
   border-color: #fff #ccc #ccc #fff;
   color: #555555;
   font-size: 18px;
+} */
+#payson{
+  background-image: url("img/payson_button.png");
+  background-position: -15px 0px;
+  background-repeat: no-repeat;
+  width:205px;
+  margin-right: 10px;
+  border-color: #fff #879371 #879371 #fff;
+  color: #000;
+  font-size: 18px;
+  padding: 7px 9px 10px 9px;  
 }
 /*  gul
 #faktura{  
@@ -313,24 +325,29 @@ hgroup{height:127px; float:left;}
   padding: 7px 9px 10px 9px;
 }  */
 #faktura{  
-  background-image: url("img/invoice_bg.png");
+  background-image: url("img/invoice_button.png");
   background-position: -30px 0px;
   background-repeat: no-repeat;
   width:195px;
-  border-color: #fff #ccc #ccc #fff;
-  border-width: 2px;
+  border-color: #fff #879371 #879371 #fff;
+  border-width: 1px;
   color: #000;
   font-size: 18px;
   margin-top: 10px;
   padding: 7px 9px 10px 9px;
+  margin-bottom: 15px;
 }
 #faktura:hover {
   padding: 5px 11px 12px 7px;
   background-position: -32px -2px;
 }
-#faktura:hover, #payson:hover{border-color: #ccc #fff #fff #ccc;}
+#payson:hover {
+  padding: 5px 11px 12px 7px;
+  background-position: -17px -2px;
+}
+#faktura:hover, #payson:hover{border-color: #879371 #fff #fff #879371;}
 
-#buy-payment-options{float:left;height:143px;width:400px;background-image: url("img/payment_options.png");background-repeat: no-repeat;background-position:0 33px;}
+#buy-payment-options{float:left;height:143px;width:400px;background-image: url("img/payment_options.png");background-repeat: no-repeat;background-position:0 40px;}
 #integrity{clear: both;font-size: 16px;}
 
 

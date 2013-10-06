@@ -2298,6 +2298,21 @@ www.motiomera.se';
     $ids = $db->valuesAsArray($sql);
     return $ids;
   }
+  
+  /**
+   * Return a list with all medlem ids
+   * 
+   * @author kristian Erendi <kristian@reptilo.se>
+   * @date 2013-09-06
+   * @global type $db
+   * @return type
+   */
+  public static function listMedlemIdsByLagId($lid) {
+    global $db;
+    $sql = "SELECT medlem_id FROM mm_foretagsnycklar WHERE lag_id = $lid and medlem_id is not null";
+    $ids = $db->valuesAsArray($sql);
+    return $ids;
+  }
 
   /**
    * Rest all the fadmin in tghe db for this company
