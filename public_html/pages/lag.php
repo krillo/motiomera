@@ -5,6 +5,9 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/init.php";
 if (!isset($FORETAG))
   Security::demand(USER);
 
+
+Misc::setTestData(107);
+
 $smarty = new MMSmarty();
 
 if (isset($_GET["lid"])) {
@@ -91,4 +94,16 @@ if (isset($_GET["lid"])) {
 
   $smarty->assign("bildURL", $lag->getBildFullUrl());
 }
+
+// Grafer:
+
+include_once ROOT . '/php/libs/php-ofc-library/open-flash-chart-object.php';
+
+ob_start();
+open_flash_chart_object( 300, 200, '/data/veckograf.php?lid=' . $lag->getId(),false,'/' );
+$graf = ob_get_contents();
+ob_end_clean();
+
+$smarty->assign("graf",$graf);
+
 $smarty->display('lag.tpl');

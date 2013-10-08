@@ -197,7 +197,6 @@ class Steg extends Mobject{
 	public static function getStegTotalPerDays($mm_id, $from_date, $to_date){
 		global $db;
     $sql = "SELECT SUM(steg) AS steg, datum  FROM mm_steg WHERE medlem_id = $mm_id AND datum >= '$from_date' AND datum <= '$to_date' group by datum"; 
-    echo $sql; 
     $dbResult = $db->allValuesAsArray($sql);
     foreach ($dbResult as $key => $value) {
       $date_step[$value['datum']] = (int)$value['steg'];

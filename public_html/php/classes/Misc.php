@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Felkoder
  * -1 $to är inte en giltig e-postadress
@@ -6,15 +7,11 @@
  * -3 Felaktigt format
  * -4 Mailet kunde inte skickas
  */
-class Misc
-{
+class Misc {
 
-	public function __construct()
-	{
-		throw new Exception("Kan inte instansiera denna klass");
-	}
-
-
+  public function __construct() {
+    throw new Exception("Kan inte instansiera denna klass");
+  }
 
   /**
    * Return dayname in swedish by passing weekday number
@@ -22,8 +19,8 @@ class Misc
    * @return string
    */
   public static function veckodag($daynumber) {
-  	$dag = explode(";", "Måndag;Tisdag;Onsdag;Torsdag;Fredag;Lördag;Söndag" );
-    return $dag[$daynumber-1];
+    $dag = explode(";", "Måndag;Tisdag;Onsdag;Torsdag;Fredag;Lördag;Söndag");
+    return $dag[$daynumber - 1];
   }
 
   /**
@@ -32,19 +29,19 @@ class Misc
    * @return string
    */
   public static function month($monthnumber) {
-    $monthnames=array(
-      1 => "januari",
-      2 => "februari",
-      3 => "mars",
-      4 => "april",
-      5 => "maj",
-      6 => "juni",
-      7 => "juli",
-      8 => "augusti",
-      9 => "september",
-      10 => "oktober",
-      11 => "november",
-      12 => "december",
+    $monthnames = array(
+        1 => "januari",
+        2 => "februari",
+        3 => "mars",
+        4 => "april",
+        5 => "maj",
+        6 => "juni",
+        7 => "juli",
+        8 => "augusti",
+        9 => "september",
+        10 => "oktober",
+        11 => "november",
+        12 => "december",
     );
     return $monthnames[$monthnumber];
   }
@@ -55,185 +52,168 @@ class Misc
    * @param int $keep
    * @return array
    */
-  public static function truncateArrayFromEnd(array $array, $keep){
+  public static function truncateArrayFromEnd(array $array, $keep) {
     $fullCount = count($array);
-    if($fullCount >= $keep + 1){
-      for($x = $fullCount; $x >= $keep; $x--){
+    if ($fullCount >= $keep + 1) {
+      for ($x = $fullCount; $x >= $keep; $x--) {
         unset($array[$x]);
       }
     }
-  	return $array;
+    return $array;
   }
 
+  public static function isUtf8($string) {
+    return (utf8_encode(utf8_decode($string)) == $string);
+  }
 
-	public static function isUtf8($string)
-	{
-	    return (utf8_encode(utf8_decode($string)) == $string);
-	}
+  public static function shuffle_assoc(&$array, $mode = 2) {
+    $keys = array_keys($array);
+    $values = array_values($array);
 
-	public static function shuffle_assoc(&$array, $mode = 2)
-	{
-		$keys = array_keys($array);
-		$values = array_values($array);
+    if (($mode == 0) || ($mode == 1))
+      shuffle($values);
 
-		if (($mode == 0) || ($mode == 1)) shuffle($values);
+    if (($mode == 0) || ($mode == 2))
+      shuffle($keys);
+    if (count($keys) > 0 && count($values) > 0) {
+      return array_combine($keys, $values);
+    } else {
+      return false;
+    }
+  }
 
-		if (($mode == 0) || ($mode == 2)) shuffle($keys);
-		if (count($keys)>0 && count($values)>0) {
-			return array_combine($keys, $values);
-		} else {
-			return false;
-		}
-	}
+  public static function matchString($first, $second) { //Returns true if it match
+    if ($first == $second) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-	public static function matchString($first, $second)
-	{ //Returns true if it match
+  public static function isValidId($id) {
 
+    if (is_numeric($id) && floor($id) == $id && !empty($id) && $id > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-		if ($first == $second) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+  public function gentime() { //För att mäta vad tid något tar i scriptet :)
+    static $gentime;
 
-	public static function isValidId($id)
-	{
+    if ($gentime == 0)
+      $gentime = microtime(true);
+    else
+      return (string) (microtime(true) - $gentime);
+  }
 
-		if (is_numeric($id) && floor($id) == $id && !empty($id) && $id > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+  public static function get_milliseconds($remove_dot = false) {
+    $time = microtime();
+    $timearray = explode(" ", $time);
+    $time = $timearray[1] + $timearray[0];
 
-	public function gentime()
-	{ //För att mäta vad tid något tar i scriptet :)
+    if ($remove_dot == true) {
+      $time = intval($time);
+    }
+    return $time;
+  }
 
-		static $gentime;
+  public static function dateToTimestamp($date) {
+    $time = explode('-', $date);
+    $mktime = mktime(0, 0, 0, $time[1], $time[2], $time[0]);
+    return $mktime;
+  }
 
-		if ($gentime == 0) $gentime = microtime(true);
-		else return (string)(microtime(true) - $gentime);
-	}
+  public static function getManadFromDate($n) {
+    $manader = array(
+        "Januari",
+        "Februari",
+        "Mars",
+        "April",
+        "Maj",
+        "Juni",
+        "Juli",
+        "Augusti",
+        "September",
+        "Oktober",
+        "November",
+        "December"
+    );
+    $date = explode('-', $n);
+    return $manader[$date[1] - 1];
+  }
 
-	public static function get_milliseconds($remove_dot = false)
-	{
-		$time = microtime();
-		$timearray = explode(" ", $time);
-		$time = $timearray[1] + $timearray[0];
+  public static function getDateFromDateTime($n) {
+    $date = explode(' ', $n);
+    return $date[0];
+  }
 
-		if ($remove_dot == true) {
-			$time = intval($time);
-		}
-		return $time;
-	}
+  public static function getCalFromSteg($steg) {
+    return $steg * 0.05;
+  }
 
-	public static function dateToTimestamp($date)
-	{
-		$time = explode('-', $date);
-		$mktime = mktime(0, 0, 0, $time[1], $time[2], $time[0]);
-		return $mktime;
-	}
+  public static function getDagarMellanTvaDatum($startdag, $slutdag) {
+    $start = self::dateToTimestamp($startdag);
+    $slut = self::dateToTimestamp($slutdag);
+    return intval(($slut - $start) / (86400));
+  }
 
-	public static function getManadFromDate($n)
-	{
-		$manader = array(
-			"Januari",
-			"Februari",
-			"Mars",
-			"April",
-			"Maj",
-			"Juni",
-			"Juli",
-			"Augusti",
-			"September",
-			"Oktober",
-			"November",
-			"December"
-		);
-		$date = explode('-', $n);
-		return $manader[$date[1] - 1];
-	}
+  public static function isInt($mixed) {
+    $num = (int) $mixed;
+    $num = (string) $num;
 
-	public static function getDateFromDateTime($n)
-	{
-		$date = explode(' ', $n);
-		return $date[0];
-	}
+    if ($num == $mixed)
+      return true;
+    else
+      return false;
+  }
 
-	public static function getCalFromSteg($steg)
-	{
-		return $steg * 0.05;
-	}
+  public static function isEmail($email) {
+    //return eregi('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$', $email);
+    return preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i', $email);
+  }
 
-	public static function getDagarMellanTvaDatum($startdag, $slutdag)
-	{
-		$start = self::dateToTimestamp($startdag);
-		$slut = self::dateToTimestamp($slutdag);
-		return intval(($slut - $start) / (86400));
-	}
+  public static function isDate($date, $format = "Y-m-d H:i:s") {
+    $dateereg = "[1-2][0-9]{3}-[0-1][0-9]-[0-3][0-9]";
+    $timeereg = "[0-2][0-9]:[0-5][0-9]:[0-5][0-9]";
 
-	public static function isInt($mixed)
-	{
-		$num = (int)$mixed;
-		$num = (string)$num;
+    switch ($format) {
+      case "Y-m-d":
+        //return eregi('^' . $dateereg . '$', $date);
+        return preg_match('/^' . $dateereg . '$/', $date);
+        break;
 
-		if ($num == $mixed) return true;
-		else return false;
-	}
+      case "Y-m-d H:i:s":
+        //return eregi('^' . $dateereg . ' ' . $timeereg . '$', $date);
+        return preg_match('/^' . $dateereg . ' ' . $timeereg . '$/', $date);
+        break;
 
-	public static function isEmail($email)
-	{
-		//return eregi('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$', $email);
-		return preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i', $email);
-    
-	}
+      default:
+        throw new MiscException("Felaktigt format", -3);
+    }
+  }
 
-	public static function isDate($date, $format = "Y-m-d H:i:s")
-	{
-		$dateereg = "[1-2][0-9]{3}-[0-1][0-9]-[0-3][0-9]";
-		$timeereg = "[0-2][0-9]:[0-5][0-9]:[0-5][0-9]";
+  public function niceDate($time, $format) {
 
-		switch ($format) {
-		case "Y-m-d":
-			//return eregi('^' . $dateereg . '$', $date);
-			return preg_match('/^' . $dateereg . '$/', $date);
-			break;
+    if (date("Y-m-d") == date("Y-m-d", $time)) {
+      return "Idag";
+    } else
+    if (date("Y-m-d", strtotime("-1 day")) == date("Y-m-d", $time)) {
+      return "Igår";
+    } else {
+      return date($format, $steg->getDatum());
+    }
+  }
 
-		case "Y-m-d H:i:s":
-			//return eregi('^' . $dateereg . ' ' . $timeereg . '$', $date);
-			return preg_match('/^' . $dateereg . ' ' . $timeereg . '$/', $date);
-			break;
+  public static function arrayKeyMerge($arr1, $arr2) {
+    $result = $arr1;
+    foreach ($arr2 as $key => $value) {
+      $result[$key] = $value;
+    }
+    return $result;
+  }
 
-		default:
-			throw new MiscException("Felaktigt format", -3);
-		}
-	}
-
-	public function niceDate($time, $format)
-	{
-
-		if (date("Y-m-d") == date("Y-m-d", $time)) {
-			return "Idag";
-		} else
-		if (date("Y-m-d", strtotime("-1 day")) == date("Y-m-d", $time)) {
-			return "Igår";
-		} else {
-			return date($format, $steg->getDatum());
-		}
-	}
-
-	public static function arrayKeyMerge($arr1, $arr2)
-	{
-		$result = $arr1;
-		foreach($arr2 as $key => $value) {
-			$result[$key] = $value;
-		}
-		return $result;
-	}
-
-
-  
   /**
    * This function creates a filname with safe letters  
    * The format is yymmdd_id_name.txt like 090616_1910_KaptenAB.txt
@@ -281,7 +261,7 @@ class Misc
         $path = MEDLEMSFIL_LOCAL_PATH . "/";
         break;
       default:
-        $path = FORETAGSFIL_LOCAL_PATH . "/";        
+        $path = FORETAGSFIL_LOCAL_PATH . "/";
         break;
     }
 
@@ -292,23 +272,20 @@ class Misc
       $i++;
     }
     return $filnamn;
-  }  
-  
-  
-  
-  
-/**
- * Sends all the emails. Loggs all to file email.log
- * Optional messages can sent to the logfile via last param logmessage
- *
- * @param string $to
- * @param string $from
- * @param string $subject
- * @param string $message
- * @param string $logMessage
- * @return boolean
- */
-	public static function sendEmail($to, $from, $subject, $message, $logMessage = '') {
+  }
+
+  /**
+   * Sends all the emails. Loggs all to file email.log
+   * Optional messages can sent to the logfile via last param logmessage
+   *
+   * @param string $to
+   * @param string $from
+   * @param string $subject
+   * @param string $message
+   * @param string $logMessage
+   * @return boolean
+   */
+  public static function sendEmail($to, $from, $subject, $message, $logMessage = '') {
     global $SETTINGS;
     $tomail = explode("Bcc:", $to);
     $charset = 'UTF-8';
@@ -344,17 +321,16 @@ class Misc
   }
 
   /**
-	 * Log email sending to logfile
-	 *
-	 * @param boolean $success
-	 * @param string_type $whichEmail
-	 * @param string_type $msg
-	 */
-	public static function logEmailSend($success, $whichEmail, $msg){
-		$success ? $status = "SUCCESS" : $status = "FAIL";
-    @file_put_contents(EMAIL_SEND_LOG_FILE, date("Y-m-d H:i:s ") . ' | ' . $whichEmail . ' | '. $msg . " | "  . $status . "\n" , FILE_APPEND);
+   * Log email sending to logfile
+   *
+   * @param boolean $success
+   * @param string_type $whichEmail
+   * @param string_type $msg
+   */
+  public static function logEmailSend($success, $whichEmail, $msg) {
+    $success ? $status = "SUCCESS" : $status = "FAIL";
+    @file_put_contents(EMAIL_SEND_LOG_FILE, date("Y-m-d H:i:s ") . ' | ' . $whichEmail . ' | ' . $msg . " | " . $status . "\n", FILE_APPEND);
   }
-
 
   /**
    * All purpose logging to motiomera.log
@@ -362,11 +338,10 @@ class Misc
    *
    * @param string_type $msg
    * @param string $level
-   */   
-  public static function logCronMotiomera($msg){
-    @file_put_contents(LOG_DIR.'/cron_motiomera.log', $msg . "\n" , FILE_APPEND);
-  } 
-
+   */
+  public static function logCronMotiomera($msg) {
+    @file_put_contents(LOG_DIR . '/cron_motiomera.log', $msg . "\n", FILE_APPEND);
+  }
 
   /**
    * All purpose logging to motiomera.log
@@ -376,50 +351,74 @@ class Misc
    * @param string_type $msg
    * @param string $level
    */
-  public static function logMotiomera($msg, $level = '', $filename = 'motiomera'){
-  	$logFile = LOG_DIR."/". $filename . ".".date("y-m").".log";
-    if(!file_exists($logFile)){
+  public static function logMotiomera($msg, $level = '', $filename = 'motiomera') {
+    $logFile = LOG_DIR . "/" . $filename . "." . date("y-m") . ".log";
+    if (!file_exists($logFile)) {
       touch($logFile);
-      if(CAPISTRANO_DEPLOY == true){
+      if (CAPISTRANO_DEPLOY == true) {
         chmod($logFile, 0777);
         chown($logFile, FILE_OWNER);
       }
     }
-    $msg = date("Y-m-d H:i:s") . " [". strtoupper($level) ."] ".$msg ."\n";
-  	$fd = fopen($logFile, "a");
-  	fwrite($fd, $msg);
-  	fclose($fd);
+    $msg = date("Y-m-d H:i:s") . " [" . strtoupper($level) . "] " . $msg . "\n";
+    $fd = fopen($logFile, "a");
+    fwrite($fd, $msg);
+    fclose($fd);
   }
 
+  public static function curlGetHeaders($url) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, 1);
+    curl_setopt($ch, CURLOPT_NOBODY, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    $result = explode("\n", curl_exec($ch));
+    return $result;
+  }
 
+  public static function getCurrentPage() {
+    $current_page = $_SERVER['SCRIPT_NAME'];
+    $current_page = explode('/', $current_page);
+    $current_page = strtolower(str_replace('.php', '', $current_page[count($current_page) - 1]));
+    return $current_page;
+  }
 
-	public static function curlGetHeaders($url)
-	{
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_HEADER, 1);
-		curl_setopt($ch, CURLOPT_NOBODY, 1);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-		$result = explode("\n", curl_exec($ch));
-		return $result;
-	}
+  /**
+   * Set testdata in the db for the submitted mid. Set 31 days back but never add more than one record for each date. 
+   * @global type $db
+   * @param type $mid
+   */
+  public static function setTestData($mid) {
+    global $db;
+    $d = new JDate();
+    $medlem = Medlem::loadById($mid);
+    $activity = Aktivitet::loadById(5);
+    for ($i = 0; $i < 31; $i++) {
+      $sql = "SELECT * FROM mm_steg WHERE medlem_id = $mid and datum = '" . $d->getDate() . "'";
+      $count = $db->allValuesAsArray($sql);
+      if (empty($count)) {
+        $date = $d->getDate() . " 00:00:00";
+        $steps = (int)Misc::randomSteps();
+        $steg = new Steg($medlem, $activity, $date, $steps, false);
+      } 
+      $d->subDays(1);
+    }
+  }
 
-	public static function getCurrentPage()
-	{
-		$current_page = $_SERVER['SCRIPT_NAME'];
-		$current_page = explode('/', $current_page);
-		$current_page = strtolower(str_replace('.php', '', $current_page[count($current_page) - 1]));
-		return $current_page;
-	}
+ public static function randomSteps() {
+    $rand = rand(60, 99) . '00';
+    return $rand;
+  }
+
 }
 
-class MiscException extends UserException
-{
+class MiscException extends UserException {
 
-	public function __construct($msg, $code)
-	{
-		parent::__construct($msg, $code);
-	}
+  public function __construct($msg, $code) {
+    parent::__construct($msg, $code);
+  }
+
 }
+
 ?>
