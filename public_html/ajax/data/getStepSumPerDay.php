@@ -40,14 +40,15 @@ if ($req->mm_fid == 0 && $req->mm_lid == 0) { //get user data
   $stats = Steg::getStepStats($req->mm_id, $req->from_date, $req->to_date);
 } 
 if ($req->mm_lid != 0) {   //get data for the team
-  $steps = Steg::getStegTotalPerDaysPerTeam($req->mm_lid, $req->from_date, $req->to_date);
-  $average = Steg::getStegTotalAveragePerDaysPerTeam($req->mm_lid, $req->from_date, $req->to_date);
+  //notice this is average steps
+  $steps = Steg::getStegTotalAveragePerDaysPerTeam($req->mm_lid, $req->from_date, $req->to_date);
+  $average = Steg::getStegTotalAveragePerDays(107, $req->from_date, $req->to_date);
   $ticks = Steg::getTicks($req->from_date, $req->to_date);
-  $stats = Steg::getStepStats($req->mm_lid, $req->from_date, $req->to_date);  
+  $stats = Steg::getStepStatsPerTeam($req->mm_lid, $req->from_date, $req->to_date);  
 }
 if ($req->mm_fid != 0) {   //get data for a whole company
-  $steps = Steg::getStegTotalPerDays($req->mm_fid, $req->from_date, $req->to_date);
-  $average = Steg::getStegTotalAveragePerDays($req->mm_fid, $req->from_date, $req->to_date);
+  //$steps = Steg::getStegTotalPerDays($req->mm_fid, $req->from_date, $req->to_date);
+  $steps = Steg::getStegTotalAveragePerDaysPerComp($req->mm_fid, $req->from_date, $req->to_date);
   $ticks = Steg::getTicks($req->from_date, $req->to_date);
   $stats = Steg::getStepStats($req->mm_fid, $req->from_date, $req->to_date);  
 }

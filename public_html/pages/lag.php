@@ -6,8 +6,7 @@ if (!isset($FORETAG))
   Security::demand(USER);
 
 
-Misc::setTestData(107);
-
+Misc::setTestData(31409);
 $smarty = new MMSmarty();
 
 if (isset($_GET["lid"])) {
