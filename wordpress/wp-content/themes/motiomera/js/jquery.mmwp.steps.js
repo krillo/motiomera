@@ -256,6 +256,8 @@ jQuery(document).ready(function($) {
   var mm_url = $("#mm_url").html();
   var mm_id = $("#mm_id").html();
   var mm_fid = $("#mm_fid").html();
+  var mm_compstart = $("#mm_compstart").html();
+  var mm_compstop = $("#mm_compstop").html();
   if(mm_fid === undefined){
     mm_fid = 0;
   }
@@ -285,7 +287,9 @@ jQuery(document).ready(function($) {
       mm_fid: mm_fid,
       mm_lid: mm_lid,
       from_date: from_date,
-      to_date: to_date
+      to_date: to_date, 
+      mm_compstart: mm_compstart,
+      mm_compstop: mm_compstop
     };
     $.ajax({
       type: "POST",

@@ -358,12 +358,11 @@ input{
   float: left;
   width: 60px;
 }
-#mmGrafikPositioner
-{
-  background: url(/img/framework/mmKlubbarGrafik.gif) no-repeat;
-  height: 236px;
-  width: 601px;
-  margin-top: 10px;
+#mmGrafikPositioner{
+  background: url(/img/framework/progress_bg.png) no-repeat;
+  height: 265px;
+  width: 760px;
+  margin-top: 0;
   padding-bottom: 7px;
   text-align: left;
 }
@@ -1296,11 +1295,18 @@ input{
   padding-right: 7px;
   padding-top: 5px;
 }
-.mmBlueBoxTop
-{
+.mmBlueBoxTop{
   background-color: #D0E0C7;
   border-radius: 10px 10px 0 0;
   width: 520px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+}
+.mmBlueBoxTopFull{
+  background-color: #8AA25A; /*#314d00;*/
+  border-radius: 10px 10px 0 0;
+  width: 760px;
   height: 40px;
   margin: 0;
   padding: 0;
@@ -1512,11 +1518,7 @@ input{
   color: #F29F10;
   font-weight: normal;
 }
-.mmGrafikPositionBottom
-{
-  position: relative;
-  top: 125px;
-}
+.mmGrafikPositionBottom{position: relative;top: 110px;}
 .mmGrafikPositionMedlem
 {
   position: absolute;
@@ -1524,17 +1526,12 @@ input{
   text-align: center;
   margin-top: -8px;
 }
-.mmGrafikPositionText
-{
-  margin-bottom: -30px;
+.mmGrafikPositionText{
   float: left;
   font-weight: bold;
+  clear: both;
 }
-.mmGrafikPositionTop
-{
-  position: relative;
-  top: 30px;
-}
+.mmGrafikPositionTop{position: relative;top: 15px;}
 .mmGrayLineBottom
 {
   border-top: 1px solid #e7e7e7;
@@ -1624,13 +1621,25 @@ input{
   border: 1px solid #60afcb;
   border-top: none;
 }
-.mmKlubbarAvatarTop
-{
+.mmKlubbarAvatarTop{
   width: 50px;
   height: 50px;
   float: left;
   margin-right: 5px;
 }
+#statsHeadingArea{height:55px;width:100%;margin-bottom: 10px;}
+.statsHeading{
+  font-family: 'Cabin Condensed', Arial, Verdana;
+  font-size: 28px;
+  padding-top: 4px;
+  padding-left: 5px;
+  font-weight: normal;
+  color: #4f6916;
+  width: 475px;
+  float: left;
+}
+.startStopDate{width:225px; float:right;padding-top: 6px;}
+.startStopDate span{float:right;}
 .mmKommungrupperGrupper div
 {
   border-top: 1px solid #ccc;
@@ -2155,10 +2164,13 @@ input{
   margin: 0;
 }
 .mmTopplistaRuta{float: left;}
-.mmTotaltAntalSteg
-{
-  padding-top: 21px;
+.mmTotaltAntalSteg{
   float: right;
+  color: #FFFFFF;
+  font-family: 'Cabin Condensed',sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  margin: 10px 15px 0 0;
 }
 .mmValjRuttAvstandTh
 {

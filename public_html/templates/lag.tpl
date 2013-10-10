@@ -1,9 +1,16 @@
 <div id="mm_lid" style="display: none;">{$lag2->getId()}</div>
-<div class="mmTotaltAntalSteg"><b>Totalt:</b> {$lag2->getStegTotal()|nice_tal} steg</div>
-<div class="mmKlubbarAvatarTop"><img src="{$bildURL}" alt="" /></div>
-<div class="mmh2">{$lag2->getNamn()}</div>
-Tillhör företaget <a href="{$urlHandler->getUrl(Foretag, URL_VIEW, $foretag2->getId())}"><strong>{$foretag2->getNamn()}</strong></a> | Startdatum: {$lag2->getStart()|nice_date:"j F Y"}
-<br /><br />
+<div id="mm_compstart" style="display: none;">{$lag2->getStart()}</div>
+<div id="mm_compstop" style="display: none;">{$lag2->getSlut()}</div>
+<div id="statsHeadingArea">
+  <div class="mmKlubbarAvatarTop"><img src="{$bildURL}" alt="" /></div>
+  <div class="statsHeading">{$lag2->getNamn()} - <a href="{$urlHandler->getUrl(Foretag, URL_VIEW, $foretag2->getId())}">{$foretag2->getNamn()}</a></div>
+  <div class="startStopDate">
+    <span>Start: {$lag2->getStart()|nice_date:"j F Y"}</span>
+    <span>Slut: {$lag2->getSlut()|nice_date:"j F Y"}</span>
+  </div>
+</div>
+
+
 
 {include file="positionerlagm.tpl"}
 

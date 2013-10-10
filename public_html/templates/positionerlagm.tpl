@@ -1,5 +1,6 @@
+<div class="mmBlueBoxTopFull mmGrafikPositionText"><h3 class="mmWhite BoxTitle">Placering och totala steg per deltagare från tävlingsstart</h3> <h3 class="mmTotaltAntalSteg">Totalt: {$lag2->getStegTotal()|nice_tal} steg</h3></div>
+<div class="mmClearBoth"></div>
 <div id="mmGrafikPositioner">
-	<div class="mmGrafikPositionText">Totala steg per deltagare från start</div>
 	<div class="mmGrafikPosition mmGrafikPositionTop">	
 		{foreach from=$positioner item=position key=medlem_id name=loopPositionerTop}
 		{if $smarty.foreach.loopPositionerTop.iteration % 2 neq 0}

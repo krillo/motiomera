@@ -1,5 +1,6 @@
-<div id="mmGrafikPositioner">
-	<div class="mmGrafikPositionText">Snitt per deltagare i lag från start</div><div class="mmClearBoth"></div>
+<div class="mmGrafikPositionText">Snitt per deltagare i lag från start</div>
+<div class="mmClearBoth"></div>
+<div id="mmGrafikPositioner">	
 	<div class="mmGrafikPosition mmGrafikPositionTop">
 		{foreach from=$positioner item=lag key=list name=loopPositionerTop}
 		{if $smarty.foreach.loopPositionerTop.iteration % 2 neq 0}

@@ -27,24 +27,19 @@ if (isset($_GET["lid"])) {
 
   $medlemmar = $lag->listMedlemmar();
   $smarty->assign("medlemmar", $medlemmar);
-
   if (count($medlemmar) > 0) {
     $smarty->assign("medlemmar", $medlemmar);
-
-    $start = $lag->getStart();
-
-
+    $start = $lag->getStart();    
+    $slut = $lag->getSlut();    
     $topplista = new Topplista();
     $topplista->addParameter(Topplista::PARAM_LAG, $lag);
     $topplista->addParameter(Topplista::PARAM_START, $start);
-
-
     $topplistan = $topplista->getTopplista(10);
-
+    
     if (count($topplistan) < 2)
       $multiplier = 0;
     else
-      $multiplier = 500 / (count($topplistan) - 1);
+      $multiplier = 650 / (count($topplistan) - 1);
 
     $topplistan = array_reverse($topplistan);
 
@@ -54,7 +49,6 @@ if (isset($_GET["lid"])) {
       $positioner[$position["medlem"]->getId()] = round($i * $multiplier);
       $i++;
     }
-
     $smarty->assign("positioner", $positioner);
   }
 
@@ -99,10 +93,10 @@ if (isset($_GET["lid"])) {
 include_once ROOT . '/php/libs/php-ofc-library/open-flash-chart-object.php';
 
 ob_start();
-open_flash_chart_object( 300, 200, '/data/veckograf.php?lid=' . $lag->getId(),false,'/' );
+open_flash_chart_object(300, 200, '/data/veckograf.php?lid=' . $lag->getId(), false, '/');
 $graf = ob_get_contents();
 ob_end_clean();
 
-$smarty->assign("graf",$graf);
+$smarty->assign("graf", $graf);
 
 $smarty->display('lag.tpl');
