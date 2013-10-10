@@ -93,43 +93,33 @@
 
 <div class="mmAnslagstavla">
 
-  <div class="mmAnslagstavlaBoxTop"><h3 class="mmWhite BoxTitle AnslagTitle">Anslagstavlan</h3></div>
-  <div class="mmAnslagstavlaBoxBg">
-
-
+  <div class="mmBlueBoxTop"><h3 class="BoxTitle">{$lag2->getNamn()}s anslagstavlan</h3></div>
+  <div class="mmBlueBoxBg mmTabell">
     {if $nbrPosts > 0}
-      <table class="mmAnslagstavlaTabell" cellpadding="1" cellspacing="0">
-        {foreach from=$atavla key=myId item=i}
-          <tr>
-            <td>{$i.anamn}</td>
-            <td><em>{$i.ts|nice_date:"d/m-y"}</em>&nbsp;</td>
-            <td>{$i.text}</td>
+      <table class="mmAnslagstavlaTabell">
+        <tr>
+          <td><b>Medlem</b></td>
+          <td><b>När</b></td>
+          <td><b>Meddelande</b></td>
+        </tr>
+        {foreach name=lista from=$atavla key=myId item=i}
+          <tr {if $smarty.foreach.lista.index % 2}{else}class="odd"{/if}>
+            <td class="anslag_name"><a href="/pages/profil.php?mid={$i.medlem_id}">{$i.anamn}</a></td>
+            <td class="anslag_time"><em>{$i.ts|nice_date:"d/m-y"}</em>&nbsp;</td>
+            <td class="anslag_txt">{$i.text}</td>
           </tr>
         {/foreach}
       </table>
     {/if}
-
-
-    <div class="mmTextalignRight mmMarginRight10">
-      {*}<a href="#">L&auml;s alla inlägg</a>
-      <a href="#">
-      <img src="/img/icons/ArrowCircleBlue.gif" alt="" class="mmMarginLeft3 mmArrow" />
-      </a>{*}
-    </div>
     {if $owner || $ismember}
-      <form action="{$urlHandler->getUrl(AnslagstavlaRad, URL_SAVE)}" method="post">
+      <form action="{$urlHandler->getUrl(AnslagstavlaRad, URL_SAVE)}" method="post" id="anslagstavla_post">
         <input type="hidden" name="gid" value="{$lag2->getId()}"/>
         <input type="hidden" name="aid" value="{$lag2->getAnslagstavlaId()}"/>
-        Skriv på anslagstavlan:<br />
-        <textarea name="atext" rows="5" cols="5"></textarea>
-        <br />
-        <input type="submit" value="Skicka"/><br /><br />
+        <b>Skriv på anslagstavlan:</b>
+        <textarea name="atext" ></textarea>
+        <input type="submit" value="Skicka"/>
       </form>
     {/if}
   </div>
-
-  <div class="mmAnslagstavlaBoxBottom"></div>
-
 </div>
-
 <div class="mmClearBoth"></div>

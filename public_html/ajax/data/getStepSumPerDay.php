@@ -46,7 +46,7 @@ if ($req->mm_lid != 0) {   //get data for the team
   if($req->mm_compstart > $req->from_date){
     $req->from_date = $req->mm_compstart;
   }
-  if($req->mm_compstop > $req->to_date){
+  if($req->mm_compstop < $req->to_date){
     $req->to_date = $req->mm_compstop;
   }
   $steps = Steg::getStegTotalAveragePerDaysPerTeam($req->mm_lid, $req->from_date, $req->to_date); 
