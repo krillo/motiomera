@@ -17,49 +17,34 @@
 <div class="mmFloatRight">
 
   <div class="mmAlbumBoxTop">
-    <h3 class="mmWhite BoxTitle">Stegtoppen</h3>
+    <h3 class="mmWhite BoxTitle">Steg sen tävlingsstart</h3>
   </div>
   <div class="mmRightMinSidaBox">
-
-    <strong>Steg sen start</strong><br /><br />
     <table width="155" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td>&nbsp;</td>
         <td><b>Medlem</b></td>
         <td><b>Steg</b></td>
       </tr>
-
       {foreach name=steglista from=$topplista->getTopplista(100,$medlem) item=placering}
         {if $placering.placering == 101}
-
           {assign var=tomrad value=1}
-
         {/if}
-
         {if $placering.placering > 100 && $tomrad == 0}
-
           {assign var=tomrad value=1}
-
           <tr><td>&nbsp;</td></tr>
-
         {/if}
-        <tr>
+        <tr  {if $smarty.foreach.steglista.index % 2}{else}class="odd"{/if}>
           <td>{$placering.placering}.</td>
           <td><a href="{$urlHandler->getUrl("Medlem", URL_VIEW, $placering.medlem->getId())}">{if isset($medlem) && $placering.medlem->getId() == $medlem->getId()}<strong class="mm_topplista_markerad">{$placering.medlem->getANamn()}</strong>{else}{$placering.medlem->getANamn()}{/if}</a></td>
           <td>{if isset($medlem) && $placering.medlem->getId() == $medlem->getId()}<strong class="mm_topplista_markerad">{$placering.steg|nice_tal}</strong>{else}{$placering.steg|nice_tal}{/if}</td>
         </tr>
-
       {/foreach}
-
     </table>
-
     <br />
     <a href="{$urlHandler->getUrl(Foretagstavling, URL_VIEW)}">Företagstopplistor <img src="/img/icons/ArrowCircleBlue.gif" alt="Steg sen start" /></a>
-
   </div>
-
   <br />
-
   {include file='bildblock.tpl'}
 </div>
 

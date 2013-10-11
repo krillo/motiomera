@@ -21,7 +21,7 @@
     <!--link rel="stylesheet" href="{$mm_url}/css/print.css" type="text/css" media="print" /-->
 
     <link rel='stylesheet' id='wp-mm-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/wp_mm_common.css?ver=3.3.2' type='text/css' media='all' />
-    <script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
     {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
       {if !NO_INTERNET || GOOGLEMAPS_OVERRIDE_NO_INTERNET}
@@ -41,6 +41,11 @@
       <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.js?ver=3.3.2'></script>
       <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.stack.js?ver=3.3.2'></script>    
       <script type="text/javascript" src="{$mm_url}/wp-content/themes/motiomera/js/jquery.mmwp.steps.js?ver=3.5.1"></script>
+    {/if}
+    {if $pagetitle == 'Företagstävling'} 
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     {/if}
 
     

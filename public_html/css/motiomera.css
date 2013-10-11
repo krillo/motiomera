@@ -3101,3 +3101,5 @@ td.number
 .facebook-like{float:right;width:200px;height: 30px;}
 
 .mmTabell{padding-left:0;width:500px !important;}
+.floatit{float:left;margin-right: 20px;}
+.tabArea{overflow:hidden;}
