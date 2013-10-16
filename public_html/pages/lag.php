@@ -2,11 +2,10 @@
 
 include $_SERVER["DOCUMENT_ROOT"] . "/php/init.php";
 
-if (!isset($FORETAG))
+if (!isset($FORETAG)){
   Security::demand(USER);
+}
 
-
-Misc::setTestData(31409);
 $smarty = new MMSmarty();
 
 if (isset($_GET["lid"])) {

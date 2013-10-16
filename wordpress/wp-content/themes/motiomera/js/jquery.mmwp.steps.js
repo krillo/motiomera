@@ -55,7 +55,7 @@ jQuery(document).ready(function($) {
     $("#mm-progress").show();
     var data = {
       mm_id: mm_id,
-      date: $('#mm-step-date').attr('value')
+      date: $('#mm-step-date').val()
     };
     $.ajax({
       type: "POST",
@@ -92,18 +92,22 @@ jQuery(document).ready(function($) {
   function printTable(table) {
     var rows = '';
     $(table).each(function(index, value) {
-      var row = '<tr class="' + value[0] + '">';
-      row += '<td class="mm-first-cell">' + value[1] + '</td>';
-      row += '<td class="mm-activity-cell">' + value[3] + '</td>';
-      row += '<td class="">' + value[4] + '</td>';
-      row += '<td class="">' + value[5] + '</td>';
-      if (value[0].indexOf('mm-sum') >= 0) {
-        row += '<td class="">Steg</td>';
+      if (value[5] === null) {
+        rows = '<tr class="mm-odd"><td class="mm-first-cell">2013-10-01</td><td class="mm-activity-cell"></td><td class=""></td><td class="">12000</td><td class=""><div class="mm-delete ui-icon-closethick" id="1666210"></div></td></tr>';
       } else {
-        row += '<td class=""><div class="mm-delete ui-icon-closethick" id="' + value[6] + '"></div></td>';
+        var row = '<tr class="' + value[0] + '">';
+        row += '<td class="mm-first-cell">' + value[1] + '</td>';
+        row += '<td class="mm-activity-cell">' + value[3] + '</td>';
+        row += '<td class="">' + value[4] + '</td>';
+        row += '<td class="">' + value[5] + '</td>';
+        if (value[0].indexOf('mm-sum') >= 0) {
+          row += '<td class="">Steg</td>';
+        } else {
+          row += '<td class=""><div class="mm-delete ui-icon-closethick" id="' + value[6] + '"></div></td>';
+        }
+        row += '</tr>';
+        rows += row;
       }
-      row += '</tr>';
-      rows += row;
     });
     $('#mm-step-list-table tbody').html(rows).fadeIn();
     if ($("#mm-step-date-today").val() === $("#mm-step-date").val()) {
@@ -124,8 +128,8 @@ jQuery(document).ready(function($) {
     }
     var data = {
       mm_id: mm_id,
-      count: $('#mm-count').attr('value'),
-      date: $('#mm-step-date').attr('value'),
+      count: $('#mm-count').val(),
+      date: $('#mm-step-date').val(),
       activity_id: activity_id
     };
     $.ajax({
@@ -159,29 +163,29 @@ jQuery(document).ready(function($) {
 
 
 
-
-
-  //delete activity row
-  $(".mm-delete").live('click', function() {
-    $("#mm-progress").show();
-    var rowId = $(this).attr('id');
-    var data = {
-      row_id: rowId,
-      mm_id: mm_id,
-      date: jQuery('#mm-step-date').attr('value')
-    };
-    jQuery.ajax({
-      type: "POST",
-      url: mm_url + "/ajax/actions/deletesteps.php",
-      data: data,
-      success: function(data) {
-        printTable(data.table);
-        printDiary(data.diary);
-      }
-    });
-    return false;
-  });
-
+  
+   
+   //delete activity row
+   $(body).on('click', ".mm-delete", function() {
+   $("#mm-progress").show();
+   var rowId = $(this).attr('id');
+   var data = {
+   row_id: rowId,
+   mm_id: mm_id,
+   date: jQuery('#mm-step-date').val()
+   };
+   jQuery.ajax({
+   type: "POST",
+   url: mm_url + "/ajax/actions/deletesteps.php",
+   data: data,
+   success: function(data) {
+   printTable(data.table);
+   printDiary(data.diary);
+   }
+   });
+   return false;
+   });
+   
 
   //submit steps to db via ajax
   $("#mm-submit").click(function(event) {
@@ -195,9 +199,9 @@ jQuery(document).ready(function($) {
     $("#mm-progress").show();
     var data = {
       mm_id: mm_id,
-      comment: jQuery('#mm-comment').attr('value'),
+      comment: jQuery('#mm-comment').val(),
       smiley: jQuery('input:radio:checked').attr('value'),
-      date: jQuery('#mm-step-date').attr('value')
+      date: jQuery('#mm-step-date').val()
     };
     $.ajax({
       type: "POST",
@@ -223,7 +227,7 @@ jQuery(document).ready(function($) {
   //get the activity serverities as a dropdown and display it
   $("#mm-activity-list").change(function() {
     var data = {
-      activity_id: $('#mm-activity-cat-id').attr('value')
+      activity_id: $('#mm-activity-cat-id').val()
     };
     $.ajax({
       type: "POST",
@@ -235,13 +239,6 @@ jQuery(document).ready(function($) {
     });
     return false;
   });
-
-
-  $(".mm-delete-x").click(function(event) {
-    var rowId = $(this).attr('id');
-    alert(rowId);
-  });
-
 
 
   /******************** graph ***********************  
@@ -258,11 +255,11 @@ jQuery(document).ready(function($) {
   var mm_fid = $("#mm_fid").html();
   var mm_compstart = $("#mm_compstart").html();
   var mm_compstop = $("#mm_compstop").html();
-  if(mm_fid === undefined){
+  if (mm_fid === undefined) {
     mm_fid = 0;
   }
   var mm_lid = $("#mm_lid").html();
-  if(mm_lid === undefined){
+  if (mm_lid === undefined) {
     mm_lid = 0;
   }
   var steps = null;
@@ -287,7 +284,7 @@ jQuery(document).ready(function($) {
       mm_fid: mm_fid,
       mm_lid: mm_lid,
       from_date: from_date,
-      to_date: to_date, 
+      to_date: to_date,
       mm_compstart: mm_compstart,
       mm_compstop: mm_compstop
     };

@@ -481,6 +481,25 @@ class Steg extends Mobject {
   }
 
   
+  
+  public static function getStepdataPerAllCurrentCompetitionTeams(){
+    global $db;
+    $members = array();
+    $jtoday = new JDate();
+    $today = $jtoday->getDate();
+    $sql = "SELECT n.medlem_id, n.lag_id, n.foretag_id, l.namn AS lag_namn, l.bildUrl, f.namn AS foretag_namn, f.startdatum, f.slutdatum FROM mm_foretagsnycklar n, mm_foretag f, mm_lag l WHERE n.foretag_id IN (SELECT id FROM mm_foretag f WHERE isvalid = 1 AND slutdatum >= '$today'  AND `startdatum` <= '$today') AND n.medlem_id IS NOT null AND n.lag_id IS NOT null AND n.foretag_id = f.id AND n.lag_id = l.id order by lag_id";
+    $team_membs = $db->allValuesAsArray($sql);
+    print_r($team_membs);
+    foreach ($team_membs as $fid => $value) {
+      
+    }
+    
+    
+  }          
+          
+  
+  
+  
   public static function getStegTotal(Medlem $medlem, $start = null, $stop = null) {
     global $db;
     $sql = "SELECT SUM(steg) AS totalSteg FROM " . self::classToTable(get_class()) . " WHERE medlem_id = " . $medlem->getId() . " ";

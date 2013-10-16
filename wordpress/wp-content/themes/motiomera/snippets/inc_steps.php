@@ -86,7 +86,6 @@
   
 </style>
 
-
 <div id="mm-dialog" title="Rapportera steg" style="display:none;">
   <div id="mm-datepicker" ></div>
   <div id="mm-step-data-area">

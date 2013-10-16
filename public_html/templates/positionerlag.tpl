@@ -1,4 +1,4 @@
-<div class="mmGrafikPositionText">Snitt per deltagare i lag från start</div>
+<div class="mmBlueBoxTopFull mmGrafikPositionText"><h3 class="mmWhite BoxTitle">Placering och snittsteg i lagen från tävlingsstart</h3> <h3 class="mmTotaltAntalSteg">Totalt: {$this_foretag->getStegTotal()|nice_tal} steg</h3></div>
 <div class="mmClearBoth"></div>
 <div id="mmGrafikPositioner">	
 	<div class="mmGrafikPosition mmGrafikPositionTop">

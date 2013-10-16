@@ -89,6 +89,19 @@ php medal_from_cmd.php 2010 24
 <br/>
 
 
+<form action="/admin/actions/slumpa_steg.php?id={$ADMIN->getId()}" method="get">
+  <h3>Slumpa steg till användare</h3>
+  <p>Det slumpas ut steg till enn användare, från idag och 30 dagar bakåt. Om steg redan finns så hoppas den dafen över</p>
+  användar-id: <input type="text" name="mm_id" value="" /><br/>
+  <input type="submit" value="Slumpa steg" />
+</form>
+<br/>
+<br/>
+<br/>
+
+
+
+
 <h3>Parametrarna i settingsfilen</h3>
 <pre>
 {$settings}

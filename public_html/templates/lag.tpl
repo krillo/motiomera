@@ -10,12 +10,9 @@
   </div>
 </div>
 
-
-
 {include file="positionerlagm.tpl"}
 
 <div class="mmFloatRight">
-
   <div class="mmAlbumBoxTop">
     <h3 class="mmWhite BoxTitle">Steg sen tävlingsstart</h3>
   </div>
@@ -65,7 +62,6 @@
       {/foreach}
     </tr>
   </table><br />
-  {*}<div class="mmTextalignRight mmMarginRight20"><a href="#">Se alla medlemmar</a><a href="#"><img src="/img/icons/ArrowCircleBlue.gif" class="mmMarginLeft3 mmArrow" alt="" /></a></div>{*}
 </div>
 <div class="mmBlueBoxBottom"></div>
 

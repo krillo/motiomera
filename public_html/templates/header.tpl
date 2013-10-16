@@ -22,6 +22,7 @@
 
     <link rel='stylesheet' id='wp-mm-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/wp_mm_common.css?ver=3.3.2' type='text/css' media='all' />
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <!--script type='text/javascript' src='{$mm_url}/wp-includes/js/jquery/jquery.js?ver=1.8.3'></script-->
 
     {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
       {if !NO_INTERNET || GOOGLEMAPS_OVERRIDE_NO_INTERNET}
@@ -63,6 +64,7 @@
 
     <script type="text/javascript">
       {literal}
+        /*
         var mmPopup;
         // remove the registerOverlay call to disable the controlbar
         hs.registerOverlay(
@@ -78,6 +80,7 @@
         hs.outlineType = 'rounded-white';
         // Tell Highslide to use the thumbnails title for captions
         hs.captionEval = 'this.thumb.title';
+        */
       {/literal}
     </script>
 
@@ -122,7 +125,7 @@
 
 
   </head>	
-  <body id="body" class="{$BROWSER} {$currentPage}">    
+  <body id="body" class="{$BROWSER} {$currentPage}">
     {if isset($USER)}
       <div id="mm_id" style="display: none;">{$USER->getId()}</div>
     {else}

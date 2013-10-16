@@ -49,7 +49,7 @@ if (count($lagList) > 0 && $foretag->getStartDatum() <= date("Y-m-d")) {
     if (empty($nr)) {
       $nr = 1;
     }
-    $multiplier = 500 / ($nr);
+    $multiplier = 650 / ($nr);
   }
   $i = 0;
   $positioner = array();

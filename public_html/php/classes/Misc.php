@@ -407,7 +407,7 @@ class Misc {
   }
 
  public static function randomSteps() {
-    $rand = rand(60, 99) . '00';
+    $rand = rand(65, 120) . '00';
     return $rand;
   }
 
