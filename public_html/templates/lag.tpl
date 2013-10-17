@@ -66,8 +66,9 @@
 <div class="mmBlueBoxBottom"></div>
 
 {php}
-  $heading = "Snittsteg för laget de senaste ";
+  $heading = "Snittsteg för laget under hela tävlingen ";
   $legend1 = "Lagets snittsteg";
+  $dateSelector = false;
   include(BASE_PATH . '/wordpress/wp-content/themes/motiomera/snippets/inc_graph.php');
 {/php}
 <div class="mmClearBoth"></div>

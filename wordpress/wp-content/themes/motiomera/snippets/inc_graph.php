@@ -8,15 +8,9 @@
  * 
  *
  */
-if(!isset($heading)){
-  $heading = "Framsteg de senaste ";
-}
-if(!isset($legend1)){
-  $legend1 = "Dina steg ";
-}
-
-
-
+!isset($heading)? $heading = "Framsteg de senaste " : null;
+!isset($legend1)? $legend1 = "Dina steg " : null;
+!isset($dateSelector)? $dateSelector = true : null;
 ?>
 
 <style>
@@ -69,7 +63,7 @@ if(!isset($legend1)){
 </style>
 
 <div class="mmBlueBoxTop">
-  <h3 class="BoxTitle"><?php echo $heading; ?><input type="text" id="mm-nbr-days" value="7" /> dagarna <input type="button" value="ok" id="mm-nbr-days-ok"></h3> 
+  <h3 class="BoxTitle"><?php echo $heading; if($dateSelector): ?><input type="text" id="mm-nbr-days" value="7" /> dagarna <input type="button" value="ok" id="mm-nbr-days-ok"> <?php endif; ?></h3> 
 </div>    
 <div id="mm-graph">
   <div id="placeholder" ></div>

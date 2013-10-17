@@ -50,8 +50,9 @@
 
   
 {php}
-  $heading = "Snittsteg för företaget de senaste ";
+  $heading = "Snittsteg för företaget under hela tävlingen";
   $legend1 = "Företagets snittsteg";
+  $dateSelector = false;
   include(BASE_PATH . '/wordpress/wp-content/themes/motiomera/snippets/inc_graph.php');
 {/php}  
 <div class="mmClearBoth"></div>

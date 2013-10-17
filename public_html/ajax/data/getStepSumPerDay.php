@@ -42,25 +42,21 @@ if ($req->mm_fid == 0 && $req->mm_lid == 0) { //get user data
   $ticks = Steg::getTicks($req->from_date, $req->to_date);
   $stats = Steg::getStepStats($req->mm_id, $req->from_date, $req->to_date);
 }
-//Clean the dates for team and company querys - only competition dates 
-if ($req->mm_compstart > $req->from_date) {
-  $req->from_date = $req->mm_compstart;
+//Clean the dates for team and company querys - only competition dates, max today 
+if ($req->mm_compstop > $req->to_date) {
+  $req->mm_compstop = $req->to_date;
 }
-if ($req->mm_compstop < $req->to_date) {
-  $req->to_date = $req->mm_compstop;
-}
-
 if ($req->mm_lid != 0) {   //get data for the team 
-  $steps = Steg::getStegTotalAveragePerDaysPerTeam($req->mm_lid, $req->from_date, $req->to_date);
-  $average = Steg::getStegTotalAveragePerDays($req->from_date, $req->to_date);
-  $ticks = Steg::getTicks($req->from_date, $req->to_date);
-  $stats = Steg::getStepStatsPerTeam($req->mm_lid, $req->from_date, $req->to_date);
+  $steps = Steg::getStegTotalAveragePerDaysPerTeam($req->mm_lid, $req->mm_compstart, $req->mm_compstop);
+  $average = Steg::getStegTotalAveragePerDays($req->mm_compstart, $req->mm_compstop);
+  $ticks = Steg::getTicks($req->mm_compstart, $req->mm_compstop);
+  $stats = Steg::getStepStatsPerTeam($req->mm_lid, $req->mm_compstart, $req->mm_compstop);
 }
 if ($req->mm_fid != 0) {   //get data for a whole company
-  $steps = Steg::getStegTotalAveragePerDaysPerComp($req->mm_fid, $req->from_date, $req->to_date);
-  $average = Steg::getStegTotalAveragePerDays($req->from_date, $req->to_date);
-  $ticks = Steg::getTicks($req->from_date, $req->to_date);
-  $stats = Steg::getStepStatsPerComp($req->mm_fid, $req->from_date, $req->to_date);
+  $steps = Steg::getStegTotalAveragePerDaysPerComp($req->mm_fid, $req->mm_compstart, $req->mm_compstop);
+  $average = Steg::getStegTotalAveragePerDays($req->mm_compstart, $req->mm_compstop);
+  $ticks = Steg::getTicks($req->mm_compstart, $req->mm_compstop);
+  $stats = Steg::getStepStatsPerComp($req->mm_fid, $req->mm_compstart, $req->mm_compstop);
 }
 $response['steps'] = $steps;
 $response['average'] = $average;

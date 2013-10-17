@@ -308,7 +308,7 @@ jQuery(document).ready(function($) {
 
 
   function onDataReceived() {
-    if (nbr_days > 10) {
+    if (stats.nbr_days > 10) {
       ticks = null;
     }
     var plot = $.plot($("#placeholder"),
