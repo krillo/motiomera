@@ -7,3 +7,6 @@ CREATE TABLE `mm_dagbok` (
   `datum` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+update mm_lag set bildUrl = replace(bildUrl, 'jpg', 'png') where bildUrl like 'Lag_%';
+update mm_lagnamn set img = replace(img, 'jpg', 'png') where img like '%Lag_%';

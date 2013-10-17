@@ -36,7 +36,7 @@ class Lag extends Mobject{
 	const FORETAG_TABLE = "mm_foretag";
 	const MIN_LENGTH_NAMN = 5;
 	const BILD_PATH = "/files/lagnamn";
-	const BILD_DEFAULT = "Lag_2.jpg";
+	const BILD_DEFAULT = "Lag_5.png";
 	const MAX_LAG_NAMN_LENGTH = 40;
 
 	

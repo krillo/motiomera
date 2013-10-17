@@ -124,7 +124,7 @@ class LagNamn extends Mobject
 		if (!$this->getId()) {
 			$this->commit();
 		}
-		return LAGNAMN_PATH . "/" . self::PREFIX . $this->getId() . ".jpg";
+		return LAGNAMN_PATH . "/" . self::PREFIX . $this->getId() . ".png";
 	}
 	
 	public function getImgO()
@@ -133,9 +133,8 @@ class LagNamn extends Mobject
 		return $bild;
 	}
 	
-	public function getImgUrl()
-	{
-		return substr($this->getImg() , strlen($_SERVER["DOCUMENT_ROOT"]));;
+	public function getImgUrl(){
+		return substr($this->getImg() , strpos($this->getImg(), '/files/lagnamn/Lag'));;
 	}
 	
 	public function setNamn($namn)
@@ -172,4 +171,3 @@ class LagNamn extends Mobject
 class LagNamnException extends Exception
 {
 }
-?>
