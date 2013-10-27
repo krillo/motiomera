@@ -319,6 +319,8 @@ jQuery(document).ready(function($) {
             {
               xaxis: {ticks: ticks
               },
+              yaxis: {min: 0
+              },
               grid: {hoverable: true, clickable: true, markings: [
                   {xaxis: {from: 0, to: 1000},
                     yaxis: {from: 7000, to: 11000}, color: "#CCC"},
