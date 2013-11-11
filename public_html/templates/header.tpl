@@ -24,23 +24,44 @@
     {/foreach}
     <script type="text/javascript">
       {literal}
-		var mmPopup;
-		// remove the registerOverlay call to disable the controlbar
-		hs.registerOverlay(
-			{
-				thumbnailId: null,
-				overlayId: 'controlbar',
-				position: 'top right',
-				hideOnMouseOut: true
-			}
-		);
-		hs.showCredits = false;
-		hs.graphicsDir = '/js/highslide/graphics/';
-		hs.outlineType = 'rounded-white';
-		// Tell Highslide to use the thumbnails title for captions
-		hs.captionEval = 'this.thumb.title';
+        var mmPopup;
+        // remove the registerOverlay call to disable the controlbar
+        hs.registerOverlay(
+                {
+                  thumbnailId: null,
+                  overlayId: 'controlbar',
+                  position: 'top right',
+                  hideOnMouseOut: true
+                }
+        );
+        hs.showCredits = false;
+        hs.graphicsDir = '/js/highslide/graphics/';
+        hs.outlineType = 'rounded-white';
+        // Tell Highslide to use the thumbnails title for captions
+        hs.captionEval = 'this.thumb.title';
       {/literal}
     </script>
+
+
+
+    {if $pagetitle == 'Kvitto'} 
+      {literal}    
+        <script type="text/javascript">
+          var fb_param = {};
+          fb_param.pixel_id = '6009178513893';
+          fb_param.value = '0';
+          fb_param.currency = 'SEK';
+          (function() {
+            var fpw = document.createElement('script');
+            fpw.async = true;
+            fpw.src = '//connect.facebook.net/en_US/fp.js';
+            var ref = document.getElementsByTagName('script')[0];
+            ref.parentNode.insertBefore(fpw, ref);
+          })();
+        </script>
+        <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6009178513893&amp;value=0&amp;currency=SEK" /></noscript>
+      {/literal}    
+    {/if}
 
 
     {literal}
@@ -50,9 +71,12 @@
         _gaq.push(['_trackPageview']);
 
         (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
         })();
       </script>
     {/literal}
@@ -149,7 +173,7 @@
             <div id="mmMaBraLogo">
               {if isset($USER) || isset($FORETAG)}
                 {foreach from=$helpers item=helper}
-                  <a href="javascript:;" onclick="mm_rapportera_show_help({$helper->getId()},{$helper->getSizeX()},{$helper->getSizeY()},'topleft')"><img src="/img/icons/FaqCircleRed.gif" alt="Hjälp" class="mmFloatRight" /></a>
+                  <a href="javascript:;" onclick="mm_rapportera_show_help({$helper->getId()},{$helper->getSizeX()},{$helper->getSizeY()}, 'topleft')"><img src="/img/icons/FaqCircleRed.gif" alt="Hjälp" class="mmFloatRight" /></a>
                 {/foreach}
               {/if}
               {*}<a href="javascript:;" onclick="rapportera_show_help(1,480,200,'topleft')"><img src="/img/icons/FaqCircleGreen.gif" alt="Hjälp" class="mmPositionRelative mmFloatRight" /></a>{*}
@@ -191,51 +215,51 @@
                   <li><a href="{$urlHandler->getUrl(Paminnelser, URL_ADMIN_LIST)}">PÅMINNELSER</a></li>	                  
                   <li><a href="{$urlHandler->getUrl(Help, URL_ADMIN_LIST)}">HJÄLPRUTOR</a></li>
                   <li><a href="{$urlHandler->getUrl(KontrolleraBilder, URL_ADMIN_LIST)}">BILDKONTROLL</a></li>
-                  {if $ADMIN->isTyp(ADMIN)}
+                    {if $ADMIN->isTyp(ADMIN)}
                     <li><a href="{$urlHandler->getUrl(Level, URL_ADMIN_LIST)}">MEDLEMSNIVÅER</a></li> 
                     <li><a href="{$urlHandler->getUrl(LagNamn, URL_ADMIN_LIST)}">LAGNAMN</a></li>                     
                     <li><a href="/admin/pages/proquiz.php">PROQUIZ</a></li>
                     <li><a href="{$urlHandler->getUrl(FastaUtmaningar, URL_ADMIN_LIST)}">FASTA RUTTER</a></li>
                     <li><a href="{$urlHandler->getUrl(Kommundialekt, URL_ADMIN_LIST)}">KOMMUNDIALEKTER</a></li>
-                  {/if}
-                  {if $ADMIN->isTyp(SUPERADMIN)} 					
+                    {/if}
+                    {if $ADMIN->isTyp(SUPERADMIN)} 					
                     <li><a href="{$urlHandler->getUrl(Admin, URL_ADMIN_LIST)}">ADMINISTRATÖRER</a></li>
                     <li><a href="{$urlHandler->getUrl(MergeOrder, URL_ADMIN_MERGE)}">SLÅ IHOP ORDRAR</a></li>  					
                     <li><a href="{$urlHandler->getUrl(Admin, URL_VIEW)}">DEBUG</a></li>
                     <li><a href="/php/memcache.php">MEMCACHED (inlogg)</a></li>
-                  {/if}
+                    {/if}
                   <hr/>
                   <hr/>
                 {/if}
 
                 <li><a {if $urlChecker->getMarkedMenu() eq "HEM"} class="mmMarkedMenu"{/if} href="/">HEM</a></li>
-                {if isset($FORETAG)}
-                <li><a   class="vinnare-menu"   href="/pages/editforetag.php?fid={$FORETAG->getId()}&tab=2">HANTERA FÖRETAG</a></li>
-                {/if}
-                {if isset($USER)}
+                  {if isset($FORETAG)}
+                  <li><a   class="vinnare-menu"   href="/pages/editforetag.php?fid={$FORETAG->getId()}&tab=2">HANTERA FÖRETAG</a></li>
+                  {/if}
+                  {if isset($USER)}
                   <li class="mmMenuBG"><a{if $urlChecker->getMarkedMenu() eq "MIN SIDA"} class="mmMarkedMenu"{/if} href="/pages/minsida.php">MIN SIDA</a><img src="/img/ftag/minsida_icon.gif" class="mmMarginLeft5" alt="" /></li>
-                  {assign var=foretag value=$USER->getForetag(true)}
-                  {if $USER->getForetagsnyckel(true)}
-                    {if isset($foretag) && $foretag->aktivTavling(1)}
-                      {assign var=lag value=$USER->getLag()}
-                      {if $lag!= null}
+                    {assign var=foretag value=$USER->getForetag(true)}
+                    {if $USER->getForetagsnyckel(true)}
+                      {if isset($foretag) && $foretag->aktivTavling(1)}
+                        {assign var=lag value=$USER->getLag()}
+                        {if $lag!= null}
                         <li class="mmMenuBG"><a{if $urlChecker->getMarkedMenu() eq "MITT LAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Lag, URL_VIEW, $lag->getId())}">MITT LAG</a><img src="/img/ftag/mittlag_icon.gif" class="mmMarginLeft5" alt="" /></li>
-                      {/if}
-                      {assign var=foretag value=$USER->getForetag()}
+                        {/if}
+                        {assign var=foretag value=$USER->getForetag()}
                       <li class="mmMenuBG"><a{if $urlChecker->getMarkedMenu() eq "MITT FÖRETAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretag, URL_VIEW, $foretag->getId())}">MITT F&Ouml;RETAG</a><img src="/img/ftag/mittforetag_icon.gif" class="mmMarginLeft2" alt="" /></li>
                       <li class="mmMenuBG"><a{if $urlChecker->getMarkedMenu() eq "TOPPLISTOR"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretagstavling, URL_VIEW)}">F&Ouml;RETAGST&Auml;VLING</a></li>
+                      {/if}
                     {/if}
-                  {/if}
-                  {if $USER->isVeckoVinnare()}
+                    {if $USER->isVeckoVinnare()}
                     <li><a href="/pages/minvinst.php" class="vinnare-menu">DU ÄR VINNARE</a></li>
-                  {/if}
+                    {/if}
                   <li><a{if $urlChecker->getMarkedMenu() eq "MOTIOMERAMAIL"} class="mmMarkedMenu"{/if} href="/pages/mail.php">MOTIOMERAMAIL</a></li>
                   <li><a{if $urlChecker->getMarkedMenu() eq "FOTOALBUM"} class="mmMarkedMenu"{/if} href="/pages/fotoalbum.php">FOTOALBUM</a></li>
-                  {* if isset($USER) && $sajtDelarObj->medlemHasAccess($USER,'minaQuiz')}
+                    {* if isset($USER) && $sajtDelarObj->medlemHasAccess($USER,'minaQuiz')}
                     <li><a{if $urlChecker->getMarkedMenu() eq "QUIZ"} class="mmMarkedMenu"{/if} href="/pages/minaquiz.php">MINA QUIZ</a></li>
-                  {/if *}
+                    {/if *}
                   <li><a{if $urlChecker->getMarkedMenu() eq "MINA VÄNNER"} class="mmMarkedMenu"{/if} href="/pages/adressbok.php">MINA VÄNNER</a></li>
-                  {* <li><a{if $urlChecker->getMarkedMenu() eq "KLUBBAR"} class="mmMarkedMenu"{/if} href="/pages/klubbar.php">KLUBBAR</a></li>  *}
+                    {* <li><a{if $urlChecker->getMarkedMenu() eq "KLUBBAR"} class="mmMarkedMenu"{/if} href="/pages/klubbar.php">KLUBBAR</a></li>  *}
                   <li><a{if $urlChecker->getMarkedMenu() eq "INSTÄLLNINGAR"} class="mmMarkedMenu"{/if} href="/pages/installningar.php">INST&Auml;LLNINGAR</a></li>
 
                 {/if}
@@ -243,11 +267,11 @@
                 <li><a{if $urlChecker->getMarkedMenu() eq "VANLIGA FRÅGOR"} class="mmMarkedMenu"{/if} href="/pages/vanligafragor.php" class="utLoggadMenuVal">VANLIGA FR&Aring;GOR</a></li>
                 <li><a{if $urlChecker->getMarkedMenu() eq "TÄVLINGAR"} class="mmMarkedMenu"{/if} href="/pages/tavlingar.php" class="utLoggadMenuVal">T&Auml;VLINGAR</a></li>
                 <li><a{if $urlChecker->getMarkedMenu() eq "KOMMUNJAKTEN"} class="mmMarkedMenu"{/if} href="/pages/kommunjakten.php" class="utLoggadMenuVal">KOMMUNJAKTEN</a></li>
-                {if isset($FORETAG)}
+                  {if isset($FORETAG)}
                   <li><a{if $urlChecker->getMarkedMenu() eq "FÖR FÖRETAG"} class="mmMarkedMenu"{/if} href="{$urlHandler->getUrl(Foretag, URL_EDIT, $FORETAG->getId())}" class="utLoggadMenuVal" title="om stegtävling">F&Ouml;R F&Ouml;RETAG</a></li>
-                {else}
+                  {else}
                   <li><a{if $urlChecker->getMarkedMenu() eq "FÖR FÖRETAG"} class="mmMarkedMenu"{/if} href="/pages/for_foretag.php" class="utLoggadMenuVal" title="om stegtävling">F&Ouml;R F&Ouml;RETAG</a></li>
-                {/if}
+                  {/if}
 
               </ul>
             </div>
