@@ -35,7 +35,9 @@ $order = new stdClass;
 !empty($_REQUEST['country']) ? $order->country = $_REQUEST['country'] : $order->country = '';
 !empty($_REQUEST['paytype']) ? $order->paytype = $_REQUEST['paytype'] : $order->paytype = '';
 !empty($_REQUEST['campcode']) ? $order->campcode = $_REQUEST['campcode'] : $order->campcode = '';
-!empty($_REQUEST['channel']) ? $order->channel = $_REQUEST['channel'] : $order->channel = '';
+!empty($_REQUEST['kanal']) ? $order->channel = $_REQUEST['kanal'] : $order->channel = '';
+
+
 
 $order->PRIV3 = (int) $order->PRIV3;
 $order->PRIV12 = (int) $order->PRIV12;
