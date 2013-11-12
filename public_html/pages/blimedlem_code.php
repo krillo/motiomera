@@ -7,6 +7,12 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
 
 !empty($_REQUEST['kanal']) ? $kanal = addslashes($_REQUEST['kanal']) : $kanal = '';
 !empty($_REQUEST['erbj']) ? $erbj = addslashes($_REQUEST['erbj']) : $erbj = '';
+
+//ugly facebook campaign hack...
+if(date('ymd') < '131121'){
+  $kanal = 'fb-priv-13-46';
+  $erbj = 12;
+}
 ?>
 
 
