@@ -4,13 +4,43 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
 //ini_set('display_errors', '1');
 $campaignCodes = Order::$campaignCodes;
 $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn()); 
+
+!empty($_REQUEST['kanal']) ? $kanal = addslashes($_REQUEST['kanal']) : $kanal = '';
+!empty($_REQUEST['erbj']) ? $erbj = addslashes($_REQUEST['erbj']) : $erbj = '';
+
+//ugly facebook campaign hack...
+if(date('ymd') < '131121'){
+  $kanal = 'fb-priv-13-46';
+  $erbj = 12;
+}
 ?>
+
 
 
 <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
 <script type="text/javascript">    
-  $(function() {
-    //do input validation
+  jQuery(document).ready(function($) {    
+    if($('#kanal').val()){
+      hideForetagsnyckelOption();
+    }
+    if($('#erbj').val()){
+      if($('#erbj').val() === '12'){
+        $('#long-radio').attr('checked', 'checked');
+      }
+      if($('#erbj').val() === '3'){
+        $('#short-radio').attr('checked', 'checked');
+      }
+      hideForetagsnyckelOption();
+      sum();
+    }
+
+    function hideForetagsnyckelOption(){
+      $('#type').hide();
+      $('#member-private').show();      
+    }
+    
+    
+  //do input validation
     var validator = $("#checkout").validate({
       errorClass: "invalid",
       validClass: "valid",
@@ -166,7 +196,7 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
 
 
     //catch keyup where the alias is submitted 
-    $('#anamn').keyup(function() {
+    $('#anamn').focus(function() {
       $('#fields-hidden').toggleClass("visible");
       $('#fields-hidden').show("slow");
     });
@@ -241,11 +271,14 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
 
 
 
+<img src="/img/puff.png" alt=""/>
+<h1 style="margin-top:15px;color:#B71416;font-size:22px;">Bli medlem du också på MotioMera</h1>
+<p style="font-size:16px;width:550px;">Gå virtuellt runt i Sverige och samla på kommuner, svara på kommunquiz, lyssna på dialkter och samtidigt peppa dig själv att motionera mer!</p>
 
 
 
 <style>
-  #type {font-size: 14px;margin-top: 40px;}
+  #type {font-size: 14px;margin-top: 40px;margin-bottom: 30px;}
   #type div{float:left;}
   #type input{font-size: 15px;width:200px;}
   #or{font-size: 15px; margin:0 30px 0 30px;}
@@ -275,10 +308,10 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
     <input type="hidden" name="m_priv12"  id="m_priv12" value="">        
     <input type="hidden" name="m_steg01"  id="m_steg01" value="">        
     <input type="hidden" name="m_frakt02" id="m_frakt02" value="">
-
+    <input type="hidden" name="kanal" id="kanal" value="<?php echo $kanal; ?>">
+    <input type="hidden" name="erbj" id="erbj" value="<?php echo $erbj; ?>">
 
     <style>
-
       #checkout-ul h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
       #checkout-ul .h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
       #checkout-ul li{margin-top: 5px;}
@@ -287,7 +320,6 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
       #checkout-ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
       #checkout-ul input{height:18px;font-size: 14px;}
       #checkout-ul a{text-decoration: underline;}
-
     </style>
 
 
@@ -409,7 +441,7 @@ $kommuner = Misc::arrayKeyMerge(array("" => "Välj..."), Kommun::listNamn());
         </li>
       </div> 
     </ul>
-    </form>
+  </form>
 
 
 

@@ -35,7 +35,9 @@ $order = new stdClass;
 !empty($_REQUEST['country']) ? $order->country = $_REQUEST['country'] : $order->country = '';
 !empty($_REQUEST['paytype']) ? $order->paytype = $_REQUEST['paytype'] : $order->paytype = '';
 !empty($_REQUEST['campcode']) ? $order->campcode = $_REQUEST['campcode'] : $order->campcode = '';
-!empty($_REQUEST['channel']) ? $order->channel = $_REQUEST['channel'] : $order->channel = '';
+!empty($_REQUEST['kanal']) ? $order->channel = $_REQUEST['kanal'] : $order->channel = '';
+
+
 
 $order->PRIV3 = (int) $order->PRIV3;
 $order->PRIV12 = (int) $order->PRIV12;
@@ -127,7 +129,7 @@ if ($order->STEG01 == 1) {
 }
 $paysonMsg = $msg;
 if ($order->email == 'krillo@gmail.com' OR (strpos($order->email, '@erendi.se') > 0)) {
-  $sumToPay = 1;   //for testing only pay 1 kr and allways kristian@erendi.se, don't forget to return the money in payson
+  $sumToPay = 10;   //for testing only pay 1 kr and allways kristian@erendi.se, don't forget to return the money in payson
   $order->email = 'kristian@erendi.se';
   $order->fname = 'kristian';
   $order->ename = 'erendi';
@@ -137,14 +139,15 @@ if ($order->email == 'krillo@gmail.com' OR (strpos($order->email, '@erendi.se') 
 }
 $data = Order::setupPaysonConnection($order->email, $order->fname, $order->lname, $sumToPay, $paysonMsg);
 $payResponse = $data['payResponse'];
-//print_r($payResponse);
+Misc::logMotiomera(print_r($order, true), 'INFO', 'payson');
 $api = $data['api'];
 if ($payResponse->getResponseEnvelope()->wasSuccessful()) {  // Payson Step 3: verify that it suceeded
-//print_r($payResponse);
+  Misc::logMotiomera(print_r($payResponse, true), 'INFO', 'payson');
   $token = $payResponse->getToken();
   echo $token;
 //header("Location: " . $api->getForwardPayUrl($payResponse)); //do the redirection to payson
 } else {
+  Misc::logMotiomera(print_r($payResponse, true), 'ERROR', 'payson');
   throw new UserException("Problem med Payson.se", "Det är något problem med betaltjänsten Payson.se. Prova igen senare.");
 }
 
