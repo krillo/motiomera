@@ -1,10 +1,5 @@
 {if isset($USER) && !$selfProfile}
 	<div id="mmProfilAdressbok">
-		{if isset($invitable)}
-			<img src="/img/icons/AdressbokIcon.gif" alt=""/> <a href="#" onclick="motiomera_bjudInTillKlubb({$medlem->getId()}); return false;" title="Bjud in till klubb">Bjud in till klubb</a>
-		{/if}
-
-
 		{if $USER->inAdressbok($medlem)}
 			<img src="/img/icons/AdressbokIcon.gif" alt="" class="mmMarginLeft10" /> <a href="{$urlHandler->getUrl(Adressbok, URL_DELETE, $medlem->getId())}" title="Ta bort som vän">Ta bort som vän</a>
 		{else}

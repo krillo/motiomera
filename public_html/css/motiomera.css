@@ -899,11 +899,12 @@ input{
 }
 
 
-#motiomera_valjrutt_flytande_knappar
-{
+#motiomera_valjrutt_flytande_knappar{
+  /*
   position: absolute;
   left: 400px;
   top: 2100px;
+  */
   z-index: 500;
 }
 #motiomera_valjrutt_flytande_knappar img
@@ -3079,14 +3080,17 @@ td.number
 /* New mm style 2012 Added by krillo  */
 .show-more-link{padding:8px 0 25px 0; float:right;font-size: 12px;}
 #report-area{height:50px;whith:760px;background-color:#8aa25a;border-radius: 0 0 10px 10px;border-top: 1px solid #fff;margin-bottom: 35px;padding:10px 10px 10px 0;}
-.report-button{background-color: #5b7a19;padding:0 35px 32px 0;border-radius:5px 5px 5px 5px;height:10px;color:#fff; float:left;margin-left: 10px;font-family:Cabin Condensed;font-size:18px;
+.report-button{background-color: #5b7a19;padding:2px 35px 32px 2px;border-radius:5px 5px 5px 5px;height:10px;color:#fff; float:left;margin-left: 10px;font-family:Cabin Condensed;font-size:18px;
                background-image: url("/img/design12/arrow_yellow.png"); background-repeat: no-repeat;background-position: 205px 10px; 
                border-color: #CEE596 #555 #555 #CEE596;border-width: 1px;border-style: solid;}
-.report-button:hover{border-color: #555 #CEE596 #CEE596 #555;border-width: 1px;border-style: solid; text-decoration: none; color: #fff;}
+.report-button:hover{border-color: #555 #CEE596 #CEE596 #555;border-width: 1px;border-style: solid; text-decoration: none; color: #fff;padding: 0px 37px 34px 0px;background-position: 203px 8px; }
 .report-button img{margin: 0 5px 0 5px;}
 .route{background-position: 138px 10px; }
+.route:hover{background-position: 136px 8px; }
 .graph{background-position: 188px 10px;float:right;}
-#report-data{float:left;margin-left: 20px;color:#fff;}
+.graph:hover{background-position: 186px 8px;float:right;}
+
+#report-data{float:left;margin-left: 8px;color:#fff;}
 .margin-top{margin-top: 15px;}
 .margin-right{margin-right: 15px;}
 #info-area{height:20px;whith:760px;background-color:#8aa25a;border-bottom: 1px solid #fff;padding:10px 10px 10px 10px;color:#fff;}

@@ -105,6 +105,7 @@ Kvar om du går 11.000 steg per dag: {$dagar11000} dagar<br/>
 
 </div>
 
+  <!--div class="clear"></div-->  
 <div id="motiomera_valjrutt_flytande_knappar">
 	<img src="../img/icons/avbryt_ikon.gif" alt="Avbryt rutt" onclick="var q = confirm('Är du säkert på att du vill avbryta? Icke godkänd rutt kommer försvinna.'); if(q) location.href='/actions/save.php?table=stracka_r'; else return false;" />
 	<img src="../img/icons/godkann_rutt_ikon.gif" alt="Godkänn rutt" onclick="location.href='/actions/save.php?table=stracka_g';"/>

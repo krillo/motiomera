@@ -275,8 +275,8 @@ jQuery(document).ready(function($) {
     var to_date = $.datepicker.formatDate('yy-mm-dd', new Date());
     var from_date = new Date(new Date().setDate(new Date().getDate() - nbr_days + 1));
     from_date = $.datepicker.formatDate('yy-mm-dd', from_date);
-    //is it a profil page listing?
-    if ($("title").html() === "Profilsida" && $("#profil_id").html() > 0) {
+    //is it a profil page listing or detaljerad rapport?
+    if (($("title").html() === "Profilsida" || $("title").html() === "Detaljerad rapport") && $("#profil_id").html() > 0) {
       mm_id = $("#profil_id").html();
     }
     var data = {
