@@ -10,14 +10,50 @@ $medlem = (!empty($req->mm_id)) ? Medlem::loadById($req->mm_id) : $USER;
 ?>
 
 <?php print_r($medlem); ?>
-<h1>Detaljerad rapport - <?php echo $medlem->getAnamn(); ?></h1>
+<h1>Detaljerad rapport för <?php echo $medlem->getAnamn(); ?></h1>
 <div id="profil_id" style="display: none;"><?php echo $req->mm_id; ?></div>  
 
+<img id="mmInstallningarAvatar" src="/files/avatarer/<?php echo $medlem->getAvatarFilename(); ?>" alt="" class="mmAvatar">
+<a href="/kommun/<?php echo $medlem->getJustNuKommunNamn(); ?>/" /><?php echo $medlem->getJustNuKommunNamn(); ?> </a> 
+<br>
+medlem sedan <?php echo $medlem->getSkapadDateOnly(); ?>
+<br>
+<br>
+<?php echo $medlem->getAvatar(); ?>
+<br>
+<?php echo $medlem->getCustomVisningsbild(); ?>
+<br>
+
+
+
+
+
 <?php 
-  $heading = "Snittsteg för företaget under hela tävlingen";
+$fid = $medlem->getForetagsId();
+  if($fid > 0){
+    echo $fid;
+    echo '<br>';
+    echo $medlem->getForetag()->getNamn();
+    echo '<br>';
+    $startDatum = $medlem->getForetag()->getStartdatum();
+    echo 'Tävlingsstart: ' . $startDatum;
+    $nbrDays = (int) JDate::dateDaysDiff($startDatum, date('y-m-d'));
+    echo '<br>';
+    echo $nbrDays;
+    $heading = "Steg under hela tävlingen ";
+    
+  } else {
+    $heading = "Steg de senaste ";
+    $nbrDays = 30;
+  }
+
+
+  
   $legend1 = "Företagets snittsteg";
-  //$dateSelector = false;
-  $mid = 
+  $dateSelector = true;
 include(BASE_PATH . '/wordpress/wp-content/themes/motiomera/snippets/inc_graph.php');
+?>
+  
+
 
 

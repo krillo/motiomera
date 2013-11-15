@@ -1059,14 +1059,6 @@ class Medlem extends Mobject {
     return $this->justNuKommun_id;
   }
 
-  /**
-   * Function getJustNuKommunId
-   * 
-   * Returns name of current kommun
-   *
-   * Example:
-   *      getJustNuKommunId  (  )
-   */
   public function getJustNuKommunNamn() {
     if ($this->getJustNuKommunId()) {
       $kommun = Kommun::loadByid($this->getJustNuKommunId());
