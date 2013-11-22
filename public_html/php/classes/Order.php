@@ -211,7 +211,8 @@ class Order extends Mobject {
       "PRIV3" => array(
           "typ" => "medlem",
           "text" => "3 månader MotioMera",
-          "pris" => 79,
+          //"pris" => 79,
+          "pris" => 98,
           "dagar" => 91,
           "popupid" => 30,
           "levelid" => 1,
