@@ -391,14 +391,14 @@ Order::getMondays(15);
       <div id="integrity">Genom att fortsätta betalningen godkänner jag <a href="/pages/integritetspolicy.php" target="_blank">Motiomeras integritetspolicy</a> och är över 18 år</div>
       <div class="clear"></div>
 
-      <div >
+      <!-- div >
         <input type="submit" value="Betalning - Payson" name="paytype" id="payson">
       </div>
-      <div id="or">eller</div>
+      <div id="or">eller</div -->
       <div >      
-        <input type="submit" value="Faktura" name="paytype" id="faktura">
+        <input type="submit" value="Skapa faktura" name="paytype" id="faktura">
       </div>  
-      <div class="clear"></div>
+      <!-- div class="clear"></div>
       <div id="payalt">
         På Payson kan du betala med:
         <ul>
@@ -409,7 +409,7 @@ Order::getMondays(15);
           <li>Internetbank: SEB </li>
           <li>Internetbank: Nordea </li>
         </ul>
-      </div>  
+      </div-->  
     </div>
 
 
