@@ -93,7 +93,7 @@ jQuery(document).ready(function($) {
     var rows = '';
     $(table).each(function(index, value) {
       if (value[5] === null) {
-        rows = '<tr class="mm-odd"><td class="mm-first-cell">2013-10-01</td><td class="mm-activity-cell"></td><td class=""></td><td class="">12000</td><td class=""><div class="mm-delete ui-icon-closethick" id="1666210"></div></td></tr>';
+        rows = '';
       } else {
         var row = '<tr class="' + value[0] + '">';
         row += '<td class="mm-first-cell">' + value[1] + '</td>';
@@ -103,7 +103,11 @@ jQuery(document).ready(function($) {
         if (value[0].indexOf('mm-sum') >= 0) {
           row += '<td class="">Steg</td>';
         } else {
-          row += '<td class=""><div class="mm-delete ui-icon-closethick" id="' + value[6] + '"></div></td>';
+          row += '<td class="">';
+          if($('#enable-input').val() === '1'){ //posibility to remove row
+            row += '<div class="mm-delete ui-icon-closethick" id="' + value[6] + '"></div>';
+          }
+          row += '</td>';
         }
         row += '</tr>';
         rows += row;

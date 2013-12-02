@@ -100,11 +100,11 @@
 <div id="mmStegGrafikDetaljeradRapport">
   <div class="mmh4 mmGreen">
     {if isset($medlem)}
-      <a href="{$urlHandler->getUrl(Rutt, URL_VIEW, $medlem->getId())}&amp;tab=1">
+      <a href="/pages/detaljerad.php?mid={$medlem->getId()}">
       {else}
-        <a href="{$urlHandler->getUrl(Rutt, URL_VIEW)}&amp;tab=1">
+        <a href="/pages/detaljerad.php?mid=">
         {/if}
-        Detaljerad<br/>Rapport
+        Detaljerad<br/>Rapport 
       </a>
   </div>
 </div>
@@ -358,8 +358,8 @@ if(end > 0) {
   {if $sajtDelarObj->medlemHasAccess($medlem,"minSidaCalories")}{$caltotal|nice_tal} kcal{/if}
 </div>
 {if isset($medlem)}
-  <a class="report-button graph" href="{$urlHandler->getUrl(Rutt, URL_VIEW, $medlem->getId())}&amp;tab=1"><img src="/img/design12/graph.png" alt=""/>Detaljerad Rapport</a>
+  <a class="report-button graph" href="/pages/detaljerad.php?mid={$medlem->getId()}"><img src="/img/design12/graph.png" alt=""/>Detaljerad Rapport</a>
   {else}
-  <a class="report-button graph" href="{$urlHandler->getUrl(Rutt, URL_VIEW)}&amp;tab=1"><img src="/img/design12/graph.png" alt=""/>Detaljerad Rapport</a>
+  <a class="report-button graph" href="/pages/detaljerad.php?mid="><img src="/img/design12/graph.png" alt=""/>Detaljerad Rapport</a>
   {/if}				
 </div>    
