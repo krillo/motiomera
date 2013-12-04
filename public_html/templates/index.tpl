@@ -1,7 +1,6 @@
 <div class="mmFlash">
   <div id="mmSplash">
 
-
     <div style="text-align:center;">
 <!--a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Teambuilding på jobbet!</h1-->
 <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Gå runt Sverige och samla kommunvapen</h1>
