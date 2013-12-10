@@ -38,6 +38,10 @@ if ($fid > 0) {
   $startDatum = $medlem->getForetag()->getStartdatum();
   echo 'Tävlingsstart: ' . $startDatum;
   $nbrDays = (int) JDate::dateDaysDiff($startDatum, date('y-m-d'));
+  if ($nbrDays > 56) {  //56 = 7 * 8 days
+    $heading = "Steg de senaste ";
+    $nbrDays = 30;
+  }
   echo '<br>';
   echo $nbrDays;
   $heading = "Steg under hela tävlingen ";
