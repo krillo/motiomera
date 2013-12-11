@@ -311,10 +311,17 @@ jQuery(document).ready(function($) {
   }
 
 
+  /**
+   * Draw the graph
+   */
   function onDataReceived() {
     if (stats.nbr_days > 10) {
       ticks = null;
     }
+    graphWidth = $("#graph-width").val() + 'px';
+    $(".mmBlueBoxTop").css({"width": graphWidth});
+    $("#mm-legend-area").css({"width": graphWidth});
+    $("#placeholder").css({"width": graphWidth});
     var plot = $.plot($("#placeholder"),
             [
               {data: steps, bars: {show: true, barWidth: 0.6}, color: "rgba(0, 173, 223, 0.7)"},

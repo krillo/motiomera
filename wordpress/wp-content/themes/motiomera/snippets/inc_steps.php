@@ -10,7 +10,7 @@
 !isset($enableInput) ? $enableInput = true : null;
 !isset($showComments) ? $showComments = 'true' : null;
 ?>
-<style>
+<!-- style>
 
   .ui-widget-header{background-color: #5B7A19;background-image: none;border-color: #384A0E;}
   .ui-widget {font-family: 'Cabin Condensed';font-size: 1.1em;}
@@ -87,7 +87,7 @@
   }
   html input[type="button"]:hover{border-color: #555 #CEE596 #CEE596 #555;} /*padding: 0.55em 0.55em 0.65em 0.45em; } */
 
-</style>
+</style-->
 
 <div id="mm-dialog" title="Rapportera steg" style="<?php echo $display; ?>">
   <div id="mm-datepicker" ></div>

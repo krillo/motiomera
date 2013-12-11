@@ -9,21 +9,12 @@ if($USER->getPaidUntil() < date("Y-m-d")){
   $urlHandler->redirect("Medlem", URL_BUY, $USER->getId());
 }
 
-
 $smarty = new MMSmarty;
 $smarty->assign("pagetitle", "Min sida");
 
 // Ta bort eventuella temp-sträckor som inte sparats:
 $USER->cleanTempStrackor();
 
-
-// Klubbar:
-$grupper = Grupp::listByMedlem($USER);
-
-if(count($grupper) > 0)
-{
-	$smarty->assign("grupper", $grupper);
-}
 
 // Topplistor
 $forraVeckan = date("Y-m-d H:i:s",strtotime("-7 days"));

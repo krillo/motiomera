@@ -20,7 +20,7 @@
     <!--link rel="stylesheet" href="{$mm_url}/css/checkout.css" type="text/css" media="screen" /-->
     <!--link rel="stylesheet" href="{$mm_url}/css/print.css" type="text/css" media="print" /-->
 
-    <link rel='stylesheet' id='wp-mm-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/wp_mm_common.css?ver=3.3.2' type='text/css' media='all' />
+
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <!--script type='text/javascript' src='{$mm_url}/wp-includes/js/jquery/jquery.js?ver=1.8.3'></script-->
 
@@ -34,7 +34,7 @@
     {foreach from=$urlChecker->getJsPackage() item=file}
       <script type="text/javascript" src="{$file}"></script>
     {/foreach}
-    
+
 
     {if $pagetitle == 'Min sida' or  $pagetitle == 'Profilsida' or $pagetitle == 'Företagssida' or $pagetitle == 'Lagsidan' or $pagetitle == 'Detaljerad rapport'} 
       <link rel='stylesheet' id='ui-lightness-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/ui-lightness/jquery-ui-1.9.2.custom.min.css?ver=3.3.2' type='text/css' media='all' />
@@ -44,13 +44,12 @@
       <script type="text/javascript" src="{$mm_url}/wp-content/themes/motiomera/js/jquery.mmwp.steps.js?ver=3.5.1"></script>
     {/if}
     {if $pagetitle == 'Företagstävling'} 
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-  
-  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+      <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+      <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     {/if}
+    <link rel='stylesheet' id='wp-mm-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/wp_mm_common.css?ver=3.3.2' type='text/css' media='all' />
 
-    
-    
+
 
     {php}
       //get all scripts and css from wp
@@ -65,22 +64,22 @@
     <script type="text/javascript">
       {literal}
         /*
-        var mmPopup;
-        // remove the registerOverlay call to disable the controlbar
-        hs.registerOverlay(
-                {
-                  thumbnailId: null,
-                  overlayId: 'controlbar',
-                  position: 'top right',
-                  hideOnMouseOut: true
-                }
-        );
-        hs.showCredits = false;
-        hs.graphicsDir = '/js/highslide/graphics/';
-        hs.outlineType = 'rounded-white';
-        // Tell Highslide to use the thumbnails title for captions
-        hs.captionEval = 'this.thumb.title';
-        */
+         var mmPopup;
+         // remove the registerOverlay call to disable the controlbar
+         hs.registerOverlay(
+         {
+         thumbnailId: null,
+         overlayId: 'controlbar',
+         position: 'top right',
+         hideOnMouseOut: true
+         }
+         );
+         hs.showCredits = false;
+         hs.graphicsDir = '/js/highslide/graphics/';
+         hs.outlineType = 'rounded-white';
+         // Tell Highslide to use the thumbnails title for captions
+         hs.captionEval = 'this.thumb.title';
+         */
       {/literal}
     </script>
 

@@ -28,20 +28,6 @@
   </script>
 
 
-
-
-  {if isset($rssFeed)}
-    <div id="mmRssFeeds" class="gmaps">
-      <strong>
-        Senaste blogginlägget:
-      </strong>
-      ({$rssFeed.pubDate})
-      <br />
-      <a href="{$urlHandler->getUrl('RssFlow', URL_VIEW, $medlem->getId())}">{$rssFeed.title}</a><br />
-      {$rssFeed.description|truncate:110}
-      <br />
-    </div>
-  {/if}
   <div id="map-container">
     <div id="map">
       {if $nastaKommun neq null}

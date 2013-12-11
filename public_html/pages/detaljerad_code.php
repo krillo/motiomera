@@ -54,6 +54,7 @@ if ($fid > 0) {
 
 $legend1 = "Dina snittsteg";
 $dateSelector = true;
+$graphWidth = '760';
 include(BASE_PATH . '/wordpress/wp-content/themes/motiomera/snippets/inc_graph.php');
 
 echo '<div class="clear"></div>';
