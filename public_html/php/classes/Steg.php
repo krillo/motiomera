@@ -481,7 +481,72 @@ class Steg extends Mobject {
   }
 
   
-  
+  /**
+   * 
+   * @global type $db
+   * (
+    [0] => Array
+        (
+            [medlem_id] => 31454
+            [lag_id] => 9645
+            [foretag_id] => 2957
+            [lag_namn] => Kloka ugglorna
+            [bildUrl] => Lag_10.jpg
+            [foretag_namn] => Repetition
+            [startdatum] => 2013-12-02
+            [slutdatum] => 2014-02-09
+        )
+
+    [1] => Array
+        (
+            [medlem_id] => 31493
+            [lag_id] => 9645
+            [foretag_id] => 2957
+            [lag_namn] => Kloka ugglorna
+            [bildUrl] => Lag_10.jpg
+            [foretag_namn] => Repetition
+            [startdatum] => 2013-12-02
+            [slutdatum] => 2014-02-09
+        )
+
+    [2] => Array
+        (
+            [medlem_id] => 31455
+            [lag_id] => 9645
+            [foretag_id] => 2957
+            [lag_namn] => Kloka ugglorna
+            [bildUrl] => Lag_10.jpg
+            [foretag_namn] => Repetition
+            [startdatum] => 2013-12-02
+            [slutdatum] => 2014-02-09
+        )
+
+    [3] => Array
+        (
+            [medlem_id] => 31281
+            [lag_id] => 9653
+            [foretag_id] => 2957
+            [lag_namn] => smarta aporna
+            [bildUrl] => Lag_16.png
+            [foretag_namn] => Repetition
+            [startdatum] => 2013-12-02
+            [slutdatum] => 2014-02-09
+        )
+
+    [4] => Array
+        (
+            [medlem_id] => 107
+            [lag_id] => 9653
+            [foretag_id] => 2957
+            [lag_namn] => smarta aporna
+            [bildUrl] => Lag_16.png
+            [foretag_namn] => Repetition
+            [startdatum] => 2013-12-02
+            [slutdatum] => 2014-02-09
+        )
+
+)
+   */
   public static function getStepdataPerAllCurrentCompetitionTeams(){
     global $db;
     $members = array();
@@ -489,10 +554,15 @@ class Steg extends Mobject {
     $today = $jtoday->getDate();
     $sql = "SELECT n.medlem_id, n.lag_id, n.foretag_id, l.namn AS lag_namn, l.bildUrl, f.namn AS foretag_namn, f.startdatum, f.slutdatum FROM mm_foretagsnycklar n, mm_foretag f, mm_lag l WHERE n.foretag_id IN (SELECT id FROM mm_foretag f WHERE isvalid = 1 AND slutdatum >= '$today'  AND `startdatum` <= '$today') AND n.medlem_id IS NOT null AND n.lag_id IS NOT null AND n.foretag_id = f.id AND n.lag_id = l.id order by lag_id";
     $team_membs = $db->allValuesAsArray($sql);
-    print_r($team_membs);
-    foreach ($team_membs as $fid => $value) {
-      
+    
+    //print_r($team_membs);
+    $allTeams = array();
+    foreach ($team_membs as $key => $lag) {
+      if(!array_key_exists($lag["lag_id"], $allTeams)){
+        $allTeams[$lag["lag_id"]] = $lag;
+      }
     }
+    print_r($allTeams);
     
     
   }          
