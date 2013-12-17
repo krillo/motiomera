@@ -50,17 +50,19 @@
           </tr>
           <?php
           $list = Steg::getStepdataPerAllCurrentCompetitionTeams();
-          foreach ($list as $mid => $member): $i++;
+          foreach ($list as $key => $lag):
             ?>
             <tr>
-              <td><?php echo $i ?>.</td>
-              <td><a href = "/pages/profil.php?mid=<?php echo $mid; ?>"><?php echo $member['anamn'] ?></a></td>
-              <td><?php echo $member['average'] ?></td>
+              <td><?php echo $key + 1; ?>.</td>
+              <td><a href = "/pages/lag.php?lid=<?php echo $lag['lag_id']; ?>"><?php echo $lag['lag_namn']; ?></a></td>
+              <td><?php echo $lag['average_steps']; ?></td>
             </tr>
           <?php endforeach; ?>
         </table>
       </div>
     </div>
+
+
 
 
     <div class="floatit">
@@ -76,14 +78,29 @@
           </tr>
           <?php
           $list = Steg::getStepdataPerAllCurrentCompetitionMembers(true);
-          foreach ($list as $mid => $member): $i++;
+          foreach ($list as $key => $lag):
+            /*
+             *    *     [0] => Array
+             *      (
+             *          [lag_id] => 9653
+             *          [foretag_id] => 2957
+             *          [lag_namn] => smarta aporna
+             *          [bildUrl] => Lag_16.png
+             *          [foretag_namn] => Repetition
+             *          [startdatum] => 2013-12-02
+             *          [slutdatum] => 2014-02-09
+             *          [total_steps] => 318204
+             *          [average_steps] => 159102
+             *          [nbr_members] => 2
+             *      )
+             */
             ?>
             <tr>
-              <td><?php echo $i ?>.</td>
-              <td><a href = "/pages/profil.php?mid=<?php echo $mid; ?>"><?php echo $member['anamn'] ?></a></td>
-              <td><?php echo $member['average'] ?></td>
+              <td><?php echo $key + 1; ?>.</td>
+              <td><a href = "/pages/profil.php?mid=<?php echo $lag['lag_namn']; ?>"><?php echo $lag['lag_namn']; ?></a></td>
+              <td><?php echo $lag['average_steps']; ?></td>
             </tr>
-          <?php endforeach; ?>
+<?php endforeach; ?>
         </table>
       </div>   
     </div>

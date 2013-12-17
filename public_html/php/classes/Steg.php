@@ -474,102 +474,86 @@ class Steg extends Mobject {
         $members[$dat['medlem_id']] = $dat;
       }
     }
-    if($sortByAverage){
+    if ($sortByAverage) {
       //sort by average - not implemented yet!!
     }
     return $members;
   }
 
-  
   /**
+   * Returns a sorted array of all teams average steps. The team with highest average steps is fisrt 
    * 
    * @global type $db
-   * (
-    [0] => Array
-        (
-            [medlem_id] => 31454
-            [lag_id] => 9645
-            [foretag_id] => 2957
-            [lag_namn] => Kloka ugglorna
-            [bildUrl] => Lag_10.jpg
-            [foretag_namn] => Repetition
-            [startdatum] => 2013-12-02
-            [slutdatum] => 2014-02-09
-        )
-
-    [1] => Array
-        (
-            [medlem_id] => 31493
-            [lag_id] => 9645
-            [foretag_id] => 2957
-            [lag_namn] => Kloka ugglorna
-            [bildUrl] => Lag_10.jpg
-            [foretag_namn] => Repetition
-            [startdatum] => 2013-12-02
-            [slutdatum] => 2014-02-09
-        )
-
-    [2] => Array
-        (
-            [medlem_id] => 31455
-            [lag_id] => 9645
-            [foretag_id] => 2957
-            [lag_namn] => Kloka ugglorna
-            [bildUrl] => Lag_10.jpg
-            [foretag_namn] => Repetition
-            [startdatum] => 2013-12-02
-            [slutdatum] => 2014-02-09
-        )
-
-    [3] => Array
-        (
-            [medlem_id] => 31281
-            [lag_id] => 9653
-            [foretag_id] => 2957
-            [lag_namn] => smarta aporna
-            [bildUrl] => Lag_16.png
-            [foretag_namn] => Repetition
-            [startdatum] => 2013-12-02
-            [slutdatum] => 2014-02-09
-        )
-
-    [4] => Array
-        (
-            [medlem_id] => 107
-            [lag_id] => 9653
-            [foretag_id] => 2957
-            [lag_namn] => smarta aporna
-            [bildUrl] => Lag_16.png
-            [foretag_namn] => Repetition
-            [startdatum] => 2013-12-02
-            [slutdatum] => 2014-02-09
-        )
-
-)
+   * @return sorted array of all teams
+   * 
+   * Date: 2013-12-17
+   * Author: Kristian Erendi 
+   * URI: http://reptilo.se  
+   * 
+   * 
+   *     [0] => Array
+   *      (
+   *          [lag_id] => 9653
+   *          [foretag_id] => 2957
+   *          [lag_namn] => smarta aporna
+   *          [bildUrl] => Lag_16.png
+   *          [foretag_namn] => Repetition
+   *          [startdatum] => 2013-12-02
+   *          [slutdatum] => 2014-02-09
+   *          [total_steps] => 318204
+   *          [average_steps] => 159102
+   *          [nbr_members] => 2
+   *      )
    */
-  public static function getStepdataPerAllCurrentCompetitionTeams(){
+  public static function getStepdataPerAllCurrentCompetitionTeams() {
     global $db;
     $members = array();
     $jtoday = new JDate();
     $today = $jtoday->getDate();
     $sql = "SELECT n.medlem_id, n.lag_id, n.foretag_id, l.namn AS lag_namn, l.bildUrl, f.namn AS foretag_namn, f.startdatum, f.slutdatum FROM mm_foretagsnycklar n, mm_foretag f, mm_lag l WHERE n.foretag_id IN (SELECT id FROM mm_foretag f WHERE isvalid = 1 AND slutdatum >= '$today'  AND `startdatum` <= '$today') AND n.medlem_id IS NOT null AND n.lag_id IS NOT null AND n.foretag_id = f.id AND n.lag_id = l.id order by lag_id";
     $team_membs = $db->allValuesAsArray($sql);
-    
     //print_r($team_membs);
     $allTeams = array();
     foreach ($team_membs as $key => $lag) {
-      if(!array_key_exists($lag["lag_id"], $allTeams)){
-        $allTeams[$lag["lag_id"]] = $lag;
+      $lag_id = $lag["lag_id"];
+      if (!array_key_exists($lag_id, $allTeams)) {
+        $allTeams[$lag_id] = $lag;
+        $allTeams[$lag_id]['total_steps'] = 0;
+        $allTeams[$lag_id]['average_steps'] = 0;
+        $allTeams[$lag_id]['nbr_members'] = 0;
+        unset($allTeams[$lag_id]['medlem_id']);
       }
+      $start = $lag['startdatum'];
+      $stop = $lag['slutdatum'];
+      $medlem_id = $lag['medlem_id'];
+      $sql = "select SUM(steg) AS steps from mm_steg s where s.medlem_id = $medlem_id AND datum BETWEEN '$start' AND '$stop' ";
+      $steps = $db->value($sql);
+      $allTeams[$lag_id]['nbr_members'] = $allTeams[$lag_id]['nbr_members'] + 1;
+      $allTeams[$lag_id]['total_steps'] = $allTeams[$lag_id]['total_steps'] + $steps;
+      $allTeams[$lag_id]['average_steps'] = $allTeams[$lag_id]['total_steps'] / $allTeams[$lag_id]['nbr_members'];
     }
-    print_r($allTeams);
-    
-    
-  }          
-          
+    //sort the array
+    function cmp($a, $b) {
+      if ($a == $b) {
+        return 0;
+      }
+      return ($a[total_steps] > $b[total_steps]) ? -1 : 1;
+    }
+    usort($allTeams, "cmp");
+    //print_r($allTeams);
+    return $allTeams;
+  }
+
   
   
-  
+  /**
+   * 
+   * @global type $db
+   * @param Medlem $medlem
+   * @param type $start
+   * @param type $stop
+   * @return type
+   */
   public static function getStegTotal(Medlem $medlem, $start = null, $stop = null) {
     global $db;
     $sql = "SELECT SUM(steg) AS totalSteg FROM " . self::classToTable(get_class()) . " WHERE medlem_id = " . $medlem->getId() . " ";
