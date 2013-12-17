@@ -9,49 +9,35 @@ $req = new stdClass;
 $medlem = (!empty($req->mm_id)) ? Medlem::loadById($req->mm_id) : $USER;
 ?>
 
-<?php print_r($medlem); ?>
-<h1>Detaljerad rapport för <?php echo $medlem->getAnamn(); ?></h1>
+<?php //print_r($medlem); ?>
 <div id="profil_id" style="display: none;"><?php echo $req->mm_id; ?></div>  
-
-<img id="mmInstallningarAvatar" src="/files/avatarer/<?php echo $medlem->getAvatarFilename(); ?>" alt="" class="mmAvatar">
-<a href="/kommun/<?php echo $medlem->getJustNuKommunNamn(); ?>/" /><?php echo $medlem->getJustNuKommunNamn(); ?> </a> 
-<br>
-medlem sedan <?php echo $medlem->getSkapadDateOnly(); ?>
-<br>
-<br>
-<?php echo $medlem->getAvatar(); ?>
-<br>
-<?php echo $medlem->getCustomVisningsbild(); ?>
-<br>
-
-
-
+<h1>Detaljerad rapport för <?php echo $medlem->getAnamn(); ?> <img id="mmInstallningarAvatar" src="/files/avatarer/<?php echo $medlem->getAvatarFilename(); ?>" alt="" class="mmAvatar"style="margin-left: 10px;"></h1>
+<p>Medlem sedan <?php echo $medlem->getSkapadDateOnly(); ?><br/>
+Just nu i <a href="/kommun/<?php echo $medlem->getJustNuKommunNamn(); ?>/" /><?php echo $medlem->getJustNuKommunNamn(); ?></a></p>
 
 
 <?php
 $fid = $medlem->getForetagsId();
 if ($fid > 0) {
-  echo $fid;
-  echo '<br>';
-  echo $medlem->getForetag()->getNamn();
-  echo '<br>';
+  //echo $fid;
+  //echo '<br>';
+  //echo $medlem->getForetag()->getNamn();
+  //echo '<br>';
   $startDatum = $medlem->getForetag()->getStartdatum();
-  echo 'Tävlingsstart: ' . $startDatum;
+  //echo 'Tävlingsstart: ' . $startDatum;
   $nbrDays = (int) JDate::dateDaysDiff($startDatum, date('y-m-d'));
   if ($nbrDays > 56) {  //56 = 7 * 8 days
     $heading = "Steg de senaste ";
     $nbrDays = 30;
   }
-  echo '<br>';
-  echo $nbrDays;
+  //echo '<br>';
+  //echo $nbrDays;
   $heading = "Steg under hela tävlingen ";
 } else {
   $heading = "Steg de senaste ";
   $nbrDays = 30;
 }
-
-
-
+ 
 $legend1 = "Dina snittsteg";
 $dateSelector = true;
 $graphWidth = '760';

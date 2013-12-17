@@ -18,7 +18,9 @@
 
 <input type="hidden" id="graph-width" value="<?php echo $graphWidth; ?>" />
 <div class="mmBlueBoxTop">
-  <div class="BoxTitlePart"><?php echo $heading; ?></div><div class="BoxTitlePart"> <?php if ($dateSelector): ?><input type="text" id="mm-nbr-days" value="<?php echo $nbrDays; ?>" /> dagarna </div><div class="BoxTitlePart BoxTitlePart-button"><input type="button" value="ok" id="mm-nbr-days-ok"></div><?php endif; ?>
+  <div class="BoxTitlePart"><?php echo $heading; ?></div>
+  <div class="BoxTitlePart"> <?php if ($dateSelector): ?><input type="text" id="mm-nbr-days" value="<?php echo $nbrDays; ?>" /> dagarna </div>
+  <div class="BoxTitlePart BoxTitlePart-button"><input type="button" value="ok" id="mm-nbr-days-ok"><?php endif; ?></div>
 </div>
 <div id="mm-graph">
   <div id="placeholder" ></div>
