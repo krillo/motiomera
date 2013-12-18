@@ -39,7 +39,7 @@
 
     <div class="floatit">
       <div class="mmAlbumBoxTop">
-        <h3 class="mmWhite BoxTitle">Snittsteg per lag</h3>
+        <h3 class="mmWhite BoxTitle">Snittsteg per lag och dag</h3>
       </div>
       <div class="mmRightMinSidaBox">
         <table width="155" cellpadding="0" cellspacing="0" border="0">
@@ -77,7 +77,7 @@
             <td><b>Steg</b></td>
           </tr>
           <?php
-          $list = Steg::getStepdataPerAllCurrentCompetitionMembers(true);
+          $list = Steg::getStepdataPerAllCurrentCompetitionCompanies();
           foreach ($list as $key => $lag):
             /*
              *    *     [0] => Array

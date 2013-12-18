@@ -481,7 +481,8 @@ class Steg extends Mobject {
   }
 
   /**
-   * Returns a sorted array of all teams average steps. The team with highest average steps is fisrt 
+   * Returns a sorted array of all teams average steps. The team with highest average steps is fisrt
+   * steps/(members * days) 
    * 
    * @global type $db
    * @return sorted array of all teams
@@ -522,6 +523,8 @@ class Steg extends Mobject {
         $allTeams[$lag_id]['average_steps'] = 0;
         $allTeams[$lag_id]['nbr_members'] = 0;
         unset($allTeams[$lag_id]['medlem_id']);
+        $nbrDays = JDate::dateDaysDiff(date($allTeams[$lag_id]['startdatum']), date($today));
+        $allTeams[$lag_id]['nbr_days'] = $nbrDays;
       }
       $start = $lag['startdatum'];
       $stop = $lag['slutdatum'];
@@ -530,7 +533,7 @@ class Steg extends Mobject {
       $steps = $db->value($sql);
       $allTeams[$lag_id]['nbr_members'] = $allTeams[$lag_id]['nbr_members'] + 1;
       $allTeams[$lag_id]['total_steps'] = $allTeams[$lag_id]['total_steps'] + $steps;
-      $allTeams[$lag_id]['average_steps'] = $allTeams[$lag_id]['total_steps'] / $allTeams[$lag_id]['nbr_members'];
+      $allTeams[$lag_id]['average_steps'] = ceil($allTeams[$lag_id]['total_steps'] / $allTeams[$lag_id]['nbr_members'] / $allTeams[$lag_id]['nbr_days']);
     }
     //sort the array
     function cmp($a, $b) {
@@ -544,6 +547,15 @@ class Steg extends Mobject {
     return $allTeams;
   }
 
+  public static function getStepdataPerAllCurrentCompetitionCompanies($date = false) {
+    $comps = Foretag::getAllActiveCompanys($date);
+    print_r($comps);
+    
+    //getStepStatsPerTeam($mm_lid, $from_date, $to_date);
+    
+  } 
+  
+  
   
   
   /**

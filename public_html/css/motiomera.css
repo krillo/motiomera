@@ -3105,5 +3105,6 @@ td.number
 .facebook-like{float:right;width:200px;height: 30px;}
 
 .mmTabell{padding-left:0;width:500px !important;}
-.floatit{float:left;margin-right: 20px;}
+.floatit{float:left;margin-right: 20px;font-family: Arial, Verdana, 'Cabin Condensed';font-size: 12px;color: #5C5C5C;}
+.floatit a{color: #4F6916;}
 .tabArea{overflow:hidden;}
