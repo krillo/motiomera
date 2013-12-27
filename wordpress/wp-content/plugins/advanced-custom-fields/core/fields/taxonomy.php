@@ -200,6 +200,17 @@ class acf_field_taxonomy extends acf_field
 			$field['value'] = array( $field['value'] );
 		}
 		
+		
+		// vars
+		$args = array(
+			'taxonomy'     => $field['taxonomy'],
+			'hide_empty'   => false,
+			'style'        => 'none',
+			'walker'       => new acf_taxonomy_field_walker( $field ),
+		);
+		
+		$args = apply_filters('acf/fields/taxonomy/wp_list_categories', $args, $field );
+		
 		?>
 <div class="acf-taxonomy-field">
 	<input type="hidden" name="<?php echo $single_name; ?>" value="" />
@@ -213,7 +224,7 @@ class acf_field_taxonomy extends acf_field
 	
 	<?php else: ?>
 		<div class="categorychecklist-holder">
-		<ul class="categorychecklist">
+		<ul class="categorychecklist<?php if( !$field['load_save_terms'] ){ echo ' no-ajax'; } ?>">
 			<?php if( $field['allow_null'] ): ?>
 				<li>
 					<label class="selectit">
@@ -224,16 +235,7 @@ class acf_field_taxonomy extends acf_field
 	
 	<?php endif; ?>
 			
-			<?php 
-	
-			wp_list_categories( array(
-				'taxonomy'      => $field['taxonomy'],
-				'hide_empty'   => false,
-				'style'        => 'none',
-				'walker'       => new acf_taxonomy_field_walker( $field ),
-			));
-	
-			?>
+			<?php wp_list_categories( $args ); ?>
 	
 	<?php if( $field['field_type'] == 'select' ): ?>
 	
@@ -405,7 +407,7 @@ class acf_taxonomy_field_walker extends Walker
 
 	
 	// start_el
-	function start_el( &$output, $term, $depth, $args = array(), $current_object_id = 0)
+	function start_el( &$output, $term, $depth = 0, $args = array(), $current_object_id = 0)
 	{
 		// vars
 		$selected = in_array( $term->term_id, $this->field['value'] );

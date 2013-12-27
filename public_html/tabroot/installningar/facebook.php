@@ -67,5 +67,5 @@
 
 </style>
 <h2>Koppla ditt konto till Facebook</h2>
-<p>Genom att klicka på knappen och logga in på Facebook kopplar du ditt konto Motiomerakonto till Facebook</p>
+<p>Genom att klicka på knappen och logga in på Facebook kopplar du ihop ditt Motiomera- och Facebookkonto. Du får förenklad inloggning genom Facebook</p>
 <input type="button" id="login-fb" name="login-fb" value="Logga in »">

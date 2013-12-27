@@ -252,8 +252,36 @@ class Kommun extends Mobject
 		}
 	}
 	
-	public static function listAll($ordered = true, $json = false)
-	{
+  
+  
+  
+  /**
+   * Get all kommun names and info possibility to order them
+   * 13-12-27 Kristian Erendi, Reptilo.se
+   * 
+   * @param type $orderedby
+   */
+  public static function listAllOrderBy($orderedby = 'lan'){
+    switch ($orderedby) {
+      case 'lan':
+        $order = ' ORDER by lan ASC '; 
+        break;
+      case 'alpha':
+        $order = ' ORDER by namn ASC'; 
+        break;
+      default:
+        $order = ' '; 
+        break;
+    }
+    global $db;
+		$sql = 'SELECT id, namn, lan FROM mm_kommun ' . $order;
+    $res = $db->allValuesAsArray($sql);
+    return $res;
+  }
+	
+          
+          
+  public static function listAll($ordered = true, $json = false){
 		if (!self::$kommunList) {
 			$kommuner = parent::lister(get_class() , null, null, "`namn`");
 			self::$kommunList = $kommuner;
