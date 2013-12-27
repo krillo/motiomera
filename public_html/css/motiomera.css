@@ -3109,5 +3109,7 @@ td.number
 .floatit a{color: #4F6916;}
 .tabArea{overflow:hidden;}
 
-.kommunvapenlistlan{float:left;clear:left;}
-.kommunvapenlist{background-repeat: no-repeat;height:55px;float:left;padding-top: 50px;margin-right: 10px;min-width: 42px;}
+.kommunvapenlistlan{float:left;clear:left;margin-top: 10px;}
+.kommunvapenlistbox{float:left;overflow:hidden;margin-right: 15px;margin-top: 15px;}
+.kommunvapenklarat{padding-left: 20px;}
+.kommunvapenlist{background-repeat: no-repeat;height:32px;float:left;padding-top: 20px;min-width: 42px;}

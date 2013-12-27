@@ -256,25 +256,39 @@ class Kommun extends Mobject
   
   
   /**
-   * Get all kommun names and info possibility to order them
+   * Get all kommuner with info if the quiz is successfully answered. Possibility to order them by
    * 13-12-27 Kristian Erendi, Reptilo.se
    * 
+   * Like this:
+   * 
+   *     [99] => Array
+   *     (
+   *         [id] => 99
+   *         [namn] => Olofström
+   *         [lan] => Blekinge Län
+   *         [medlem_id] => 107
+   *         [quiz_date] => 2008-07-10 15:40:57
+   *     )
+   * 
+   * @global type $db
+   * @param type $mid
    * @param type $orderedby
+   * @return type array
    */
-  public static function listAllOrderBy($orderedby = 'lan'){
+  public static function listAllOrderBy($mid = 0, $orderedby = 'lan'){
     switch ($orderedby) {
       case 'lan':
-        $order = ' ORDER by lan ASC '; 
+        $order = ' ORDER BY lan ASC '; 
         break;
       case 'alpha':
-        $order = ' ORDER by namn ASC'; 
+        $order = ' ORDER BY namn ASC '; 
         break;
       default:
         $order = ' '; 
         break;
     }
     global $db;
-		$sql = 'SELECT id, namn, lan FROM mm_kommun ' . $order;
+    $sql = "SELECT k.id, k.namn, k.lan, q.medlem_id, q.quiz_date FROM mm_kommun k LEFT JOIN mm_quizsuccess q ON k.id = q.kommun_id AND medlem_id = $mid " . $order;
     $res = $db->allValuesAsArray($sql);
     return $res;
   }
