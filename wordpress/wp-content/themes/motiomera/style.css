@@ -143,7 +143,10 @@ hgroup{height:127px; float:left;}
 #login-checkbox label{color:white;font-family: arial;font-size: 12px;}
 #login-buttons{float:right;}
 #login #login-buttons input{color:#fff;font-size: 21px;}
+/*#login-submit{padding:10px 10px 10px 10px;border-color: #CEE596 #555 #555 #CEE596;}*/
+/*#login-submit:hover{padding:12px 8px 8px 12px;border-color: #555 #CEE596 #CEE596 #555;}*/
 #login-fb{padding-left:38px;background-image:url('img/fb_button.png');background-repeat:no-repeat; overflow:hidden;margin-left: 5px;}
+#login-fb:hover{padding: 0.5em 1em 0.5em 1em;padding-left:38px;}
 
 
 #info{width:650px;height:350px;background-color: yellow;position: relative;z-index: 5;left:0px;top:-150px;display: none;border-radius: 10px 10px / 10px 10px;}
@@ -495,6 +498,8 @@ article h1{color:#60723D;font-size: 38px;font-weight: bold;text-transform: upper
 article h2{color:#889d59;font-size: 36px;}
 article p{color:#5c5c5c;font-size: 14px;font-family: arial;}
 
+.twocol{float:left;width:420px}
+.twocol-right{margin-left: 50px;}
 
 
 #testimonial{background-image:url('img/testimonial.png');height: 120px;}
@@ -539,6 +544,8 @@ footer a, footer a:visited{color:white;}
 .faq-answer p{font-size: 20px;margin-bottom: 0;}
 .faq-a{float:left;color:#2f4c00;font-family: arial;font-size: 20px;margin-top: 20px;}
 .faq-a:visited{color:#2f4c00;}
+
+
 
 
 
