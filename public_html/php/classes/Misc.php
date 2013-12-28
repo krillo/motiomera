@@ -399,16 +399,35 @@ class Misc {
       $count = $db->allValuesAsArray($sql);
       if (empty($count)) {
         $date = $d->getDate() . " 00:00:00";
-        $steps = (int)Misc::randomSteps();
+        $steps = (int) Misc::randomSteps();
         $steg = new Steg($medlem, $activity, $date, $steps, false);
-      } 
+      }
       $d->subDays(1);
     }
   }
 
- public static function randomSteps() {
+  public static function randomSteps() {
     $rand = rand(65, 120) . '00';
     return $rand;
+  }
+
+  /**
+   * Clean string to slug
+   * @param type $str
+   * @return type
+   */
+  public static function url_slug($str) {
+    #convert case to lower
+    $str = strtolower($str);
+    #remove special characters
+    $str = preg_replace('/[^a-zA-Z0-9]/i', ' ', $str);
+    #remove white space characters from both side
+    $str = trim($str);
+    #remove double or more space repeats between words chunk
+    $str = preg_replace('/\s+/', ' ', $str);
+    #fill spaces with hyphens
+    $str = preg_replace('/\s+/', '-', $str);
+    return $str;
   }
 
 }

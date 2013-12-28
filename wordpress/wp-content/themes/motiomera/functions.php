@@ -40,18 +40,49 @@ add_action('after_setup_theme', 'motiomera_setup');
  */
 function add_contact_to_footer_menu($items, $args) {
   if ($args->menu == 'footer') {
-    global $mmStatus;
-    $body = '';
-    if ($mmStatus->mm_mid != 0) {
-      $body = '?body=Namn:%20' . $mmStatus->mm_fnamn . ' ' . $mmStatus->mm_enamn . '%0AEmail:%20' . $mmStatus->mm_email . '%0AId:%20' . $mmStatus->mm_mid . '%0A------------ LÅT STÅ ---------------';
-    }
-    $contactlink = '<li class=""><a href="mailto:support@motiomera.se' . $body . '" target="_blank">Kontakta oss</a></li>';
+    $contactlink = '<li class="contact-us">' . contact_us() . '</li>';
     $items = $items . $contactlink;
   }
   return $items;
 }
 
 add_filter('wp_nav_menu_items', 'add_contact_to_footer_menu', 10, 2);
+
+
+
+/**
+ * Shortcode for mailto:support
+ * [mailto-support]
+ * 
+ * @param type $atts
+ * @return string
+ */
+function mailto_support($atts){
+	return contact_us();
+}
+add_shortcode( 'mailto-support', 'mailto_support' );
+
+
+/**
+ * Return the best possible mailto, like so:
+ * <a href="mailto:support@motiomera.se?body=Namn:%20kapten krillo%0AEmail:%20krillo@gmail.com%0AId:%20107%0A------------ LÅT STÅ ---------------" target="_blank">Kontakta oss</a>  
+ * 
+ * @global type $mmStatus
+ * @return string
+ */
+function contact_us() {
+  global $mmStatus;
+  $body = '';
+  if ($mmStatus->mm_mid != 0) {
+    $name = urlencode($mmStatus->mm_fnamn . ' ' . $mmStatus->mm_enamn);
+    $body = '?body=Namn:%20' . $name . '%0AEmail:%20' . $mmStatus->mm_email . '%0AId:%20' . $mmStatus->mm_mid . '%0A------------%20LÅT%20STÅ%20---------------';
+  }
+  $contactlink = '<a href="mailto:support@motiomera.se' . $body . '" target="_blank">Kontakta oss</a>';
+  return $contactlink;
+}
+
+
+
 
 /**
  * Clean up the admin panel
@@ -211,11 +242,11 @@ function includeSnippet($file) {
 
   switch ($file) {
     case 'main_menu':
-      if ($mmStatus->mm_logged_in == 1){
-          wp_nav_menu(array('menu' => 'header_logged_in'));
-        } else { //primary = logged out 
-          wp_nav_menu(array('menu' => 'primary'));
-        }
+      if ($mmStatus->mm_logged_in == 1) {
+        wp_nav_menu(array('menu' => 'header_logged_in'));
+      } else { //primary = logged out 
+        wp_nav_menu(array('menu' => 'primary'));
+      }
       break;
     case 'inc_login_area.php':   //if not logged in - show login area
       if ($mmStatus->mm_logged_in == 0) {
@@ -223,7 +254,7 @@ function includeSnippet($file) {
       }
       break;
     case 'inc_fb_root.php':   //if fisrt page and not logged in - show fb-root and FB javascript
-      if (($mmStatus->front_page == 1 || $mmStatus->wp_page == 1 || is_404()) && $mmStatus->mm_logged_in == 0 ) {
+      if (($mmStatus->front_page == 1 || $mmStatus->wp_page == 1 || is_404()) && $mmStatus->mm_logged_in == 0) {
         include 'snippets/' . $file;
       }
       break;
@@ -261,6 +292,12 @@ function includeSnippet($file) {
       include 'snippets/' . $file;
       break;
     case 'inc_steps.php':
+      include 'snippets/' . $file;
+      break;
+    case 'inc_kommuner_logged_in.php':
+      include 'snippets/' . $file;
+      break;
+    case 'inc_kommuner_logged_out.php':
       include 'snippets/' . $file;
       break;
     default:

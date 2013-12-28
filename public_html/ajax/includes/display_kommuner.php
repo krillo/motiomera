@@ -1,21 +1,21 @@
 <?php
-/**
- * 13-12-27 Kristian Erendi, Reptilo.se
- */
-require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
-//error_reporting(E_ALL);
-//ini_set('display_errors', '1');
-global $USER;
-Security::demand(USER);
-$kommuner = Kommun::listAllOrderBy($USER->getId(), 'lan');
+ /**
+  * 12-12-29 Kristian Erendi, Reptilo.se
+  */
+header("Content-Type: text/html; charset=utf-8");
+require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
+!empty($_REQUEST['mm_id']) ? $id = addslashes($_REQUEST['mm_id']) : $id = '107'; 
+
+$kommuner = Kommun::listAllOrderBy($id, 'lan');
 //print_r($kommuner);
 $out = '<div>';
 $lan = '';
 foreach ($kommuner as $key => $kommun) {
   if ($lan != $kommun['lan']) {
     $lan = $kommun['lan'];
+    $lan_slug = Misc::url_slug($kommun['lan']);
     $out .= '</div>';
-    $out .= '<div class="kommunvapenlistlan">';
+    $out .= '<div class="kommunvapenlistlan" id="'.$lan_slug.'">';
     $out .= "<h2>$lan</h2>";
   }
   $out .= '<a href="/kommun/' . $kommun['namn'] . '/" title="' . $kommun['namn'] . '" class="kommunvapenlistbox" >';

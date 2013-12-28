@@ -183,6 +183,15 @@
           <div id="mmColumnLeft">
             <div id="mmMenuLeft">
               <ul>
+                {if !isset($logged_id)}
+                  &nbsp;
+                  {php}
+                    //get menu from wp
+                    //global $SETTINGS;
+                    //$menu = file_get_contents($SETTINGS["url"].'/api-menu/');
+                    //print($menu);
+                  {/php}    
+                {/if}
                 {if isset($inAdmin) && isset($ADMIN)}
                   {$urlChecker->getFileName()}
                   <li><a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">ORDER</a></li>		

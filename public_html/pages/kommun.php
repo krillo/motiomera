@@ -3,9 +3,11 @@
 require_once($_SERVER["DOCUMENT_ROOT"]."/php/init.php");
 
 //allow only Ystad and Helsingborg if not logged in
+$logged_in = false;
 $req_kommun =  $_SERVER['REQUEST_URI'];
 if(strcmp($req_kommun,'/kommun/Ystad/') != 0 && strcmp($req_kommun,'/kommun/Helsingborg/') != 0){
   Security::demand(USER);
+  $logged_in = true;
 }
 
 
@@ -45,6 +47,7 @@ $smarty = new MMSmarty;
 
 $kommunNamn = $kommun->getNamn();
 $kommunId = $kommun->getId();
+$smarty->assign("logged_in", $logged_in);
 $smarty->assign("kommun", $kommun);
 $smarty->assign("kommunNamn", $kommunNamn);
 $smarty->assign("kommunId", $kommunId);
@@ -96,6 +99,9 @@ foreach($avstand as $temp){
 }
 $smarty->assign("avstandArgs", $avstandArgs);
 
+
+$lan_slug = Misc::url_slug($kommun->getLan());
+$smarty->assign("lan_slug", $lan_slug);
 
 $kommunvapen = $kommun->getKommunvapen();
 $smarty->assign("kommunvapen", $kommunvapen);

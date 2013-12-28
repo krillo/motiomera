@@ -5,11 +5,11 @@
 ?>
 <?php get_header(); ?>
 <script>
-  jQuery(function($) {    
-    $("#faq-common" ).accordion({ active: false });
+  jQuery(function($) {
+    $("#faq-common").accordion({active: false});
   });
-  jQuery(function($) {    
-    $("#faq-company" ).accordion({ active: false });
+  jQuery(function($) {
+    $("#faq-company").accordion({active: false});
   });
 </script>
 
@@ -46,17 +46,15 @@
               <div class="faq-answer"><?php the_content(); ?></div>
             <?php endif; ?>
           <?php endwhile; ?>
-
         </div>
-
+        <?php edit_post_link(); ?>
       </article>
     <?php endwhile; // end of the loop.   ?>
-
 
   </div><!-- #content -->
 </div><!-- #primary .site-content -->
 <div class="clear"></div>
-<?php includeSnippet("inc_page_promo_footer.php");?>
+<?php includeSnippet("inc_page_promo_footer.php"); ?>
 <?php get_footer(); ?>
 
 

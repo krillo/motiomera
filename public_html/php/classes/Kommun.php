@@ -276,6 +276,7 @@ class Kommun extends Mobject
    * @return type array
    */
   public static function listAllOrderBy($mid = 0, $orderedby = 'lan'){
+    require_once "DB.php";
     switch ($orderedby) {
       case 'lan':
         $order = ' ORDER BY lan ASC '; 

@@ -23,4 +23,3 @@ switch ($snippet) {
   default:
     break;
 }
-

@@ -130,7 +130,8 @@
 
 <div id="mmInlineColumnMiddle">
 	<h1>{$kommunNamn}</h1>
-	<a href="/kommunjakten/{$kommun->getLanForLink()}/">{$kommun->getLan()}</a>
+	{*}<a href="/kommunjakten/{$kommun->getLanForLink()}/">{$kommun->getLan()}</a>{*}
+	<a href="/kommunjakten/#{$lan_slug}">{$kommun->getLan()}</a>
 	
 	<br class="mmClearBoth" /><br />
 	<img src="/img/icons/ForstoringsglasIcon.gif" alt="F&ouml;rstora Bilder" class="mmVerticalAlignMiddle" /> Klicka p&aring; bilderna f&ouml;r att f&ouml;rstora<br /><br />
