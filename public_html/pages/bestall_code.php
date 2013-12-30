@@ -3,131 +3,29 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 $campaignCodes = Order::$campaignCodes;
+$moms = Order::$moms;
 $email = '';
 $fname = '';
 $lname = '';
 !empty($_REQUEST['mmForetagsnyckel']) ? $nyckel = $_REQUEST['mmForetagsnyckel'] : $nyckel = '';
+!empty($_REQUEST['buy']) ? $buy = $_REQUEST['buy'] : $buy = 'private';
 $user = Medlem::getInloggad();
 if (!empty($user)) {
   $email = $user->getEpost();
   $fname = $user->getFNamn();
   $lname = $user->getENamn();
+  $co = $user->getCo();
+  $address = $user->getENamn();
+  $zip = $user->getZip();
+  $city = $user->getCity();
+  $phone = $user->getPhone();
+  $country = $user->getCountry();
+//[address:protected] => fgatan 3 [co:protected] => [zip:protected] => 252 23 [city:protected] => helsingborg [phone:protected] => 46761393833 [country:protected] => Sverige     
 }
 ?>
 
 
-<script src="/js/jquery.validate.min.js" type="text/javascript"></script>
-<script type="text/javascript">    
-  $(function() {
-    sum();  //run the sum function to validate pre-checked ratio buttons 
-    
-    //do input validation
-    var validator = $("#checkout").validate({
-      errorClass: "invalid",
-      validClass: "valid",
-      rules: {
-        firstname: {
-          required: true
-        },
-        lastname: {
-          required: true
-        },
-        mailone: {
-          required: true,
-          email: true
-        }       
-      },  
-      messages: {
-        firstname: {
-          required: ''
-        },
-        lastname: {
-          required: ''
-        },
-        mailone: {
-          required: '', 
-          email: ''
-        }           
-      }
-    });
 
-
-    $('#short-radio').change(function() {
-      sum(); 
-    });
-    $('#long-radio').change(function() {
-      sum(); 
-    });
-    $('#short-check').change(function() {
-      sum(); 
-    });
-    $('#long-check').change(function() {
-      sum(); 
-    });
- 
-    function sum(){
-      radio  = $('input:radio[name=radio-priv]:checked').val();
-      if(typeof radio != 'undefined'){  //one of the radios are checked
-        shortRadio = <?php echo $campaignCodes['PRIV3']['pris']; ?>;
-        longRadio = <?php echo $campaignCodes['PRIV12']['pris']; ?>;
-        
-        if(radio == <?php echo $campaignCodes['PRIV3']['pris']; ?>){          
-          $('input:#long-check').attr('checked', false);
-          longRadio = 0;
-          $('#m_priv3').val(1);   
-          $('#m_priv12').val(0);   
-        }
-        if(radio == <?php echo $campaignCodes['PRIV12']['pris']; ?>){            
-          $('input:#short-check').attr('checked', false);
-          shortRadio = 0;
-          $('#m_priv12').val(1);
-          $('#m_priv3').val(0);
-        }
-        shortCheck = $('input:#short-check:checked').val();
-        longCheck = $('input:#long-check:checked').val();        
-        if(typeof shortCheck == 'undefined'){
-          shortCheck = 0;
-        }
-        if(typeof longCheck == 'undefined'){
-          longCheck = 0;
-        } 
-        //alert('radio: ' + radio + ' shortCheck: ' + shortCheck+ ' longCheck: ' + longCheck);
-        if(shortCheck != 0 || longCheck != 0){
-          sumFreight = parseInt(<?php echo $campaignCodes['FRAKT02']['pris']; ?>);
-          $('#m_frakt02').val(1);
-          $('#m_steg01').val(1);          
-        } else{
-          sumFreight = 0;
-          $('#m_frakt02').val(0);
-          $('#m_steg01').val(0);
-        }
-          
-        sumShort = parseInt(shortRadio) + parseInt(shortCheck);
-        sumLong = parseInt(longRadio) + parseInt(longCheck);        
-        sumTotal = sumShort + sumLong + sumFreight;
-      
-        $('#sum-short span').html(sumShort);
-        $('#sum-long span').html(sumLong);
-        $('#sum-freight span').html(sumFreight);
-        $('#sum-total span').html(sumTotal);
-      
-          
-        $('#m_total').val(sumTotal);        
-        $('#m_freight').val(sumFreight);      
-      
-        
-      } else { //radiobutton is undfined do nothing     
-        //alert('apa');
-      }
-    }
-
- 
- 
- 
-  });
-    
-
-</script>    
 
 
 <style>
@@ -142,6 +40,7 @@ if (!empty($user)) {
   #key li label{margin-left: 15px;margin-right: 10px;padding-left: 0;font-size: 16px;}
 </style>
 
+<div id="buy"></div>
 <form action="/actions/medlem_foretagsnyckel.php" method="post" id="key">
   <input type="hidden" name="type" value="foretagsnyckel">  
   <ul id="">
@@ -152,110 +51,132 @@ if (!empty($user)) {
       <input id="" type="submit" value="ok">
     </li>
   </ul>
-</form >  
+</form>  
 
 
 
 
 
-
-<style>
-  #checkout-ul h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
-  #checkout-ul .h2{margin-bottom: 12px;display:block;margin-top: 45px;font-size:18px;}
-  #checkout-ul li{margin-top: 5px;}
-
-  #checkout-ul label{width:130px;font-size: 14px;float:left}
-  #checkout-ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
-  #checkout-ul input{height:18px;font-size: 14px;}
-  #checkout-ul a{text-decoration: underline;}
-</style>
-
-
-<style>
-  #member-private form h2{margin-top: 45px; font-family: Trebuchet ms,Tahoma,Arial,Helvetica;font-size: 180%;font-weight: bold;}
-  #calc {margin-top: 25px;margin-bottom: 10px;font-size: 14px;border-bottom: 1px solid black;float:left;}
-  #calc input{width:18px;height:18px;font-size: 14px;float:left;}
-  #calc div{font-size: 14px;float:left;}
-  .step-check{margin-left: 20px;}
-  #short, #long{margin-bottom: 25px;width:280px;}
-  #freight{margin: 0 0 10px 28px;width:253px;}
-  #sum-short, #sum-long, #freight-sum{margin-left: 20px;}
-  .nbr{font-size: 22px; font-weight: bold;}
-  #sum-freight{margin-left:18px;}
-  #sum-total{margin-left:300px; float:left;margin-bottom:40px;color:#427F10;}
-
-  #pay {font-size: 14px;margin-top: 45px;}
-  #integrity{margin-bottom: 20px;width: 350px;}
-
-  #pay div{float:left;}
-  #pay input{font-size: 15px;width:200px;height:25px;}
-  #pay ul{margin-left: 2px;padding-left: 15px;} 
-  #payalt{color:#494949;font-size:11px;margin:5px 0 0 10PX;}
-</style> 
+<div style="clear:both;"></div>
+<br>
+<hr>
+<br>
 
 
 
-<div id="member-private" class="">  
-  <form action="/actions/payson_privat.php" method="post" id="checkout">
-    <input type="hidden" name="type" value="medlem_extend">         
-    <input type="hidden" name="m_total"   id="m_total" value="">                    
-    <input type="hidden" name="m_priv3"   id="m_priv3" value="">        
-    <input type="hidden" name="m_priv12"  id="m_priv12" value="">        
-    <input type="hidden" name="m_steg01"  id="m_steg01" value="">        
-    <input type="hidden" name="m_frakt02" id="m_frakt02" value="">
+<!--script src="/js/jquery.validate.min.js" type="text/javascript"></script-->
 
 
-<h2>Välj hur du vill förlänga ditt medlemskap</h2>
-    <div id="calc">      
-      <div id="short">
-        <input type="radio" id="short-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV3']['pris']; ?>" /><div id="short-text"><?php echo $campaignCodes['PRIV3']['text']; ?><span > <?php echo $campaignCodes['PRIV3']['pris']; ?> kr</span></div>
-        <div class="clear"></div>
-        <div id="" class="step-check"><input type="checkbox" id="short-check" name="short-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /><div id="short-text"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></div>    
+<form action="/actions/wp_buy.php" method="post" id="checkout">
+  <input type="hidden" name=""      id="m_r3_price" value="<?php echo $campaignCodes['RE03']['pris']; ?>">
+  <input type="hidden" name=""      id="m_r4_price" value="<?php echo $campaignCodes['RE04']['pris']; ?>">
+  <input type="hidden" name=""      id="m_frakt00_price" value="<?php echo $campaignCodes['FRAKT00']['pris']; ?>">
+  <input type="hidden" name=""      id="m_frakt00_extra" value="<?php echo $campaignCodes['FRAKT00']['extra']; ?>">
+  <input type="hidden" name=""      id="m_frakt01_price" value="<?php echo $campaignCodes['FRAKT01']['pris']; ?>">
+  <input type="hidden" name=""      id="m_frakt01_extra" value="<?php echo $campaignCodes['FRAKT01']['extra']; ?>">
+  <input type="hidden" name=""      id="m_frakt02_price" value="<?php echo $campaignCodes['FRAKT02']['pris']; ?>">  
+  <input type="hidden" name=""      id="m_priv3_price" value="<?php echo $campaignCodes['PRIV3']['pris']; ?>">
+  <input type="hidden" name=""      id="m_priv12_price" value="<?php echo $campaignCodes['PRIV12']['pris']; ?>">
+  <input type="hidden" name=""      id="m_moms_percent" value="<?php echo $moms['percent']; ?>">
+  <input type="hidden" name="type"      id="type" value="<?php echo $buy; ?>">
+  <input type="hidden" name="m_exmoms"  id="m_exmoms" value=""> 
+  <input type="hidden" name="m_freight" id="m_freight"  value="">         
+  <input type="hidden" name="m_total"   id="m_total" value="">        
+  <input type="hidden" name="m_incmoms" id="m_incmoms" value="">       
+  <input type="hidden" name="m_priv3"   id="m_priv3" value="">        
+  <input type="hidden" name="m_priv12"  id="m_priv12" value="">        
+  <input type="hidden" name="m_steg01"  id="m_steg01" value="">        
+  <input type="hidden" name="m_frakt02" id="m_frakt02" value="">  
+
+
+
+
+  <!-- private --> 
+  <div id="buy-private" class="">
+    <div id="buy-private-top">Välj hur du vill förlänga ditt medlemskap</div>
+    <span id="priv-the-price" class="hide">79</span>
+
+    <div> 
+      <div id="buy-company-calc" class="buy-box-outer">
+        <div id="buy-company-calc-text"></div>
+        <div  class="buy-box">
+          <table class="buy-table"> 
+            <tbody >
+              <tr>
+                <td><input type="radio" id="short-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV3']['pris']; ?>" /></td>
+                <td colspan="2"><div id="short-text"><?php echo $campaignCodes['PRIV3']['text']; ?><span > <?php echo $campaignCodes['PRIV3']['pris']; ?> kr</span></div></td>
+                <td rowspan="2" style="width:100px;"><div id="sum-short" class="nbr">0</div></td>
+                <td rowspan="2" style="width:100px;" class="kr">kr</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style="width:25px;"><div id="" class="step-check"><input type="checkbox" id="short-check" name="short-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /></td>
+                <td><div id="short-text" style="margin-bottom:20px;"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></td>
+              </tr>
+              <tr>            
+                <td><input type="radio" id="long-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV12']['pris']; ?>" /></td>
+                <td colspan="2"><div id="long-text"><?php echo $campaignCodes['PRIV12']['text']; ?><span > <?php echo $campaignCodes['PRIV12']['pris']; ?> kr</span></div></td>
+                <td rowspan="2"><div id="sum-long" class="nbr">0</span></td>
+                <td rowspan="2" style="width:100px;" class="kr">kr</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><div id=""class="step-check"><input type="checkbox" id="long-check" name="long-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /></td>
+                <td><div id="long-text" style="margin-bottom:20px;"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td colspan="2" class="kr"><div id="freight_private">Frakt (<?php echo $campaignCodes['FRAKT02']['pris']; ?> kr)</div></td>
+                <td><div id="sum-freight"class="nbr">0</div></td>
+                <td class="kr">kr</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td ></td>
+                <td class="line"><div id="sum-total" class="nbr">0</div></td>
+                <td class="line kr"> kr</td>
+              </tr>
+            </tbody>
+          </table>      
+        </div> 
       </div>
-      <div id="sum-short"><span class="nbr">0</span> kr</div>
-      <div class="clear"></div>
-      <div id="long">
-        <input type="radio" id="long-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV12']['pris']; ?>" checked /><div id="long-text"><?php echo $campaignCodes['PRIV12']['text']; ?><span > <?php echo $campaignCodes['PRIV12']['pris']; ?> kr</span></div>
-        <div class="clear"></div>
-        <div id=""class="step-check"><input type="checkbox" id="long-check" name="long-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /><div id="long-text"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></div>    
-      </div>
-      <div id="sum-long"><span class="nbr">0</span> kr</div>
-      <div class="clear"></div>
-      <div id="freight">Frakt (<?php echo $campaignCodes['FRAKT02']['pris']; ?> kr)</div><div id="sum-freight"><span class="nbr">0</span> kr</div>
-      <div class="clear"></div>
     </div>
-    <div id="sum-total"><span class="nbr">0</span> kr</div>
-    <div class="clear"></div>
+
+<style>
+  .buy-ul-label{width: 110px;display:inline;float:left;}
+  .buy-ul li input{width:150px;display:inline;float:left;}
+  .buy-ul li{clear:left;}
+  .buy-ul{list-style: none;padding:0;}
+</style>                  
+                  
+    <div id="buy-private-2" class="buy-container" >
+      <div class="buy-box-outer">
+        <div class="buy-box margin-top">
+          <div class="buy-heading">Om dina adressuppgifter är fel eller saknas så var vänlig och rätta till det.</div>
+          <ul class="buy-ul">
+            <li><label class="buy-ul-label">Förnamn *</label><input type="text" name="firstname" id="firstname" class="required"  value="<?php echo $fname; ?>" /></li>
+            <li><label class="buy-ul-label">Efternamn *</label><input type="text" name="lastname" id="lastname" class="required"  value="<?php echo $lname; ?>" /></li>
+            <li><label class="buy-ul-label">c/o</label><input type="text" name="co" id="co" class=""  value="<?php echo $co; ?>" /></li>
+            <li><label class="buy-ul-label">Telefon *</label><input type="text" name="phone" id="phone"  class="required"  value="<?php echo $phone; ?>" /></li>
+            <li><label class="buy-ul-label">Adress *</label><input type="text" name="street1" id="street1" class="required"  value="<?php echo $address; ?>" /></li>
+            <li><label class="buy-ul-label">Adress</label><input type="text" name="street2" id="street2"   /></li>
+            <li><label class="buy-ul-label">Postnummer *</label><input type="text" name="zip" id="zip" class=""  value="<?php echo $zip; ?>" /></li>
+            <li><label class="buy-ul-label">Ort *</label><input type="text" name="city" id="city" class=""  value="<?php echo $city; ?>" /></li>
+            <li><label class="buy-ul-label">Land *</label><input type="text" name="country" id="country" class="" value="<?php echo $country; ?>" /></li>
+            <li><label class="buy-ul-label">&nbsp;</label><input type="submit" id="payson" class="buy-payment-buttons" name="paytype" value="Betala genom Payson"></li>     
+          </ul>
+        </div>
+      </div>
+    </div>
+<div style="clear:left;"></div>
 
 
-    <ul id="checkout-ul">
-      <li><label for="mailone">E-post</label><input type="text" name="mailone" id="mailone" class="" value="<?php echo $email; ?>" /></li>        
-      <li><label for="firstname">Förnamn</label><input type="text" name="firstname" id="firstname" class="" value="<?php echo $fname; ?>"/></li>
-      <li><label for="lastname">Efternamn</label><input type="text" name="lastname" id="lastname" class="" value="<?php echo $lname; ?>"/></li>
+    <div id="buy-payment" class="buy-container hidden" >  
+      <div class="buy-box">
+        <div id="buy-payment-options">Via Payson kan du betala med följande alternativ:</div>
+        <div id="integrity">Genom att fortsätta betalningen godkänner jag <br/><a target="_blank" href="<?php echo esc_url(get_permalink(get_page_by_title('integritetspolicy'))); ?>">Motiomeras avtal och integritetspolicy</a> samt är över 18 år</div>
+      </div>
+    </div>  
 
-
-      <li>
-        <div id="pay">
-          <div id="integrity">Genom att fortsätta betalningen godkänner jag <a href="/pages/integritetspolicy.php" target="_blank">Motiomeras integritetspolicy</a> och är över 18 år</div>
-          <div class="clear"></div>
-          <div ><input type="submit" value="Betala - Payson" name="paytype" id="payson"></div>
-          <div class="clear"></div>
-          <div id="payalt">
-            På Payson kan du betala med:
-            <ul>
-              <li>VISA</li>
-              <li>MasterCard </li>
-              <li>Internetbank: Föreningssparbanken / Swedbank</li>
-              <li>Internetbank: Handelsbanken </li>
-              <li>Internetbank: SEB </li>
-              <li>Internetbank: Nordea </li>
-            </ul>
-          </div>  
-        </div>    
-      </li>
-    </ul>
-
-
-
-
-</div> <!-- end member-private -->  
+</form>

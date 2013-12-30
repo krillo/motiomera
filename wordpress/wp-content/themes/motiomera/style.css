@@ -136,7 +136,7 @@ hgroup{height:127px; float:left;}
   width:930px;
 }
 #login-input{float:left;margin-right:10px;}
-#login-input input{height:35px;background-color: #CEE596;color:#2A4400;margin-right: 5px;}
+#login-input input{height:35px;background-color: #CEE596;color:#2A4400;margin-right: 5px;width:220px;}
 #login-checkbox{float:left;width:140px;height:45px;}
 #login-checkbox ul{margin: 0; }
 #login-checkbox input {height:20px;width:20px;margin-right:5px;}

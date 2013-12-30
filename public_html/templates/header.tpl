@@ -22,7 +22,6 @@
 
 
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <!--script type='text/javascript' src='{$mm_url}/wp-includes/js/jquery/jquery.js?ver=1.8.3'></script-->
 
     {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
       {if !NO_INTERNET || GOOGLEMAPS_OVERRIDE_NO_INTERNET}
@@ -32,11 +31,11 @@
       {/if}
     {/if}
     {foreach from=$urlChecker->getJsPackage() item=file}
-      <script type="text/javascript" src="{$file}"></script>
+      <!--script type="text/javascript" src="{$file}"></script-->
     {/foreach}
 
 
-    {if $pagetitle == 'Min sida' or  $pagetitle == 'Profilsida' or $pagetitle == 'Företagssida' or $pagetitle == 'Lagsidan' or $pagetitle == 'Detaljerad rapport'} 
+    {if $pagetitle == 'Min sida' or  $pagetitle == 'Profilsida' or $pagetitle == 'Företagssida' or $pagetitle == 'Lagsidan' or $pagetitle == 'Detaljerad rapport' } 
       <link rel='stylesheet' id='ui-lightness-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/ui-lightness/jquery-ui-1.9.2.custom.min.css?ver=3.3.2' type='text/css' media='all' />
       <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery-ui-1.9.2.custom.min.js?ver=3.3.2'></script>
       <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.js?ver=3.3.2'></script>
@@ -46,6 +45,10 @@
     {if $pagetitle == 'Företagstävling'} 
       <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
       <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    {/if}
+    {if $pagetitle == 'Förläng ditt medlemsskap'}
+      <script type="text/javascript" src="{$mm_url}/wp-content/themes/motiomera/js/jquery.validate.min.js?ver=3.8"></script>
+      <script type="text/javascript" src="{$mm_url}/wp-content/themes/motiomera/js/jquery.mmwp.buy.js?ver=3.8"></script>
     {/if}
     <link rel='stylesheet' id='wp-mm-style-css'  href='{$mm_url}/wp-content/themes/motiomera/css/wp_mm_common.css?ver=3.3.2' type='text/css' media='all' />
 
@@ -186,6 +189,7 @@
                 {if !isset($logged_id)}
                   &nbsp;
                   {php}
+                    //this is the sidebar for pages when not logged in...
                     //get menu from wp
                     //global $SETTINGS;
                     //$menu = file_get_contents($SETTINGS["url"].'/api-menu/');

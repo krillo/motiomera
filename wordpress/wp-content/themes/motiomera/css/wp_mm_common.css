@@ -32,13 +32,13 @@ a.post-edit-link:hover{
 }
 article a img{
   padding:10px;
-  border:#EAEAEA solid 2px;  
+  /* border:#EAEAEA solid 2px;  */
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   margin-bottom: 15px;
 }
-
+article h2{clear:left;}
 
 
 /********* legacy ***************/

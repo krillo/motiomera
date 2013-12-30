@@ -83,7 +83,7 @@ Order::getMondays(15);
           <li><input type="text" name="street2" id="street2" placeholder=""/></li>
           <li><input type="text" name="zip" id="zip" class="" placeholder="Postnummer*"/></li>
           <li><input type="text" name="city" id="city" class="" placeholder="Ort*"/></li>
-          <li><input type="text" name="country" id="country" class="" value="Sverige"/>
+          <li><input type="text" name="country" id="country" class="" value="Sverige"/></li>
         </ul>
       </div>
     </div>
