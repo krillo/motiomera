@@ -104,7 +104,7 @@ if (!empty($user)) {
 
     <div id="buy-private-2" class="buy-container" >
       <div class="buy-box-outer">
-        <div class="buy-box margin-top">
+        <div class="buy-box">
           <div class="buy-heading">Om dina adressuppgifter är fel eller saknas så var vänlig och rätta till det.</div>
           <ul class="buy-ul">
             <li><label class="buy-ul-label">Förnamn *</label><input type="text" name="firstname" id="firstname" class="required"  value="<?php echo $fname; ?>" /></li>
@@ -176,9 +176,9 @@ if (!empty($user)) {
         <input type="submit" id="payson" class="buy-payment-buttons" name="paytype" value="Betala med">     
         <!--input type="submit" id="faktura" class="buy-payment-buttons" name="paytype" value="Betala med faktura" /-->
       </div>  
-      <div class="buy-box">
-        <div id="buy-payment-options">Via Payson kan du betala med följande alternativ:</div>
-        <div id="integrity">Genom att fortsätta betalningen godkänner jag <br><a target="_blank" href="http://mm.dev/integritetspolicy/">Motiomeras avtal och integritetspolicy</a> samt är över 18 år</div>
+      <div class="buy-box margin-top">
+        <div id="buy-payment-options">Via Payson kan du betala med följande:</div>
+        <div id="integrity">Genom att fortsätta betalningen bekräftar jag att jag är över 18 år och godkänner <br><a target="_blank" href="http://mm.dev/integritetspolicy/">Motiomeras avtal och integritetspolicy</a></div>
       </div>
     </div>
   </div>
