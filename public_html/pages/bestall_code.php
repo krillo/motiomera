@@ -93,64 +93,15 @@ if (!empty($user)) {
 
   <!-- private --> 
   <div id="buy"></div>
+
+
+
   <div id="buy-private" class="">
     <div id="buy-private-top">Välj hur du vill förlänga ditt medlemskap</div>
     <span id="priv-the-price" class="hide">79</span>
 
-    <div class="buy-container"> 
-      <div id="buy-company-calc" class="buy-box-outer">
-        <div id="buy-company-calc-text"></div>
-        <div  class="buy-box">
-          <table class="buy-table"> 
-            <tbody >
-              <tr>
-                <td><input type="radio" id="short-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV3']['pris']; ?>" /></td>
-                <td colspan="2"><div id="short-text"><?php echo $campaignCodes['PRIV3']['text']; ?><span > <?php echo $campaignCodes['PRIV3']['pris']; ?> kr</span></div></td>
-                <td rowspan="2" style="width:100px;"><div id="sum-short" class="nbr">0</div></td>
-                <td rowspan="2" style="width:100px;" class="kr">kr</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td style="width:25px;"><div id="" class="step-check"><input type="checkbox" id="short-check" name="short-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /></td>
-                <td><div id="short-text" style="margin-bottom:20px;"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></td>
-              </tr>
-              <tr>            
-                <td><input type="radio" id="long-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV12']['pris']; ?>" /></td>
-                <td colspan="2"><div id="long-text"><?php echo $campaignCodes['PRIV12']['text']; ?><span > <?php echo $campaignCodes['PRIV12']['pris']; ?> kr</span></div></td>
-                <td rowspan="2"><div id="sum-long" class="nbr">0</span></td>
-                <td rowspan="2" style="width:100px;" class="kr">kr</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><div id=""class="step-check"><input type="checkbox" id="long-check" name="long-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /></td>
-                <td><div id="long-text" style="margin-bottom:20px;"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td colspan="2" class="kr"><div id="freight_private">Frakt (<?php echo $campaignCodes['FRAKT02']['pris']; ?> kr)</div></td>
-                <td><div id="sum-freight"class="nbr">0</div></td>
-                <td class="kr">kr</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td ></td>
-                <td class="line"><div id="sum-total" class="nbr">0</div></td>
-                <td class="line kr"> kr</td>
-              </tr>
-            </tbody>
-          </table>      
-        </div> 
-      </div>
-    </div>
 
-<style>
-  .buy-ul-label{width: 110px;display:inline;float:left;}
-  .buy-ul li input{width:150px;display:inline;float:left;}
-  .buy-ul li{clear:left;}
-  .buy-ul{list-style: none;padding:0;}
-</style>                  
-                  
+
     <div id="buy-private-2" class="buy-container" >
       <div class="buy-box-outer">
         <div class="buy-box margin-top">
@@ -170,20 +121,75 @@ if (!empty($user)) {
         </div>
       </div>
     </div>
-<div style="clear:left;"></div>
 
 
 
-<div id="buy-payment" class="buy-container">
-    <div id="buy-payment-buttons">
-      <input type="submit" id="payson" class="buy-payment-buttons" name="paytype" value="Betala med">     
-      <!--input type="submit" id="faktura" class="buy-payment-buttons" name="paytype" value="Betala med faktura" /-->
-    </div>  
-    <div class="buy-box">
-      <div id="buy-payment-options">Via Payson kan du betala med följande alternativ:</div>
-      <div id="integrity">Genom att fortsätta betalningen godkänner jag <br><a target="_blank" href="http://mm.dev/integritetspolicy/">Motiomeras avtal och integritetspolicy</a> samt är över 18 år</div>
+
+
+    <div class="buy-container">         
+      <div  class="buy-box">
+        <table class="buy-table"> 
+          <tbody >
+            <tr>
+              <td><input type="radio" id="short-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV3']['pris']; ?>" /></td>
+              <td colspan="2"><div id="short-text"><?php echo $campaignCodes['PRIV3']['text']; ?><span > <?php echo $campaignCodes['PRIV3']['pris']; ?> kr</span></div></td>
+              <td rowspan="2" style="width:100px;"><div id="sum-short" class="nbr">0</div></td>
+              <td rowspan="2" style="width:100px;" class="kr">kr</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td style="width:25px;"><div id="" class="step-check"><input type="checkbox" id="short-check" name="short-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /></td>
+              <td><div id="short-text" style="margin-bottom:20px;"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></td>
+            </tr>
+            <tr>            
+              <td><input type="radio" id="long-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV12']['pris']; ?>" /></td>
+              <td colspan="2"><div id="long-text"><?php echo $campaignCodes['PRIV12']['text']; ?><span > <?php echo $campaignCodes['PRIV12']['pris']; ?> kr</span></div></td>
+              <td rowspan="2"><div id="sum-long" class="nbr">0</span></td>
+              <td rowspan="2" style="width:100px;" class="kr">kr</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><div id=""class="step-check"><input type="checkbox" id="long-check" name="long-check-step" value="<?php echo $campaignCodes['STEG01']['pris']; ?>" /></td>
+              <td><div id="long-text" style="margin-bottom:20px;"><?php echo $campaignCodes['STEG01']['text']; ?><span> +<?php echo $campaignCodes['STEG01']['pris']; ?> kr</span></div></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td colspan="2" class="kr"><div id="freight_private">Frakt (<?php echo $campaignCodes['FRAKT02']['pris']; ?> kr)</div></td>
+              <td><div id="sum-freight"class="nbr">0</div></td>
+              <td class="kr">kr</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td ></td>
+              <td class="line"><div id="sum-total" class="nbr">0</div></td>
+              <td class="line kr"> kr</td>
+            </tr>
+          </tbody>
+        </table>      
+      </div> 
+    </div>
+
+
+    <div id="buy-payment" class="buy-container">
+      <div id="buy-payment-buttons">
+        <input type="submit" id="payson" class="buy-payment-buttons" name="paytype" value="Betala med">     
+        <!--input type="submit" id="faktura" class="buy-payment-buttons" name="paytype" value="Betala med faktura" /-->
+      </div>  
+      <div class="buy-box">
+        <div id="buy-payment-options">Via Payson kan du betala med följande alternativ:</div>
+        <div id="integrity">Genom att fortsätta betalningen godkänner jag <br><a target="_blank" href="http://mm.dev/integritetspolicy/">Motiomeras avtal och integritetspolicy</a> samt är över 18 år</div>
+      </div>
     </div>
   </div>
+
+
+
+
+  <div style="clear:left;"></div>
+
+
+
 
 </div>
 </form>
