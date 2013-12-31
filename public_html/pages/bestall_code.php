@@ -40,7 +40,7 @@ if (!empty($user)) {
   #key li label{margin-left: 15px;margin-right: 10px;padding-left: 0;font-size: 16px;}
 </style>
 
-<div id="buy"></div>
+
 <form action="/actions/medlem_foretagsnyckel.php" method="post" id="key">
   <input type="hidden" name="type" value="foretagsnyckel">  
   <ul id="">
@@ -92,11 +92,12 @@ if (!empty($user)) {
 
 
   <!-- private --> 
+  <div id="buy"></div>
   <div id="buy-private" class="">
     <div id="buy-private-top">Välj hur du vill förlänga ditt medlemskap</div>
     <span id="priv-the-price" class="hide">79</span>
 
-    <div> 
+    <div class="buy-container"> 
       <div id="buy-company-calc" class="buy-box-outer">
         <div id="buy-company-calc-text"></div>
         <div  class="buy-box">
@@ -164,7 +165,7 @@ if (!empty($user)) {
             <li><label class="buy-ul-label">Postnummer *</label><input type="text" name="zip" id="zip" class=""  value="<?php echo $zip; ?>" /></li>
             <li><label class="buy-ul-label">Ort *</label><input type="text" name="city" id="city" class=""  value="<?php echo $city; ?>" /></li>
             <li><label class="buy-ul-label">Land *</label><input type="text" name="country" id="country" class="" value="<?php echo $country; ?>" /></li>
-            <li><label class="buy-ul-label">&nbsp;</label><input type="submit" id="payson" class="buy-payment-buttons" name="paytype" value="Betala genom Payson"></li>     
+            <!--li><label class="buy-ul-label">&nbsp;</label><input type="submit" id="payson" class="buy-payment-buttons" name="paytype" value="Betala med"></li-->     
           </ul>
         </div>
       </div>
@@ -172,11 +173,17 @@ if (!empty($user)) {
 <div style="clear:left;"></div>
 
 
-    <div id="buy-payment" class="buy-container hidden" >  
-      <div class="buy-box">
-        <div id="buy-payment-options">Via Payson kan du betala med följande alternativ:</div>
-        <div id="integrity">Genom att fortsätta betalningen godkänner jag <br/><a target="_blank" href="<?php echo esc_url(get_permalink(get_page_by_title('integritetspolicy'))); ?>">Motiomeras avtal och integritetspolicy</a> samt är över 18 år</div>
-      </div>
-    </div>  
 
+<div id="buy-payment" class="buy-container">
+    <div id="buy-payment-buttons">
+      <input type="submit" id="payson" class="buy-payment-buttons" name="paytype" value="Betala med">     
+      <!--input type="submit" id="faktura" class="buy-payment-buttons" name="paytype" value="Betala med faktura" /-->
+    </div>  
+    <div class="buy-box">
+      <div id="buy-payment-options">Via Payson kan du betala med följande alternativ:</div>
+      <div id="integrity">Genom att fortsätta betalningen godkänner jag <br><a target="_blank" href="http://mm.dev/integritetspolicy/">Motiomeras avtal och integritetspolicy</a> samt är över 18 år</div>
+    </div>
+  </div>
+
+</div>
 </form>

@@ -70,6 +70,91 @@ article h2{clear:left;}
 /********* end legacy ***************/
 
 
+
+
+/******* buy - forlang ********/
+
+#buy-private-top{font-size: 36px;color: #4F6916;}
+.buy-container {
+  float: left;
+  width: 370px;
+  height: 100%;
+  padding-bottom: 30px;
+  background: #EFEFEF;
+  -moz-border-radius: 10px 10px / 10px 10px;
+  border-radius: 10px 10px / 10px 10px;
+  font-weight: normal;
+  margin-top: 1px;
+}
+
+/******* buy company bubble ********/
+#buy-payment{padding:15px 30px; width: 370px;}
+#buy-payment-buttons-area{float:left;height:80px;}
+.buy-payment-buttons{
+  float:left;
+  font-size: 20px;
+  overflow: hidden;
+  padding-left: 8px;
+  text-align: left;
+  height:55px;    
+  font-family: cabin condensed;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+#payson{
+  background-image: url("/wp-content/themes/motiomera/img/payson_button.png");
+  background-position: -15px 0px;
+  background-repeat: no-repeat;
+  width:205px;
+  margin-right: 10px;
+  border-color: #fff #879371 #879371 #fff;
+  color: #000;
+  font-size: 18px;
+  padding: 7px 9px 10px 9px;  
+}
+#payson:hover {
+  border-color: #879371 #FFF #FFF #879371;
+}
+#payson:hover {
+  padding: 5px 11px 12px 7px;
+  background-position: -17px -2px;
+}
+#buy-payment-options {
+  float: left;
+  height: 143px;
+  width: 400px;
+  background-image: url("/wp-content/themes/motiomera/img/payment_options.png");
+  background-repeat: no-repeat;
+  background-position: 0 40px;
+}
+.buy-box {
+  float: left;
+  padding: 15px;
+  background-color: #EDEDED;
+  border-color: #D3D3D3 #FEFEFE #FEFEFE #D3D3D3;
+  -moz-border-radius: 7px 7px / 7px 7px;
+  border-radius: 7px 7px / 7px 7px;
+  border-style: solid;
+  border-width: 1px;
+  width: 310px;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /** menu **/
 .main-navigation {clear: both;display: block;float: left;width: 100%;}
 .main-navigation-logged-in {margin-bottom: 40px;}

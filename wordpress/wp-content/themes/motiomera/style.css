@@ -162,6 +162,8 @@ hgroup{height:127px; float:left;}
 
 
 
+
+
 /******* buy ********/
 .kr{padding-top:7px;}
 .buy-ul li .invalid{border-color:red;}
@@ -274,7 +276,6 @@ hgroup{height:127px; float:left;}
 #bubble{float:left;margin-left:10px; padding: 15px 0 0 50px; background-image:url('img/bubble.png');background-repeat:no-repeat;height: 245px;width:253px;font-size: 24px;height: 231px;}
 #buy-contact-tel{color:#404040;font-family: helvetica; font-size: 36px;font-weight: bold;text-decoration: none;}
 #buy-contact-tel:hover{color:#888;}
-
 .invioce-area{padding:30px 30px 0;}
 
 
@@ -349,12 +350,8 @@ hgroup{height:127px; float:left;}
   background-position: -17px -2px;
 }
 #faktura:hover, #payson:hover{border-color: #879371 #fff #fff #879371;}
-
 #buy-payment-options{float:left;height:143px;width:400px;background-image: url("img/payment_options.png");background-repeat: no-repeat;background-position:0 40px;}
 #integrity{clear: both;font-size: 16px;}
-
-
-
 
 
 
@@ -403,12 +400,6 @@ hgroup{height:127px; float:left;}
   border-radius: 7px 7px / 7px 7px;
 }
 
-
-
-
-
-
-
 #calc {width:100%;font-size: 14px;border-bottom: 1px solid black;float:left;}
 #calc input{width:18px;height:18px;font-size: 14px;float:left;}
 #calc div{font-size: 14px;}
@@ -427,10 +418,6 @@ hgroup{height:127px; float:left;}
 #pay input{font-size: 15px;width:200px;height:25px;}
 #pay ul{margin-left: 2px;padding-left: 15px;}
 #payalt{color:#494949;font-size:11px;margin:5px 0 0 10PX;}
-
-
-
-
 
 
 
