@@ -131,9 +131,9 @@ input{
   padding:4px 4px 6px 7px;
   -moz-border-radius: 5px 5px / 5px 5px;
   border-radius: 5px 5px / 5px 5px;
-  -moz-box-shadow: inset -1px -1px 1px #CEE596;
+  /*-moz-box-shadow: inset -1px -1px 1px #CEE596;
   -webkit-box-shadow: inset -1px -1px 1px #CEE596;
-  box-shadow: inset -1px -1px 1px #CEE596;  
+  box-shadow: inset -1px -1px 1px #CEE596; */  
 }
 #map-container #loader
 {

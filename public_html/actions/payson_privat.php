@@ -7,7 +7,8 @@ if (!isset($_POST) or empty($_POST)) {
 }
 
 $order = new stdClass;
-!empty($_REQUEST['type']) ? $order->type = $_REQUEST['type'] : $order->type = 'medlem';
+!empty($_REQUEST['type']) ? $order->type = $_REQUEST['type'] : $order->type = '';
+!empty($_REQUEST['private-type']) ? $order->private_type = $_REQUEST['private-type'] : $order->private_type = '';
 !empty($_REQUEST['m_total']) ? $order->total = $_REQUEST['m_total'] : $order->total = 0;
 !empty($_REQUEST['m_priv3']) ? $order->PRIV3 = $_REQUEST['m_priv3'] : $order->PRIV3 = 0;
 !empty($_REQUEST['m_priv12']) ? $order->PRIV12 = $_REQUEST['m_priv12'] : $order->PRIV12 = 0;
@@ -38,20 +39,15 @@ $order = new stdClass;
 !empty($_REQUEST['kanal']) ? $order->channel = $_REQUEST['kanal'] : $order->channel = '';
 
 
-
 $order->PRIV3 = (int) $order->PRIV3;
 $order->PRIV12 = (int) $order->PRIV12;
 $order->FRAKT02 = (int) $order->FRAKT02;
 $order->total = (int) $order->total;
 
-
 $order->street = $order->street1;
 !empty($order->street2) ? $order->street = $order->street . ' ' . $order->street2 : null;
 !empty($order->street3) ? $order->street = $order->street . ' ' . $order->street3 : null;
-
-
-
-switch ($order->type) {
+switch ($order->private_type) {
   case 'medlem':   //ny medlem
     if ($order->email != $order->email2) {
       global $UrlHandler;
@@ -90,7 +86,7 @@ switch ($order->type) {
         $msg = $e->getMessage();
         throw new UserException($msg, null, $urlHandler->getUrl('Medlem', URL_CREATE), 'Tillbaka');
       }
-    } else{
+    } else {
       throw new UserException("priset stämmer inte", "Försök igen: <a href=\"" . $urlHandler->getUrl("Medlem", URL_CREATE) . "\">Bli Medlem</a>");
     }
     break;
@@ -103,10 +99,16 @@ switch ($order->type) {
     }
     $noFraud = Order::priceCheckPrivate($order->PRIV3, $order->PRIV12, $order->STEG01, $order->FRAKT02, $order->total, $order->discount);
     if ($noFraud) {  //javascript prices match to local calculation
-      
       $medlem = Medlem::getInloggad();
+      $medlem->setAddress($order->street);
+      $medlem->setCo($order->co);
+      $medlem->setZip($order->zip);
+      $medlem->setCity($order->city);
+      $medlem->setPhone($order->phone);
+      $medlem->setCountry($order->country);
+      $medlem->commit();
       $ordertyp = "medlem_extend";
-    } else{
+    } else {
       throw new UserException("Priset stämmer inte", ' <a href="/pages/bestall.php?email=' . $order->email . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '" >Prova igen</a>');
     }
     break;
@@ -159,7 +161,7 @@ $orderFRAKT02 = null;
 $orderId = '';
 if ($order->PRIV3 > 0) {
   echo "inne priv3";
-  
+
   $orderPRIV3 = Order::__constructOrderWithSameRefId($ordertyp, $medlem, 'PRIV3', 1, $order->channel, $order->campcode, 0, false, $token);
   $orderPRIV3->setCompanyName($order->fname . ' ' . $order->lname);
   $orderPRIV3->setPrice(Order::$campaignCodes['PRIV3']['pris']);

@@ -41,40 +41,8 @@ article a img{
 article h2{clear:left;}
 
 
-/********* legacy ***************/
-/*
-.main-navigation ul ul {
-  -moz-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
-  -webkit-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
-  box-shadow: 0 3px 3px rgba(0,0,0,0.2);
-  display: none;
-  float: left;
-  position: absolute;
-  top: 1.5em;
-  left: 0;
-  z-index: 99999;
-}
-.main-navigation ul ul ul {left: 100%;top: 0;}
-.main-navigation ul ul a {width: 200px;}
-.main-navigation ul ul li {}
-.main-navigation li:hover > a {}
-.main-navigation ul ul :hover > a {}
-.main-navigation ul ul a:hover {}
-.main-navigation ul li:hover > ul {display: block;}
-.main-navigation li.current_page_item a,
-.main-navigation li.current-menu-item a {}
-/ * Small menu * /
-.menu-toggle {cursor: pointer;}
-.main-small-navigation .menu {display: none;}
-*/
-/********* end legacy ***************/
-
-
-
-
 /******* buy - forlang ********/
-
-#buy-private-top{font-size: 36px;color: #4F6916;}
+#buy-private-top{font-size: 34px;color: #4F6916;margin-bottom: 15px;}
 .buy-container {
   float: left;
   width: 319px;
@@ -99,7 +67,12 @@ article h2{clear:left;}
   width: 280px;
   font-size: 15px;
 }
-
+.buy-box-extra-width{padding-left: 5px;padding-right: 10px;}
+.nbr {font-size: 22px;}
+.buy-table{font-size: 13px;}
+.line {border-top: 1px solid #333;}
+.kr {padding-top: 7px;}
+#sum-total {float: left;color: #427F10;}
 /******* buy company bubble ********/
 #buy-payment-buttons-area{float:left;height:80px;}
 .buy-payment-buttons{
@@ -120,9 +93,12 @@ article h2{clear:left;}
   width:205px;
   margin-right: 10px;
   border-color: #fff #879371 #879371 #fff;
+  border-style: solid;
+  border-width: 1px;
   color: #000;
   font-size: 18px;
-  padding: 7px 9px 10px 9px;  
+  padding: 7px 9px 10px 9px;
+ 
 }
 #payson:hover {
   border-color: #879371 #FFF #FFF #879371;
@@ -420,7 +396,7 @@ html input[type="button"]{
   border-style: solid;  
   border-radius: 5px 5px 5px 5px;
   cursor: pointer;
-  -webkit-box-shadow: inset 0 -2px #5A7919;
+  /* -webkit-box-shadow: inset 0 -2px #5A7919; */
 }
 html input[type="button"]:hover{
   border-color: #555 #CEE596 #CEE596 #555;

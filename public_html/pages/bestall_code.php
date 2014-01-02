@@ -15,7 +15,7 @@ if (!empty($user)) {
   $fname = $user->getFNamn();
   $lname = $user->getENamn();
   $co = $user->getCo();
-  $address = $user->getENamn();
+  $address = $user->getAddress();
   $zip = $user->getZip();
   $city = $user->getCity();
   $phone = $user->getPhone();
@@ -63,11 +63,7 @@ if (!empty($user)) {
 <br>
 
 
-
-<!--script src="/js/jquery.validate.min.js" type="text/javascript"></script-->
-
-
-<form action="/actions/wp_buy.php" method="post" id="checkout">
+<form action="/actions/payson_privat.php" method="post" id="checkout">
   <input type="hidden" name=""      id="m_r3_price" value="<?php echo $campaignCodes['RE03']['pris']; ?>">
   <input type="hidden" name=""      id="m_r4_price" value="<?php echo $campaignCodes['RE04']['pris']; ?>">
   <input type="hidden" name=""      id="m_frakt00_price" value="<?php echo $campaignCodes['FRAKT00']['pris']; ?>">
@@ -78,35 +74,28 @@ if (!empty($user)) {
   <input type="hidden" name=""      id="m_priv3_price" value="<?php echo $campaignCodes['PRIV3']['pris']; ?>">
   <input type="hidden" name=""      id="m_priv12_price" value="<?php echo $campaignCodes['PRIV12']['pris']; ?>">
   <input type="hidden" name=""      id="m_moms_percent" value="<?php echo $moms['percent']; ?>">
-  <input type="hidden" name="type"      id="type" value="<?php echo $buy; ?>">
-  <input type="hidden" name="m_exmoms"  id="m_exmoms" value=""> 
-  <input type="hidden" name="m_freight" id="m_freight"  value="">         
-  <input type="hidden" name="m_total"   id="m_total" value="">        
-  <input type="hidden" name="m_incmoms" id="m_incmoms" value="">       
-  <input type="hidden" name="m_priv3"   id="m_priv3" value="">        
-  <input type="hidden" name="m_priv12"  id="m_priv12" value="">        
-  <input type="hidden" name="m_steg01"  id="m_steg01" value="">        
-  <input type="hidden" name="m_frakt02" id="m_frakt02" value="">  
-
-
-
+  <input type="hidden" name="type"          id="type" value="private">
+  <input type="hidden" name="m_exmoms"      id="m_exmoms" value=""> 
+  <input type="hidden" name="m_freight"     id="m_freight"  value="">         
+  <input type="hidden" name="m_total"       id="m_total" value="">        
+  <input type="hidden" name="m_incmoms"     id="m_incmoms" value="">       
+  <input type="hidden" name="m_priv3"       id="m_priv3" value="">        
+  <input type="hidden" name="m_priv12"      id="m_priv12" value="">        
+  <input type="hidden" name="m_steg01"      id="m_steg01" value="">        
+  <input type="hidden" name="m_frakt02"     id="m_frakt02" value="">
+  <input type="hidden" name="private-type"  id="private-type" value="medlem_extend">
 
   <!-- private --> 
   <div id="buy"></div>
-
-
-
   <div id="buy-private" class="">
     <div id="buy-private-top">Välj hur du vill förlänga ditt medlemskap</div>
-    <span id="priv-the-price" class="hide">79</span>
-
-
-
+    <span id="priv-the-price" class="hide"></span>
     <div id="buy-private-2" class="buy-container" >
       <div class="buy-box-outer">
         <div class="buy-box">
           <div class="buy-heading">Om dina adressuppgifter är fel eller saknas så var vänlig och rätta till det.</div>
           <ul class="buy-ul">
+            <li><label class="buy-ul-label">E-post *</label><input type="text" name="email1" id="email" class="required"  value="<?php echo $email; ?>" /></li>
             <li><label class="buy-ul-label">Förnamn *</label><input type="text" name="firstname" id="firstname" class="required"  value="<?php echo $fname; ?>" /></li>
             <li><label class="buy-ul-label">Efternamn *</label><input type="text" name="lastname" id="lastname" class="required"  value="<?php echo $lname; ?>" /></li>
             <li><label class="buy-ul-label">c/o</label><input type="text" name="co" id="co" class=""  value="<?php echo $co; ?>" /></li>
@@ -115,24 +104,19 @@ if (!empty($user)) {
             <li><label class="buy-ul-label">Adress</label><input type="text" name="street2" id="street2"   /></li>
             <li><label class="buy-ul-label">Postnummer *</label><input type="text" name="zip" id="zip" class=""  value="<?php echo $zip; ?>" /></li>
             <li><label class="buy-ul-label">Ort *</label><input type="text" name="city" id="city" class=""  value="<?php echo $city; ?>" /></li>
-            <li><label class="buy-ul-label">Land *</label><input type="text" name="country" id="country" class="" value="<?php echo $country; ?>" /></li>
-            <!--li><label class="buy-ul-label">&nbsp;</label><input type="submit" id="payson" class="buy-payment-buttons" name="paytype" value="Betala med"></li-->     
+            <li><label class="buy-ul-label">Land *</label><input type="text" name="country" id="country" class="" value="<?php echo $country; ?>" /></li>  
           </ul>
         </div>
       </div>
     </div>
 
-
-
-
-
     <div class="buy-container">         
-      <div  class="buy-box">
+      <div  class="buy-box buy-box-extra-width">
         <table class="buy-table"> 
           <tbody >
             <tr>
               <td><input type="radio" id="short-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV3']['pris']; ?>" /></td>
-              <td colspan="2"><div id="short-text"><?php echo $campaignCodes['PRIV3']['text']; ?><span > <?php echo $campaignCodes['PRIV3']['pris']; ?> kr</span></div></td>
+              <td colspan="2" style="width:100%;"><div id="short-text"><?php echo $campaignCodes['PRIV3']['text']; ?><span > <?php echo $campaignCodes['PRIV3']['pris']; ?> kr</span></div></td>
               <td rowspan="2" style="width:100px;"><div id="sum-short" class="nbr">0</div></td>
               <td rowspan="2" style="width:100px;" class="kr">kr</td>
             </tr>
@@ -143,7 +127,7 @@ if (!empty($user)) {
             </tr>
             <tr>            
               <td><input type="radio" id="long-radio" name="radio-priv" value="<?php echo $campaignCodes['PRIV12']['pris']; ?>" /></td>
-              <td colspan="2"><div id="long-text"><?php echo $campaignCodes['PRIV12']['text']; ?><span > <?php echo $campaignCodes['PRIV12']['pris']; ?> kr</span></div></td>
+              <td colspan="2" style="width:100%;"><div id="long-text"><?php echo $campaignCodes['PRIV12']['text']; ?><span > <?php echo $campaignCodes['PRIV12']['pris']; ?> kr</span></div></td>
               <td rowspan="2"><div id="sum-long" class="nbr">0</span></td>
               <td rowspan="2" style="width:100px;" class="kr">kr</td>
             </tr>
@@ -170,11 +154,9 @@ if (!empty($user)) {
       </div> 
     </div>
 
-
     <div id="buy-payment" class="buy-container">
       <div id="buy-payment-buttons">
         <input type="submit" id="payson" class="buy-payment-buttons" name="paytype" value="Betala med">     
-        <!--input type="submit" id="faktura" class="buy-payment-buttons" name="paytype" value="Betala med faktura" /-->
       </div>  
       <div class="buy-box margin-top">
         <div id="buy-payment-options">Via Payson kan du betala med följande:</div>
@@ -182,14 +164,6 @@ if (!empty($user)) {
       </div>
     </div>
   </div>
-
-
-
-
   <div style="clear:left;"></div>
-
-
-
-
 </div>
 </form>
