@@ -3,7 +3,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
 
 if (!isset($_POST) or empty($_POST)) {
-  throw new UserException('Felaktigt anrop', 'Sättet att anropa denna sida var felaktig försök igen här: <a href="' . $urlHandler->getUrl('Medlem', URL_CREATE) . '">Bli Medlem</a>');
+  throw new UserException('Felaktigt anrop', 'Sättet att anropa denna sida var felaktig försök igen här: <a href="/#buy/private">Bli Medlem</a>');
 }
 
 $order = new stdClass;
@@ -38,7 +38,6 @@ $order = new stdClass;
 !empty($_REQUEST['campcode']) ? $order->campcode = $_REQUEST['campcode'] : $order->campcode = '';
 !empty($_REQUEST['kanal']) ? $order->channel = $_REQUEST['kanal'] : $order->channel = '';
 
-
 $order->PRIV3 = (int) $order->PRIV3;
 $order->PRIV12 = (int) $order->PRIV12;
 $order->FRAKT02 = (int) $order->FRAKT02;
@@ -47,20 +46,24 @@ $order->total = (int) $order->total;
 $order->street = $order->street1;
 !empty($order->street2) ? $order->street = $order->street . ' ' . $order->street2 : null;
 !empty($order->street3) ? $order->street = $order->street . ' ' . $order->street3 : null;
+$callbackVars = '?email1=' . $order->email . '&email2=' . $order->email2 . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '&co=' . $order->co .'&phone=' . $order->phone;
+$callbackVars .= '&street1=' . $order->street1 .'&street2=' . $order->street2 .'&zip=' . $order->zip .'&city=' . $order->city .'&country=' . $order->country;
+//echo $callbackVars;
 switch ($order->private_type) {
   case 'medlem':   //ny medlem
-    if ($order->email != $order->email2) {
+    //if ($order->email != $order->email2) {
+    if ($order->email == $order->email2) {
       global $UrlHandler;
-      throw new UserException("Epost matchar inte", "De angivna epost adresserna är inte samma, försök igen här: <a href=\"" . $urlHandler->getUrl("Medlem", URL_CREATE) . "\">Bli Medlem</a>");
+      throw new UserException('Epost matchar inte', 'De angivna epost-adresserna är inte samma, försök igen här: <a href="/#buy/private'.$callbackVars.'">Bli Medlem</a>');
     }
     if (Medlem::upptagenEpost($order->email)) {
       throw new UserException('Upptagen epost', 'Den epost adress du angav är tyvärr upptagen. <a href="/pages/glomtlosen.php?email=' . $order->email . '" >Glömt ditt lösenord?</a>');
     }
     if ($order->anamn == '') {
-      throw new UserException("Användarnamn ej ifyllt", "Alla fällt måste vara ifyllda, försök igen: <a href=\"" . $urlHandler->getUrl("Medlem", URL_CREATE) . "\">Bli Medlem</a>");
+      throw new UserException('Användarnamn ej ifyllt', 'Alla fällt måste vara ifyllda, försök igen: <a href="/#buy/private">Bli Medlem</a>');
     }
     if (($order->PRIV3 == 0 && $order->PRIV12 == 0)) { //return to checkout
-      throw new UserException("Ingen tidsperiod", "Du måste välja en tidsperiod på abonnemanget, försök igen: <a href=\"" . $urlHandler->getUrl("Medlem", URL_CREATE) . "\">Bli Medlem</a>");
+      throw new UserException('Ingen tidsperiod', 'Du måste välja en tidsperiod på abonnemanget, försök igen: <a href="/#buy/private">Bli Medlem</a>');
     }
     //do a price check to avoid javascript hacking
     $noFraud = Order::priceCheckPrivate($order->PRIV3, $order->PRIV12, $order->STEG01, $order->FRAKT02, $order->total, $order->discount);
@@ -87,7 +90,7 @@ switch ($order->private_type) {
         throw new UserException($msg, null, $urlHandler->getUrl('Medlem', URL_CREATE), 'Tillbaka');
       }
     } else {
-      throw new UserException("priset stämmer inte", "Försök igen: <a href=\"" . $urlHandler->getUrl("Medlem", URL_CREATE) . "\">Bli Medlem</a>");
+      throw new UserException('Priset stämmer inte', 'Försök igen: <a href="/#buy/private">Bli Medlem</a>');
     }
     break;
   case 'medlem_extend':  //förläng abonnemang
@@ -149,8 +152,10 @@ if ($payResponse->getResponseEnvelope()->wasSuccessful()) {  // Payson Step 3: v
   echo $token;
 //header("Location: " . $api->getForwardPayUrl($payResponse)); //do the redirection to payson
 } else {
+  // log error to logfile and send a email
   Misc::logMotiomera(print_r($payResponse, true), 'ERROR', 'payson');
-  throw new UserException("Problem med Payson.se", "Det är något problem med betaltjänsten Payson.se. Prova igen senare.");
+  Misc::sendEmail('kristian@motiomera.se', $SETTINGS["email"], 'Payson error', print_r($payResponse, true));
+  throw new UserException('Problem med Payson.se', 'Det är något problem med betaltjänsten Payson.se. Prova igen senare. <a href="/#buy/private">Bli Medlem</a>');
 }
 
 $paymenttype = 'payson';

@@ -20,26 +20,8 @@ if (!empty($user)) {
   $city = $user->getCity();
   $phone = $user->getPhone();
   $country = $user->getCountry();
-//[address:protected] => fgatan 3 [co:protected] => [zip:protected] => 252 23 [city:protected] => helsingborg [phone:protected] => 46761393833 [country:protected] => Sverige     
 }
 ?>
-
-
-
-
-
-<style>
-  #key{ background: none repeat scroll 0 0 #EAF4E2;padding: 4px;
-        -moz-border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -khtml-border-radius: 10px;
-        border-radius: 10px;border: #DFEED4 1px solid;
-  }
-  #key input{font-size: 15px;height: 25px;width: 100px;margin-right: 15px;}
-  #key ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
-  #key li label{margin-left: 15px;margin-right: 10px;padding-left: 0;font-size: 16px;}
-</style>
-
 
 <form action="/actions/medlem_foretagsnyckel.php" method="post" id="key">
   <input type="hidden" name="type" value="foretagsnyckel">  
@@ -54,14 +36,10 @@ if (!empty($user)) {
 </form>  
 
 
-
-
-
 <div style="clear:both;"></div>
 <br>
 <hr>
 <br>
-
 
 <form action="/actions/payson_privat.php" method="post" id="checkout">
   <input type="hidden" name=""      id="m_r3_price" value="<?php echo $campaignCodes['RE03']['pris']; ?>">

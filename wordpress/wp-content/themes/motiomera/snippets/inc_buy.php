@@ -21,10 +21,6 @@ Order::getMondays(15);
 !empty($_REQUEST['buy']) ? $buy = $_REQUEST['buy'] : $buy = '';
 ?>
 
-
-<!--script src="/js/jquery.validate.min.js" type="text/javascript"></script-->
-
-
 <form action="/actions/wp_buy.php" method="post" id="checkout">
   <input type="hidden" name=""      id="m_r3_price" value="<?php echo $campaignCodes['RE03']['pris']; ?>">
   <input type="hidden" name=""      id="m_r4_price" value="<?php echo $campaignCodes['RE04']['pris']; ?>">
@@ -45,7 +41,7 @@ Order::getMondays(15);
   <input type="hidden" name="m_priv12"  id="m_priv12" value="">        
   <input type="hidden" name="m_steg01"  id="m_steg01" value="">        
   <input type="hidden" name="m_frakt02" id="m_frakt02" value="">  
-
+  <input type="hidden" name="private-type"  id="private-type" value="medlem">
 
   <div id="buy-private-2" class="buy-container hide-private hidden" >
     <div id="buy-private-top-left"><a href="#" id="link-company" name="company" class="hide-company hidden">För företag från 169 kr?</a></div>
@@ -68,22 +64,22 @@ Order::getMondays(15);
             <label for="kid" style="margin-left:10px;">Startkommun</label>
           </li>
           <li>
-            <input type="text" name="email1" id="email1" class="" placeholder="E-post"/>
+            <input type="text" name="email1" id="email1" class="" placeholder="E-post" value="" />
             <label class="invalid" for="email1" generated="false" style="display: none;">Upptagen epostadress <a href="/pages/glomtlosen.php?email=" > glömt ditt lösenord?</a></label>
             <div id="mmEpostError" class="invalid hide">Upptagen, <a href="/pages/glomtlosen.php?email=" > glömt ditt lösenord?</a></div>
           </li>
-          <li><input type="text" name="email2" id="email2" class="" placeholder="E-post igen*"/></li>
+          <li><input type="text" name="email2" id="email2" class="" placeholder="E-post igen*" value="" /></li>
           <li><input type="password" name="pass" id="pass" class="" placeholder="Lösenord*"/></li>
           <li><input type="password" name="pass2" id="pass2" class="" placeholder="Lösenord igen*"/></li>
-          <li><input type="text" name="firstname" id="firstname" class="required" placeholder="Förnamn*"/></li>
-          <li><input type="text" name="lastname" id="lastname" class="required" placeholder="Efternamn*"/></li>
-          <li><input type="text" name="co" id="co" class="" placeholder="c/o"/></li>
-          <li><input type="text" name="phone" id="phone"  class="required" placeholder="Mobil/telefon*"/></li>
-          <li><input type="text" name="street1" id="street1" class="required" placeholder="Adress*"/></li>
-          <li><input type="text" name="street2" id="street2" placeholder=""/></li>
-          <li><input type="text" name="zip" id="zip" class="" placeholder="Postnummer*"/></li>
-          <li><input type="text" name="city" id="city" class="" placeholder="Ort*"/></li>
-          <li><input type="text" name="country" id="country" class="" value="Sverige"/></li>
+          <li><input type="text" name="firstname" id="firstname" class="required" placeholder="Förnamn*" value="" /></li>
+          <li><input type="text" name="lastname" id="lastname" class="required" placeholder="Efternamn*" value="" /></li>
+          <li><input type="text" name="co" id="co" class="" placeholder="c/o" value="" /></li>
+          <li><input type="text" name="phone" id="phone"  class="required" placeholder="Mobil/telefon*" value="" /></li>
+          <li><input type="text" name="street1" id="street1" class="required" placeholder="Adress*" value="" /></li>
+          <li><input type="text" name="street2" id="street2" placeholder="" value="" /></li>
+          <li><input type="text" name="zip" id="zip" class="" placeholder="Postnummer*" value="" /></li>
+          <li><input type="text" name="city" id="city" class="" placeholder="Ort*" value="" /></li>
+          <li><input type="text" name="country" id="country" class="" value="Sverige" value="" /></li>
         </ul>
       </div>
     </div>

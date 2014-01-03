@@ -3109,3 +3109,97 @@ td.number
 .floatit a{color: #4F6916;}
 .tabArea{overflow:hidden;}
 
+
+
+
+/******************************/
+/******* buy - forlang ********/
+#key{ background: none repeat scroll 0 0 #EAF4E2;padding: 4px;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      border-radius: 10px;border: #DFEED4 1px solid;
+}
+#key input{font-size: 15px;height: 25px;width: 100px;margin-right: 15px;}
+#key ul{list-style: none;margin-left: 0;padding-left: 0;font-size: 13px;}
+#key li label{margin-left: 15px;margin-right: 10px;padding-left: 0;font-size: 16px;}
+
+#buy-private-top{font-size: 34px;color: #4F6916;margin-bottom: 15px;}
+.buy-container {
+  float: left;
+  width: 319px;
+  height: 100%;
+  padding: 30px;
+  background: #EFEFEF;
+  -moz-border-radius: 10px 10px / 10px 10px;
+  border-radius: 10px 10px / 10px 10px;
+  font-weight: normal;
+  margin-top: 1px;
+  margin-right: 1px;
+}
+.buy-box {
+  float: left;
+  padding: 15px;
+  background-color: #EDEDED;
+  border-color: #D3D3D3 #FEFEFE #FEFEFE #D3D3D3;
+  -moz-border-radius: 7px 7px / 7px 7px;
+  border-radius: 7px 7px / 7px 7px;
+  border-style: solid;
+  border-width: 1px;
+  width: 280px;
+  font-size: 15px;
+}
+.buy-box-extra-width{padding-left: 5px;padding-right: 10px;}
+.nbr {font-size: 22px;}
+.buy-table{font-size: 13px;}
+.line {border-top: 1px solid #333;}
+.kr {padding-top: 7px;}
+#sum-total {float: left;color: #427F10;}
+#buy-payment-buttons-area{float:left;height:80px;}
+.buy-payment-buttons{
+  float:left;
+  font-size: 20px;
+  overflow: hidden;
+  padding-left: 8px;
+  text-align: left;
+  height:55px;    
+  font-family: cabin condensed;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+#payson{
+  background-image: url("/wp-content/themes/motiomera/img/payson_button.png");
+  background-position: -15px 0px;
+  background-repeat: no-repeat;
+  width:205px;
+  margin-right: 10px;
+  border-color: #fff #879371 #879371 #fff;
+  border-style: solid;
+  border-width: 1px;
+  color: #000;
+  font-size: 18px;
+  padding: 7px 9px 10px 9px;
+
+}
+#payson:hover {
+  border-color: #879371 #FFF #FFF #879371;
+}
+#payson:hover {
+  padding: 5px 11px 12px 7px;
+  background-position: -17px -2px;
+}
+#buy-payment-options {
+  float: left;
+  height: 143px;
+  width: 400px;
+  background-image: url("/wp-content/themes/motiomera/img/payment_options_275.png");
+  background-repeat: no-repeat;
+  background-position: 0 40px;
+}
+.buy-ul-label{width: 110px;display:inline;float:left;}
+.buy-ul li input{width:150px;display:inline;float:left;}
+.buy-ul li{clear:left;}
+.buy-ul{list-style: none;padding:0;}
+#buy-private{float:left;}
+#buy-private-2{float:right;}
+.buy-ul li .invalid {border-color: #F00;}
