@@ -23,7 +23,6 @@ $order = new stdClass;
 !empty($_REQUEST['email2']) ? $order->email2 = $_REQUEST['email2'] : $order->email2 = '';
 !empty($_REQUEST['pass']) ? $order->pass = $_REQUEST['pass'] : $order->pass = '';
 !empty($_REQUEST['pass2']) ? $order->pass2 = $_REQUEST['pass2'] : $order->pass2 = '';
-
 !empty($_REQUEST['firstname']) ? $order->fname = $_REQUEST['firstname'] : $order->fname = '';
 !empty($_REQUEST['lastname']) ? $order->lname = $_REQUEST['lastname'] : $order->lname = '';
 !empty($_REQUEST['co']) ? $order->co = $_REQUEST['co'] : $order->co = '';
@@ -46,13 +45,12 @@ $order->total = (int) $order->total;
 $order->street = $order->street1;
 !empty($order->street2) ? $order->street = $order->street . ' ' . $order->street2 : null;
 !empty($order->street3) ? $order->street = $order->street . ' ' . $order->street3 : null;
-$callbackVars = '?email1=' . $order->email . '&email2=' . $order->email2 . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '&co=' . $order->co .'&phone=' . $order->phone;
+$callbackVars = '?anamn=' . $order->anamn . '&email1=' . $order->email . '&email2=' . $order->email2 . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '&co=' . $order->co .'&phone=' . $order->phone;
 $callbackVars .= '&street1=' . $order->street1 .'&street2=' . $order->street2 .'&zip=' . $order->zip .'&city=' . $order->city .'&country=' . $order->country;
-//echo $callbackVars;
+$callbackVars .= '&m_priv3=' . $order->PRIV3 .'&m_priv12=' . $order->PRIV12 .'&m_steg01=' . $order->STEG01;
 switch ($order->private_type) {
   case 'medlem':   //ny medlem
-    //if ($order->email != $order->email2) {
-    if ($order->email == $order->email2) {
+    if ($order->email != $order->email2) {
       global $UrlHandler;
       throw new UserException('Epost matchar inte', 'De angivna epost-adresserna är inte samma, försök igen här: <a href="/#buy/private'.$callbackVars.'">Bli Medlem</a>');
     }
@@ -60,10 +58,10 @@ switch ($order->private_type) {
       throw new UserException('Upptagen epost', 'Den epost adress du angav är tyvärr upptagen. <a href="/pages/glomtlosen.php?email=' . $order->email . '" >Glömt ditt lösenord?</a>');
     }
     if ($order->anamn == '') {
-      throw new UserException('Användarnamn ej ifyllt', 'Alla fällt måste vara ifyllda, försök igen: <a href="/#buy/private">Bli Medlem</a>');
+      throw new UserException('Användarnamn ej ifyllt', 'Alla fällt måste vara ifyllda, försök igen: <a href="/#buy/private'.$callbackVars.'">Bli Medlem</a>');
     }
     if (($order->PRIV3 == 0 && $order->PRIV12 == 0)) { //return to checkout
-      throw new UserException('Ingen tidsperiod', 'Du måste välja en tidsperiod på abonnemanget, försök igen: <a href="/#buy/private">Bli Medlem</a>');
+      throw new UserException('Ingen tidsperiod', 'Du måste välja en tidsperiod på abonnemanget, försök igen: <a href="/#buy/private'.$callbackVars.'">Bli Medlem</a>');
     }
     //do a price check to avoid javascript hacking
     $noFraud = Order::priceCheckPrivate($order->PRIV3, $order->PRIV12, $order->STEG01, $order->FRAKT02, $order->total, $order->discount);
@@ -90,15 +88,15 @@ switch ($order->private_type) {
         throw new UserException($msg, null, $urlHandler->getUrl('Medlem', URL_CREATE), 'Tillbaka');
       }
     } else {
-      throw new UserException('Priset stämmer inte', 'Försök igen: <a href="/#buy/private">Bli Medlem</a>');
+      throw new UserException('Priset stämmer inte', 'Försök igen: <a href="/#buy/private'.$callbackVars.'">Bli Medlem</a>');
     }
     break;
   case 'medlem_extend':  //förläng abonnemang
     if ($order->email == '' OR $order->fname == '' OR $order->lname == '') {
-      throw new UserException('Du måste fylla i alla fält', 'Du måste fylla i alla fält.<a href="/pages/bestall.php?email=' . $order->email . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '" >Prova igen</a>');
+      throw new UserException('Du måste fylla i alla fält', 'Du måste fylla i alla fält.<a href="/pages/bestall.php'.$callbackVars.'" >Prova igen</a>');
     }
     if (($order->PRIV3 == 0 && $order->PRIV12 == 0)) { //return to checkout
-      throw new UserException("Ingen tidsperiod", 'Du måste välja en tidsperiod på abonnemanget, <a href="/pages/bestall.php?email=' . $order->email . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '" >Prova igen</a>');
+      throw new UserException("Ingen tidsperiod", 'Du måste välja en tidsperiod på abonnemanget, <a href="/pages/bestall.php'.$callbackVars.'" >Prova igen</a>');
     }
     $noFraud = Order::priceCheckPrivate($order->PRIV3, $order->PRIV12, $order->STEG01, $order->FRAKT02, $order->total, $order->discount);
     if ($noFraud) {  //javascript prices match to local calculation
@@ -112,7 +110,7 @@ switch ($order->private_type) {
       $medlem->commit();
       $ordertyp = "medlem_extend";
     } else {
-      throw new UserException("Priset stämmer inte", ' <a href="/pages/bestall.php?email=' . $order->email . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '" >Prova igen</a>');
+      throw new UserException("Priset stämmer inte", ' <a href="/pages/bestall.php'.$callbackVars.'" >Prova igen</a>');
     }
     break;
   default:

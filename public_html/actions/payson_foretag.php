@@ -1,14 +1,10 @@
 <?php
 
+// NOTICE the parameters with prefix "del-" is the actual company
+// and with "inv_" is all invoice date, the payer (faktura)
 require_once($_SERVER["DOCUMENT_ROOT"] . "/php/init.php");
-
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-
-
-// NOTICE the parameters with prefix "del-" is the actual company
-// and without "del-" is all payer (faktura) data
-
 
 $req = new stdClass;
 !empty($_REQUEST['type']) ? $req->type = $_REQUEST['type'] : $req->type = 'foretag';
@@ -21,19 +17,19 @@ $req = new stdClass;
 !empty($_REQUEST['discount']) ? $req->discount = $_REQUEST['discount'] : $req->discount = '';
 !empty($_REQUEST['RE03']) ? $req->RE03 = $_REQUEST['RE03'] : $req->RE03 = 0;
 !empty($_REQUEST['RE04']) ? $req->RE04 = $_REQUEST['RE04'] : $req->RE04 = 0;
-!empty($_REQUEST['company']) ? $req->company = $_REQUEST['company'] : $req->company = '';
-!empty($_REQUEST['co']) ? $req->co = $_REQUEST['co'] : $req->co = '';
-!empty($_REQUEST['firstname']) ? $req->fname = $_REQUEST['firstname'] : $req->fname = '';
-!empty($_REQUEST['lastname']) ? $req->lname = $_REQUEST['lastname'] : $req->lname = '';
-!empty($_REQUEST['refcode']) ? $req->refcode = $_REQUEST['refcode'] : $req->refcode = '';
-!empty($_REQUEST['email']) ? $req->email = $_REQUEST['email'] : $req->email = '';
-!empty($_REQUEST['phone']) ? $req->phone = $_REQUEST['phone'] : $req->phone = '';
-!empty($_REQUEST['street1']) ? $req->street1 = $_REQUEST['street1'] : $req->street1 = '';
-!empty($_REQUEST['street2']) ? $req->street2 = $_REQUEST['street2'] : $req->street2 = '';
-!empty($_REQUEST['street3']) ? $req->street3 = $_REQUEST['street3'] : $req->street3 = '';
-!empty($_REQUEST['zip']) ? $req->zip = $_REQUEST['zip'] : $req->zip = '';
-!empty($_REQUEST['city']) ? $req->city = $_REQUEST['city'] : $req->city = '';
-!empty($_REQUEST['country']) ? $req->country = $_REQUEST['country'] : $req->country = '';
+!empty($_REQUEST['inv_company']) ? $req->company = $_REQUEST['inv_company'] : $req->company = '';
+!empty($_REQUEST['inv_co']) ? $req->co = $_REQUEST['inv_co'] : $req->co = '';
+!empty($_REQUEST['inv_firstname']) ? $req->fname = $_REQUEST['inv_firstname'] : $req->fname = '';
+!empty($_REQUEST['inv_lastname']) ? $req->lname = $_REQUEST['inv_lastname'] : $req->lname = '';
+!empty($_REQUEST['inv_refcode']) ? $req->refcode = $_REQUEST['inv_refcode'] : $req->refcode = '';
+!empty($_REQUEST['inv_email']) ? $req->email = $_REQUEST['inv_email'] : $req->email = '';
+!empty($_REQUEST['inv_phone']) ? $req->phone = $_REQUEST['inv_phone'] : $req->phone = '';
+!empty($_REQUEST['inv_street1']) ? $req->street1 = $_REQUEST['inv_street1'] : $req->street1 = '';
+!empty($_REQUEST['inv_street2']) ? $req->street2 = $_REQUEST['inv_street2'] : $req->street2 = '';
+!empty($_REQUEST['inv_street3']) ? $req->street3 = $_REQUEST['inv_street3'] : $req->street3 = '';
+!empty($_REQUEST['inv_zip']) ? $req->zip = $_REQUEST['inv_zip'] : $req->zip = '';
+!empty($_REQUEST['inv_city']) ? $req->city = $_REQUEST['inv_city'] : $req->city = '';
+!empty($_REQUEST['inv_country']) ? $req->country = $_REQUEST['inv_country'] : $req->country = '';
 !empty($_REQUEST['del-company']) ? $req->delCompany = $_REQUEST['del-company'] : $req->delCompany = '';
 !empty($_REQUEST['del-co']) ? $req->delCo = $_REQUEST['del-co'] : $req->delCo = '';
 !empty($_REQUEST['del-firstname']) ? $req->delFname = $_REQUEST['del-firstname'] : $req->delFname = '';
@@ -84,8 +80,13 @@ if (!empty($_REQUEST["startdatumRadio"])) {
   }
 }
 
+$callbackVars = '';
+//$callbackVars .= '?anamn=' . $order->anamn . '&email1=' . $order->email . '&email2=' . $order->email2 . '&firstname=' . $order->fname . '&lastname=' . $order->lname . '&co=' . $order->co .'&phone=' . $order->phone;
+//$callbackVars .= '&street1=' . $order->street1 .'&street2=' . $order->street2 .'&zip=' . $order->zip .'&city=' . $order->city .'&country=' . $order->country;
+//$callbackVars .= '&m_priv3=' . $order->PRIV3 .'&m_priv12=' . $order->PRIV12 .'&m_steg01=' . $order->STEG01;
+
 if (($req->RE03 == 0 && $req->RE04 == 0)) { //return to checkout
-  $url = $SETTINGS["url"] . '/pages/skapaforetag.php?nbr=0';
+  $url = $SETTINGS["url"] . '/#buy/company' . $callbackVars;
   header('Location: ' . $url);
   exit;
 } else {
@@ -96,7 +97,7 @@ if (($req->RE03 == 0 && $req->RE04 == 0)) { //return to checkout
     //everthing looks fine sofar, create the company 
     $kommun = Kommun::loadById(150);  //Use Ale - legacy
     $foretagLosen = Foretag::skapaLosen();  //a new is created in api/order if a purchase is made
-    $isValid = 0;          
+    $isValid = 0;
     $foretag = new Foretag($req->delCompany, $kommun, $foretagLosen, $req->startdatum, $req->channel, $req->campcode, $isValid, $req->weeks);  //param "Order::isValid" and is set to 0 - i.e. not a valid order yet
     $foretag->setTempLosenord($foretagLosen);  //a new is created in api/order if a purchase is made. Store this one!
     $foretag->setPayerCompanyName($req->company);
@@ -129,7 +130,7 @@ if (($req->RE03 == 0 && $req->RE04 == 0)) { //return to checkout
     $foretag->setReciverCountry($req->delCountry);
     $foretag->setCompanyName($req->company);
     $foretag->setCreatedDate();
-    $foretag->setVeckor($req->veckor);    
+    $foretag->setVeckor($req->veckor);
     $foretag->commit();
 
     $token = null;
@@ -137,7 +138,7 @@ if (($req->RE03 == 0 && $req->RE04 == 0)) { //return to checkout
       $nbrpers = $req->RE03 + $req->RE04;
       $paysonMsg = "Motiomera, $nbrpers deltagare, $req->RE03 stegräknare";
       if ($req->email == 'krillo@gmail.com' OR (strpos($req->email, '@erendi.se') > 0)) {
-        $sumToPay = 1;   //for testing only pay 1 kr and allways kristian@erendi.se, don't forget to return the money in payson
+        $sumToPay = 10;   //for testing only pay 1 kr and allways kristian@erendi.se, don't forget to return the money in payson
         $req->email = 'kristian@erendi.se';
         $req->fname = 'kristian';
         $req->ename = 'erendi';
@@ -147,13 +148,17 @@ if (($req->RE03 == 0 && $req->RE04 == 0)) { //return to checkout
       }
       $data = Order::setupPaysonConnection($req->email, $req->fname, $req->lname, $sumToPay, $paysonMsg);
       $payResponse = $data['payResponse'];
+      Misc::logMotiomera(print_r($order, true), 'INFO', 'payson');
       $api = $data['api'];
       if ($payResponse->getResponseEnvelope()->wasSuccessful()) {  // Step 3: verify that it suceeded
         //print_r($payResponse);
+        Misc::logMotiomera(print_r($payResponse, true), 'INFO', 'payson');
         $token = $payResponse->getToken();
         echo $token;
         //header("Location: " . $api->getForwardPayUrl($payResponse)); //do the redirection to payson
       } else {
+        Misc::logMotiomera(print_r($payResponse, true), 'ERROR', 'payson');
+        Misc::sendEmail('kristian@motiomera.se', $SETTINGS["email"], 'Payson error', print_r($payResponse, true));
         throw new UserException("Problem med Payson.se", "Det är något problem med betaltjänsten Payson.se. Prova igen senare eller välj faktura.");
       }
     }

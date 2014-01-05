@@ -26,7 +26,7 @@ jQuery(document).ready(function($) {
     if (hash.indexOf('buy/private') > -1) {
       scrollToBuy();
       showPrivateHideCompany();
-      preFillInputFields(hash);
+      reFillInputFields(hash);
     }
     if (hash.indexOf('buy/company') > -1) {
       scrollToBuy();
@@ -34,14 +34,17 @@ jQuery(document).ready(function($) {
     }
   }
 
+function urldecode(str) {
+   return decodeURIComponent((str+'').replace(/\+/g, '%20'));
+}
 
   /**
-   * get teh get-variables and fill the form
+   * Fill tghe form from the get-variables
    * http://mm.dev/#buy/private?email1=kristian@er.seemail2=kristian@er.se&firstname=Kristian&lastname=Er&co=&phone=0761-393855&street1=Finjagatan%206&street2=&zip=25251&city=Helsingborg&country=Sverige
    * @param {type} hash
    * @returns {undefined}
    */
-  function preFillInputFields(hash) {
+  function reFillInputFields(hash) {
     if (hash.indexOf('?') > -1) {
       var paramsStr = hash.substring(hash.indexOf('?') + 1);
       var prmarr = paramsStr.split('&')
@@ -50,17 +53,31 @@ jQuery(document).ready(function($) {
         var tmparr = prmarr[i].split("=");
         params[tmparr[0]] = tmparr[1];
       }
-      $('#email1').val(params.email1);
-      $('#email2').val(params.email2);
-      $('#firstname').val(params.firstname);
-      $('#lastname').val(params.lastname);
-      $('#co').val(params.co);
-      $('#phone').val(params.phone);
-      $('#street1').val(params.street1);
-      $('#street2').val(params.street2);
-      $('#zip').val(params.zip);
-      $('#city').val(params.city);
-      $('#country').val(params.country);
+      $('#anamn').val(urldecode(params.anamn));
+      $('#email1').val(urldecode(params.email1));
+      $('#email2').val(urldecode(params.email2));
+      $('#firstname').val(urldecode(params.firstname));
+      $('#lastname').val(urldecode(params.lastname));
+      $('#co').val(urldecode(params.co));
+      $('#phone').val(urldecode(params.phone));
+      $('#street1').val(urldecode(params.street1));
+      $('#street2').val(urldecode(params.street2));
+      $('#zip').val(urldecode(params.zip));
+      $('#city').val(urldecode(params.city));
+      $('#country').val(urldecode(params.country));
+      if(params.m_priv3 === '1'){
+        $("#short-radio").prop('checked', true);
+        if(params.m_steg01 === '1'){
+          $("#short-check").prop('checked', true);
+        } 
+      }
+      if(params.m_priv12 === '1'){
+        $("#long-radio").prop('checked', true);
+        if(params.m_steg01 === '1'){
+          $("#long-check").prop('checked', true);
+        } 
+      }      
+      sum_private();
     }
   }
 
@@ -130,7 +147,7 @@ jQuery(document).ready(function($) {
       }
     });
     return anamnFree;
-  }, "Upptaget alias, välj ett annat");
+  }, "Upptaget alias, v�lj ett annat");
 
 
 
@@ -239,8 +256,8 @@ jQuery(document).ready(function($) {
       //Private
       "anamn": {
         required: '',
-        maxlength: 'För långt',
-        minlength: 'För kort'
+        maxlength: 'F�r l�ngt',
+        minlength: 'F�r kort'
       },
       "firstname": {
         required: ''

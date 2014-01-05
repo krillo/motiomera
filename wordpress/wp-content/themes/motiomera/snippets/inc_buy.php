@@ -188,17 +188,17 @@ Order::getMondays(15);
       <div class="buy-box">
         <a href="" id="delivery-toggle" class=" buy-heading">Annan faktura-adress?</a>
         <ul id="delivery-address" class="buy-ul hidden">
-          <li><input type="text" name="company" id="company" class="" placeholder="Företagets namn"/></li>
-          <li><input type="text" name="co" id="co" placeholder="c/o"/></li>        
-          <li><input type="text" name="street1" id="street1" placeholder="Adress"/></li>
-          <li><input type="text" name="street2" id="del-street2" placeholder=""/></li>
-          <li><input type="text" name="zip" id="zip" placeholder="Postnummer"/></li>
-          <li><input type="text" name="city" id="city" placeholder="Ort"/></li>
-          <li><input type="text" name="country" id="country" class="" value="Sverige" placeholder="Sverige"/></li>
-          <li><input type="text" name="firstname" id="firstname" class="" placeholder="Kontakt förnamn"/></li>
-          <li><input type="text" name="lastname" id="lastname" class="" placeholder="Kontakt efternamn"/></li>
-          <li><input type="email" name="email" id="email" class="" placeholder="E-post"/></li>
-          <li><input type="text" name="phone" id="phone" placeholder="Mobil/telefon"/></li>
+          <li><input type="text" name="inv_company" id="inv_company" class="" placeholder="Företagets namn"/></li>
+          <li><input type="text" name="inv_co" id="inv_co" placeholder="c/o"/></li>        
+          <li><input type="text" name="inv_street1" id="inv_street1" placeholder="Adress"/></li>
+          <li><input type="text" name="inv_street2" id="inv_street2" placeholder=""/></li>
+          <li><input type="text" name="inv_zip" id="inv_zip" placeholder="Postnummer"/></li>
+          <li><input type="text" name="inv_city" id="inv_city" placeholder="Ort"/></li>
+          <li><input type="text" name="inv_country" id="inv_country" class="" value="Sverige" placeholder="Sverige"/></li>
+          <li><input type="text" name="inv_firstname" id="inv_firstname" class="" placeholder="Kontakt förnamn"/></li>
+          <li><input type="text" name="inv_lastname" id="inv_lastname" class="" placeholder="Kontakt efternamn"/></li>
+          <li><input type="email" name="inv_email" id="inv_email" class="" placeholder="E-post"/></li>
+          <li><input type="text" name="inv_phone" id="inv_phone" placeholder="Mobil/telefon"/></li>
         </ul>
       </div>
     </div>
