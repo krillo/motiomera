@@ -27,12 +27,11 @@ Vill du anmäla fler deltagare till tävlingen gör du det under fliken <b>Till�
 
 <br/>
 <br/>
-<a href="/pages/foretag.php?fid={$foretaget->getId()}"><button type="button" class="button">Statistik under tävlingen</button></a>
+<a href="/pages/foretag.php?fid={$foretaget->getId()}"><button type="button" class="mm-button">  <span class="glyphicon glyphicon-stats"></span> Statistik under tävlingen</button></a>
 <br/>
 {if (isset($tid)) }
 <br/>
-<a href="/pages/tavlingsres.php?fid={$foretaget->getId()}&tid={$tid}"><button type="button" class="button">Statistik för avslutad tävling</button></a>
-<!-- div class="mmRed"><h3>Er tävling är nu slut och här kan du se all <a href="/pages/tavlingsres.php?fid={* $foretaget->getId() *}&tid={* $tid *}" class="mmRed" style="text-decoration:underline; ">statistik för tävlingen</a></h3></div-->
+<a href="/pages/tavlingsres.php?fid={$foretaget->getId()}&tid={$tid}"><button type="button" class="mm-button">  <span class="glyphicon glyphicon-stats"></span> Statistik för avslutad tävling</button></a>
 {/if}
 <br/>
 <br/>

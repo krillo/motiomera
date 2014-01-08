@@ -48,7 +48,7 @@
           <a href="/pages/foretaglogin.php?u={$orderList.foretagANamn}&p={$orderList.foretagLosen}" >Klicka här för att komma till administrationssidan för er tävling</a> 
         </p>      
       </div>  
-      <div style="float:right;" class="noprint"><button onclick="window.print()" class="print-button">  <span class="glyphicon glyphicon-print"></span> Skriv ut denna sida</button></div>
+      <div style="float:right;" class="noprint"><button onclick="window.print()" class="mm-button">  <span class="glyphicon glyphicon-print"></span> Skriv ut denna sida</button></div>
     </div>
     <div class="mmClearBoth"></div>  
   {/if}

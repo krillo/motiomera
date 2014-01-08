@@ -1,11 +1,3 @@
-<script type="text/javascript">
-  {literal}
-	$(document).ready(function()
-	{
-		addSorting();
-	});
-  {/literal}
-</script>
 <h1>Order</h1>
 
 <form method="get" action="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">
@@ -23,95 +15,46 @@
 {else}
 
 
-  <table class="sortable" border="0" cellpadding="0" cellspacing="0">
+  <table class="mmTableAdmin" border="0" cellpadding="0" cellspacing="0">
     <thead>
-      <tr>
-        <th>
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">ID</a>
-        </th>
-
-        <th style="padding-right: 5px;">
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Företagsnamn</a>
-        </th>
-        <th style="padding-right: 5px;">
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">FöretagsId</a>
-        </th>			
-        <th>
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">typ</a>
-        </th>			
-        <th>	
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Datum</a>
-        </th>
-        <th>	
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Veckor </a>
-        </th>
-        <th>	
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Tävlingsdatum</a>
-        </th>
-        <th>  
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Kanal</a>
-        </th>
-        <th style="padding-right: 5px;">
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Valid </a>
-        </th>			
-        <th style="padding-right: 5px;">	
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Status</a>
-        </th>          			
-        <th  style="padding-right: 5px;">
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Antal</a>
-        </th>
-        <th  style="padding-right: 5px;">
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Quantity</a>
-        </th>
-        <th>
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Pris</a>
-        </th>
-        <th>
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Pris moms</a>
-        </th>
-        <th style="padding-right: 5px;">	
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Betalning</a>
-        </th>
-        <th style="padding-right: 5px;">  
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Namn</a>
-        </th>
-        <th style="padding-right: 5px;">  
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Epost</a>
-        </th>
-        <th style="padding-right: 5px;">  
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Telefon</a>
-        </th>
-
-        <th style="padding-right: 5px;">
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Kampanj</a>
-        </th>
-        <th>
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Kampanj med text</a>
-        </th>			
-        <th>
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Filnamn</a>
-        </th> 			
-        <th>
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Faktura filnamn</a>
-        </th> 	
-        <th style="padding-right: 5px;">  
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Faktura namn</a>
-        </th>
-        <th style="padding-right: 5px;">  
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Faktura epost</a>
-        </th>
-        <th style="padding-right: 5px;">  
-          <a href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}">Faktura telefon</a>
-        </th>
-
-
+      <tr style="background-color:#fff;">
+        <th>ID</th>
+        <th style="padding-right: 5px;">Företagsnamn</th>
+        <th style="padding-right: 5px;">FöretagsId</th>			
+        <th>typ</th>			
+        <th>Datum</th>
+        <th>Veckor</th>
+        <th>Tävlingsdatum</th>
+        <th>Kanal</th>
+        <th style="padding-right: 5px;">Valid</th>			
+        <th style="padding-right: 5px;">Status</th>          			
+        <th style="padding-right: 5px;">Antal</th>
+        <th style="padding-right: 5px;">Quantity</th>
+        <th>Pris</th>
+        <th>Pris moms</th>
+        <th style="padding-right: 5px;">Betalning</th>
+        <th style="padding-right: 5px;">Namn</th>
+        <th style="padding-right: 5px;">Epost</th>
+        <th style="padding-right: 5px;">Telefon</th>
+        <th style="padding-right: 5px;">Kampanj</th>
+        <th>Kampanj med text</th>			
+        <th>Filnamn</th> 			
+        <th>Faktura filnamn</th> 	
+        <th style="padding-right: 5px;">Faktura namn</th>
+        <th style="padding-right: 5px;">Faktura epost</th>
+        <th style="padding-right: 5px;">Faktura telefon</th>
       </tr>
     </thead>
     <tbody>
       {foreach from=$listOrder item=thisOrder}
         <tr>
           <td class="mmList1">{$thisOrder->getId()}.</td>
-          <td class="mmList2"><a style="text-decoration: underline; color: blue;" href="{$urlHandler->getUrl(Foretag, URL_EDIT, $thisOrder->getForetagId())}">{$thisOrder->getCompanyName()}</a></td>	
+          {if $thisOrder->getTyp() eq 'foretag' or $thisOrder->getTyp() eq 'foretag_tillagg'}
+            <td class="mmList2"><a style="text-decoration: underline; color: blue;" href="{$urlHandler->getUrl(Foretag, URL_EDIT, $thisOrder->getForetagId())}">{$thisOrder->getCompanyName()}</a></td>	
+          {/if}          
+          {if $thisOrder->getTyp() eq 'medlem' or $thisOrder->getTyp() eq 'medlem_extend'}
+            <td class="mmList2"><a style="text-decoration: underline; color: blue;" href="/admin/pages/medlem.php?id={$thisOrder->getMedlemId()}">{$thisOrder->getCompanyName()}</a></td>	
+          {/if}          
           <td class="mmList1"><a style="text-decoration: underline; color: blue;" href="{$urlHandler->getUrl(Order, URL_ADMIN_ORDER_LIST)}&foretagid={$thisOrder->getForetagId()}">{$thisOrder->getForetagId()}</a></td>						
           <td class="mmList2">{$thisOrder->getTyp()}</td>
           <td class="mmList1">{$thisOrder->getSkapadDatum()}</td>

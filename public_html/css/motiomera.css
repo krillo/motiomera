@@ -419,7 +419,7 @@ input{
   background-color: #E0EDD9;
   border: 1px solid #D0E0C7;  
 }
-.print-button{
+.mm-button{
   margin-top: 30px;
   padding: 15px;
   border-radius: 5px;
@@ -428,7 +428,7 @@ input{
   margin-right: 15px;
   background-color: #EEE;
 }
-.print-button:hover{cursor:  pointer;}
+.mm-button:hover{cursor:  pointer;}
 #mm-kvitto-cred{width:250px;}
 #mmLoggaIn .mmTextField
 {
@@ -1129,14 +1129,9 @@ input{
   vertical-align: middle;
   text-indent: 10px;
 }
-.mmAdressbokCellWhite2
-{
-  background: #fff;
-}
-.mmCellAdmin{
-  text-indent: 2px;
-}
-
+.mmAdressbokCellWhite2{background: #fff;}
+.mmTableAdmin{font-size: 12px;}
+.mmCellAdmin{text-indent: 2px;}
 .mmCellAdmin a{
   position: relative;
   top: 3px;  
@@ -1529,10 +1524,7 @@ input{
   color: #555;
   font-weight: normal;
 }
-.mmAdminColor{
-  color: #F29F10;
-  font-weight: normal;
-}
+.mmAdminColor, .mmAdminColor h3 {color: #F29F10;font-weight: normal;}
 .mmGrafikPositionBottom{position: relative;top: 110px;}
 .mmGrafikPositionMedlem
 {

@@ -75,6 +75,8 @@ if(!empty($_GET['search'])){
 
 if($foretagid != "0"){
 	$listOrder = Order::listOrderIdsByForetagId($foretagid);
+  //print_r($listOrder);
+  //die();
 } else {
 	$listOrder = Order::listOrderKrillo($offset, $limit, $field, $search, $way, $showValid, $showForetag);
   //print_r($listOrder);
