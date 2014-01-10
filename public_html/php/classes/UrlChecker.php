@@ -64,19 +64,16 @@ class UrlChecker
 	protected $urlMarkup = array(
 		"KOMMUNER" => array(
 			"editkommun.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 		) ,
 		"FASTA UTMANINGAR" => array(
 			"fastautmaningar_route.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 		) ,
 		"MIN SIDA" => array(
 			"minsida.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 			"rapport.php" => array() ,
@@ -109,54 +106,43 @@ class UrlChecker
 		) ,
 		"QUIZ" => array(
 			"minaquizskapa.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 			"minaquizandra.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 			"minaquizvisa.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 			"minaquiz.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 		) ,
 		"PROQUIZ" => array(
 			"proquizskapa.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 			"proquizandra.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 			"proquizvisa.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 			"proquiz.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 		) ,
 		"PÅMINNELSER" => array(
 			"paminnelse_andrasql.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 			"paminnelse_skapasql.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 		) ,
 		"MINA VÄNNER" => array(
 			"adressbok.php" => array() ,
 			"profil.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.motiomera.js"
 			) ,
 		) ,
@@ -188,21 +174,18 @@ class UrlChecker
 		) ,
 		"MEDLEMMAR" => array(
 			"medlemmar.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.tablesorter.js",
 				"/js/jquery.motiomera.js"
 			) ,
 		) ,
 		"LISTA FÖRETAG" => array(
 			"listforetag.php" => array(
-				//"/js/jquery-1.2.6.min.js",
 				"/js/jquery.tablesorter.js",
 				"/js/jquery.motiomera.js"
 			) ,
 		) ,
 		"INDEX" => array(
-			"index.php" => array(
-        //"/js/jquery-1.7.1.min.js",          
+			"index.php" => array(          
 				//"http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js",
         "/js/slides.min.jquery.js",
 				"/js/jquery.tablesorter.js",

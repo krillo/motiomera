@@ -31,7 +31,7 @@
       {/if}
     {/if}
     {foreach from=$urlChecker->getJsPackage() item=file}
-      <!--script type="text/javascript" src="{$file}"></script-->
+      <script type="text/javascript" src="{$file}"></script>
     {/foreach}
 
 
@@ -42,7 +42,7 @@
       <script type='text/javascript' src='{$mm_url}/wp-content/themes/motiomera/js/jquery.flot.stack.js?ver=3.3.2'></script>    
       <script type="text/javascript" src="{$mm_url}/wp-content/themes/motiomera/js/jquery.mmwp.steps.js?ver=3.5.1"></script>
     {/if}
-    {if $pagetitle == 'Företagstävling'} 
+    {if $pagetitle == 'Företagstävling' or  $pagetitle == 'Redigera företag'} 
       <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
       <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     {/if}
@@ -61,6 +61,7 @@
       //print($includes);
     {/php} 
 
+    
 
 
 

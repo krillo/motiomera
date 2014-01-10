@@ -2091,7 +2091,7 @@ input{
 }
 .mmTabBoxMid a
 {
-  padding: 0 8px;
+  padding: 0 6px;
 }
 .mmTabBoxMid
 {
@@ -3212,3 +3212,36 @@ td.number
 #buy-private{float:left;}
 #buy-private-2{float:right;}
 .buy-ul li .invalid {border-color: #F00;}
+
+/******************************/
+/******* buy - tillägg ********/
+.buy-heading {font-size: 20px;margin-bottom: 10px;}
+#faktura {
+  background-image: url("/wp-content/themes/motiomera/img/invoice_button.png");
+  background-position: -30px 0px;
+  background-repeat: no-repeat;
+  width: 195px;
+  border-color: #FFF #879371 #879371 #FFF;
+  border-width: 1px;
+  color: #000;
+  font-size: 18px;
+  margin-top: 10px;
+  padding: 7px 9px 10px 9px;
+  margin-bottom: 15px;
+}
+#faktura:hover{
+  border-color: #879371 #FFF #FFF #879371;
+  padding: 5px 11px 12px 7px;
+  background-position: -32px -2px;
+}
+#nbr-with-text, #nbr-without-text{margin-right: 25px;margin-bottom: 15px;}
+#nbr-with, #nbr-without {
+  margin-right: 25px;
+  width: 26px;
+  height: 20px;
+  font-size: 19px;
+  color: #888;
+  padding-left: 5px;
+}
+.tr-extra-margin{margin-top:10px;}
+#nbr-sum-total-freight-moms, .total-freight-moms {color: #4F6916;}

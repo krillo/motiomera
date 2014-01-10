@@ -1,5 +1,4 @@
 <?php
-
 include $_SERVER["DOCUMENT_ROOT"]  . "/php/init.php";
 
 
@@ -16,7 +15,7 @@ $tid = Tavling::getTavlingsId($foretag->getId());
 $smarty->assign("tid", $tid[tavlings_id]);
 $smarty->assign("pagetitle", "Redigera företag");
 
-$tabs = new TabBox("foretag", 670, null);
+$tabs = new TabBox("foretag", 700, null);
 $tabs->addTab("Lag", "lag");
 $tabs->addTab("Inställningar", "installningar");
 $tabs->addTab("Deltagare", "anstallda");

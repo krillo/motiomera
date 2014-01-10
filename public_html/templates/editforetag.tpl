@@ -12,7 +12,6 @@ Deltagarna blir automatiskt indelade i lag. Du kan ändra lagindelningen genom a
 Vill du anmäla fler deltagare till tävlingen gör du det under fliken <b>Tilläggsbeställning</b>.
 </p>
 
-
 <br/>
 <h3>Viktiga datum</h3>
 <table class="sortable sorted">
