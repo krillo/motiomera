@@ -59,11 +59,15 @@
     <tr>
       <th>Facebook</th>
         <td class="mmRawText">{$medlem->getFbId()}</td>
-        <td class="mmRawText"><a href="http://facebook.com/{$medlem->getFbId()}" style="text-decoration: underline; color: blue;" target="_blank">facebook.com/{$medlem->getFbId()}</a></td>
+        <td class="mmRawText"><a href="http://facebook.com/{$medlem->getFbId()}" style="text-decoration: underline; color: blue;" target="_blank">http://facebook.com/{$medlem->getFbId()}</a></td>
     </tr>
     <tr>
-      <th>Namn</th>
-      <td class="mmRawText">{$medlem->getFNamn()} {$medlem->getENamn()}</td>
+      <th>Namn, adress</th>
+      <td class="mmRawText" style="background-color: #E1EDDA;">{$medlem->getFNamn()} {$medlem->getENamn()}<br/>{$medlem->getAddress()}{if $medlem->getCo() != ''}<br/>{ $medlem->getCo()}{/if} <br/>{$medlem->getZip()} {$medlem->getCity()}<br/>{$medlem->getCountry()}</td>
+    </tr>
+    <tr>
+      <th>Tel</th>
+      <td class="mmRawText">{$medlem->getPhone()}</td>
     </tr>
     <tr>
       <th>E-post</th>

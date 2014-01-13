@@ -3245,3 +3245,21 @@ td.number
 }
 .tr-extra-margin{margin-top:10px;}
 #nbr-sum-total-freight-moms, .total-freight-moms {color: #4F6916;}
+#buy-contact {float: right;}
+#buy-contact img {
+  float: left;
+  border: 7px solid #FFF;
+  -moz-border-radius: 10px 10px / 10px 10px;
+  border-radius: 10px 10px / 10px 10px;
+}
+#bubble {
+  float: left;
+  margin-left: 10px;
+  padding: 15px 0 0 50px;
+  background-image: url('/wp-content/themes/motiomera/img/bubble.png');
+  background-repeat: no-repeat;
+  height: 245px;
+  width: 253px;
+  font-size: 18px;
+  height: 231px;
+}
