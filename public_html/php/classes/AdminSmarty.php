@@ -38,6 +38,7 @@ class AdminSmarty extends Smarty
 		$this->assign("GOOGLEMAPS_APIKEY", GOOGLEMAPS_APIKEY);
 		$this->assign("BROWSER", Medlem::getCurrentBrowserVersion(true));
 		$this->assign("urlChecker", $urlChecker);
+		$this->assign("admin_css_class", ' rep-admin ');    
 		
 		if ($ADMIN) $this->assign("ADMIN", $ADMIN);
 		

@@ -56,8 +56,8 @@
 
     {php}
       //get all scripts and css from wp
-      global $SETTINGS;
-      $includes = file_get_contents($SETTINGS["url"].'/api-header/?page=kapten');
+      //global $SETTINGS;
+      //$includes = file_get_contents($SETTINGS["url"].'/api-header/?page=kapten');
       //print($includes);
     {/php} 
 
@@ -149,7 +149,8 @@
 
 
   </head>	
-  <body id="body" class="{$BROWSER} {$currentPage}">
+  <body id="body" class="{$admin_css_class} {$BROWSER} {$currentPage} ">
+    {*$smarty.server.PHP_SELF*} 
     {if isset($USER)}
       <div id="mm_id" style="display: none;">{$USER->getId()}</div>
     {else}

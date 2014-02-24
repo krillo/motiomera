@@ -3263,3 +3263,9 @@ td.number
   font-size: 18px;
   height: 231px;
 }
+
+
+/*** Special css for admin pages ***/
+.rep-admin #mmWrapMiddle{margin-left:0;}
+body.rep-admin{background-position: left top;}
+body.rep-admin #footer-last{background-position: left bottom;}
