@@ -1,0 +1,160 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2012-02-19T18:14:21+00:00\n"
+"Last-Translator: Faleddo <http://faleddo.x10.bz>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Indonesian\n"
+"X-Poedit-Country: Indonesia\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
+msgstr "Plugin ini menjadwalkan backup dari file penting website anda: mudah digunakan dan efisien"
+
+msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
+msgstr "maaf, anda harus menginstall/mengaktifkan %s pada website anda. Atau, plugin tidak akan bekerja dengan baik."
+
+msgid "How often do you want to backup your website?"
+msgstr "Seberapa sering anda ingin membackup website anda?"
+
+msgid "Frequency (in days):"
+msgstr "Frekuensi(dalam hari):"
+
+msgid "Time of the backups:"
+msgstr "Waktu backup:"
+
+msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
+msgstr "Harap diingat bahwa 0 berarti"
+
+msgid "What do you want to save?"
+msgstr "Apa yang ingin anda simpan?"
+
+msgid "All directories (the full Wordpress installation):"
+msgstr "Semua folder(semua file instalasi Wordpress):"
+
+msgid "(i.e. %s)"
+msgstr "(i.e. %s)"
+
+msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
+msgstr "Pilih opsi ini jika anda ingin menyimpan semuanya. Hati-hati, file cadangan bisa berukuran besar!"
+
+msgid "The plugins directory:"
+msgstr "Folder plugin:"
+
+msgid "The themes directory:"
+msgstr "Folder tema"
+
+msgid "The upload directory:"
+msgstr "Folder upload"
+
+msgid "The SQL database:"
+msgstr "Basis data SQL"
+
+msgid "The maximum file size (in MB):"
+msgstr "Ukuran file maksimum(dalam MB):"
+
+msgid "Do you want that the backup is sent by email?"
+msgstr "Apakah anda ingin file cadangan dikirim melalui email?"
+
+msgid "If so, please enter your email:"
+msgstr "Jika ya,masukkan email anda"
+
+msgid "FTP host:"
+msgstr "Host FTP:"
+
+msgid "Your FTP login:"
+msgstr "Login FTP anda:"
+
+msgid "Your FTP pass:"
+msgstr "Kata sandi FTP anda:"
+
+msgid "Backups"
+msgstr "Backup"
+
+msgid "Parameters"
+msgstr "Parameter"
+
+msgid "Manage translations"
+msgstr "Kelola terjemahan"
+
+msgid "Give feedback"
+msgstr "Kirim Masukan"
+
+msgid "Other plugins"
+msgstr "Plugin lain"
+
+msgid "Date of the backup"
+msgstr "File backup"
+
+msgid "Backup files"
+msgstr "File backup"
+
+msgid "Part %s"
+msgstr "Bagian %s"
+
+msgid "Delete these backup files"
+msgstr "Hapus file backup"
+
+msgid "Cancel this process"
+msgstr "Batalkan perintah"
+
+msgid "Please wait..."
+msgstr "Mohon tunggu.."
+
+msgid "(ZIP creation)"
+msgstr "(pembuatan ZIP)"
+
+msgid "(FTP sending)"
+msgstr "(pengiriman FTP)"
+
+msgid "Backup of %s on %s (%s)"
+msgstr "Cadangan dari %s pada %s(%s)"
+
+msgid "(MAIL sending)"
+msgstr "(pengiriman email)"
+
+msgid "Keep the backup files for (in days):"
+msgstr "Simpan file cadangan untuk(dalam hari):"
+
+msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
+msgstr "Pilih opsi ini jika anda ingin menyimpan semua plugin yang anda install dan anda pakai di website ini."
+
+msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
+msgstr "Pilih opsi ini jika anda ingin menyimpan semua tema yang anda install dan anda pakai di website ini."
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc."
+msgstr "Pilih opsi ini jika anda ingin menyimpan semua teks posting, pengaturan, dan lain lain."
+
+msgid "Send the backup files by email:"
+msgstr "Kirim backup melalui email:"
+
+msgid "Do you want that the backup is stored on a FTP?"
+msgstr "Apakah anda ingin menyimpan file cadangan di FTP?"
+
+msgid "Save the backup files on a FTP?"
+msgstr "Simpan file cadangan di FTP?"
+
+msgid "Advanced - Memory and time management"
+msgstr "Tingkat lanjut - pengelolaan memori dan waktu"
+
+msgid "Backup finished on %s at %s"
+msgstr "Backup selesai %s pada %s"
+
+msgid "The total size of the files is %s"
+msgstr "Ukuran file total adalah %s"
+
+msgid "An unknown error occured!"
+msgstr "Terjadi kesalahan!"
+

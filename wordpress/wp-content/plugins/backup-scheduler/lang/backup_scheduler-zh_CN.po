@@ -1,0 +1,467 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-06-26T14:12:29+00:00\n"
+"Last-Translator: YiscaJoe <J.Yisca@gmail.com>\n"
+"Last-Translator: jeffli <www.jdccie.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: People's Republic of China\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
+msgstr "这个插件将使计划备份成为您的网站的重要组成部分：使用简单、高效！"
+
+msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
+msgstr "很抱歉，但您应该确保 install/activate%s 在您的网站上。否则，这个插件将无法正常工作！"
+
+msgid "How often do you want to backup your website?"
+msgstr "您希望多久备份一次您的站点呢？"
+
+msgid "Frequency (in days):"
+msgstr "频率（按天数）："
+
+msgid "Time of the backups:"
+msgstr "备份时间："
+
+msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
+msgstr "请注意0表示午夜，1表示凌晨1点，13表示下午1点等等。请确保您的网站在设置的时间进行备份不会造成系统过载。"
+
+msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
+msgstr ""
+
+msgid "Keep the backup files for (in days):"
+msgstr "保存文件的时间（按天数）："
+
+msgid "If you want to be notify when the backup process is finished, please enter your email:"
+msgstr "如果你想当备份完成的时候发邮件通知,请输入邮箱:"
+
+msgid "Customize the name of the files?"
+msgstr "自定义备份文件的名字"
+
+msgid "Add this string to the name of the files:"
+msgstr "添加这个字符串到文件名"
+
+msgid "The name of the files will be %s."
+msgstr "这个名字将为 %s"
+
+msgid "%s is the string of the present option. You may set this option to %s."
+msgstr "%s是现在的字符串,你可以自定义 %s"
+
+msgid "%s is a random string for security reasons."
+msgstr "%s做为随机字符串出现"
+
+msgid "%s is the extension (i.e. %s)."
+msgstr "%s扩展 (i.e. %s)"
+
+msgid "What do you want to save?"
+msgstr "您要保存哪些文件呢？"
+
+msgid "All directories (the full Wordpress installation):"
+msgstr "所有目录(安装完整的wordpress)"
+
+msgid "(i.e. %s)"
+msgstr "（即 %s）"
+
+msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
+msgstr "如果你要每天保存,请检查选项.注意,备分文件会相当大"
+
+msgid "The plugins directory:"
+msgstr "插件目录："
+
+msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
+msgstr "选中此项将保存所有您已经安装和使用的插件。"
+
+msgid "The themes directory:"
+msgstr "主题目录："
+
+msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
+msgstr "选中此项将保存所有您已经安装和使用的主题。"
+
+msgid "The upload directory for this blog:"
+msgstr ""
+
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
+msgstr "选中此项将保存已经上传的图片和文件等等在articles/posts/pages中。"
+
+msgid "All upload directories (for this site and the sub-blogs):"
+msgstr ""
+
+msgid "Check this option if you want to save the images, the files, etc. that people have uploaded on their websites to create articles/posts/pages."
+msgstr ""
+
+msgid "The upload directory for the main site:"
+msgstr ""
+
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your main website to create your articles/posts/pages."
+msgstr ""
+
+msgid "The upload directory:"
+msgstr "上传文件目录："
+
+msgid "The SQL database:"
+msgstr "SQL数据库："
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for this blog"
+msgstr ""
+
+msgid "All SQL databases:"
+msgstr ""
+
+msgid "Check this option if you want to save all texts of posts, configurations, etc. for all blogs in this website"
+msgstr ""
+
+msgid "Only your SQL database:"
+msgstr ""
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for the main website"
+msgstr ""
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc."
+msgstr "选中此项将保存您文章中的文字和设置等等。"
+
+msgid "The maximum file size (in MB):"
+msgstr ""
+
+msgid "Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated"
+msgstr "请注意文件将可能被压缩并分割成多个压缩文件"
+
+msgid "Do you want that the backup is sent by email?"
+msgstr "您希望您的备份被发送到您的邮箱中么？"
+
+msgid "Send the backup files by email:"
+msgstr ""
+
+msgid "If so, please enter your email:"
+msgstr "如果需要发送，请输入您的邮箱账号："
+
+msgid "Do you want to add a suffix to sent files:"
+msgstr ""
+
+msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
+msgstr "这项设置将允许该块通过一些电子邮件服务商对于zip附件的拦截（如GMail）。"
+
+msgid "You do not need to fill this field if no mail is to be sent."
+msgstr "如果不需要邮寄您的备份，您不需要填写该字段。"
+
+msgid "Do you want that the backup is stored on a FTP?"
+msgstr ""
+
+msgid "Save the backup files on a FTP?"
+msgstr ""
+
+msgid "FTP host:"
+msgstr ""
+
+msgid "Should be at the form %s or %s"
+msgstr ""
+
+msgid "If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s."
+msgstr ""
+
+msgid "FTP port:"
+msgstr ""
+
+msgid "By default the port is %s"
+msgstr ""
+
+msgid "Your FTP login:"
+msgstr ""
+
+msgid "Your FTP pass:"
+msgstr ""
+
+msgid "Click on that button %s to test if the above information is correct"
+msgstr ""
+
+msgid "Test"
+msgstr ""
+
+msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
+msgstr ""
+
+msgid "Advanced - Memory and time management"
+msgstr "高级 - 内存和时间管理"
+
+msgid "What is the maximum size of allocated memory (in MB):"
+msgstr "允许的最大内存（MB）："
+
+msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
+msgstr "在一些已安装的WordPress中，您可能会遇见一些内存错误。如果你碰到错误，请尽量减小这个数值。"
+
+msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
+msgstr "根据您的信息，服务器允许的最大内存值为 %s 而目前的内存使用状况是 %s。"
+
+msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
+msgstr "这是建议设置的附件最高大小没有比这个更高的值了。"
+
+msgid "Please note that the files greater than this limit won't be included in the zip file!"
+msgstr ""
+
+msgid "What is the maximum time for the php scripts execution (in seconds):"
+msgstr "PHP脚本执行的最长时间（按秒）："
+
+msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
+msgstr "即使您没有时间限制，建议您将该值设定为15s，以免您的服务器提供商将该PHP脚本强制结束。"
+
+msgid "Here is the backup files. You can force a new backup or download previous backup files."
+msgstr "这是备份文件。你可以建立一个新的备份文件或者下载您之前的备份文件。"
+
+msgid "Please note that the current GMT time of the server is %s. If it is not correct, please configure the Wordpress installation correctly."
+msgstr ""
+
+msgid "An automatic backup will be launched in %s days and %s hours."
+msgstr "自动备份将在 %s天%s小时 后进行。"
+
+msgid "The backup process has started %s hours ago but has not finished yet."
+msgstr ""
+
+msgid "Force a new backup (with Mail/FTP)"
+msgstr ""
+
+msgid "Force a new backup (without any external storage or sending)"
+msgstr ""
+
+msgid "How to restore the backup files?"
+msgstr ""
+
+msgid "To restore the backups, and if you have backuped the full installation, you will have to execute the following steps:"
+msgstr ""
+
+msgid "Save all zip files (i.e. *.zip, *.z01, *.z02, etc.) in a single folder on your hard disk."
+msgstr ""
+
+msgid "Unzip these files by using IZArc, Winzip, or Winrar (others software could not support these multipart zip and consider that the archive is corrupted)."
+msgstr ""
+
+msgid "Save the extracted files on your webserver."
+msgstr ""
+
+msgid "Reimport the SQL files (i.e. *.sql1, *sql2, etc.) with phpmyadmin (it is recommended to save your database first)."
+msgstr ""
+
+msgid "To restore the backups, and if you have backuped only some folders, you will have to execute the following steps:"
+msgstr ""
+
+msgid "Install a fresh version of Wordpress on your webserver."
+msgstr ""
+
+msgid "Replace the folders (i.e. 'plugins',  'themes', and/or 'uploads') of the root of your webserver by the extracted folders."
+msgstr ""
+
+msgid "Replace the wp-config.php (at the root of your webserver) with the extracted one."
+msgstr ""
+
+msgid "Backups"
+msgstr "备份"
+
+msgid "Parameters"
+msgstr "参数"
+
+msgid "Manage translations"
+msgstr "翻译管理"
+
+msgid "Give feedback"
+msgstr "提供反馈意见"
+
+msgid "Other plugins"
+msgstr "其它插件"
+
+msgid "Date of the backup"
+msgstr "备份天数"
+
+msgid "Backup files"
+msgstr "备份文件"
+
+msgid "Part %s"
+msgstr "第 %s 部分"
+
+msgid "Backup finished on %s at %s"
+msgstr ""
+
+msgid "The total size of the files is %s"
+msgstr "文件大小合计为%s"
+
+msgid "These files will be deleted in %s days"
+msgstr "这些文件将在 %s 天后删除"
+
+msgid "Delete these backup files"
+msgstr "删除这些备份文件"
+
+msgid "The process is still in progress for this backup (begun %s at %s)."
+msgstr ""
+
+msgid "The SQL extraction is in progress (%s entries extracted)."
+msgstr ""
+
+msgid "The ZIP creation is in progress (%s files has been added in %s zip files and the current size of the zip files is %s)."
+msgstr ""
+
+msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
+msgstr ""
+
+msgid "The MAIL sending is in progress (%s files has been sent)."
+msgstr ""
+
+msgid "Cancel this process"
+msgstr ""
+
+msgid "Please wait..."
+msgstr ""
+
+msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
+msgstr "（现在，这里没有任何备份文件。你应该等待或者强行建立一个备份（看看下面））"
+
+msgid "Please wait, a backup is in progress for %s seconds! Wait until %s seconds for an automatic restart."
+msgstr ""
+
+msgid "This error message may also be generated if the chunk size is too big: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
+msgstr ""
+
+msgid "(SQL extraction - ending)"
+msgstr ""
+
+msgid "(SQL extraction)"
+msgstr ""
+
+msgid "(SQL extraction - nothing to be done)"
+msgstr ""
+
+msgid "(ZIP creation)"
+msgstr ""
+
+msgid "(FTP sending)"
+msgstr ""
+
+msgid "(FTP sending - ending)"
+msgstr ""
+
+msgid "(FTP sending - nothing to be done)"
+msgstr ""
+
+msgid "Backup of %s on %s (%s)"
+msgstr ""
+
+msgid "(MAIL sending)"
+msgstr ""
+
+msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
+msgstr ""
+
+msgid "(MAIL sending - ending)"
+msgstr ""
+
+msgid "(MAIL sending - nothing to be done)"
+msgstr ""
+
+msgid "(END - ending)"
+msgstr ""
+
+msgid "An unknown error occured!"
+msgstr "发生了一个未知错误！"
+
+msgid "A new backup has been generated!"
+msgstr "已经产生了一个新的备份！"
+
+msgid "Dear sirs,"
+msgstr "亲爱的用户们，"
+
+msgid "Here is attached the %s on %s backup files for today"
+msgstr "这里是今天 %s %s 备份文件的链接"
+
+msgid "Best regards,"
+msgstr "最亲切的问候，"
+
+msgid "Please find hereafter a summary of the backup process."
+msgstr ""
+
+msgid "Global synthesis"
+msgstr ""
+
+msgid "The backup process has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "SQL synthesis"
+msgstr ""
+
+msgid "The SQL extraction has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "%s entries have been extracted and have been stored in %s files."
+msgstr ""
+
+msgid "%s created on %s"
+msgstr ""
+
+msgid "ZIP synthesis"
+msgstr ""
+
+msgid "The ZIP creation phase has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "%s files have been stored into %s split files (zip, z01, z02, etc.)."
+msgstr ""
+
+msgid "Please note that %s files have been excluded from the backup process because their sizes exceed the chunk size (i.e. %s Mo)."
+msgstr ""
+
+msgid "%s (size %s)"
+msgstr ""
+
+msgid "These zip files are accessible for %s days at the following path:"
+msgstr ""
+
+msgid "FTP synthesis"
+msgstr ""
+
+msgid "The %s zip files have been stored on the specified FTP: %s"
+msgstr ""
+
+msgid "%s stored on %s"
+msgstr ""
+
+msgid "Backup of %s on %s"
+msgstr ""
+
+msgid "No host has been defined"
+msgstr ""
+
+msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
+msgstr ""
+
+msgid "The host %s cannot be resolved!"
+msgstr ""
+
+msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
+msgstr ""
+
+msgid "The file %s cannot be transfered to the FTP repository and PASV mode cannot be entered : %s"
+msgstr ""
+
+msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
+msgstr ""
+
+msgid "The login/password does not seems valid!"
+msgstr ""
+
+msgid "The folder %s does not seems to be writable"
+msgstr ""
+
+msgid "It seems impossible to switch to PASV mode"
+msgstr ""
+
+msgid "Everything OK!"
+msgstr ""
+

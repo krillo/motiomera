@@ -1,0 +1,76 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-06-13T21:10:27+00:00\n"
+"Last-Translator: GaithBader <http://www.bader.cc>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Poedit-Language: Arabic\n"
+"X-Poedit-Country: Jordan\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "About..."
+msgstr "حَول"
+
+msgid "Settings"
+msgstr "الإعدادات"
+
+msgid "KB"
+msgstr "KB"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "GB"
+msgstr "GB"
+
+msgid "Update"
+msgstr "تحديث"
+
+msgid "Translation"
+msgstr "ترجمة"
+
+msgid "Your name:"
+msgstr "إسمك:"
+
+msgid "Language"
+msgstr "لغة"
+
+msgid "Information"
+msgstr "معلومات"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Donate"
+msgstr "تبرع"
+
+msgid "Contact the author"
+msgstr "يرجى الاتصال بالمؤلف"
+
+msgid "Send feedback"
+msgstr "أرسل ملاحظاتك"
+
+msgid "The feedback has been sent"
+msgstr "تم إرسال ملاحظاتك"
+
+msgid "Current Page"
+msgstr "الصفحة الحالية"
+
+msgid "Installed plugins"
+msgstr "تثبيت الاضافات"
+
+msgid "Last update:"
+msgstr "آخر تحديث:"
+

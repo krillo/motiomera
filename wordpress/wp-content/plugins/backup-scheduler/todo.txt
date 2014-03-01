@@ -1,0 +1,3 @@
+Modify the more plugin tab
+change http://s.wordpress.org/ into https://s.wordpress.org/
+Password protected Alexander Dippold (Alexander.Dippold at gmail)

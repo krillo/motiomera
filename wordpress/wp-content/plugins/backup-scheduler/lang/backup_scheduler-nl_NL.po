@@ -1,0 +1,390 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2012-08-26T14:40:24+00:00\n"
+"Last-Translator: Matrix <http://www.pcbeveiligen.nl/>\n"
+"Last-Translator: WybAnema <www.mmwb.nl>\n"
+"Last-Translator: Jay <www.troisj.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: Netherlands\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
+msgstr "Met deze plugin is het mogelijk om je site geheel of gedeeltelijk te backuppen - Simpel en efficiënt!"
+
+msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
+msgstr "Sorry, je zult eerst %s moeten installeren/activeren. Dit is noodzakelijk voor de werking van deze plugin!"
+
+msgid "How often do you want to backup your website?"
+msgstr "Hoevaak wil je een backup laten plaatsvinden?"
+
+msgid "Frequency (in days):"
+msgstr "Interval (in dagen)"
+
+msgid "Time of the backups:"
+msgstr "Tijdstip van de backup:"
+
+msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
+msgstr "Let op: 0 staat voor 0:00, 1 staat voor 1:00, 13 staat voor 13:00 etc. The backup vindt plaats op die tijd (server tijd), zorg dus dat je site niet overactief is op dat tijdstip."
+
+msgid "Keep the backup files for (in days):"
+msgstr "Bewaar de backups voor x dagen:"
+
+msgid "What do you want to save?"
+msgstr "Wat wil je opslaan?"
+
+msgid "(i.e. %s)"
+msgstr "(Oftewel %s)"
+
+msgid "The plugins directory:"
+msgstr "Plugins:"
+
+msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
+msgstr "Vink deze optie aan als je alle geïnstalleerde plugins wilt opslaan."
+
+msgid "The themes directory:"
+msgstr "Thema&#039;s:"
+
+msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
+msgstr "Vink deze optie aan als je alle geïnstalleerde thema&#039;s wilt opslaan."
+
+msgid "The upload directory:"
+msgstr "Upload map:"
+
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
+msgstr "Vink deze optie aan als je alle afbeeldingen en bestanden uit artikels, berichten en pagina&#039;s wilt opslaan"
+
+msgid "The SQL database:"
+msgstr "SQL database:"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc."
+msgstr "Vink deze optie aan als je de database wilt opslaan."
+
+msgid "Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated"
+msgstr "Let op: het .zip bestand zal worden gesplitst indien deze de maximum grootte van de bijlage overschrijd."
+
+msgid "Do you want that the backup is sent by email?"
+msgstr "Wil je de database per email toegezonden krijgen?"
+
+msgid "If so, please enter your email:"
+msgstr "Zoja, voer hier je emailadres in:"
+
+msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
+msgstr "Deze optie geeft de mogelijkheid om bijvoorbeeld de blokkade van GMail op .zip bestanden te omzeilen."
+
+msgid "You do not need to fill this field if no mail is to be sent."
+msgstr "Dit veld hoeft niet te worden ingevuld indien er geen email wordt verstuurd."
+
+msgid "Advanced - Memory and time management"
+msgstr "Geavanceerd geheugen en tijdsbeheer"
+
+msgid "What is the maximum size of allocated memory (in MB):"
+msgstr "Wat is het maximale toegewezen geheugen (MB):"
+
+msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
+msgstr "Bij sommige Wordpress blogs ontstaan geheugen problemen. Probeer in dat geval deze waarde te verlagen."
+
+msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
+msgstr "Ter info: het maximale geheugen van je webserver is %s, huidig geheugengebruik is %s"
+
+msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
+msgstr "Het is niet aan te raden dat de maximale grootte deze waarde overschrijd."
+
+msgid "What is the maximum time for the php scripts execution (in seconds):"
+msgstr "Wat is de maximale tijdsduur voor uitvoering van de php scripts (in secondes):"
+
+msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
+msgstr "Zelfs als je webserver geen tijdslimiet heeft is het aan te raden deze waarde op 15 te laten staan om afbreken van php scripts te voorkomen."
+
+msgid "Here is the backup files. You can force a new backup or download previous backup files."
+msgstr "Dit zijn de backup bestanden. Je kan een nieuwe backup forceren of een eerdere backup ophalen."
+
+msgid "An automatic backup will be launched in %s days and %s hours."
+msgstr "Een automatische backup zal plaatsvinden over %s dag(en) en %s uur"
+
+msgid "Backups"
+msgstr "Backups"
+
+msgid "Parameters"
+msgstr "Parameters"
+
+msgid "Manage translations"
+msgstr "Vertalingen"
+
+msgid "Give feedback"
+msgstr "Geef je mening"
+
+msgid "Other plugins"
+msgstr "Overige plugins"
+
+msgid "Date of the backup"
+msgstr "Datum van de backup"
+
+msgid "Backup files"
+msgstr "Backup bestanden"
+
+msgid "Part %s"
+msgstr "Backup %s"
+
+msgid "The total size of the files is %s"
+msgstr "Totale grootte van de bestanden is %s"
+
+msgid "These files will be deleted in %s days"
+msgstr "Deze bestanden zullen verwijderd worden over %s dagen"
+
+msgid "Delete these backup files"
+msgstr "Verwijder deze backup bestanden"
+
+msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
+msgstr "(Er is momenteel geen backup bestand.. Forceer een backup (zie onder))"
+
+msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
+msgstr "Er is al een database backup gaande (nog %s seconde) Even geduld aub.."
+
+msgid "An other backup is still in progress (for %s seconds)... Please wait!"
+msgstr "Er is al een backup gaande (nog %s seconde) Even geduld aub.."
+
+msgid "An unknown error occured!"
+msgstr "Onbekende fout opgetreden!"
+
+msgid "A new backup has been generated!"
+msgstr "Nieuwe backup gecreëerd!"
+
+msgid "Dear sirs,"
+msgstr "Geachte ontvanger,"
+
+msgid "Here is attached the %s on %s backup files for today"
+msgstr "Bijgaand treft u de backup bestanden van %s om %s vandaag"
+
+msgid "Best regards,"
+msgstr "Met vriendelijke groet,"
+
+msgid "All directories (the full Wordpress installation):"
+msgstr "Alle directories/mappen (De volledige Wordpress installatie)"
+
+msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
+msgstr "Vink deze optie aan als je alles wilt bewaren. Bedenk wel dat de back-up erg groot kan worden!"
+
+msgid "The upload directory for this blog:"
+msgstr "De locatie van de uploadfolder voor je site/blog:"
+
+msgid "All upload directories (for this site and the sub-blogs):"
+msgstr "Alle upload folders (voor deze site en sub-blogs):"
+
+msgid "The upload directory for the main site:"
+msgstr "De uploadmap voor de hoofdsite:"
+
+msgid "All SQL databases:"
+msgstr "Alle SQL databases:"
+
+msgid "Only your SQL database:"
+msgstr "Uitsluitend je SQL databases:"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for the main website"
+msgstr "Vink deze optie aan als je de tekst van je berichten, je instellingen, e.d. wilt opslaan voor de hoofdsite"
+
+msgid "The maximum file size (in MB):"
+msgstr "De maximale omvang van het back-up bestand (in MB):"
+
+msgid "Send the backup files by email:"
+msgstr "Stuur me de backup bestanden via mail:"
+
+msgid "Do you want to add a suffix to sent files:"
+msgstr "Wil je een achtervoegsel toevoegen aan verzonden files:"
+
+msgid "Do you want that the backup is stored on a FTP?"
+msgstr "Wil je de back-up bestanden via FTP bewaren op een externe server?"
+
+msgid "FTP host:"
+msgstr "FTP host:"
+
+msgid "Your FTP login:"
+msgstr "Gebruikersnaam voor je FTP host:"
+
+msgid "Your FTP pass:"
+msgstr "Wachtwoord voor je FTP host:"
+
+msgid "Click on that button %s to test if the above information is correct"
+msgstr "Klik op de button %s om te controleren of de gegevens juist zijn"
+
+msgid "Test"
+msgstr "Test"
+
+msgid "If you want to be notify when the FTP storage is finished, please enter your email:"
+msgstr "Wil je een bericht ontvangen als de upload via FTP voltooid is, geef dan hier je e-mailadres op:"
+
+msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
+msgstr "Je PHP installatie ondersteunt FTP niet en is uitgeschakeld! Sorry ..."
+
+msgid "Please note that the files greater than this limit won't be included in the zip file!"
+msgstr "Let op dat bestanden groter dan de opgegeven limiet niet in het gezipte bestand worden opgenomen!"
+
+msgid "The backup process has started %s hours ago but has not finished yet."
+msgstr "Het back-up proces is %s uur geleden begonnen en nog niet afgerond."
+
+msgid "Force a new backup (with Mail/FTP)"
+msgstr "Forceer een nieuwe back-up (met mail/FTP)"
+
+msgid "Force a new backup (without any external storage or sending)"
+msgstr "Forceer een nieuwe back-up (zonder externe opslag of verzending via mail)"
+
+msgid "Cancel this process"
+msgstr "Breek dit proces af"
+
+msgid "Please wait..."
+msgstr "Even geduld ..."
+
+msgid "(ZIP creation)"
+msgstr "(ZIP-bestand wordt gecreëerd)"
+
+msgid "(MAIL sending)"
+msgstr "(mailbericht wordt verzonden)"
+
+msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
+msgstr "Je Wordpress installatie kan geen mail verzenden (met grote bijlagen)!"
+
+msgid "The process has been canceled by a third person"
+msgstr "Het proces is afgebroken door iemand anders"
+
+msgid "No host has been defined"
+msgstr "Er is geen host gedefinieerd"
+
+msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
+msgstr "Je PHP installatie ondersteunt geen SSL ... Probeer standaard FTP te gebruiken in plaats van FTPS!"
+
+msgid "The host %s cannot be resolved!"
+msgstr "Kan de host %s niet vinden!"
+
+msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
+msgstr "De opgegeven folder %s bestaat niet. Maak deze eerst aan, voordat de overdracht kan beginnen!"
+
+msgid "The login/password does not seems valid!"
+msgstr "De gebruikersnaam en/of het wachtwoord is ongeldig!"
+
+msgid "The folder %s does not seems to be writable"
+msgstr "Er kan niet naar de folder %s geschreven worden"
+
+msgid "Everything OK!"
+msgstr "Alles gelukt!"
+
+msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
+msgstr "Let op: de backup is niet afgerond op dat tijdstip. Het kan wel tot 6 uur duren - zeker als er weinig bezoekers zijn op je site en/of als het om een zeer grote file gaat."
+
+msgid "Check this option if you want to save the images, the files, etc. that people have uploaded on their websites to create articles/posts/pages."
+msgstr "Vink deze optie aan als je de afbeeldingen en bestanden (uit artikels, berichten en pagina&#039;s) die gebruikers naar hun sites hebben geupload, wilt opslaan"
+
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your main website to create your articles/posts/pages."
+msgstr "Vink deze optie aan als je de afbeeldingen en bestanden (uit artikels, berichten en pagina&#039;s) van je eigen site, wilt opslaan"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for this blog"
+msgstr "Vink deze optie aan als je de tekst van je artikelen (posts), instellingen etc. voor je eigen blog wilt opslaan"
+
+msgid "Check this option if you want to save all texts of posts, configurations, etc. for all blogs in this website"
+msgstr "Vink deze optie aan als je de tekst van artikelen (posts), instellingen etc. voor  alle blogs onder deze site wilt opslaan"
+
+msgid "Save the backup files on a FTP?"
+msgstr "Wil je de back-up bestanden via FTP bewaren op een externe server?"
+
+msgid "Should be at the form %s or %s"
+msgstr "Dient in het formaat: %s of %s te zijn"
+
+msgid "Please note that the current GMT time of the server is %s. If it is not correct, please configure the Wordpress installation correctly."
+msgstr "Let op: de huidige GMT  server-tijd is %s. Als dit niet juist is, pas de tijd aan in je Wordpress instellingen."
+
+msgid "How to restore the backup files?"
+msgstr "Hoe zet je backup-files terug?"
+
+msgid "Backup finished on %s at %s"
+msgstr "Backup afgerond op %s om %s"
+
+msgid "To download them, please click on the following links:"
+msgstr "Om ze te downloaden, klik op de volgende links:"
+
+msgid "Backup of %s on %s - FTP confirmation"
+msgstr "Backup van %s op %s - FTP bevestiging"
+
+msgid "It seems impossible to switch to PASV mode"
+msgstr "PASV modus niet mogelijk"
+
+msgid "To restore the backups, and if you have backuped the full installation, you will have to execute the following steps:"
+msgstr "Om de backups terug te zetten als je de volledige installatie hebt opgeslagen dien je de volgende stappen uit te voeren:"
+
+msgid "Save all zip files (i.e. *.zip, *.z01, *.z02, etc.) in a single folder on your hard disk."
+msgstr "Sla alle zip files (*.zip, *.z01, *.z02, etc.) in een enkele map/folder op je harde schijf op."
+
+msgid "Unzip these files by using IZArc, Winzip, or Winrar (others software could not support these multipart zip and consider that the archive is corrupted)."
+msgstr "Pak deze files uit met IZArc, Winzip, of Winrar (andere programma&#039;s kunnen problemen hebben met meer-delige compressie-bestanden)."
+
+msgid "Save the extracted files on your webserver."
+msgstr "Sla de uit uitgepakte files op op je webserver."
+
+msgid "Reimport the SQL files (i.e. *.sql1, *sql2, etc.) with phpmyadmin (it is recommended to save your database first)."
+msgstr "Importeer de SQL files (*.sql1, *sql2, etc.) via &#039;phpmyadmin&#039; (sla eerst je database op)."
+
+msgid "To restore the backups, and if you have backuped only some folders, you will have to execute the following steps:"
+msgstr "Om de backups terug te zetten als je slechts een aantal mappen hebt opgeslagen dien je de volgende stappen uit te voeren:"
+
+msgid "Install a fresh version of Wordpress on your webserver."
+msgstr "Installeer de laatste Wordpress versie op je webserver."
+
+msgid "Replace the folders (i.e. 'plugins',  'themes', and/or 'uploads') of the root of your webserver by the extracted folders."
+msgstr "Vervang de mappen (&#039;plugins&#039;, &#039;themes&#039;, en/of &#039;uploads&#039;) in de hoofdfolder van je site door de uitgepakte mappen."
+
+msgid "Replace the wp-config.php (at the root of your webserver) with the extracted one."
+msgstr "Vervang &#039;wp-config.php&#039; in de hoofdfolder van je site door de uitgepakte &#039;wp-config.php&#039;."
+
+msgid "The process is still in progress for this backup (begun %s at %s)."
+msgstr "Backup in volle gang (gestart om %s op %s)."
+
+msgid "The SQL extraction is in progress (%s tables extracted)."
+msgstr "SQL-uitpakken in volle gang (%s tabellen uitgepakt)."
+
+msgid "The ZIP creation is in progress (%s files has been added in the zip file and the current size of the zip is %s)."
+msgstr "ZIP-compressie in volle gang (%s files tot dusverre gecomprimeerd; huidige bestand-grootte: %s)."
+
+msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
+msgstr "FTP-verzending in volle gang (%s files opgeslagen)."
+
+msgid "The MAIL sending is in progress (%s files has been sent)."
+msgstr "MAIL-verzending in volle gang (%s files verstuurd)."
+
+msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
+msgstr "Let op, er draait al een backup! Als je een nieuwe backup wil forceren, laadt deze pagina opnieuw (F5) en stop dan eerst de huidige backup."
+
+msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
+msgstr "Het lukt niet om de %s file aan te maken in de %s folder. Check de folder/file rechten (CHMOD)."
+
+msgid "(SQL extraction)"
+msgstr "(SQL uitpakken)"
+
+msgid "(FTP sending)"
+msgstr "(FTP verzending)"
+
+msgid "Backup of %s on %s (%s)"
+msgstr "Backup van %s op %s (%s)"
+
+msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
+msgstr "De file %s kan niet worden verwijderd (check de folder/file rechten (CHMOD) of beveiligings-beperkingen)."
+
+msgid "%s backup files has been successfully saved on your FTP (%s)"
+msgstr "%s backup files met succes opgeslagen via FTP (%s)"
+
+msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
+msgstr "De file: &#039; %s &#039; kan niet worden opgeslagen in de FTP-locatie. Ftp_put melding: %s"
+
+msgid "The file %s cannot be transfered to the FTP repository and PASV mode cannot be entered : %s"
+msgstr "De file: &#039; %s &#039; kan niet worden opgeslagen in de FTP-locatie en PASV-modus is niet mogelijk: %s"
+

@@ -1,0 +1,470 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-04-07T13:57:47+00:00\n"
+"Last-Translator: rudysyahnaya <foritonsite.org>\n"
+"Last-Translator: PradiktaDwiAnthony <pradikta.anthony@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Indonesian\n"
+"X-Poedit-Country: Indonesia\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "About..."
+msgstr "Tentang"
+
+msgid "Settings"
+msgstr "Pengaturan"
+
+msgid "Log options"
+msgstr "Opsi rekaman"
+
+msgid "What is the debug level:"
+msgstr "Level debug:"
+
+msgid "See the debug logs"
+msgstr "Lihat catatan debug"
+
+msgid "1=log only the critical errors;"
+msgstr "Hanya rekam data error yang kritis"
+
+msgid "2=log only the critical errors and the standard errors;"
+msgstr "Hanya rekam data error yang standar dan kritis"
+
+msgid "3=log only the critical errors, the standard errors and the warnings;"
+msgstr "Hanya rekam data error yang kritis, standar, dan peringatan"
+
+msgid "4=log information;"
+msgstr "Informasi rekaman"
+
+msgid "5=log verbose;"
+msgstr ""
+
+msgid "Multisite Management"
+msgstr "Pengaturan &quot;multisite&quot;"
+
+msgid "Do you want to allow sub-blogs to modify the translations of the plugins:"
+msgstr "Apakah Anda ingin mengizinkan sub-blog untuk memodifikasi terjemahan plugins:"
+
+msgid "If this option is unchecked, the translation tab won't be displayed in the blog administration panel."
+msgstr "jika opsi ini tidak dipilih, tab terjemahan tidak akan ditampilkan pada panel administrasi blog"
+
+msgid "Summary page for the plugins developped with the SL framework"
+msgstr "Ringkasan halaman untuk plugin yang dikembangkan dengan SL Framework"
+
+msgid "For now, you have installed %d  plugins including %d plugins developped with the 'SL framework':"
+msgstr "Untuk saat ini, Anda telah menginstall %d plugins termasuk %d plugins yang dikembangkan dengan &quot;Framework SL&quot;:"
+
+msgid "Plugin name"
+msgstr "Nama plugin"
+
+msgid "Description"
+msgstr "Deskripsi"
+
+msgid "There is a SQL database for this plugin"
+msgstr "Terdapat database SQL untuk plugin ini"
+
+msgid "Version: %s by %s"
+msgstr "Versi: %s Oleh %s"
+
+msgid "List of SL plugins"
+msgstr "List dari SL Plugins"
+
+msgid "Parameters of the framework"
+msgstr "Paramater Framework"
+
+msgid "Manage translation of the framework"
+msgstr "Mengelola terjemahan dari Framework"
+
+msgid "The folder %s is not %s !"
+msgstr ""
+
+msgid "The file %s is not %s !"
+msgstr ""
+
+msgid "The folder %s does not exists and cannot be created !"
+msgstr ""
+
+msgid "The file %s does not exists and cannot be created !"
+msgstr ""
+
+msgid "There are some issues with folders rights. Please corret them as soon as possible as they could induce bugs and instabilities."
+msgstr ""
+
+msgid "Please see below:"
+msgstr ""
+
+msgid "KB"
+msgstr "KB"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "GB"
+msgstr "GB"
+
+msgid "Error: the submitted value is not an integer and thus, the parameter has not been updated!"
+msgstr ""
+
+msgid "Error: the submitted string does not match the constrains"
+msgstr ""
+
+msgid "Error: the submitted file can not be uploaded!"
+msgstr ""
+
+msgid "Error: security issue!"
+msgstr ""
+
+msgid "Parameters"
+msgstr "Parameter"
+
+msgid "Here are the parameters of the plugin. Modify them at will to fit your needs."
+msgstr ""
+
+msgid "Here are the parameters of the framework. Modify them at will to fit your needs."
+msgstr ""
+
+msgid "Values"
+msgstr "Nilai"
+
+msgid "Warning: some characters have been removed because they are not allowed here"
+msgstr ""
+
+msgid "(integer)"
+msgstr "(integer)"
+
+msgid "(If you want to delete this file, please check this box %s)"
+msgstr ""
+
+msgid "Update"
+msgstr "Pembaharuan"
+
+msgid "Reset to default values"
+msgstr ""
+
+msgid "Some parameters have not been updated due to errors (see below)!"
+msgstr ""
+
+msgid "Parameters have been updated (but with some warnings)!"
+msgstr ""
+
+msgid "Parameters have been updated successfully!"
+msgstr ""
+
+msgid "Parameters have been reset to their default values!"
+msgstr ""
+
+msgid "Here, you may configure three levels of translations: at the plugin level, at the framework level, and at the dashboard level."
+msgstr ""
+
+msgid "Please be informed that your current language is %s. Text will be translated if a translation is available."
+msgstr ""
+
+msgid "If you want to modify the language, please go in %s and find %s or %s. The second argument is your language and you may modify it as you want."
+msgstr ""
+
+msgid "Translations available for this plugin (i.e. %s)"
+msgstr ""
+
+msgid "Translations available for the SL framework (stored in %s)"
+msgstr ""
+
+msgid "Adding a new translation for this language: %s"
+msgstr ""
+
+msgid "Sentence to translate"
+msgstr "kalimat untuk diterjemahkan"
+
+msgid "Translation"
+msgstr "Terjemahan"
+
+msgid "Your name:"
+msgstr "Nama Anda:"
+
+msgid "(if your name/pseudo is already in the list, there is no need to fill this input)"
+msgstr ""
+
+msgid "Your email or your website:"
+msgstr "Email atau website anda:"
+
+msgid "Create the translation files"
+msgstr "Buat file terjemahan"
+
+msgid "Modifying the translation for this language: %s"
+msgstr ""
+
+msgid "Modify the translation files"
+msgstr "Perbaiki file terjemahan"
+
+msgid "The file %s cannot be extracted from mail attachments"
+msgstr ""
+
+msgid "The file %s cannot be written in the %s folder"
+msgstr ""
+
+msgid "The file %s has been imported in the %s folder"
+msgstr ""
+
+msgid "Plugin"
+msgstr ""
+
+msgid "Language"
+msgstr "Bahasa"
+
+msgid "Information"
+msgstr "Informasi"
+
+msgid "%s sentences have been translated (i.e. %s)."
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "See the new translation file and merge"
+msgstr ""
+
+msgid "%s sentences have been newly translated and %s sentences have been modified (the old file has %s translated sentences)."
+msgstr ""
+
+msgid "See the modifications/new translations and Merge"
+msgstr ""
+
+msgid "See the new translations and Merge"
+msgstr ""
+
+msgid "New translations are available"
+msgstr ""
+
+msgid "Updates of translations are available"
+msgstr ""
+
+msgid "What are the differences between these two files?"
+msgstr ""
+
+msgid "Old sentence"
+msgstr ""
+
+msgid "New sentence"
+msgstr ""
+
+msgid "To replace?"
+msgstr ""
+
+msgid "Merge"
+msgstr ""
+
+msgid "%s sentences have been translated (i.e. %s) %s %s sentences have to be checked because they are close (but not identical) to those to translate.%s"
+msgstr ""
+
+msgid "The translation %s have been sent"
+msgstr ""
+
+msgid "An error occured sending the email."
+msgstr ""
+
+msgid "Make sure that your wordpress is able to send email."
+msgstr ""
+
+msgid "%s file cannot be created for %s as there is no translated sentence. Please, translate at least one sentence to create a file"
+msgstr ""
+
+msgid "%s file has been updated for %s"
+msgstr ""
+
+msgid "%s file has been updated from this file"
+msgstr ""
+
+msgid "%s file has been created with a new translation for %s"
+msgstr ""
+
+msgid "%s file has been created from this file"
+msgstr ""
+
+msgid "If you do not want to loose your translations on the next upgrading of this plugin, it is recommended to send the translation files to the author by clicking %s here %s !"
+msgstr ""
+
+msgid "If you do not want to loose your translations on the next upgrading of this plugin, please save them on your hard disk before upgrading and then restore them after the upgrade !"
+msgstr ""
+
+msgid "Summary cached %s"
+msgstr ""
+
+msgid "The sentences used in this plugin are in English. Help the others users using the same language as you by translating this plugin."
+msgstr ""
+
+msgid "This plugin is available in %d languages."
+msgstr ""
+
+msgid "There are %d sentences to be translated in this plugin."
+msgstr ""
+
+msgid "Ratio %"
+msgstr ""
+
+msgid "Translators"
+msgstr "Penerjemah"
+
+msgid "This is the default language of the plugin. It cannot be modified."
+msgstr "Ini adalah bahasa default plugin. ini tidak dapat dimodifikasi."
+
+msgid "Modify"
+msgstr "Diubah"
+
+msgid "Send to the author of the plugin"
+msgstr "Kirim ke author plugin"
+
+msgid "Add a new translation"
+msgstr "Tambah terjemahan baru"
+
+msgid "You may add a new translation hereafter (Please note that it is recommended to send your translation to the author so that he would be able to add your translation to the future release of the plugin !)"
+msgstr ""
+
+msgid "Add"
+msgstr "Tambah"
+
+msgid "The 'SL framework' is a framework used for developping many plugins like this one. Thus, if you participate translating the framework, it will be very helpful for a bunch of plugins."
+msgstr ""
+
+msgid "There is %d languages supported for the 'SL framework'."
+msgstr ""
+
+msgid "There is %d sentence to be translated in the framework."
+msgstr ""
+
+msgid "Send to the author of the framework"
+msgstr "Kirim ke author framework"
+
+msgid "Donate"
+msgstr ""
+
+msgid "If you like the plugin, do not hesitate to donate. Please note that this plugin is developed in my spare time for free."
+msgstr ""
+
+msgid "This is not mandatory! but it may be a sign that this plugin fits you needs: it makes me happy..."
+msgstr ""
+
+msgid "Feedback form"
+msgstr ""
+
+msgid "This form is an easy way to contact the author and to discuss issues/incompatibilities/etc. with him"
+msgstr ""
+
+msgid "Contact the author"
+msgstr "Kontak author"
+
+msgid "Your email:"
+msgstr "Email anda:"
+
+msgid "Useful... so that the author will be able to anwser you."
+msgstr ""
+
+msgid "Your comments:"
+msgstr "Komentar anda:"
+
+msgid "Please note that additional information on your wordpress installation will be sent to the author in order to help the debugging if needed (such as : the wordpress version, the installed plugins, etc.)"
+msgstr ""
+
+msgid "Send feedback"
+msgstr ""
+
+msgid "No email have been provided for the author of this plugin. Therefore, the feedback is impossible"
+msgstr ""
+
+msgid "The feedback has been sent"
+msgstr ""
+
+msgid "Plugins that you may install"
+msgstr "Plugin yang dapat anda install"
+
+msgid "The following plugins have been developed by the author and are not yet installed:"
+msgstr "Plugin berikut telah dikembangkan oleh author dan belum diinstal:"
+
+msgid "Plugin not yet installed"
+msgstr "Plugin belum terinstall"
+
+msgid "Description and Screenshots"
+msgstr "Deskripsi &amp; Gambar Layar"
+
+msgid "All author's plugins have been installed. Thank you!"
+msgstr "Semua plugin author telah dipasang. Terima kasih!"
+
+msgid "Installed plugins"
+msgstr "Plugins terinstall"
+
+msgid "You have already installed the following author's plugins:"
+msgstr "Anda telah menginstal plugin author berikut ini:"
+
+msgid "Plugin already installed"
+msgstr "Plugin sudah terinstall"
+
+msgid "The Wordpress page: %s"
+msgstr "Halaman Wordpress: %s"
+
+msgid "An Unexpected HTTP Error occurred during the API request."
+msgstr "Kesalahan pada HTTP terjadi pada saat permintaan API"
+
+msgid "Last update:"
+msgstr "Update terakhir"
+
+msgid "Rating: %s"
+msgstr "Rangking: %s"
+
+msgid "by %s persons"
+msgstr "oleh %s orang"
+
+msgid "Number of download:"
+msgstr "Jumlah download:"
+
+msgid "Close popup"
+msgstr "Tutup popup"
+
+msgid "Filter: %s"
+msgstr ""
+
+msgid "%s of %s"
+msgstr ""
+
+msgid "Current Page"
+msgstr ""
+
+msgid "Error: %s function is not found"
+msgstr ""
+
+msgid "The file %s cannot be read. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+msgid "The folder %s cannot be opened. You should have a problem with folder permissions or security restrictions."
+msgstr ""
+
+msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+msgid "An other process is still running (it runs for %s seconds)"
+msgstr ""
+
+msgid "The file %s cannot be modified/created. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+msgid "The file %s cannot be created. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+msgid "The file %s cannot be compressed."
+msgstr ""
+
+msgid "The file %s cannot be renamed. You should have a problem with file permissions or security restrictions."
+msgstr ""
+
+msgid "The file %s cannot be modified. You should have a problem with file permissions or security restrictions."
+msgstr ""
+

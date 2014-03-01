@@ -1,0 +1,470 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-04-07T14:05:06+00:00\n"
+"Last-Translator: Javier <>\n"
+"Last-Translator: AVfoto <alvaro@alvarovillafoto.es>\n"
+"Last-Translator: charliechin <http://www.twitter.com/charliechin>\n"
+"Last-Translator: IgnacioCalvo <http://ignaciocalvo.com>\n"
+"Last-Translator: JordiVives <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: Spain\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
+msgstr "Este plugin activa la copia de seguridad programada de partes importanes de su website: ¡fácil  y eficiente!"
+
+msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
+msgstr "Lo siento, pero debe instalar/activar %s en tu website. De otra manera el plugin no funcionará correctamente !"
+
+msgid "How often do you want to backup your website?"
+msgstr "Cada cuánto quiere realizar copia de seguridad de tu website?"
+
+msgid "Frequency (in days):"
+msgstr "Frecuencia (en días):"
+
+msgid "Time of the backups:"
+msgstr "Horario de la copia de seguridad:"
+
+msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
+msgstr "Tenga en cuenta que 0 significa medianoche, 1 significa 1am, 13 significa 13:00, etc... La copia de seguridad se producirá en ese momento (hora del servidor) Asegurese de que su sitio web no está demasiado sobrecargada en ese momento."
+
+msgid "Please also note that the backup won't be end exactly at that time. The backup process could take up to 6h especially if you do not have a lot of traffic on your website and/or if the backup is quite huge."
+msgstr "Por favor, tenga en cuenta que su copia de seguridad no finalizará exactamente a esa hora. El proceso de respaldo puede tardar hasta 6h ante todo si no dispone de mucho tráfico en su sitio web y/o la copia de seguridad es bastante grande."
+
+msgid "Keep the backup files for (in days):"
+msgstr "Guardar los archivos de copia por (en dias):"
+
+msgid "If you want to be notify when the backup process is finished, please enter your email:"
+msgstr ""
+
+msgid "Customize the name of the files?"
+msgstr ""
+
+msgid "Add this string to the name of the files:"
+msgstr ""
+
+msgid "The name of the files will be %s."
+msgstr ""
+
+msgid "% is the string of the present option. You may set this option to %s."
+msgstr ""
+
+msgid "% is a random string for security reasons."
+msgstr ""
+
+msgid "% is the extension (i.e. %s)."
+msgstr ""
+
+msgid "What do you want to save?"
+msgstr "¿Qué quiere guardar?"
+
+msgid "All directories (the full Wordpress installation):"
+msgstr "Todos los directorios (La instalación completa de Wordpress)"
+
+msgid "(i.e. %s)"
+msgstr "(por ejemplo %s)"
+
+msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
+msgstr "Marque esta opción si deseas guardar todo. Tenga cuidado, ya que su copia de seguridad puede ser muy grande."
+
+msgid "The plugins directory:"
+msgstr "El directorio de plugins:"
+
+msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
+msgstr "Marque esta opción si desea guardar todos los plugins que ha instalado y que usa en  este sitio web."
+
+msgid "The themes directory:"
+msgstr "El directorio de temas:"
+
+msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
+msgstr "Marque esta opción si desea guardar todos sus temas (themes) que tiene instalado y que usa en este sitio web."
+
+msgid "The upload directory for this blog:"
+msgstr "El directorio de subidas de este blog:"
+
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
+msgstr "Marca esta opción si desea guardar las imágenes, archivos, etc., que se han subido a su sitio web  para crear articulos/entradas/páginas."
+
+msgid "All upload directories (for this site and the sub-blogs):"
+msgstr "Todos los directorios de subidas (para este blog y los sub-blogs):"
+
+msgid "Check this option if you want to save the images, the files, etc. that people have uploaded on their websites to create articles/posts/pages."
+msgstr "Marque esta opción si desea guardar las imágenes, archivos, etc., que la gente ha subido a sus propios sitios web para crear artículos/entradas/páginas."
+
+msgid "The upload directory for the main site:"
+msgstr "El directorio de subida del sitio principal:"
+
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your main website to create your articles/posts/pages."
+msgstr "Marque esta opción si desea guardar las imágenes, archivos, etc., que usted ha subido al sitio web para crear sus artículos/entradas/páginas."
+
+msgid "The upload directory:"
+msgstr "El directorio de subidas:"
+
+msgid "The SQL database:"
+msgstr "La base de datos SQL:"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for this blog"
+msgstr "Marque esta opción si desea guardar el texto de sus entradas, sus configuraciones, etc., para este blog"
+
+msgid "All SQL databases:"
+msgstr "Todas las bases de datos SQL:"
+
+msgid "Check this option if you want to save all texts of posts, configurations, etc. for all blogs in this website"
+msgstr "Marque esta opción si desea guardar el texto de sus entradas, sus configuraciones, etc., para todos los blogs de este sitio web"
+
+msgid "Only your SQL database:"
+msgstr "Sólo tu base de datos SQL:"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc. for the main website"
+msgstr "Marque esta opción si desea guardar el texto de sus entradas, sus configuraciones, etc., para el sitio web principal"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc."
+msgstr "Marque esta opción si desea guardar el texto de sus posts, su configuración, etc."
+
+msgid "The maximum file size (in MB):"
+msgstr "Tamaño máximo de archivo (en MB):"
+
+msgid "Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated"
+msgstr "Por favor, tenga en cuenta que el archivo .zip será partido en multiples archivos para coincidir con el tamaño máximo de archivo que ha especificado."
+
+msgid "Do you want that the backup is sent by email?"
+msgstr "¿Quiere que la copia de seguridad le sea enviada por e-mail?"
+
+msgid "Send the backup files by email:"
+msgstr "Enviar copia de seguridad mediante email:"
+
+msgid "If so, please enter your email:"
+msgstr "Si es así, introduce tu e-mail:"
+
+msgid "Do you want to add a suffix to sent files:"
+msgstr "Desea añadir un sufijo para enviar los archivos:"
+
+msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
+msgstr "Esta opción permite desactivar la función de bloqueo de algunos proveedores de correo que bloquean los correos con archivos adjuntos zip (como Gmail)."
+
+msgid "You do not need to fill this field if no mail is to be sent."
+msgstr "No necesita rellenar este campo si no se va a enviar ningún correo"
+
+msgid "Do you want that the backup is stored on a FTP?"
+msgstr "¿Desea que su copia de seguridad se almacene en un  FTP?"
+
+msgid "Save the backup files on a FTP?"
+msgstr "¿Guardar los archivos de la copia de seguridad en un FTP?"
+
+msgid "FTP host:"
+msgstr "Servidor FTP:"
+
+msgid "Should be at the form %s or %s"
+msgstr "Debe ser de la forma %s o %s"
+
+msgid "If %s is omitted then it is automatically added when connecting to your FTP. This is useful if you get an 404 error submitting these parameters with %s."
+msgstr "Si %s se omite, entonces se añadirá automáticamente cuando conecte con el FTP. Esto es útil si obtienes un error 404 cuando mandas los parámetros con %s."
+
+msgid "FTP port:"
+msgstr "Puerto FTP:"
+
+msgid "By default the port is %s"
+msgstr "El puerto por defecto es %s"
+
+msgid "Your FTP login:"
+msgstr "Su login FTP:"
+
+msgid "Your FTP pass:"
+msgstr "Su contraseña FTP:"
+
+msgid "Click on that button %s to test if the above information is correct"
+msgstr "Pulsa el botón %s para comprobar si la información introducida es correcta."
+
+msgid "Test"
+msgstr "Prueba"
+
+msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
+msgstr "Su instalación PHP no soporta características FTP, asi que esta opción se ha desactivado! Lo sentimos..."
+
+msgid "Advanced - Memory and time management"
+msgstr "Avanzado - Gestión de memoria y tiempo"
+
+msgid "What is the maximum size of allocated memory (in MB):"
+msgstr "¿Cuál es el tamaño máximo de memoria asignada (en MB)?:"
+
+msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
+msgstr "En algunas instalaciones de Wordpress, puede tener problemas de memoria. Por lo tanto, intente reducir este número si se enfrentan a tal error."
+
+msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
+msgstr "Para su información, el límite de memoria de su servidor web es %s mientras que el uso de la memoria actual es %s."
+
+msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
+msgstr "Se recomienda que el tamaño máximo de archivo adjunto no supere este valor."
+
+msgid "Please note that the files greater than this limit won't be included in the zip file!"
+msgstr "Por favor, no olvide que los ficheros más grandes que este límite no serán incluidos."
+
+msgid "What is the maximum time for the php scripts execution (in seconds):"
+msgstr "¿Cuál es el tiempo máximo para la ejecución de scripts php? (en segundos):"
+
+msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
+msgstr "Incluso si no tiene restricción de tiempo, se recomienda establecer este valor a 15 segundos con el fin de evitar cualquier muerte (kill) de los scripts PHP por su proveedor de alojamiento web."
+
+msgid "Here is the backup files. You can force a new backup or download previous backup files."
+msgstr "Aquí están los archivos de la copia de seguridad. Puede forzar a hacer una nueva copia de seguridad o descargar los anteriores."
+
+msgid "Please note that the current GMT time of the server is %s. If it is not correct, please configure the Wordpress installation correctly."
+msgstr "Por favor, no olvide que la hora GMT actual del servidor es %s. Si no está bien, configure la instalación de Wordpress correctamente."
+
+msgid "An automatic backup will be launched in %s days and %s hours."
+msgstr "Una copia de seguridad se pondrá en marcha en %s dias y %s horas."
+
+msgid "The backup process has started %s hours ago but has not finished yet."
+msgstr "El proceso de copia de seguridad ha empezado hace %s horas pero aun no ha acabado."
+
+msgid "Force a new backup (with Mail/FTP)"
+msgstr "Forzar una nueva copia de seguridad (con FTP/email)"
+
+msgid "Force a new backup (without any external storage or sending)"
+msgstr "Forzar una nueva copia de seguridad (sin ningún tipo de almacenamiento externo o envío)"
+
+msgid "How to restore the backup files?"
+msgstr "¿Cómo restaurar los ficheros de copia de seguridad?"
+
+msgid "To restore the backups, and if you have backuped the full installation, you will have to execute the following steps:"
+msgstr "Para restaurar las copias, y si ha realizado una copia de la instalación completa, debe realizar los siguientes pasos:"
+
+msgid "Save all zip files (i.e. *.zip, *.z01, *.z02, etc.) in a single folder on your hard disk."
+msgstr "Guarde los ficheros zip (esto es, *.zip, *.z01, *.z02, etc.) juntos en una carpeta de su disco duro."
+
+msgid "Unzip these files by using IZArc, Winzip, or Winrar (others software could not support these multipart zip and consider that the archive is corrupted)."
+msgstr "Descomprímalos usando IZArc, Winzip o Winrar (otros puede que no reconozcan zip multiparte y consideren que el archivo está corrupto)."
+
+msgid "Save the extracted files on your webserver."
+msgstr "Guarde los ficheros extraídos en su servidor web."
+
+msgid "Reimport the SQL files (i.e. *.sql1, *sql2, etc.) with phpmyadmin (it is recommended to save your database first)."
+msgstr "Reimporte los ficheros SQL (esto es, *.sql1, *.sql2, etc.) con phpmyadmin (se recomienda que antes guarde la base de datos)."
+
+msgid "To restore the backups, and if you have backuped only some folders, you will have to execute the following steps:"
+msgstr "Para restaurar la copia, si sólo ha hecho copia de algunas carpetas, debe realizar los siguientes pasos:"
+
+msgid "Install a fresh version of Wordpress on your webserver."
+msgstr "Instale una versión limpia de Wordpress en su servidor."
+
+msgid "Replace the folders (i.e. 'plugins',  'themes', and/or 'uploads') of the root of your webserver by the extracted folders."
+msgstr "Reemplace las carpetas (p. ej. &#039;plugins&#039;, &#039;themes&#039;, &#039;uploads&#039;) del raíz de su servidor web con las carpetas extraídas."
+
+msgid "Replace the wp-config.php (at the root of your webserver) with the extracted one."
+msgstr "Reemplace el wp-config.php (en el raíz de su servidor web) con el extraído."
+
+msgid "Backups"
+msgstr "Copias de seguridad."
+
+msgid "Parameters"
+msgstr "Parámetros"
+
+msgid "Manage translations"
+msgstr "Modificar traducciones"
+
+msgid "Give feedback"
+msgstr "Deje su comentario"
+
+msgid "Other plugins"
+msgstr "Otros plugins"
+
+msgid "Date of the backup"
+msgstr "Fecha de la copia de seguridad"
+
+msgid "Backup files"
+msgstr "Archivos en la copia de seguridad"
+
+msgid "Part %s"
+msgstr "Parte %s"
+
+msgid "Backup finished on %s at %s"
+msgstr "Copia de seguridad finalizada en %s al %s"
+
+msgid "The total size of the files is %s"
+msgstr "El tamaño total de los archivos es %s"
+
+msgid "These files will be deleted in %s days"
+msgstr "Estos archivos serán eliminados en %s días"
+
+msgid "Delete these backup files"
+msgstr "Eliminar estos archivos de la copia de seguridad"
+
+msgid "The process is still in progress for this backup (begun %s at %s)."
+msgstr "El proceso de esta copia de seguridad aún está en marcha (Empezado %s en %s)."
+
+msgid "The SQL extraction is in progress (%s entries extracted)."
+msgstr ""
+
+msgid "The ZIP creation is in progress (%s files has been added in %s zip files and the current size of the zip files is %s)."
+msgstr ""
+
+msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
+msgstr "El envío mediante FTP está en curso (%s archivos se ha almacenado en el servidor FTP)."
+
+msgid "The MAIL sending is in progress (%s files has been sent)."
+msgstr "El envío mediante MAIL está en curso (%s archivos se han enviado)"
+
+msgid "Cancel this process"
+msgstr "Cancelar este proceso"
+
+msgid "Please wait..."
+msgstr "Espere por favor..."
+
+msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
+msgstr "(Por el momento, no hay archivos de copia de seguridad ... Espere o fuerce una copia de seguridad (ver más abajo))"
+
+msgid "Please wait, a backup is in progress for %s seconds! Wait until %s seconds for an automatic restart."
+msgstr ""
+
+msgid "This error message may also be generated if the chunk size is too big: try first to set the chunk size to 1Mo in order to avoid any memory saturation of your server and then increase it slowly..."
+msgstr ""
+
+msgid "(SQL extraction - ending)"
+msgstr ""
+
+msgid "(SQL extraction)"
+msgstr "(extracción SQL)"
+
+msgid "(SQL extraction - nothing to be done)"
+msgstr ""
+
+msgid "(ZIP creation)"
+msgstr "(Creación del archivo ZIP)"
+
+msgid "(FTP sending)"
+msgstr "(Enviando FTP)"
+
+msgid "(FTP sending - ending)"
+msgstr ""
+
+msgid "(FTP sending - nothing to be done)"
+msgstr ""
+
+msgid "Backup of %s on %s (%s)"
+msgstr "Copia de seguridad de %s en %s (%s)"
+
+msgid "(MAIL sending)"
+msgstr "(enviando CORREO)"
+
+msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
+msgstr "¡Su instalación de Wordpress no puede enviar correos electrónicos (con archivos adjuntos pesados)!"
+
+msgid "(MAIL sending - ending)"
+msgstr ""
+
+msgid "(MAIL sending - nothing to be done)"
+msgstr ""
+
+msgid "(END - ending)"
+msgstr ""
+
+msgid "An unknown error occured!"
+msgstr "¡Oops! ¡Ha ocurrido un error desconocido!"
+
+msgid "A new backup has been generated!"
+msgstr "¡Una nueva copia de seguridad ha sido generada!"
+
+msgid "Dear sirs,"
+msgstr "Estimados señores,"
+
+msgid "Here is attached the %s on %s backup files for today"
+msgstr "Aquí se adjunta el %s en los archivos de copia de seguridad de %s para hoy"
+
+msgid "Best regards,"
+msgstr "Saludos cordiales,"
+
+msgid "Please find hereafter a summary of the backup process."
+msgstr ""
+
+msgid "Global synthesis"
+msgstr ""
+
+msgid "The backup process has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "SQL synthesis"
+msgstr ""
+
+msgid "The SQL extraction has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "%s entries have been extracted and have been stored in %s files."
+msgstr ""
+
+msgid "%s created on %s"
+msgstr ""
+
+msgid "ZIP synthesis"
+msgstr ""
+
+msgid "The ZIP creation phase has started on %s and have lasted %s minutes and %s seconds"
+msgstr ""
+
+msgid "%s files have been stored into %s split files (zip, z01, z02, etc.)."
+msgstr ""
+
+msgid "Please note that %s files have been excluded from the backup process because their sizes exceed the chunk size (i.e. %s Mo)."
+msgstr ""
+
+msgid "%s (size %s)"
+msgstr ""
+
+msgid "These zip files are accessible for %s days at the following path:"
+msgstr ""
+
+msgid "FTP synthesis"
+msgstr ""
+
+msgid "The %s zip files have been stored on the specified FTP: %s"
+msgstr ""
+
+msgid "%s stored on %s"
+msgstr ""
+
+msgid "Backup of %s on %s"
+msgstr ""
+
+msgid "No host has been defined"
+msgstr "No se ha definido ningún servidor"
+
+msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
+msgstr "Su instalación PHP no soporta características SSL. Asi que, por favor, ¡use un FTP estandar y no uno FTPS!"
+
+msgid "The host %s cannot be resolved!"
+msgstr "¡El nombre de servidor %s no puede ser resuelto!"
+
+msgid "The file %s cannot be transfered to the FTP repository! The ftp_put function returns: %s"
+msgstr "¡El archivo %s no puede ser transferido al FTP especificado! La función ftp_put devuelve: %s"
+
+msgid "The file %s cannot be transfered to the FTP repository and PASV mode cannot be entered : %s"
+msgstr "El fichero %s no puede transferirse al FTP y no se puede entrar en modo PASV: %s"
+
+msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
+msgstr "La carpeta especificada %s no existe. Por favor, cree la carpeta para que la transferencia empiece."
+
+msgid "The login/password does not seems valid!"
+msgstr "Login/contraseña incorrectos"
+
+msgid "The folder %s does not seems to be writable"
+msgstr "La carpeta %s no puede escribirse"
+
+msgid "It seems impossible to switch to PASV mode"
+msgstr "Parece imposible pasar a modo PASV"
+
+msgid "Everything OK!"
+msgstr "¡Todo bien!"
+

@@ -1,0 +1,334 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2012-09-21T21:39:27+00:00\n"
+"Last-Translator: UfukArt <http://www.ufukart.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"
+"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
+msgstr "Bu eklenti web sitenizin önemli bir ihtiyacı olan zamanlanmış yedekleme sağlar : kullanımı kolay ve etkilidir!"
+
+msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
+msgstr "Üzgünüm, ama web sitenize %s kurup etkinleştirmelisiniz. Aksi halde, bu eklenti düzgün çalışmayacaktır."
+
+msgid "How often do you want to backup your website?"
+msgstr "Ne sıklıkla web sitenizi yedeklemek istersiniz?"
+
+msgid "Frequency (in days):"
+msgstr "Sıklık (gün):"
+
+msgid "Time of the backups:"
+msgstr "Yedekleme zamanı:"
+
+msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
+msgstr "0&#039;ın anlamı gece yarısıdır. 1 Gece 1 demektir. 13 yazarsanız öğleden sonra 1 anlamına gelir. Yedekleme için ziyaretçi sayılarınızın en az olduğu saati seçin"
+
+msgid "Keep the backup files for (in days):"
+msgstr "Yedekleme dosyalarını koru (gün):"
+
+msgid "What do you want to save?"
+msgstr "Neleri yedeklemek istiyorsunuz?"
+
+msgid "All directories (the full Wordpress installation):"
+msgstr "Tüm dizinler (tam Wordpress kurulumu):"
+
+msgid "(i.e. %s)"
+msgstr "(örn: %s)"
+
+msgid "Check this option if you want to save everything. Be careful, because the backup could be quite huge!"
+msgstr "Her şeyi kaydetmek istiyorsanız bu seçeneği işaretleyin. Dikkatli olun, çünkü yedek oldukça büyük olabilir!"
+
+msgid "The plugins directory:"
+msgstr "Eklentiler (plugins) dizini:"
+
+msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
+msgstr "Web sitenizde kullandığınız kurulu tüm eklentileri kaydetmek istiyorsanız bu seçeneği seçin."
+
+msgid "The themes directory:"
+msgstr "Temalar (themes) Dizini"
+
+msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
+msgstr "Web sitenizde kullandığınız  kurulu tüm temaları kaydetmek istiyorsanız bu seçeneği seçin."
+
+msgid "The upload directory for this blog:"
+msgstr "Bu blog için yükleme dizini:"
+
+msgid "All upload directories (for this site and the sub-blogs):"
+msgstr "Tüm yükleme dizinleri (Bu site ve alt bloglar için):"
+
+msgid "The upload directory for the main site:"
+msgstr "Ana site için yükleme dizini:"
+
+msgid "The upload directory:"
+msgstr "Yükleme dizini:"
+
+msgid "The SQL database:"
+msgstr "SQL Veritabanı:"
+
+msgid "All SQL databases:"
+msgstr "Tüm SQL veritabanları:"
+
+msgid "Only your SQL database:"
+msgstr "Sadece sizin SQL veritabanınız:"
+
+msgid "The maximum file size (in MB):"
+msgstr "Maksimum dosya boyutu (MB):"
+
+msgid "Do you want that the backup is sent by email?"
+msgstr "Bu yedeğin e-posta yoluyla gönderilmesini istiyor musunuz?"
+
+msgid "Send the backup files by email:"
+msgstr "Yedek dosyalarını e-posta ile gönder:"
+
+msgid "If so, please enter your email:"
+msgstr "Öyleyse lütfen e-posta adresinizi girin:"
+
+msgid "Do you want to add a suffix to sent files:"
+msgstr "Size gönderilen dosyalara bir sonek eklemek istiyor musunuz:"
+
+msgid "You do not need to fill this field if no mail is to be sent."
+msgstr "Mail istemiyorsanız bu alanı doldurmak zorunda değilsiniz."
+
+msgid "Do you want that the backup is stored on a FTP?"
+msgstr "Bu yedeğin FTP yoluyla gönderilmesini istiyor musunuz?"
+
+msgid "Save the backup files on a FTP?"
+msgstr "Yedekleme dosyalarını FTP&#039;ye kaydet?"
+
+msgid "FTP host:"
+msgstr "FTP sunucu:"
+
+msgid "Should be at the form %s or %s"
+msgstr "Form %s veya %s olmalı"
+
+msgid "Your FTP login:"
+msgstr "FTP kullanıcı adı:"
+
+msgid "Your FTP pass:"
+msgstr "FTP parolası:"
+
+msgid "Click on that button %s to test if the above information is correct"
+msgstr "Yukarıdaki bilgilerin doğru olup olmadığını test etmek için %s düğmesine tıklayın"
+
+msgid "Test"
+msgstr "Test"
+
+msgid "If you want to be notify when the FTP storage is finished, please enter your email:"
+msgstr "FTP depolama bittiğinde haberdar olmak istiyorsanız, e-posta giriniz:"
+
+msgid "Your PHP installation does not support FTP features, thus this option has been disabled! Sorry..."
+msgstr "PHP kurulumunuz FTP özellikleri desteklemiyor, bu nedenle bu seçenek devre dışı bırakıldı! Üzgünüm..."
+
+msgid "Advanced - Memory and time management"
+msgstr "Gelişmiş - Bellek (RAM) ve zaman yönetimi"
+
+msgid "What is the maximum size of allocated memory (in MB):"
+msgstr "En fazla RAM bellek kullanımı (MB):"
+
+msgid "Please note that the files greater than this limit won't be included in the zip file!"
+msgstr "Dikkat edin, bu sınırdan daha büyük dosyaları zip dosyasına dahil edilmeyecektir!"
+
+msgid "What is the maximum time for the php scripts execution (in seconds):"
+msgstr "Php dosyalarının en fazla çalışma süresini belirtin (saniye):"
+
+msgid "Here is the backup files. You can force a new backup or download previous backup files."
+msgstr "Yedek dosyalarınız buradadır. Yeni bir yedekleme başlatabilir veya önceki yedekleme dosyalarını indirebilirsiniz"
+
+msgid "Please note that the current GMT time of the server is %s. If it is not correct, please configure the Wordpress installation correctly."
+msgstr "Sunucunun şu anki GMT zamanı %s. Bu doğru değilse, lütfen Wordpress ayarlarınızı kontrol edin."
+
+msgid "An automatic backup will be launched in %s days and %s hours."
+msgstr "Bir otomatik yedekleme %s gün %s saat içinde başlayacak."
+
+msgid "The backup process has started %s hours ago but has not finished yet."
+msgstr "Yedekleme işlemi %s saat önce başladı ancak henüz tamamlanmadı."
+
+msgid "Force a new backup (with Mail/FTP)"
+msgstr "Yeni bir yedekleme başlat (Posta/FTP ile)"
+
+msgid "Force a new backup (without any external storage or sending)"
+msgstr "Yeni bir yedekleme başlat (Posta/FTP olmaksızın)"
+
+msgid "How to restore the backup files?"
+msgstr "Yedekleme dosyaları nasıl geri yüklenir?"
+
+msgid "To restore the backups, and if you have backuped the full installation, you will have to execute the following steps:"
+msgstr "Yedekleri geri yükleme için ve Tam yedek aldıysanız aşağıdaki adımları takip etmelisiniz."
+
+msgid "Save all zip files (i.e. *.zip, *.z01, *.z02, etc.) in a single folder on your hard disk."
+msgstr "Tüm zip dosyalarını (örn: *.zip, *.z01, *.z02 gibi) bilgisayarınızdaki bir klasöre kaydedin."
+
+msgid "Unzip these files by using IZArc, Winzip, or Winrar (others software could not support these multipart zip and consider that the archive is corrupted)."
+msgstr "Winrar, Winzip, IZArc gibi bir programla bu dosyaları çıkarın. (Diğer yazılımlar çok parçalı zip dosyaları açmayı desteklemez ve arşivi bozabilir.)"
+
+msgid "Save the extracted files on your webserver."
+msgstr "Çıkardığınız dosyaları web sunucunuza kaydedin."
+
+msgid "Reimport the SQL files (i.e. *.sql1, *sql2, etc.) with phpmyadmin (it is recommended to save your database first)."
+msgstr "Phpmyadmin kullanarak SQL dosyalarınızı (örn: *.sql1, *sql2, gibi)  içe aktarın. (Veritabanını kaydetmek için bu önerilir.)"
+
+msgid "To restore the backups, and if you have backuped only some folders, you will have to execute the following steps:"
+msgstr "Yedekleri geri yüklemek için ve eğer sadece bazı klasörleri yedeklediyseniz, aşağıdaki adımları takip etmeniz gerekir:"
+
+msgid "Install a fresh version of Wordpress on your webserver."
+msgstr "Web sunucunuza Wordpress&#039;in yeni bir sürümünü yükleyin."
+
+msgid "Replace the folders (i.e. 'plugins',  'themes', and/or 'uploads') of the root of your webserver by the extracted folders."
+msgstr "Çıkartılan klasörleri (örn: &#039;plugins&#039;, &#039;themes&#039;, ve/veya &#039;uploads&#039;) web sunucunuzun ilgili klasörlerindekilerle değiştirin."
+
+msgid "Replace the wp-config.php (at the root of your webserver) with the extracted one."
+msgstr "wp-config.php dosyasını sunucunuzun ana dizinindekiyle değiştirin."
+
+msgid "Backups"
+msgstr "Yedekler"
+
+msgid "Parameters"
+msgstr "Parametreler"
+
+msgid "Manage translations"
+msgstr "Çevirileri yönet"
+
+msgid "Give feedback"
+msgstr "Görüşleriniz"
+
+msgid "Other plugins"
+msgstr "Diğer eklentiler"
+
+msgid "Date of the backup"
+msgstr "Yedekleme tarihi"
+
+msgid "Backup files"
+msgstr "Yedek dosyaları"
+
+msgid "Part %s"
+msgstr "Part %s"
+
+msgid "Backup finished on %s at %s"
+msgstr "Yedekleme %s tarihinde saat %s&#039;te tamamlandı"
+
+msgid "The total size of the files is %s"
+msgstr "Dosyaların toplam boyutu %s"
+
+msgid "These files will be deleted in %s days"
+msgstr "Bu dosyalar %s gün içinde silinecektir"
+
+msgid "Delete these backup files"
+msgstr "Bu yedek dosyaları silin"
+
+msgid "The process is still in progress for this backup (begun %s at %s)."
+msgstr "Bu yedekleme işlemi devam etmektedir (%s tarihinde %s&#039;te başladı)."
+
+msgid "The SQL extraction is in progress (%s tables extracted)."
+msgstr "SQL çıkarma devam ediyor (%s tabloları çıkarıldı)."
+
+msgid "The ZIP creation is in progress (%s files has been added in the zip file and the current size of the zip is %s)."
+msgstr "ZIP oluşturma devam ediyor (%s dosya eklendi ve dosyanın şu anki boyutu %s oldu)."
+
+msgid "The FTP sending is in progress (%s files has been stored in the FTP)."
+msgstr "FTP gönderme devam ediyor (%s dosya FTP&#039;ye gönderildi)."
+
+msgid "The MAIL sending is in progress (%s files has been sent)."
+msgstr "MAIL gönderme devam ediyor (%s dosya gönderildi)."
+
+msgid "Cancel this process"
+msgstr "Bu işlemi iptal edin"
+
+msgid "Please wait..."
+msgstr "Lütfen bekleyin..."
+
+msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
+msgstr "(Şu anda yedek dosya yok... Bekleyebilir veya yeni bir yedekleme başlatabilirsiniz. (aşağıya bakınız))"
+
+msgid "Please wait, a backup is in progress! If you want to force a new backup, refresh this page and end the current backup first."
+msgstr "Lütfen bekleyin, bir yedekleme işlemi devam ediyor! Yeni bir yedekleme başlatmak istiyorsanız önce bu sayfayı yenileyin ve mevcut yedeklemeyi bitirin."
+
+msgid "It is impossible to create the %s file in the %s folder. Please check folder/file permissions."
+msgstr "%s klasöründe %s dosyası oluşturmak mümkün değildir. Lütfen Klasör/Dosya izinlerini kontrol edin."
+
+msgid "An other SQL extraction is still in progress (for %s seconds)... Please wait!"
+msgstr "Bir diğer SQL çıkarma (%s saniye) halen devam etmektedir... Lütfen bekleyin!"
+
+msgid "(SQL extraction)"
+msgstr "(SQL çıkarma)"
+
+msgid "An other backup is still in progress (for %s seconds)... Please wait!"
+msgstr "Bir diğer yedekleme (%s saniye) halen devam etmektedir... Lütfen bekleyin!"
+
+msgid "(ZIP creation)"
+msgstr "(ZIP oluşturma)"
+
+msgid "(FTP sending)"
+msgstr "(FTP&#039;ye gönderme)"
+
+msgid "(MAIL sending)"
+msgstr "(Mail&#039;e gönderme)"
+
+msgid "Your Wordpress installation cannot send emails (with heavy attachments)!"
+msgstr "Wordpress kurulumunuz e-posta ile gönderilemez! (Büyük boyut)"
+
+msgid "The file %s cannot be deleted. You should have a problem with file permissions or security restrictions."
+msgstr "%s dosyası silinemedi. Dosya izinleri veya güvenlik kısıtlamaları ile ilgili bir sorun olmalı."
+
+msgid "An unknown error occured!"
+msgstr "Bilinmeyen bir hata oluştu!"
+
+msgid "The process has been canceled by a third person"
+msgstr "İşlem üçüncü bir kişi tarafından iptal edildi"
+
+msgid "A new backup has been generated!"
+msgstr "Yeni bir yedek oluşturuldu!"
+
+msgid "Dear sirs,"
+msgstr "Sayın bay,"
+
+msgid "Here is attached the %s on %s backup files for today"
+msgstr "İşte bugün için %s %s yedek dosyaları"
+
+msgid "Best regards,"
+msgstr "Saygılarımızla,"
+
+msgid "%s backup files has been successfully saved on your FTP (%s)"
+msgstr "%s yedekleme dosyaları başarıyla FTP&#039;ye (%s) kaydedildi"
+
+msgid "To download them, please click on the following links:"
+msgstr "İndirmek için aşağıdaki linklere tıklayınız:"
+
+msgid "No host has been defined"
+msgstr "Hiç sunucu oluşturulmadı"
+
+msgid "Your PHP installation does not support SSL features... Thus, please use a standard FTP and not a FTPS!"
+msgstr "PHP kurulumunuz SSL özellikleri desteklemiyor... Lütfen standart FTP kullanın, FTPS değil!"
+
+msgid "The host %s cannot be resolved!"
+msgstr "%s sunucusu çözülemedi!"
+
+msgid "The specified folder %s does not exists. Please create it so that the transfer may start!"
+msgstr "Belirtilen %s klasörü yok. Lütfen oluşturun!"
+
+msgid "The login/password does not seems valid!"
+msgstr "Kullanıcı/Parola doğru görünmüyor!"
+
+msgid "The folder %s does not seems to be writable"
+msgstr "%s klasörü yazılabilir görünmüyor"
+
+msgid "It seems impossible to switch to PASV mode"
+msgstr "Pasif moda geçmek mümkün görünmüyor"
+
+msgid "Everything OK!"
+msgstr "Herşey tamam!"
+

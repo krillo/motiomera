@@ -1,0 +1,183 @@
+msgid ""
+msgstr ""
+"Generated: SL Framework (http://www.sedlex.fr)\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-02-15T23:33:20+00:00\n"
+"Last-Translator: PeterDbbert <duebbert@gmx.net>\n"
+"Last-Translator: BernhardKnab <bernhardknab@bernik.ch>\n"
+"Last-Translator: scream <www.dasblog.ch>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: Switzerland\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+msgid "This plugin enables scheduled backup of important part of your website : simple to use and efficient !"
+msgstr "Dieses Plugin ermöglicht zeitgesteuerte Backups wichtiger Teile deiner Website: einfach zu benutzen und effizient!"
+
+msgid "Sorry, but you should install/activate %s on your website. Otherwise, this plugin will not work properly!"
+msgstr "Entschuldige, aber du solltest %s auf deiner Website installieren/aktivieren. Dieses Plugin wird sonst nicht funktionieren!"
+
+msgid "How often do you want to backup your website?"
+msgstr "Wie oft willst du deine Website sichern?"
+
+msgid "Frequency (in days):"
+msgstr "Häufigkeit (in Tagen):"
+
+msgid "Keep the backup files for (in days):"
+msgstr "Behalte die Sicherungsdateien für (in Tagen):"
+
+msgid "What do you want to save?"
+msgstr "Was willst du sichern?"
+
+msgid "(i.e. %s)"
+msgstr "(d.i. %s)"
+
+msgid "The plugins directory:"
+msgstr "Das Plugin-Verzeichnis:"
+
+msgid "Check this option if you want to save all plugins that you have installed and that you use on this website."
+msgstr "Schalte diese Option ein, wenn du alle deine installierten und auf der Website benutzten Plugins sichern möchtest"
+
+msgid "The themes directory:"
+msgstr "Das Themen-Verzeichnis_"
+
+msgid "Check this option if you want to save all themes that you have installed and that you use on this website."
+msgstr "Schalte diese Option ein, falls du alle installierten und auf der Website benutzten Themen sichern willst."
+
+msgid "The upload directory:"
+msgstr "Das Upload-Verzeichnis:"
+
+msgid "Check this option if you want to save the images, the files, etc. that you have uploaded on your website to create your articles/posts/pages."
+msgstr "Schalte diese Option ein, wenn du die Bilder, Dateien u.s.w., die du auf die Website geladen hast, um deine Artikel/Posts/Seiten zu gestalten, sichern willst."
+
+msgid "The SQL database:"
+msgstr "Das SQL Verzeichnis:"
+
+msgid "Check this option if you want to save the text of your posts, your configurations, etc."
+msgstr "Schalte diese option ei, falls du den Text deiner Posts, deine Konfigurationen u.s.w. sichern willst."
+
+msgid "Please note that the zip file will be split into multiple files to comply with the maximum file size you have indicated"
+msgstr "Bitte beachte, dass die zip Datei in mehrere Dateien geteilt wird, um die maximale Grösse, die du angegeben hast, nicht zu überschreiten"
+
+msgid "Do you want that the backup is sent by email?"
+msgstr "Willst du, dass die Sicherung uaf deine mail gesendet wird?"
+
+msgid "If so, please enter your email:"
+msgstr "Wenn ja, bitte gib deine Mailadresse ein:"
+
+msgid "This option allows going round the blocking feature of some mail provider that block the mails with zip attachments (like GMail)."
+msgstr "Diese Option erlaubt dir die Blockierung einiger Mailanbieter zu umgehen, die Dateien mit der Endung zip nicht akzeptieren (wie GMail)."
+
+msgid "You do not need to fill this field if no mail is to be sent."
+msgstr "Du musst dieses Feld nicht ausfüllen, wenn du keine Mail erhalten möchtest."
+
+msgid "Advanced - Memory and time management"
+msgstr "erweitert - Speicher- und Zeit-Management"
+
+msgid "What is the maximum size of allocated memory (in MB):"
+msgstr "Was ist das Maximum des zugeordneten Speichers (in MB):"
+
+msgid "On some Wordpress installation, you may have memory issues. Thus, try to reduce this number if you face such error."
+msgstr "Bei manchen Wordpress-Installationen könntest du Schwierigkeiten mit dem Arbeitsspeicher kriegen. Versuche also diese Zahl zu verringern, um diesen Fehler zu beseitigen."
+
+msgid "For your information, the memory limit of your webserver is %s whereas the present memory usage is %s."
+msgstr "Für deine Information, das Arbeitsspeicher-Limit deines Webservers ist %s, wobei der momentan benutzte Speicher %s beträgt."
+
+msgid "It is recommended that the maximum attachment size is not set to a value higher than this one."
+msgstr "Es wird empfohlen die maximale Grösse nicht höher einzustellen als diese Angabe."
+
+msgid "What is the maximum time for the php scripts execution (in seconds):"
+msgstr "Was ist die maximale Zeit der PHP Scipts (in sekunden):"
+
+msgid "Even if you do not have time restriction, it is recommended to set this value to 15sec in order to avoid any killing of the php scripts by your web hoster."
+msgstr "Auch wenn du keine Zeit-Restriktionen haben solltest, ist es empfehlenswert diesen Wert auf 15 Sekunden zu setzen, um das Stoppen des Scripts von deinem Webhoster zu vermeiden."
+
+msgid "Here is the backup files. You can force a new backup or download previous backup files."
+msgstr "Hier sind die Sicherungsdateien. Du kannst ein neue Sicherung erzwingen oder vorherige Sicherungsdateien runterladen."
+
+msgid "Backups"
+msgstr "Sicherungen"
+
+msgid "Parameters"
+msgstr "Parameter"
+
+msgid "Manage translations"
+msgstr "Verwalte die Übersetzungen"
+
+msgid "Give feedback"
+msgstr "Gib Rückmeldung"
+
+msgid "Other plugins"
+msgstr "Andere Plugins"
+
+msgid "Date of the backup"
+msgstr "Datum der Sicherung"
+
+msgid "Backup files"
+msgstr "Sicherungsdateien"
+
+msgid "Part %s"
+msgstr "Teil %s"
+
+msgid "The total size of the files is %s"
+msgstr "Die Grösse der Dateien ist %s"
+
+msgid "These files will be deleted in %s days"
+msgstr "Diese Dateien werden in %s Tagen gelöscht"
+
+msgid "(For now, there is no backup files... You should wait or force a backup (see below) )"
+msgstr "(Bis jetzt sind keine Sicherungsdateien vorhanden... Du solltest warten oder eine Sicherung erzwingen (siehe unten))"
+
+msgid "An other backup is still in progress (for %s seconds)... Please wait!"
+msgstr "Eine andere Sicherung wird ausgeführt (noch %s Sekunden)... Bitte warte!"
+
+msgid "An unknown error occured!"
+msgstr "Es ist ein unbekannter Fehler aufgetreten."
+
+msgid "A new backup has been generated!"
+msgstr "Eine neue Sicherung wurde erstellt !"
+
+msgid "Dear sirs,"
+msgstr "Lieber Nutzer,"
+
+msgid "Here is attached the %s on %s backup files for today"
+msgstr "Hier sind %s von %s Sicherungen für heute beigelegt"
+
+msgid "Best regards,"
+msgstr "Freundliche Grüsse"
+
+msgid "Time of the backups:"
+msgstr "Zeit für Ausführung:"
+
+msgid "Please note that 0 means midnight, 1 means 1am, 13 means 1pm, etc. The backup will occur at that time (server time) so make sure that your website is not too overloaded at that time."
+msgstr "Bitte beachten Sie dass 0 für Mitternacht, 1 für 1 Uhr morgens, 13 für 1 Uhr Nachmittags steht. Das Backup wird zu dieser Zeit (Zeiteinstellung des Servers) ausgeführt. Bitte stellen Sie sicher dass Ihr Server nicht zu dieser Zeit nicht zu sehr beansprucht wird."
+
+msgid "Add this string to the name of the files:"
+msgstr "Füge diesen String den Dateinamen hinzu:"
+
+msgid "The name of the files will be %s."
+msgstr "Der Name der Dateien wird %s sein."
+
+msgid "All directories (the full Wordpress installation):"
+msgstr "Alle Verzeichnisse (komplette Wordpress installation)"
+
+msgid "All SQL databases:"
+msgstr "Alle SQL-Datenbanken"
+
+msgid "The maximum file size (in MB):"
+msgstr "Maximale Dateigrösse (in MB):"
+
+msgid "Send the backup files by email:"
+msgstr "Sende die Backup-Daten per E-Mail:"
+
