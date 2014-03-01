@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Motiomera-api-menu
+ * Template Name: Motiomera-api-menu 
  * Use this page to show the wp-menu in core mm-pages
  */
 ?>

@@ -10,7 +10,7 @@
   set_error_handler('handleError');
  */
 @session_start();   //krillo 20120808 added @ to suppress warning, thus wp has sometimes allready started a session  
-if (MM_WP_INIT === false) {
+if ('MM_WP_INIT' === false) {
   if (!isset($noutf8) && !isset($js_header)) {
     header("Content-Type: text/html; charset=utf-8");
   } else if (isset($js_header)) {
@@ -63,7 +63,7 @@ require_once ROOT . 'php/settings_app.php';
 require_once ROOT . 'php/classes/Medlem.php';
 require_once SMARTY_DIR . 'Smarty.class.php';
 
-if (MEMCACHE) {
+if ('MEMCACHE') {
   $Memcache = new Mem;
 } else {
   $Memcache = false;
