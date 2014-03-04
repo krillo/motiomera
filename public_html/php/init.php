@@ -9,10 +9,8 @@ if(!isset($noutf8)&&!isset($js_header)){
 define('INIT', true);
 
 if (!defined('ROOT')) {
-	define('ROOT', $_SERVER["DOCUMENT_ROOT"]);
+	define('ROOT', $_SERVER["DOCUMENT_ROOT"] . '/');
 }
-
-//echo "ROOT = " . ROOT;
 
 require_once ROOT . '/php/constants.php';
 require_once ROOT . '/php/settings.php';
