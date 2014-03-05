@@ -315,11 +315,11 @@ Order::getMondays(15);
     
     
     <li><h2>Välj ert startdatum (valfri måndag)</h2>      
-      <input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2013-09-23" disabled><label for="startdatumRadio1" id="startdatumRadio-label" style="text-decoration: none; font-size: 13px;display: inline;color:lightgray;">Vår stora hösttävling 23/9 - 27/10</label>
+      <input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2014-04-28" checked><label for="startdatumRadio1" id="startdatumRadio-label" style="text-decoration: none; font-size: 13px;display: inline;font-weight:bold;">Vår stora vårtävling börjar 28/4</label>
       <div style="clear:both;"></div>
-      <div style="color:red;font-size: 13px;display: block;line-height: 20px;margin-left: 48px;margin-bottom: 10px;">Hösttävlingen pågår under v39 - v46 så ni kan ändå<br/> var med fastän ni startar senare, ring Kristian för mer info.</div>
+      <!--div style="color:red;font-size: 13px;display: block;line-height: 20px;margin-left: 48px;margin-bottom: 10px;">Hösttävlingen pågår under v39 - v46 så ni kan ändå<br/> var med fastän ni startar senare, ring Kristian för mer info.</div-->
       <div class="clear"></div>
-      <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum" checked>
+      <input name="startdatumRadio" id="startdatumRadio2" type="radio" value="egetdatum">
       <select name="startdatum" id="startdatum" onchange="updateStartRadio();">
         <?php echo Order::getMondays(20); ?>
       </select>

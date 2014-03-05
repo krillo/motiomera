@@ -3,53 +3,48 @@
 
 
     <div style="text-align:center;">
-<!--a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Teambuilding på jobbet!</h1-->
-<a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Gå runt Sverige och samla kommunvapen</h1>
-  <div style="text-align:left;float:left;padding-left:50px;">
-    <h2 style="text-align:left;float:left;"> 
-      Delta i vår stegtävling och samla kommunvapen i kommunjakten. <br/><br/>
-      Välj mellan 5 till 8 veckors för samma pris.<br/><br/>
-      <!--Den stora hösttävlingen startar den 23 sep</br> 
-      15% rabatt om ni beställer före den 17 sep<br/-->
-      </h2>
-    
-    <br/><br/>
-      
-      <!--div style="color:red;font-size: 14px;display: block;line-height: 20px;margin-bottom: 10px;margin-top: 30px;">Vårtävlingen pågår i en 8 vekors-period, v16 - v24 så ni kan ändå var med fastän ni startar senare, ring Kristian för mer info.</div-->
-   
-      
-      <!--span style="font-size:18px;color:#B71416;">Välj mellan 5 och 8 veckors tävling<br>
-      till samma pris.</span-->
-    
+      <!--a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Teambuilding på jobbet!</h1-->
+      <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Gå runt Sverige och samla kommunvapen</h1>
+        <div style="text-align:left;float:left;padding-left:50px;">
+          <h2 style="text-align:left;float:left;"> 
+            Delta i vår roliag stegtävling och samla kommunvapen i kommunjakten. <br><br>
+            Välj mellan 5 till 8 veckors för samma pris.<br><br>
+            Den stora vårtävlingen startar den 28 april<br> 
+            <!-- 15% rabatt om ni beställer före den 17 sep<br/-->
+          </h2>    
+          <br/><br/>
 
-    <div class="clear"></div>
-    
-    <br/>
-    <!--span style="font-size:18px;color:#B71416;">15% rabatt</span><br/-->      
-    <p style="text-align:left;font-size:14px;">
-    <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144 kr per person<br/>
-    <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 246 kr per person med stegräknare  -->
-    
-    169 kr per person<br/>
-    289 kr per person med stegräknare 
-    
-  </p>
-</div>        
-</a>
-<a href="/pages/skapaforetag.php"><img src="img/bestall_knapp.jpg" alt="Stegtävling" title="Stegtävling"/></a>
-</div>
+          <!--div style="color:red;font-size: 14px;display: block;line-height: 20px;margin-bottom: 10px;margin-top: 30px;">Vårtävlingen pågår i en 8 vekors-period, v16 - v24 så ni kan ändå var med fastän ni startar senare, ring Kristian för mer info.</div-->
+          <!--span style="font-size:18px;color:#B71416;">Välj mellan 5 och 8 veckors tävling<br>
+          till samma pris.</span-->
+
+          <div class="clear"></div>
+          <br/>
+          <!--span style="font-size:18px;color:#B71416;">15% rabatt</span><br/-->      
+          <p style="text-align:left;font-size:14px;">
+            <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144 kr per person<br/>
+            <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 246 kr per person med stegräknare  -->
+            169 kr per person<br/>
+            289 kr per person med stegräknare 
+          </p>
+        </div>        
+      </a>
+      <a href="/pages/skapaforetag.php"><img src="img/bestall_knapp.jpg" alt="Stegtävling" title="Stegtävling"/></a>
+    </div>
 
     <div class="mmGrayLineMiddle"></div>
     <div id="fb-root"></div>
     <script>
       {literal}
-  (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/sv_SE/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id))
+            return;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "//connect.facebook.net/sv_SE/all.js#xfbml=1";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
       {/literal}
     </script>
     <div style="color:#3B5998;font-family:lucida,tahoma,verdana,arial,sans-serif;margin-left: 20px;margin-bottom: 20px;">
@@ -61,13 +56,13 @@
 
     <script>
       {literal}
-$(function(){
-  $("#slides").slides({
-  effect: 'fade',
-	play: 5000,
-  generatePagination: false
-  });
-});
+        $(function() {
+          $("#slides").slides({
+            effect: 'fade',
+            play: 5000,
+            generatePagination: false
+          });
+        });
       {/literal}
     </script>
 
