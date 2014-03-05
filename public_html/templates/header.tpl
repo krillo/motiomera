@@ -21,7 +21,7 @@
     <!--link rel="stylesheet" href="{$mm_url}/css/print.css" type="text/css" media="print" /-->
 
 
-    <!--script src="http://code.jquery.com/jquery-1.9.1.js"></script-->
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
     {if isset($USER) or isset($ADMIN) or isset($FORETAG)}
       {if !NO_INTERNET || GOOGLEMAPS_OVERRIDE_NO_INTERNET}
