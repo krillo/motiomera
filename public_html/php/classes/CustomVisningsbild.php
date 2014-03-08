@@ -48,7 +48,8 @@ class CustomVisningsbild extends Bild
 			parent::__construct($source);
 			
 			// Only allow gif, jpg or png files:
-			if($this->getExt() != "gif" && $this->getExt() != "jpg" && $this->getExt() != "png") {
+      $file_ext = strtolower($this->getExt());
+			if($file_ext != "gif" && $file_ext != "jpg" && $file_ext != "png") {
 				throw new CustomVisningsbildException("Fel filformat", -4);
 			}
 			

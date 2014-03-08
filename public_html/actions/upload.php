@@ -57,10 +57,10 @@ switch($_GET["do"]){
 				throw new UserException("Bilden är för stor", "Bilden får max vara 1 MB stor. Var god försök igen!<br><br><a href=".$urlHandler->getUrl("Foretag", URL_EDIT, array($_POST["fid"],1)).">Tillbaka</a>");			
 			}
 			elseif($e->getCode() == -5){
-				throw new UserException("Bilden har fel storlek", "Bilden får max vara av format ".CustomForetagsBild::WIDTH."x".CustomForetagsBild::HEIGHT." pixlar och av typ : ".CustomForetagsBild::ALLOWED_FORMAT.".<br><br><a href=".$urlHandler->getUrl("Foretag", URL_EDIT, array($_POST["fid"],1)).">Tillbaka</a>");			
+				throw new UserException("Bilden har fel storlek", "Bilden får max vara av format ".CustomForetagsBild::WIDTH."x".CustomForetagsBild::HEIGHT." pixlar och av typ : ". implode(', ' , CustomLagbild::getAllowedFormats()) .".<br><br><a href=".$urlHandler->getUrl("Foretag", URL_EDIT, array($_POST["fid"],1)).">Tillbaka</a>");			
 			}
 			elseif($e->getCode() == -7){
-				throw new UserException("Bilden har fel filtyp", "Bilden måste vara av typ : ".CustomForetagsBild::ALLOWED_FORMAT."
+				throw new UserException("Bilden har fel filtyp", "Bilden måste vara av typ : ". implode(', ' , CustomLagbild::getAllowedFormats()) ."
 				<br><br><a href=".$urlHandler->getUrl("Foretag", URL_EDIT, array($_POST["fid"],1)).">Tillbaka</a>");			
 			}
 		
