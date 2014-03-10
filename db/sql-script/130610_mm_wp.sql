@@ -9,7 +9,7 @@ CREATE TABLE `mm_dagbok` (
   `betyg` int(1) DEFAULT NULL,
   `datum` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 -- new transparent images
 update mm_lag set bildUrl = replace(bildUrl, 'jpg', 'png') where bildUrl like 'Lag_%';
