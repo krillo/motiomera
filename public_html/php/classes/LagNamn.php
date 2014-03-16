@@ -124,7 +124,7 @@ class LagNamn extends Mobject
 		if (!$this->getId()) {
 			$this->commit();
 		}
-		return LAGNAMN_PATH . "/" . self::PREFIX . $this->getId() . ".jpg";
+		return LAGNAMN_PATH . "/" . self::PREFIX . $this->getId() . ".png";
 	}
 	
 	public function getImgO()
