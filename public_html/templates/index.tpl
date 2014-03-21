@@ -8,12 +8,12 @@
         <div style="text-align:left;float:left;padding-left:50px;">
           <h2 style="text-align:left;float:left;"> 
             Delta i vår roliga stegtävling och samla kommunvapen i kommunjakten. <br>
-            <!-- Välj mellan 5 till 8 veckors för samma pris.<br><br-->
-            Den stora vårtävlingen startar den 28 april<br><br> 
+             Välj mellan 5 till 8 veckors för samma pris.<br><br>
+            <!--Den stora vårtävlingen startar den 28 april<br><br--> 
             
-            <div style="color:red;font-size: 18px;">
+            <!--div style="color:red;font-size: 18px;">
               15% rabatt om ni beställer före den 28 mars
-            </div>
+            </div-->
           </h2>    
           <br/><br/>
 
@@ -25,12 +25,12 @@
           <br/>
           <!--span style="font-size:18px;color:#B71416;">15% rabatt</span><br/-->      
           <p style="text-align:left;font-size:14px;">
-            <span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144 kr per person<br/>
-            <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 246 kr per person med stegräknare  >
-            <!--
+            <!--span style="text-decoration:line-through;color: #B71416;">169 kr &nbsp;</span> 144 kr per person<br/>
+            <span style="text-decoration:line-through;color: #B71416; ">289 kr &nbsp;</span> 246 kr per person med stegräknare  -->
+            
             169 kr per person<br/>
             289 kr per person med stegräknare 
-            -->
+            
           </p>
         </div>        
       </a>
