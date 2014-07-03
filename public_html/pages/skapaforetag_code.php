@@ -308,14 +308,14 @@ Order::getMondays(15);
         <option value="7">7</option>
         <option value="8">8</option>
       </select>
-      <div id="" style="float:left;margin-left: 15px;">Ring Kristian 0761-393855 om ni önskar fler veckor.</div>
+      <div id="" style="float:left;margin-left: 15px;">Ring gustaf 0730-550918 om ni önskar fler veckor.</div>
       <!--div id="" style="float:left;margin-left: 15px;">Maila <a href="mailto:kristian@motiomera.se">kristian@motiomera.se</a> om ni önskar fler veckor.</div-->
     </li>
     <div class="clear"></div>
     
     
     <li><h2>Välj ert startdatum (valfri måndag)</h2>      
-      <input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2014-04-28" checked><label for="startdatumRadio1" id="startdatumRadio-label" style="text-decoration: none; font-size: 13px;display: inline;font-weight:bold;">Vår stora vårtävling börjar 28/4</label>
+      <input name="startdatumRadio" id="startdatumRadio1" type="radio" value="2014-09-01" checked><label for="startdatumRadio1" id="startdatumRadio-label" style="text-decoration: none; font-size: 13px;display: inline;font-weight:bold;">Höstens stora motions och stegtävling 1/9</label>
       <div style="clear:both;"></div>
       <!--div style="color:red;font-size: 13px;display: block;line-height: 20px;margin-left: 48px;margin-bottom: 10px;">Hösttävlingen pågår under v39 - v46 så ni kan ändå<br/> var med fastän ni startar senare, ring Kristian för mer info.</div-->
       <div class="clear"></div>
@@ -324,7 +324,7 @@ Order::getMondays(15);
         <?php echo Order::getMondays(20); ?>
       </select>
       <div class="clear"></div>
-      <div id="early-info">Ring Kristian 0761-393855 om ni önskar tidigare datum.</div>
+      <div id="early-info">Ring Gustaf 0730-550918 om ni önskar tidigare datum.</div>
       <!--div id="early-info">Maila <a href="mailto:kristian@motiomera.se">kristian@motiomera.se</a> om ni önskar tidigare datum.</div-->
     </li>
 
@@ -431,13 +431,12 @@ Order::getMondays(15);
 <br/>
 <div id="pers-service">
   <div id="pers-img" style="float:left;">
-    <img src="/img/kristian_80x90.png" alt="Kristian"/>
+    <img src="/img/kristian_80x90.png" alt="Gustaf"/>
   </div>
   <div id="pers-text" style="float:left;padding-left:15px;width:450px;padding-top:5px">
-    <span  class="mmObs mmObsText">För mer information eller om du vill ha en powerpoint-presentation. Kontakta Kristian på:<br/>
-      0761-393855<br/>  
-      <a href="mailto:kristian@motiomera.se" >kristian@motiomera.se</a>
+    <span  class="mmObs mmObsText">För mer information eller om du vill ha en powerpoint-presentation. Kontakta Gustaf på:<br/>
+      0730-550918<br/>  
+      <a href="mailto:gustaf@motiomera.se" >gustaf@motiomera.se</a>
     </span>
   </div>
 </div>
-<div>Tack</div>
