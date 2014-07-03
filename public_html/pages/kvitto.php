@@ -207,8 +207,10 @@ if (!empty($order) && !empty($orderItemList)) {
       CURLOPT_RETURNTRANSFER => 1, 
       CURLOPT_URL => "https://api.pushover.net/1/messages.json",
       CURLOPT_POSTFIELDS => array(
-        "token" => "assirAR25PaXiQ5JXFVceqhtXHSmUz",
-        "user" => "u9WXxcPqw94p2khp2qEC3jwyrDZzKK",
+        //"token" => "assirAR25PaXiQ5JXFVceqhtXHSmUz",
+        //"user" => "u9WXxcPqw94p2khp2qEC3jwyrDZzKK",
+        "token" => "a2xUVS5DE3mpBMDVDZa6X6Qmf2Y4n9",
+        "user" => "uUwaBT3H6g6Fg1RRTmXVgznsGgDWRu",
         "message" => $pushover_msg,
       )));
     curl_exec($ch);
