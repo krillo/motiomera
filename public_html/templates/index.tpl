@@ -4,10 +4,10 @@
 
     <div style="text-align:center;">
       <!--a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Teambuilding på jobbet!</h1-->
-      <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Gå runt Sverige och samla kommunvapen</h1>
+      <a href="/pages/skapaforetag.php" style="text-decoration:none;" title="stegtävling"><h1 style="color:#B71416;font-size:250%;">Motion och stegtävling - vi aktiverar Sverige!</h1>
         <div style="text-align:left;float:left;padding-left:50px;">
           <h2 style="text-align:left;float:left;"> 
-            Delta i vår roliga stegtävling och samla kommunvapen i kommunjakten. <br>
+            Delta i höstens stora motion och stegtävling. Samla kommunvapen i kommunjakten! <br>
              Välj mellan 5 till 8 veckors för samma pris.<br><br>
             <!--Den stora vårtävlingen startar den 28 april<br><br--> 
             
