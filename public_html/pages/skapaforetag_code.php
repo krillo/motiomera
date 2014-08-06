@@ -431,7 +431,7 @@ Order::getMondays(15);
 <br/>
 <div id="pers-service">
   <div id="pers-img" style="float:left;">
-    <img src="/img/kristian_80x90.png" alt="Gustaf"/>
+    <img src="/img/gustaf_80x90.png" alt="Gustaf"/>
   </div>
   <div id="pers-text" style="float:left;padding-left:15px;width:450px;padding-top:5px">
     <span  class="mmObs mmObsText">För mer information eller om du vill ha en powerpoint-presentation. Kontakta Gustaf på:<br/>
