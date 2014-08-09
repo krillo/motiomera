@@ -699,12 +699,14 @@ table#alh_navtable
 	width: 780px;
 	background: url('/img/framework/mmBgMiddle.gif') repeat-y;
 	height: auto;
+  /*margin: auto; */
 }
 #mmWrapTop
 {
 	width: 780px;
 	height: 10px;
 	background: url('/img/framework/mmBgTop.gif') bottom no-repeat;
+  /*margin: auto; */
 }
 #motiomera_andra_losenord_link
 {
