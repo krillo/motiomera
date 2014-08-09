@@ -6,7 +6,7 @@
 			<div id="mmFooterRight">
 				<!--a href="#" onclick="motiomera_rapportera(); return false;">Uppmärksamma oss på denna sida</a-->
 			</div>
-			<a href="mailto:kristian@motiomera.se?subject=Kontakt%20oss" >Kontakta oss</a>  |  <a href="http://motiomera.se/pages/integritetspolicy.php/#cookies" rel="external">Om Cookies</a>  |  <a href="http://motiomera.se/pages/integritetspolicy.php" rel="external">Integritetspolicy</a>  |
+			<a href="mailto:gustaf@motiomera.se?subject=Kontakt%20oss%20om%20Motiomera" >Kontakta oss</a>  |  <a href="http://motiomera.se/pages/integritetspolicy.php/#cookies" rel="external">Om Cookies</a>  |  <a href="http://motiomera.se/pages/integritetspolicy.php" rel="external">Integritetspolicy</a>  |
 			  <a href="/pages/sitemap.html">Sitemap</a><br />
 	&copy; Copyright Motiomera 2008 - {$smarty.now|date_format:"%Y"}
 	
